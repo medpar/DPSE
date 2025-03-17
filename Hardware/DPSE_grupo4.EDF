@@ -106,51 +106,51 @@
   (component 0805_C2 (place C2 52.10000 -51.90000 front 0))
   (component 0805_C1 (place C1 45.10000 -51.90000 front 0))
   (component HC49_X1 (place X1 52.40000 -57.10000 front 180))
-  (component "B3F-1050_SW_DOWN" (place SW_DOWN 86.90000 -51.80000 front 0))
-  (component "B3F-1050_SW_LEFT" (place SW_LEFT 78.70000 -43.60000 front 0))
-  (component "B3F-1050_SW_RIGHT" (place SW_RIGHT 95.10000 -43.60000 front 0))
-  (component "B3F-1050_SW_UP" (place SW_UP 86.90000 -35.30000 front 0))
-  (component "B3F-1050_SWL_RIGHT" (place SWL_RIGHT 26.50000 12.80000 front 0))
-  (component "B3F-1050_SWL_LEFT" (place SWL_LEFT 10.00000 12.70000 front 0))
-  (component "B3F-1050_SWL_DOWN" (place SWL_DOWN 18.30000 4.50000 front 0))
-  (component "B3F-1050_SWL_UP" (place SWL_UP 18.20000 21.00000 front 0))
-  (component 0805_R21 (place R21 82.60000 -40.20000 front 0))
-  (component 0805_R32 (place R32 82.50000 -42.40000 front 0))
-  (component 0805_R33 (place R33 93.40000 -46.70000 front 0))
-  (component 0805_R22 (place R22 93.50000 -49.00000 front 0))
-  (component 0805_R1 (place R1 71.30000 -48.80000 front 0))
-  (component 0805_R23 (place R23 89.40000 -51.70000 front 0))
-  (component 0805_R34 (place R34 89.40000 -54.40000 front 0))
-  (component 0805_R20 (place R20 89.70000 -29.70000 front 0))
-  (component 0805_R31 (place R31 89.70000 -31.80000 front 0))
-  (component SSOP28_U8 (place U8 39.00000 -28.20000 front 180))
-  (component 0805_R15 (place R15 38.40000 -31.00000 front -90))
-  (component 0805_R16 (place R16 36.00000 -31.00000 front -90))
-  (component 0805_R17 (place R17 33.80000 -31.00000 front -90))
-  (component 0805_R14 (place R14 31.80000 -31.00000 front -90))
-  (component 0805_C10 (place C10 29.20000 -26.06640 front -90))
-  (component 0805_C20 (place C20 29.20000 -21.26640 front -90))
-  (component 0805_C6 (place C6 35.10000 -15.06640 front -90))
-  (component PIN_TXD (place TXD 42.70000 -28.90000 front -90))
-  (component PIN_RXD (place RXD 42.80000 -25.60000 front -90))
-  (component PIN_GND (place GND 25.80000 -14.20000 front 0))
-  (component PIN_5V (place 5V 25.80000 -17.30000 front 0))
-  (component PIN_3V3 (place 3V3 25.80000 -20.30000 front 0))
-  (component PIN_1V8 (place 1V8 25.80000 -23.30000 front 0))
+  (component "B3F-1050_SW_DOWN" (place SW_DOWN 88.30000 -51.30000 front 0))
+  (component "B3F-1050_SW_LEFT" (place SW_LEFT 81.50000 -40.80000 front 0))
+  (component "B3F-1050_SW_RIGHT" (place SW_RIGHT 95.10000 -40.90000 front 0))
+  (component "B3F-1050_SW_UP" (place SW_UP 88.40000 -30.50000 front 0))
+  (component "B3F-1050_SWL_RIGHT" (place SWL_RIGHT 22.70000 8.50000 front 0))
+  (component "B3F-1050_SWL_LEFT" (place SWL_LEFT 9.10000 8.50000 front 0))
+  (component "B3F-1050_SWL_DOWN" (place SWL_DOWN 15.90000 -1.90000 front 0))
+  (component "B3F-1050_SWL_UP" (place SWL_UP 15.90000 18.90000 front 0))
+  (component 0805_R21 (place R21 84.10000 -35.30000 front 0))
+  (component 0805_R32 (place R32 84.00000 -37.50000 front 0))
+  (component 0805_R33 (place R33 95.10000 -47.00000 front 0))
+  (component 0805_R22 (place R22 95.10000 -48.80000 front 0))
+  (component 0805_R1 (place R1 72.80000 -43.90000 front 0))
+  (component 0805_R23 (place R23 90.70000 -54.10000 front 0))
+  (component 0805_R34 (place R34 90.70000 -56.80000 front 0))
+  (component 0805_R20 (place R20 91.20000 -24.80000 front 0))
+  (component 0805_R31 (place R31 91.20000 -26.90000 front 0))
+  (component SSOP28_U8 (place U8 39.00000 -37.20000 front 180))
+  (component 0805_R15 (place R15 38.40000 -40.00000 front -90))
+  (component 0805_R16 (place R16 36.00000 -40.00000 front -90))
+  (component 0805_R17 (place R17 33.80000 -40.00000 front -90))
+  (component 0805_R14 (place R14 31.80000 -40.00000 front -90))
+  (component 0805_C10 (place C10 29.20000 -35.06640 front -90))
+  (component 0805_C20 (place C20 29.20000 -30.26640 front -90))
+  (component 0805_C6 (place C6 35.10000 -24.06640 front -90))
+  (component PIN_TXD (place TXD 42.70000 -37.90000 front -90))
+  (component PIN_RXD (place RXD 42.80000 -34.60000 front -90))
+  (component PIN_GND (place GND 25.80000 -23.20000 front 0))
+  (component PIN_5V (place 5V 25.80000 -26.30000 front 0))
+  (component PIN_3V3 (place 3V3 25.80000 -29.30000 front 0))
+  (component PIN_1V8 (place 1V8 25.80000 -32.30000 front 0))
   (component PIN_TP_CS (place TP_CS 70.10000 -46.40000 front 0))
   (component PIN_TFT_CS (place TFT_CS 70.10000 -52.10000 front 0))
   (component PIN_TFT_RD (place TFT_RD 70.10000 -55.10000 front 0))
   (component PIN_TFT_WR (place TFT_WR 70.10000 -58.50000 front 0))
   (component PIN_TFT_RS (place TFT_RS 70.10000 -61.80000 front 0))
-  (component PIN_MISO (place MISO 71.80000 -35.10000 front 0))
-  (component PIN_SCK (place SCK 71.80000 -31.00000 front 0))
-  (component PIN_MOSI (place MOSI 71.70000 -27.00000 front 0))
-  (component 0805_R2 (place R2 70.60000 -23.30000 front 0))
-  (component PIN_$NONAME0 (place $NONAME0 72.10000 -19.60000 front 0))
+  (component PIN_MISO (place MISO 73.30000 -30.20000 front 0))
+  (component PIN_SCK (place SCK 73.30000 -26.10000 front 0))
+  (component PIN_MOSI (place MOSI 73.20000 -22.10000 front 0))
+  (component 0805_R2 (place R2 72.10000 -18.40000 front 0))
+  (component PIN_$NONAME0 (place $NONAME0 73.60000 -14.70000 front 0))
   (component PIN_AUDIO_L (place AUDIO_L 59.00000 -12.00000 front 0))
   (component PIN_AUDIO_R (place AUDIO_R 59.00000 -15.30000 front 0))
-  (component PIN_/RESET (place /RESET 35.50000 -42.30000 front 0))
-  (component PIN_BOOT (place BOOT 27.60000 -42.40000 front 0))
+  (component PIN_/RESET (place /RESET 35.50000 -51.30000 front 0))
+  (component PIN_BOOT (place BOOT 27.60000 -51.40000 front 0))
   (component "SOT23-5_U3" (place U3 13.00000 -19.90000 front -90))
   (component 0805_C11 (place C11 8.90000 -20.63360 front 270))
   (component 0805_R5 (place R5 9.00000 -16.60000 front 0))
@@ -161,11 +161,11 @@
   (component SO8_U4 (place U4 15.20000 -28.60000 front 0))
   (component SO8_U2 (place U2 15.20000 -37.50000 front 0))
   (component 0805_C7 (place C7 9.70000 -26.70000 front -90))
-  (component 0805_R3 (place R3 21.30000 -27.90000 front 90))
-  (component 0805_R4 (place R4 21.20000 -32.60000 front 90))
-  (component 0805_R7 (place R7 21.00000 -41.90000 front 90))
-  (component 0805_C9 (place C9 24.50000 -36.80000 front 90))
-  (component 0805_R6 (place R6 21.20000 -36.80000 front 90))
+  (component 0805_R3 (place R3 21.30000 -36.90000 front 90))
+  (component 0805_R4 (place R4 21.20000 -41.60000 front 90))
+  (component 0805_R7 (place R7 21.00000 -50.90000 front 90))
+  (component 0805_C9 (place C9 24.50000 -45.80000 front 90))
+  (component 0805_R6 (place R6 21.20000 -45.80000 front 90))
   (component 0805_C8 (place C8 9.60000 -34.50000 front -90))
   (component 0805_R24 (place R24 12.30000 -41.50000 front 0))
   (component 0805_R25 (place R25 12.20000 -43.40000 front 0))
@@ -175,13 +175,13 @@
   (component "CONN-SIL2_SPK_L" (place SPK_L 35.30000 -67.90000 front 180))
   (component "CONN-SIL2_SPK_R" (place SPK_R 40.60000 -68.00000 front 0))
   (component "SOIC127P605X175-16N_U7" (place U7 13.00000 -55.10000 front 0))
-  (component 0805_C26 (place C26 9.70000 -54.80000 front 180))
-  (component 0805_C16 (place C16 7.50000 -56.70000 front 0))
-  (component 0805_C19 (place C19 7.50000 -58.50000 front 0))
-  (component 0805_C18 (place C18 7.50000 -60.60000 front 0))
-  (component 0805_C22 (place C22 9.70000 -62.60000 front 180))
-  (component 0805_R18 (place R18 7.50000 -64.60000 front 0))
-  (component 0805_C24 (place C24 7.50000 -66.60000 front 0))
+  (component 0805_C26 (place C26 9.80000 -55.70000 front 180))
+  (component 0805_C16 (place C16 7.60000 -57.50000 front 0))
+  (component 0805_C19 (place C19 7.60000 -59.30000 front 0))
+  (component 0805_C18 (place C18 7.60000 -61.40000 front 0))
+  (component 0805_C22 (place C22 9.80000 -63.40000 front 180))
+  (component 0805_R18 (place R18 7.60000 -65.40000 front 0))
+  (component 0805_C24 (place C24 7.60000 -67.40000 front 0))
   (component 0805_C21 (place C21 14.60000 -66.60000 front 0))
   (component 0805_C27 (place C27 21.80000 -54.80000 front 0))
   (component 0805_C17 (place C17 24.00000 -56.60000 front 180))
@@ -195,15 +195,24 @@
   (component SOT23_Q1 (place Q1 33.70000 6.70000 front -90))
   (component 0805_R13 (place R13 35.80000 7.70000 front -90))
   (component "SOD-323_D2" (place D2 32.40000 13.40000 front 180))
-  (component PIN_VIBR (place VIBR 27.70000 6.70000 front 0))
+  (component PIN_VIBR (place VIBR 27.60000 3.00000 front 0))
   (component TFT_3_98_M4 (place M4 62.70000 -22.50000 front 0))
   (component OS102011MA1QS1_SW1 (place SW1 20.10000 -9.30000 front 180))
   (component 530480310_BAT1 (place BAT1 3.20000 -13.50000 front 90))
-  (component "MOLEX USB MINI B 67503-1230_J2" (place J2 46.25000 -13.47000 front 180
+  (component "MOLEX USB MINI B 67503-1230_J2" (place J2 36.48000 -13.70500 front 180
   ))
   (component VIBRATOR_M2 (place M2 34.70000 16.70000 front 0))
-  (component DM3ATSFPEJM5_$NONAME1 (place $NONAME1 44.72000 -15.69000 back -180))
-  (component SOD123_K_$NONAME2 (place $NONAME2 17.00000 -16.20000 front 0))
+  (component "CONN-SIL9_J7" (place J7 67.10000 -3.90000 front 90))
+  (component "CONN-SIL9_J6" (place J6 7.30000 -53.40000 front 90))
+  (component PIN_1V8M (place 1V8M 25.40000 -40.70000 front 0))
+  (component PIN_3V7 (place 3V7 10.80000 -24.40000 front 0))
+  (component HRS_DM3ATSFPEJM5_J1 (place J1 37.70000 -22.70000 front 0))
+  (component RESC1608X84_L1 (place L1 29.20000 -24.90000 front 0))
+  (component 0805_R11 (place R11 44.90000 -49.00000 front 0))
+  (component 0805_R10 (place R10 27.60000 -45.80000 front 90))
+  (component PIN_SD_CS (place SD_CS 35.60000 -55.50000 front 0))
+  (component SOD123_K_D1 (place D1 18.20000 -16.50000 front 0))
+  (component "B103 POT RUEDA_RV1" (place RV1 54.33000 -17.58500 back 0))
  )
  (library
   (image 0805_C5 (side front)
@@ -858,27 +867,88 @@
    (pin PS19 (rotate 90) 2 4.50000 0.00000)
    (pin PS19 (rotate 90) 3 4.50000 2.50000)
   )
-  (image DM3ATSFPEJM5_$NONAME1 (side back)
-   (outline (rect TOP -8.37000 -9.69000 8.37000 9.69000))
-   (pin PS20 (rotate 0) 0 2.78000 7.41000)
-   (pin PS20 (rotate 0) 1 1.68000 7.41000)
-   (pin PS20 (rotate 0) 2 0.58000 7.41000)
-   (pin PS20 (rotate 0) 3 -0.52000 7.41000)
-   (pin PS20 (rotate 0) 4 -1.62000 7.41000)
-   (pin PS20 (rotate 0) 5 -2.72000 7.41000)
-   (pin PS20 (rotate 0) 6 -3.82000 7.41000)
-   (pin PS20 (rotate 0) 7 -4.92000 7.41000)
-   (pin PS21 (rotate 0) 8 4.32000 7.41000)
-   (pin PS20 (rotate 0) 9 -5.88000 7.41000)
-   (pin PS21 (rotate 0) 10 -6.82000 3.11000)
-   (pin PS22 (rotate 0) 11 -6.82000 -3.09000)
-   (pin PS23 (rotate 0) 12 -6.82000 -7.24000)
-   (pin PS24 (rotate 0) 13 6.68000 -7.69000)
+  (image "CONN-SIL9_J7" (side front)
+   (outline (rect TOP -1.32080 -1.32080 21.64080 1.32080))
+   (pin PS8 (rotate 0) 0 0.00000 0.00000)
+   (pin PS8 (rotate 0) 1 2.54000 0.00000)
+   (pin PS8 (rotate 0) 2 5.08000 0.00000)
+   (pin PS8 (rotate 0) 3 7.62000 0.00000)
+   (pin PS8 (rotate 0) 4 10.16000 0.00000)
+   (pin PS8 (rotate 0) 5 12.70000 0.00000)
+   (pin PS8 (rotate 0) 6 15.24000 0.00000)
+   (pin PS8 (rotate 0) 7 17.78000 0.00000)
+   (pin PS8 (rotate 0) 8 20.32000 0.00000)
   )
-  (image SOD123_K_$NONAME2 (side front)
-   (outline (rect TOP -3.50000 -0.90500 0.87492 0.90500))
+  (image "CONN-SIL9_J6" (side front)
+   (outline (rect TOP -1.32080 -1.32080 21.64080 1.32080))
+   (pin PS8 (rotate 0) 0 0.00000 0.00000)
+   (pin PS8 (rotate 0) 1 2.54000 0.00000)
+   (pin PS8 (rotate 0) 2 5.08000 0.00000)
+   (pin PS8 (rotate 0) 3 7.62000 0.00000)
+   (pin PS8 (rotate 0) 4 10.16000 0.00000)
+   (pin PS8 (rotate 0) 5 12.70000 0.00000)
+   (pin PS8 (rotate 0) 6 15.24000 0.00000)
+   (pin PS8 (rotate 0) 7 17.78000 0.00000)
+   (pin PS8 (rotate 0) 8 20.32000 0.00000)
+  )
+  (image PIN_1V8M (side front)
+   (outline (rect TOP -1.32080 -1.32080 1.32080 1.32080))
+   (pin PS5 (rotate 0) 0 0.00000 0.00000)
+  )
+  (image PIN_3V7 (side front)
+   (outline (rect TOP -1.32080 -1.32080 1.32080 1.32080))
+   (pin PS5 (rotate 0) 0 0.00000 0.00000)
+  )
+  (image HRS_DM3ATSFPEJM5_J1 (side front)
+   (outline (rect TOP -10.47500 -1.80500 4.95500 21.72500))
+   (pin PS20 (rotate 180) 0 0.00000 0.00000)
+   (pin PS20 (rotate 180) 1 -1.10000 0.00000)
+   (pin PS20 (rotate 180) 2 -2.19000 0.00000)
+   (pin PS20 (rotate 180) 3 -3.30000 0.00000)
+   (pin PS20 (rotate 180) 4 -4.40000 0.00000)
+   (pin PS20 (rotate 180) 5 -5.49000 0.00000)
+   (pin PS20 (rotate 180) 6 -6.59000 0.00000)
+   (pin PS20 (rotate 180) 7 -7.69506 0.00000)
+   (pin PS21 (rotate 180) 8 -9.59498 4.30000)
+   (pin PS22 (rotate 180) 9 -9.59498 14.65512)
+   (pin PS23 (rotate 180) 10 3.90512 15.10000)
+   (pin PS21 (rotate 180) 11 1.56000 0.00000)
+   (pin PS24 (rotate 180) 12 -9.59498 10.51000)
+   (pin PS20 (rotate 180) 13 -8.64502 0.00000)
+  )
+  (image RESC1608X84_L1 (side front)
+   (outline (rect TOP -0.67500 -0.77500 2.37500 0.77500))
    (pin PS25 (rotate 0) 0 0.00000 0.00000)
-   (pin PS25 (rotate 0) 1 -2.10000 0.00000)
+   (pin PS25 (rotate 0) 1 1.70000 0.00000)
+  )
+  (image 0805_R11 (side front)
+   (outline (rect TOP -0.50800 -0.68580 2.64160 0.63500))
+   (pin PS0 (rotate 0) 0 0.00000 0.00000)
+   (pin PS0 (rotate 0) 1 2.13360 0.00000)
+  )
+  (image 0805_R10 (side front)
+   (outline (rect TOP -0.50800 -0.68580 2.64160 0.63500))
+   (pin PS0 (rotate 0) 0 0.00000 0.00000)
+   (pin PS0 (rotate 0) 1 2.13360 0.00000)
+  )
+  (image PIN_SD_CS (side front)
+   (outline (rect TOP -1.32080 -1.32080 1.32080 1.32080))
+   (pin PS5 (rotate 0) 0 0.00000 0.00000)
+  )
+  (image SOD123_K_D1 (side front)
+   (outline (rect TOP -3.50000 -0.90500 0.87492 0.90500))
+   (pin PS26 (rotate 0) 0 0.00000 0.00000)
+   (pin PS26 (rotate 0) 1 -2.10000 0.00000)
+  )
+  (image "B103 POT RUEDA_RV1" (side back)
+   (outline (rect TOP -4.05080 -0.80000 12.05080 15.55080))
+   (pin PS27 (rotate 0) 0 0.00000 0.00000)
+   (pin PS27 (rotate 0) 1 2.00000 0.00000)
+   (pin PS27 (rotate 0) 2 6.00000 0.00000)
+   (pin PS27 (rotate 0) 3 8.00000 0.00000)
+   (pin PS27 (rotate 0) 4 4.00000 0.00000)
+   (pin PS28 (rotate 0) 5 -1.00000 10.00000)
+   (pin PS28 (rotate 0) 6 9.00000 10.00000)
   )
   (padstack PS0 (absolute on) (shape (rect TOP -0.50800 -0.63500 0.50800 0.63500)))
   (padstack PS1 (absolute on) (shape (rect TOP -0.15000 -0.80000 0.15000 0.80000)))
@@ -1055,10 +1125,47 @@
   (padstack PS19 (absolute on) (shape (rect TOP -0.75000 -1.25000 0.75000 1.25000)))
   (padstack PS20 (absolute on) (shape (rect BOT -0.35000 -0.60000 0.35000 0.60000)))
   (padstack PS21 (absolute on) (shape (rect BOT -0.50000 -0.60000 0.50000 0.60000)))
-  (padstack PS22 (absolute on) (shape (rect BOT -0.50000 -0.40005 0.50000 0.40005)))
-  (padstack PS23 (absolute on) (shape (rect BOT -0.50000 -1.40000 0.50000 1.40000)))
-  (padstack PS24 (absolute on) (shape (rect BOT -0.65000 -0.94996 0.65000 0.94996)))
-  (padstack PS25 (absolute on) (shape (rect TOP -0.60000 -0.60000 0.60000 0.60000)))
+  (padstack PS22 (absolute on) (shape (rect BOT -0.50000 -1.40000 0.50000 1.40000)))
+  (padstack PS23 (absolute on) (shape (rect BOT -0.65000 -0.94996 0.65000 0.94996)))
+  (padstack PS24 (absolute on) (shape (rect BOT -0.50000 -0.40005 0.50000 0.40005)))
+  (padstack PS25 (absolute on) (shape (rect TOP -0.39370 -0.49530 0.39370 0.49530)))
+  (padstack PS26 (absolute on) (shape (rect TOP -0.60000 -0.60000 0.60000 0.60000)))
+  (padstack PS27 (absolute on)
+   (shape (circle TOP 1.60000 0 0))
+   (shape (circle I1 1.60000 0 0))
+   (shape (circle I2 1.60000 0 0))
+   (shape (circle I3 1.60000 0 0))
+   (shape (circle I4 1.60000 0 0))
+   (shape (circle I5 1.60000 0 0))
+   (shape (circle I6 1.60000 0 0))
+   (shape (circle I7 1.60000 0 0))
+   (shape (circle I8 1.60000 0 0))
+   (shape (circle I9 1.60000 0 0))
+   (shape (circle I10 1.60000 0 0))
+   (shape (circle I11 1.60000 0 0))
+   (shape (circle I12 1.60000 0 0))
+   (shape (circle I13 1.60000 0 0))
+   (shape (circle I14 1.60000 0 0))
+   (shape (circle BOT 1.60000 0 0))
+  )
+  (padstack PS28 (absolute on)
+   (shape (circle TOP 1.20000 0 0))
+   (shape (circle I1 1.20000 0 0))
+   (shape (circle I2 1.20000 0 0))
+   (shape (circle I3 1.20000 0 0))
+   (shape (circle I4 1.20000 0 0))
+   (shape (circle I5 1.20000 0 0))
+   (shape (circle I6 1.20000 0 0))
+   (shape (circle I7 1.20000 0 0))
+   (shape (circle I8 1.20000 0 0))
+   (shape (circle I9 1.20000 0 0))
+   (shape (circle I10 1.20000 0 0))
+   (shape (circle I11 1.20000 0 0))
+   (shape (circle I12 1.20000 0 0))
+   (shape (circle I13 1.20000 0 0))
+   (shape (circle I14 1.20000 0 0))
+   (shape (circle BOT 1.20000 0 0))
+  )
   (padstack $VIA#0_SIGNAL (absolute on)
    (shape (circle TOP 0.76200 0 0))
    (shape (circle I1 0.76200 0 0))
@@ -1122,7 +1229,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins C6-0 J2-0)
+   (pins C6-0 J2-0 L1-0)
   )
   (net "#00157"
    (circuit
@@ -1149,7 +1256,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins R5-0)
+   (pins R5-0 D1-1)
   )
   (net "#00166"
    (circuit
@@ -1194,7 +1301,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins U2-7 C9-0 R6-1)
+   (pins U2-7 C9-0 R6-1 1V8M-0 R10-0)
   )
   (net "#00182"
    (circuit
@@ -1275,7 +1382,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins AUDIO_L-0 C24-1)
+   (pins AUDIO_L-0 C24-1 RV1-2)
   )
   (net "#00280"
    (circuit
@@ -1284,7 +1391,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins AUDIO_R-0 C25-1)
+   (pins AUDIO_R-0 C25-1 RV1-1)
   )
   (net "#00281"
    (circuit
@@ -1311,7 +1418,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins Q1-1 R13-0)
+   (pins Q1-1 R13-0 J7-2)
   )
   (net "/RESET"
    (circuit
@@ -1320,7 +1427,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins U1-5 R15-1 R14-0 M4-2)
+   (pins U1-5 R15-1 R14-0 /RESET-0 M4-2)
   )
   (net "1V8"
    (circuit
@@ -1329,7 +1436,7 @@
      $VIA#0_POWER
     )
    )
-   (pins C5-1 U1-4 1V8-0)
+   (pins C5-1 U1-4 1V8-0 R10-1)
   )
   (net "3V3"
    (circuit
@@ -1339,7 +1446,8 @@
     )
    )
     (pins C3-1 C4-1 U1-16 U1-39 R32-0 R33-0 R1-0 R34-0 R31-0 R17-0 R14-1 3V3-0 R2-1 U2-0
-    U2-1 U2-2 U7-3 U7-5 U7-12 C16-0 C19-0 C18-0 C17-0 M4-11 M4-12 M4-22)
+     U2-1 U2-2 U7-3 U7-5 U7-12 C16-0 C19-0 C18-0 C17-0 M4-11 M4-12 M4-22 J6-3 J1-3 R11-0
+   )
   )
   (net "3V7"
    (circuit
@@ -1348,7 +1456,7 @@
      $VIA#0_POWER
     )
    )
-   (pins U3-2 C11-0 SW1-0 BAT1-0)
+   (pins U3-2 C11-0 SW1-0 BAT1-0 3V7-0)
   )
   (net "5V"
    (circuit
@@ -1357,7 +1465,7 @@
      $VIA#0_POWER
     )
    )
-   (pins U8-3 U8-19 C10-0 5V-0 U3-3 SW1-2)
+   (pins U8-3 U8-19 C10-0 5V-0 U3-3 SW1-2 L1-1 D1-0)
   )
   (net "AUDIO_L"
    (circuit
@@ -1366,7 +1474,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins U1-27)
+   (pins U1-27 RV1-3)
   )
   (net "AUDIO_R"
    (circuit
@@ -1375,7 +1483,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins U1-28)
+   (pins U1-28 RV1-4)
   )
   (net "AUX_3V3"
    (circuit
@@ -1384,7 +1492,7 @@
      $VIA#0_POWER
     )
    )
-   (pins R35-0 R36-0 R37-0 R38-0 Q1-2 R13-1)
+   (pins R35-0 R36-0 R37-0 R38-0 Q1-2 R13-1 J7-3)
   )
   (net "AUX_B4"
    (circuit
@@ -1393,7 +1501,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins SWL_UP-0 SWL_UP-1 R35-1)
+   (pins SWL_UP-0 SWL_UP-1 R35-1 J7-8)
   )
   (net "AUX_B5"
    (circuit
@@ -1402,7 +1510,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins SWL_LEFT-0 SWL_LEFT-1 R36-1)
+   (pins SWL_LEFT-0 SWL_LEFT-1 R36-1 J7-7)
   )
   (net "AUX_B6"
    (circuit
@@ -1411,7 +1519,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins SWL_RIGHT-0 SWL_RIGHT-1 R37-1)
+   (pins SWL_RIGHT-0 SWL_RIGHT-1 R37-1 J7-6)
   )
   (net "AUX_B7"
    (circuit
@@ -1420,7 +1528,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins SWL_DOWN-0 SWL_DOWN-1 R38-1)
+   (pins SWL_DOWN-0 SWL_DOWN-1 R38-1 J7-5)
   )
   (net "AUX_GND"
    (circuit
@@ -1430,7 +1538,7 @@
     )
    )
     (pins SWL_RIGHT-2 SWL_RIGHT-3 SWL_LEFT-2 SWL_LEFT-3 SWL_DOWN-2 SWL_DOWN-3 SWL_UP-2
-    SWL_UP-3 D2-0 M2-1)
+    SWL_UP-3 D2-0 M2-1 J7-0)
   )
   (net "B0"
    (circuit
@@ -1475,7 +1583,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins R24-1)
+   (pins R24-1 J6-8)
   )
   (net "B5"
    (circuit
@@ -1484,7 +1592,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins R25-1)
+   (pins R25-1 J6-7)
   )
   (net "B6"
    (circuit
@@ -1493,7 +1601,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins R26-1)
+   (pins R26-1 J6-6)
   )
   (net "B7"
    (circuit
@@ -1502,7 +1610,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins R27-1)
+   (pins R27-1 J6-5)
   )
   (net "BOOT/AUDIO_SHDN"
    (circuit
@@ -1511,7 +1619,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins U1-43 R16-1 R17-1 U7-11)
+   (pins U1-43 R16-1 R17-1 BOOT-0 U7-11)
   )
   (net "DB0"
    (circuit
@@ -1668,7 +1776,7 @@
      SW_LEFT-3 SW_RIGHT-2 SW_RIGHT-3 SW_UP-2 SW_UP-3 U8-6 U8-17 U8-20 U8-24 U8-25 C10-1
      C20-1 C6-1 GND-0 U3-1 C11-1 R8-1 U4-3 U2-3 C7-1 R4-0 R7-0 C9-1 C8-1 GND_-0 U7-1 U7-8
      U7-10 U7-14 C16-1 C19-1 C18-1 C22-1 C21-1 C17-1 C23-0 M4-13 M4-21 BAT1-2 J2-4 J2-5
-    J2-6 J2-7 J2-8)
+    J2-6 J2-7 J2-8 J6-0 J1-5 RV1-0)
   )
   (net "INL"
    (circuit
@@ -1695,7 +1803,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins U1-22 MISO-0 M4-14)
+   (pins U1-22 MISO-0 M4-14 J1-6)
   )
   (net "MOSI"
    (circuit
@@ -1704,7 +1812,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins U1-23 MOSI-0 M4-19)
+   (pins U1-23 MOSI-0 M4-19 J1-2)
   )
   (net "RXD"
    (circuit
@@ -1722,7 +1830,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins U1-21 SCK-0 M4-17)
+   (pins U1-21 SCK-0 M4-17 J1-4)
   )
   (net "SD_CS"
    (circuit
@@ -1731,7 +1839,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins U1-20)
+   (pins U1-20 J1-1 R11-1 SD_CS-0)
   )
   (net "SPKL+"
    (circuit
@@ -1848,7 +1956,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins U1-29)
+   (pins U1-29 J6-2)
   )
   (class POWER
    "1V8"

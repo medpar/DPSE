@@ -11,4 +11,6 @@
 17-03-2025: Planos de masa creados. PCB exportada. Ficheros gerber creados.
 19-03-2025: Corte de la PCB. Comienzo de la soldadura de circuitos integrados.
 24-03-2025: Soldadrua de circuitos integrados terminado. Inicio soldadura de resistencias y condensadores.
-26-03-2025: Soldadura de la placa finalizada. Correcciones en la PCB. 
+26-03-2025: Soldadura de resistencias y condensadores finalizada. Correcciones en la PCB.
+31-03-2025: Soldadura de todos los elementos finalizada.
+02-04-2025: Comprobación de componentes finalizada. El hardware funciona correctamente con la pantalla y la batería o el cable conectados.

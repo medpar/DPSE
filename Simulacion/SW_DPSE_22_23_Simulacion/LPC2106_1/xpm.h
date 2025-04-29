@@ -5,13 +5,7 @@
 // Asignatura: Desarrollo Práctico de Sistemas Electrónicos
 // ----------------------------------------------------------------------
 // mapa de bits de los sprites en formato gráfico xpm
-extern char *pacman_xpm[]; //
-extern char *wall[];    // Pac-Man
-extern char *back[];// Fantasma Rojo
-extern char *coin[];
-extern char *ghost_red[];
-
-//extern char *ghost_blue[]; // Fantasma Azul, etc.
+extern char * bloques[]; //
 extern unsigned short paleta[96];
 extern int xpm_ancho, xpm_alto, xpm_ncol, xpm_cpp;
 extern int xpm_sx, xpm_sy; // Tamaño en pixel de los sprites

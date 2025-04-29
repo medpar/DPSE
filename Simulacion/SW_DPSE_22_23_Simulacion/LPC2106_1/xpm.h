@@ -6,6 +6,11 @@
 // ----------------------------------------------------------------------
 // mapa de bits de los sprites en formato gráfico xpm
 extern char * bloques[]; //
+extern char * pacman_xpm[];
+extern char * wall_xpm[];
+extern char * bg_xpm[];
+extern char * coin_xpm[];
+extern char * ghost_xpm[];
 extern unsigned short paleta[96];
 extern int xpm_ancho, xpm_alto, xpm_ncol, xpm_cpp;
 extern int xpm_sx, xpm_sy; // Tamaño en pixel de los sprites

@@ -1,0 +1,759 @@
+Archive member included because of file (symbol)
+
+c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+                              audio.o (__aeabi_uidiv)
+c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+                              CALIBR~1.o (__aeabi_idiv)
+c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
+                              c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o) (__aeabi_idiv0)
+c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+                              xpt2046.o (memset)
+c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+                              NT35510.o (strlen)
+
+Allocating common symbols
+Common symbol       size              file
+
+tft_x               0x4               NT35510.o
+LENX                0x4               NT35510.o
+paleta              0xc0              xpm.o
+xpm_sy              0x4               xpm.o
+xpm_ncol            0x4               xpm.o
+tft_y               0x4               NT35510.o
+teselas_x           0x4               xpm.o
+xpm_cpp             0x4               xpm.o
+xpm_ancho           0x4               xpm.o
+xpm_sx              0x4               xpm.o
+LENY                0x4               NT35510.o
+xpm_alto            0x4               xpm.o
+
+Discarded input sections
+
+ .bss           0x00000000        0x0 crt.o
+ .data          0x00000000        0x0 main.o
+ .text          0x00000000      0x1fc audio.o
+ .data          0x00000000      0x124 audio.o
+ .bss           0x00000000        0x0 audio.o
+ .rodata        0x00000000      0x200 audio.o
+ .rodata.str1.1
+                0x00000000       0x20 audio.o
+ .text          0x00000000        0x0 big_font.o
+ .data          0x00000000        0x0 big_font.o
+ .bss           0x00000000        0x0 big_font.o
+ .text          0x00000000        0x0 bloques.o
+ .data          0x00000000       0xb4 bloques.o
+ .bss           0x00000000        0x0 bloques.o
+ .rodata.str1.1
+                0x00000000     0x11d0 bloques.o
+ .data          0x00000000        0x0 CALIBR~1.o
+ .bss           0x00000000        0x0 CALIBR~1.o
+ .text          0x00000000        0x0 SMALL_~1.o
+ .data          0x00000000        0x0 SMALL_~1.o
+ .bss           0x00000000        0x0 SMALL_~1.o
+ .rodata        0x00000000      0x479 SMALL_~1.o
+ .data          0x00000000        0x0 vibrador.o
+ .bss           0x00000000        0x0 vibrador.o
+ .bss           0x00000000        0x0 xpt2046.o
+ .data          0x00000000        0x0 galaga.o
+ .bss           0x00000000        0x0 galaga.o
+ .text          0x00000000        0x0 PACMAN~1.o
+ .bss           0x00000000        0x0 PACMAN~1.o
+ .text          0x00000000      0x114 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+ .data          0x00000000        0x0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+ .data          0x00000000        0x0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+ .data          0x00000000        0x0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
+ .data          0x00000000        0x0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+ .data          0x00000000        0x0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+ROM              0x00000000         0x00020000         xr
+RAM              0x40000000         0x00010000         rw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+START GROUP
+END GROUP
+LOAD crt.o
+LOAD main.o
+LOAD audio.o
+LOAD big_font.o
+LOAD bloques.o
+LOAD CALIBR~1.o
+LOAD NT35510.o
+LOAD SMALL_~1.o
+LOAD vibrador.o
+LOAD xpm.o
+LOAD xpt2046.o
+LOAD galaga.o
+LOAD PACMAN~1.o
+START GROUP
+LOAD c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a
+LOAD c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a
+END GROUP
+                0x00000400                STACK_SIZE = 0x400
+                0x40010000                _stack_end = 0x40010000
+
+.text           0x00000000     0x5842
+ //*(.text.startup)
+ *(.text)
+ .text          0x00000000      0x640 crt.o
+                0x00000000                _boot
+                0x00000230                _start
+                0x00000230                _mainCRTStartup
+                0x00000230                start
+                0x00000348                _Halt
+                0x00000360                _delay_loop
+                0x0000036c                _prtnum
+                0x00000410                _prthex
+                0x00000458                _puts
+                0x0000047c                _printf
+                0x00000524                _gets
+                0x000005ac                _U0putch
+                0x000005c4                _U0getch
+ .text          0x00000640      0x5bc main.o
+                0x00000640                initGame
+                0x0000078c                dibuja_hud
+                0x000007fc                dibuja_mapa
+                0x00000944                movePacman
+                0x00000a5c                checkCollisions
+ .text          0x00000bfc      0x1c4 CALIBR~1.o
+                0x00000bfc                setCalibrationMatrix
+                0x00000d40                getDisplayPoint
+ .text          0x00000dc0     0x295c NT35510.o
+                0x00000dc0                NT35510_Cmd
+                0x00000dec                NT35510_Data
+                0x00000e1c                NT35510_Data_
+                0x00000e48                NT35510_Reg
+                0x00000e94                TFT_SetArea
+                0x00000f6c                TFT_SetAreaR
+                0x00001044                NT35510_ReadCMD
+                0x000010d4                TFT_Init
+                0x0000292c                TFT_FillArea
+                0x0000299c                TFT_PutPixel
+                0x00002a6c                TFT_PutPixelColor
+                0x00002b18                TFT_DrawLine
+                0x00002bf8                TFT_HorizontalLine
+                0x00002c84                TFT_VerticalLine
+                0x00002cf8                TFT_DrawSquare
+                0x00002d6c                TFT_DrawCircle
+                0x00002e84                TFT_FillCircle
+                0x00002f0c                TFT_DrawFillSquare
+                0x00002f88                TFT_DrawFillSquareS
+                0x00002ffc                TFT_DumpBinaryFont
+                0x00003168                TFT_putch
+                0x00003228                TFT_print
+                0x00003274                TFT_print_centered_x
+                0x000032e8                TFT_putchar
+                0x00003330                TFT_putch_xNyN
+                0x00003450                TFT_putchar_xNyN
+                0x0000349c                TFT_print_xNyN
+                0x000034f0                TFT_print_centered_x_xNyN
+                0x00003578                TFT_Off
+                0x000035f8                TFT_On
+                0x000035fc                NT35510_WritePage
+                0x0000366c                NT35510_ReadPage
+ .text          0x0000371c       0x6c vibrador.o
+                0x0000371c                TIMER1_ISR
+                0x00003744                VibratorON
+ .text          0x00003788      0x73c xpm.o
+                0x00003788                _atoi
+                0x000037cc                XPM_Extract
+                0x00003964                XPM_PintaAll
+                0x00003a24                XPM_PintaAt
+                0x00003b58                XPM_SetxNyN
+                0x00003bb8                XPM_PintaAtxNyN
+ .text          0x00003ec4      0x448 xpt2046.o
+                0x00003ec4                TP_Init
+                0x00003f04                TP_EnviaRecibe
+                0x00003f2c                TP_Get_XY
+                0x0000400c                TP_Get_XY_Cal
+                0x0000407c                TP_Aspa
+                0x000040dc                TP_Calibrate
+ .text          0x0000430c       0x88 galaga.o
+                0x0000430c                GetAction
+ .text          0x00004394      0x148 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+                0x00004394                __divsi3
+                0x00004394                __aeabi_idiv
+                0x000044bc                __aeabi_idivmod
+ .text          0x000044dc        0x4 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
+                0x000044dc                __aeabi_idiv0
+                0x000044dc                __aeabi_ldiv0
+ .text          0x000044e0       0xf0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+                0x000044e0                memset
+ .text          0x000045d0       0x60 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+                0x000045d0                strlen
+ *(.text.startup)
+ .text.startup  0x00004630      0x148 main.o
+                0x00004630                main
+ *(.rodata)
+ .rodata        0x00004778      0x17a main.o
+ .rodata        0x000048f2      0xbe5 big_font.o
+                0x000048f2                BigFont
+ *(.rodata*)
+ .rodata.str1.1
+                0x000054d7       0x94 main.o
+ .rodata.str1.1
+                0x0000556b       0x9c NT35510.o
+                                 0xae (size before relaxing)
+ .rodata.str1.1
+                0x00005607       0x1f xpm.o
+ .rodata.str1.1
+                0x00005626       0x8c xpt2046.o
+                                 0x96 (size before relaxing)
+ .rodata.str1.1
+                0x000056b2      0x190 PACMAN~1.o
+ *(.glue_7)
+ .glue_7        0x00000000        0x0 linker stubs
+ *(.glue_7t)
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x00005844        0x0 load address 0x00005842
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x00005844        0x0 load address 0x00005842
+ .v4_bx         0x00000000        0x0 linker stubs
+                0x00005844                . = ALIGN (0x4)
+
+.ctors          0x00005842        0x0
+                0x00005842                PROVIDE (__ctors_start__, .)
+ *(SORT(.ctors.*))
+ *(.ctors)
+                0x00005842                PROVIDE (__ctors_end__, .)
+
+.dtors          0x00005842        0x0
+                0x00005842                PROVIDE (__dtors_start__, .)
+ *(SORT(.dtors.*))
+ *(.dtors)
+                0x00005842                PROVIDE (__dtors_end__, .)
+                0x00005844                . = ALIGN (0x4)
+                0x00005844                _etext = .
+                0x00005844                PROVIDE (etext, .)
+
+.data           0x40000000      0x1b0 load address 0x00005844
+                0x40000000                _data = .
+ *(.data)
+ .data          0x40000000        0x8 crt.o
+                0x40000000                _vputch
+                0x40000004                _vgetch
+ .data          0x40000008       0x10 NT35510.o
+                0x40000008                FG_Color
+                0x4000000c                CF
+                0x40000010                xN
+                0x40000014                yN
+ .data          0x40000018       0x10 xpm.o
+                0x40000018                xpm_xn
+                0x4000001c                xpm_yn
+                0x40000020                xpm_sxn
+                0x40000024                xpm_syn
+ .data          0x40000028       0x20 xpt2046.o
+                0x40000028                X_SINPULSAR
+                0x4000002c                Cal
+ .data          0x40000048      0x168 PACMAN~1.o
+                0x40000048                ghost_xpm
+                0x40000090                coin_xpm
+                0x400000d8                wall_xpm
+                0x40000120                bg_xpm
+                0x40000168                pacman_xpm
+                0x400001b0                . = ALIGN (0x4)
+                0x400001b0                _edata = .
+                0x400001b0                PROVIDE (edata, .)
+
+.bss            0x400001b0      0x2b4 load address 0x000059f4
+                0x400001b0                __bss_start = .
+                0x400001b0                __bss_start__ = .
+ *(.bss)
+ .bss           0x400001b0      0x1c0 main.o
+ .bss           0x40000370        0x2 NT35510.o
+                0x40000370                BG_Color
+ *fill*         0x40000372        0x2 00
+ .bss           0x40000374        0x4 xpm.o
+                0x40000374                xpm_xmirror
+ *(COMMON)
+ COMMON         0x40000378       0x10 NT35510.o
+                0x40000378                tft_x
+                0x4000037c                LENX
+                0x40000380                tft_y
+                0x40000384                LENY
+ COMMON         0x40000388       0xdc xpm.o
+                0x40000388                paleta
+                0x40000448                xpm_sy
+                0x4000044c                xpm_ncol
+                0x40000450                teselas_x
+                0x40000454                xpm_cpp
+                0x40000458                xpm_ancho
+                0x4000045c                xpm_sx
+                0x40000460                xpm_alto
+                0x40000464                . = ALIGN (0x4)
+                0x40000464                . = ALIGN (0x4)
+                0x40000464                __bss_end__ = .
+                0x40000464                PROVIDE (__bss_end, .)
+
+.stack          0x40000464      0x49c load address 0x00005ca8
+                0x40000500                . = ALIGN (0x100)
+ *fill*         0x40000464       0x9c 00
+                0x40000900                . = (. + STACK_SIZE)
+ *fill*         0x40000500      0x400 00
+                0x40000900                PROVIDE (_stack, .)
+                0x40000900                _end = .
+                0x40000900                PROVIDE (end, .)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.ARM.attributes
+                0x00000000       0x2e
+ .ARM.attributes
+                0x00000000       0x22 crt.o
+ .ARM.attributes
+                0x00000022       0x32 main.o
+ .ARM.attributes
+                0x00000054       0x32 audio.o
+ .ARM.attributes
+                0x00000086       0x32 big_font.o
+ .ARM.attributes
+                0x000000b8       0x32 bloques.o
+ .ARM.attributes
+                0x000000ea       0x32 CALIBR~1.o
+ .ARM.attributes
+                0x0000011c       0x32 NT35510.o
+ .ARM.attributes
+                0x0000014e       0x32 SMALL_~1.o
+ .ARM.attributes
+                0x00000180       0x32 vibrador.o
+ .ARM.attributes
+                0x000001b2       0x32 xpm.o
+ .ARM.attributes
+                0x000001e4       0x32 xpt2046.o
+ .ARM.attributes
+                0x00000216       0x32 galaga.o
+ .ARM.attributes
+                0x00000248       0x32 PACMAN~1.o
+ .ARM.attributes
+                0x0000027a       0x1a c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x00000294       0x1a c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+ .ARM.attributes
+                0x000002ae       0x18 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x000002c6       0x32 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+ .ARM.attributes
+                0x000002f8       0x32 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+
+.comment        0x00000000       0x11
+ *(.comment)
+ .comment       0x00000000       0x11 main.o
+                                 0x12 (size before relaxing)
+ .comment       0x00000000       0x12 audio.o
+ .comment       0x00000000       0x12 big_font.o
+ .comment       0x00000000       0x12 bloques.o
+ .comment       0x00000000       0x12 CALIBR~1.o
+ .comment       0x00000000       0x12 NT35510.o
+ .comment       0x00000000       0x12 SMALL_~1.o
+ .comment       0x00000000       0x12 vibrador.o
+ .comment       0x00000000       0x12 xpm.o
+ .comment       0x00000000       0x12 xpt2046.o
+ .comment       0x00000000       0x12 galaga.o
+ .comment       0x00000000       0x12 PACMAN~1.o
+ .comment       0x00000000       0x12 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+ .comment       0x00000000       0x12 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000      0x1c8
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x20 crt.o
+ .debug_aranges
+                0x00000020       0x28 main.o
+ .debug_aranges
+                0x00000048       0x20 audio.o
+ .debug_aranges
+                0x00000068       0x20 CALIBR~1.o
+ .debug_aranges
+                0x00000088       0x20 NT35510.o
+ .debug_aranges
+                0x000000a8       0x20 vibrador.o
+ .debug_aranges
+                0x000000c8       0x20 xpm.o
+ .debug_aranges
+                0x000000e8       0x20 xpt2046.o
+ .debug_aranges
+                0x00000108       0x20 galaga.o
+ .debug_aranges
+                0x00000128       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+ .debug_aranges
+                0x00000148       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+ .debug_aranges
+                0x00000168       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
+ .debug_aranges
+                0x00000188       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+ .debug_aranges
+                0x000001a8       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info     0x00000000     0x27d1
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x00000000       0xb6 crt.o
+ .debug_info    0x000000b6      0x5b7 main.o
+ .debug_info    0x0000066d      0x1ce audio.o
+ .debug_info    0x0000083b       0x5c big_font.o
+ .debug_info    0x00000897       0x5c bloques.o
+ .debug_info    0x000008f3      0x1e4 CALIBR~1.o
+ .debug_info    0x00000ad7      0xe0d NT35510.o
+ .debug_info    0x000018e4       0x5c SMALL_~1.o
+ .debug_info    0x00001940       0xc0 vibrador.o
+ .debug_info    0x00001a00      0x56e xpm.o
+ .debug_info    0x00001f6e      0x37a xpt2046.o
+ .debug_info    0x000022e8       0xb6 galaga.o
+ .debug_info    0x0000239e       0xa4 PACMAN~1.o
+ .debug_info    0x00002442       0x98 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+ .debug_info    0x000024da       0x98 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+ .debug_info    0x00002572       0x98 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
+ .debug_info    0x0000260a      0x116 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+ .debug_info    0x00002720       0xb1 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+
+.debug_abbrev   0x00000000      0xc30
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000       0x14 crt.o
+ .debug_abbrev  0x00000014      0x208 main.o
+ .debug_abbrev  0x0000021c       0xed audio.o
+ .debug_abbrev  0x00000309       0x49 big_font.o
+ .debug_abbrev  0x00000352       0x4b bloques.o
+ .debug_abbrev  0x0000039d       0xe8 CALIBR~1.o
+ .debug_abbrev  0x00000485      0x2c2 NT35510.o
+ .debug_abbrev  0x00000747       0x49 SMALL_~1.o
+ .debug_abbrev  0x00000790       0x70 vibrador.o
+ .debug_abbrev  0x00000800       0xd3 xpm.o
+ .debug_abbrev  0x000008d3      0x18e xpt2046.o
+ .debug_abbrev  0x00000a61       0x4e galaga.o
+ .debug_abbrev  0x00000aaf       0x4b PACMAN~1.o
+ .debug_abbrev  0x00000afa       0x14 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+ .debug_abbrev  0x00000b0e       0x14 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+ .debug_abbrev  0x00000b22       0x14 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
+ .debug_abbrev  0x00000b36       0x8d c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+ .debug_abbrev  0x00000bc3       0x6d c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+
+.debug_line     0x00000000     0x1195
+ *(.debug_line)
+ .debug_line    0x00000000      0x18b crt.o
+ .debug_line    0x0000018b      0x19d main.o
+ .debug_line    0x00000328       0x83 audio.o
+ .debug_line    0x000003ab       0x2e big_font.o
+ .debug_line    0x000003d9       0x2d bloques.o
+ .debug_line    0x00000406       0xa2 CALIBR~1.o
+ .debug_line    0x000004a8      0x4df NT35510.o
+ .debug_line    0x00000987       0x30 SMALL_~1.o
+ .debug_line    0x000009b7       0x47 vibrador.o
+ .debug_line    0x000009fe      0x1fd xpm.o
+ .debug_line    0x00000bfb       0xf3 xpt2046.o
+ .debug_line    0x00000cee       0x4b galaga.o
+ .debug_line    0x00000d39       0x2f PACMAN~1.o
+ .debug_line    0x00000d68       0x93 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+ .debug_line    0x00000dfb       0x9f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+ .debug_line    0x00000e9a       0x6a c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
+ .debug_line    0x00000f04      0x180 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+ .debug_line    0x00001084      0x111 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+
+.debug_frame    0x00000000      0x808
+ *(.debug_frame)
+ .debug_frame   0x00000000       0xcc main.o
+ .debug_frame   0x000000cc       0xa8 audio.o
+ .debug_frame   0x00000174       0x5c CALIBR~1.o
+ .debug_frame   0x000001d0      0x3d0 NT35510.o
+ .debug_frame   0x000005a0       0x38 vibrador.o
+ .debug_frame   0x000005d8       0xcc xpm.o
+ .debug_frame   0x000006a4       0xb4 xpt2046.o
+ .debug_frame   0x00000758       0x28 galaga.o
+ .debug_frame   0x00000780       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+ .debug_frame   0x000007a0       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+ .debug_frame   0x000007c0       0x28 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+ .debug_frame   0x000007e8       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+
+.debug_str      0x00000000      0x8c0
+ *(.debug_str)
+ .debug_str     0x00000000      0x26e main.o
+                                0x2b1 (size before relaxing)
+ .debug_str     0x0000026e       0xb5 audio.o
+                                0x1de (size before relaxing)
+ .debug_str     0x00000323        0xe big_font.o
+                                 0xc4 (size before relaxing)
+ .debug_str     0x00000331       0x15 bloques.o
+                                 0xba (size before relaxing)
+ .debug_str     0x00000346       0x71 CALIBR~1.o
+                                0x1a7 (size before relaxing)
+ .debug_str     0x000003b7      0x237 NT35510.o
+                                0x3bc (size before relaxing)
+ .debug_str     0x000005ee       0x1a SMALL_~1.o
+                                 0xc8 (size before relaxing)
+ .debug_str     0x00000608       0x24 vibrador.o
+                                0x14d (size before relaxing)
+ .debug_str     0x0000062c       0xce xpm.o
+                                0x20f (size before relaxing)
+ .debug_str     0x000006fa       0x6b xpt2046.o
+                                0x1d8 (size before relaxing)
+ .debug_str     0x00000765       0x16 galaga.o
+                                0x13f (size before relaxing)
+ .debug_str     0x0000077b        0xf PACMAN~1.o
+                                 0xe2 (size before relaxing)
+ .debug_str     0x0000078a       0xa2 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+                                0x137 (size before relaxing)
+ .debug_str     0x0000082c       0x94 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+                                0x130 (size before relaxing)
+
+.debug_loc      0x00000000     0x2307
+ *(.debug_loc)
+ .debug_loc     0x00000000      0x397 main.o
+ .debug_loc     0x00000397       0xb9 audio.o
+ .debug_loc     0x00000450       0xfe CALIBR~1.o
+ .debug_loc     0x0000054e     0x118a NT35510.o
+ .debug_loc     0x000016d8       0x20 vibrador.o
+ .debug_loc     0x000016f8      0x7cd xpm.o
+ .debug_loc     0x00001ec5      0x1f8 xpt2046.o
+ .debug_loc     0x000020bd       0x52 galaga.o
+ .debug_loc     0x0000210f      0x1e5 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+ .debug_loc     0x000022f4       0x13 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+OUTPUT(Release.elf elf32-littlearm)
+
+.debug_ranges   0x00000000       0xa8
+ .debug_ranges  0x00000000       0x78 main.o
+ .debug_ranges  0x00000078       0x30 NT35510.o
+
+Cross Reference Table
+
+Symbol                                            File
+AUDIO_Effect                                      audio.o
+AUDIO_Timer_On                                    audio.o
+BG_Color                                          NT35510.o
+                                                  xpt2046.o
+                                                  main.o
+BigFont                                           big_font.o
+                                                  NT35510.o
+                                                  main.o
+CF                                                NT35510.o
+                                                  main.o
+Cal                                               xpt2046.o
+FG_Color                                          NT35510.o
+                                                  xpt2046.o
+                                                  main.o
+GetAction                                         galaga.o
+                                                  main.o
+IRQ_Spurious_Routine                              audio.o
+LENX                                              xpt2046.o
+                                                  xpm.o
+                                                  NT35510.o
+                                                  main.o
+LENY                                              xpt2046.o
+                                                  xpm.o
+                                                  NT35510.o
+                                                  main.o
+NOTE                                              audio.o
+NT35510_Cmd                                       NT35510.o
+NT35510_Data                                      NT35510.o
+NT35510_Data_                                     NT35510.o
+                                                  xpm.o
+NT35510_ReadCMD                                   NT35510.o
+NT35510_ReadPage                                  NT35510.o
+NT35510_Reg                                       NT35510.o
+NT35510_WritePage                                 NT35510.o
+PARTITURE_Off                                     audio.o
+PARTITURE_On                                      audio.o
+PWM0_ISR                                          audio.o
+SmallFont                                         SMALL_~1.o
+TABLA_SQUARE_WAVE                                 audio.o
+TFT_DrawCircle                                    NT35510.o
+                                                  xpt2046.o
+TFT_DrawFillSquare                                NT35510.o
+                                                  xpt2046.o
+TFT_DrawFillSquareS                               NT35510.o
+                                                  main.o
+TFT_DrawLine                                      NT35510.o
+                                                  xpt2046.o
+TFT_DrawSquare                                    NT35510.o
+TFT_DumpBinaryFont                                NT35510.o
+TFT_FillArea                                      NT35510.o
+TFT_FillCircle                                    NT35510.o
+TFT_HorizontalLine                                NT35510.o
+TFT_Init                                          NT35510.o
+                                                  main.o
+TFT_Off                                           NT35510.o
+TFT_On                                            NT35510.o
+TFT_PutPixel                                      NT35510.o
+TFT_PutPixelColor                                 NT35510.o
+TFT_SetArea                                       NT35510.o
+                                                  xpm.o
+TFT_SetAreaR                                      NT35510.o
+TFT_VerticalLine                                  NT35510.o
+TFT_print                                         NT35510.o
+TFT_print_centered_x                              NT35510.o
+                                                  xpt2046.o
+TFT_print_centered_x_xNyN                         NT35510.o
+TFT_print_xNyN                                    NT35510.o
+                                                  main.o
+TFT_putch                                         NT35510.o
+TFT_putch_xNyN                                    NT35510.o
+TFT_putchar                                       NT35510.o
+TFT_putchar_xNyN                                  NT35510.o
+TIMER0_ISR                                        audio.o
+TIMER1_ISR                                        vibrador.o
+TP_Aspa                                           xpt2046.o
+TP_Calibrate                                      xpt2046.o
+TP_EnviaRecibe                                    xpt2046.o
+TP_Get_XY                                         xpt2046.o
+TP_Get_XY_Cal                                     xpt2046.o
+TP_Init                                           xpt2046.o
+                                                  main.o
+VibratorON                                        vibrador.o
+                                                  main.o
+XPM_Extract                                       xpm.o
+                                                  main.o
+XPM_PintaAll                                      xpm.o
+XPM_PintaAt                                       xpm.o
+XPM_PintaAtxNyN                                   xpm.o
+                                                  main.o
+XPM_SetxNyN                                       xpm.o
+                                                  main.o
+X_SINPULSAR                                       xpt2046.o
+_Halt                                             crt.o
+_U0getch                                          crt.o
+_U0putch                                          crt.o
+__aeabi_idiv                                      c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+                                                  xpt2046.o
+                                                  xpm.o
+                                                  CALIBR~1.o
+__aeabi_idiv0                                     c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
+                                                  c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+                                                  c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+__aeabi_idivmod                                   c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+                                                  xpm.o
+__aeabi_ldiv0                                     c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
+__aeabi_uidiv                                     c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+                                                  audio.o
+__aeabi_uidivmod                                  c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+__bss_end__                                       crt.o
+__bss_start                                       crt.o
+__bss_start__                                     crt.o
+__divsi3                                          c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+__udivsi3                                         c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+_atoi                                             xpm.o
+_boot                                             crt.o
+_data                                             crt.o
+_delay_loop                                       crt.o
+                                                  galaga.o
+                                                  xpt2046.o
+                                                  NT35510.o
+                                                  main.o
+_edata                                            crt.o
+_etext                                            crt.o
+_gets                                             crt.o
+_mainCRTStartup                                   crt.o
+_printf                                           crt.o
+                                                  xpt2046.o
+                                                  xpm.o
+                                                  NT35510.o
+                                                  audio.o
+                                                  main.o
+_prthex                                           crt.o
+_prtnum                                           crt.o
+_puts                                             crt.o
+                                                  xpt2046.o
+_stack                                            crt.o
+_stack_end                                        crt.o
+_start                                            crt.o
+_vgetch                                           crt.o
+_vputch                                           crt.o
+bg_xpm                                            PACMAN~1.o
+                                                  main.o
+bloques                                           bloques.o
+checkCollisions                                   main.o
+coin_xpm                                          PACMAN~1.o
+                                                  main.o
+dibuja_hud                                        main.o
+dibuja_mapa                                       main.o
+getDisplayPoint                                   CALIBR~1.o
+                                                  xpt2046.o
+ghost_xpm                                         PACMAN~1.o
+                                                  main.o
+initGame                                          main.o
+main                                              main.o
+                                                  crt.o
+memset                                            c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+                                                  xpt2046.o
+movePacman                                        main.o
+pacman_xpm                                        PACMAN~1.o
+                                                  main.o
+paleta                                            xpm.o
+setCalibrationMatrix                              CALIBR~1.o
+                                                  xpt2046.o
+start                                             crt.o
+strlen                                            c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+                                                  NT35510.o
+teselas_x                                         xpm.o
+tft_x                                             NT35510.o
+tft_y                                             NT35510.o
+wall_xpm                                          PACMAN~1.o
+                                                  main.o
+xN                                                NT35510.o
+xpm_alto                                          xpm.o
+xpm_ancho                                         xpm.o
+xpm_cpp                                           xpm.o
+xpm_ncol                                          xpm.o
+xpm_sx                                            xpm.o
+                                                  main.o
+xpm_sxn                                           xpm.o
+xpm_sy                                            xpm.o
+                                                  main.o
+xpm_syn                                           xpm.o
+xpm_xmirror                                       xpm.o
+xpm_xn                                            xpm.o
+xpm_yn                                            xpm.o
+yN                                                NT35510.o

@@ -1,7 +1,7 @@
 # Makefile 
-# Ingeniería de Sistemas Electrónicos
-# Desarrollo Práctico de Sistemas Electrónicos
-# Jesús M. Hernández
+# Ingenierï¿½a de Sistemas Electrï¿½nicos
+# Desarrollo Prï¿½ctico de Sistemas Electrï¿½nicos
+# Jesï¿½s M. Hernï¿½ndez
 # 2023/03/21
 
 SHELL = cmd.exe
@@ -10,7 +10,7 @@ SRC = crt.S main.c \
 	calibrate.c xpt2046.c  \
 	bloques.c xpm.c \
 	vibrador.c big_font.c small_font.c audio.c \
-	galaga.c
+	galaga.c pacmanXPM.c
 	
 INC = nt35510.h calibrate.h xpt2046.h system.h audio.h 
 

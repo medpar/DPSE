@@ -1,393 +1,456 @@
 // =======================================================================
 // Proyecto VIDEOCONSOLA Curso 2022-2023
-// Autor: Jesús Manuel Hernández Mangas
-// Asignatura: Desarrollo Práctico de Sistemas Electrónicos
-// File: main.c  Programa principal
+// Autor : Jesús Manuel Hernández Mangas
+// File  : main.c – PAC-MAN suave, rápido y sin parpadeos
 // =======================================================================
 #include "system.h"
 #include "xpm.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <time.h>
+#include <sys/time.h>
+#include <stddef.h>
 
+/* ------------------- Constantes generales -------------------------- */
 #define SCREEN_W   800
 #define SCREEN_H   480
 #define TILE       15
 #define SCALE      2
-#define TW         (TILE * SCALE)  // 30 px
-
-
-
-#define WALL    '1'
-#define COIN    'C'
-#define EMPTY   '0'
-#define PACMAN  'P'
-#define GHOST   'G'
+#define TW         (TILE * SCALE)          /* 30 px */
 
 #define MAP_COLS   26
 #define MAP_ROWS   14
+#define X_OFFSET   ((SCREEN_W - MAP_COLS * TW) / 2)
+#define Y_OFFSET   60
 
+/* Mapa */
+#define WALL   '1'
+#define COIN   'C'
+#define EMPTY  '0'
+#define PACMAN 'P'
+#define GHOST  'G'
 
-// Márgenes para centrar (horizontal y vertical + HUD)
-#define X_OFFSET  ((SCREEN_W - MAP_COLS*TW) / 2)  // = (800 - 780)/2 = 10 px
-#define Y_OFFSET  60   
+/* GPIO bits (no tocar) */
+#define LEFT   (1 << 0)
+#define RIGHT  (1 << 1)
+#define UP     (1 << 2)
+#define DOWN   (1 << 3)
 
-int GetAction();
-// -----------------------------------------------------------------------------
-  static const char originalMap[MAP_ROWS][MAP_COLS+1] = {
-    "11111111111111111111111111",
-    "1PCCCCCCCCCCCC1CCCCCCCCG11",
-    "1CCCC11111CCCC1CCCC111CC11",
-    "1CCCC1   1CCCC1CCCC1  CC11",  // Las espacios ' ' representan áreas de pared interna; ajustadas abajo.
-    "1CCCC1   1CCCC1CCCC1   1C1",
-    "1CCCC1   1CCCC1CCCC1   GC1",  // Suponemos 3 fantasmas G; reemplazar ' ' por '1' apropiadamente
-    "1CCCC11111CCCC1CCCC111CCC1",
-    "1CCCCCCCCCCCCCCCCCCCCCCCC1",
-    "1CCCCCCCCCCCCCCCCCCCCCCCC1",
-    "1CCCC1CCCC11111CCCC1CCCCC1",
-    "1CCCC1CCCC1GGG1CCCC1CCCCC1",
-    "1CCCC1CCCC1   1CCCC1CCCCC1",
-    "1CCCC1CCCC1   1CCCC1CCCCC1",
-    "11111111111111111111111111",
+/* Velocidad / suavidad */
+#define STEP_PX            2   /* píxeles por iteración (1 = extra-suave) */
+#define PAC_DELAY_MS       1   /* retardo interno Pac-Man                 */
+#define GHOST_DELAY_MS     0   /* retardo interno fantasmas               */
+
+/* ------------------- Laberinto base ------------------------------- */
+static const char originalMap[MAP_ROWS][MAP_COLS+1] = {
+    "11111111111111111111111111",  //  0: muro completo
+    "1PCCCCCCCCCCCCCCCCCCCCCCC1",  //  1: pasillo horizontal (P al inicio)
+    "111C111C111C111C111C111C11",  //  2: pasillos verticales en c=3,7,11,15,19,23
+    "1CCCCCCCCCCCCCCCCCCCCCCCC1",  //  3: pasillo horizontal
+    "111C111C111C111C111C111C11",  //  4: idem fila 2
+    "1CCCCCCCCCCCCCCCCCCCCCCCC1",  //  5
+    "111C111C111C111C111C111C11",  //  6
+    "1CCCCCCCCCCGCCCGCCCGCCCCC1",  //  7: pasillo horizontal + casa de fantasmas
+    "111C111C111C111C111C111C11",  //  8
+    "1CCCCCCCCCCCCCCCCCCCCCCCC1",  //  9
+    "111C111C111C111C111C111C11",  // 10
+    "1CCCCCCCCCCCCCCCCCCCCCCCC1",  // 11
+    "111C111C111C111C111C111C11",  // 12
+    "11111111111111111111111111",  // 13
 };
 
-// Direcciones de movimiento
+/* ------------------- Tipos y estructuras -------------------------- */
 typedef enum { DIR_UP, DIR_DOWN, DIR_LEFT, DIR_RIGHT, DIR_NONE } Direction;
 
-// Estructura para fantasmas
 typedef struct {
-    int x;            // Columna actual
-    int y;            // Fila actual
-    Direction dir;    // Dirección actual (para fantasma fijo o perseguidor, o última dirección válida)
-    char under;       // Contenido de la celda debajo del fantasma (COIN o EMPTY)
-    int type;         // Tipo de fantasma: 0=fijo, 1=aleatorio, 2=perseguidor
+    int  x, y;                 /* casillas                  */
+    Direction dir;
+    char under;
+    int  type;                 /* 0 rebote, 1 random, 2 AI  */
 } Ghost;
 
-static char map[MAP_ROWS][MAP_COLS+1];
-static int lives;
-static int score;
-static int totalCoins;
-static int pacmanX, pacmanY;
-//static Direction pacmanDir = DIR_NONE;  // dirección actual de Pac-Man (opcional, aquí solo usamos input directo)
-
-// Arreglo de fantasmas
+/* ------------------- Estado global -------------------------------- */
 #define GHOST_COUNT 3
 static Ghost ghosts[GHOST_COUNT];
+static char  map[MAP_ROWS][MAP_COLS + 1];
 
-void initGame() {
-    // Copiar la matriz de mapa original a la matriz de juego actual
-   int i, j, g;
-    for(i = 0; i < MAP_ROWS; ++i) {
-        for(j = 0; j < MAP_COLS; ++j) {
-            map[i][j] = originalMap[i][j];
-        }
-	map[i][MAP_COLS] = '\0';
+static int pacPixX, pacPixY;          /* Pac-Man en píxeles */
+static Direction desiredDir = DIR_NONE;
+static Direction currentDir = DIR_NONE;
+
+static int lives, score, totalCoins;
+static bool hudDirty = true;
+
+/* ------------------- Prototipos externos -------------------------- */
+int GetAction(void);
+
+/* ------------------- Prototipos internos -------------------------- */
+static bool      wallAt(int r, int c);
+static bool      canMoveDir(int px, int py, Direction d);
+static void      restoreBackground(int px, int py);
+static void      drawPacman(int px, int py);
+static void      animatePacmanMove(int nx, int ny);
+static void      movePacman(void);
+
+static void      animateGhostMove(Ghost *g, int nx, int ny);
+static void      moveGhosts(int tick);
+static void      checkCollisions(void);
+
+static void      initGame(void);
+static void      dibuja_hud(void);
+static void      dibuja_mapa(const char m[][MAP_COLS + 1]);
+static void      drawTile(int r, int c);
+
+/* =================================================================== */
+/*                     FUNCIONES AUXILIARES                            */
+/* =================================================================== */
+static bool wallAt(int r, int c)
+{
+    if (c < 0 || c >= MAP_COLS || r < 0 || r >= MAP_ROWS) return true;
+    return map[r][c] == WALL;
+}
+
+static bool canMoveDir(int px, int py, Direction d)
+{
+    int cx = (px - X_OFFSET) / TW;
+    int cy = (py - Y_OFFSET) / TW;
+    if (d == DIR_UP)    cy--;
+    if (d == DIR_DOWN)  cy++;
+    if (d == DIR_LEFT)  cx--;
+    if (d == DIR_RIGHT) cx++;
+    return !wallAt(cy, cx);
+}
+
+/* Restaura todos los tiles tocados por el sprite */
+static void restoreBackground(int px, int py)
+{
+    int r0 = (py - Y_OFFSET) / TW;
+    int c0 = (px - X_OFFSET) / TW;
+    int offx = (px - X_OFFSET) % TW;
+    int offy = (py - Y_OFFSET) % TW;
+
+    drawTile(r0, c0);
+    if (offx && c0 + 1 < MAP_COLS) drawTile(r0, c0 + 1);
+    if (offy && r0 + 1 < MAP_ROWS) drawTile(r0 + 1, c0);
+    if (offx && offy && r0 + 1 < MAP_ROWS && c0 + 1 < MAP_COLS)
+        drawTile(r0 + 1, c0 + 1);
+}
+
+static void drawPacman(int px, int py)
+{
+    XPM_PintaAtxNyN(px, py, 0, pacman_xpm);
+}
+
+/* =================================================================== */
+/*                         INICIALIZACIÓN                              */
+/* =================================================================== */
+static void initGame(void)
+{
+    int r, c, g;
+
+    for (r = 0; r < MAP_ROWS; r++) {
+        for (c = 0; c < MAP_COLS; c++) map[r][c] = originalMap[r][c];
+        map[r][MAP_COLS] = '\0';
     }
-    // Inicializar vidas y puntaje
-    lives = 3;
-    score = 0;
+
+    for (g = 0; g < GHOST_COUNT; g++) ghosts[g].type = -1;
     totalCoins = 0;
-    // Encontrar la posición inicial de Pac-Man y contar monedas
-    for(i = 0; i < MAP_ROWS; ++i) {
-        for(j = 0; j < MAP_COLS; ++j) {
-            if(map[i][j] == PACMAN) {
-                pacmanY = i;
-                pacmanX = j;
-            } else if(map[i][j] == GHOST) {
-                // Inicializar fantasmas: registrar sus posiciones iniciales
-                // Encontrar primer slot libre en arreglo ghosts
-                for(g = 0; g < GHOST_COUNT; ++g) {
-                    if(ghosts[g].type == -1) { // usamos type==-1 como indicador no inicializado
-                        ghosts[g].y = i;
-                        ghosts[g].x = j;
-                        ghosts[g].under = EMPTY; // asumimos que no hay moneda bajo fantasma inicial
-                        // Asignar tipo según orden (por ejemplo, 0=fijo, 1=aleatorio, 2=perseguidor)
-                        ghosts[g].type = g; 
-                        // Dirección inicial: 
-                        if(ghosts[g].type == 0) {
-                            ghosts[g].dir = DIR_RIGHT; // fantasma fijo inicia moviendo derecha
-                        } else {
-                            ghosts[g].dir = DIR_NONE;  // otros pueden calcular dirección en su turno
-                        }
+
+    for (r = 0; r < MAP_ROWS; r++) {
+        for (c = 0; c < MAP_COLS; c++) {
+            if (map[r][c] == PACMAN) {
+                pacPixX = X_OFFSET + c * TW;
+                pacPixY = Y_OFFSET + r * TW;
+                map[r][c] = EMPTY;
+            } else if (map[r][c] == GHOST) {
+                for (g = 0; g < GHOST_COUNT; g++)
+                    if (ghosts[g].type == -1) {
+                        ghosts[g].x = c; ghosts[g].y = r;
+                        ghosts[g].under = EMPTY;
+                        ghosts[g].type  = g;
+                        ghosts[g].dir   = (g == 0) ? DIR_RIGHT : DIR_NONE;
                         break;
                     }
-                }
-            } else if(map[i][j] == COIN) {
-                totalCoins++;
-            }
+            } else if (map[r][c] == COIN) totalCoins++;
         }
     }
-    // Nota: arriba se asume que en originalMap colocamos exactamente GHOST_COUNT fantasmas 'G'. 
-    // Alternativamente, podríamos enumerarlos si supiéramos sus posiciones de inicio.
-    // Para simplificar, en este ejemplo usamos el truco de marcar ghosts[g].type = -1 inicialmente para encontrar posiciones.
+
+    lives = 3; score = 0;
+    desiredDir = currentDir = DIR_NONE;
+
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    srand((unsigned)tv.tv_usec);
 }
 
-
-void dibuja_hud(void) {
-    // Ejemplo: fondo gris sobre la franja superior
-    TFT_DrawFillSquareS(0, 0, SCREEN_W, Y_OFFSET, TFT_Color(50,50,50));
-    FG_Color = WHITE; BG_Color = TFT_Color(50,50,50);
-    CF = BigFont;
-    TFT_print_xNyN( X_OFFSET, Y_OFFSET/2 - 8,
-                    "VIDAS: 3  PUNTOS: 1234");
-}
-
-void dibuja_mapa(const char mapa[][MAP_COLS+1]) {
-    int i, j;
-    // Extraemos todos los sprites XPM
-    XPM_Extract(wall_xpm);
-    XPM_Extract(bg_xpm);
-    XPM_Extract(coin_xpm);
-    XPM_Extract(pacman_xpm);
-    XPM_Extract(ghost_xpm);
-
-    // Tamaño de tile y escala
-    xpm_sx = TILE; 
-    xpm_sy = TILE;
-    XPM_SetxNyN(SCALE, SCALE);
-
-    // Recorremos cada celda y pintamos el sprite adecuado
-    for (i = 0; i < MAP_ROWS; i++) {
-        for (j = 0; j < MAP_COLS; j++) {
-            int x = X_OFFSET + j * TW;
-            int y = Y_OFFSET + i * TW;
-            switch (mapa[i][j]) {
-                case WALL: // pared
-                    XPM_PintaAtxNyN(x, y, 0, wall_xpm);
-                    break;
-                case EMPTY: // fondo sin moneda
-                    XPM_PintaAtxNyN(x, y, 0, bg_xpm);
-                    break;
-                case COIN: // moneda
-                    XPM_PintaAtxNyN(x, y, 0, coin_xpm);
-                    break;
-                case PACMAN: // Pac-Man
-                    XPM_PintaAtxNyN(x, y, 0, pacman_xpm);
-                    break;
-                case GHOST: // fantasma
-                    XPM_PintaAtxNyN(x, y, 0, ghost_xpm);
-                    break;
-                default:
-                    // por seguridad, dibujamos fondo
-                    XPM_PintaAtxNyN(x, y, 0, bg_xpm);
-            }
-        }
-    }
-}
-
-#define LEFT	(1<< 0)
-#define RIGHT   (1<< 1)
-#define UP      (1<< 2)
-#define DOWN    (1<< 3)
-
-void movePacman(void)
+/* =================================================================== */
+/*                         DIBUJO MAPA & HUD                           */
+/* =================================================================== */
+static void drawTile(int r, int c)
 {
-    int action = GetAction();
-    Direction newDir = DIR_NONE;
-
-    if      (action & UP)    newDir = DIR_UP;
-    else if (action & DOWN)  newDir = DIR_DOWN;
-    else if (action & LEFT)  newDir = DIR_LEFT;
-    else if (action & RIGHT) newDir = DIR_RIGHT;
-
-    if (newDir == DIR_NONE) return;   // ninguna tecla: no se mueve
-
-    int tx = pacmanX, ty = pacmanY;
-    if (newDir == DIR_UP)    ty--;
-    if (newDir == DIR_DOWN)  ty++;
-    if (newDir == DIR_LEFT)  tx--;
-    if (newDir == DIR_RIGHT) tx++;
-
-    if (tx>=0 && tx<MAP_COLS &&
-        ty>=0 && ty<MAP_ROWS &&
-        map[ty][tx] != WALL)
-    {
-        map[pacmanY][pacmanX] = EMPTY;
-        pacmanX = tx; pacmanY = ty;
-
-        if (map[ty][tx] == COIN) {
-            score++;
-            totalCoins--;
-        }
-        map[pacmanY][pacmanX] = PACMAN;
+    int px = X_OFFSET + c * TW;
+    int py = Y_OFFSET + r * TW;
+    switch (map[r][c]) {
+        case WALL:   XPM_PintaAtxNyN(px, py, 0, wall_xpm);  break;
+        case COIN:   XPM_PintaAtxNyN(px, py, 0, coin_xpm);  break;
+        case EMPTY:  XPM_PintaAtxNyN(px, py, 0, bg_xpm);    break;
+        case GHOST:  XPM_PintaAtxNyN(px, py, 0, ghost_xpm); break;
+        default:     XPM_PintaAtxNyN(px, py, 0, bg_xpm);
     }
 }
 
+static void dibuja_mapa(const char m[][MAP_COLS + 1])
+{
+    XPM_Extract(wall_xpm);  XPM_Extract(bg_xpm);  XPM_Extract(coin_xpm);
+    XPM_Extract(pacman_xpm);XPM_Extract(ghost_xpm);
+    xpm_sx = TILE; xpm_sy = TILE; XPM_SetxNyN(SCALE, SCALE);
 
+    int r, c;
+    for (r = 0; r < MAP_ROWS; r++)
+        for (c = 0; c < MAP_COLS; c++)
+            drawTile(r, c);
 
+    drawPacman(pacPixX, pacPixY);
+}
 
-void checkCollisions() {
-    // Revisar si Pac-Man comparte celda con algún fantasma
-   int g, h, i, j;
-    for(g = 0; g < GHOST_COUNT; ++g) {
-        if(pacmanX == ghosts[g].x && pacmanY == ghosts[g].y) {
-            // Colisión detectada
-            lives--;
-            if(lives > 0) {
-                // Reset de posiciones (similar a lo hecho en moveGhosts colisión)
-                // Remover fantasmas del mapa (restaurar debajo)
-                for(h = 0; h < GHOST_COUNT; ++h) {
-                    map[ghosts[h].y][ghosts[h].x] = ghosts[h].under;
-                }
-                // Remover Pac-Man del mapa
-                map[pacmanY][pacmanX] = EMPTY;
-                // Restaurar Pac-Man a posición inicial
-                for(i = 0; i < MAP_ROWS; ++i) {
-                    for(j = 0; j < MAP_COLS; ++j) {
-                        if(originalMap[i][j] == PACMAN) {
-                            pacmanY = i;
-                            pacmanX = j;
-                        }
-                    }
-                }
-                map[pacmanY][pacmanX] = PACMAN;
-                // Restaurar fantasmas a posiciones iniciales
-                int foundGhosts = 0;
-                for(i = 0; i < MAP_ROWS; ++i) {
-                    for(j = 0; j < MAP_COLS; ++j) {
-                        if(originalMap[i][j] == GHOST && foundGhosts < GHOST_COUNT) {
-                            ghosts[foundGhosts].y = i;
-                            ghosts[foundGhosts].x = j;
-                            ghosts[foundGhosts].under = EMPTY;
-                            ghosts[foundGhosts].type = foundGhosts;
-                            ghosts[foundGhosts].dir = (foundGhosts == 0 ? DIR_RIGHT : DIR_NONE);
-                            map[i][j] = GHOST;
-                            foundGhosts++;
-                        }
-                    }
+static void dibuja_hud(void)
+{
+    char buf[40];
+    TFT_DrawFillSquareS(0, 0, SCREEN_W, Y_OFFSET, TFT_Color(50, 50, 50));
+    FG_Color = WHITE; BG_Color = TFT_Color(50, 50, 50);
+    CF = BigFont;
+    sprintf(buf, "VIDAS: %d  PUNTOS: %d", lives, score);
+    TFT_print_xNyN(X_OFFSET, Y_OFFSET / 2 - 8, buf);
+}
+
+/* =================================================================== */
+/*                   ANIMACIÓN PAC-MAN (suave)                         */
+/* =================================================================== */
+static void animatePacmanMove(int nx, int ny)
+{
+    int dx = (nx > pacPixX) ? STEP_PX : (nx < pacPixX ? -STEP_PX : 0);
+    int dy = (ny > pacPixY) ? STEP_PX : (ny < pacPixY ? -STEP_PX : 0);
+
+    while (pacPixX != nx || pacPixY != ny) {
+        restoreBackground(pacPixX, pacPixY);
+        if (pacPixX != nx) pacPixX += dx;
+        if (pacPixY != ny) pacPixY += dy;
+        drawPacman(pacPixX, pacPixY);
+        if (PAC_DELAY_MS) _delay_ms(PAC_DELAY_MS);
+    }
+}
+
+/* --------------------- Movimiento de Pac-Man ----------------------- */
+static void movePacman(void)
+{
+    int keys = GetAction();
+    if (keys & UP)      desiredDir = DIR_UP;
+    else if (keys & DOWN)  desiredDir = DIR_DOWN;
+    else if (keys & LEFT)  desiredDir = DIR_LEFT;
+    else if (keys & RIGHT) desiredDir = DIR_RIGHT;
+
+    bool ax = ((pacPixX - X_OFFSET) % TW) == 0;
+    bool ay = ((pacPixY - Y_OFFSET) % TW) == 0;
+
+    if (ax && ay) {
+        int cx = (pacPixX - X_OFFSET) / TW;
+        int cy = (pacPixY - Y_OFFSET) / TW;
+
+        if (map[cy][cx] == COIN) {
+            map[cy][cx] = EMPTY; drawTile(cy, cx);
+            score++; totalCoins--; hudDirty = true;
+        }
+        if (desiredDir != DIR_NONE && canMoveDir(pacPixX, pacPixY, desiredDir))
+            currentDir = desiredDir;
+        if (!canMoveDir(pacPixX, pacPixY, currentDir))
+            currentDir = DIR_NONE;
+    }
+
+    if (currentDir == DIR_NONE) {
+        /* Si está parado, asegúrate de que sigue visible */
+        drawPacman(pacPixX, pacPixY);
+        return;
+    }
+
+    int tx = pacPixX, ty = pacPixY;
+    if (currentDir == DIR_UP)    ty -= TW;
+    if (currentDir == DIR_DOWN)  ty += TW;
+    if (currentDir == DIR_LEFT)  tx -= TW;
+    if (currentDir == DIR_RIGHT) tx += TW;
+
+    animatePacmanMove(tx, ty);
+}
+
+/* =================================================================== */
+/*                      ANIMACIÓN FANTASMAS                            */
+/* =================================================================== */
+static void animateGhostMove(Ghost *g, int nx, int ny)
+{
+    map[g->y][g->x] = g->under; drawTile(g->y, g->x);
+
+    int px = X_OFFSET + g->x * TW;
+    int py = Y_OFFSET + g->y * TW;
+    int tx = X_OFFSET + nx * TW;
+    int ty = Y_OFFSET + ny * TW;
+    int dx = (tx > px) ? STEP_PX : (tx < px ? -STEP_PX : 0);
+    int dy = (ty > py) ? STEP_PX : (ty < py ? -STEP_PX : 0);
+
+    while (px != tx || py != ty) {
+        restoreBackground(px, py);
+        if (px != tx) px += dx;
+        if (py != ty) py += dy;
+        XPM_PintaAtxNyN(px, py, 0, ghost_xpm);
+        if (GHOST_DELAY_MS) _delay_ms(GHOST_DELAY_MS);
+    }
+
+    g->x = nx; g->y = ny;
+    g->under = map[ny][nx];
+    map[ny][nx] = GHOST;
+    XPM_PintaAtxNyN(tx, ty, 0, ghost_xpm);
+}
+
+/* ------------------ Movimientos lógicos fantasmas ------------------ */
+static void moveGhosts(int tick)
+{
+    int i, nx, ny, t, k;
+    int dirs[4] = { DIR_UP, DIR_DOWN, DIR_LEFT, DIR_RIGHT };
+
+    for (i = 0; i < GHOST_COUNT; i++) {
+        Ghost *g = &ghosts[i];
+        nx = g->x; ny = g->y;
+
+        if (g->type == 0) {
+            if (g->dir == DIR_RIGHT) { nx++; if (wallAt(ny, nx)) { g->dir = DIR_LEFT;  nx = g->x - 1; } }
+            else                     { nx--; if (wallAt(ny, nx)) { g->dir = DIR_RIGHT; nx = g->x + 1; } }
+        }
+        else if (g->type == 1) {
+            if ((tick & 3) == 0) {
+                for (t = 0; t < 10; t++) {
+                    g->dir = dirs[rand() % 4];
+                    nx = g->x; ny = g->y;
+                    if (g->dir == DIR_UP)    ny--;
+                    if (g->dir == DIR_DOWN)  ny++;
+                    if (g->dir == DIR_LEFT)  nx--;
+                    if (g->dir == DIR_RIGHT) nx++;
+                    if (!wallAt(ny, nx)) break;
                 }
             } else {
-                // Game Over: todas las vidas perdidas (podríamos indicar fin del juego)
+                if (g->dir == DIR_UP)    ny--;
+                if (g->dir == DIR_DOWN)  ny++;
+                if (g->dir == DIR_LEFT)  nx--;
+                if (g->dir == DIR_RIGHT) nx++;
+                if (wallAt(ny, nx)) { g->dir = DIR_NONE; nx = g->x; ny = g->y; }
             }
-            // Después de manejar la colisión, salimos de la función
+        }
+        else {
+            int dx = ((pacPixX - X_OFFSET) / TW) - g->x;
+            int dy = ((pacPixY - Y_OFFSET) / TW) - g->y;
+            g->dir = (abs(dx) > abs(dy))
+                        ? (dx > 0 ? DIR_RIGHT : DIR_LEFT)
+                        : (dy > 0 ? DIR_DOWN  : DIR_UP);
+
+            nx = g->x; ny = g->y;
+            if (g->dir == DIR_UP)    ny--;
+            if (g->dir == DIR_DOWN)  ny++;
+            if (g->dir == DIR_LEFT)  nx--;
+            if (g->dir == DIR_RIGHT) nx++;
+            if (wallAt(ny, nx)) {
+                for (k = 0; k < 4; k++) {
+                    g->dir = dirs[rand() % 4];
+                    nx = g->x; ny = g->y;
+                    if (g->dir == DIR_UP)    ny--;
+                    if (g->dir == DIR_DOWN)  ny++;
+                    if (g->dir == DIR_LEFT)  nx--;
+                    if (g->dir == DIR_RIGHT) nx++;
+                    if (!wallAt(ny, nx)) break;
+                }
+            }
+        }
+
+        if (nx != g->x || ny != g->y) animateGhostMove(g, nx, ny);
+    }
+}
+
+/* =================================================================== */
+/*                           COLISIONES                                */
+/* =================================================================== */
+static void checkCollisions(void)
+{
+    int tx = (pacPixX - X_OFFSET + TW / 2) / TW;
+    int ty = (pacPixY - Y_OFFSET + TW / 2) / TW;
+    int g;
+    for (g = 0; g < GHOST_COUNT; g++) {
+        if (tx == ghosts[g].x && ty == ghosts[g].y) {
+            lives--; hudDirty = true;
+            if (lives > 0) {
+                restoreBackground(pacPixX, pacPixY);
+                initGame(); dibuja_mapa(map); dibuja_hud();
+            }
             return;
         }
     }
 }
 
-int main (void)
-{ 
- //int x,y,i,k,t;
-   
- SCS = 1; // Muy importante para activar el FAST GPIO
- //          33222222222211111111110000000000
- //          10987654321098765432109876543210 
- FIODIR  = 0b11111111111111111111111111011101;  
- FIOSET  = 0xFFFFFFFF;  
- 
- PINSEL0 = 0x00029505;
- PINSEL1 = 0x00000000;
- _delay_ms(100); // Espero a que el terminal del PC esté preparado
+/* =================================================================== */
+/*                                MAIN                                 */
+/* =================================================================== */
+int main(void)
+{
+    /* -------- NO TOCAR CONFIGURACIÓN DE PINES ---------------------- */
+    SCS = 1;
+    FIODIR  = 0b11111111111111111111111111011101;
+    FIOSET  = 0xFFFFFFFF;
+    PINSEL0 = 0x00029505;
+    PINSEL1 = 0x00000000;
+    _delay_ms(100);
 
- _printf("Desarrollo Practico de Sistemas Electronicos\r\n"
-         "Ingenieria de Sistemas Electronicos\r\n");
+    _printf("Desarrollo Practico de Sistemas Electronicos\r\n"
+            "Ingenieria de Sistemas Electronicos\r\n");
 
- AMPLIF_OFF;
- TFT_Init();    
- TP_Init();
- //TP_Calibrate();
+    AMPLIF_OFF;
+    TFT_Init();
+    TP_Init();
 
- VibratorON(50);
- 
- // Ejemplo de dibujo .....
- TFT_DrawFillSquareS(0,0,LENX,LENY,TFT_Color(0,0,0)); // Borro pantalla
- /*CF = (struct _current_font*) BigFont;				  // Selecciono fuente
- FG_Color = BLUE;									  // ForeGround Color
- BG_Color = TFT_Color(100,200,10);					  // BackGround Color
- xN = 4;											  // Tamaño fuente horizontal x2
- yN = 5;											  // Tamaño fuente vertical x3
- */
- TFT_print_xNyN(100,100,"Hola Mundo");				  // Pinta "Hola Mundo" 
-				  // Linea
- 
- /*XPM_Extract(bloques);
- xpm_sx = 15; xpm_sy = 15; // Tamaño de las teselas (tiles)
- XPM_SetxNyN( 5, 5);       // Amplificación
- i=0;
- 
- //xpm_xmirror  =1;
- 
- for(k=0;k<10;k++) XPM_PintaAtxNyN(k*15*xpm_xn, 300, k, bloques);
- for(k=0;k<10;k++) XPM_PintaAtxNyN(k*15*xpm_xn, 300+15*xpm_yn, k+10, bloques);*/
-  
- /*Timer_On();
- t=Get_Time();
- for(k=0;k<1;k++)
- { 
-  for(y=0; y<LENY/xpm_sy; y++)
-   for(x=0; x<LENX/xpm_sx; x++)
-    XPM_PintaAt(x*xpm_sx, y*xpm_sy, (i++)&0b1111, bloques);   
-  i++;
- }*/
- 
+    TFT_DrawFillSquareS(0, 0, LENX, LENY, TFT_Color(0, 0, 0));
 
- 
- ///////////////////// ///
+    initGame();
+    dibuja_mapa(map);
+    dibuja_hud();
 
- //_printf("%d\n", Get_Time()-t);
- 
- // -------------------------------------------------------
- //TP_Calibrate();
- // Test de los botones y el panel táctil 
- CS_ON;
- FIOSET = SD_CS|TP_CS;
- _printf("\r\n""BT ""(X   ,Y   )""\r\n");
-///////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
+    int tick = 0;
+    while (1) {
+        if (totalCoins == 0) break;
+        if (lives     <= 0) break;
 
+        movePacman();
+        moveGhosts(tick);
+        checkCollisions();
 
-
-
-   initGame();
-   dibuja_hud();
-   dibuja_mapa(map);
-   int cycle=0;
-   
-   while(1)
-   {
-     int act = GetAction();
-    _printf("act=%02X\r\n", act);   // debería cambiar al pulsar
-      if (totalCoins == 0)
-      {
-	 //meter msg victoria
-	    break;
-      }
-      if (lives <= 0)
-      {
-	 //meter msg game over
-	 break;
-      }
-      movePacman();
-      checkCollisions();
-      if(lives <= 0)
-      {
-            // Pac-Man murió, reiniciar ciclo sin mover fantasmas este turno
-            // (El checkCollisions se encargó de resetear posiciones si vidas > 0)
-            cycle++;
-            dibuja_mapa(map);
-            dibuja_hud();
-            // Pequeño retardo para visualizar (ejemplo)
-            // delay_ms(1000);
-            continue;
-       }
-       //moveGhosts(cycle);
-       
-       checkCollisions();
-       
-       dibuja_mapa(map);
-       dibuja_hud();
-	cycle++;
-      
-   }
-       if(totalCoins == 0) {
-        //PrintText(100, 200, "¡Ganaste! Has recogido todas las monedas.");
-    } else if(lives <= 0) {
-        //PrintText(100, 200, "Game Over. Pac-Man se quedó sin vidas.");
+        if (hudDirty) { dibuja_hud(); hudDirty = false; }
+        tick++;
     }
-   return 0;
-// -----------------------------------------
-}   
+    return 0;
+}
+
+/* =================================================================== */
+/*                        STUBS NEWLIB                                 */
+/* =================================================================== */
+int _gettimeofday(struct timeval *tv, void *tz)
+{
+    (void)tz;
+    if (tv) { tv->tv_sec = 0; tv->tv_usec = 0; }
+    return 0;
+}
+
+void *_sbrk(ptrdiff_t incr)
+{
+    extern char _end;
+    static char *heap_end = NULL;
+    char *prev_heap_end;
+
+    if (heap_end == NULL) heap_end = &_end;
+    prev_heap_end = heap_end;
+    heap_end += incr;
+    return (void *)prev_heap_end;
+}

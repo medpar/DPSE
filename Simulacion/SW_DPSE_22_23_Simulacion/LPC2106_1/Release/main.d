@@ -23,7 +23,10 @@ main.o: ../main.c ../system.h ../lpc2106.h \
  c:/program\ files\ (x86)/yagarto/lib/gcc/../../arm-none-eabi/sys-include/sys/types.h \
  c:/program\ files\ (x86)/yagarto/lib/gcc/../../arm-none-eabi/sys-include/machine/types.h \
  c:/program\ files\ (x86)/yagarto/lib/gcc/../../arm-none-eabi/sys-include/sys/stdio.h \
- c:\program\ files\ (x86)\yagarto\bin\../lib/gcc/arm-none-eabi/4.6.2/include/stdbool.h
+ c:\program\ files\ (x86)\yagarto\bin\../lib/gcc/arm-none-eabi/4.6.2/include/stdbool.h \
+ c:/program\ files\ (x86)/yagarto/lib/gcc/../../arm-none-eabi/sys-include/time.h \
+ c:/program\ files\ (x86)/yagarto/lib/gcc/../../arm-none-eabi/sys-include/machine/time.h \
+ c:/program\ files\ (x86)/yagarto/lib/gcc/../../arm-none-eabi/sys-include/sys/time.h
 
 ../system.h:
 
@@ -82,3 +85,9 @@ c:/program\ files\ (x86)/yagarto/lib/gcc/../../arm-none-eabi/sys-include/machine
 c:/program\ files\ (x86)/yagarto/lib/gcc/../../arm-none-eabi/sys-include/sys/stdio.h:
 
 c:\program\ files\ (x86)\yagarto\bin\../lib/gcc/arm-none-eabi/4.6.2/include/stdbool.h:
+
+c:/program\ files\ (x86)/yagarto/lib/gcc/../../arm-none-eabi/sys-include/time.h:
+
+c:/program\ files\ (x86)/yagarto/lib/gcc/../../arm-none-eabi/sys-include/machine/time.h:
+
+c:/program\ files\ (x86)/yagarto/lib/gcc/../../arm-none-eabi/sys-include/sys/time.h:

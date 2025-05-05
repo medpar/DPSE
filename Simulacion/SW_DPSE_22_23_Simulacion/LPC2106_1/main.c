@@ -15,14 +15,14 @@
 /* ------------------- Constantes generales -------------------------- */
 #define SCREEN_W   800
 #define SCREEN_H   480
-#define TILE       15
+#define TILE       16
 #define SCALE      2
-#define TW         (TILE * SCALE)          /* 30 px */
+#define TW         (TILE * SCALE)          /* 32 px */
 
-#define MAP_COLS   26
-#define MAP_ROWS   14
-#define X_OFFSET   ((SCREEN_W - MAP_COLS * TW) / 2)
-#define Y_OFFSET   60
+#define MAP_COLS   24
+#define MAP_ROWS   13
+#define X_OFFSET   ((SCREEN_W - MAP_COLS * TW)/2)
+#define Y_OFFSET   ((SCREEN_H + 64 - MAP_ROWS * TW)/2)
 
 /* Mapa */
 #define WALL   '1'
@@ -44,20 +44,19 @@
 
 /* ------------------- Laberinto base ------------------------------- */
 static const char originalMap[MAP_ROWS][MAP_COLS+1] = {
-    "11111111111111111111111111",  //  0: muro completo
-    "1PCCCCCCCCCCCCCCCCCCCCCCC1",  //  1: pasillo horizontal (P al inicio)
-    "111C111C111C111C111C111C11",  //  2: pasillos verticales en c=3,7,11,15,19,23
-    "1CCCCCCCCCCCCCCCCCCCCCCCC1",  //  3: pasillo horizontal
-    "111C111C111C111C111C111C11",  //  4: idem fila 2
-    "1CCCCCCCCCCCCCCCCCCCCCCCC1",  //  5
-    "111C111C111C111C111C111C11",  //  6
-    "1CCCCCCCCCCGCCCGCCCGCCCCC1",  //  7: pasillo horizontal + casa de fantasmas
-    "111C111C111C111C111C111C11",  //  8
-    "1CCCCCCCCCCCCCCCCCCCCCCCC1",  //  9
-    "111C111C111C111C111C111C11",  // 10
-    "1CCCCCCCCCCCCCCCCCCCCCCCC1",  // 11
-    "111C111C111C111C111C111C11",  // 12
-    "11111111111111111111111111",  // 13
+    "111111111111111111111111",  //  0: muro completo
+    "1PCCCCCCCCCCCCCCCCCCCCC1",  //  1: pasillo horizontal (P al inicio)
+    "1C1C1C11CC11111C111111C1",  //  2: pasillos verticales en c=3,7,11,15,19,23
+    "1C11CC1C1C1CCCCC1CCCCCC1",  //  3: pasillo horizontal
+    "1C1C1C11CC1CCCCC1CCCCCC1",  //  4: idem fila 2
+    "1C1C1C1CCC1CCCCC1CCCCCC1",  //  5
+    "1C1C1C1CCC11111C111111C1",  //  6
+    "1C1C1C1CCCCGCC1C1CCGCCC1",  //  7: pasillo horizontal + casa de fantasmas
+    "1C1C1C1CCCCCCC1C111C11C1",  //  8
+    "1C11CC1CCCCCCC1C1CCCCCC1",  //  9
+    "1C1C1C1CCC11111C111111C1",  // 10
+    "1CCCCCCCCCCCCCCCCCCCCCC1",  // 11
+    "111111111111111111111111",  // 12
 };
 
 /* ------------------- Tipos y estructuras -------------------------- */
@@ -139,7 +138,7 @@ static void restoreBackground(int px, int py)
 
 static void drawPacman(int px, int py)
 {
-    XPM_PintaAtxNyN(px, py, 0, pacman_xpm);
+    XPM_PintaAtxNyN(px, py, 11, pacman);
 }
 
 /* =================================================================== */
@@ -192,25 +191,25 @@ static void drawTile(int r, int c)
     int px = X_OFFSET + c * TW;
     int py = Y_OFFSET + r * TW;
     switch (map[r][c]) {
-        case WALL:   XPM_PintaAtxNyN(px, py, 0, wall_xpm);  break;
-        case COIN:   XPM_PintaAtxNyN(px, py, 0, coin_xpm);  break;
-        case EMPTY:  XPM_PintaAtxNyN(px, py, 0, bg_xpm);    break;
-        case GHOST:  XPM_PintaAtxNyN(px, py, 0, ghost_xpm); break;
-        default:     XPM_PintaAtxNyN(px, py, 0, bg_xpm);
+        case WALL:   XPM_PintaAtxNyN(px, py, 67, pacman);  break;
+        case COIN:   XPM_PintaAtxNyN(px, py, 81, pacman);  break;
+        case EMPTY:  XPM_PintaAtxNyN(px, py, 69, pacman);   break;
+        case GHOST:  XPM_PintaAtxNyN(px, py, 0, pacman); break;
+        default:     XPM_PintaAtxNyN(px, py, 11, pacman);
     }
 }
 
 static void dibuja_mapa(const char m[][MAP_COLS + 1])
 {
     XPM_Extract(wall_xpm);  XPM_Extract(bg_xpm);  XPM_Extract(coin_xpm);
-    XPM_Extract(pacman_xpm);XPM_Extract(ghost_xpm);
+    XPM_Extract(pacman_xpm);XPM_Extract(ghost_xpm); XPM_Extract(pacman);
     xpm_sx = TILE; xpm_sy = TILE; XPM_SetxNyN(SCALE, SCALE);
 
     int r, c;
-    for (r = 0; r < MAP_ROWS; r++)
-        for (c = 0; c < MAP_COLS; c++)
-            drawTile(r, c);
-
+    for (r = 0; r < MAP_ROWS; r++){
+        for (c = 0; c < MAP_COLS; c++){
+            drawTile(r, c);}
+   }
     drawPacman(pacPixX, pacPixY);
 }
 
@@ -233,7 +232,7 @@ static void animatePacmanMove(int nx, int ny)
     int dy = (ny > pacPixY) ? STEP_PX : (ny < pacPixY ? -STEP_PX : 0);
 
     while (pacPixX != nx || pacPixY != ny) {
-        restoreBackground(pacPixX, pacPixY);
+        XPM_PintaAtxNyN(pacPixX, pacPixY,10,pacman);
         if (pacPixX != nx) pacPixX += dx;
         if (pacPixY != ny) pacPixY += dy;
         drawPacman(pacPixX, pacPixY);

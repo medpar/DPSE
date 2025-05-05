@@ -1,1 +1,1 @@
-code_flash.elf: pacmanXPM.c
+code_flash.elf: xpmschulos.c

@@ -16,5 +16,17 @@
 02-04-2025: Comprobación de componentes finalizada. El hardware funciona correctamente con la pantalla y la batería o el cable conectados.
 07-04-2025: Avances firmware.
 09-04-2025: Avances .xmp y mapa.
-28-04-2025: Comienzo del desarrollo del videojuego.
-30-04-2025: Continuación desarrollo del videoujuego y drivers.
+14-04-2025: Vacaciones de Semana Santa.
+16-04-2025: Vacaciones de Semana Santa.
+21-04-2025: Vacaciones de Semana Santa.
+23-04-2025: Vacaciones de Semana Santa.
+28-04-2025: Comienzo del desarrollo del videojuego. Ideas iniciales.
+30-04-2025: Comienzo del desarrollo de los drivers.
+05-05-2025: Diseño ficheros .xmp y gráficos del videojuego.
+07-05-2025: 
+12-05-2025: 
+14-05-2025: 
+19-05-2025: 
+21-05-2025: 
+26-05-2025: 
+28-05-2025: 

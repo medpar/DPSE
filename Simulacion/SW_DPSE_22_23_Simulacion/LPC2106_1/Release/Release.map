@@ -3,7 +3,7 @@ Archive member included because of file (symbol)
 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
                               audio.o (__aeabi_uidiv)
 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
-                              CALIBR~1.o (__aeabi_idiv)
+                              main.o (__aeabi_idiv)
 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
                               c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o) (__aeabi_idiv0)
 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
@@ -207,7 +207,7 @@ END GROUP
                 0x00000400                STACK_SIZE = 0x400
                 0x40010000                _stack_end = 0x40010000
 
-.text           0x00000000    0x12e44
+.text           0x00000000    0x199b4
  //*(.text.startup)
  *(.text)
  .text          0x00000000      0x640 crt.o
@@ -224,230 +224,230 @@ END GROUP
                 0x00000524                _gets
                 0x000005ac                _U0putch
                 0x000005c4                _U0getch
- .text          0x00000640      0x54c main.o
-                0x00000b44                _gettimeofday
-                0x00000b5c                _sbrk
- .text          0x00000b8c      0x1c4 CALIBR~1.o
-                0x00000b8c                setCalibrationMatrix
-                0x00000cd0                getDisplayPoint
- .text          0x00000d50     0x295c NT35510.o
-                0x00000d50                NT35510_Cmd
-                0x00000d7c                NT35510_Data
-                0x00000dac                NT35510_Data_
-                0x00000dd8                NT35510_Reg
-                0x00000e24                TFT_SetArea
-                0x00000efc                TFT_SetAreaR
-                0x00000fd4                NT35510_ReadCMD
-                0x00001064                TFT_Init
-                0x000028bc                TFT_FillArea
-                0x0000292c                TFT_PutPixel
-                0x000029fc                TFT_PutPixelColor
-                0x00002aa8                TFT_DrawLine
-                0x00002b88                TFT_HorizontalLine
-                0x00002c14                TFT_VerticalLine
-                0x00002c88                TFT_DrawSquare
-                0x00002cfc                TFT_DrawCircle
-                0x00002e14                TFT_FillCircle
-                0x00002e9c                TFT_DrawFillSquare
-                0x00002f18                TFT_DrawFillSquareS
-                0x00002f8c                TFT_DumpBinaryFont
-                0x000030f8                TFT_putch
-                0x000031b8                TFT_print
-                0x00003204                TFT_print_centered_x
-                0x00003278                TFT_putchar
-                0x000032c0                TFT_putch_xNyN
-                0x000033e0                TFT_putchar_xNyN
-                0x0000342c                TFT_print_xNyN
-                0x00003480                TFT_print_centered_x_xNyN
-                0x00003508                TFT_Off
-                0x00003588                TFT_On
-                0x0000358c                NT35510_WritePage
-                0x000035fc                NT35510_ReadPage
- .text          0x000036ac      0x73c xpm.o
-                0x000036ac                _atoi
-                0x000036f0                XPM_Extract
-                0x00003888                XPM_PintaAll
-                0x00003948                XPM_PintaAt
-                0x00003a7c                XPM_SetxNyN
-                0x00003adc                XPM_PintaAtxNyN
- .text          0x00003de8      0x448 xpt2046.o
-                0x00003de8                TP_Init
-                0x00003e28                TP_EnviaRecibe
-                0x00003e50                TP_Get_XY
-                0x00003f30                TP_Get_XY_Cal
-                0x00003fa0                TP_Aspa
-                0x00004000                TP_Calibrate
- .text          0x00004230       0x88 galaga.o
-                0x00004230                GetAction
- .text          0x000042b8      0x114 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
-                0x000042b8                __aeabi_uidiv
-                0x000042b8                __udivsi3
-                0x000043ac                __aeabi_uidivmod
- .text          0x000043cc      0x148 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
-                0x000043cc                __divsi3
-                0x000043cc                __aeabi_idiv
-                0x000044f4                __aeabi_idivmod
- .text          0x00004514        0x4 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
-                0x00004514                __aeabi_idiv0
-                0x00004514                __aeabi_ldiv0
- .text          0x00004518       0xf0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
-                0x00004518                memset
- .text          0x00004608       0x78 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-rand.o)
-                0x00004608                srand
-                0x00004624                rand
- .text          0x00004680       0xdc c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sprintf.o)
-                0x00004680                _sprintf_r
-                0x000046e8                sprintf
- .text          0x0000475c       0x60 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
-                0x0000475c                strlen
- .text          0x000047bc     0x1d98 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfprintf.o)
-                0x000047bc                _svfprintf_r
- .text          0x00006554       0x28 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sysgettod.o)
-                0x00006554                gettimeofday
- *fill*         0x0000657c        0x4 00
- .text          0x00006580     0x18a8 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-dtoa.o)
-                0x00006778                _dtoa_r
- .text          0x00007e28       0x40 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-gettimeofdayr.o)
-                0x00007e28                _gettimeofday_r
- .text          0x00007e68       0xd0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-locale.o)
-                0x00007e68                _setlocale_r
-                0x00007ed4                __locale_charset
-                0x00007ee0                __locale_mb_cur_max
-                0x00007ef0                __locale_msgcharset
-                0x00007efc                __locale_cjk_lang
-                0x00007f04                _localeconv_r
-                0x00007f10                setlocale
-                0x00007f2c                localeconv
- .text          0x00007f38      0x714 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mallocr.o)
-                0x00007f38                _malloc_r
- .text          0x0000864c      0x100 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memchr.o)
-                0x0000864c                memchr
- .text          0x0000874c       0xd8 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memcpy.o)
-                0x0000874c                memcpy
- .text          0x00008824        0x8 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mlock.o)
-                0x00008824                __malloc_lock
-                0x00008828                __malloc_unlock
- .text          0x0000882c      0xd2c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mprec.o)
-                0x0000882c                _Balloc
-                0x000088b8                _Bfree
-                0x000088d4                __multadd
-                0x000089b0                __s2b
-                0x00008a98                __hi0bits
-                0x00008ae8                __lo0bits
-                0x00008b78                __i2b
-                0x00008b9c                __multiply
-                0x00008d98                __pow5mult
-                0x00008e8c                __lshift
-                0x00008f88                __mcmp
-                0x00008fec                __mdiff
-                0x0000913c                __ulp
-                0x00009198                __b2d
-                0x00009260                __d2b
-                0x0000936c                __ratio
-                0x000093fc                _mprec_log10
-                0x00009450                __copybits
-                0x000094c4                __any_on
- .text          0x00009558       0x84 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-s_fpclassify.o)
-                0x00009558                __fpclassifyd
- .text          0x000095dc       0x40 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sbrkr.o)
-                0x000095dc                _sbrk_r
- .text          0x0000961c      0x230 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strcmp.o)
-                0x0000961c                strcmp
- .text          0x0000984c      0xf6c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfiprintf.o)
-                0x0000984c                __ssprint_r
-                0x000099d4                _svfiprintf_r
- .text          0x0000a7b8       0x90 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-callocr.o)
-                0x0000a7b8                _calloc_r
- .text          0x0000a848      0x360 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-freer.o)
-                0x0000a848                _malloc_trim_r
-                0x0000a944                _free_r
- .text          0x0000aba8      0x134 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memmove.o)
-                0x0000aba8                memmove
- .text          0x0000acdc      0x55c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reallocr.o)
-                0x0000acdc                _realloc_r
- .text          0x0000b238      0x41c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_addsubdf3.o)
-                0x0000b238                __aeabi_drsub
-                0x0000b240                __aeabi_dsub
-                0x0000b240                __subdf3
-                0x0000b244                __aeabi_dadd
-                0x0000b244                __adddf3
-                0x0000b554                __floatunsidf
-                0x0000b554                __aeabi_ui2d
-                0x0000b578                __floatsidf
-                0x0000b578                __aeabi_i2d
-                0x0000b5a0                __aeabi_f2d
-                0x0000b5a0                __extendsfdf2
-                0x0000b5e0                __floatundidf
-                0x0000b5e0                __aeabi_ul2d
-                0x0000b5f4                __floatdidf
-                0x0000b5f4                __aeabi_l2d
- .text          0x0000b654      0x49c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_muldivdf3.o)
-                0x0000b654                __aeabi_dmul
-                0x0000b654                __muldf3
-                0x0000b8e4                __divdf3
-                0x0000b8e4                __aeabi_ddiv
- .text          0x0000baf0      0x144 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_cmpdf2.o)
-                0x0000baf0                __gtdf2
-                0x0000baf0                __gedf2
-                0x0000baf8                __ltdf2
-                0x0000baf8                __ledf2
-                0x0000bb00                __nedf2
-                0x0000bb00                __eqdf2
-                0x0000bb00                __cmpdf2
-                0x0000bb88                __aeabi_cdrcmple
-                0x0000bba4                __aeabi_cdcmpeq
-                0x0000bba4                __aeabi_cdcmple
-                0x0000bbbc                __aeabi_dcmpeq
-                0x0000bbd4                __aeabi_dcmplt
-                0x0000bbec                __aeabi_dcmple
-                0x0000bc04                __aeabi_dcmpge
-                0x0000bc1c                __aeabi_dcmpgt
- .text          0x0000bc34       0x5c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_fixdfsi.o)
-                0x0000bc34                __aeabi_d2iz
-                0x0000bc34                __fixdfsi
+ .text          0x00000640      0x654 main.o
+                0x00000c4c                _gettimeofday
+                0x00000c64                _sbrk
+ .text          0x00000c94      0x1c4 CALIBR~1.o
+                0x00000c94                setCalibrationMatrix
+                0x00000dd8                getDisplayPoint
+ .text          0x00000e58     0x295c NT35510.o
+                0x00000e58                NT35510_Cmd
+                0x00000e84                NT35510_Data
+                0x00000eb4                NT35510_Data_
+                0x00000ee0                NT35510_Reg
+                0x00000f2c                TFT_SetArea
+                0x00001004                TFT_SetAreaR
+                0x000010dc                NT35510_ReadCMD
+                0x0000116c                TFT_Init
+                0x000029c4                TFT_FillArea
+                0x00002a34                TFT_PutPixel
+                0x00002b04                TFT_PutPixelColor
+                0x00002bb0                TFT_DrawLine
+                0x00002c90                TFT_HorizontalLine
+                0x00002d1c                TFT_VerticalLine
+                0x00002d90                TFT_DrawSquare
+                0x00002e04                TFT_DrawCircle
+                0x00002f1c                TFT_FillCircle
+                0x00002fa4                TFT_DrawFillSquare
+                0x00003020                TFT_DrawFillSquareS
+                0x00003094                TFT_DumpBinaryFont
+                0x00003200                TFT_putch
+                0x000032c0                TFT_print
+                0x0000330c                TFT_print_centered_x
+                0x00003380                TFT_putchar
+                0x000033c8                TFT_putch_xNyN
+                0x000034e8                TFT_putchar_xNyN
+                0x00003534                TFT_print_xNyN
+                0x00003588                TFT_print_centered_x_xNyN
+                0x00003610                TFT_Off
+                0x00003690                TFT_On
+                0x00003694                NT35510_WritePage
+                0x00003704                NT35510_ReadPage
+ .text          0x000037b4      0x73c xpm.o
+                0x000037b4                _atoi
+                0x000037f8                XPM_Extract
+                0x00003990                XPM_PintaAll
+                0x00003a50                XPM_PintaAt
+                0x00003b84                XPM_SetxNyN
+                0x00003be4                XPM_PintaAtxNyN
+ .text          0x00003ef0      0x448 xpt2046.o
+                0x00003ef0                TP_Init
+                0x00003f30                TP_EnviaRecibe
+                0x00003f58                TP_Get_XY
+                0x00004038                TP_Get_XY_Cal
+                0x000040a8                TP_Aspa
+                0x00004108                TP_Calibrate
+ .text          0x00004338       0x88 galaga.o
+                0x00004338                GetAction
+ .text          0x000043c0      0x114 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+                0x000043c0                __aeabi_uidiv
+                0x000043c0                __udivsi3
+                0x000044b4                __aeabi_uidivmod
+ .text          0x000044d4      0x148 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+                0x000044d4                __divsi3
+                0x000044d4                __aeabi_idiv
+                0x000045fc                __aeabi_idivmod
+ .text          0x0000461c        0x4 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
+                0x0000461c                __aeabi_idiv0
+                0x0000461c                __aeabi_ldiv0
+ .text          0x00004620       0xf0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+                0x00004620                memset
+ .text          0x00004710       0x78 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-rand.o)
+                0x00004710                srand
+                0x0000472c                rand
+ .text          0x00004788       0xdc c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sprintf.o)
+                0x00004788                _sprintf_r
+                0x000047f0                sprintf
+ .text          0x00004864       0x60 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+                0x00004864                strlen
+ .text          0x000048c4     0x1d98 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfprintf.o)
+                0x000048c4                _svfprintf_r
+ .text          0x0000665c       0x28 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sysgettod.o)
+                0x0000665c                gettimeofday
+ *fill*         0x00006684        0x4 00
+ .text          0x00006688     0x18a8 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-dtoa.o)
+                0x00006880                _dtoa_r
+ .text          0x00007f30       0x40 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-gettimeofdayr.o)
+                0x00007f30                _gettimeofday_r
+ .text          0x00007f70       0xd0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-locale.o)
+                0x00007f70                _setlocale_r
+                0x00007fdc                __locale_charset
+                0x00007fe8                __locale_mb_cur_max
+                0x00007ff8                __locale_msgcharset
+                0x00008004                __locale_cjk_lang
+                0x0000800c                _localeconv_r
+                0x00008018                setlocale
+                0x00008034                localeconv
+ .text          0x00008040      0x714 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mallocr.o)
+                0x00008040                _malloc_r
+ .text          0x00008754      0x100 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memchr.o)
+                0x00008754                memchr
+ .text          0x00008854       0xd8 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memcpy.o)
+                0x00008854                memcpy
+ .text          0x0000892c        0x8 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mlock.o)
+                0x0000892c                __malloc_lock
+                0x00008930                __malloc_unlock
+ .text          0x00008934      0xd2c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mprec.o)
+                0x00008934                _Balloc
+                0x000089c0                _Bfree
+                0x000089dc                __multadd
+                0x00008ab8                __s2b
+                0x00008ba0                __hi0bits
+                0x00008bf0                __lo0bits
+                0x00008c80                __i2b
+                0x00008ca4                __multiply
+                0x00008ea0                __pow5mult
+                0x00008f94                __lshift
+                0x00009090                __mcmp
+                0x000090f4                __mdiff
+                0x00009244                __ulp
+                0x000092a0                __b2d
+                0x00009368                __d2b
+                0x00009474                __ratio
+                0x00009504                _mprec_log10
+                0x00009558                __copybits
+                0x000095cc                __any_on
+ .text          0x00009660       0x84 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-s_fpclassify.o)
+                0x00009660                __fpclassifyd
+ .text          0x000096e4       0x40 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sbrkr.o)
+                0x000096e4                _sbrk_r
+ .text          0x00009724      0x230 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strcmp.o)
+                0x00009724                strcmp
+ .text          0x00009954      0xf6c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfiprintf.o)
+                0x00009954                __ssprint_r
+                0x00009adc                _svfiprintf_r
+ .text          0x0000a8c0       0x90 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-callocr.o)
+                0x0000a8c0                _calloc_r
+ .text          0x0000a950      0x360 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-freer.o)
+                0x0000a950                _malloc_trim_r
+                0x0000aa4c                _free_r
+ .text          0x0000acb0      0x134 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memmove.o)
+                0x0000acb0                memmove
+ .text          0x0000ade4      0x55c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reallocr.o)
+                0x0000ade4                _realloc_r
+ .text          0x0000b340      0x41c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_addsubdf3.o)
+                0x0000b340                __aeabi_drsub
+                0x0000b348                __aeabi_dsub
+                0x0000b348                __subdf3
+                0x0000b34c                __aeabi_dadd
+                0x0000b34c                __adddf3
+                0x0000b65c                __floatunsidf
+                0x0000b65c                __aeabi_ui2d
+                0x0000b680                __floatsidf
+                0x0000b680                __aeabi_i2d
+                0x0000b6a8                __aeabi_f2d
+                0x0000b6a8                __extendsfdf2
+                0x0000b6e8                __floatundidf
+                0x0000b6e8                __aeabi_ul2d
+                0x0000b6fc                __floatdidf
+                0x0000b6fc                __aeabi_l2d
+ .text          0x0000b75c      0x49c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_muldivdf3.o)
+                0x0000b75c                __aeabi_dmul
+                0x0000b75c                __muldf3
+                0x0000b9ec                __divdf3
+                0x0000b9ec                __aeabi_ddiv
+ .text          0x0000bbf8      0x144 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_cmpdf2.o)
+                0x0000bbf8                __gtdf2
+                0x0000bbf8                __gedf2
+                0x0000bc00                __ltdf2
+                0x0000bc00                __ledf2
+                0x0000bc08                __nedf2
+                0x0000bc08                __eqdf2
+                0x0000bc08                __cmpdf2
+                0x0000bc90                __aeabi_cdrcmple
+                0x0000bcac                __aeabi_cdcmpeq
+                0x0000bcac                __aeabi_cdcmple
+                0x0000bcc4                __aeabi_dcmpeq
+                0x0000bcdc                __aeabi_dcmplt
+                0x0000bcf4                __aeabi_dcmple
+                0x0000bd0c                __aeabi_dcmpge
+                0x0000bd24                __aeabi_dcmpgt
+ .text          0x0000bd3c       0x5c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_fixdfsi.o)
+                0x0000bd3c                __aeabi_d2iz
+                0x0000bd3c                __fixdfsi
  *(.text.startup)
- .text.startup  0x0000bc90      0x7e8 main.o
-                0x0000bc90                main
+ .text.startup  0x0000bd98      0x7fc main.o
+                0x0000bd98                main
  *(.rodata)
- .rodata        0x0000c478      0x158 main.o
- .rodata        0x0000c5d0      0xbe5 big_font.o
-                0x0000c5d0                BigFont
- *fill*         0x0000d1b5        0x3 00
- .rodata        0x0000d1b8       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfprintf.o)
- .rodata        0x0000d1d8      0x128 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mprec.o)
-                0x0000d1e8                __mprec_tens
-                0x0000d2b0                __mprec_tinytens
-                0x0000d2d8                __mprec_bigtens
- .rodata        0x0000d300       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfiprintf.o)
+ .rodata        0x0000c594      0x274 main.o
+ .rodata        0x0000c808      0xbe5 big_font.o
+                0x0000c808                BigFont
+ *fill*         0x0000d3ed        0x3 00
+ .rodata        0x0000d3f0       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfprintf.o)
+ .rodata        0x0000d410      0x128 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mprec.o)
+                0x0000d420                __mprec_tens
+                0x0000d4e8                __mprec_tinytens
+                0x0000d510                __mprec_bigtens
+ .rodata        0x0000d538       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfiprintf.o)
  *(.rodata*)
  .rodata.str1.1
-                0x0000d320       0x6a main.o
+                0x0000d558       0x6a main.o
  .rodata.str1.1
-                0x0000d38a       0x9c NT35510.o
+                0x0000d5c2       0x9c NT35510.o
                                  0xae (size before relaxing)
  .rodata.str1.1
-                0x0000d426       0x1f xpm.o
+                0x0000d65e       0x1f xpm.o
  .rodata.str1.1
-                0x0000d445       0x8c xpt2046.o
+                0x0000d67d       0x8c xpt2046.o
                                  0x96 (size before relaxing)
  .rodata.str1.1
-                0x0000d4d1      0x190 PACMAN~1.o
+                0x0000d709      0x190 PACMAN~1.o
  .rodata.str1.1
-                0x0000d661     0x577e XPMSCH~1.o
- *fill*         0x00012ddf        0x1 00
+                0x0000d899     0xc0b6 XPMSCH~1.o
+ *fill*         0x0001994f        0x1 00
  .rodata.str1.4
-                0x00012de0       0x42 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfprintf.o)
+                0x00019950       0x42 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfprintf.o)
                                  0x44 (size before relaxing)
- *fill*         0x00012e22        0x2 00
+ *fill*         0x00019992        0x2 00
  .rodata.str1.4
-                0x00012e24       0x10 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-dtoa.o)
+                0x00019994       0x10 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-dtoa.o)
                                  0x14 (size before relaxing)
  .rodata.str1.4
-                0x00012e34        0x2 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-impure.o)
+                0x000199a4        0x2 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-impure.o)
                                   0x4 (size before relaxing)
- *fill*         0x00012e36        0x2 00
+ *fill*         0x000199a6        0x2 00
  .rodata.str1.4
-                0x00012e38        0xc c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-locale.o)
+                0x000199a8        0xc c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-locale.o)
                                  0x14 (size before relaxing)
  .rodata.str1.4
                 0x00000000       0x30 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfiprintf.o)
@@ -456,29 +456,29 @@ END GROUP
  *(.glue_7t)
  .glue_7t       0x00000000        0x0 linker stubs
 
-.vfp11_veneer   0x00012e44        0x0
+.vfp11_veneer   0x000199b4        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x00012e44        0x0
+.v4_bx          0x000199b4        0x0
  .v4_bx         0x00000000        0x0 linker stubs
-                0x00012e44                . = ALIGN (0x4)
+                0x000199b4                . = ALIGN (0x4)
 
-.ctors          0x00012e44        0x0
-                0x00012e44                PROVIDE (__ctors_start__, .)
+.ctors          0x000199b4        0x0
+                0x000199b4                PROVIDE (__ctors_start__, .)
  *(SORT(.ctors.*))
  *(.ctors)
-                0x00012e44                PROVIDE (__ctors_end__, .)
+                0x000199b4                PROVIDE (__ctors_end__, .)
 
-.dtors          0x00012e44        0x0
-                0x00012e44                PROVIDE (__dtors_start__, .)
+.dtors          0x000199b4        0x0
+                0x000199b4                PROVIDE (__dtors_start__, .)
  *(SORT(.dtors.*))
  *(.dtors)
-                0x00012e44                PROVIDE (__dtors_end__, .)
-                0x00012e44                . = ALIGN (0x4)
-                0x00012e44                _etext = .
-                0x00012e44                PROVIDE (etext, .)
+                0x000199b4                PROVIDE (__dtors_end__, .)
+                0x000199b4                . = ALIGN (0x4)
+                0x000199b4                _etext = .
+                0x000199b4                PROVIDE (etext, .)
 
-.data           0x40000000      0xd34 load address 0x00012e44
+.data           0x40000000      0xe14 load address 0x000199b4
                 0x40000000                _data = .
  *(.data)
  .data          0x40000000        0x8 crt.o
@@ -505,65 +505,65 @@ END GROUP
                 0x400000dc                wall_xpm
                 0x40000124                bg_xpm
                 0x4000016c                pacman_xpm
- .data          0x400001b4      0x2c4 XPMSCH~1.o
+ .data          0x400001b4      0x3a4 XPMSCH~1.o
                 0x400001b4                pacman
- .data          0x40000478      0x430 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-impure.o)
-                0x40000478                _impure_ptr
- .data          0x400008a8       0x7c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-locale.o)
-                0x400008c8                __mb_cur_max
- .data          0x40000924      0x410 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mallocr.o)
-                0x40000924                __malloc_av_
-                0x40000d2c                __malloc_sbrk_base
-                0x40000d30                __malloc_trim_threshold
-                0x40000d34                . = ALIGN (0x4)
-                0x40000d34                _edata = .
-                0x40000d34                PROVIDE (edata, .)
+ .data          0x40000558      0x430 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-impure.o)
+                0x40000558                _impure_ptr
+ .data          0x40000988       0x7c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-locale.o)
+                0x400009a8                __mb_cur_max
+ .data          0x40000a04      0x410 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mallocr.o)
+                0x40000a04                __malloc_av_
+                0x40000e0c                __malloc_sbrk_base
+                0x40000e10                __malloc_trim_threshold
+                0x40000e14                . = ALIGN (0x4)
+                0x40000e14                _edata = .
+                0x40000e14                PROVIDE (edata, .)
 
-.bss            0x40000d34      0x2bc load address 0x00013b78
-                0x40000d34                __bss_start = .
-                0x40000d34                __bss_start__ = .
+.bss            0x40000e14      0x3d8 load address 0x0001a7c8
+                0x40000e14                __bss_start = .
+                0x40000e14                __bss_start__ = .
  *(.bss)
- .bss           0x40000d34      0x190 main.o
- .bss           0x40000ec4        0x2 NT35510.o
-                0x40000ec4                BG_Color
- *fill*         0x40000ec6        0x2 00
- .bss           0x40000ec8        0x4 xpm.o
-                0x40000ec8                xpm_xmirror
- .bss           0x40000ecc       0x34 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mallocr.o)
-                0x40000ecc                __malloc_top_pad
-                0x40000ed0                __malloc_current_mallinfo
-                0x40000ef8                __malloc_max_sbrked_mem
-                0x40000efc                __malloc_max_total_mem
+ .bss           0x40000e14      0x2ac main.o
+ .bss           0x400010c0        0x2 NT35510.o
+                0x400010c0                BG_Color
+ *fill*         0x400010c2        0x2 00
+ .bss           0x400010c4        0x4 xpm.o
+                0x400010c4                xpm_xmirror
+ .bss           0x400010c8       0x34 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mallocr.o)
+                0x400010c8                __malloc_top_pad
+                0x400010cc                __malloc_current_mallinfo
+                0x400010f4                __malloc_max_sbrked_mem
+                0x400010f8                __malloc_max_total_mem
  *(COMMON)
- COMMON         0x40000f00       0x10 NT35510.o
-                0x40000f00                tft_x
-                0x40000f04                LENX
-                0x40000f08                tft_y
-                0x40000f0c                LENY
- COMMON         0x40000f10       0xdc xpm.o
-                0x40000f10                paleta
-                0x40000fd0                xpm_sy
-                0x40000fd4                xpm_ncol
-                0x40000fd8                teselas_x
-                0x40000fdc                xpm_cpp
-                0x40000fe0                xpm_ancho
-                0x40000fe4                xpm_sx
-                0x40000fe8                xpm_alto
- COMMON         0x40000fec        0x4 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reent.o)
-                0x40000fec                errno
-                0x40000ff0                . = ALIGN (0x4)
-                0x40000ff0                . = ALIGN (0x4)
-                0x40000ff0                __bss_end__ = .
-                0x40000ff0                PROVIDE (__bss_end, .)
+ COMMON         0x400010fc       0x10 NT35510.o
+                0x400010fc                tft_x
+                0x40001100                LENX
+                0x40001104                tft_y
+                0x40001108                LENY
+ COMMON         0x4000110c       0xdc xpm.o
+                0x4000110c                paleta
+                0x400011cc                xpm_sy
+                0x400011d0                xpm_ncol
+                0x400011d4                teselas_x
+                0x400011d8                xpm_cpp
+                0x400011dc                xpm_ancho
+                0x400011e0                xpm_sx
+                0x400011e4                xpm_alto
+ COMMON         0x400011e8        0x4 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reent.o)
+                0x400011e8                errno
+                0x400011ec                . = ALIGN (0x4)
+                0x400011ec                . = ALIGN (0x4)
+                0x400011ec                __bss_end__ = .
+                0x400011ec                PROVIDE (__bss_end, .)
 
-.stack          0x40000ff0      0x410 load address 0x00013e34
-                0x40001000                . = ALIGN (0x100)
- *fill*         0x40000ff0       0x10 00
-                0x40001400                . = (. + STACK_SIZE)
- *fill*         0x40001000      0x400 00
-                0x40001400                PROVIDE (_stack, .)
-                0x40001400                _end = .
-                0x40001400                PROVIDE (end, .)
+.stack          0x400011ec      0x414 load address 0x0001aba0
+                0x40001200                . = ALIGN (0x100)
+ *fill*         0x400011ec       0x14 00
+                0x40001600                . = (. + STACK_SIZE)
+ *fill*         0x40001200      0x400 00
+                0x40001600                PROVIDE (_stack, .)
+                0x40001600                _end = .
+                0x40001600                PROVIDE (end, .)
 
 .stab
  *(.stab)
@@ -813,295 +813,295 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000    0x10181
+.debug_info     0x00000000    0x10156
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000       0xb6 crt.o
- .debug_info    0x000000b6      0xb71 main.o
- .debug_info    0x00000c27      0x1ce audio.o
- .debug_info    0x00000df5       0x5c big_font.o
- .debug_info    0x00000e51       0x5c bloques.o
- .debug_info    0x00000ead      0x1e4 CALIBR~1.o
- .debug_info    0x00001091      0xe0d NT35510.o
- .debug_info    0x00001e9e       0x5c SMALL_~1.o
- .debug_info    0x00001efa       0xc0 vibrador.o
- .debug_info    0x00001fba      0x56e xpm.o
- .debug_info    0x00002528      0x37a xpt2046.o
- .debug_info    0x000028a2       0xb6 galaga.o
- .debug_info    0x00002958       0xa4 PACMAN~1.o
- .debug_info    0x000029fc       0x5c XPMSCH~1.o
- .debug_info    0x00002a58       0x98 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
- .debug_info    0x00002af0       0x98 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
- .debug_info    0x00002b88       0x98 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
- .debug_info    0x00002c20      0x116 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
- .debug_info    0x00002d36      0x985 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-rand.o)
- .debug_info    0x000036bb      0xa62 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sprintf.o)
- .debug_info    0x0000411d       0xb1 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
- .debug_info    0x000041ce     0x1015 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfprintf.o)
- .debug_info    0x000051e3      0x9c8 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sysgettod.o)
- .debug_info    0x00005bab      0xdce c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-dtoa.o)
- .debug_info    0x00006979      0x9f1 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-gettimeofdayr.o)
- .debug_info    0x0000736a      0x966 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-impure.o)
- .debug_info    0x00007cd0      0xc96 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-locale.o)
- .debug_info    0x00008966      0xd6b c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mallocr.o)
- .debug_info    0x000096d1      0x122 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memchr.o)
- .debug_info    0x000097f3      0x130 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memcpy.o)
- .debug_info    0x00009923      0x980 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mlock.o)
- .debug_info    0x0000a2a3     0x14e6 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mprec.o)
- .debug_info    0x0000b789      0xa64 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reent.o)
- .debug_info    0x0000c1ed      0x142 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-s_fpclassify.o)
- .debug_info    0x0000c32f      0x9ac c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sbrkr.o)
- .debug_info    0x0000ccdb       0xe7 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strcmp.o)
- .debug_info    0x0000cdc2      0xd97 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfiprintf.o)
- .debug_info    0x0000db59      0xa4e c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-callocr.o)
- .debug_info    0x0000e5a7      0xc40 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-freer.o)
- .debug_info    0x0000f1e7      0x12e c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memmove.o)
- .debug_info    0x0000f315      0xc10 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reallocr.o)
- .debug_info    0x0000ff25       0x97 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_addsubdf3.o)
- .debug_info    0x0000ffbc       0x97 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_muldivdf3.o)
- .debug_info    0x00010053       0x97 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_cmpdf2.o)
- .debug_info    0x000100ea       0x97 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_fixdfsi.o)
+ .debug_info    0x00000000       0x7d crt.o
+ .debug_info    0x0000007d      0xb7f main.o
+ .debug_info    0x00000bfc      0x1ce audio.o
+ .debug_info    0x00000dca       0x5c big_font.o
+ .debug_info    0x00000e26       0x5c bloques.o
+ .debug_info    0x00000e82      0x1e4 CALIBR~1.o
+ .debug_info    0x00001066      0xe0d NT35510.o
+ .debug_info    0x00001e73       0x5c SMALL_~1.o
+ .debug_info    0x00001ecf       0xc0 vibrador.o
+ .debug_info    0x00001f8f      0x56e xpm.o
+ .debug_info    0x000024fd      0x37a xpt2046.o
+ .debug_info    0x00002877       0xb6 galaga.o
+ .debug_info    0x0000292d       0xa4 PACMAN~1.o
+ .debug_info    0x000029d1       0x5c XPMSCH~1.o
+ .debug_info    0x00002a2d       0x98 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+ .debug_info    0x00002ac5       0x98 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+ .debug_info    0x00002b5d       0x98 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
+ .debug_info    0x00002bf5      0x116 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+ .debug_info    0x00002d0b      0x985 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-rand.o)
+ .debug_info    0x00003690      0xa62 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sprintf.o)
+ .debug_info    0x000040f2       0xb1 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+ .debug_info    0x000041a3     0x1015 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfprintf.o)
+ .debug_info    0x000051b8      0x9c8 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sysgettod.o)
+ .debug_info    0x00005b80      0xdce c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-dtoa.o)
+ .debug_info    0x0000694e      0x9f1 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-gettimeofdayr.o)
+ .debug_info    0x0000733f      0x966 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-impure.o)
+ .debug_info    0x00007ca5      0xc96 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-locale.o)
+ .debug_info    0x0000893b      0xd6b c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mallocr.o)
+ .debug_info    0x000096a6      0x122 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memchr.o)
+ .debug_info    0x000097c8      0x130 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memcpy.o)
+ .debug_info    0x000098f8      0x980 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mlock.o)
+ .debug_info    0x0000a278     0x14e6 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mprec.o)
+ .debug_info    0x0000b75e      0xa64 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reent.o)
+ .debug_info    0x0000c1c2      0x142 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-s_fpclassify.o)
+ .debug_info    0x0000c304      0x9ac c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sbrkr.o)
+ .debug_info    0x0000ccb0       0xe7 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strcmp.o)
+ .debug_info    0x0000cd97      0xd97 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfiprintf.o)
+ .debug_info    0x0000db2e      0xa4e c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-callocr.o)
+ .debug_info    0x0000e57c      0xc40 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-freer.o)
+ .debug_info    0x0000f1bc      0x12e c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memmove.o)
+ .debug_info    0x0000f2ea      0xc10 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reallocr.o)
+ .debug_info    0x0000fefa       0x97 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_addsubdf3.o)
+ .debug_info    0x0000ff91       0x97 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_muldivdf3.o)
+ .debug_info    0x00010028       0x97 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_cmpdf2.o)
+ .debug_info    0x000100bf       0x97 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_fixdfsi.o)
 
-.debug_abbrev   0x00000000     0x32e0
+.debug_abbrev   0x00000000     0x32d3
  *(.debug_abbrev)
  .debug_abbrev  0x00000000       0x14 crt.o
- .debug_abbrev  0x00000014      0x335 main.o
- .debug_abbrev  0x00000349       0xed audio.o
- .debug_abbrev  0x00000436       0x49 big_font.o
- .debug_abbrev  0x0000047f       0x4b bloques.o
- .debug_abbrev  0x000004ca       0xe8 CALIBR~1.o
- .debug_abbrev  0x000005b2      0x2c2 NT35510.o
- .debug_abbrev  0x00000874       0x49 SMALL_~1.o
- .debug_abbrev  0x000008bd       0x70 vibrador.o
- .debug_abbrev  0x0000092d       0xd3 xpm.o
- .debug_abbrev  0x00000a00      0x18e xpt2046.o
- .debug_abbrev  0x00000b8e       0x4e galaga.o
- .debug_abbrev  0x00000bdc       0x4b PACMAN~1.o
- .debug_abbrev  0x00000c27       0x4b XPMSCH~1.o
- .debug_abbrev  0x00000c72       0x14 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
- .debug_abbrev  0x00000c86       0x14 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
- .debug_abbrev  0x00000c9a       0x14 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
- .debug_abbrev  0x00000cae       0x8d c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
- .debug_abbrev  0x00000d3b      0x194 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-rand.o)
- .debug_abbrev  0x00000ecf      0x1c8 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sprintf.o)
- .debug_abbrev  0x00001097       0x6d c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
- .debug_abbrev  0x00001104      0x2ea c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfprintf.o)
- .debug_abbrev  0x000013ee      0x17f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sysgettod.o)
- .debug_abbrev  0x0000156d      0x22b c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-dtoa.o)
- .debug_abbrev  0x00001798      0x1b3 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-gettimeofdayr.o)
- .debug_abbrev  0x0000194b      0x166 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-impure.o)
- .debug_abbrev  0x00001ab1      0x25e c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-locale.o)
- .debug_abbrev  0x00001d0f      0x233 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mallocr.o)
- .debug_abbrev  0x00001f42       0xc4 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memchr.o)
- .debug_abbrev  0x00002006       0x99 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memcpy.o)
- .debug_abbrev  0x0000209f      0x179 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mlock.o)
- .debug_abbrev  0x00002218      0x30e c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mprec.o)
- .debug_abbrev  0x00002526      0x1e6 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reent.o)
- .debug_abbrev  0x0000270c       0xc5 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-s_fpclassify.o)
- .debug_abbrev  0x000027d1      0x1b0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sbrkr.o)
- .debug_abbrev  0x00002981       0x86 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strcmp.o)
- .debug_abbrev  0x00002a07      0x262 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfiprintf.o)
- .debug_abbrev  0x00002c69      0x1ba c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-callocr.o)
- .debug_abbrev  0x00002e23      0x1ea c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-freer.o)
- .debug_abbrev  0x0000300d       0xa8 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memmove.o)
- .debug_abbrev  0x000030b5      0x1db c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reallocr.o)
- .debug_abbrev  0x00003290       0x14 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_addsubdf3.o)
- .debug_abbrev  0x000032a4       0x14 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_muldivdf3.o)
- .debug_abbrev  0x000032b8       0x14 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_cmpdf2.o)
- .debug_abbrev  0x000032cc       0x14 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_fixdfsi.o)
+ .debug_abbrev  0x00000014      0x328 main.o
+ .debug_abbrev  0x0000033c       0xed audio.o
+ .debug_abbrev  0x00000429       0x49 big_font.o
+ .debug_abbrev  0x00000472       0x4b bloques.o
+ .debug_abbrev  0x000004bd       0xe8 CALIBR~1.o
+ .debug_abbrev  0x000005a5      0x2c2 NT35510.o
+ .debug_abbrev  0x00000867       0x49 SMALL_~1.o
+ .debug_abbrev  0x000008b0       0x70 vibrador.o
+ .debug_abbrev  0x00000920       0xd3 xpm.o
+ .debug_abbrev  0x000009f3      0x18e xpt2046.o
+ .debug_abbrev  0x00000b81       0x4e galaga.o
+ .debug_abbrev  0x00000bcf       0x4b PACMAN~1.o
+ .debug_abbrev  0x00000c1a       0x4b XPMSCH~1.o
+ .debug_abbrev  0x00000c65       0x14 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+ .debug_abbrev  0x00000c79       0x14 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+ .debug_abbrev  0x00000c8d       0x14 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
+ .debug_abbrev  0x00000ca1       0x8d c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+ .debug_abbrev  0x00000d2e      0x194 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-rand.o)
+ .debug_abbrev  0x00000ec2      0x1c8 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sprintf.o)
+ .debug_abbrev  0x0000108a       0x6d c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+ .debug_abbrev  0x000010f7      0x2ea c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfprintf.o)
+ .debug_abbrev  0x000013e1      0x17f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sysgettod.o)
+ .debug_abbrev  0x00001560      0x22b c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-dtoa.o)
+ .debug_abbrev  0x0000178b      0x1b3 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-gettimeofdayr.o)
+ .debug_abbrev  0x0000193e      0x166 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-impure.o)
+ .debug_abbrev  0x00001aa4      0x25e c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-locale.o)
+ .debug_abbrev  0x00001d02      0x233 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mallocr.o)
+ .debug_abbrev  0x00001f35       0xc4 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memchr.o)
+ .debug_abbrev  0x00001ff9       0x99 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memcpy.o)
+ .debug_abbrev  0x00002092      0x179 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mlock.o)
+ .debug_abbrev  0x0000220b      0x30e c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mprec.o)
+ .debug_abbrev  0x00002519      0x1e6 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reent.o)
+ .debug_abbrev  0x000026ff       0xc5 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-s_fpclassify.o)
+ .debug_abbrev  0x000027c4      0x1b0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sbrkr.o)
+ .debug_abbrev  0x00002974       0x86 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strcmp.o)
+ .debug_abbrev  0x000029fa      0x262 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfiprintf.o)
+ .debug_abbrev  0x00002c5c      0x1ba c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-callocr.o)
+ .debug_abbrev  0x00002e16      0x1ea c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-freer.o)
+ .debug_abbrev  0x00003000       0xa8 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memmove.o)
+ .debug_abbrev  0x000030a8      0x1db c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reallocr.o)
+ .debug_abbrev  0x00003283       0x14 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_addsubdf3.o)
+ .debug_abbrev  0x00003297       0x14 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_muldivdf3.o)
+ .debug_abbrev  0x000032ab       0x14 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_cmpdf2.o)
+ .debug_abbrev  0x000032bf       0x14 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_fixdfsi.o)
 
-.debug_line     0x00000000     0x4eee
+.debug_line     0x00000000     0x4eff
  *(.debug_line)
  .debug_line    0x00000000      0x18b crt.o
- .debug_line    0x0000018b      0x30f main.o
- .debug_line    0x0000049a       0x83 audio.o
- .debug_line    0x0000051d       0x2e big_font.o
- .debug_line    0x0000054b       0x2d bloques.o
- .debug_line    0x00000578       0xa2 CALIBR~1.o
- .debug_line    0x0000061a      0x4df NT35510.o
- .debug_line    0x00000af9       0x30 SMALL_~1.o
- .debug_line    0x00000b29       0x47 vibrador.o
- .debug_line    0x00000b70      0x1fd xpm.o
- .debug_line    0x00000d6d       0xf3 xpt2046.o
- .debug_line    0x00000e60       0x4b galaga.o
- .debug_line    0x00000eab       0x2f PACMAN~1.o
- .debug_line    0x00000eda       0x30 XPMSCH~1.o
- .debug_line    0x00000f0a       0x93 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
- .debug_line    0x00000f9d       0x9f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
- .debug_line    0x0000103c       0x6a c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
- .debug_line    0x000010a6      0x180 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
- .debug_line    0x00001226      0x16d c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-rand.o)
- .debug_line    0x00001393      0x1bd c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sprintf.o)
- .debug_line    0x00001550      0x111 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
- .debug_line    0x00001661      0x937 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfprintf.o)
- .debug_line    0x00001f98      0x13f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sysgettod.o)
- .debug_line    0x000020d7      0x757 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-dtoa.o)
- .debug_line    0x0000282e      0x194 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-gettimeofdayr.o)
- .debug_line    0x000029c2      0x110 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-impure.o)
- .debug_line    0x00002ad2      0x1a0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-locale.o)
- .debug_line    0x00002c72      0x2d1 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mallocr.o)
- .debug_line    0x00002f43      0x159 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memchr.o)
- .debug_line    0x0000309c      0x16f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memcpy.o)
- .debug_line    0x0000320b      0x122 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mlock.o)
- .debug_line    0x0000332d      0x5a5 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mprec.o)
- .debug_line    0x000038d2      0x168 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reent.o)
- .debug_line    0x00003a3a      0x12c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-s_fpclassify.o)
- .debug_line    0x00003b66      0x174 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sbrkr.o)
- .debug_line    0x00003cda       0xc4 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strcmp.o)
- .debug_line    0x00003d9e      0x608 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfiprintf.o)
- .debug_line    0x000043a6      0x148 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-callocr.o)
- .debug_line    0x000044ee      0x1e8 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-freer.o)
- .debug_line    0x000046d6      0x18f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memmove.o)
- .debug_line    0x00004865      0x25f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reallocr.o)
- .debug_line    0x00004ac4      0x16f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_addsubdf3.o)
- .debug_line    0x00004c33      0x187 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_muldivdf3.o)
- .debug_line    0x00004dba       0xb5 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_cmpdf2.o)
- .debug_line    0x00004e6f       0x7f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_fixdfsi.o)
+ .debug_line    0x0000018b      0x320 main.o
+ .debug_line    0x000004ab       0x83 audio.o
+ .debug_line    0x0000052e       0x2e big_font.o
+ .debug_line    0x0000055c       0x2d bloques.o
+ .debug_line    0x00000589       0xa2 CALIBR~1.o
+ .debug_line    0x0000062b      0x4df NT35510.o
+ .debug_line    0x00000b0a       0x30 SMALL_~1.o
+ .debug_line    0x00000b3a       0x47 vibrador.o
+ .debug_line    0x00000b81      0x1fd xpm.o
+ .debug_line    0x00000d7e       0xf3 xpt2046.o
+ .debug_line    0x00000e71       0x4b galaga.o
+ .debug_line    0x00000ebc       0x2f PACMAN~1.o
+ .debug_line    0x00000eeb       0x30 XPMSCH~1.o
+ .debug_line    0x00000f1b       0x93 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+ .debug_line    0x00000fae       0x9f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+ .debug_line    0x0000104d       0x6a c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
+ .debug_line    0x000010b7      0x180 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+ .debug_line    0x00001237      0x16d c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-rand.o)
+ .debug_line    0x000013a4      0x1bd c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sprintf.o)
+ .debug_line    0x00001561      0x111 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+ .debug_line    0x00001672      0x937 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfprintf.o)
+ .debug_line    0x00001fa9      0x13f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sysgettod.o)
+ .debug_line    0x000020e8      0x757 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-dtoa.o)
+ .debug_line    0x0000283f      0x194 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-gettimeofdayr.o)
+ .debug_line    0x000029d3      0x110 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-impure.o)
+ .debug_line    0x00002ae3      0x1a0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-locale.o)
+ .debug_line    0x00002c83      0x2d1 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mallocr.o)
+ .debug_line    0x00002f54      0x159 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memchr.o)
+ .debug_line    0x000030ad      0x16f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memcpy.o)
+ .debug_line    0x0000321c      0x122 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mlock.o)
+ .debug_line    0x0000333e      0x5a5 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mprec.o)
+ .debug_line    0x000038e3      0x168 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reent.o)
+ .debug_line    0x00003a4b      0x12c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-s_fpclassify.o)
+ .debug_line    0x00003b77      0x174 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sbrkr.o)
+ .debug_line    0x00003ceb       0xc4 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strcmp.o)
+ .debug_line    0x00003daf      0x608 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfiprintf.o)
+ .debug_line    0x000043b7      0x148 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-callocr.o)
+ .debug_line    0x000044ff      0x1e8 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-freer.o)
+ .debug_line    0x000046e7      0x18f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memmove.o)
+ .debug_line    0x00004876      0x25f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reallocr.o)
+ .debug_line    0x00004ad5      0x16f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_addsubdf3.o)
+ .debug_line    0x00004c44      0x187 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_muldivdf3.o)
+ .debug_line    0x00004dcb       0xb5 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_cmpdf2.o)
+ .debug_line    0x00004e80       0x7f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_fixdfsi.o)
 
-.debug_frame    0x00000000      0xf74
+.debug_frame    0x00000000      0xf78
  *(.debug_frame)
- .debug_frame   0x00000000      0x11c main.o
- .debug_frame   0x0000011c       0xa8 audio.o
- .debug_frame   0x000001c4       0x5c CALIBR~1.o
- .debug_frame   0x00000220      0x3d0 NT35510.o
- .debug_frame   0x000005f0       0x38 vibrador.o
- .debug_frame   0x00000628       0xcc xpm.o
- .debug_frame   0x000006f4       0xb4 xpt2046.o
- .debug_frame   0x000007a8       0x28 galaga.o
- .debug_frame   0x000007d0       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
- .debug_frame   0x000007f0       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
- .debug_frame   0x00000810       0x28 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
- .debug_frame   0x00000838       0x38 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-rand.o)
- .debug_frame   0x00000870       0x5c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sprintf.o)
- .debug_frame   0x000008cc       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
- .debug_frame   0x000008ec       0x3c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfprintf.o)
- .debug_frame   0x00000928       0x28 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sysgettod.o)
- .debug_frame   0x00000950       0x64 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-dtoa.o)
- .debug_frame   0x000009b4       0x2c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-gettimeofdayr.o)
- .debug_frame   0x000009e0       0x98 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-locale.o)
- .debug_frame   0x00000a78       0x38 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mallocr.o)
- .debug_frame   0x00000ab0       0x2c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memchr.o)
- .debug_frame   0x00000adc       0x2c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memcpy.o)
- .debug_frame   0x00000b08       0x30 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mlock.o)
- .debug_frame   0x00000b38      0x218 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mprec.o)
- .debug_frame   0x00000d50       0x68 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reent.o)
- .debug_frame   0x00000db8       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-s_fpclassify.o)
- .debug_frame   0x00000dd8       0x2c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sbrkr.o)
- .debug_frame   0x00000e04       0x30 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strcmp.o)
- .debug_frame   0x00000e34       0x64 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfiprintf.o)
- .debug_frame   0x00000e98       0x28 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-callocr.o)
- .debug_frame   0x00000ec0       0x50 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-freer.o)
- .debug_frame   0x00000f10       0x2c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memmove.o)
- .debug_frame   0x00000f3c       0x38 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reallocr.o)
+ .debug_frame   0x00000000      0x120 main.o
+ .debug_frame   0x00000120       0xa8 audio.o
+ .debug_frame   0x000001c8       0x5c CALIBR~1.o
+ .debug_frame   0x00000224      0x3d0 NT35510.o
+ .debug_frame   0x000005f4       0x38 vibrador.o
+ .debug_frame   0x0000062c       0xcc xpm.o
+ .debug_frame   0x000006f8       0xb4 xpt2046.o
+ .debug_frame   0x000007ac       0x28 galaga.o
+ .debug_frame   0x000007d4       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
+ .debug_frame   0x000007f4       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
+ .debug_frame   0x00000814       0x28 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+ .debug_frame   0x0000083c       0x38 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-rand.o)
+ .debug_frame   0x00000874       0x5c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sprintf.o)
+ .debug_frame   0x000008d0       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+ .debug_frame   0x000008f0       0x3c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfprintf.o)
+ .debug_frame   0x0000092c       0x28 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sysgettod.o)
+ .debug_frame   0x00000954       0x64 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-dtoa.o)
+ .debug_frame   0x000009b8       0x2c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-gettimeofdayr.o)
+ .debug_frame   0x000009e4       0x98 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-locale.o)
+ .debug_frame   0x00000a7c       0x38 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mallocr.o)
+ .debug_frame   0x00000ab4       0x2c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memchr.o)
+ .debug_frame   0x00000ae0       0x2c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memcpy.o)
+ .debug_frame   0x00000b0c       0x30 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mlock.o)
+ .debug_frame   0x00000b3c      0x218 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mprec.o)
+ .debug_frame   0x00000d54       0x68 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reent.o)
+ .debug_frame   0x00000dbc       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-s_fpclassify.o)
+ .debug_frame   0x00000ddc       0x2c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sbrkr.o)
+ .debug_frame   0x00000e08       0x30 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strcmp.o)
+ .debug_frame   0x00000e38       0x64 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfiprintf.o)
+ .debug_frame   0x00000e9c       0x28 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-callocr.o)
+ .debug_frame   0x00000ec4       0x50 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-freer.o)
+ .debug_frame   0x00000f14       0x2c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memmove.o)
+ .debug_frame   0x00000f40       0x38 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reallocr.o)
 
-.debug_str      0x00000000     0x1c4d
+.debug_str      0x00000000     0x1ba6
  *(.debug_str)
- .debug_str     0x00000000      0x320 main.o
-                                0x387 (size before relaxing)
- .debug_str     0x00000320      0x13c audio.o
-                                0x1de (size before relaxing)
- .debug_str     0x0000045c        0xe big_font.o
-                                 0xc4 (size before relaxing)
- .debug_str     0x0000046a       0x15 bloques.o
-                                 0xba (size before relaxing)
- .debug_str     0x0000047f       0x71 CALIBR~1.o
-                                0x1a7 (size before relaxing)
- .debug_str     0x000004f0      0x232 NT35510.o
-                                0x3bc (size before relaxing)
- .debug_str     0x00000722       0x1a SMALL_~1.o
-                                 0xc8 (size before relaxing)
- .debug_str     0x0000073c       0x24 vibrador.o
-                                0x14d (size before relaxing)
- .debug_str     0x00000760       0xce xpm.o
-                                0x20f (size before relaxing)
- .debug_str     0x0000082e       0x6b xpt2046.o
-                                0x1d8 (size before relaxing)
- .debug_str     0x00000899       0x16 galaga.o
-                                0x13f (size before relaxing)
- .debug_str     0x000008af        0xf PACMAN~1.o
-                                 0xe2 (size before relaxing)
- .debug_str     0x000008be       0x10 XPMSCH~1.o
-                                 0xa3 (size before relaxing)
- .debug_str     0x000008ce       0xa2 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+ .debug_str     0x00000000      0x300 main.o
+                                0x367 (size before relaxing)
+ .debug_str     0x00000300       0xb5 audio.o
+                                0x1a5 (size before relaxing)
+ .debug_str     0x000003b5        0xe big_font.o
+                                 0x8b (size before relaxing)
+ .debug_str     0x000003c3       0x15 bloques.o
+                                 0x81 (size before relaxing)
+ .debug_str     0x000003d8       0x71 CALIBR~1.o
+                                0x16e (size before relaxing)
+ .debug_str     0x00000449      0x232 NT35510.o
+                                0x383 (size before relaxing)
+ .debug_str     0x0000067b       0x1a SMALL_~1.o
+                                 0x8f (size before relaxing)
+ .debug_str     0x00000695       0x24 vibrador.o
+                                0x114 (size before relaxing)
+ .debug_str     0x000006b9       0xce xpm.o
+                                0x1d6 (size before relaxing)
+ .debug_str     0x00000787       0x6b xpt2046.o
+                                0x19f (size before relaxing)
+ .debug_str     0x000007f2       0x16 galaga.o
+                                0x106 (size before relaxing)
+ .debug_str     0x00000808        0xf PACMAN~1.o
+                                 0xa9 (size before relaxing)
+ .debug_str     0x00000817       0x10 XPMSCH~1.o
+                                 0x83 (size before relaxing)
+ .debug_str     0x00000827       0xa2 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
                                 0x137 (size before relaxing)
- .debug_str     0x00000970      0x3fb c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-rand.o)
+ .debug_str     0x000008c9      0x3fb c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-rand.o)
                                 0x4de (size before relaxing)
- .debug_str     0x00000d6b       0xb0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sprintf.o)
+ .debug_str     0x00000cc4       0xb0 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sprintf.o)
                                 0x50d (size before relaxing)
- .debug_str     0x00000e1b       0x94 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+ .debug_str     0x00000d74       0x94 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
                                 0x130 (size before relaxing)
- .debug_str     0x00000eaf      0x1b5 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfprintf.o)
+ .debug_str     0x00000e08      0x1b5 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfprintf.o)
                                 0x6b8 (size before relaxing)
- .debug_str     0x00001064       0x9a c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sysgettod.o)
+ .debug_str     0x00000fbd       0x9a c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sysgettod.o)
                                 0x521 (size before relaxing)
- .debug_str     0x000010fe      0x100 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-dtoa.o)
+ .debug_str     0x00001057      0x100 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-dtoa.o)
                                 0x5d4 (size before relaxing)
- .debug_str     0x000011fe       0x95 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-gettimeofdayr.o)
+ .debug_str     0x00001157       0x95 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-gettimeofdayr.o)
                                 0x52a (size before relaxing)
- .debug_str     0x00001293       0x57 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-impure.o)
+ .debug_str     0x000011ec       0x57 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-impure.o)
                                 0x4ed (size before relaxing)
- .debug_str     0x000012ea      0x25b c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-locale.o)
+ .debug_str     0x00001243      0x25b c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-locale.o)
                                 0x743 (size before relaxing)
- .debug_str     0x00001545      0x20c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mallocr.o)
+ .debug_str     0x0000149e      0x20c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mallocr.o)
                                 0x6c4 (size before relaxing)
- .debug_str     0x00001751       0x53 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memchr.o)
+ .debug_str     0x000016aa       0x53 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memchr.o)
                                 0x13d (size before relaxing)
- .debug_str     0x000017a4       0x67 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memcpy.o)
+ .debug_str     0x000016fd       0x67 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memcpy.o)
                                 0x14a (size before relaxing)
- .debug_str     0x0000180b       0x6b c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mlock.o)
+ .debug_str     0x00001764       0x6b c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mlock.o)
                                 0x4f6 (size before relaxing)
- .debug_str     0x00001876       0xf6 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mprec.o)
+ .debug_str     0x000017cf       0xf6 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mprec.o)
                                 0x5e1 (size before relaxing)
- .debug_str     0x0000196c       0x71 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reent.o)
+ .debug_str     0x000018c5       0x71 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reent.o)
                                 0x512 (size before relaxing)
- .debug_str     0x000019dd       0xb6 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-s_fpclassify.o)
+ .debug_str     0x00001936       0xb6 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-s_fpclassify.o)
                                 0x175 (size before relaxing)
- .debug_str     0x00001a93       0x3f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sbrkr.o)
+ .debug_str     0x000019ec       0x3f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sbrkr.o)
                                 0x4e4 (size before relaxing)
- .debug_str     0x00001ad2       0x59 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strcmp.o)
+ .debug_str     0x00001a2b       0x59 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strcmp.o)
                                 0x13a (size before relaxing)
- .debug_str     0x00001b2b       0x29 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfiprintf.o)
+ .debug_str     0x00001a84       0x29 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfiprintf.o)
                                 0x62b (size before relaxing)
- .debug_str     0x00001b54       0x19 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-callocr.o)
+ .debug_str     0x00001aad       0x19 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-callocr.o)
                                 0x515 (size before relaxing)
- .debug_str     0x00001b6d       0x3c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-freer.o)
+ .debug_str     0x00001ac6       0x3c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-freer.o)
                                 0x616 (size before relaxing)
- .debug_str     0x00001ba9       0x4b c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memmove.o)
+ .debug_str     0x00001b02       0x4b c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memmove.o)
                                 0x156 (size before relaxing)
- .debug_str     0x00001bf4       0x59 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reallocr.o)
+ .debug_str     0x00001b4d       0x59 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reallocr.o)
                                 0x596 (size before relaxing)
 
-.debug_loc      0x00000000     0xae96
+.debug_loc      0x00000000     0xaf1a
  *(.debug_loc)
- .debug_loc     0x00000000      0x9d6 main.o
- .debug_loc     0x000009d6       0xb9 audio.o
- .debug_loc     0x00000a8f       0xfe CALIBR~1.o
- .debug_loc     0x00000b8d     0x118a NT35510.o
- .debug_loc     0x00001d17       0x20 vibrador.o
- .debug_loc     0x00001d37      0x7cd xpm.o
- .debug_loc     0x00002504      0x1f8 xpt2046.o
- .debug_loc     0x000026fc       0x52 galaga.o
- .debug_loc     0x0000274e      0x1e5 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
- .debug_loc     0x00002933       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-rand.o)
- .debug_loc     0x00002953       0xc1 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sprintf.o)
- .debug_loc     0x00002a14       0x13 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
- .debug_loc     0x00002a27     0x1da1 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfprintf.o)
- .debug_loc     0x000047c8       0x5c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sysgettod.o)
- .debug_loc     0x00004824     0x1ebc c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-dtoa.o)
- .debug_loc     0x000066e0       0x6f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-gettimeofdayr.o)
- .debug_loc     0x0000674f       0xb3 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-locale.o)
- .debug_loc     0x00006802      0x8b3 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mallocr.o)
- .debug_loc     0x000070b5      0x157 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memchr.o)
- .debug_loc     0x0000720c      0x1ab c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memcpy.o)
- .debug_loc     0x000073b7     0x165a c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mprec.o)
- .debug_loc     0x00008a11      0x1dc c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reent.o)
- .debug_loc     0x00008bed       0x75 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-s_fpclassify.o)
- .debug_loc     0x00008c62       0x51 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sbrkr.o)
- .debug_loc     0x00008cb3       0x26 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strcmp.o)
- .debug_loc     0x00008cd9     0x1009 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfiprintf.o)
- .debug_loc     0x00009ce2      0x179 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-callocr.o)
- .debug_loc     0x00009e5b      0x370 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-freer.o)
- .debug_loc     0x0000a1cb      0x1fe c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memmove.o)
- .debug_loc     0x0000a3c9      0xacd c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reallocr.o)
+ .debug_loc     0x00000000      0xa5a main.o
+ .debug_loc     0x00000a5a       0xb9 audio.o
+ .debug_loc     0x00000b13       0xfe CALIBR~1.o
+ .debug_loc     0x00000c11     0x118a NT35510.o
+ .debug_loc     0x00001d9b       0x20 vibrador.o
+ .debug_loc     0x00001dbb      0x7cd xpm.o
+ .debug_loc     0x00002588      0x1f8 xpt2046.o
+ .debug_loc     0x00002780       0x52 galaga.o
+ .debug_loc     0x000027d2      0x1e5 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memset.o)
+ .debug_loc     0x000029b7       0x20 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-rand.o)
+ .debug_loc     0x000029d7       0xc1 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sprintf.o)
+ .debug_loc     0x00002a98       0x13 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strlen.o)
+ .debug_loc     0x00002aab     0x1da1 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfprintf.o)
+ .debug_loc     0x0000484c       0x5c c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sysgettod.o)
+ .debug_loc     0x000048a8     0x1ebc c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-dtoa.o)
+ .debug_loc     0x00006764       0x6f c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-gettimeofdayr.o)
+ .debug_loc     0x000067d3       0xb3 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-locale.o)
+ .debug_loc     0x00006886      0x8b3 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mallocr.o)
+ .debug_loc     0x00007139      0x157 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memchr.o)
+ .debug_loc     0x00007290      0x1ab c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memcpy.o)
+ .debug_loc     0x0000743b     0x165a c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-mprec.o)
+ .debug_loc     0x00008a95      0x1dc c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reent.o)
+ .debug_loc     0x00008c71       0x75 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-s_fpclassify.o)
+ .debug_loc     0x00008ce6       0x51 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-sbrkr.o)
+ .debug_loc     0x00008d37       0x26 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-strcmp.o)
+ .debug_loc     0x00008d5d     0x1009 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-svfiprintf.o)
+ .debug_loc     0x00009d66      0x179 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-callocr.o)
+ .debug_loc     0x00009edf      0x370 c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-freer.o)
+ .debug_loc     0x0000a24f      0x1fe c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-memmove.o)
+ .debug_loc     0x0000a44d      0xacd c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2/../../../../arm-none-eabi/lib\libc.a(lib_a-reallocr.o)
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -1266,11 +1266,13 @@ __aeabi_idiv                                      c:/program files (x86)/yagarto
                                                   xpt2046.o
                                                   xpm.o
                                                   CALIBR~1.o
+                                                  main.o
 __aeabi_idiv0                                     c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
                                                   c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
                                                   c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_udivsi3.o)
 __aeabi_idivmod                                   c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_divsi3.o)
                                                   xpm.o
+                                                  main.o
 __aeabi_l2d                                       c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_addsubdf3.o)
 __aeabi_ldiv0                                     c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_dvmd_tls.o)
 __aeabi_ui2d                                      c:/program files (x86)/yagarto/bin/../lib/gcc/arm-none-eabi/4.6.2\libgcc.a(_arm_addsubdf3.o)

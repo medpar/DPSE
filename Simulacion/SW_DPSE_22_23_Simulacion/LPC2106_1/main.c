@@ -15,21 +15,35 @@
 /* ------------------- Constantes generales -------------------------- */
 #define SCREEN_W   800
 #define SCREEN_H   480
-#define TILE       16
-#define SCALE      2
+#define TILE       24
+#define SCALE      1
 #define TW         (TILE * SCALE)          /* 32 px */
 
-#define MAP_COLS   24
-#define MAP_ROWS   13
+#define MAP_COLS   33
+#define MAP_ROWS   18
 #define X_OFFSET   ((SCREEN_W - MAP_COLS * TW)/2)
-#define Y_OFFSET   ((SCREEN_H + 64 - MAP_ROWS * TW)/2)
+#define Y_OFFSET   48
 
 /* Mapa */
-#define WALL   '1'
-#define COIN   'C'
-#define EMPTY  '0'
-#define PACMAN 'P'
-#define GHOST  'G'
+#define WALL_UP   	'0'
+#define WALL_DOWN   	'1'
+#define WALL_RIGHT   	'2'
+#define WALL_LEFT   	'3'
+#define CORNER_UPR   	'4'
+#define CORNER_UPL   	'5'
+#define CORNER_DOWNR   	'6'
+#define CORNER_DOWNL   	'7'
+#define WALL_HOR	'8'
+#define WALL_VER	'9'
+#define WALL_HOR_LIM1	'A'
+#define WALL_HOR_LIM2	'B'
+#define WALL_VER_LIM1	'Y'
+#define WALL_VER_LIM2	'Z'
+#define COIN   		'C'
+#define EMPTY  		'E'
+#define PACMAN 		'P'
+#define POWER_UP 	'V'
+#define GHOST  		'G'
 
 /* GPIO bits (no tocar) */
 #define LEFT   (1 << 0)
@@ -44,20 +58,26 @@
 
 /* ------------------- Laberinto base ------------------------------- */
 static const char originalMap[MAP_ROWS][MAP_COLS+1] = {
-    "111111111111111111111111",  //  0: muro completo
-    "1PCCCCCCCCCCCCCCCCCCCCC1",  //  1: pasillo horizontal (P al inicio)
-    "1C1C1C11CC11111C111111C1",  //  2: pasillos verticales en c=3,7,11,15,19,23
-    "1C11CC1C1C1CCCCC1CCCCCC1",  //  3: pasillo horizontal
-    "1C1C1C11CC1CCCCC1CCCCCC1",  //  4: idem fila 2
-    "1C1C1C1CCC1CCCCC1CCCCCC1",  //  5
-    "1C1C1C1CCC11111C111111C1",  //  6
-    "1C1C1C1CCCCGCC1C1CCGCCC1",  //  7: pasillo horizontal + casa de fantasmas
-    "1C1C1C1CCCCCCC1C111C11C1",  //  8
-    "1C11CC1CCCCCCC1C1CCCCCC1",  //  9
-    "1C1C1C1CCC11111C111111C1",  // 10
-    "1CCCCCCCCCCCCCCCCCCCCCC1",  // 11
-    "111111111111111111111111",  // 12
+    "500000000000000000000000000000004",  //  0: borde superior
+    "3VPCCCCCCCCCCCCCCCCCCCCCCCCCCCCV2",  //  1: corredor superior exterior con power-ups
+    "3CA88BCA88BCA88BCA88BCA88BCA88BC2",  //  2: pasillos verticales con monedas
+    "3CEEEECEEEECEEEECEEEECEEEECEEEEC2",  //  3: pasillos verticales con espacios
+    "3CYCCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  //  4: corredor con esquinas internas
+    "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  //  5: corredor interior lleno de monedas
+    "3C9EEECEEEECEEEECEEEECEEEECEEEEC2",  //  6: repetición de pasillos verticales con espacios
+    "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  //  7: corredor interior lleno de monedas
+    "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  //  8: repetición del corredor interior
+    "3E9EEEEEGGEEEEEEEEEEEEEEEEEEEEEE2",  //  9: zona central de fantasmas
+    "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  // 10: corredor interior lleno de monedas
+    "3C9EEECEEEECEEEECEEEECEEEECEEEEC2",  // 11: pasillos verticales con espacios
+    "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  // 12: corredor interior lleno de monedas
+    "3CZEEECEEEECEEEECEEEECEEEECEEEEC2",  // 13: repetición de pasillos verticales
+    "3CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  // 14: corredor interior lleno de monedas
+    "3CA88BCA88BCA88BCA88BCA88BCA88BC2",  // 15: Pac-Man en corredor central
+    "3VCCCCCCCCCCCCCCCCCCCCCCCCCCCCCV2",  // 16: corredor inferior exterior con power-ups
+    "711111111111111111111111111111116"   // 17: borde inferior
 };
+
 
 /* ------------------- Tipos y estructuras -------------------------- */
 typedef enum { DIR_UP, DIR_DOWN, DIR_LEFT, DIR_RIGHT, DIR_NONE } Direction;
@@ -107,7 +127,7 @@ static void      drawTile(int r, int c);
 static bool wallAt(int r, int c)
 {
     if (c < 0 || c >= MAP_COLS || r < 0 || r >= MAP_ROWS) return true;
-    return map[r][c] == WALL;
+    return map[r][c] == WALL_UP;
 }
 
 static bool canMoveDir(int px, int py, Direction d)
@@ -191,11 +211,25 @@ static void drawTile(int r, int c)
     int px = X_OFFSET + c * TW;
     int py = Y_OFFSET + r * TW;
     switch (map[r][c]) {
-        case WALL:   XPM_PintaAtxNyN(px, py, 67, pacman);  break;
-        case COIN:   XPM_PintaAtxNyN(px, py, 81, pacman);  break;
-        case EMPTY:  XPM_PintaAtxNyN(px, py, 69, pacman);   break;
-        case GHOST:  XPM_PintaAtxNyN(px, py, 0, pacman); break;
-        default:     XPM_PintaAtxNyN(px, py, 11, pacman);
+        case WALL_UP:   	XPM_PintaAtxNyN(px, py, 49, pacman);  break;
+	case WALL_RIGHT:	XPM_PintaAtxNyN(px, py, 62, pacman);  break;
+	case WALL_LEFT:   	XPM_PintaAtxNyN(px, py, 60, pacman);  break;
+	case WALL_DOWN:   	XPM_PintaAtxNyN(px, py, 73, pacman);  break;
+	case CORNER_UPR:   	XPM_PintaAtxNyN(px, py, 50, pacman);  break;
+	case CORNER_UPL:   	XPM_PintaAtxNyN(px, py, 48, pacman);  break;
+	case CORNER_DOWNR:   	XPM_PintaAtxNyN(px, py, 74, pacman);  break;
+	case CORNER_DOWNL:   	XPM_PintaAtxNyN(px, py, 72, pacman);  break;
+	case WALL_HOR:   	XPM_PintaAtxNyN(px, py, 56, pacman);  break;
+	case WALL_HOR_LIM1:   	XPM_PintaAtxNyN(px, py, 55, pacman);  break;
+	case WALL_HOR_LIM2:   	XPM_PintaAtxNyN(px, py, 57, pacman);  break;
+	case WALL_VER:   	XPM_PintaAtxNyN(px, py, 66, pacman);  break;
+	case WALL_VER_LIM1:   	XPM_PintaAtxNyN(px, py, 54, pacman);  break;
+	case WALL_VER_LIM2:   	XPM_PintaAtxNyN(px, py, 78, pacman);  break;
+        case COIN:   		XPM_PintaAtxNyN(px, py, 81, pacman);  break;
+        case EMPTY:  		XPM_PintaAtxNyN(px, py, 61, pacman);  break;
+	case POWER_UP:  	XPM_PintaAtxNyN(px, py, 80, pacman);  break;
+        case GHOST:  		XPM_PintaAtxNyN(px, py, 0, pacman);   break;
+        default:     		XPM_PintaAtxNyN(px, py, 11, pacman);
     }
 }
 
@@ -299,14 +333,14 @@ static void animateGhostMove(Ghost *g, int nx, int ny)
         restoreBackground(px, py);
         if (px != tx) px += dx;
         if (py != ty) py += dy;
-        XPM_PintaAtxNyN(px, py, 0, ghost_xpm);
+        XPM_PintaAtxNyN(px, py, 1, pacman);
         if (GHOST_DELAY_MS) _delay_ms(GHOST_DELAY_MS);
     }
 
     g->x = nx; g->y = ny;
     g->under = map[ny][nx];
     map[ny][nx] = GHOST;
-    XPM_PintaAtxNyN(tx, ty, 0, ghost_xpm);
+    XPM_PintaAtxNyN(tx, ty, 0, pacman); 
 }
 
 /* ------------------ Movimientos lógicos fantasmas ------------------ */

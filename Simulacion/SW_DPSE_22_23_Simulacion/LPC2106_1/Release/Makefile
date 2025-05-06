@@ -12,7 +12,7 @@ SHELL = C:\WINDOWS\system32\cmd.exe
 ## Tools general options
 ASMFLAGS=-x assembler-with-cpp -gdwarf-2 -mcpu=arm7tdmi -mthumb-interwork
 BIN2HEXFLAGS=-O ihex
-CCFLAGS=-gdwarf-2 -fomit-frame-pointer -Wall -fverbose-asm -MD -MP -fsigned-char -Os -mcpu=arm7tdmi -mthumb-interwork -I..
+CCFLAGS=-gdwarf-2 -fomit-frame-pointer -Wall -fverbose-asm -MD -MP -fsigned-char -Os -mcpu=arm7tdmi -mthumb-interwork -I"C:\Users\Luis Fran\DPSE\Simulacion\SW_DPSE_22_23_Simulacion\LPC2106_1"
 LDFLAGS=-mcpu=arm7tdmi -nostartfiles -mthumb-interwork
 
 ## Processing Tools
@@ -20,43 +20,43 @@ CC=arm-none-eabi-gcc.exe
 LD=arm-none-eabi-gcc.exe
 ASM=arm-none-eabi-gcc.exe
 BIN2HEX=arm-none-eabi-objcopy.exe
-#  C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/Release.hex: TOOL=BIN2HEX
-#     C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/Release.elf: TOOL=LD
-#        C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/crt.o: TOOL=ASM
-#           C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/crt.S
-#        C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/LPC2106_FLASH.ld
-#        C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/main.o: TOOL=CC
-#           C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/main.c
-#        C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/audio.o: TOOL=CC
-#           C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/audio.c
-#        C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/big_font.o: TOOL=CC
-#           C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/big_font.c
-#        C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/bloques.o: TOOL=CC
-#           C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/bloques.c
-#        C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/CALIBR~1.o: TOOL=CC
-#           C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/calibrate.c
-#        C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/NT35510.o: TOOL=CC
-#           C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/NT35510.c
-#        C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/SMALL_~1.o: TOOL=CC
-#           C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/small_font.c
-#        C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/vibrador.o: TOOL=CC
-#           C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/vibrador.c
-#        C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/xpm.o: TOOL=CC
-#           C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/xpm.c
-#        C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/xpt2046.o: TOOL=CC
-#           C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/xpt2046.c
-#        C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/galaga.o: TOOL=CC
-#           C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/galaga.c
-#        C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/PACMAN~1.o: TOOL=CC
-#           C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/pacmanXPM.c
-#        C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/XPMSCH~1.o: TOOL=CC
-#           C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/xpmschulos.c
+#  C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/Release.hex: TOOL=BIN2HEX
+#     C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/Release.elf: TOOL=LD
+#        C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/crt.o: TOOL=ASM
+#           C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/crt.S
+#        C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/LPC2106_FLASH.ld
+#        C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/main.o: TOOL=CC
+#           C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/main.c
+#        C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/audio.o: TOOL=CC
+#           C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/audio.c
+#        C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/big_font.o: TOOL=CC
+#           C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/big_font.c
+#        C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/bloques.o: TOOL=CC
+#           C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/bloques.c
+#        C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/CALIBR~1.o: TOOL=CC
+#           C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/calibrate.c
+#        C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/NT35510.o: TOOL=CC
+#           C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/NT35510.c
+#        C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/SMALL_~1.o: TOOL=CC
+#           C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/small_font.c
+#        C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/vibrador.o: TOOL=CC
+#           C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/vibrador.c
+#        C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/xpm.o: TOOL=CC
+#           C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/xpm.c
+#        C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/xpt2046.o: TOOL=CC
+#           C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/xpt2046.c
+#        C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/galaga.o: TOOL=CC
+#           C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/galaga.c
+#        C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/PACMAN~1.o: TOOL=CC
+#           C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/pacmanXPM.c
+#        C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/Release/XPMSCH~1.o: TOOL=CC
+#           C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/xpmschulos.c
 
 # Build tree:
 all:	Release
 
 Release:	Release.hex
-	cp "Release.hex" "C:/Users/Invitado(pass user)/Documents/DPSE_ultimo/dpse/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1.hex"
+	cp "Release.hex" "C:/Users/Luis Fran/DPSE/Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1.hex"
 
 Release.hex:	Release.elf 
 	$(BIN2HEX) $(BIN2HEXFLAGS)  "Release.elf" "Release.hex"

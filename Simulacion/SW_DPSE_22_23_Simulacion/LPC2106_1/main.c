@@ -53,7 +53,7 @@
 
 /* Velocidad / suavidad */
 #define STEP_PX            2   /* píxeles por iteración (1 = extra-suave) */
-#define PAC_DELAY_MS       1   /* retardo interno Pac-Man                 */
+#define PAC_DELAY_MS       6   /* retardo interno Pac-Man                 */
 #define GHOST_DELAY_MS     0   /* retardo interno fantasmas               */
 
 /* ------------------- Laberinto base ------------------------------- */
@@ -67,7 +67,7 @@ static const char originalMap[MAP_ROWS][MAP_COLS+1] = {
     "3C9EEECEEEECEEEECEEEECEEEECEEEEC2",  //  6: repetición de pasillos verticales con espacios
     "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  //  7: corredor interior lleno de monedas
     "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  //  8: repetición del corredor interior
-    "3E9EEEEEGGEEEEEEEEEEEEEEEEEEEEEE2",  //  9: zona central de fantasmas
+    "3E9EEEEEGGGEEEEEEEEEEEEEEEEEEEEE2",  //  9: zona central de fantasmas
     "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  // 10: corredor interior lleno de monedas
     "3C9EEECEEEECEEEECEEEECEEEECEEEEC2",  // 11: pasillos verticales con espacios
     "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  // 12: corredor interior lleno de monedas
@@ -97,6 +97,7 @@ static char  map[MAP_ROWS][MAP_COLS + 1];
 static int pacPixX, pacPixY;          /* Pac-Man en píxeles */
 static Direction desiredDir = DIR_NONE;
 static Direction currentDir = DIR_NONE;
+static Direction printdir = DIR_NONE;
 
 static int lives, score, totalCoins;
 static bool hudDirty = true;
@@ -127,7 +128,7 @@ static void      drawTile(int r, int c);
 static bool wallAt(int r, int c)
 {
     if (c < 0 || c >= MAP_COLS || r < 0 || r >= MAP_ROWS) return true;
-    return map[r][c] == WALL_UP;
+    return map[r][c] == (WALL_UP || WALL_DOWN || WALL_RIGHT || WALL_LEFT || WALL_HOR || WALL_VER || WALL_HOR_LIM1 || WALL_HOR_LIM2 || WALL_VER_LIM1 || WALL_VER_LIM2);
 }
 
 static bool canMoveDir(int px, int py, Direction d)
@@ -235,8 +236,7 @@ static void drawTile(int r, int c)
 
 static void dibuja_mapa(const char m[][MAP_COLS + 1])
 {
-    XPM_Extract(wall_xpm);  XPM_Extract(bg_xpm);  XPM_Extract(coin_xpm);
-    XPM_Extract(pacman_xpm);XPM_Extract(ghost_xpm); XPM_Extract(pacman);
+    XPM_Extract(pacman);
     xpm_sx = TILE; xpm_sy = TILE; XPM_SetxNyN(SCALE, SCALE);
 
     int r, c;
@@ -253,7 +253,7 @@ static void dibuja_hud(void)
     TFT_DrawFillSquareS(0, 0, SCREEN_W, Y_OFFSET, TFT_Color(50, 50, 50));
     FG_Color = WHITE; BG_Color = TFT_Color(50, 50, 50);
     CF = BigFont;
-    sprintf(buf, "VIDAS: %d  PUNTOS: %d", lives, score);
+    //_sprintf(printdir, "VIDAS: %d  PUNTOS: %d", lives, score);
     TFT_print_xNyN(X_OFFSET, Y_OFFSET / 2 - 8, buf);
 }
 
@@ -444,7 +444,8 @@ int main(void)
     AMPLIF_OFF;
     TFT_Init();
     TP_Init();
-
+    VibratorON(50);
+   
     TFT_DrawFillSquareS(0, 0, LENX, LENY, TFT_Color(0, 0, 0));
 
     initGame();
@@ -457,8 +458,9 @@ int main(void)
         if (lives     <= 0) break;
 
         movePacman();
-        moveGhosts(tick);
+        //moveGhosts(tick);
         checkCollisions();
+	
 
         if (hudDirty) { dibuja_hud(); hudDirty = false; }
         tick++;

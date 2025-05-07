@@ -10,7 +10,7 @@ SRC = crt.S main.c \
 	calibrate.c xpt2046.c  \
 	bloques.c xpm.c \
 	vibrador.c big_font.c small_font.c audio.c \
-	galaga.c pacmanXPM.c xpmschulos.c
+	galaga.c xpmschulos.c
 	
 INC = nt35510.h calibrate.h xpt2046.h system.h audio.h 
 

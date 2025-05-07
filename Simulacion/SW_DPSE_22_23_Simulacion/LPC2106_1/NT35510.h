@@ -166,6 +166,13 @@ void TFT_putchar_xNyN(unsigned char c);
    _printf(format, __VA_ARGS__);\
    _vputch =(void*)_U0putch;
 
+
+#define _sprintf( sdir,format, ...) \
+   dir = sdir;\
+   _vputch =(void*)_sputchar;\
+   _printf(format, __VA_ARGS__);\
+   _vputch =(void*)_U0putch;
+
 struct _current_font
 {
 	unsigned char x_size;

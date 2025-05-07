@@ -1,0 +1,3314 @@
+Directory structure:
+└── /./
+    └── Simulacion/
+        └── SW_DPSE_22_23_Simulacion/
+            └── LPC2106_1/
+                ├── galaga.c
+                ├── NT35510.c
+                ├── xpt2046.h
+                ├── calibrate.h
+                ├── audio.h
+                ├── vibrador.c
+                ├── main.c
+                ├── calibrate.c
+                ├── NT35510.h
+                ├── xpt2046.c
+                ├── system.h
+                ├── audio.c
+                ├── lpc2106.h
+                └── bloques.c
+
+================================================
+File: /Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/galaga.c
+================================================
+// =======================================================================
+// Proyecto VIDEOCONSOLA Curso 2022-2023
+// Autor: Jess Manuel Hernndez Mangas
+// Asignatura: Desarrollo Prctico de Sistemas Electrnicos
+// File: galaga.c
+// =======================================================================
+#include "system.h"
+// -----------------------------------------------------------------------
+#define LEFT	(1<< 0)
+#define RIGHT   (1<< 1)
+#define UP      (1<< 2)
+#define DOWN    (1<< 3)
+#define T_DOWN  (1<< 4)
+#define T_LEFT  (1<< 5)
+#define T_RIGHT (1<< 6)
+#define T_UP    (1<< 7)
+
+// -----------------------------------------------------------------------
+int GetAction()
+{
+ int x, out=0;
+ // Pines como entradas
+ FIODIR &= ~0b111111110000000000000000;
+ _delay_ms(5);
+ // Lectura
+ x = ~((FIOPIN >>16))&0xFF;
+ if(x & (1<<0)) out |= UP;
+ if(x & (1<<1)) out |= LEFT;
+ if(x & (1<<2)) out |= RIGHT;
+ if(x & (1<<3)) out |= DOWN;
+ 
+ if(x & (1<<4)) out |= T_UP;
+ if(x & (1<<5)) out |= T_LEFT;
+ if(x & (1<<6)) out |= T_RIGHT;
+ if(x & (1<<7)) out |= T_DOWN;
+ // Pines como salidas
+ FIODIR |= 0b111111110000000000000000;
+ 
+ return out;
+}
+
+================================================
+File: /Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/NT35510.c
+================================================
+// =======================================================================
+// Proyecto 
+// Fecha: 2023/03/21
+// Autor: Jess M. Hernndez Mangas
+// Asignatura: Ingeniera de Sistemas Electrnicos
+// File: NT35510.c Rutinas para manejar el controlador del TFT
+// =======================================================================
+#include <string.h>
+#include "system.h"
+int LENX, LENY;
+// ---------------------------------------------------
+inline void NT35510_Cmd( unsigned short cmd)
+{
+ //RS_OFF; // Comando
+ FIOCLR = (0xFFFF <<NT35510_DT) | NT35510_RS;
+ FIOSET = (cmd    <<NT35510_DT);
+ WR_OFF;
+
+ WR_ON;
+}
+// ---------------------------------------------------
+//inline
+void NT35510_Data( unsigned short data)
+{
+ //RS_ON; // Data
+ FIOCLR = (0xFFFF<<NT35510_DT);
+ FIOSET = (data  <<NT35510_DT) | NT35510_RS;
+ WR_OFF;
+
+ WR_ON; 
+}
+
+// ---------------------------------------------------
+//inline 
+void NT35510_Data_( unsigned short data)
+{// Faster version
+ //RS_ON; // Data
+ FIOCLR = (0xFFFF<<NT35510_DT);
+ FIOSET = (data  <<NT35510_DT);
+ WR_OFF;
+
+ WR_ON;
+}
+// ---------------------------------------------------
+void NT35510_Reg( unsigned short cmd, unsigned short data)
+{
+ RS_OFF; // Comando
+ FIOCLR = (0xFFFF <<NT35510_DT);
+ FIOSET = (cmd    <<NT35510_DT);
+ WR_OFF;
+
+ WR_ON;
+ RS_ON; // Data
+ FIOCLR = (0xFFFF<<NT35510_DT);
+ FIOSET = (data  <<NT35510_DT);
+ WR_OFF;
+
+ WR_ON; 
+}
+
+// ---------------------------------------------------
+inline void TFT_SetArea(int x0, int y0, int x1, int y1 )
+{
+ NT35510_Cmd( CMD_SET_COLUMN  );  NT35510_Data(  x0>>8 ); // Start Column High byte
+ NT35510_Cmd( CMD_SET_COLUMN+1);  NT35510_Data(  x0    ); // Start Column Low  byte
+ NT35510_Cmd( CMD_SET_COLUMN+2);  NT35510_Data(  x1>>8 ); // End   Column High byte
+ NT35510_Cmd( CMD_SET_COLUMN+3);  NT35510_Data(  x1    ); // End   Column Low  byte
+ NT35510_Cmd( CMD_SET_PAGE   );   NT35510_Data( y0>>8 ); // Start Row    High byte
+ NT35510_Cmd( CMD_SET_PAGE+1 );   NT35510_Data( y0    ); // Start Row    Low  byte
+ NT35510_Cmd( CMD_SET_PAGE+2 );   NT35510_Data( y1>>8 ); // End   Row    High byte
+ NT35510_Cmd( CMD_SET_PAGE+3 );   NT35510_Data( y1    ); // End   Row    Low  byte
+ NT35510_Cmd( CMD_WR_MEMSTART );
+}
+// ---------------------------------------------------
+inline void TFT_SetAreaR(int x0, int y0, int x1, int y1 )
+{
+ NT35510_Cmd( CMD_SET_COLUMN  );  NT35510_Data(  x0>>8 ); // Start Column High byte
+ NT35510_Cmd( CMD_SET_COLUMN+1);  NT35510_Data(  x0    ); // Start Column Low  byte
+ NT35510_Cmd( CMD_SET_COLUMN+2);  NT35510_Data(  x1>>8 ); // End   Column High byte
+ NT35510_Cmd( CMD_SET_COLUMN+3);  NT35510_Data(  x1    ); // End   Column Low  byte
+ NT35510_Cmd( CMD_SET_PAGE   );   NT35510_Data( y0>>8 ); // Start Row    High byte
+ NT35510_Cmd( CMD_SET_PAGE+1 );   NT35510_Data( y0    ); // Start Row    Low  byte
+ NT35510_Cmd( CMD_SET_PAGE+2 );   NT35510_Data( y1>>8 ); // End   Row    High byte
+ NT35510_Cmd( CMD_SET_PAGE+3 );   NT35510_Data( y1    ); // End   Row    Low  byte
+ NT35510_Cmd( CMD_RD_MEMSTART );
+}
+// ---------------------------------------------------
+inline unsigned short NT35510_ReadCMD( unsigned short cmd )
+{
+ unsigned short data;
+ CS_OFF;
+ RS_OFF; // CMD
+ FIOCLR = (0xFFFF << NT35510_DT);
+ FIOSET = (cmd    << NT35510_DT);
+ WR_OFF;
+   asm("nop");
+ WR_ON;
+
+ RS_ON; // DATA
+ DT_INPUT;
+ _delay_us(10);
+ RD_OFF;
+   asm("nop");
+   data = (FIOPIN >> NT35510_DT) & 0xFFFF;
+ RD_ON;
+
+ DT_OUTPUT;
+ CS_ON;
+ return data;
+}
+// ---------------------------------------------------
+void TFT_Init()
+{
+ FIODIR = FIODIR | NT35510_CS | NT35510_RS | NT35510_WR | NT35510_RD |
+	 (0xFFFF << NT35510_DT);
+ CS_OFF;
+ 
+ //************* NT35510**********//	
+ NT35510_Reg(0xF000, 0x55);  //#Enable Page1
+ NT35510_Reg(0xF001, 0xAA);
+ NT35510_Reg(0xF002, 0x52);
+ NT35510_Reg(0xF003, 0x08);
+ NT35510_Reg(0xF004, 0x01);
+ //# AVDD: manual
+ NT35510_Reg(0xB600, 0x34);
+ NT35510_Reg(0xB601, 0x34);
+ NT35510_Reg(0xB602, 0x34);
+ 
+ NT35510_Reg(0xB000, 0x0D);//09
+ NT35510_Reg(0xB001, 0x0D);
+ NT35510_Reg(0xB002, 0x0D);
+ //# AVEE: manual -6V
+ NT35510_Reg(0xB700, 0x24);
+ NT35510_Reg(0xB701, 0x24);
+ NT35510_Reg(0xB702, 0x24);
+                    
+ NT35510_Reg(0xB100, 0x0D);
+ NT35510_Reg(0xB101, 0x0D);
+ NT35510_Reg(0xB102, 0x0D);
+ //#Power Control for
+ //VCL
+ NT35510_Reg(0xB800, 0x24);
+ NT35510_Reg(0xB801, 0x24);
+ NT35510_Reg(0xB802, 0x24);
+                   
+ NT35510_Reg(0xB200, 0x00);
+ 
+ //# VGH: Clamp Enable
+ NT35510_Reg(0xB900, 0x24);
+ NT35510_Reg(0xB901, 0x24);
+ NT35510_Reg(0xB902, 0x24);
+                   
+ NT35510_Reg(0xB300, 0x05);
+ NT35510_Reg(0xB301, 0x05);
+ NT35510_Reg(0xB302, 0x05);
+ 
+ ///NT35510_Reg(0xBF00, 0x01);
+ 
+ //# VGL(LVGL):
+ NT35510_Reg(0xBA00, 0x34);
+ NT35510_Reg(0xBA01, 0x34);
+ NT35510_Reg(0xBA02, 0x34);
+ //# VGL_REG(VGLO)
+ NT35510_Reg(0xB500, 0x0B);
+ NT35510_Reg(0xB501, 0x0B);
+ NT35510_Reg(0xB502, 0x0B);
+ //# VGMP/VGSP:
+ NT35510_Reg(0xBC00, 0X00);
+ NT35510_Reg(0xBC01, 0xA3);
+ NT35510_Reg(0xBC02, 0X00);
+ //# VGMN/VGSN
+ NT35510_Reg(0xBD00, 0x00);
+ NT35510_Reg(0xBD01, 0xA3);
+ NT35510_Reg(0xBD02, 0x00);
+ //# VCOM=-0.1
+ NT35510_Reg(0xBE00, 0x00);
+ NT35510_Reg(0xBE01, 0x63);//4f
+ //  VCOMH+0x01;
+ //#R+
+ NT35510_Reg(0xD100, 0x00);
+ NT35510_Reg(0xD101, 0x37);
+ NT35510_Reg(0xD102, 0x00);
+ NT35510_Reg(0xD103, 0x52);
+ NT35510_Reg(0xD104, 0x00);
+ NT35510_Reg(0xD105, 0x7B);
+ NT35510_Reg(0xD106, 0x00);
+ NT35510_Reg(0xD107, 0x99);
+ NT35510_Reg(0xD108, 0x00);
+ NT35510_Reg(0xD109, 0xB1);
+ NT35510_Reg(0xD10A, 0x00);
+ NT35510_Reg(0xD10B, 0xD2);
+ NT35510_Reg(0xD10C, 0x00);
+ NT35510_Reg(0xD10D, 0xF6);
+ NT35510_Reg(0xD10E, 0x01);
+ NT35510_Reg(0xD10F, 0x27);
+ NT35510_Reg(0xD110, 0x01);
+ NT35510_Reg(0xD111, 0x4E);
+ NT35510_Reg(0xD112, 0x01);
+ NT35510_Reg(0xD113, 0x8C);
+ NT35510_Reg(0xD114, 0x01);
+ NT35510_Reg(0xD115, 0xBE);
+ NT35510_Reg(0xD116, 0x02);
+ NT35510_Reg(0xD117, 0x0B);
+ NT35510_Reg(0xD118, 0x02);
+ NT35510_Reg(0xD119, 0x48);
+ NT35510_Reg(0xD11A, 0x02);
+ NT35510_Reg(0xD11B, 0x4A);
+ NT35510_Reg(0xD11C, 0x02);
+ NT35510_Reg(0xD11D, 0x7E);
+ NT35510_Reg(0xD11E, 0x02);
+ NT35510_Reg(0xD11F, 0xBC);
+ NT35510_Reg(0xD120, 0x02);
+ NT35510_Reg(0xD121, 0xE1);
+ NT35510_Reg(0xD122, 0x03);
+ NT35510_Reg(0xD123, 0x10);
+ NT35510_Reg(0xD124, 0x03);
+ NT35510_Reg(0xD125, 0x31);
+ NT35510_Reg(0xD126, 0x03);
+ NT35510_Reg(0xD127, 0x5A);
+ NT35510_Reg(0xD128, 0x03);
+ NT35510_Reg(0xD129, 0x73);
+ NT35510_Reg(0xD12A, 0x03);
+ NT35510_Reg(0xD12B, 0x94);
+ NT35510_Reg(0xD12C, 0x03);
+ NT35510_Reg(0xD12D, 0x9F);
+ NT35510_Reg(0xD12E, 0x03);
+ NT35510_Reg(0xD12F, 0xB3);
+ NT35510_Reg(0xD130, 0x03);
+ NT35510_Reg(0xD131, 0xB9);
+ NT35510_Reg(0xD132, 0x03);
+ NT35510_Reg(0xD133, 0xC1);
+ //#G+   
+ NT35510_Reg(0xD200, 0x00);
+ NT35510_Reg(0xD201, 0x37);
+ NT35510_Reg(0xD202, 0x00);
+ NT35510_Reg(0xD203, 0x52);
+ NT35510_Reg(0xD204, 0x00);
+ NT35510_Reg(0xD205, 0x7B);
+ NT35510_Reg(0xD206, 0x00);
+ NT35510_Reg(0xD207, 0x99);
+ NT35510_Reg(0xD208, 0x00);
+ NT35510_Reg(0xD209, 0xB1);
+ NT35510_Reg(0xD20A, 0x00);
+ NT35510_Reg(0xD20B, 0xD2);
+ NT35510_Reg(0xD20C, 0x00);
+ NT35510_Reg(0xD20D, 0xF6);
+ NT35510_Reg(0xD20E, 0x01);
+ NT35510_Reg(0xD20F, 0x27);
+ NT35510_Reg(0xD210, 0x01);
+ NT35510_Reg(0xD211, 0x4E);
+ NT35510_Reg(0xD212, 0x01);
+ NT35510_Reg(0xD213, 0x8C);
+ NT35510_Reg(0xD214, 0x01);
+ NT35510_Reg(0xD215, 0xBE);
+ NT35510_Reg(0xD216, 0x02);
+ NT35510_Reg(0xD217, 0x0B);
+ NT35510_Reg(0xD218, 0x02);
+ NT35510_Reg(0xD219, 0x48);
+ NT35510_Reg(0xD21A, 0x02);
+ NT35510_Reg(0xD21B, 0x4A);
+ NT35510_Reg(0xD21C, 0x02);
+ NT35510_Reg(0xD21D, 0x7E);
+ NT35510_Reg(0xD21E, 0x02);
+ NT35510_Reg(0xD21F, 0xBC);
+ NT35510_Reg(0xD220, 0x02);
+ NT35510_Reg(0xD221, 0xE1);
+ NT35510_Reg(0xD222, 0x03);
+ NT35510_Reg(0xD223, 0x10);
+ NT35510_Reg(0xD224, 0x03);
+ NT35510_Reg(0xD225, 0x31);
+ NT35510_Reg(0xD226, 0x03);
+ NT35510_Reg(0xD227, 0x5A);
+ NT35510_Reg(0xD228, 0x03);
+ NT35510_Reg(0xD229, 0x73);
+ NT35510_Reg(0xD22A, 0x03);
+ NT35510_Reg(0xD22B, 0x94);
+ NT35510_Reg(0xD22C, 0x03);
+ NT35510_Reg(0xD22D, 0x9F);
+ NT35510_Reg(0xD22E, 0x03);
+ NT35510_Reg(0xD22F, 0xB3);
+ NT35510_Reg(0xD230, 0x03);
+ NT35510_Reg(0xD231, 0xB9);
+ NT35510_Reg(0xD232, 0x03);
+ NT35510_Reg(0xD233, 0xC1);
+ //#B+   
+ NT35510_Reg(0xD300, 0x00);
+ NT35510_Reg(0xD301, 0x37);
+ NT35510_Reg(0xD302, 0x00);
+ NT35510_Reg(0xD303, 0x52);
+ NT35510_Reg(0xD304, 0x00);
+ NT35510_Reg(0xD305, 0x7B);
+ NT35510_Reg(0xD306, 0x00);
+ NT35510_Reg(0xD307, 0x99);
+ NT35510_Reg(0xD308, 0x00);
+ NT35510_Reg(0xD309, 0xB1);
+ NT35510_Reg(0xD30A, 0x00);
+ NT35510_Reg(0xD30B, 0xD2);
+ NT35510_Reg(0xD30C, 0x00);
+ NT35510_Reg(0xD30D, 0xF6);
+ NT35510_Reg(0xD30E, 0x01);
+ NT35510_Reg(0xD30F, 0x27);
+ NT35510_Reg(0xD310, 0x01);
+ NT35510_Reg(0xD311, 0x4E);
+ NT35510_Reg(0xD312, 0x01);
+ NT35510_Reg(0xD313, 0x8C);
+ NT35510_Reg(0xD314, 0x01);
+ NT35510_Reg(0xD315, 0xBE);
+ NT35510_Reg(0xD316, 0x02);
+ NT35510_Reg(0xD317, 0x0B);
+ NT35510_Reg(0xD318, 0x02);
+ NT35510_Reg(0xD319, 0x48);
+ NT35510_Reg(0xD31A, 0x02);
+ NT35510_Reg(0xD31B, 0x4A);
+ NT35510_Reg(0xD31C, 0x02);
+ NT35510_Reg(0xD31D, 0x7E);
+ NT35510_Reg(0xD31E, 0x02);
+ NT35510_Reg(0xD31F, 0xBC);
+ NT35510_Reg(0xD320, 0x02);
+ NT35510_Reg(0xD321, 0xE1);
+ NT35510_Reg(0xD322, 0x03);
+ NT35510_Reg(0xD323, 0x10);
+ NT35510_Reg(0xD324, 0x03);
+ NT35510_Reg(0xD325, 0x31);
+ NT35510_Reg(0xD326, 0x03);
+ NT35510_Reg(0xD327, 0x5A);
+ NT35510_Reg(0xD328, 0x03);
+ NT35510_Reg(0xD329, 0x73);
+ NT35510_Reg(0xD32A, 0x03);
+ NT35510_Reg(0xD32B, 0x94);
+ NT35510_Reg(0xD32C, 0x03);
+ NT35510_Reg(0xD32D, 0x9F);
+ NT35510_Reg(0xD32E, 0x03);
+ NT35510_Reg(0xD32F, 0xB3);
+ NT35510_Reg(0xD330, 0x03);
+ NT35510_Reg(0xD331, 0xB9);
+ NT35510_Reg(0xD332, 0x03);
+ NT35510_Reg(0xD333, 0xC1);
+ 
+ //#R-///////////////////////////////////////////
+ NT35510_Reg(0xD400, 0x00);
+ NT35510_Reg(0xD401, 0x37);
+ NT35510_Reg(0xD402, 0x00);
+ NT35510_Reg(0xD403, 0x52);
+ NT35510_Reg(0xD404, 0x00);
+ NT35510_Reg(0xD405, 0x7B);
+ NT35510_Reg(0xD406, 0x00);
+ NT35510_Reg(0xD407, 0x99);
+ NT35510_Reg(0xD408, 0x00);
+ NT35510_Reg(0xD409, 0xB1);
+ NT35510_Reg(0xD40A, 0x00);
+ NT35510_Reg(0xD40B, 0xD2);
+ NT35510_Reg(0xD40C, 0x00);
+ NT35510_Reg(0xD40D, 0xF6);
+ NT35510_Reg(0xD40E, 0x01);
+ NT35510_Reg(0xD40F, 0x27);
+ NT35510_Reg(0xD410, 0x01);
+ NT35510_Reg(0xD411, 0x4E);
+ NT35510_Reg(0xD412, 0x01);
+ NT35510_Reg(0xD413, 0x8C);
+ NT35510_Reg(0xD414, 0x01);
+ NT35510_Reg(0xD415, 0xBE);
+ NT35510_Reg(0xD416, 0x02);
+ NT35510_Reg(0xD417, 0x0B);
+ NT35510_Reg(0xD418, 0x02);
+ NT35510_Reg(0xD419, 0x48);
+ NT35510_Reg(0xD41A, 0x02);
+ NT35510_Reg(0xD41B, 0x4A);
+ NT35510_Reg(0xD41C, 0x02);
+ NT35510_Reg(0xD41D, 0x7E);
+ NT35510_Reg(0xD41E, 0x02);
+ NT35510_Reg(0xD41F, 0xBC);
+ NT35510_Reg(0xD420, 0x02);
+ NT35510_Reg(0xD421, 0xE1);
+ NT35510_Reg(0xD422, 0x03);
+ NT35510_Reg(0xD423, 0x10);
+ NT35510_Reg(0xD424, 0x03);
+ NT35510_Reg(0xD425, 0x31);
+ NT35510_Reg(0xD426, 0x03);
+ NT35510_Reg(0xD427, 0x5A);
+ NT35510_Reg(0xD428, 0x03);
+ NT35510_Reg(0xD429, 0x73);
+ NT35510_Reg(0xD42A, 0x03);
+ NT35510_Reg(0xD42B, 0x94);
+ NT35510_Reg(0xD42C, 0x03);
+ NT35510_Reg(0xD42D, 0x9F);
+ NT35510_Reg(0xD42E, 0x03);
+ NT35510_Reg(0xD42F, 0xB3);
+ NT35510_Reg(0xD430, 0x03);
+ NT35510_Reg(0xD431, 0xB9);
+ NT35510_Reg(0xD432, 0x03);
+ NT35510_Reg(0xD433, 0xC1);
+ 
+ //#G-//////////////////////////////////////////////
+ NT35510_Reg(0xD500, 0x00);
+ NT35510_Reg(0xD501, 0x37);
+ NT35510_Reg(0xD502, 0x00);
+ NT35510_Reg(0xD503, 0x52);
+ NT35510_Reg(0xD504, 0x00);
+ NT35510_Reg(0xD505, 0x7B);
+ NT35510_Reg(0xD506, 0x00);
+ NT35510_Reg(0xD507, 0x99);
+ NT35510_Reg(0xD508, 0x00);
+ NT35510_Reg(0xD509, 0xB1);
+ NT35510_Reg(0xD50A, 0x00);
+ NT35510_Reg(0xD50B, 0xD2);
+ NT35510_Reg(0xD50C, 0x00);
+ NT35510_Reg(0xD50D, 0xF6);
+ NT35510_Reg(0xD50E, 0x01);
+ NT35510_Reg(0xD50F, 0x27);
+ NT35510_Reg(0xD510, 0x01);
+ NT35510_Reg(0xD511, 0x4E);
+ NT35510_Reg(0xD512, 0x01);
+ NT35510_Reg(0xD513, 0x8C);
+ NT35510_Reg(0xD514, 0x01);
+ NT35510_Reg(0xD515, 0xBE);
+ NT35510_Reg(0xD516, 0x02);
+ NT35510_Reg(0xD517, 0x0B);
+ NT35510_Reg(0xD518, 0x02);
+ NT35510_Reg(0xD519, 0x48);
+ NT35510_Reg(0xD51A, 0x02);
+ NT35510_Reg(0xD51B, 0x4A);
+ NT35510_Reg(0xD51C, 0x02);
+ NT35510_Reg(0xD51D, 0x7E);
+ NT35510_Reg(0xD51E, 0x02);
+ NT35510_Reg(0xD51F, 0xBC);
+ NT35510_Reg(0xD520, 0x02);
+ NT35510_Reg(0xD521, 0xE1);
+ NT35510_Reg(0xD522, 0x03);
+ NT35510_Reg(0xD523, 0x10);
+ NT35510_Reg(0xD524, 0x03);
+ NT35510_Reg(0xD525, 0x31);
+ NT35510_Reg(0xD526, 0x03);
+ NT35510_Reg(0xD527, 0x5A);
+ NT35510_Reg(0xD528, 0x03);
+ NT35510_Reg(0xD529, 0x73);
+ NT35510_Reg(0xD52A, 0x03);
+ NT35510_Reg(0xD52B, 0x94);
+ NT35510_Reg(0xD52C, 0x03);
+ NT35510_Reg(0xD52D, 0x9F);
+ NT35510_Reg(0xD52E, 0x03);
+ NT35510_Reg(0xD52F, 0xB3);
+ NT35510_Reg(0xD530, 0x03);
+ NT35510_Reg(0xD531, 0xB9);
+ NT35510_Reg(0xD532, 0x03);
+ NT35510_Reg(0xD533, 0xC1);
+ //#B-///////////////////////////////
+ NT35510_Reg(0xD600, 0x00);
+ NT35510_Reg(0xD601, 0x37);
+ NT35510_Reg(0xD602, 0x00);
+ NT35510_Reg(0xD603, 0x52);
+ NT35510_Reg(0xD604, 0x00);
+ NT35510_Reg(0xD605, 0x7B);
+ NT35510_Reg(0xD606, 0x00);
+ NT35510_Reg(0xD607, 0x99);
+ NT35510_Reg(0xD608, 0x00);
+ NT35510_Reg(0xD609, 0xB1);
+ NT35510_Reg(0xD60A, 0x00);
+ NT35510_Reg(0xD60B, 0xD2);
+ NT35510_Reg(0xD60C, 0x00);
+ NT35510_Reg(0xD60D, 0xF6);
+ NT35510_Reg(0xD60E, 0x01);
+ NT35510_Reg(0xD60F, 0x27);
+ NT35510_Reg(0xD610, 0x01);
+ NT35510_Reg(0xD611, 0x4E);
+ NT35510_Reg(0xD612, 0x01);
+ NT35510_Reg(0xD613, 0x8C);
+ NT35510_Reg(0xD614, 0x01);
+ NT35510_Reg(0xD615, 0xBE);
+ NT35510_Reg(0xD616, 0x02);
+ NT35510_Reg(0xD617, 0x0B);
+ NT35510_Reg(0xD618, 0x02);
+ NT35510_Reg(0xD619, 0x48);
+ NT35510_Reg(0xD61A, 0x02);
+ NT35510_Reg(0xD61B, 0x4A);
+ NT35510_Reg(0xD61C, 0x02);
+ NT35510_Reg(0xD61D, 0x7E);
+ NT35510_Reg(0xD61E, 0x02);
+ NT35510_Reg(0xD61F, 0xBC);
+ NT35510_Reg(0xD620, 0x02);
+ NT35510_Reg(0xD621, 0xE1);
+ NT35510_Reg(0xD622, 0x03);
+ NT35510_Reg(0xD623, 0x10);
+ NT35510_Reg(0xD624, 0x03);
+ NT35510_Reg(0xD625, 0x31);
+ NT35510_Reg(0xD626, 0x03);
+ NT35510_Reg(0xD627, 0x5A);
+ NT35510_Reg(0xD628, 0x03);
+ NT35510_Reg(0xD629, 0x73);
+ NT35510_Reg(0xD62A, 0x03);
+ NT35510_Reg(0xD62B, 0x94);
+ NT35510_Reg(0xD62C, 0x03);
+ NT35510_Reg(0xD62D, 0x9F);
+ NT35510_Reg(0xD62E, 0x03);
+ NT35510_Reg(0xD62F, 0xB3);
+ NT35510_Reg(0xD630, 0x03);
+ NT35510_Reg(0xD631, 0xB9);
+ NT35510_Reg(0xD632, 0x03);
+ NT35510_Reg(0xD633, 0xC1);
+ 
+ //#Enable Page0
+ NT35510_Reg(0xF000, 0x55); // Enable access CMD2 (CMD_ENA1)
+ NT35510_Reg(0xF001, 0xAA);
+ NT35510_Reg(0xF002, 0x52);
+ NT35510_Reg(0xF003, 0x08);
+ NT35510_Reg(0xF004, 0x00);
+ //# RGB I/F Setting
+ NT35510_Reg(0xB000, 0x08); 
+ NT35510_Reg(0xB001, 0x05);
+ NT35510_Reg(0xB002, 0x02);
+ NT35510_Reg(0xB003, 0x05);
+ NT35510_Reg(0xB004, 0x02);
+ //## SDT:
+ NT35510_Reg(0xB600, 0x08);
+ NT35510_Reg(0xB500, 0x50);//0x6b resolution 480x854, 0x50 resolution 480x800
+ 
+ //## Gate EQ:
+ NT35510_Reg(0xB700, 0x00);
+ NT35510_Reg(0xB701, 0x00);
+ 
+ //## Source EQ:
+ NT35510_Reg(0xB800, 0x01);
+ NT35510_Reg(0xB801, 0x05);
+ NT35510_Reg(0xB802, 0x05);
+ NT35510_Reg(0xB803, 0x05);
+ 
+ //# Inversion: Column inversion (NVT)
+ NT35510_Reg(0xBC00, 0x00);
+ NT35510_Reg(0xBC01, 0x00);
+ NT35510_Reg(0xBC02, 0x00);
+ 
+ //# BOE's Setting(default)
+ NT35510_Reg(0xCC00, 0x03);
+ NT35510_Reg(0xCC01, 0x00);
+ NT35510_Reg(0xCC02, 0x00);
+ 
+ //# Display Timing:
+ NT35510_Reg(0xBD00, 0x01); // ??
+ NT35510_Reg(0xBD01, 0x84);
+ NT35510_Reg(0xBD02, 0x07);
+ NT35510_Reg(0xBD03, 0x31);
+ NT35510_Reg(0xBD04, 0x00);
+ 
+ NT35510_Reg(0xBA00, 0x01);
+ 
+ NT35510_Reg(0xFF00, 0xAA); // Enable access CMD2 (CMD_ENA1)
+ NT35510_Reg(0xFF01, 0x55);
+ NT35510_Reg(0xFF02, 0x25);
+ NT35510_Reg(0xFF03, 0x01);
+ 
+ NT35510_Reg(0x3500, 0x00); // Tearing effect mode off
+ NT35510_Reg(0x3a00, 0x55); // Interface pixel format (0x55, 16bit) (0x66, 18bit)
+ NT35510_Cmd(0x1100); // Sleep out and booster on
+ _delay_ms(120); 
+ NT35510_Cmd(0x2900 ); // Display ON
+ int direction = 3; // To match our console orientation
+ int LCD_W = 480;
+ int LCD_H = 800;
+ switch(direction)
+ {// Memory Data Access Control 0x3600
+  case 0: LENX = LCD_W; LENY = LCD_H; NT35510_Reg(0x3600,          0x00);	break;
+  case 1: LENX = LCD_H; LENY = LCD_W; NT35510_Reg(0x3600, (1<<5)|(1<<6));	break;
+  case 2: LENX = LCD_W; LENY = LCD_H; NT35510_Reg(0x3600, (1<<7)|(1<<6));	break;
+  case 3: LENX = LCD_H; LENY = LCD_W; NT35510_Reg(0x3600, (1<<7)|(1<<5));	break;
+ }	
+/*
+ unsigned short val;
+ NT35510_Reg(0xF000, 0x55); // Enable access CMD2 (CMD_ENA1)  //#Enable Page1
+ NT35510_Reg(0xF001, 0xAA);
+ NT35510_Reg(0xF002, 0x52);
+ NT35510_Reg(0xF003, 0x08);
+ NT35510_Reg(0xF004, 0x01);
+ val  = NT35510_ReadCMD(0xC500)<<8;
+ val |= NT35510_ReadCMD(0xC501);
+ _printf("TFT ID = 0x%04x\n", val);
+*/
+ CS_ON;
+}
+// ---------------------------------------------------
+unsigned short FG_Color = 0xFFFF;
+unsigned short BG_Color = 0x0000;
+// ---------------------------------------------------
+void TFT_FillArea(unsigned short x0, unsigned short y0,
+		       unsigned short x1, unsigned short y1 )
+{int i;
+ CS_OFF;
+ TFT_SetArea( x0, y0, x1, y1 );
+ for(i=0;i<(x1-x0+1)*(y1-y0+1);i++) NT35510_Data(FG_Color);
+ CS_ON;
+}
+// ---------------------------------------------------
+inline void TFT_PutPixel(int x0, int y0)
+{    
+ //if(x0<0) return;
+ if(x0<0 || x0>LENX-1 || y0<0 || y0>LENY-1) return;
+ CS_OFF;
+ //TFT_SetArea(x0, y0, LENX-1, LENY-1 );
+ //TFT_SetArea(x0, y0, x0+1, y0+1);
+ 
+ NT35510_Cmd( CMD_SET_COLUMN  );  NT35510_Data(  x0>>8 ); // Start Column High byte
+ NT35510_Cmd( CMD_SET_COLUMN+1);  NT35510_Data(  x0    ); // Start Column Low  byte
+// NT35510_Cmd( CMD_SET_COLUMN+2);  NT35510_Data(  (x0+1)>>8 ); // End   Column High byte
+// NT35510_Cmd( CMD_SET_COLUMN+3);  NT35510_Data(  x0+1    ); // End   Column Low  byte
+ NT35510_Cmd( CMD_SET_PAGE   );   NT35510_Data( y0>>8 ); // Start Row    High byte
+ NT35510_Cmd( CMD_SET_PAGE+1 );   NT35510_Data( y0    ); // Start Row    Low  byte
+// NT35510_Cmd( CMD_SET_PAGE+2 );   NT35510_Data( (y0+1)>>8 ); // End   Row    High byte
+// NT35510_Cmd( CMD_SET_PAGE+3 );   NT35510_Data( y0+1    ); // End   Row    Low  byte
+ NT35510_Cmd( CMD_WR_MEMSTART );
+ 
+ NT35510_Data(FG_Color);
+ CS_ON;
+}
+// ---------------------------------------------------
+inline void TFT_PutPixelColor(unsigned short x0, unsigned short y0, unsigned short color)
+{
+ //if(x0<0) return;
+ if(x0<0 || x0>LENX-1 || y0<0 || y0>LENY-1) return;
+ CS_OFF;
+ //TFT_SetArea(x0, y0, LENX-1, LENY-1 );
+ //TFT_SetArea(x0, y0, x0+1, y0+1);
+ 
+ NT35510_Cmd( CMD_SET_COLUMN  );  NT35510_Data(  x0>>8 ); // Start Column High byte
+ NT35510_Cmd( CMD_SET_COLUMN+1);  NT35510_Data(  x0    ); // Start Column Low  byte
+// NT35510_Cmd( CMD_SET_COLUMN+2);  NT35510_Data(  (x0+1)>>8 ); // End   Column High byte
+// NT35510_Cmd( CMD_SET_COLUMN+3);  NT35510_Data(  x0+1    ); // End   Column Low  byte
+ NT35510_Cmd( CMD_SET_PAGE   );   NT35510_Data( y0>>8 ); // Start Row    High byte
+ NT35510_Cmd( CMD_SET_PAGE+1 );   NT35510_Data( y0    ); // Start Row    Low  byte
+// NT35510_Cmd( CMD_SET_PAGE+2 );   NT35510_Data( (y0+1)>>8 ); // End   Row    High byte
+// NT35510_Cmd( CMD_SET_PAGE+3 );   NT35510_Data( y0+1    ); // End   Row    Low  byte
+ NT35510_Cmd( CMD_WR_MEMSTART );
+ 
+ NT35510_Data(color);
+ CS_ON;
+}
+// ---------------------------------------------------
+void TFT_DrawLine(int x1, int y1, int x2, int y2, int color)
+{ // Bresenham's algorithm
+ unsigned int	dx = (x2 > x1 ? x2 - x1 : x1 - x2);
+ short			xstep =  x2 > x1 ? 1 : -1;
+ unsigned int	dy = (y2 > y1 ? y2 - y1 : y1 - y2);
+ short			ystep =  y2 > y1 ? 1 : -1;
+ int			col = x1, row = y1;
+
+ FG_Color = color;
+ if (dx < dy)
+ {
+  int t = - (dy >> 1);
+  while(1)
+  {
+
+   TFT_PutPixel(col,row);
+   if (row == y2) return;
+   row += ystep;
+   t += dx;
+   if (t >= 0){ col += xstep; t -= dy; }
+  }
+ }
+ else
+ {
+  int t = - (dx >> 1);
+  while(1)
+  {
+   TFT_PutPixel(col,row);
+   if (col == x2) return;
+   col += xstep;
+   t += dy;
+   if (t >= 0){	row += ystep; t -= dx; }
+  }
+ }
+}
+//------------------------------------------------------------------
+void TFT_HorizontalLine(int x1, int x2, int y, int color)
+{
+ int i, n;
+ if(y>LENY-1) return;
+ CS_OFF;
+ TFT_SetArea( x1, y, x2-1, y );
+ RS_ON;
+ if(x1<x2) n = (x2-x1); else n = (x1-x2);
+ for(i=0;i<n;i++) NT35510_Data_(color);
+ CS_ON;
+}
+//------------------------------------------------------------------
+void TFT_VerticalLine(int x, int y1, int y2, int color)
+{
+ int i, n;
+ CS_OFF;
+ TFT_SetArea( x, y1, x, y2-1 );
+ RS_ON;
+ if(y1<y2) n = (y2-y1); else n = (y1-y2);
+ for(i=0;i<n;i++) NT35510_Data_(color);
+ CS_ON;
+}
+//------------------------------------------------------------------
+void TFT_DrawSquare(int x1, int y1, int x2, int y2, int color)
+{
+ TFT_DrawLine(x1,y1,x1,y2,color);
+ TFT_DrawLine(x1,y2,x2,y2,color);
+ TFT_DrawLine(x2,y2,x2,y1,color);
+ TFT_DrawLine(x2,y1,x1,y1,color);
+}
+// -----------------------------------------------------------------------
+void TFT_DrawCircle(int x, int y, int radius, int color)
+{ // Bresenham's algorithm
+ int f = 1 - radius;
+ int ddF_x = 1;
+ int ddF_y = -2 * radius;
+ int x1 = 0;
+ int y1 = radius;
+
+ FG_Color = color;
+ TFT_PutPixel(x, y+radius);
+ TFT_PutPixel(x, y-radius);
+ TFT_PutPixel(x+radius, y);
+ TFT_PutPixel(x-radius, y);
+ while(x1 < y1)
+ {
+  if(f >= 0)
+  {
+	y1--;
+	ddF_y += 2;
+	f += ddF_y;
+  }
+  x1++;
+  ddF_x += 2;
+  f += ddF_x;
+
+  TFT_PutPixel(x+x1, y+y1);
+  TFT_PutPixel(x-x1, y+y1);
+  TFT_PutPixel(x+x1, y-y1);
+  TFT_PutPixel(x-x1, y-y1);
+
+  TFT_PutPixel(x+y1, y+x1);
+  TFT_PutPixel(x-y1, y+x1);
+  TFT_PutPixel(x+y1, y-x1);
+  TFT_PutPixel(x-y1, y-x1);
+ }
+}
+// -----------------------------------------------------------------------
+void TFT_FillCircle(int x, int y, int radius, int color)
+{
+ int y1,x1;
+
+ for(y1=-radius; y1<=0; y1++)
+	for(x1=-radius; x1<=0; x1++)
+		if(x1*x1+y1*y1 <= radius*radius)
+		{
+			TFT_HorizontalLine(x+x1, x-x1, y+y1, color);
+			TFT_HorizontalLine(x+x1, x-x1, y-y1, color);
+			break;
+		}
+}
+// -----------------------------------------------------------------------
+void TFT_DrawFillSquare(int x1, int y1, int x2, int y2, int color)
+{
+ int i,n;
+ CS_OFF;
+ TFT_SetArea( x1, y1, x2, y2 );
+ RS_ON;
+ n = (x2-x1+1)*(y2-y1+1);
+ for(i=0;i<n;i++) NT35510_Data_(color);
+ CS_ON;
+}
+// -----------------------------------------------------------------------
+void TFT_DrawFillSquareS(int x1, int y1, int sx, int sy, int color)
+{
+ int i,n;
+ CS_OFF;
+ TFT_SetArea( x1, y1, x1+sx-1, y1+sy-1 );
+ RS_ON;
+ n = (sx)*(sy);
+ for(i=0;i<n;i++) NT35510_Data_(color);
+ CS_ON;
+}
+// -----------------------------------------------------------------------
+struct _current_font *CF = (struct _current_font*) BigFont;
+// -----------------------------------------------------------------------
+void TFT_DumpBinaryFont()
+{
+ int i, j, k, b, d;	
+ _printf("//------- \n");
+ _printf("const unsigned char Font[] ={\n");
+ _printf(" %d,%d, // sx, sy\n", CF->x_size, CF->y_size); 
+ _printf(" %d,    // x_step\n", CF->x_step);
+ _printf(" '%c',   // first_char\n", CF->offset);
+ _printf(" %3d,  // n_chars\n", CF->numchars);
+ for(i=0; i<CF->numchars; i++)
+ {
+  _printf("// Character %3d '%c'\n", i+CF->offset, i+CF->offset);	 
+  for(j=0;j<CF->y_size;j++)
+  {
+	//_printf(" 0b");
+	
+	for(k=0;k<CF->x_size>>3;k++)
+	{
+	 _printf(" 0b");
+	 d = CF->font[((i*CF->x_size*CF->y_size)>>3) +((j*CF->x_size)>>3) + k];
+	 for(b=0;b<8;b++)
+	 {		
+	  if(d&0x80) _printf("1");
+	  else       _printf("0");
+	  d = d << 1;
+	 }	 
+	 _printf(",");
+	}
+	_printf("\n");
+  }	  
+  
+ }
+ _printf("};\n//------- \n");
+}
+
+/*
+void TFT_putch_old(int x1, int y1, unsigned char c)
+{
+ int x, y, j, d, org, xx, yy;
+
+ //y1 = y1 + CF->y_size;
+ org = (c - CF->offset)*CF->x_size*CF->y_size>>3;
+ for(y=0;y<CF->y_size;y++)
+ {
+  yy = y1+y;
+  for(x=0;x<CF->x_size>>3;x++)
+  {
+   xx = x1 + (x<<3);
+   d = CF->font[ org + ((y*CF->x_size)>>3) + x ];
+   for(j=0;j<8;j++)
+   {
+    if( d&0x80 ) TFT_PutPixelColor( xx+j, yy, FG_Color); // Color primer plano
+    else         TFT_PutPixelColor( xx+j, yy, BG_Color); // Color fondo
+    d = (d<<1);
+   }
+  }
+ }
+}
+*/
+// -----------------------------------------------------------------------
+void TFT_putch(int x1, int y1, unsigned char c)
+{ // Faster version (now 197 ut, before 2312 ut)
+ int j, d, org, i, n;
+
+ n = CF->x_size*CF->y_size>>3;
+ org = (c - CF->offset)*n;
+CS_OFF;
+ TFT_SetArea(x1,y1,x1+CF->x_size-1,y1+CF->y_size-1);
+ RS_ON; // Data
+
+ for(i=0;i<n;i++)
+ {
+   d = CF->font[ org++ ];
+   for(j=0;j<8;j++)
+   {
+    if(d&0x80) NT35510_Data_(FG_Color);
+    else       NT35510_Data_(BG_Color);
+    d = (d<<1);
+   }
+ }
+CS_ON; 
+}
+// -----------------------------------------------------------------------
+void TFT_print(int x1, int y1, char * s)
+{
+ int i=0;
+ while(s[i]){ TFT_putch(x1+i*CF->x_step, y1,s[i]);i++;}
+}
+// -----------------------------------------------------------------------
+void TFT_print_centered_x(int y1, char * s)
+{
+ int i=0, x1;
+ x1 = LENX/2 - (strlen(s)*CF->x_step)/2;
+ while(s[i]){ TFT_putch(x1+i*CF->x_step, y1,s[i]);i++;}
+}
+// -----------------------------------------------------------------------
+int tft_x, tft_y;
+int *dir;
+
+void _sputchar(unsigned char c)
+{
+ *dir = c;
+ dir++;
+}
+
+
+void TFT_putchar(unsigned char c)
+{
+ TFT_putch(tft_x, tft_y, c);	
+ tft_x += CF->x_step;
+}
+// -----------------------------------------------------------------------
+/* // Definido en ssd1963.h MACRO variadica
+#define TFT_printf(...) \
+   tft_x = x;\
+   tft_y = y;\
+   _vputch =(void*)TFT_putchar;\
+   _printf(__VA_ARGS__);\
+   _vputch =(void*)_U0putch;
+*/
+// -----------------------------------------------------------------------
+#ifdef TFT_PRINT_xN_yN
+int yN = 2;
+int xN = 2;
+
+void TFT_putch_xNyN(int x1, int y1, unsigned char c)
+{
+ int x, y, j, d, org, xx, yy, ix, iy;
+
+ org = ((c - CF->offset)*CF->x_size*CF->y_size)>>3;
+ for(y=0,iy=0;y<(CF->y_size*yN);y+=yN,iy++)
+ {
+  yy = y1+y;
+  for(x=0,ix=0;x<(CF->x_size>>3)*xN;x+=xN,ix++)
+  {
+   xx = x1 + (x<<3);
+   d = CF->font[ org + ((iy*CF->x_size)>>3) + ix ];
+   for(j=0;j<8;j++)
+   {
+    if( d&0x80 ) 
+       TFT_DrawFillSquareS( xx+j*xN, yy, xN, yN, FG_Color); // Color primer plano
+    else
+       TFT_DrawFillSquareS( xx+j*xN, yy, xN, yN, BG_Color); // Color fondo
+    d = (d<<1);
+   }
+  }
+ }
+}
+// -----------------------------------------------------------------------
+void TFT_putchar_xNyN(unsigned char c)
+{
+ TFT_putch_xNyN(tft_x, tft_y, c);
+ tft_x += CF->x_step*xN;
+}
+// -----------------------------------------------------------------------
+void TFT_print_xNyN(int x1, int y1, char * s)
+{
+ int i=0;
+ while(s[i]){ TFT_putch_xNyN(x1+(i*CF->x_step)*xN, y1,s[i]);i++;}
+}
+// -----------------------------------------------------------------------
+int TFT_print_centered_x_xNyN(int y1, char * s)
+{
+ int i=0, x1;
+ x1 = LENX/2 - (strlen(s)*CF->x_step*xN)/2;
+ while(s[i]){ TFT_putch_xNyN(x1+(i*CF->x_step)*xN, y1,s[i]);i++;}
+ return x1;
+}
+#endif
+// -----------------------------------------------------------------------
+void TFT_Off()
+{
+CS_OFF;    
+ NT35510_Cmd( CMD_BLANK_DISPLAY ); // 0x28
+ NT35510_Cmd( CMD_SET_PWM_CONF );  // 0xBE
+   NT35510_Data( 0x01 ); // PWMF
+						 // PWM_f = 120e6/(65536*PWMF) = 1831 Hz
+   NT35510_Data( 0x00 ); // PWM duty cycle = 0 (OFF)
+   NT35510_Data( 0x01 ); // PWM enabled and controlled by host
+   NT35510_Data( 0x00 ); //
+   NT35510_Data( 0x00 ); //
+   NT35510_Data( 0x00 ); //
+ // Espero a que se desactive el PWM, si no podra quedarse en alto
+ // y encendido
+ _delay_ms(10);  
+ 
+ NT35510_Cmd( CMD_ENT_DEEP_SLEEP );  // 0xE5  , 2 dummy read exits drom deep sleep
+ _delay_ms(10);
+ CS_ON;
+}
+// -----------------------------------------------------------------------
+void TFT_On()
+{
+ TFT_Init();
+}
+// -----------------------------------------------------------------------
+// 2018/10/26 Aprovechamiento de la RAM del NT35510. Prueba de concepto
+void NT35510_WritePage(int page, unsigned short * data)
+{
+ // El tamao de los bloques es de 16 kB
+ #define NP16K ((8192/480)+1)
+ #define NLI (272)
+ int i;
+CS_OFF;
+ TFT_SetArea(0,NLI+page*NP16K, 479, NLI+(page+1)*NP16K);
+ RS_ON; // DATA
+ for(i=0;i<8192;i++) NT35510_Data_(data[i]);
+ CS_ON;
+}
+// -----------------------------------------------------------------------
+// 2018/10/26 Aprovechamiento de la RAM del NT35510. Prueba de concepto
+void NT35510_ReadPage(int page, unsigned short * data)
+{
+  // El tamao de los bloques es de 16 kB
+ int i;
+CS_OFF;
+ TFT_SetAreaR(0,NLI+page*NP16K, 479, NLI+(page+1)*NP16K);
+ RS_ON; // DATA
+ DT_INPUT;
+ _delay_us(10);
+ for(i=0;i<8192;i++)
+ {
+  RD_OFF;
+   asm("nop");
+   data[i] = (FIOPIN >> NT35510_DT);
+  RD_ON;
+ }
+ DT_OUTPUT;
+ CS_ON;
+}
+/*
+// -----------------------------------------------------------------------
+extern unsigned char ZX_RAM[48*1024];
+
+void NT35510_TestPages()
+{
+ // Prueba de concepto 2018/10/26 ===============================
+ int i;
+ int chk;
+ _delay_ms(100);
+ #define NMM (480)
+
+ _printf("Relleno y guardo ----------------\n");
+ chk =0;
+ for(i=0;i<8192;i++)
+ {
+  ((unsigned short*)ZX_RAM)[i] = i;
+  chk+=((unsigned short*)ZX_RAM)[i];
+ }
+ //for(i=0;i<10;i++) _printf("[%6d] = %3d\n",i,((unsigned short*)ZX_RAM)[i*NMM]);
+ _printf("chk=%6d\n",chk);
+ NT35510_WritePage(10,(unsigned short*) ZX_RAM);
+
+ _printf("Borro            ----------------\n");
+ for(i=0;i<8192;i++) ((unsigned short*)ZX_RAM)[i] = 0;
+ //for(i=0;i<10;i++) _printf("[%6d] = %3d\n",i,((unsigned short*)ZX_RAM)[i*NMM]);
+
+ _printf("Leo y muestro    ----------------\n");
+ NT35510_ReadPage(10,(unsigned short*) ZX_RAM);
+ chk=0;
+ for(i=0;i<8192;i++)
+ {
+  chk+=((unsigned short*)ZX_RAM)[i];
+ }
+
+ //for(i=0;i<10;i++) _printf("[%6d] = %3d\n",i,((unsigned short*)ZX_RAM)[i*NMM]);
+ _printf("chk=%6d\n",chk);
+}
+*/
+
+================================================
+File: /Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/xpt2046.h
+================================================
+// =======================================================================
+// Proyecto 
+// Fecha: 2024/03/21
+// Autor: Jess M. Hernndez Mangas
+// Asignatura: Desarrollo Prctico de Sistemas Electrnicos
+// File: xpt2046.h  Rutinas para manejar el controlador del TouchPannel
+// =======================================================================
+#ifndef __XPT2046_H__
+#define __XPT2046_H__
+void TP_Init();
+unsigned char TP_EnviaRecibe(unsigned char d);
+int TP_Get_XY(int *x, int *y);
+int TP_Get_XY_Cal(int *x, int *y);
+void TP_Calibrate();
+#endif
+
+================================================
+File: /Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/calibrate.h
+================================================
+/*
+ *   Copyright (c) 2001, Carlos E. Vidales. All rights reserved.
+ *
+ *   This sample program was written and put in the public domain 
+ *    by Carlos E. Vidales.  The program is provided "as is" 
+ *    without warranty of any kind, either expressed or implied.
+ *   If you choose to use the program within your own products
+ *    you do so at your own risk, and assume the responsibility
+ *    for servicing, repairing or correcting the program should
+ *    it prove defective in any manner.
+ *   You may copy and distribute the program's source code in any 
+ *    medium, provided that you also include in each copy an
+ *    appropriate copyright notice and disclaimer of warranty.
+ *   You may also modify this program and distribute copies of
+ *    it provided that you include prominent notices stating 
+ *    that you changed the file(s) and the date of any change,
+ *    and that you do not charge any royalties or licenses for 
+ *    its use.
+ * 
+ *   File Name:  calibrate.h
+ *
+ *   Definition of constants and structures, and declaration of functions 
+ *    in Calibrate.c
+ */
+#ifndef _CALIBRATE_H_
+#define _CALIBRATE_H_
+#include <math.h>
+#ifndef	_CALIBRATE_C_
+ #define EXTERN extern
+#else
+ #define EXTERN
+#endif
+
+#ifndef	OK
+ #define OK		        0
+ #define NOT_OK		   -1
+#endif
+
+#define	INT32 long
+
+
+typedef struct Point { INT32 x,y ;} POINT ;
+typedef struct Matrix {
+                        INT32    An,     /* A = An/Divider */
+                                 Bn,     /* B = Bn/Divider */
+                                 Cn,     /* C = Cn/Divider */
+                                 Dn,     /* D = Dn/Divider */
+                                 En,     /* E = En/Divider */
+                                 Fn,     /* F = Fn/Divider */
+                                 Divider ;
+                     } MATRIX ;
+					 
+EXTERN int setCalibrationMatrix( POINT * display,
+                                 POINT * screen,
+                                 MATRIX * matrix);
+					 
+EXTERN int getDisplayPoint( POINT * display,
+                            POINT * screen,
+                            MATRIX * matrix );
+
+
+#endif  /* _CALIBRATE_H_ */ 
+
+
+================================================
+File: /Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/audio.h
+================================================
+#ifndef _AUDIO_H_
+#define _AUDIO_H_
+// Musical note frequencies x 100. Character _ means sustained note (# sostenido)
+#define DO2     6541L
+#define DO2_    6930L
+#define RE2     7342L
+#define RE2_    7778L
+#define MI2     8241L
+#define FA2     8731L
+#define FA2_    9250L
+#define SOL2    9800L
+#define SOL2_  10383L
+#define LA2    11000L
+#define LA2_   11654L
+#define SI2    12347L
+
+#define DO3    13081L
+#define DO3_   13859L
+#define RE3    14683L
+#define RE3_   15556L
+#define MI3    16481L
+#define FA3    17461L
+#define FA3_   18500L
+#define SOL3   19600L
+#define SOL3_  20765L
+#define LA3    22000L
+#define LA3_   23308L
+#define SI3    24694L
+
+#define DO4    26163L
+#define DO4_   27718L
+#define RE4    29366L
+#define RE4_   31113L
+#define MI4    32963L
+#define FA4    34923L
+#define FA4_   36999L
+#define SOL4   39200L
+#define SOL4_  41530L
+#define LA4    44000L
+#define LA4_   46600L
+#define SI4    49388L
+
+#define DO5    52325L
+#define DO5_   55437L
+#define RE5    58733L
+#define RE5_   62225L
+#define MI5    65926L
+#define FA5    69846L
+#define FA5_   73999L
+#define SOL5   78399L
+#define SOL5_  83061L
+#define LA5    88000L
+#define LA5_   93233L
+#define SI5    98777L
+
+#define DO6   104650L
+#define DO6_  110873L
+#define RE6   117466L
+#define RE6_  124451L
+#define MI6   131851L
+#define FA6   139691L
+#define FA6_  147998L
+#define SOL6  156798L
+#define SOL6_ 166122L
+#define LA6   176000L
+#define LA6_  186466L
+#define SI6   197553L
+
+#define DO7   209300L
+#define DO7_  221746L
+#define RE7   234932L
+#define RE7_  248902L
+#define MI7   263702L
+#define FA7   279383L
+#define FA7_  295996L
+#define SOL7  313596L
+#define SOL7_ 332244L
+#define LA7   352000L
+#define LA7_  372931L
+#define SI7   395107L
+
+// ------------------------------------------------------------------------ 
+// Musical notes durations (ms)
+// 112.5 NEGRA/min from partiture -> NEGRA = 533.3 ms
+#define BLANCA      (2*NEGRA)
+#define NEGRA       (533)
+#define CORCHEA     (NEGRA/2)
+#define SEMICORCHEA (CORCHEA/2)
+#define FUSA        (SEMICORCHEA/2)
+#define SEMIFUSA    (FUSA/2)
+// ------------------------------------------------------------------------
+/*
+unsigned char PARTITURE[][4] = { 
+// Base-time on demisemiquaver (fusas) notes
+// CH1_NOTE, CH2_NOTE, CH3_NOTE, CH4_NOTE, // 	
+	G4,		0,		G6,		0,
+	G4,		0,		G6,		0,
+	0,		G5,		A6,		0,
+	0,		G5,		A6_,	0,	
+	G4,		0,		A6,		0,
+	G4,		0,		A6,		0,
+	0,		G5,		G6,		0,
+	0,		G5,		G6,		0,
+	F4,		0,		A6,		0,
+	F4,		0,		A6,		0,
+	0,		F5,		D7,		0,
+	0,		F5,		D7,		0,
+	F4,		0,		A6,		0,
+	F4,		0,		A6,		0,
+	0,		F5,		A6,		0,
+	0,		F5,		A6,		0,
+	D4_,	0,		G6,		0,
+	D4_,	0,		G6,		0,
+	0,		D5_,	A6,		0,
+	0,		D5_,	A6_,	0,
+	D4_,	0,		A6,		0,
+	D4_,	0,		A6,		0,	
+	0,		D5_,	G6,		0,
+	0,		D5_,	G6,		0,	
+	D4,		0,		G6,		0,
+	D4,		0,		G6,		0,	
+	
+};
+*/
+
+// ------------------------------------------------------------------------
+// Musical notes english notation
+enum notes { 
+	C2=1,C2_,D2,D2_,E2,F2,F2_,G2,G2_,A2,A2_,B2, 
+	C3  ,C3_,D3,D3_,E3,F3,F3_,G3,G3_,A3,A3_,B3, 
+	C4  ,C4_,D4,D4_,E4,F4,F4_,G4,G4_,A4,A4_,B4,
+	C5  ,C5_,D5,D5_,E5,F5,F5_,G5,G5_,A5,A5_,B5,
+	C6  ,C6_,D6,D6_,E6,F6,F6_,G6,G6_,A6,A6_,B6,
+	C7  ,C7_,D7,D7_,E7,F7,F7_,G7,G7_,A7,A7_,B7 
+};
+
+extern volatile int CH1_ON,CH2_ON,CH3_ON,CH4_ON;
+extern volatile int iPP, rPP;
+extern unsigned char PARTITURE[112][4];
+
+void AUDIO_Effect(int note, int duration, int volume);
+void PARTITURE_On(unsigned char *P, unsigned int N, unsigned int tempo);
+void PARTITURE_Off();
+#endif // _AUDIO_H_
+
+================================================
+File: /Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/vibrador.c
+================================================
+// ----------------------------------------------------------------------------------
+// Project 
+// Date: 	2023/03/21
+// Author: Jess M. Hernndez Mangas
+// Subject: Desarrollo Prctico de Sistemas Electrnicos 2022-2023
+// File: vibrador.c
+// ----------------------------------------------------------------------------------
+#include "system.h"
+void TIMER1_ISR(void) __attribute__ ((interrupt("IRQ")));
+// ----------------------------------------------------------------------------------
+void TIMER1_ISR(void)
+{
+ T1IR = 0xFFFF;	   	   // Clear all interrupt notifications	
+ //  Para el temporizador 1
+ // ...
+
+ // Para el vibrador
+ // ...
+ 
+ VICVectAddr=-1;  	   // EOI for interrupt controller	
+}
+// ----------------------------------------------------------------------------------
+void VibratorON(unsigned int ms)
+{	
+ int d;
+ #define PCTIM1 (2)
+ PCONP |= (1<<PCTIM1);      // Power TIMER1 peripheral 	
+ // Configura el temporizador 1 para que genere interrupcin a los 'ms' milisegundos
+ // ...
+
+
+ #define TIMER1_INT (5)
+ // Interrupt setup
+ VICIntEnable=(1<<TIMER1_INT);                 		// TIMER1 interrupt enable
+ VICVectAddr2=(unsigned int)TIMER1_ISR;             // Vector for slot 2
+ VICVectCntl2=(1<<5)|TIMER1_INT;                    // Slot 2 for TIMER1 and enabled
+ // Activa el vibrador 
+ // ...
+ 
+ // Enable both IRQ interrupts
+ asm volatile (
+  " mrs r0,cpsr\n"
+  " bic r0,r0,#0x80\n"
+  " msr cpsr,r0\n"
+ );
+}
+// ----------------------------------------------------------------------------------
+
+
+================================================
+File: /Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/main.c
+================================================
+// =======================================================================
+// Proyecto VIDEOCONSOLA Curso 2022-2023
+// Autor : Jess Manuel Hernndez Mangas
+// File  : main.c  PAC-MAN suave, rpido y sin parpadeos
+// =======================================================================
+#include "system.h"
+#include "xpm.h"
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <time.h>
+#include <sys/time.h>
+#include <stddef.h>
+
+/* ------------------- Constantes generales -------------------------- */
+#define SCREEN_W   800
+#define SCREEN_H   480
+#define TILE       24
+#define SCALE      1
+#define TW         (TILE * SCALE)          /* 32 px */
+
+#define MAP_COLS   33
+#define MAP_ROWS   18
+#define X_OFFSET   ((SCREEN_W - MAP_COLS * TW)/2)
+#define Y_OFFSET   48
+
+/* Mapa */
+#define WALL_UP   	'0'
+#define WALL_DOWN   	'1'
+#define WALL_RIGHT   	'2'
+#define WALL_LEFT   	'3'
+#define CORNER_UPR   	'4'
+#define CORNER_UPL   	'5'
+#define CORNER_DOWNR   	'6'
+#define CORNER_DOWNL   	'7'
+#define WALL_HOR	'8'
+#define WALL_VER	'9'
+#define WALL_HOR_LIM1	'A'
+#define WALL_HOR_LIM2	'B'
+#define WALL_VER_LIM1	'Y'
+#define WALL_VER_LIM2	'Z'
+#define COIN   		'C'
+#define EMPTY  		'E'
+#define PACMAN 		'P'
+#define POWER_UP 	'V'
+#define GHOST  		'G'
+
+/* GPIO bits (no tocar) */
+#define LEFT   (1 << 0)
+#define RIGHT  (1 << 1)
+#define UP     (1 << 2)
+#define DOWN   (1 << 3)
+
+/* Velocidad / suavidad */
+#define STEP_PX            2   /* pxeles por iteracin (1 = extra-suave) */
+#define PAC_DELAY_MS       6   /* retardo interno Pac-Man                 */
+#define GHOST_DELAY_MS     0   /* retardo interno fantasmas               */
+
+/* ------------------- Laberinto base ------------------------------- */
+static const char originalMap[MAP_ROWS][MAP_COLS+1] = {
+    "500000000000000000000000000000004",  //  0: borde superior
+    "3VPCCCCCCCCCCCCCCCCCCCCCCCCCCCCV2",  //  1: corredor superior exterior con power-ups
+    "3CA88BCA88BCA88BCA88BCA88BCA88BC2",  //  2: pasillos verticales con monedas
+    "3CEEEECEEEECEEEECEEEECEEEECEEEEC2",  //  3: pasillos verticales con espacios
+    "3CYCCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  //  4: corredor con esquinas internas
+    "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  //  5: corredor interior lleno de monedas
+    "3C9EEECEEEECEEEECEEEECEEEECEEEEC2",  //  6: repeticin de pasillos verticales con espacios
+    "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  //  7: corredor interior lleno de monedas
+    "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  //  8: repeticin del corredor interior
+    "3E9EEEEEGGGEEEEEEEEEEEEEEEEEEEEE2",  //  9: zona central de fantasmas
+    "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  // 10: corredor interior lleno de monedas
+    "3C9EEECEEEECEEEECEEEECEEEECEEEEC2",  // 11: pasillos verticales con espacios
+    "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  // 12: corredor interior lleno de monedas
+    "3CZEEECEEEECEEEECEEEECEEEECEEEEC2",  // 13: repeticin de pasillos verticales
+    "3CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  // 14: corredor interior lleno de monedas
+    "3CA88BCA88BCA88BCA88BCA88BCA88BC2",  // 15: Pac-Man en corredor central
+    "3VCCCCCCCCCCCCCCCCCCCCCCCCCCCCCV2",  // 16: corredor inferior exterior con power-ups
+    "711111111111111111111111111111116"   // 17: borde inferior
+};
+
+
+/* ------------------- Tipos y estructuras -------------------------- */
+typedef enum { DIR_UP, DIR_DOWN, DIR_LEFT, DIR_RIGHT, DIR_NONE } Direction;
+
+typedef struct {
+    int  x, y;                 /* casillas                  */
+    Direction dir;
+    char under;
+    int  type;                 /* 0 rebote, 1 random, 2 AI  */
+} Ghost;
+
+/* ------------------- Estado global -------------------------------- */
+#define GHOST_COUNT 3
+static Ghost ghosts[GHOST_COUNT];
+static char  map[MAP_ROWS][MAP_COLS + 1];
+
+static int pacPixX, pacPixY;          /* Pac-Man en pxeles */
+static Direction desiredDir = DIR_NONE;
+static Direction currentDir = DIR_NONE;
+static Direction printdir = DIR_NONE;
+
+static int lives, score, totalCoins;
+static bool hudDirty = true;
+
+/* ------------------- Prototipos externos -------------------------- */
+int GetAction(void);
+
+/* ------------------- Prototipos internos -------------------------- */
+static bool      wallAt(int r, int c);
+static bool      canMoveDir(int px, int py, Direction d);
+static void      restoreBackground(int px, int py);
+static void      drawPacman(int px, int py);
+static void      animatePacmanMove(int nx, int ny);
+static void      movePacman(void);
+
+static void      animateGhostMove(Ghost *g, int nx, int ny);
+static void      moveGhosts(int tick);
+static void      checkCollisions(void);
+
+static void      initGame(void);
+static void      dibuja_hud(void);
+static void      dibuja_mapa(const char m[][MAP_COLS + 1]);
+static void      drawTile(int r, int c);
+
+/* =================================================================== */
+/*                     FUNCIONES AUXILIARES                            */
+/* =================================================================== */
+static bool wallAt(int r, int c)
+{
+    if (c < 0 || c >= MAP_COLS || r < 0 || r >= MAP_ROWS) return true;
+    return map[r][c] == (WALL_UP || WALL_DOWN || WALL_RIGHT || WALL_LEFT || WALL_HOR || WALL_VER || WALL_HOR_LIM1 || WALL_HOR_LIM2 || WALL_VER_LIM1 || WALL_VER_LIM2);
+}
+
+static bool canMoveDir(int px, int py, Direction d)
+{
+    int cx = (px - X_OFFSET) / TW;
+    int cy = (py - Y_OFFSET) / TW;
+    if (d == DIR_UP)    cy--;
+    if (d == DIR_DOWN)  cy++;
+    if (d == DIR_LEFT)  cx--;
+    if (d == DIR_RIGHT) cx++;
+    return !wallAt(cy, cx);
+}
+
+/* Restaura todos los tiles tocados por el sprite */
+static void restoreBackground(int px, int py)
+{
+    int r0 = (py - Y_OFFSET) / TW;
+    int c0 = (px - X_OFFSET) / TW;
+    int offx = (px - X_OFFSET) % TW;
+    int offy = (py - Y_OFFSET) % TW;
+
+    drawTile(r0, c0);
+    if (offx && c0 + 1 < MAP_COLS) drawTile(r0, c0 + 1);
+    if (offy && r0 + 1 < MAP_ROWS) drawTile(r0 + 1, c0);
+    if (offx && offy && r0 + 1 < MAP_ROWS && c0 + 1 < MAP_COLS)
+        drawTile(r0 + 1, c0 + 1);
+}
+
+static void drawPacman(int px, int py)
+{
+    XPM_PintaAtxNyN(px, py, 11, pacman);
+}
+
+/* =================================================================== */
+/*                         INICIALIZACIN                              */
+/* =================================================================== */
+static void initGame(void)
+{
+    int r, c, g;
+
+    for (r = 0; r < MAP_ROWS; r++) {
+        for (c = 0; c < MAP_COLS; c++) map[r][c] = originalMap[r][c];
+        map[r][MAP_COLS] = '\0';
+    }
+
+    for (g = 0; g < GHOST_COUNT; g++) ghosts[g].type = -1;
+    totalCoins = 0;
+
+    for (r = 0; r < MAP_ROWS; r++) {
+        for (c = 0; c < MAP_COLS; c++) {
+            if (map[r][c] == PACMAN) {
+                pacPixX = X_OFFSET + c * TW;
+                pacPixY = Y_OFFSET + r * TW;
+                map[r][c] = EMPTY;
+            } else if (map[r][c] == GHOST) {
+                for (g = 0; g < GHOST_COUNT; g++)
+                    if (ghosts[g].type == -1) {
+                        ghosts[g].x = c; ghosts[g].y = r;
+                        ghosts[g].under = EMPTY;
+                        ghosts[g].type  = g;
+                        ghosts[g].dir   = (g == 0) ? DIR_RIGHT : DIR_NONE;
+                        break;
+                    }
+            } else if (map[r][c] == COIN) totalCoins++;
+        }
+    }
+
+    lives = 3; score = 0;
+    desiredDir = currentDir = DIR_NONE;
+
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    srand((unsigned)tv.tv_usec);
+}
+
+/* =================================================================== */
+/*                         DIBUJO MAPA & HUD                           */
+/* =================================================================== */
+static void drawTile(int r, int c)
+{
+    int px = X_OFFSET + c * TW;
+    int py = Y_OFFSET + r * TW;
+    switch (map[r][c]) {
+        case WALL_UP:   	XPM_PintaAtxNyN(px, py, 49, pacman);  break;
+	case WALL_RIGHT:	XPM_PintaAtxNyN(px, py, 62, pacman);  break;
+	case WALL_LEFT:   	XPM_PintaAtxNyN(px, py, 60, pacman);  break;
+	case WALL_DOWN:   	XPM_PintaAtxNyN(px, py, 73, pacman);  break;
+	case CORNER_UPR:   	XPM_PintaAtxNyN(px, py, 50, pacman);  break;
+	case CORNER_UPL:   	XPM_PintaAtxNyN(px, py, 48, pacman);  break;
+	case CORNER_DOWNR:   	XPM_PintaAtxNyN(px, py, 74, pacman);  break;
+	case CORNER_DOWNL:   	XPM_PintaAtxNyN(px, py, 72, pacman);  break;
+	case WALL_HOR:   	XPM_PintaAtxNyN(px, py, 56, pacman);  break;
+	case WALL_HOR_LIM1:   	XPM_PintaAtxNyN(px, py, 55, pacman);  break;
+	case WALL_HOR_LIM2:   	XPM_PintaAtxNyN(px, py, 57, pacman);  break;
+	case WALL_VER:   	XPM_PintaAtxNyN(px, py, 66, pacman);  break;
+	case WALL_VER_LIM1:   	XPM_PintaAtxNyN(px, py, 54, pacman);  break;
+	case WALL_VER_LIM2:   	XPM_PintaAtxNyN(px, py, 78, pacman);  break;
+        case COIN:   		XPM_PintaAtxNyN(px, py, 81, pacman);  break;
+        case EMPTY:  		XPM_PintaAtxNyN(px, py, 61, pacman);  break;
+	case POWER_UP:  	XPM_PintaAtxNyN(px, py, 80, pacman);  break;
+        case GHOST:  		XPM_PintaAtxNyN(px, py, 0, pacman);   break;
+        default:     		XPM_PintaAtxNyN(px, py, 11, pacman);
+    }
+}
+
+static void dibuja_mapa(const char m[][MAP_COLS + 1])
+{
+    XPM_Extract(pacman);
+    xpm_sx = TILE; xpm_sy = TILE; XPM_SetxNyN(SCALE, SCALE);
+
+    int r, c;
+    for (r = 0; r < MAP_ROWS; r++){
+        for (c = 0; c < MAP_COLS; c++){
+            drawTile(r, c);}
+   }
+    drawPacman(pacPixX, pacPixY);
+}
+
+static void dibuja_hud(void)
+{
+    char buf[40];
+    TFT_DrawFillSquareS(0, 0, SCREEN_W, Y_OFFSET, TFT_Color(50, 50, 50));
+    FG_Color = WHITE; BG_Color = TFT_Color(50, 50, 50);
+    CF = BigFont;
+    //_sprintf(printdir, "VIDAS: %d  PUNTOS: %d", lives, score);
+    TFT_print_xNyN(X_OFFSET, Y_OFFSET / 2 - 8, buf);
+}
+
+/* =================================================================== */
+/*                   ANIMACIN PAC-MAN (suave)                         */
+/* =================================================================== */
+static void animatePacmanMove(int nx, int ny)
+{
+    int dx = (nx > pacPixX) ? STEP_PX : (nx < pacPixX ? -STEP_PX : 0);
+    int dy = (ny > pacPixY) ? STEP_PX : (ny < pacPixY ? -STEP_PX : 0);
+
+    while (pacPixX != nx || pacPixY != ny) {
+        XPM_PintaAtxNyN(pacPixX, pacPixY,10,pacman);
+        if (pacPixX != nx) pacPixX += dx;
+        if (pacPixY != ny) pacPixY += dy;
+        drawPacman(pacPixX, pacPixY);
+        if (PAC_DELAY_MS) _delay_ms(PAC_DELAY_MS);
+    }
+}
+
+/* --------------------- Movimiento de Pac-Man ----------------------- */
+static void movePacman(void)
+{
+    int keys = GetAction();
+    if (keys & UP)      desiredDir = DIR_UP;
+    else if (keys & DOWN)  desiredDir = DIR_DOWN;
+    else if (keys & LEFT)  desiredDir = DIR_LEFT;
+    else if (keys & RIGHT) desiredDir = DIR_RIGHT;
+
+    bool ax = ((pacPixX - X_OFFSET) % TW) == 0;
+    bool ay = ((pacPixY - Y_OFFSET) % TW) == 0;
+
+    if (ax && ay) {
+        int cx = (pacPixX - X_OFFSET) / TW;
+        int cy = (pacPixY - Y_OFFSET) / TW;
+
+        if (map[cy][cx] == COIN) {
+            map[cy][cx] = EMPTY; drawTile(cy, cx);
+            score++; totalCoins--; hudDirty = true;
+        }
+        if (desiredDir != DIR_NONE && canMoveDir(pacPixX, pacPixY, desiredDir))
+            currentDir = desiredDir;
+        if (!canMoveDir(pacPixX, pacPixY, currentDir))
+            currentDir = DIR_NONE;
+    }
+
+    if (currentDir == DIR_NONE) {
+        /* Si est parado, asegrate de que sigue visible */
+        drawPacman(pacPixX, pacPixY);
+        return;
+    }
+
+    int tx = pacPixX, ty = pacPixY;
+    if (currentDir == DIR_UP)    ty -= TW;
+    if (currentDir == DIR_DOWN)  ty += TW;
+    if (currentDir == DIR_LEFT)  tx -= TW;
+    if (currentDir == DIR_RIGHT) tx += TW;
+
+    animatePacmanMove(tx, ty);
+}
+
+/* =================================================================== */
+/*                      ANIMACIN FANTASMAS                            */
+/* =================================================================== */
+static void animateGhostMove(Ghost *g, int nx, int ny)
+{
+    map[g->y][g->x] = g->under; drawTile(g->y, g->x);
+
+    int px = X_OFFSET + g->x * TW;
+    int py = Y_OFFSET + g->y * TW;
+    int tx = X_OFFSET + nx * TW;
+    int ty = Y_OFFSET + ny * TW;
+    int dx = (tx > px) ? STEP_PX : (tx < px ? -STEP_PX : 0);
+    int dy = (ty > py) ? STEP_PX : (ty < py ? -STEP_PX : 0);
+
+    while (px != tx || py != ty) {
+        restoreBackground(px, py);
+        if (px != tx) px += dx;
+        if (py != ty) py += dy;
+        XPM_PintaAtxNyN(px, py, 1, pacman);
+        if (GHOST_DELAY_MS) _delay_ms(GHOST_DELAY_MS);
+    }
+
+    g->x = nx; g->y = ny;
+    g->under = map[ny][nx];
+    map[ny][nx] = GHOST;
+    XPM_PintaAtxNyN(tx, ty, 0, pacman); 
+}
+
+/* ------------------ Movimientos lgicos fantasmas ------------------ */
+static void moveGhosts(int tick)
+{
+    int i, nx, ny, t, k;
+    int dirs[4] = { DIR_UP, DIR_DOWN, DIR_LEFT, DIR_RIGHT };
+
+    for (i = 0; i < GHOST_COUNT; i++) {
+        Ghost *g = &ghosts[i];
+        nx = g->x; ny = g->y;
+
+        if (g->type == 0) {
+            if (g->dir == DIR_RIGHT) { nx++; if (wallAt(ny, nx)) { g->dir = DIR_LEFT;  nx = g->x - 1; } }
+            else                     { nx--; if (wallAt(ny, nx)) { g->dir = DIR_RIGHT; nx = g->x + 1; } }
+        }
+        else if (g->type == 1) {
+            if ((tick & 3) == 0) {
+                for (t = 0; t < 10; t++) {
+                    g->dir = dirs[rand() % 4];
+                    nx = g->x; ny = g->y;
+                    if (g->dir == DIR_UP)    ny--;
+                    if (g->dir == DIR_DOWN)  ny++;
+                    if (g->dir == DIR_LEFT)  nx--;
+                    if (g->dir == DIR_RIGHT) nx++;
+                    if (!wallAt(ny, nx)) break;
+                }
+            } else {
+                if (g->dir == DIR_UP)    ny--;
+                if (g->dir == DIR_DOWN)  ny++;
+                if (g->dir == DIR_LEFT)  nx--;
+                if (g->dir == DIR_RIGHT) nx++;
+                if (wallAt(ny, nx)) { g->dir = DIR_NONE; nx = g->x; ny = g->y; }
+            }
+        }
+        else {
+            int dx = ((pacPixX - X_OFFSET) / TW) - g->x;
+            int dy = ((pacPixY - Y_OFFSET) / TW) - g->y;
+            g->dir = (abs(dx) > abs(dy))
+                        ? (dx > 0 ? DIR_RIGHT : DIR_LEFT)
+                        : (dy > 0 ? DIR_DOWN  : DIR_UP);
+
+            nx = g->x; ny = g->y;
+            if (g->dir == DIR_UP)    ny--;
+            if (g->dir == DIR_DOWN)  ny++;
+            if (g->dir == DIR_LEFT)  nx--;
+            if (g->dir == DIR_RIGHT) nx++;
+            if (wallAt(ny, nx)) {
+                for (k = 0; k < 4; k++) {
+                    g->dir = dirs[rand() % 4];
+                    nx = g->x; ny = g->y;
+                    if (g->dir == DIR_UP)    ny--;
+                    if (g->dir == DIR_DOWN)  ny++;
+                    if (g->dir == DIR_LEFT)  nx--;
+                    if (g->dir == DIR_RIGHT) nx++;
+                    if (!wallAt(ny, nx)) break;
+                }
+            }
+        }
+
+        if (nx != g->x || ny != g->y) animateGhostMove(g, nx, ny);
+    }
+}
+
+/* =================================================================== */
+/*                           COLISIONES                                */
+/* =================================================================== */
+static void checkCollisions(void)
+{
+    int tx = (pacPixX - X_OFFSET + TW / 2) / TW;
+    int ty = (pacPixY - Y_OFFSET + TW / 2) / TW;
+    int g;
+    for (g = 0; g < GHOST_COUNT; g++) {
+        if (tx == ghosts[g].x && ty == ghosts[g].y) {
+            lives--; hudDirty = true;
+            if (lives > 0) {
+                restoreBackground(pacPixX, pacPixY);
+                initGame(); dibuja_mapa(map); dibuja_hud();
+            }
+            return;
+        }
+    }
+}
+
+/* =================================================================== */
+/*                                MAIN                                 */
+/* =================================================================== */
+int main(void)
+{
+    /* -------- NO TOCAR CONFIGURACIN DE PINES ---------------------- */
+    SCS = 1;
+    FIODIR  = 0b11111111111111111111111111011101;
+    FIOSET  = 0xFFFFFFFF;
+    PINSEL0 = 0x00029505;
+    PINSEL1 = 0x00000000;
+    _delay_ms(100);
+
+    _printf("Desarrollo Practico de Sistemas Electronicos\r\n"
+            "Ingenieria de Sistemas Electronicos\r\n");
+
+    AMPLIF_OFF;
+    TFT_Init();
+    TP_Init();
+    VibratorON(50);
+   
+    TFT_DrawFillSquareS(0, 0, LENX, LENY, TFT_Color(0, 0, 0));
+
+    initGame();
+    dibuja_mapa(map);
+    dibuja_hud();
+
+    int tick = 0;
+    while (1) {
+        if (totalCoins == 0) break;
+        if (lives     <= 0) break;
+
+        movePacman();
+        //moveGhosts(tick);
+        checkCollisions();
+	
+
+        if (hudDirty) { dibuja_hud(); hudDirty = false; }
+        tick++;
+    }
+    return 0;
+}
+
+/* =================================================================== */
+/*                        STUBS NEWLIB                                 */
+/* =================================================================== */
+int _gettimeofday(struct timeval *tv, void *tz)
+{
+    (void)tz;
+    if (tv) { tv->tv_sec = 0; tv->tv_usec = 0; }
+    return 0;
+}
+
+void *_sbrk(ptrdiff_t incr)
+{
+    extern char _end;
+    static char *heap_end = NULL;
+    char *prev_heap_end;
+
+    if (heap_end == NULL) heap_end = &_end;
+    prev_heap_end = heap_end;
+    heap_end += incr;
+    return (void *)prev_heap_end;
+}
+
+
+================================================
+File: /Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/calibrate.c
+================================================
+/*
+ *
+ *   Copyright (c) 2001, Carlos E. Vidales. All rights reserved.
+ *
+ *   This sample program was written and put in the public domain 
+ *    by Carlos E. Vidales.  The program is provided "as is" 
+ *    without warranty of any kind, either expressed or implied.
+ *   If you choose to use the program within your own products
+ *    you do so at your own risk, and assume the responsibility
+ *    for servicing, repairing or correcting the program should
+ *    it prove defective in any manner.
+ *   You may copy and distribute the program's source code in any 
+ *    medium, provided that you also include in each copy an
+ *    appropriate copyright notice and disclaimer of warranty.
+ *   You may also modify this program and distribute copies of
+ *    it provided that you include prominent notices stating 
+ *    that you changed the file(s) and the date of any change,
+ *    and that you do not charge any royalties or licenses for 
+ *    its use.
+ * 
+ *
+ * 
+ *   File Name:  calibrate.c
+ *
+ *
+ *   This file contains functions that implement calculations 
+ *    necessary to obtain calibration factors for a touch screen
+ *    that suffers from multiple distortion effects: namely, 
+ *    translation, scaling and rotation.
+ *
+ *   The following set of equations represent a valid display 
+ *    point given a corresponding set of touch screen points:
+ *
+ *
+ *                                              /-     -\
+ *              /-    -\     /-            -\   |       |
+ *              |      |     |              |   |   Xs  |
+ *              |  Xd  |     | A    B    C  |   |       |
+ *              |      |  =  |              | * |   Ys  |
+ *              |  Yd  |     | D    E    F  |   |       |
+ *              |      |     |              |   |   1   |
+ *              \-    -/     \-            -/   |       |
+ *                                              \-     -/
+ *
+ * 
+ *    where:
+ *
+ *           (Xd,Yd) represents the desired display point 
+ *                    coordinates,
+ *
+ *           (Xs,Ys) represents the available touch screen
+ *                    coordinates, and the matrix
+ *
+ *           /-   -\
+ *           |A,B,C|
+ *           |D,E,F| represents the factors used to translate
+ *           \-   -/  the available touch screen point values
+ *                    into the corresponding display 
+ *                    coordinates.
+ *
+ *
+ *    Note that for practical considerations, the utilitities 
+ *     within this file do not use the matrix coefficients as
+ *     defined above, but instead use the following 
+ *     equivalents, since floating point math is not used:
+ *
+ *            A = An/Divider 
+ *            B = Bn/Divider 
+ *            C = Cn/Divider 
+ *            D = Dn/Divider 
+ *            E = En/Divider 
+ *            F = Fn/Divider 
+ *
+ *
+ *
+ *    The functions provided within this file are:
+ *
+ *          setCalibrationMatrix() - calculates the set of factors
+ *                                    in the above equation, given
+ *                                    three sets of test points.
+ *               getDisplayPoint() - returns the actual display
+ *                                    coordinates, given a set of
+ *                                    touch screen coordinates.
+ * translateRawScreenCoordinates() - helper function to transform
+ *                                    raw screen points into values
+ *                                    scaled to the desired display
+ *                                    resolution.
+ *
+ *
+ */
+#define _CALIBRATE_C_
+/****************************************************/
+/*                                                  */
+/* Included files                                   */
+/*                                                  */
+/****************************************************/
+#include "Calibrate.h"
+/****************************************************/
+/*                                                  */
+/* Local Definitions and macros                     */
+/*                                                  */
+/****************************************************/
+/****************************************************/
+/*                                                  */
+/* Global variables                                 */
+/*                                                  */
+/****************************************************/
+/****************************************************/
+/*                                                  */
+/* Forward Declaration of local functions           */
+/*                                                  */
+/****************************************************/
+/**********************************************************************
+ *
+ *     Function: setCalibrationMatrix()
+ *
+ *  Description: Calling this function with valid input data
+ *                in the display and screen input arguments 
+ *                causes the calibration factors between the
+ *                screen and display points to be calculated,
+ *                and the output argument - matrixPtr - to be 
+ *                populated.
+ *
+ *               This function needs to be called only when new
+ *                calibration factors are desired.
+ *               
+ *  
+ *  Argument(s): displayPtr (input) - Pointer to an array of three 
+ *                                     sample, reference points.
+ *               screenPtr (input) - Pointer to the array of touch 
+ *                                    screen points corresponding 
+ *                                    to the reference display points.
+ *               matrixPtr (output) - Pointer to the calibration 
+ *                                     matrix computed for the set 
+ *                                     of points being provided.
+ *
+ *
+ *  From the article text, recall that the matrix coefficients are
+ *   resolved to be the following:
+ *
+ *
+ *      Divider =  (Xs0 - Xs2)*(Ys1 - Ys2) - (Xs1 - Xs2)*(Ys0 - Ys2)
+ *
+ *
+ *
+ *                 (Xd0 - Xd2)*(Ys1 - Ys2) - (Xd1 - Xd2)*(Ys0 - Ys2)
+ *            A = ---------------------------------------------------
+ *                                   Divider
+ *
+ *
+ *                 (Xs0 - Xs2)*(Xd1 - Xd2) - (Xd0 - Xd2)*(Xs1 - Xs2)
+ *            B = ---------------------------------------------------
+ *                                   Divider
+ *
+ *
+ *                 Ys0*(Xs2*Xd1 - Xs1*Xd2) + 
+ *                             Ys1*(Xs0*Xd2 - Xs2*Xd0) + 
+ *                                           Ys2*(Xs1*Xd0 - Xs0*Xd1)
+ *            C = ---------------------------------------------------
+ *                                   Divider
+ *
+ *
+ *                 (Yd0 - Yd2)*(Ys1 - Ys2) - (Yd1 - Yd2)*(Ys0 - Ys2)
+ *            D = ---------------------------------------------------
+ *                                   Divider
+ *
+ *
+ *                 (Xs0 - Xs2)*(Yd1 - Yd2) - (Yd0 - Yd2)*(Xs1 - Xs2)
+ *            E = ---------------------------------------------------
+ *                                   Divider
+ *
+ *
+ *                 Ys0*(Xs2*Yd1 - Xs1*Yd2) + 
+ *                             Ys1*(Xs0*Yd2 - Xs2*Yd0) + 
+ *                                           Ys2*(Xs1*Yd0 - Xs0*Yd1)
+ *            F = ---------------------------------------------------
+ *                                   Divider
+ *
+ *
+ *       Return: OK - the calibration matrix was correctly 
+ *                     calculated and its value is in the 
+ *                     output argument.
+ *               NOT_OK - an error was detected and the 
+ *                         function failed to return a valid
+ *                         set of matrix values.
+ *                        The only time this sample code returns
+ *                        NOT_OK is when Divider == 0
+ *
+ *
+ *
+ *                 NOTE!    NOTE!    NOTE!
+ *
+ *  setCalibrationMatrix() and getDisplayPoint() will do fine
+ *  for you as they are, provided that your digitizer         
+ *  resolution does not exceed 10 bits (1024 values).  Higher
+ *  resolutions may cause the integer operations to overflow
+ *  and return incorrect values.  If you wish to use these   
+ *  functions with digitizer resolutions of 12 bits (4096    
+ *  values) you will either have to a) use 64-bit signed     
+ *  integer variables and math, or b) judiciously modify the 
+ *  operations to scale results by a factor of 2 or even 4.  
+ *
+ *
+ */
+int setCalibrationMatrix( POINT * displayPtr,
+                          POINT * screenPtr,
+                          MATRIX * matrixPtr)
+{
+
+    int  retValue = OK ;
+
+
+    
+    matrixPtr->Divider = ((screenPtr[0].x - screenPtr[2].x) * (screenPtr[1].y - screenPtr[2].y)) - 
+                         ((screenPtr[1].x - screenPtr[2].x) * (screenPtr[0].y - screenPtr[2].y)) ;
+
+    if( matrixPtr->Divider == 0 )
+    {
+        retValue = NOT_OK ;
+    }
+    else
+    {
+        matrixPtr->An = ((displayPtr[0].x - displayPtr[2].x) * (screenPtr[1].y - screenPtr[2].y)) - 
+                        ((displayPtr[1].x - displayPtr[2].x) * (screenPtr[0].y - screenPtr[2].y)) ;
+
+        matrixPtr->Bn = ((screenPtr[0].x - screenPtr[2].x) * (displayPtr[1].x - displayPtr[2].x)) - 
+                        ((displayPtr[0].x - displayPtr[2].x) * (screenPtr[1].x - screenPtr[2].x)) ;
+
+        matrixPtr->Cn = (screenPtr[2].x * displayPtr[1].x - screenPtr[1].x * displayPtr[2].x) * screenPtr[0].y +
+                        (screenPtr[0].x * displayPtr[2].x - screenPtr[2].x * displayPtr[0].x) * screenPtr[1].y +
+                        (screenPtr[1].x * displayPtr[0].x - screenPtr[0].x * displayPtr[1].x) * screenPtr[2].y ;
+
+        matrixPtr->Dn = ((displayPtr[0].y - displayPtr[2].y) * (screenPtr[1].y - screenPtr[2].y)) - 
+                        ((displayPtr[1].y - displayPtr[2].y) * (screenPtr[0].y - screenPtr[2].y)) ;
+    
+        matrixPtr->En = ((screenPtr[0].x - screenPtr[2].x) * (displayPtr[1].y - displayPtr[2].y)) - 
+                        ((displayPtr[0].y - displayPtr[2].y) * (screenPtr[1].x - screenPtr[2].x)) ;
+
+        matrixPtr->Fn = (screenPtr[2].x * displayPtr[1].y - screenPtr[1].x * displayPtr[2].y) * screenPtr[0].y +
+                        (screenPtr[0].x * displayPtr[2].y - screenPtr[2].x * displayPtr[0].y) * screenPtr[1].y +
+                        (screenPtr[1].x * displayPtr[0].y - screenPtr[0].x * displayPtr[1].y) * screenPtr[2].y ;
+    }
+ 
+    return( retValue ) ;
+
+} /* end of setCalibrationMatrix() */
+/**********************************************************************
+ *
+ *     Function: getDisplayPoint()
+ *
+ *  Description: Given a valid set of calibration factors and a point
+ *                value reported by the touch screen, this function
+ *                calculates and returns the true (or closest to true)
+ *                display point below the spot where the touch screen 
+ *                was touched.
+ * 
+ *
+ * 
+ *  Argument(s): displayPtr (output) - Pointer to the calculated
+ *                                      (true) display point.
+ *               screenPtr (input) - Pointer to the reported touch
+ *                                    screen point.
+ *               matrixPtr (input) - Pointer to calibration factors
+ *                                    matrix previously calculated
+ *                                    from a call to 
+ *                                    setCalibrationMatrix()
+ * 
+ *
+ *  The function simply solves for Xd and Yd by implementing the 
+ *   computations required by the translation matrix.  
+ * 
+ *                                              /-     -\
+ *              /-    -\     /-            -\   |       |
+ *              |      |     |              |   |   Xs  |
+ *              |  Xd  |     | A    B    C  |   |       |
+ *              |      |  =  |              | * |   Ys  |
+ *              |  Yd  |     | D    E    F  |   |       |
+ *              |      |     |              |   |   1   |
+ *              \-    -/     \-            -/   |       |
+ *                                              \-     -/
+ * 
+ *  It must be kept brief to avoid consuming CPU cycles.
+ * 
+ *
+ *       Return: OK - the display point was correctly calculated 
+ *                     and its value is in the output argument.
+ *               NOT_OK - an error was detected and the function
+ *                         failed to return a valid point.
+ *
+ *
+ *
+ *                 NOTE!    NOTE!    NOTE!
+ *
+ *  setCalibrationMatrix() and getDisplayPoint() will do fine
+ *  for you as they are, provided that your digitizer         
+ *  resolution does not exceed 10 bits (1024 values).  Higher
+ *  resolutions may cause the integer operations to overflow
+ *  and return incorrect values.  If you wish to use these   
+ *  functions with digitizer resolutions of 12 bits (4096    
+ *  values) you will either have to a) use 64-bit signed     
+ *  integer variables and math, or b) judiciously modify the 
+ *  operations to scale results by a factor of 2 or even 4.  
+ *
+ *
+ */
+int getDisplayPoint( POINT * displayPtr,
+                     POINT * screenPtr,
+                     MATRIX * matrixPtr )
+{
+    int  retValue = OK ;
+
+
+    if( matrixPtr->Divider != 0 )
+    {
+
+            /* Operation order is important since we are doing integer */
+            /*  math. Make sure you add all terms together before      */
+            /*  dividing, so that the remainder is not rounded off     */
+            /*  prematurely.                                           */
+
+        displayPtr->x = ( (matrixPtr->An * screenPtr->x) + 
+                          (matrixPtr->Bn * screenPtr->y) + 
+                           matrixPtr->Cn 
+                        ) / matrixPtr->Divider ;
+
+        displayPtr->y = ( (matrixPtr->Dn * screenPtr->x) + 
+                          (matrixPtr->En * screenPtr->y) + 
+                           matrixPtr->Fn 
+                        ) / matrixPtr->Divider ;
+    }
+    else
+    {
+        retValue = NOT_OK ;
+    }
+
+    return( retValue ) ;
+
+} /* end of getDisplayPoint() */
+
+================================================
+File: /Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/NT35510.h
+================================================
+/*****************************************************************************
+ *  Solomon Systech. NT35510 LCD controller driver
+ *****************************************************************************/
+
+#ifndef _NT35510_H
+#define _NT35510_H
+
+#define CMD_NOP                     0x00
+#define CMD_SOFT_RESET              0x01
+#define CMD_GET_PWR_MODE            0x0A
+#define CMD_GET_ADDR_MODE           0x0B
+#define CMD_GET_DISPLAY_MODE        0x0D
+#define CMD_GET_TEAR_EFFECT_STATUS  0x0E
+#define CMD_ENT_SLEEP               0x10
+#define CMD_EXIT_SLEEP              0x11
+#define CMD_ENT_PARTIAL_MODE        0x12
+#define CMD_ENT_NORMAL_MODE         0x13
+#define CMD_EXIT_INVERT_MODE        0x20
+#define CMD_ENT_INVERT_MODE         0x21
+#define CMD_SET_GAMMA               0x26
+#define CMD_BLANK_DISPLAY           0x28
+#define CMD_ON_DISPLAY              0x29
+#define CMD_SET_COLUMN              0x2A00 // NT35510 OK
+#define CMD_SET_PAGE                0x2B00 // NT35510 OK
+
+#define CMD_WR_MEMSTART             0x2C00 // NT35510 OK
+#define CMD_RD_MEMSTART             0x2E00 // NT35510 OK
+
+#define CMD_SET_PARTIAL_AREA        0x30
+#define CMD_SET_SCROLL_AREA         0x33
+#define CMD_SET_TEAR_OFF            0x34
+#define CMD_SET_TEAR_ON             0x35
+#define CMD_SET_ADDR_MODE           0x36
+#define CMD_SET_SCROLL_START        0x37
+#define CMD_EXIT_IDLE_MODE          0x38
+#define CMD_ENT_IDLE_MODE           0x39
+
+#define CMD_SET_PIXEL_FORMAT        0x3A
+
+#define CMD_WR_MEM_AUTO             0x3C
+#define CMD_RD_MEM_AUTO             0x3E
+#define CMD_SET_TEAR_SCANLINE       0x44
+#define CMD_GET_SCANLINE            0x45
+#define CMD_RD_DDB_START            0xA1
+#define CMD_SET_PANEL_MODE          0xB0
+#define CMD_GET_PANEL_MODE          0xB1
+#define CMD_SET_HOR_PERIOD          0xB4
+#define CMD_GET_HOR_PERIOD          0xB5
+#define CMD_SET_VER_PERIOD          0xB6
+#define CMD_GET_VER_PERIOD          0xB7
+#define CMD_SET_GPIO_CONF           0xB8
+#define CMD_GET_GPIO_CONF           0xB9
+#define CMD_SET_GPIO_VAL            0xBA
+#define CMD_GET_GPIO_STATUS         0xBB
+#define CMD_SET_POST_PROC           0xBC
+#define CMD_GET_POST_PROC           0xBD
+#define CMD_SET_PWM_CONF            0xBE
+#define CMD_GET_PWM_CONF            0xBF
+#define CMD_SET_LCD_GEN0            0xC0
+#define CMD_GET_LCD_GEN0            0xC1
+#define CMD_SET_LCD_GEN1            0xC2
+#define CMD_GET_LCD_GEN1            0xC3
+#define CMD_SET_LCD_GEN2            0xC4
+#define CMD_GET_LCD_GEN2            0xC5
+#define CMD_SET_LCD_GEN3            0xC6
+#define CMD_GET_LCD_GEN3            0xC7
+#define CMD_SET_GPIO0_ROP           0xC8
+#define CMD_GET_GPIO0_ROP           0xC9
+#define CMD_SET_GPIO1_ROP           0xCA
+#define CMD_GET_GPIO1_ROP           0xCB
+#define CMD_SET_GPIO2_ROP           0xCC
+#define CMD_GET_GPIO2_ROP           0xCD
+#define CMD_SET_GPIO3_ROP           0xCE
+#define CMD_GET_GPIO3_ROP           0xCF
+#define CMD_SET_ABC_DBC_CONF        0xD0
+#define CMD_GET_ABC_DBC_CONF        0xD1
+#define CMD_SET_DBC_THRES           0xD4
+#define CMD_GET_DBC_THRES           0xD5
+#define CMD_PLL_START               0xE0
+#define CMD_SET_PLL_MN              0xE2
+#define CMD_GET_PLL_MN              0xE3
+#define CMD_GET_PLL_STATUS          0xE4
+#define CMD_ENT_DEEP_SLEEP          0xE5
+#define CMD_SET_PCLK                0xE6
+#define CMD_GET_PCLK                0xE7
+#define CMD_SET_DATA_INTERFACE      0xF0
+#define CMD_GET_DATA_INTERFACE      0xF1
+
+#define NT35510_CS (1<<12)
+#define NT35510_WR (1<<11)
+#define NT35510_RD (1<<15)
+#define NT35510_RS (1<<13)
+#define NT35510_DT (16)
+
+#define RS_ON  FIOSET = NT35510_RS
+#define CS_ON  FIOSET = NT35510_CS
+#define RD_ON  FIOSET = NT35510_RD
+#define WR_ON  FIOSET = NT35510_WR
+
+#define RS_OFF FIOCLR = NT35510_RS
+#define CS_OFF FIOCLR = NT35510_CS
+#define RD_OFF FIOCLR = NT35510_RD
+#define WR_OFF FIOCLR = NT35510_WR
+
+#define DT_OUTPUT FIODIR = FIODIR |  (0xFFFF<<NT35510_DT)
+#define DT_INPUT  FIODIR = FIODIR &(~(0xFFFF<<NT35510_DT))
+
+// ---------------------------------------------------
+extern void NT35510_Cmd( unsigned short cmd);
+// ---------------------------------------------------
+extern void NT35510_Data( unsigned short data);
+// ---------------------------------------------------
+extern void NT35510_Data_( unsigned short data);
+// ---------------------------------------------------
+extern void NT35510_Reg( unsigned short cmd, unsigned short data);
+// ---------------------------------------------------
+extern void TFT_SetArea(int x0, int y0, int x1, int y1 );
+
+unsigned short NT35510_ReadCMD( unsigned short cmd );
+void TFT_Init();
+
+//void TFT_SetArea(int x0, int y0, int x1, int y1 );
+void TFT_FillArea(unsigned short x0, unsigned short y0,
+		       unsigned short x1, unsigned short y1 );
+
+void TFT_PutPixel(int x0, int y0);
+void TFT_PutPixelColor(unsigned short x0, unsigned short y0, unsigned short color);
+void TFT_DrawLine(int x1, int y1, int x2, int y2, int color);
+
+void TFT_HorizontalLine(int x1, int x2, int y, int color);
+void TFT_VerticalLine(int x, int y1, int y2, int color);
+void TFT_DrawSquare(int x1, int y1, int x2, int y2, int color);
+void TFT_DrawCircle(int x, int y, int radius, int color);
+void TFT_FillCircle(int x, int y, int radius, int color);
+void TFT_DrawFillSquare(int x1, int y1, int x2, int y2, int color);
+void TFT_DrawFillSquareS(int x1, int y1, int sx, int sy, int color);
+
+void TFT_putch(int x1, int y1, unsigned char c);
+void TFT_print(int x1, int y1, char * s);
+void TFT_print_centered_x(int y1, char * s);
+
+extern int tft_x, tft_y;
+void TFT_putchar(unsigned char c);
+//void TFT_printf(int x, int y, char *format, ...);
+#include <stdarg.h>
+#define TFT_printf( x,y,format, ...) \
+   tft_x = (x);\
+   tft_y = (y);\
+   _vputch =(void*)TFT_putchar;\
+   _printf(format, __VA_ARGS__);\
+   _vputch =(void*)_U0putch;
+   
+extern int xN;
+extern int yN;
+void TFT_putch_xNyN(int x1, int y1, unsigned char c);
+void TFT_print_xNyN(int x1, int y1, char * s);
+int TFT_print_centered_x_xNyN(int y1, char * s);
+void TFT_putchar_xNyN(unsigned char c);
+
+// Ojo!, en los argumentos x e y poner las expresiones entre paréntesis
+//  de lo contrario al pasar __VA_ARGS__ se cuelga
+#define TFT_printf_xNyN( x,y,format, ...) \
+   tft_x = (x);\
+   tft_y = (y);\
+   _vputch =(void*)TFT_putchar_xNyN;\
+   _printf(format, __VA_ARGS__);\
+   _vputch =(void*)_U0putch;
+
+
+#define _sprintf( sdir,format, ...) \
+   dir = sdir;\
+   _vputch =(void*)_sputchar;\
+   _printf(format, __VA_ARGS__);\
+   _vputch =(void*)_U0putch;
+
+struct _current_font
+{
+	unsigned char x_size;
+	unsigned char y_size;
+	unsigned char x_step;
+	unsigned char offset;
+	unsigned char numchars;
+	unsigned char font[];
+};
+extern unsigned char SmallFont[];
+extern unsigned char BigFont[];
+extern unsigned char SevenSegNumFont[];
+extern struct _current_font *CF;
+void TFT_DumpBinaryFont();
+
+#define TFT_Color(r,g,b) (((r>>3)<<11) | ((g>>2)<<5) | (b>>3))
+#define GetRED(c) ((c>>8)&0b11111000)
+#define GetGREEN(c) ((c>>3)&0b11111100)
+#define GetBLUE(c) ((c<<3)&0b11111000)
+
+#define BLACK  TFT_Color(  0,  0,  0)
+#define RED    TFT_Color(255,  0,  0)
+#define GREEN  TFT_Color(  0,255,  0)
+#define BLUE   TFT_Color(  0,  0,255)
+#define YELLOW TFT_Color(255,255,  0)
+#define CYAN   TFT_Color(  0,255,255)
+#define MAGENT TFT_Color(255,  0,255)
+#define WHITE  TFT_Color(255,255,255)
+
+#define ORANGE TFT_Color(255,0xA5,  0)
+#define BROWN  TFT_Color(100,  0,  0)
+
+#define COL_ON  TFT_Color(200,200, 20)
+#define COL_OFF TFT_Color(50,50,  0)
+
+#define CRLF  _U0puts("\r\n");
+extern unsigned short FG_Color;
+extern unsigned short BG_Color;
+   
+#define TFT_PRINT_xN_yN
+#define TFT_800x480
+
+extern int LENX, LENY;
+
+void TFT_On();
+void TFT_Off();
+
+void NT35510_WritePage(int page, unsigned short * data);
+void NT35510_ReadPage(int page, unsigned short * data);
+void NT35510_TestPages();
+#endif // _NT35510_H
+
+
+================================================
+File: /Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/xpt2046.c
+================================================
+// =======================================================================
+// Proyecto 
+// Fecha: 2023/03/21
+// Autor: Jess M. Hernndez Mangas
+// Asignatura: 
+// File: xpt2046.c  Rutinas para manejar el controlador del TouchPannel
+// =======================================================================
+#include "system.h"
+// -----------------------------------------------------------------
+void TP_Init()
+{
+ PINSEL0 = (PINSEL0 & (~((0b111111)<<8))) | ( 0b010101 << 8 ); 
+ S0SPCR = 0b0000100000100000; 
+		//	    ....			BITS = 1000, 8 bits per transfer
+		//          .           SPIE = 0, no interrupts
+		//           .          LSBF = 0, MSBit first
+		//            .			MSTR = 1, Master mode
+		//             .        CPOL = 0
+	    //              .       CPHA = 0
+		//               .      BitEnable = 0, 8 bit transfers
+ S0SPCCR =30;
+		// BitRate = PCLK/S0SPCCR = 4*14745600/30 = aprox 1966 kHz
+ FIODIR |= TP_CS; 
+}
+// -----------------------------------------------------------------
+unsigned char TP_EnviaRecibe(unsigned char d)
+{
+ S0SPDR = d;
+ while(! (S0SPSR&(1<<7)) ); // Hasta que se envie bloqueado aqu
+ return S0SPDR;	 
+}
+// -----------------------------------------------------------------
+#define TP_Select()    FIOCLR = TP_CS;
+#define TP_Unselect()  FIOSET = TP_CS;
+// Parece que en el mdulo de 3.98 pulgadas estn intercambiadas las coordenadas x e y
+#define TP_GET_X  0b11010000
+#define TP_GET_Y  0b10010000
+
+#ifdef REAL_SYSTEM
+ int X_SINPULSAR = 799;
+#else
+int X_SINPULSAR = 1;
+#endif
+// -----------------------------------------------------------------
+#ifdef REAL_SYSTEM
+ MATRIX Cal={298680,760,-12782360,0,306240,-8004000,273528};  // Video consola 2022--2023 pantalla 3.98"
+#else
+ MATRIX Cal={52360,440,-2048380,0,55912,70372,28679};
+#endif
+// -----------------------------------------------------------------
+int TP_Get_XY(int *x, int *y)
+{
+ unsigned char dh, dl;	
+ TP_Select();
+ TP_EnviaRecibe(TP_GET_Y);
+ dh = TP_EnviaRecibe(0);
+ dl = TP_EnviaRecibe(0);
+ x[0] = (((dh<<8)|dl)>>3); // 12 bits	
+ x[0] = ((x[0]*LENX)/4096);	
+ TP_Unselect();
+ 
+ TP_Select();	
+ TP_EnviaRecibe(TP_GET_X);
+ dh = TP_EnviaRecibe(0);
+ dl = TP_EnviaRecibe(0);
+ y[0] = (((dh<<8)|dl)>>3); // 12 bits	
+ #ifdef REAL_SYSTEM
+  y[0] = (y[0]*LENY)/4096;	
+ #else
+  y[0] = (y[0]*LENY)/4096;	
+ #endif
+ TP_Unselect();	 
+//	_printf(" %d",x[0]);
+ if((x[0]==X_SINPULSAR ) ) return 0;
+ else 					   return 1;
+}
+// -----------------------------------------------------------------
+int TP_Get_XY_Cal(int *x, int *y)
+{
+ if(!TP_Get_XY(x,y)) return 0;	
+ POINT Real, Measured;
+ Measured.x = *x;
+ Measured.y = *y;	
+ if( getDisplayPoint( &Real, &Measured, &Cal ) == OK)
+ {
+  *x = Real.x;
+  *y = Real.y; 	
+
+  return 1;
+ }
+ *x=0;
+ *y=0;
+ 	
+ return 0;
+}
+// -----------------------------------------------------------------
+void TP_Aspa(int x, int y, int color)
+{
+ int l = 5;
+ TFT_DrawLine( x-l, y, x+l, y, YELLOW);
+ TFT_DrawLine( x, y-l, x, y+l, YELLOW);	
+ TFT_DrawCircle(x,y,l*3,color);
+}
+// -----------------------------------------------------------------
+#define RELEASE_TP while(  TP_Get_XY(&x,&y)) _delay_ms(10);
+#define GET_XY_TP  while( !TP_Get_XY(&x,&y)) _delay_ms(10);
+void TP_Calibrate()
+{
+ #define X0 20
+ #define Y0 20
+ #define X1 LENX-20
+ #define Y1 20
+ #define X2 20
+ #define Y2 LENY-20 	
+ #define CC RED
+ #define NCAL 10
+
+ int x,y,i,j;
+ POINT TFT[3]={{X0,Y0},{X1,Y1},{X2,Y2}};
+ POINT TP[3]={{0,0},{0,0},{0,0}};
+	
+ TFT_DrawFillSquare(0,0,LENX-1,LENY-1,BLACK);	
+ BG_Color = BLACK;
+ FG_Color = WHITE;
+ TFT_print_centered_x(LENY/2,"Touch Pannel Calibration");
+	
+ for(j=0;j<3;j++)
+ {
+  TP_Aspa(TFT[j].x,TFT[j].y,CC);
+  for(i=0;i<NCAL;i++)
+  {
+   GET_XY_TP;
+   _printf("%3d:%3d\r\n",x,y);
+    TP[j].x +=x; TP[j].y +=y;
+  }
+  TP[j].x /= NCAL;
+  TP[j].y /= NCAL;
+  RELEASE_TP;
+  _printf("-->%3d:%3d\r\n",TP[j].x,TP[j].y);
+  }
+ 
+ setCalibrationMatrix( TFT, TP, &Cal);
+ // Pinta la matriz de calibracion
+ _puts("Matriz de calibracion\r\n");
+ _printf("An = %8d\r\n",Cal.An);
+ _printf("Bn = %8d\r\n",Cal.Bn);
+ _printf("Cn = %8d\r\n",Cal.Cn);
+ _printf("Dn = %8d\r\n",Cal.Dn);
+ _printf("En = %8d\r\n",Cal.En);
+ _printf("Fn = %8d\r\n",Cal.Fn);
+ _printf("Div = %7d\r\n",Cal.Divider);
+}
+// -----------------------------------------------------------------
+
+================================================
+File: /Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/system.h
+================================================
+// =======================================================================
+// Proyecto 
+// Fecha:
+// Autor: 
+// Asignatura: 
+// File: system.h Definiciones tiles e #includes
+// =======================================================================
+void _puts(char *);
+void _printf(char *,...);
+extern void (*_vputch)(int);
+extern int (*_vgetch)();
+#define _putch(d) ((*_vputch)(d))
+#define _getch() ((*_vgetch)())
+int	_gets(unsigned char *,int);
+void _U0putch(unsigned char);
+unsigned char _U0getch();
+void _delay_loop(unsigned int);
+
+#define FOSC    14745600        // Crystal frequency
+#define MSEL    4               // PLL multiplier
+//#define MSEL    5               // PLL multiplier
+#define CCLK    (FOSC*MSEL)	    // CPU clock
+#define PCKDIV  1               // APB divider
+#define PCLK    (CCLK/PCKDIV)   // Peripheral clock
+
+// delays
+#define _delay_us(n) _delay_loop(CCLK/400*n/10000-1)
+#define _delay_ms(n) _delay_loop(CCLK/4000*n-1)
+
+#include "lpc2106.h"
+#include "stdlib.h"
+#include "calibrate.h"
+#include "xpt2046.h"
+//#include "SSD1963.h"
+#include "NT35510.h"
+
+#include "audio.h"
+
+#ifndef REAL_SYSTEM
+#undef FIODIR
+#undef FIOPIN
+#undef FIOSET
+#undef FIOCLR
+
+#define FIODIR IODIR
+#define FIOPIN IOPIN 
+#define FIOSET IOSET
+#define FIOCLR IOCLR
+#endif
+
+#define   TP_CS (1<< 2)
+#define   SD_CS (1<< 3)
+
+#ifndef MODEL
+ #define MODEL 2023
+#endif
+
+#if MODEL == 2020
+ #define GPIO_CS (1<<7)
+ #define  ADC_CS (1<<9)
+ #define  ACL_CS (1<<10)
+ #define  TFT_CS (1<<12)
+ #define AUDIO_OUT (1<<8) 
+ 
+#endif
+
+#if MODEL == 2021
+ #define GPIO_CS (1<<10)
+ #define  ADC_CS (1<<12)
+ #define  TFT_CS (0)
+ #define  ACL_CS (0)
+ #define AUDIO_OUT (1<<7)
+
+#endif
+
+#if MODEL == 2022
+ #define GPIO_CS (1<<10)
+ #define  ADC_CS (1<<12)
+ #define  TFT_CS (0)
+ #define  ACL_CS (1<< 9)
+ #define AUDIO_OUT (0)
+
+#endif
+
+#if MODEL == 2023
+ 
+ #define  TFT_CS (1<<12)
+ #define AUDIO_OUT (0)
+ #define VIBRADOR (1<<9)
+#endif
+
+
+#define AUDIO_ON  FIOSET = AUDIO_OUT
+#define AUDIO_OFF FIOCLR = AUDIO_OUT
+
+#define AMPLIF_ON  FIOSET = (1<<14)
+#define AMPLIF_OFF FIOCLR = (1<<14)
+
+// Sin panel tactil
+//#undef _XPT2046_C_
+//#undef _CALIBRATE_C_
+#define _XPT2046_C_
+#define _CALIBRATE_C_
+/*
+#define Timer_On()    \
+ T1TCR  = 0b00000010; \
+ T1PR   = 58;         \
+ T1MR0  = (1<<31);    \
+ T1MCR  = 0b010;      \
+ T1CTCR = 0;          \
+ T1TC   = 0;          \
+ T1TCR  = 0b00000001; 
+// Cuenta microsegundos, desborda en 2^32 usec -> 4000 segundos
+*/
+
+#define Timer_On()    \
+ T1TCR  = 0b00000010; \
+ T1PR   = PCLK/1000;  \
+ T1MR0  = (1<<31);    \
+ T1MCR  = 0b010;      \
+ T1CTCR = 0;          \
+ T1TC   = 0;          \
+ T1TCR  = 0b00000001; 
+// Cuenta microsegundos, desborda en 2^32 usec -> 4000 segundos
+
+#define Get_Time() T1TC
+
+void VibratorON(unsigned int ms);
+
+================================================
+File: /Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/audio.c
+================================================
+// =======================================================================
+// Project: Videoconsole
+// Date: 	2022/03/28 - 2020/02/19
+// Author:  Jess M. Hernndez Mangas
+// Subject: Desarrollo Prctico de Sistemas Electrnicos 2022-2023
+// File:    audio.c
+// =======================================================================
+#include "system.h"
+#include "audio.h"
+// ------------------------------------------------------------------------
+unsigned int NOTE[] = { 0,
+     DO2, DO2_, RE2, RE2_, MI2, FA2, FA2_, SOL2, SOL2_, LA2, LA2_, SI2,
+	 DO3, DO3_, RE3, RE3_, MI3, FA3, FA3_, SOL3, SOL3_, LA3, LA3_, SI3,
+	 DO4, DO4_, RE4, RE4_, MI4, FA4, FA4_, SOL4, SOL4_, LA4, LA4_, SI4,
+	 DO5, DO5_, RE5, RE5_, MI5, FA5, FA5_, SOL5, SOL5_, LA5, LA5_, SI5,
+	 DO6, DO6_, RE6, RE6_, MI6, FA6, FA6_, SOL6, SOL6_, LA6, LA6_, SI6,
+	 DO7, DO7_, RE7, RE7_, MI7, FA7, FA7_, SOL7, SOL7_, LA7, LA7_, SI7,
+};
+// ------------------------------------------------------------------------
+//#define SINUS_WAVE
+#define SQUARE_WAVE
+// ------------------------------------------------------------------------
+// Sinus table. Angles from 0 to 2*PI.
+// 256 elements. Amplitude 512 with sign
+#ifdef SINUS_WAVE
+const short TABLA_SINUS_WAVE[]={
+    0,   12,   25,   37,   50,   62,   75,   87,
+   99,  112,  124,  136,  148,  160,  172,  184,
+  195,  207,  218,  230,  241,  252,  263,  273,
+  284,  294,  304,  314,  324,  334,  343,  353,
+  362,  370,  379,  387,  395,  403,  411,  418,
+  425,  432,  439,  445,  451,  457,  462,  468,
+  473,  477,  482,  486,  489,  493,  496,  499,
+  502,  504,  506,  508,  509,  510,  511,  511,
+  512,  511,  511,  510,  509,  508,  506,  504,
+  502,  499,  496,  493,  489,  486,  482,  477,
+  473,  468,  462,  457,  451,  445,  439,  432,
+  425,  418,  411,  403,  395,  387,  379,  370,
+  362,  353,  343,  334,  324,  314,  304,  294,
+  284,  273,  263,  252,  241,  230,  218,  207,
+  195,  184,  172,  160,  148,  136,  124,  112,
+   99,   87,   75,   62,   50,   37,   25,   12,
+    0,  -12,  -25,  -37,  -50,  -62,  -75,  -87,
+  -99, -112, -124, -136, -148, -160, -172, -184,
+ -195, -207, -218, -230, -241, -252, -263, -273,
+ -284, -294, -304, -314, -324, -334, -343, -353,
+ -362, -370, -379, -387, -395, -403, -411, -418,
+ -425, -432, -439, -445, -451, -457, -462, -468,
+ -473, -477, -482, -486, -489, -493, -496, -499,
+ -502, -504, -506, -508, -509, -510, -511, -511,
+ -512, -511, -511, -510, -509, -508, -506, -504,
+ -502, -499, -496, -493, -489, -486, -482, -477,
+ -473, -468, -462, -457, -451, -445, -439, -432,
+ -425, -418, -411, -403, -395, -387, -379, -370,
+ -362, -353, -343, -334, -324, -314, -304, -294,
+ -284, -273, -263, -252, -241, -230, -218, -207,
+ -195, -184, -172, -160, -148, -136, -124, -112,
+  -99,  -87,  -75,  -62,  -50,  -37,  -25,  -12
+};
+#endif
+// Square wave
+#ifdef SQUARE_WAVE
+const short TABLA_SQUARE_WAVE[]={
+ -511, -511, -511, -511, -511, -511, -511, -511,
+ -511, -511, -511, -511, -511, -511, -511, -511,
+ -511, -511, -511, -511, -511, -511, -511, -511,
+ -511, -511, -511, -511, -511, -511, -511, -511,
+ -511, -511, -511, -511, -511, -511, -511, -511,
+ -511, -511, -511, -511, -511, -511, -511, -511,
+ -511, -511, -511, -511, -511, -511, -511, -511,
+ -511, -511, -511, -511, -511, -511, -511, -511,
+ -511, -511, -511, -511, -511, -511, -511, -511,
+ -511, -511, -511, -511, -511, -511, -511, -511,
+ -511, -511, -511, -511, -511, -511, -511, -511,
+ -511, -511, -511, -511, -511, -511, -511, -511,
+ -511, -511, -511, -511, -511, -511, -511, -511,
+ -511, -511, -511, -511, -511, -511, -511, -511,
+ -511, -511, -511, -511, -511, -511, -511, -511,
+ -511, -511, -511, -511, -511, -511, -511, -511,
+ -511, -511,  511,  511,  511,  511,  511,  511,
+  511,  511,  511,  511,  511,  511,  511,  511,
+  511,  511,  511,  511,  511,  511,  511,  511,
+  511,  511,  511,  511,  511,  511,  511,  511,
+  511,  511,  511,  511,  511,  511,  511,  511,
+  511,  511,  511,  511,  511,  511,  511,  511,
+  511,  511,  511,  511,  511,  511,  511,  511,
+  511,  511,  511,  511,  511,  511,  511,  511,
+  511,  511,  511,  511,  511,  511,  511,  511,
+  511,  511,  511,  511,  511,  511,  511,  511,
+  511,  511,  511,  511,  511,  511,  511,  511,
+  511,  511,  511,  511,  511,  511,  511,  511,
+  511,  511,  511,  511,  511,  511,  511,  511,
+  511,  511,  511,  511,  511,  511,  511,  511,
+  511,  511,  511,  511,  511,  511,  511,  511,
+  511,  511,  511,  511,  511,  511,  511,  511
+};
+#endif
+// ------------------------------------------------------------------------
+// Volatile variables
+
+
+// ------------------------------------------------------------------------
+void TIMER0_ISR(void) __attribute__ ((interrupt("IRQ")));
+void PWM0_ISR(void) __attribute__ ((interrupt("IRQ")));
+void IRQ_Spurious_Routine (void)  __attribute__ ((interrupt("IRQ")));
+// ------------------------------------------------------------------------
+
+void PWM0_ISR(void)
+{
+ // Interrupt service subroutine for changing PWM duty cycles and 
+ //  generate different waveforms: channels 1-4 from partiture 
+ /// and special effects channels.
+ // Remember it is called 57600 times per second. Don't waste your time here.
+ // Variables
+
+ PWMIR = 0xFFFF;	   // Clear all interrupt notifications
+
+ // Get data
+
+ // Attenuate
+ 
+ // Increment phases
+ 
+ // Special effects
+
+ // Add components (cuadraphonic sound)
+
+ // Silence? 
+
+ // PMW output
+
+ VICVectAddr=-1;  	   // EOI for interrupt controller
+}
+// ------------------------------------------------------------------------
+void IRQ_Spurious_Routine (void) {
+ _printf("\r\n--- IRQ, Spurious interrupt\r\n");
+ VICVectAddr=-1;  // End of interrupt: update priority logic
+}
+// ------------------------------------------------------------------------
+void TIMER0_ISR(void)
+{
+ // Interrupt service routine for changing the partitures' notes
+ // It is called each 128 ms (duration of the sixteenth (semicorchea) note)
+ // It depends on tempo
+ T0IR = 0xFFFF;	   	   // Clear all interrupt notifications	
+ // Next note, if any, update delta phases
+
+
+ VICVectAddr=-1;  	   // EOI for interrupt controller	
+}
+// ------------------------------------------------------------------------
+void AUDIO_Timer_On()
+{
+ // Interrupt frequency will be 57600 Hz
+ #define PCPWM0 (5)
+ PCONP |= (1<<PCPWM0);      // Power PWM peripheral
+
+ PINSEL0 &=~(0b11<<16);
+ PINSEL0 |= (0b10<<16);     // PWM4/P0.8 as PWM
+// PWM2 configuration missing
+
+ PWMTCR = 0b00000010;       // Reset & PWM mode enabled
+ PWMPR  = 0;                // Prescale = 1/1
+ PWMMCR = 3;                // Interrupt and Reset on match (channel #0)
+ PWMPCR = (1<<12);		    // PWM4 single edge  and output enabled
+
+ PWMMR0 = 1024-1;			// Interrupt frequency 57600 Hz. Exact 10-bit PWM
+ PWMMR4 = PWMMR0;
+ PWMLER = (1<< 4); 			// Copy to duty reg from shadow PWM4
+// PWM2 configuration mising
+
+ PWMTCR = 0b00001001;       // Counter enable and PWM mode enabled
+
+ #define PWM0_INT (8)
+ // Interrupt setup
+ VICIntEnable=(1<<PWM0_INT);                  		// PWM0 interrupt enable
+ VICDefVectAddr=(unsigned int)IRQ_Spurious_Routine; // unvectored IRQs
+ VICVectAddr0=(unsigned int)PWM0_ISR;               // Vector for slot 0
+ VICVectCntl0=(1<<5)|PWM0_INT;                      // Slot 0 for PWM0 and enabled
+ // Enable both IRQ interrupts
+ asm volatile ("mrs r0,cpsr\n bic r0,r0,#0x80\n msr cpsr,r0");
+ asm volatile ("mrs r0,cpsr\n orr r0,r0,#0x80\n msr cpsr,r0");
+}
+// ------------------------------------------------------------------------
+void PARTITURE_On(unsigned char* P, unsigned int N, unsigned int tempo)
+{
+ int ms_negra = 60000/tempo;
+ int ms_semicorchea = ms_negra/4; 
+ #define PCTIM0 (1)
+ PCONP |= (1<<PCTIM0);      // Power TIMER0 peripheral 	
+ T0TCR = 0b00000010;		// Reset	 
+ T0CTCR= 0b00000000;		// Timer mode
+ T0PR  = 0;					// Prescale 1:1
+ T0PC  = 0;
+ T0MR0 = (PCLK/1000)*ms_semicorchea - 1; // SEMICORCHEA ms  ->aprox. 128 ms
+ T0MCR = 3;					// Interrupt and reset counter
+ T0TCR = 0b00000001;		// Counter enable
+ #define TIMER_INT (4)
+ // Interrupt setup
+ VICIntEnable=(1<<TIMER_INT);                  		// TIMER0 interrupt enable
+ VICDefVectAddr=(unsigned int)IRQ_Spurious_Routine; // unvectored IRQs
+ VICVectAddr1=(unsigned int)TIMER0_ISR;             // Vector for slot 1
+ VICVectCntl1=(1<<5)|TIMER_INT;                     // Slot 1 for TIMER0 and enabled
+
+ // Prepare audio 
+ 
+ // Instruments asignment
+ 
+ //
+ AUDIO_Timer_On();
+
+ // Enable both IRQ interrupts
+ asm volatile ("mrs r0,cpsr\n bic r0,r0,#0x80\n msr cpsr,r0");	
+}
+// ------------------------------------------------------------------------
+void PARTITURE_Off()
+{ 
+
+ T0TCR = 0; // Deactivate timer 0
+}
+// ------------------------------------------------------------------------
+void AUDIO_Effect(int note, int duration, int volume)
+{ // duration in ms
+ // Activate an extra note for duration ms
+
+}
+
+================================================
+File: /Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/lpc2106.h
+================================================
+/***********************************************************************/
+/*                                                                     */
+/*  LPC2106.H:  Header file for Philips LPC2104 / LPC2105 / LPC2106    */
+/*                                                                     */
+/***********************************************************************/
+
+#ifndef __LPC2106_H
+#define __LPC2106_H
+ 
+/* External Interrupts */
+#define EXTINT         (*((volatile unsigned char *) 0xE01FC140))
+#define EXTWAKE        (*((volatile unsigned char *) 0xE01FC144))
+#define EXTMODE        (*((volatile unsigned char *) 0xE01FC148))
+#define EXTPOLAR       (*((volatile unsigned char *) 0xE01FC14C))
+ 
+/* Phase Locked Loop (PLL) */ 
+#define PLLCON          (*((volatile unsigned char *) 0xE01FC080)) 
+#define PLLCFG          (*((volatile unsigned char *) 0xE01FC084)) 
+#define PLLSTAT         (*((volatile unsigned short*) 0xE01FC088)) 
+#define PLLFEED         (*((volatile unsigned char *) 0xE01FC08C)) 
+ 
+/* Power Control */ 
+#define PCON            (*((volatile unsigned char *) 0xE01FC0C0)) 
+#define PCONP           (*((volatile unsigned long *) 0xE01FC0C4)) 
+ 
+/* APB Divider */
+#define APBDIV         (*((volatile unsigned char *) 0xE01FC100))
+ 
+/* Memory Accelerator Module (MAM) */ 
+#define MAMCR           (*((volatile unsigned char *) 0xE01FC000)) 
+#define MAMTIM          (*((volatile unsigned char *) 0xE01FC004)) 
+#define MEMMAP         (*((volatile unsigned char *) 0xE01FC040))
+ 
+/* Vectored Interrupt Controller (VIC) */ 
+#define VICIRQStatus    (*((volatile unsigned long *) 0xFFFFF000)) 
+#define VICFIQStatus    (*((volatile unsigned long *) 0xFFFFF004)) 
+#define VICRawIntr      (*((volatile unsigned long *) 0xFFFFF008)) 
+#define VICIntSelect    (*((volatile unsigned long *) 0xFFFFF00C)) 
+#define VICIntEnable    (*((volatile unsigned long *) 0xFFFFF010)) 
+#define VICIntEnClr     (*((volatile unsigned long *) 0xFFFFF014)) 
+#define VICSoftInt      (*((volatile unsigned long *) 0xFFFFF018)) 
+#define VICSoftIntClear (*((volatile unsigned long *) 0xFFFFF01C)) 
+#define VICProtection   (*((volatile unsigned long *) 0xFFFFF020)) 
+#define VICVectAddr     (*((volatile unsigned long *) 0xFFFFF030)) 
+#define VICDefVectAddr  (*((volatile unsigned long *) 0xFFFFF034)) 
+#define VICVectAddr0    (*((volatile unsigned long *) 0xFFFFF100)) 
+#define VICVectAddr1    (*((volatile unsigned long *) 0xFFFFF104)) 
+#define VICVectAddr2    (*((volatile unsigned long *) 0xFFFFF108)) 
+#define VICVectAddr3    (*((volatile unsigned long *) 0xFFFFF10C)) 
+#define VICVectAddr4    (*((volatile unsigned long *) 0xFFFFF110)) 
+#define VICVectAddr5    (*((volatile unsigned long *) 0xFFFFF114)) 
+#define VICVectAddr6    (*((volatile unsigned long *) 0xFFFFF118)) 
+#define VICVectAddr7    (*((volatile unsigned long *) 0xFFFFF11C)) 
+#define VICVectAddr8    (*((volatile unsigned long *) 0xFFFFF120)) 
+#define VICVectAddr9    (*((volatile unsigned long *) 0xFFFFF124)) 
+#define VICVectAddr10   (*((volatile unsigned long *) 0xFFFFF128)) 
+#define VICVectAddr11   (*((volatile unsigned long *) 0xFFFFF12C)) 
+#define VICVectAddr12   (*((volatile unsigned long *) 0xFFFFF130)) 
+#define VICVectAddr13   (*((volatile unsigned long *) 0xFFFFF134)) 
+#define VICVectAddr14   (*((volatile unsigned long *) 0xFFFFF138)) 
+#define VICVectAddr15   (*((volatile unsigned long *) 0xFFFFF13C)) 
+#define VICVectCntl0    (*((volatile unsigned long *) 0xFFFFF200)) 
+#define VICVectCntl1    (*((volatile unsigned long *) 0xFFFFF204)) 
+#define VICVectCntl2    (*((volatile unsigned long *) 0xFFFFF208)) 
+#define VICVectCntl3    (*((volatile unsigned long *) 0xFFFFF20C)) 
+#define VICVectCntl4    (*((volatile unsigned long *) 0xFFFFF210)) 
+#define VICVectCntl5    (*((volatile unsigned long *) 0xFFFFF214)) 
+#define VICVectCntl6    (*((volatile unsigned long *) 0xFFFFF218)) 
+#define VICVectCntl7    (*((volatile unsigned long *) 0xFFFFF21C)) 
+#define VICVectCntl8    (*((volatile unsigned long *) 0xFFFFF220)) 
+#define VICVectCntl9    (*((volatile unsigned long *) 0xFFFFF224)) 
+#define VICVectCntl10   (*((volatile unsigned long *) 0xFFFFF228)) 
+#define VICVectCntl11   (*((volatile unsigned long *) 0xFFFFF22C)) 
+#define VICVectCntl12   (*((volatile unsigned long *) 0xFFFFF230)) 
+#define VICVectCntl13   (*((volatile unsigned long *) 0xFFFFF234)) 
+#define VICVectCntl14   (*((volatile unsigned long *) 0xFFFFF238)) 
+#define VICVectCntl15   (*((volatile unsigned long *) 0xFFFFF23C)) 
+ 
+/* General Purpose Input/Output (GPIO) */ 
+#define IOPIN           (*((volatile unsigned long *) 0xE0028000)) 
+#define IOSET           (*((volatile unsigned long *) 0xE0028004)) 
+#define IODIR           (*((volatile unsigned long *) 0xE0028008)) 
+#define IOCLR           (*((volatile unsigned long *) 0xE002800C)) 
+
+/* Fast General Purpose Input/Output (GPIO) */
+#define FIODIR         (*((volatile unsigned long *) 0x3FFFC000))
+#define FIOMASK        (*((volatile unsigned long *) 0x3FFFC010))
+#define FIOPIN         (*((volatile unsigned long *) 0x3FFFC014))
+#define FIOSET         (*((volatile unsigned long *) 0x3FFFC018))
+#define FIOCLR         (*((volatile unsigned long *) 0x3FFFC01C))
+ 
+/* Pin Connect Block */ 
+#define PINSEL0         (*((volatile unsigned long *) 0xE002C000)) 
+#define PINSEL1         (*((volatile unsigned long *) 0xE002C004)) 
+ 
+/* Universal Asynchronous Receiver Transmitter 0 (UART0) */ 
+#define U0RBR           (*((volatile unsigned char *) 0xE000C000)) 
+#define U0THR           (*((volatile unsigned char *) 0xE000C000)) 
+#define U0IER           (*((volatile unsigned char *) 0xE000C004)) 
+#define U0IIR           (*((volatile unsigned char *) 0xE000C008)) 
+#define U0FCR           (*((volatile unsigned char *) 0xE000C008)) 
+#define U0LCR           (*((volatile unsigned char *) 0xE000C00C)) 
+#define U0LSR           (*((volatile unsigned char *) 0xE000C014)) 
+#define U0SCR           (*((volatile unsigned char *) 0xE000C01C)) 
+#define U0DLL           (*((volatile unsigned char *) 0xE000C000)) 
+#define U0DLM           (*((volatile unsigned char *) 0xE000C004)) 
+
+#define U0ACR          (*((volatile unsigned long *) 0xE000C020))
+#define U0FDR          (*((volatile unsigned long *) 0xE000C028))
+#define U0TER          (*((volatile unsigned char *) 0xE000C030))
+ 
+/* Universal Asynchronous Receiver Transmitter 1 (UART1) */ 
+#define U1RBR           (*((volatile unsigned char *) 0xE0010000)) 
+#define U1THR           (*((volatile unsigned char *) 0xE0010000)) 
+#define U1IER           (*((volatile unsigned char *) 0xE0010004)) 
+#define U1IIR           (*((volatile unsigned char *) 0xE0010008)) 
+#define U1FCR           (*((volatile unsigned char *) 0xE0010008)) 
+#define U1LCR           (*((volatile unsigned char *) 0xE001000C)) 
+#define U1MCR           (*((volatile unsigned char *) 0xE0010010)) 
+#define U1LSR           (*((volatile unsigned char *) 0xE0010014)) 
+#define U1MSR           (*((volatile unsigned char *) 0xE0010018)) 
+#define U1SCR           (*((volatile unsigned char *) 0xE001001C)) 
+#define U1DLL           (*((volatile unsigned char *) 0xE0010000)) 
+#define U1DLM           (*((volatile unsigned char *) 0xE0010004)) 
+
+#define U1ACR          (*((volatile unsigned long *) 0xE0010020))
+#define U1FDR          (*((volatile unsigned long *) 0xE0010028))
+#define U1TER          (*((volatile unsigned char *) 0xE0010030))
+ 
+/* I2C (8/16 bit data bus) */ 
+#define I2CONSET        (*((volatile unsigned long *) 0xE001C000)) 
+#define I2STAT          (*((volatile unsigned long *) 0xE001C004)) 
+#define I2DAT           (*((volatile unsigned long *) 0xE001C008)) 
+#define I2ADR           (*((volatile unsigned long *) 0xE001C00C)) 
+#define I2SCLH          (*((volatile unsigned long *) 0xE001C010)) 
+#define I2SCLL          (*((volatile unsigned long *) 0xE001C014)) 
+#define I2CONCLR        (*((volatile unsigned long *) 0xE001C018)) 
+
+/* SPI (Serial Peripheral Interface) */
+#define S0SPCR         (*((volatile unsigned long *) 0xE0020000))
+#define S0SPSR         (*((volatile unsigned char *) 0xE0020004))
+#define S0SPDR         (*((volatile unsigned long *) 0xE0020008))
+#define S0SPCCR        (*((volatile unsigned char *) 0xE002000C))
+#define S0SPINT        (*((volatile unsigned char *) 0xE002001C))
+ 
+/* Synchronous Serial Port interface (SSP) */ //0xE005C000
+#define SSPCR0         (*((volatile unsigned long *) 0xE005C000))
+#define SSPCR1         (*((volatile unsigned char *) 0xE005C004))
+#define SSPDR          (*((volatile unsigned long *) 0xE005C008))
+#define SSPSR          (*((volatile unsigned char *) 0xE005C00C))
+#define SSPCPSR        (*((volatile unsigned char *) 0xE005C010))
+#define SSPIMSC        (*((volatile unsigned char *) 0xE005C014))
+#define SSPRIS         (*((volatile unsigned char *) 0xE005C018))
+#define SSPMIS         (*((volatile unsigned char *) 0xE005C01C))
+#define SSPICR         (*((volatile unsigned char *) 0xE005C020))
+ 
+/* Timer 0 */ 
+#define T0IR            (*((volatile unsigned long *) 0xE0004000)) 
+#define T0TCR           (*((volatile unsigned long *) 0xE0004004)) 
+#define T0TC            (*((volatile unsigned long *) 0xE0004008)) 
+#define T0PR            (*((volatile unsigned long *) 0xE000400C)) 
+#define T0PC            (*((volatile unsigned long *) 0xE0004010)) 
+#define T0MCR           (*((volatile unsigned long *) 0xE0004014)) 
+#define T0MR0           (*((volatile unsigned long *) 0xE0004018)) 
+#define T0MR1           (*((volatile unsigned long *) 0xE000401C)) 
+#define T0MR2           (*((volatile unsigned long *) 0xE0004020)) 
+#define T0MR3           (*((volatile unsigned long *) 0xE0004024)) 
+#define T0CCR           (*((volatile unsigned long *) 0xE0004028)) 
+#define T0CR0           (*((volatile unsigned long *) 0xE000402C)) 
+#define T0CR1           (*((volatile unsigned long *) 0xE0004030)) 
+#define T0CR2           (*((volatile unsigned long *) 0xE0004034)) 
+#define T0CR3           (*((volatile unsigned long *) 0xE0004038)) 
+#define T0EMR           (*((volatile unsigned long *) 0xE000403C)) 
+ 
+#define T0CTCR         (*((volatile unsigned char *) 0xE0004070))
+#define T0PWMCON       (*((volatile unsigned long *) 0xE0004074)) 
+ 
+/* Timer 1 */ 
+#define T1IR            (*((volatile unsigned long *) 0xE0008000)) 
+#define T1TCR           (*((volatile unsigned long *) 0xE0008004)) 
+#define T1TC            (*((volatile unsigned long *) 0xE0008008)) 
+#define T1PR            (*((volatile unsigned long *) 0xE000800C)) 
+#define T1PC            (*((volatile unsigned long *) 0xE0008010)) 
+#define T1MCR           (*((volatile unsigned long *) 0xE0008014)) 
+#define T1MR0           (*((volatile unsigned long *) 0xE0008018)) 
+#define T1MR1           (*((volatile unsigned long *) 0xE000801C)) 
+#define T1MR2           (*((volatile unsigned long *) 0xE0008020)) 
+#define T1MR3           (*((volatile unsigned long *) 0xE0008024)) 
+#define T1CCR           (*((volatile unsigned long *) 0xE0008028)) 
+#define T1CR0           (*((volatile unsigned long *) 0xE000802C)) 
+#define T1CR1           (*((volatile unsigned long *) 0xE0008030)) 
+#define T1CR2           (*((volatile unsigned long *) 0xE0008034)) 
+#define T1CR3           (*((volatile unsigned long *) 0xE0008038)) 
+#define T1EMR           (*((volatile unsigned long *) 0xE000803C)) 
+
+#define T1CTCR         (*((volatile unsigned char *) 0xE0008070))
+#define T1PWMCON       (*((volatile unsigned long *) 0xE0008074))
+ 
+/* Pulse Width Modulator (PWM) */ 
+#define PWMIR           (*((volatile unsigned long *) 0xE0014000)) 
+#define PWMTCR          (*((volatile unsigned long *) 0xE0014004)) 
+#define PWMTC           (*((volatile unsigned long *) 0xE0014008)) 
+#define PWMPR           (*((volatile unsigned long *) 0xE001400C)) 
+#define PWMPC           (*((volatile unsigned long *) 0xE0014010)) 
+#define PWMMCR          (*((volatile unsigned long *) 0xE0014014)) 
+#define PWMMR0          (*((volatile unsigned long *) 0xE0014018)) 
+#define PWMMR1          (*((volatile unsigned long *) 0xE001401C)) 
+#define PWMMR2          (*((volatile unsigned long *) 0xE0014020)) 
+#define PWMMR3          (*((volatile unsigned long *) 0xE0014024)) 
+#define PWMMR4          (*((volatile unsigned long *) 0xE0014040)) 
+#define PWMMR5          (*((volatile unsigned long *) 0xE0014044)) 
+#define PWMMR6          (*((volatile unsigned long *) 0xE0014048)) 
+#define PWMPCR          (*((volatile unsigned long *) 0xE001404C)) 
+#define PWMLER          (*((volatile unsigned long *) 0xE0014050)) 
+ 
+/* Real Time Clock */ 
+#define ILR             (*((volatile unsigned char *) 0xE0024000)) 
+#define CTC             (*((volatile unsigned short*) 0xE0024004)) 
+#define CCR             (*((volatile unsigned char *) 0xE0024008)) 
+#define CIIR            (*((volatile unsigned char *) 0xE002400C)) 
+#define AMR             (*((volatile unsigned char *) 0xE0024010)) 
+#define CTIME0          (*((volatile unsigned long *) 0xE0024014)) 
+#define CTIME1          (*((volatile unsigned long *) 0xE0024018)) 
+#define CTIME2          (*((volatile unsigned long *) 0xE002401C)) 
+#define SEC             (*((volatile unsigned char *) 0xE0024020)) 
+#define MIN             (*((volatile unsigned char *) 0xE0024024)) 
+#define HOUR            (*((volatile unsigned char *) 0xE0024028)) 
+#define DOM             (*((volatile unsigned char *) 0xE002402C)) 
+#define DOW             (*((volatile unsigned char *) 0xE0024030)) 
+#define DOY             (*((volatile unsigned short*) 0xE0024034)) 
+#define MONTH           (*((volatile unsigned char *) 0xE0024038)) 
+#define YEAR            (*((volatile unsigned short*) 0xE002403C)) 
+#define ALSEC           (*((volatile unsigned char *) 0xE0024060)) 
+#define ALMIN           (*((volatile unsigned char *) 0xE0024064)) 
+#define ALHOUR          (*((volatile unsigned char *) 0xE0024068)) 
+#define ALDOM           (*((volatile unsigned char *) 0xE002406C)) 
+#define ALDOW           (*((volatile unsigned char *) 0xE0024070)) 
+#define ALDOY           (*((volatile unsigned short*) 0xE0024074)) 
+#define ALMON           (*((volatile unsigned char *) 0xE0024078)) 
+#define ALYEAR          (*((volatile unsigned short*) 0xE002407C)) 
+#define PREINT          (*((volatile unsigned short*) 0xE0024080)) 
+#define PREFRAC         (*((volatile unsigned short*) 0xE0024084)) 
+ 
+/* Watchdog */ 
+#define WDMOD           (*((volatile unsigned char *) 0xE0000000)) 
+#define WDTC            (*((volatile unsigned long *) 0xE0000004)) 
+#define WDFEED          (*((volatile unsigned char *) 0xE0000008)) 
+#define WDTV            (*((volatile unsigned long *) 0xE000000C)) 
+
+/* Reset Source Identification */
+#define RSIR           (*((volatile unsigned char *) 0xE01FC180))
+
+/* Code Security Protection */
+#define CPSR           (*((volatile unsigned long *) 0xE01FC184))
+
+/* Syscon Miscellaneous */
+#define SCS            (*((volatile unsigned long *) 0xE01FC1A0))
+ 
+/* Define firmware Functions */ 
+#define rm_init_entry()             ((void (*)())(0x7fffff91))() 
+#define rm_undef_handler()          ((void (*)())(0x7fffffa0))() 
+#define rm_prefetchabort_handler()  ((void (*)())(0x7fffffb0))() 
+#define rm_dataabort_handler()      ((void (*)())(0x7fffffc0))() 
+#define rm_irqhandler()             ((void (*)())(0x7fffffd0))() 
+#define rm_irqhandler2()            ((void (*)())(0x7fffffe0))() 
+#define iap_entry(a, b)             ((void (*)())(0x7ffffff1))(a, b) 
+
+#endif
+
+================================================
+File: /Simulacion/SW_DPSE_22_23_Simulacion/LPC2106_1/bloques.c
+================================================
+/* XPM */
+char *bloques[] = {
+/* columns rows colors chars-per-pixel */
+"150 30 14 1 ",
+"  c #000000",
+". c #FF0000",
+"X c #DE4700",
+"o c #00FF00",
+"O c #FFB800",
+"+ c #FFFF00",
+"@ c #0000DE",
+"# c #0068DE",
+"$ c #9700DE",
+"% c #FF00DE",
+"& c #009797",
+"* c #00FFDE",
+"= c #B8B8DE",
+"- c #DEDEDE",
+/* pixels */
+"       -              .              & &            # #                                                                                               ",
+"       -              .              & &            # #                                                                                               ",
+"       -              .           &&XX&XX&&      ##%%#%%##                                                      o                           .. ..     ",
+"      ---            ...           &XX&XX&        #%%#%%#       .  # #  .     #    +    #       . .             o              X             .#.      ",
+"      ---            ...            &&&&&          #####      ...  # #  ...    # +.+.+ #    * * . . * *       %%o%%       @   XXX   @         #       ",
+"   .  ---  .      =  ...  =        &++&++&        #$$#$$#     ... -.-.- ...     #..+..#     ***  O  ***      %%ooo%%      @  XXXXX  @  ###### # ######",
+"   .  ---  .      =  ...  =      &&&+++++&&&    ###$$$$$###   ... ----- ...      +++++       ** OOO **       %oo.oo%      @+XX+X+XX+@   ############# ",
+"   - ----- -      . ..... .    &&&&&+++++&&&& #####$$$$$####   ....---....      ##+++##      ** OOO **      oooo.oooo     @++++X++++@   ------#------ ",
+".  -#--.--#-  .=  .#..=..#.  =  &&&&+++++&&&&  ####$$$$$####    ...###...      ###...###      **OOO**       ooo...ooo     @@+++++++@@     --- # ---   ",
+".  #--...--#  .=  #..===..#  =  &X&& X X &&X&  #%## % % ##%#   ....###....    ### ... ###       OOO        ooooooooooo     @@+ + +@@          #       ",
+"-  ---.-.---  -.  ...=.=...  . &&X&  X X  &X& ##%#  % %  #%#  .....---.....  #### +++ ####      OOO        oo  ooo  oo      @@ + @@           #       ",
+"- ----------- -. ........... . &X&&       &&X #%##       ##%   ... ### ...   ###  ...  ###   O   O         o    o    o       @ + @            #       ",
+"-----.---.-----.....=...=..... &XX&       &XX #%%#       #%%     .     .     ###   .   ###    O  O         o    o    o         +              #       ",
+"--- ..---.. ---... ==...== ... &XX&       &XX #%%#       #%%                                   OO               o              +              #       ",
+"--  .. - ..  --..  == . ==  .. &&&&       &&& ####       ###                                                                                          ",
+"      -              .                                                                                                                                ",
+"      -              .               &  &           #  #                                                                                              ",
+"      -              .             &&XX&          ##%%#               .               #                        o                              ..      ",
+"     ---            ...         &&XX&XX        ##%%#%%                .           +   #        . . * *         o               X    @      .. .     # ",
+"     ---  .         ...  =       &&X&&&&&&      ##%######     .    #  .          .+.+#         . . ***       %%o%%%           XXXX  @       .#    ### ",
+"      --- -          ... .         &+&++&&& &     #$#$$### #  .  #-.-  .      # +.+..      * *  O   **       %%ooo%%      @   XXXXX+@@        # ####- ",
+"    . -----        = .....       &&+++++&&&&    ##$$$$$####   . -.####..       ##++++##    ***  OOO **       %oo.oooo     @@ XX+X++++@    ### ###---- ",
+"    - -.---# .     . .=...# =    &&++++++ &&    ##$$$$$$ ##    . ####.           ++++##     *** OOO**        %oo.ooooo     @++++X+++@@ ########----   ",
+"    -#-..--- -     .#.==... .   &&&&++++  &&   ####$$$$  ##    ...---...        ##... ##     ***OOOO        ooo...ooooo    @++++++++@   ###---#  -    ",
+"    #--.-------    #..=....... &&&& +X X  &&  #### $% %  ##      .----..        ##.... ##        OOO        ooooooo  oo    @@@+++ +@@    ----- #      ",
+"  .  -----.----  =  .....=....  &&&  X X &&&   ###  % % ###     ...###...       ## +++ ##        OO         ooo ooo   o      @@ +  @           #      ",
+"  - ---.--..  -  . ...=..==  .   &&       &&    ##       ##     ...### ..       ## ... ##         O         oo   o            @ ++             #      ",
+"  --- ..--..     ... ==..==      &&&&    &&     ####    ##      ..  #           ##  .             O  O      o    o               +              #     ",
+"  --- .. -       ... == .          &&&   &        ###   #       ..              ##                 OO       o    o               +              #     ",
+"   -              .                 &&& &          ### #                                                                                              "
+};
+
+

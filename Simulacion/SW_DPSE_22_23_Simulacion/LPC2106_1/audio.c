@@ -1,8 +1,8 @@
 // =======================================================================
 // Project: Videoconsole
 // Date: 	2022/03/28 - 2020/02/19
-// Author:  Jesús M. Hernández Mangas
-// Subject: Desarrollo Práctico de Sistemas Electrónicos 2022-2023
+// Author:  Jesï¿½s M. Hernï¿½ndez Mangas
+// Subject: Desarrollo Prï¿½ctico de Sistemas Electrï¿½nicos 2022-2023
 // File:    audio.c
 // =======================================================================
 #include "system.h"
@@ -111,9 +111,10 @@ void PWM0_ISR(void)
  //  generate different waveforms: channels 1-4 from partiture 
  /// and special effects channels.
  // Remember it is called 57600 times per second. Don't waste your time here.
- // Variables
+ // Variables 
+  int d1, d2, d3, d4, dtotal;
 
- PWMIR = 0xFFFF;	   // Clear all interrupt notifications
+  PWMIR = 0xFFFF;	   // Clear all interrupt notifications
 
  // Get data
 

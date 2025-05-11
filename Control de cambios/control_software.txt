@@ -1,0 +1,35 @@
+
+09/04/2025
+- (Añadido): Análisis del software y las especificaciones requeridas.
+
+14/04/2025
+16/04/2025
+21/04/2025
+23/04/2025
+- (Vacaciones de Semana Santa)
+
+28/04/2025
+- (Añadido): Inicio del desarrollo del videojuego. Ideas iniciales.
+
+30/04/2025
+- (Modificado): Elección de desarrollar Pacman.
+- (Añadido): Planteamiento de la lógica del videojuego.
+
+05/05/2025
+- (Añadido): Diseño de gráficos y ficheros .xpm.
+
+07/05/2025
+- (Corregido): Gráficos arreglados.
+- (Añadido): Implementación de la lógica del videojuego.
+
+12/05/2025:
+- (Corregido): Sistema de puntuación y movimiento arreglado.
+- (Añadido): Drivers para la reproducción de audio.
+
+14/05/2025:
+- (Añadido): Drivers para el funcionamiento del motor vibrador.
+
+19/05/2025:
+21/05/2025:
+26/05/2025:
+28/05/2025:

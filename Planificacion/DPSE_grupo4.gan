@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="DPSE_grupo4" company="" webLink="http://" view-date="2025-02-10" view-index="0" gantt-divider-location="433" resource-divider-location="300" version="2.8.1" locale="es">
+<?xml version="1.0" encoding="UTF-8"?><project name="DPSE_grupo4" company="" webLink="http://" view-date="2025-01-13" view-index="0" gantt-divider-location="433" resource-divider-location="300" version="2.8.1" locale="es">
     <description/>
-    <view zooming-state="default:6" id="gantt-chart">
+    <view zooming-state="default:7" id="gantt-chart">
         <field id="tpd3" name="Nombre" width="216" order="0"/>
         <field id="tpd4" name="Fecha de inicio" width="99" order="1"/>
         <field id="tpd5" name="Fecha de fin" width="99" order="2"/>
@@ -97,25 +97,25 @@
                 <depend id="5" type="2" difference="0" hardness="Strong"/>
             </task>
         </task>
-        <task id="4" name="Realización Firmware. Simulación y depuración" color="#000000" meeting="false" start="2025-03-20" duration="29" complete="29" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true">
+        <task id="4" name="Realización Firmware. Simulación y depuración" color="#000000" meeting="false" start="2025-03-20" duration="29" complete="82" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true">
             <depend id="5" type="2" difference="0" hardness="Strong"/>
             <depend id="34" type="2" difference="0" hardness="Strong"/>
             <task id="30" name="Control de elementos hardware: drivers" color="#8cb6ce" meeting="false" start="2025-03-20" duration="10" complete="100" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true"/>
             <task id="31" name="Verificación " color="#8cb6ce" meeting="false" start="2025-03-28" duration="8" complete="100" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true"/>
-            <task id="32" name="Programa principal. Especificaciones" color="#8cb6ce" meeting="false" start="2025-03-28" duration="14" complete="0" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true"/>
-            <task id="33" name="Documentación firmware. Control de cambios" color="#8cb6ce" meeting="false" start="2025-03-20" duration="29" complete="0" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true"/>
+            <task id="32" name="Programa principal. Especificaciones" color="#8cb6ce" meeting="false" start="2025-03-28" duration="14" complete="75" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true"/>
+            <task id="33" name="Documentación firmware. Control de cambios" color="#8cb6ce" meeting="false" start="2025-03-20" duration="29" complete="75" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true"/>
         </task>
-        <task id="5" name="Verificación hardware" color="#000000" meeting="false" start="2025-04-18" duration="36" complete="0" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true">
-            <task id="34" name="Verificación inicial" color="#8cb6ce" meeting="false" start="2025-04-18" duration="6" complete="0" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true">
+        <task id="5" name="Verificación hardware" color="#000000" meeting="false" start="2025-04-18" duration="36" complete="71" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true">
+            <task id="34" name="Verificación inicial" color="#8cb6ce" meeting="false" start="2025-04-18" duration="6" complete="100" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true">
                 <depend id="35" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="35" name="Verificación firmware" color="#8cb6ce" meeting="false" start="2025-04-24" duration="30" complete="0" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true"/>
-            <task id="36" name="Resolución de problemas" color="#8cb6ce" meeting="false" start="2025-04-18" duration="36" complete="0" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true"/>
+            <task id="35" name="Verificación firmware" color="#8cb6ce" meeting="false" start="2025-04-24" duration="30" complete="75" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true"/>
+            <task id="36" name="Resolución de problemas" color="#8cb6ce" meeting="false" start="2025-04-18" duration="36" complete="75" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true"/>
             <task id="37" name="Análisis de prestaciones" color="#8cb6ce" meeting="false" start="2025-05-07" duration="8" complete="0" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true"/>
-            <task id="38" name="Montaje final. Piezas mecánicas" color="#8cb6ce" meeting="false" start="2025-04-18" duration="36" complete="0" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true"/>
+            <task id="38" name="Montaje final. Piezas mecánicas" color="#8cb6ce" meeting="false" start="2025-04-18" duration="36" complete="75" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true"/>
         </task>
-        <task id="6" name="Documentación" meeting="false" start="2025-02-10" duration="106" complete="0" expand="true">
-            <task id="39" name="Realización informe" color="#8cb6ce" meeting="false" start="2025-02-10" duration="106" complete="0" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true"/>
+        <task id="6" name="Documentación" meeting="false" start="2025-02-10" duration="106" complete="50" expand="true">
+            <task id="39" name="Realización informe" color="#8cb6ce" meeting="false" start="2025-02-10" duration="106" complete="50" thirdDate="2025-02-11" thirdDate-constraint="0" expand="true"/>
         </task>
     </tasks>
     <resources>

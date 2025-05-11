@@ -1,3 +1,6 @@
 **/*.workspace
 **/*.zip
 **/*.rar
+**/*.docx
+**/*digest*
+**/Project Backups/

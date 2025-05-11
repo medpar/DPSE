@@ -1,0 +1,25 @@
+07/05/2025
+- (Añadido): Inicio de la documentación del proyecto.
+
+12/05/2025:
+- (Añadido): Introducción y resumen del proyecto.
+
+14/05/2025:
+- (Añadido): Sección sobre el diagrama de Gantt y el control de versiones.
+
+19/05/2025:
+- (Añadido): Sección sobre el hardware y el montaje.
+- (Añadido): Capturas de los esquemáticos, el BOM, la PCB y el montaje.
+
+21/05/2025:
+- (Añadido): Sección sobre el software y el desarrollo del videojuego.
+
+26/05/2025:
+- (Corregido): Imágenes actualizadas.
+- (Añadido): Explicación sobre los drivers de audio y del motor de vibración.
+
+28/05/2025:
+- (Añadido): Fotografías del montaje final.
+- (Corregido): Revisión de la documentación y entrega.
+
+

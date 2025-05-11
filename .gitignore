@@ -4,3 +4,5 @@
 **/*.docx
 **/*digest*
 **/Project Backups/
+**/*.DS_Store*
+**/*._*

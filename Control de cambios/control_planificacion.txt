@@ -4,4 +4,7 @@
 
 12/02/2025
 - (Añadido): Creación del proyecto en Proteus.
-- (Modificado): Ajuste del calendario del diagrama de Gantt para los festivos del curso 2024-2025.
+- (Modificado): Calendario del diagrama de Gantt con los festivos del curso 2024-2025.
+
+17/02/2025
+- (Añadido): Control de versiones creado.

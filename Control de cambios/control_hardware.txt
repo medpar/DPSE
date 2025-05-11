@@ -52,4 +52,4 @@
 - (Añadido): Verificación de componentes. Batería, pantalla y comunicación con el PC comprobadas.
 
 07/04/2025:
-- (Corregido): Resoldadura de algunos integrados.
+- (Corregido): Resoldar algunos integrados.

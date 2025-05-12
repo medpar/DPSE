@@ -65,25 +65,57 @@
 
 /* Velocidad / suavidad */
 #define STEP_PX            2   /* p�xeles por iteraci�n (1 = extra-suave) */
-#define PAC_DELAY_MS       6   /* retardo interno Pac-Man                 */
-#define GHOST_DELAY_MS     0   /* retardo interno fantasmas               */
-#define PAC_MOUTH_TOGGLE_STEPS 14
+#define PAC_DELAY_MS       7   /* retardo interno Pac-Man                 */  /* retardo interno fantasmas (en ms)       */
+#define GHOST_MOVE_INTERVAL_MS 1 /* ms entre cada movimiento de los fantasmas */        
+#define GHOST_MOVE_INTERVAL_STEPS  1
+#define POWERUP_DURATION_MS       500
+#define POWERUP_DURATION_STEPS    (POWERUP_DURATION_MS / PAC_DELAY_MS)
+
+#define PAC_MOUTH_TOGGLE_STEPS 20
 #define PACMAN_OPEN_FRAME    11
 #define PACMAN_CLOSED_FRAME  10
+#define GHOST_COUNT 4
+/* --- Parpadeo de ojos de los fantasmas --- */
+static bool ghostsEyeOpen    = true;
+static int  ghostsEyeCounter = 0;
+
 static bool pacMouthOpen = true;
 static int  pacMouthCounter = 0;
+
+/* Estado power-up */
+static bool powerMode         = false;
+static int  powerTickCounter  = 0;
+
+/* Orígenes de fantasmas para respawn */
+static int origGhostX[GHOST_COUNT];
+static int origGhostY[GHOST_COUNT];
+/* -- Teletransporte: almacena las dos casillas 'O' -- */
+static int teleR[2], teleC[2];
+static int teleCount = 0;
+static bool justTeleported = false;
+
+
+/* --- Liberación escalonada de fantasmas --- */
+#define GHOST_RELEASE_INTERVAL_MS    1600
+#define GHOST_RELEASE_INTERVAL_STEPS \
+    ((GHOST_RELEASE_INTERVAL_MS + PAC_DELAY_MS - 1) / PAC_DELAY_MS)
+static bool ghostReleased[GHOST_COUNT] = { false, false, false, false };
+static int  ghostReleaseStepCounter     = 0;
+static int  ghostsReleasedCount        = 0;
+
+
 /* ------------------- Laberinto base ------------------------------- */
 static const char originalMap[MAP_ROWS][MAP_COLS+1] = {
     "M888888UOM888UEEEM8888888888F888U",  //  0: borde superior
     "9VPCCCC9E9CCCT888ICCCCCCCCCC9CCV9",  //  1: corredor superior exterior con power-ups
     "9CA88BC9E9CYCCCCCCCM88F888UC9CYC9",  //  2: pasillos verticales con monedas
-    "9CCCCCCZCZCJ888BCA8LVCZCCCZCZC9C9",  //  3: pasillos verticales con espacios
+    "9CCCCCCZCZCJ888BCCALVCZCCCZCZC9C9",  //  3: pasillos verticales con espacios
     "J88UCCCCCCC9CCCCCCC9CCCCYCCCCC9C9",  //  4: corredor con esquinas internas
     "9CCZCA888BCZCA888BCZCA88HF8888IC9",  //  5: corredor interior lleno de monedas
-    "9CCCCCCCCCCCCCCCCCCCCCCCC9CCCCCC9",  //  6: repetici�n de pasillos verticales con espacios
+    "9CCCCCCCCCGCCCCCCCCCCCCCC9CCCCCC9",  //  6: repetici�n de pasillos verticales con espacios
     "9CM88UCCM888UCM888BCM88BC9CYCM88I",  //  7: corredor interior lleno de monedas
-    "9C9EETUC9EEE9C9CCCCC9CCCCZC9C9EEE",  //  8: repetici�n del corredor interior
-    "9C9EEE9C9GGG9CT888UCJ88BCCC9CT888",  //  9: zona central de fantasmas
+    "9C9EETUC9GGG9C9CCCCC9CCCCZC9C9EEE",  //  8: repetici�n del corredor interior
+    "9C9EEE9C9EEE9CT888UCJ88BCCC9CT888",  //  9: zona central de fantasmas
     "9C9EEE9CJ888ICCCCC9C9CCCCA8LCEEEO",  // 10: corredor interior lleno de monedas
     "9C9EEE9C9CCCCCA888ICT88BCCC9CM888",  // 11: pasillos verticales con espacios
     "9C9EEMIC9CYCYCCCCCCCCCCCCYC9C9EEE",  // 12: corredor interior lleno de monedas
@@ -105,13 +137,14 @@ typedef struct {
 } Ghost;
 
 /* ------------------- Estado global -------------------------------- */
-#define GHOST_COUNT 3
+
 static Ghost ghosts[GHOST_COUNT];
 static char  map[MAP_ROWS][MAP_COLS + 1];
 
 static int pacPixX, pacPixY;          /* Pac-Man en p�xeles */
 static Direction desiredDir = DIR_NONE;
 static Direction currentDir = DIR_NONE;
+static struct timeval lastGhostMoveTime;  /* para temporizar fantasmas */
 
 static int lives, score, totalCoins;
 static bool hudDirty = true;
@@ -126,8 +159,11 @@ static void      restoreBackground(int px, int py);
 static void      drawPacman(int px, int py);
 static void      animatePacmanMove(int nx, int ny);
 static void      movePacman(void);
+static int getPacmanFrame(Direction dir);
 
+static int       getGhostFrame(Ghost *g);
 static void      animateGhostMove(Ghost *g, int nx, int ny);
+
 static void      moveGhosts();
 static void      checkCollisions(void);
 
@@ -155,7 +191,7 @@ static bool wallAt(int r, int c)
            tile == WALL_VER_LIM1 || tile == WALL_VER_LIM2 ||
            tile == ABAJO_IZQ_X2  || tile == ABAJO_DER_X2  ||
            tile == ARRIBA_IZQ_X2|| tile == ARRIBA_DER_X2||
-           tile == DOT         || tile == FDOT         ||
+           tile == DOT         ||
            tile == cross1      || tile == cross2      ||
            tile == cross3      || tile == cross4      ||
            tile == cross;
@@ -196,7 +232,10 @@ static void restoreBackground(int px, int py)
 
 static void drawPacman(int px, int py)
 {
-    XPM_PintaAtxNyN(px, py, 11, pacman);
+    /* usa currentDir (o derecha si NONE) para orientar */
+    Direction dir = currentDir;
+    int tile= getPacmanFrame(dir);
+    XPM_PintaAtxNyN(px, py, tile, pacman);
 }
 
 /* =================================================================== */
@@ -210,7 +249,18 @@ static void initGame(void)
         for (c = 0; c < MAP_COLS; c++) map[r][c] = originalMap[r][c];
         map[r][MAP_COLS] = '\0';
     }
-
+    /* Detecta las dos casillas teleport (FDOT = 'O') */
+    teleCount = 0;
+    for (r = 0; r < MAP_ROWS; r++) {
+        for (c = 0; c < MAP_COLS; c++) {
+            if (map[r][c] == FDOT && teleCount < 2) {
+                teleR[teleCount] = r;
+                teleC[teleCount] = c;
+                teleCount++;
+            }
+        }
+    }
+    justTeleported = false;
     for (g = 0; g < GHOST_COUNT; g++) ghosts[g].type = -1;
     totalCoins = 0;
 
@@ -224,6 +274,7 @@ static void initGame(void)
                 for (g = 0; g < GHOST_COUNT; g++)
                     if (ghosts[g].type == -1) {
                         ghosts[g].x = c; ghosts[g].y = r;
+                        origGhostX[g] = c; origGhostY[g] = r;
                         ghosts[g].under = EMPTY;
                         ghosts[g].type  = g;
                         ghosts[g].dir   = (g == 0) ? DIR_RIGHT : DIR_NONE;
@@ -232,7 +283,27 @@ static void initGame(void)
             } else if (map[r][c] == COIN) totalCoins++;
         }
     }
-
+        /* Ajusta posiciones iniciales de fantasmas:
+       solo el primero se moverá; los demás quedan en home hasta su turno */
+    {
+        int homeX = ghosts[0].x, homeY = ghosts[0].y;
+        origGhostX[0] = homeX; origGhostY[0] = homeY;
+        for (g = 1; g < GHOST_COUNT; g++) {
+            ghosts[g].x     = homeX;
+            ghosts[g].y     = homeY;
+            ghosts[g].under = EMPTY;
+            ghosts[g].dir   = DIR_NONE;
+            origGhostX[g]   = homeX;
+            origGhostY[g]   = homeY;
+        }
+    }
+    /* Reinicia estado power-up y flags de liberación */
+    powerMode        = false;
+    powerTickCounter = 0;
+    ghostReleaseStepCounter = 0;
+    ghostsReleasedCount     = 0;
+    for (g = 0; g < GHOST_COUNT; g++)
+        ghostReleased[g] = false;
     lives = 3; score = 0;
     desiredDir = currentDir = DIR_NONE;
 
@@ -266,7 +337,7 @@ static void drawTile(int r, int c)
         case COIN:   		XPM_PintaAtxNyN(px, py, 81, pacman);  break;
         case EMPTY:  		XPM_PintaAtxNyN(px, py, 61, pacman);  break;
 	case POWER_UP:  	XPM_PintaAtxNyN(px, py, 80, pacman);  break;
-        case GHOST:  		XPM_PintaAtxNyN(px, py, 0, pacman);   break;
+        case GHOST:  		XPM_PintaAtxNyN(px, py, 61, pacman);   break;
         case ARRIBA_IZQ_X2: XPM_PintaAtxNyN(px, py, 51, pacman);   break;
         case ABAJO_IZQ_X2: XPM_PintaAtxNyN(px, py, 75, pacman);   break;
         case ARRIBA_DER_X2: XPM_PintaAtxNyN(px, py, 53, pacman);   break;
@@ -308,6 +379,28 @@ static void dibuja_hud(void)
 /* =================================================================== */
 /*                   ANIMACI�N PAC-MAN (suave)                         */
 /* =================================================================== */
+
+static int getPacmanFrame(Direction dir) {
+    /* si no hay dirección, apunta a la derecha por defecto */
+    if (dir == DIR_NONE) dir = DIR_RIGHT;
+    if (pacMouthOpen) {
+        switch (dir) {
+            case DIR_RIGHT: return 11;
+            case DIR_DOWN:  return 23;
+            case DIR_LEFT:  return 35;
+            case DIR_UP:    return 47;
+        }
+    } else {
+        switch (dir) {
+            case DIR_RIGHT: return 10;
+            case DIR_DOWN:  return 22;
+            case DIR_LEFT:  return 34;
+            case DIR_UP:    return 46;
+        }
+    }
+    return 11; /* fallback */
+}
+
 static void animatePacmanMove(int nx, int ny)
 {
     int dx    = (nx > pacPixX) ? STEP_PX : (nx < pacPixX ? -STEP_PX : 0);
@@ -315,24 +408,17 @@ static void animatePacmanMove(int nx, int ny)
     int steps = (abs(nx - pacPixX) + abs(ny - pacPixY)) / STEP_PX;
     int i;
     for (i = 0; i < steps; i++) {
-        /* Restaura fondo del sprite anterior */
         restoreBackground(pacPixX, pacPixY);
-
-        /* Avanza 1 px */
         pacPixX += dx;
         pacPixY += dy;
-
-        /* Alterna boca cada X pasos */
+        /* alterna boca */
         if (++pacMouthCounter >= PAC_MOUTH_TOGGLE_STEPS) {
             pacMouthOpen    = !pacMouthOpen;
             pacMouthCounter = 0;
         }
-
-        /* Dibuja Pac-Man */
-        int frame = pacMouthOpen ? PACMAN_OPEN_FRAME : PACMAN_CLOSED_FRAME;
+        /* dibuja según dirección actual */
+        int frame = getPacmanFrame(currentDir);
         XPM_PintaAtxNyN(pacPixX, pacPixY, frame, pacman);
-
-        /* Delay para suavizar velocidad */
         if (PAC_DELAY_MS) _delay_ms(PAC_DELAY_MS);
     }
 }
@@ -354,6 +440,41 @@ static void movePacman(void)
         int cx = (pacPixX - X_OFFSET) / TW;
         int cy = (pacPixY - Y_OFFSET) / TW;
 
+    /* Power-up: si come 'V' */
+    if (map[cy][cx] == POWER_UP) {
+            map[cy][cx] = EMPTY;
+            drawTile(cy, cx);
+            powerMode        = true;
+            powerTickCounter = 0;
+            /* quizá sumar puntos aquí */
+        }
+        /* Si acabamos de teleportar, reseteamos la flag y seguimos movimiento */
+        if (justTeleported) {
+                justTeleported = false;
+            }
+            /* Teletransporte: si estamos en 'O' y no aún teleportando */
+            else if (map[cy][cx] == FDOT) {
+                /* índice de origen y destino */
+                int srcIdx  = (cy == teleR[0] && cx == teleC[0]) ? 0 : 1;
+                int destIdx = 1 - srcIdx;
+                /* Limpia el sprite en la casilla actual */
+                restoreBackground(pacPixX, pacPixY);
+                /* Mueve a la otra salida */
+                pacPixX = X_OFFSET + teleC[destIdx] * TW;
+                pacPixY = Y_OFFSET + teleR[destIdx] * TW;
+                /* Cuando venga del primer O (srcIdx=0) gira a izquierda */
+                /* Cuando venga del segundo O (srcIdx=1) gira abajo */
+                if (srcIdx == 0) {
+                    desiredDir = currentDir = DIR_LEFT;
+                } else {
+                    desiredDir = currentDir = DIR_DOWN;
+                }
+                /* Marcamos para no retrigger */
+                justTeleported = true;
+                /* Dibuja Pac-Man en la nueva posición */
+                drawPacman(pacPixX, pacPixY);
+                return;
+            }
         /* Come moneda */
         if (map[cy][cx] == COIN) {
             map[cy][cx] = EMPTY;
@@ -370,20 +491,69 @@ static void movePacman(void)
 
     /* Si no puede moverse, simplemente repinta su sprite actual */
     if (currentDir == DIR_NONE) {
-        int frame = pacMouthOpen ? PACMAN_OPEN_FRAME : PACMAN_CLOSED_FRAME;
+        int frame = getPacmanFrame(desiredDir);
         XPM_PintaAtxNyN(pacPixX, pacPixY, frame, pacman);
         return;
     }
 
-    /* Calcula destino en píxeles y anima */
+    /* cálculo de destino y animación */
     int tx = pacPixX, ty = pacPixY;
     if (currentDir == DIR_UP)    ty -= TW;
     if (currentDir == DIR_DOWN)  ty += TW;
     if (currentDir == DIR_LEFT)  tx -= TW;
     if (currentDir == DIR_RIGHT) tx += TW;
-
     animatePacmanMove(tx, ty);
 }
+
+static int getGhostFrame(Ghost *g) {
+        /* Calcula dirección del fantasma hacia Pac-Man */
+        int gx = X_OFFSET + g->x * TW;
+        int gy = Y_OFFSET + g->y * TW;
+        int dx = pacPixX - gx;
+        int dy = pacPixY - gy;
+        Direction dir;
+        if (abs(dx) > abs(dy))
+            dir = (dx >= 0) ? DIR_RIGHT : DIR_LEFT;
+        else
+            dir = (dy >= 0) ? DIR_DOWN  : DIR_UP;
+    
+        bool open = ghostsEyeOpen;
+        switch (g->type) {
+          case 0: /* Rojo */
+            switch (dir) {
+              case DIR_RIGHT: return open?  0:  1;
+              case DIR_DOWN:  return open? 12: 13;
+              case DIR_LEFT:  return open? 24: 25;
+              case DIR_UP:    return open? 36: 37;
+            }
+            break;
+          case 1: /* Amarillo */
+            switch (dir) {
+              case DIR_RIGHT: return open?  2:  3;
+              case DIR_DOWN:  return open? 14: 15;
+              case DIR_LEFT:  return open? 26: 27;
+              case DIR_UP:    return open? 38: 39;
+            }
+            break;
+          case 2: /* Azul */
+            switch (dir) {
+              case DIR_RIGHT: return open?  6:  7;
+              case DIR_DOWN:  return open? 18: 19;
+              case DIR_LEFT:  return open? 30: 31;
+              case DIR_UP:    return open? 42: 43;
+            }
+            break;
+          case 3: /* Morado */
+            switch (dir) {
+              case DIR_RIGHT: return open?  8:  9;
+              case DIR_DOWN:  return open? 20: 21;
+              case DIR_LEFT:  return open? 32: 33;
+              case DIR_UP:    return open? 44: 45;
+            }
+            break;
+        }
+        return 0;
+    }
 
 /* =================================================================== */
 /*                      ANIMACI�N FANTASMAS                            */
@@ -403,12 +573,20 @@ static void animateGhostMove(Ghost *g, int nx, int ny)
     int steps = (abs(tx - px) + abs(ty - py)) / STEP_PX;
     int i;
     for (i = 0; i < steps; i++) {
-        restoreBackground(px, py);
-        px += dx;
-        py += dy;
-        XPM_PintaAtxNyN(px, py, 0, ghost_xpm);
-        if (GHOST_DELAY_MS) _delay_ms(GHOST_DELAY_MS);
-    }
+                restoreBackground(px, py);
+                px += dx;
+                py += dy;
+                /* Parpadeo de ojos */
+                if (++ghostsEyeCounter >= PAC_MOUTH_TOGGLE_STEPS) {
+                    ghostsEyeOpen    = !ghostsEyeOpen;
+                    ghostsEyeCounter = 0;
+                }
+                /* Dibuja fantasma orientado y animado */
+                int frame = getGhostFrame(g);
+                frame = powerMode ? 59 : getGhostFrame(g);
+                XPM_PintaAtxNyN(px, py, frame, pacman);
+                //if (GHOST_DELAY_MS) _delay_ms(GHOST_DELAY_MS);
+            }
 
     /* Actualiza lógica */
     g->x     = nx;
@@ -423,6 +601,7 @@ static void moveGhosts(void)
     static const Direction dirs[4] = { DIR_UP, DIR_DOWN, DIR_LEFT, DIR_RIGHT };
     int i, t;
     for (i = 0; i < GHOST_COUNT; i++) {
+        if (!ghostReleased[i]) continue;
         Ghost *g = &ghosts[i];
 
         /* A veces elige nueva dirección al azar */
@@ -458,6 +637,7 @@ static void checkCollisions(void)
     int ty = (pacPixY - Y_OFFSET + TW / 2) / TW;
     int g;
     for (g = 0; g < GHOST_COUNT; g++) {
+        if (!ghostReleased[g]) continue;
         if (tx == ghosts[g].x && ty == ghosts[g].y) {
             lives--; hudDirty = true;
             if (lives > 0) {
@@ -494,16 +674,67 @@ int main(void)
     initGame();
     dibuja_mapa(map);
     dibuja_hud();
-
-    //int tick = 0;
+    /* ———————————————————————————————— */
+    /* Prepara la XPM de fantasmas para poder dibujarlos */
+    xpm_sx = TILE; xpm_sy = TILE;
+    XPM_SetxNyN(SCALE, SCALE);
+    /* ———————————————————————————————— */
+    /* Dibuja todos los fantasmas en home (quietos) */
+    int i;
+    for (i = 0; i < GHOST_COUNT; i++) {
+            int px    = X_OFFSET + ghosts[i].x * TW;
+            int py    = Y_OFFSET + ghosts[i].y * TW;
+            int frame = powerMode ? 60 : getGhostFrame(&ghosts[i]);
+            XPM_PintaAtxNyN(px, py, frame, pacman);
+        }
+    int ghostStepCounter=0;
+    //AUDIO_Play_Pacmania();
     while (1) {
         if (totalCoins == 0) break;
         if (lives     <= 0) break;
 
         movePacman();
-        //moveGhosts();
-        checkCollisions();
-
+        if (powerMode) {
+            if (++powerTickCounter >= POWERUP_DURATION_STEPS) {
+            powerMode = false;
+            }
+            }
+        if (++ghostStepCounter >= GHOST_MOVE_INTERVAL_STEPS) {
+            moveGhosts();
+            ghostStepCounter = 0;
+        }
+            if (++ghostReleaseStepCounter >= GHOST_RELEASE_INTERVAL_STEPS
+                    && ghostsReleasedCount < GHOST_COUNT) {
+                    ghostReleased[ghostsReleasedCount++] = true;
+                    ghostReleaseStepCounter = 0;
+                }
+            {
+                    int tx = (pacPixX - X_OFFSET + TW/2) / TW;
+                    int ty = (pacPixY - Y_OFFSET + TW/2) / TW;
+                    int g;
+                    for (g = 0; g < GHOST_COUNT; g++) {
+                        if (tx == ghosts[g].x && ty == ghosts[g].y) {
+                            if (powerMode) {
+                                /* come fantasma: respawn */
+                                restoreBackground(pacPixX, pacPixY);
+                                ghosts[g].x = origGhostX[g];
+                                ghosts[g].y = origGhostY[g];
+                                ghosts[g].dir   = DIR_NONE;
+                                ghosts[g].under = EMPTY;
+                                map[origGhostY[g]][origGhostX[g]] = EMPTY;
+                                /* dibuja fantasma en casa */
+                                drawTile(origGhostY[g], origGhostX[g]);
+                            } else {
+                                lives--; hudDirty = true;
+                                if (lives > 0) {
+                                    restoreBackground(pacPixX, pacPixY);
+                                    initGame(); dibuja_mapa(map); dibuja_hud();
+                                }
+                            }
+                        }
+                    }
+                }
+            checkCollisions();    
         if (hudDirty) { dibuja_hud(); hudDirty = false; }
         
     }

@@ -111,10 +111,9 @@ void PWM0_ISR(void)
  //  generate different waveforms: channels 1-4 from partiture 
  /// and special effects channels.
  // Remember it is called 57600 times per second. Don't waste your time here.
- // Variables 
-  int d1, d2, d3, d4, dtotal;
+ // Variables
 
-  PWMIR = 0xFFFF;	   // Clear all interrupt notifications
+ PWMIR = 0xFFFF;	   // Clear all interrupt notifications
 
  // Get data
 

@@ -871,15 +871,6 @@ void TFT_print_centered_x(int y1, char * s)
 }
 // -----------------------------------------------------------------------
 int tft_x, tft_y;
-int *dir;
-
-void _sputchar(unsigned char c)
-{
- *dir = c;
- dir++;
-}
-
-
 void TFT_putchar(unsigned char c)
 {
  TFT_putch(tft_x, tft_y, c);	

@@ -1,1 +1,1 @@
-code_flash.elf: xpmschulos.c
+code_flash.elf: pacmania.mod.txt.c

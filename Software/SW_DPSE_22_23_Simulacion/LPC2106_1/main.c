@@ -1,7 +1,7 @@
 // =======================================================================
 // Proyecto VIDEOCONSOLA Curso 2022-2023
-// Autor : Jes�s Manuel Hern�ndez Mangas
-// File  : main.c � PAC-MAN suave, r�pido y sin parpadeos
+// Autor : Jes�s Manuel Hern�ndez Mangas
+// File  : main.c � PAC-MAN suave, r�pido y sin parpadeos
 // =======================================================================
 #include "system.h"
 #include "xpm.h"
@@ -44,6 +44,18 @@
 #define PACMAN 		'P'
 #define POWER_UP 	'V'
 #define GHOST  		'G'
+#define ABAJO_IZQ_X2 'T'
+#define ARRIBA_IZQ_X2 'M'
+#define ARRIBA_DER_X2 'U'
+#define ABAJO_DER_X2 'I'
+#define DOT 'D'
+#define FDOT 'O'
+#define cross1 'F'
+#define cross2 'L'
+#define cross3 'H'
+#define cross4 'J'
+#define cross 'S'
+
 
 /* GPIO bits (no tocar) */
 #define LEFT   (1 << 0)
@@ -52,32 +64,67 @@
 #define DOWN   (1 << 3)
 
 /* Velocidad / suavidad */
-#define STEP_PX            2   /* p�xeles por iteraci�n (1 = extra-suave) */
-#define PAC_DELAY_MS       6   /* retardo interno Pac-Man                 */
-#define GHOST_DELAY_MS     0   /* retardo interno fantasmas               */
+#define STEP_PX            2   /* p�xeles por iteraci�n (1 = extra-suave) */
+#define PAC_DELAY_MS       7   /* retardo interno Pac-Man                 */  /* retardo interno fantasmas (en ms)       */
+#define GHOST_MOVE_INTERVAL_MS 1 /* ms entre cada movimiento de los fantasmas */        
+#define GHOST_MOVE_INTERVAL_STEPS  1
+#define POWERUP_DURATION_MS       500
+#define POWERUP_DURATION_STEPS    (POWERUP_DURATION_MS / PAC_DELAY_MS)
+
+#define PAC_MOUTH_TOGGLE_STEPS 20
+#define PACMAN_OPEN_FRAME    11
+#define PACMAN_CLOSED_FRAME  10
+#define GHOST_COUNT 4
+/* --- Parpadeo de ojos de los fantasmas --- */
+static bool ghostsEyeOpen    = true;
+static int  ghostsEyeCounter = 0;
+
+static bool pacMouthOpen = true;
+static int  pacMouthCounter = 0;
+
+/* Estado power-up */
+static bool powerMode         = false;
+static int  powerTickCounter  = 0;
+
+/* Orígenes de fantasmas para respawn */
+static int origGhostX[GHOST_COUNT];
+static int origGhostY[GHOST_COUNT];
+/* -- Teletransporte: almacena las dos casillas 'O' -- */
+static int teleR[2], teleC[2];
+static int teleCount = 0;
+static bool justTeleported = false;
+
+
+/* --- Liberación escalonada de fantasmas --- */
+#define GHOST_RELEASE_INTERVAL_MS    1600
+#define GHOST_RELEASE_INTERVAL_STEPS \
+    ((GHOST_RELEASE_INTERVAL_MS + PAC_DELAY_MS - 1) / PAC_DELAY_MS)
+static bool ghostReleased[GHOST_COUNT] = { false, false, false, false };
+static int  ghostReleaseStepCounter     = 0;
+static int  ghostsReleasedCount        = 0;
+
 
 /* ------------------- Laberinto base ------------------------------- */
 static const char originalMap[MAP_ROWS][MAP_COLS+1] = {
-    "500000000000000000000000000000004",  //  0: borde superior
-    "3VPCCCCCCCCCCCCCCCCCCCCCCCCCCCCV2",  //  1: corredor superior exterior con power-ups
-    "3CA88BCA88BCA88BCA88BCA88BCA88BC2",  //  2: pasillos verticales con monedas
-    "3CEEEECEEEECEEEECEEEECEEEECEEEEC2",  //  3: pasillos verticales con espacios
-    "3CYCCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  //  4: corredor con esquinas internas
-    "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  //  5: corredor interior lleno de monedas
-    "3C9EEECEEEECEEEECEEEECEEEECEEEEC2",  //  6: repetici�n de pasillos verticales con espacios
-    "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  //  7: corredor interior lleno de monedas
-    "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  //  8: repetici�n del corredor interior
-    "3E9EEEEEGGGEEEEEEEEEEEEEEEEEEEEE2",  //  9: zona central de fantasmas
-    "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  // 10: corredor interior lleno de monedas
-    "3C9EEECEEEECEEEECEEEECEEEECEEEEC2",  // 11: pasillos verticales con espacios
-    "3C9CCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  // 12: corredor interior lleno de monedas
-    "3CZEEECEEEECEEEECEEEECEEEECEEEEC2",  // 13: repetici�n de pasillos verticales
-    "3CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC2",  // 14: corredor interior lleno de monedas
-    "3CA88BCA88BCA88BCA88BCA88BCA88BC2",  // 15: Pac-Man en corredor central
-    "3VCCCCCCCCCCCCCCCCCCCCCCCCCCCCCV2",  // 16: corredor inferior exterior con power-ups
-    "711111111111111111111111111111116"   // 17: borde inferior
+    "M888888UOM888UEEEM8888888888F888U",  //  0: borde superior
+    "9VPCCCC9E9CCCT888ICCCCCCCCCC9CCV9",  //  1: corredor superior exterior con power-ups
+    "9CA88BC9E9CYCCCCCCCM88F888UC9CYC9",  //  2: pasillos verticales con monedas
+    "9CCCCCCZCZCJ888BCCALVCZCCCZCZC9C9",  //  3: pasillos verticales con espacios
+    "J88UCCCCCCC9CCCCCCC9CCCCYCCCCC9C9",  //  4: corredor con esquinas internas
+    "9CCZCA888BCZCA888BCZCA88HF8888IC9",  //  5: corredor interior lleno de monedas
+    "9CCCCCCCCCGCCCCCCCCCCCCCC9CCCCCC9",  //  6: repetici�n de pasillos verticales con espacios
+    "9CM88UCCM888UCM888BCM88BC9CYCM88I",  //  7: corredor interior lleno de monedas
+    "9C9EETUC9GGG9C9CCCCC9CCCCZC9C9EEE",  //  8: repetici�n del corredor interior
+    "9C9EEE9C9EEE9CT888UCJ88BCCC9CT888",  //  9: zona central de fantasmas
+    "9C9EEE9CJ888ICCCCC9C9CCCCA8LCEEEO",  // 10: corredor interior lleno de monedas
+    "9C9EEE9C9CCCCCA888ICT88BCCC9CM888",  // 11: pasillos verticales con espacios
+    "9C9EEMIC9CYCYCCCCCCCCCCCCYC9C9EEE",  // 12: corredor interior lleno de monedas
+    "9CT88ICCZC9CT88888BCM88BC9CZCT88U",  // 13: repetici�n de pasillos verticales
+    "9CCCCCCCCC9CCCCCCCCCZCCCC9CCCCCC9",  // 14: corredor interior lleno de monedas
+    "9CA8BCYCA8H8888BCCYCCCYCAH8888BC9",  // 15: Pac-Man en corredor central
+    "9VCCCC9CCCCCCCCCCMHUCC9CCCCCCCCV9",  // 16: corredor inferior exterior con power-ups
+    "T88888H8888888888IET88H888888888I"   // 17: borde inferior
 };
-
 
 /* ------------------- Tipos y estructuras -------------------------- */
 typedef enum { DIR_UP, DIR_DOWN, DIR_LEFT, DIR_RIGHT, DIR_NONE } Direction;
@@ -90,14 +137,14 @@ typedef struct {
 } Ghost;
 
 /* ------------------- Estado global -------------------------------- */
-#define GHOST_COUNT 3
+
 static Ghost ghosts[GHOST_COUNT];
 static char  map[MAP_ROWS][MAP_COLS + 1];
 
-static int pacPixX, pacPixY;          /* Pac-Man en p�xeles */
+static int pacPixX, pacPixY;          /* Pac-Man en p�xeles */
 static Direction desiredDir = DIR_NONE;
 static Direction currentDir = DIR_NONE;
-static Direction printdir = DIR_NONE;
+static struct timeval lastGhostMoveTime;  /* para temporizar fantasmas */
 
 static int lives, score, totalCoins;
 static bool hudDirty = true;
@@ -112,9 +159,12 @@ static void      restoreBackground(int px, int py);
 static void      drawPacman(int px, int py);
 static void      animatePacmanMove(int nx, int ny);
 static void      movePacman(void);
+static int getPacmanFrame(Direction dir);
 
+static int       getGhostFrame(Ghost *g);
 static void      animateGhostMove(Ghost *g, int nx, int ny);
-static void      moveGhosts(int tick);
+
+static void      moveGhosts();
 static void      checkCollisions(void);
 
 static void      initGame(void);
@@ -127,10 +177,33 @@ static void      drawTile(int r, int c);
 /* =================================================================== */
 static bool wallAt(int r, int c)
 {
-    if (c < 0 || c >= MAP_COLS || r < 0 || r >= MAP_ROWS) return true;
-    return map[r][c] == (WALL_UP || WALL_DOWN || WALL_RIGHT || WALL_LEFT || WALL_HOR || WALL_VER || WALL_HOR_LIM1 || WALL_HOR_LIM2 || WALL_VER_LIM1 || WALL_VER_LIM2);
+    if (c < 0 || c >= MAP_COLS || r < 0 || r >= MAP_ROWS) {
+        return true;
+    }
+
+    char tile = map[r][c];
+    return tile == WALL_UP   || tile == WALL_DOWN  ||
+           tile == WALL_RIGHT|| tile == WALL_LEFT  ||
+           tile == CORNER_UPR || tile == CORNER_UPL ||
+           tile == CORNER_DOWNR|| tile == CORNER_DOWNL||
+           tile == WALL_HOR   || tile == WALL_VER   ||
+           tile == WALL_HOR_LIM1 || tile == WALL_HOR_LIM2 ||
+           tile == WALL_VER_LIM1 || tile == WALL_VER_LIM2 ||
+           tile == ABAJO_IZQ_X2  || tile == ABAJO_DER_X2  ||
+           tile == ARRIBA_IZQ_X2|| tile == ARRIBA_DER_X2||
+           tile == DOT         ||
+           tile == cross1      || tile == cross2      ||
+           tile == cross3      || tile == cross4      ||
+           tile == cross;
 }
 
+#define DOT 'D'
+#define FDOT 'O'
+#define cross1 'F'
+#define cross2 'L'
+#define cross3 'H'
+#define cross4 'J'
+#define cross 'S'
 static bool canMoveDir(int px, int py, Direction d)
 {
     int cx = (px - X_OFFSET) / TW;
@@ -159,11 +232,14 @@ static void restoreBackground(int px, int py)
 
 static void drawPacman(int px, int py)
 {
-    XPM_PintaAtxNyN(px, py, 11, pacman);
+    /* usa currentDir (o derecha si NONE) para orientar */
+    Direction dir = currentDir;
+    int tile= getPacmanFrame(dir);
+    XPM_PintaAtxNyN(px, py, tile, pacman);
 }
 
 /* =================================================================== */
-/*                         INICIALIZACI�N                              */
+/*                         INICIALIZACI�N                              */
 /* =================================================================== */
 static void initGame(void)
 {
@@ -173,7 +249,18 @@ static void initGame(void)
         for (c = 0; c < MAP_COLS; c++) map[r][c] = originalMap[r][c];
         map[r][MAP_COLS] = '\0';
     }
-
+    /* Detecta las dos casillas teleport (FDOT = 'O') */
+    teleCount = 0;
+    for (r = 0; r < MAP_ROWS; r++) {
+        for (c = 0; c < MAP_COLS; c++) {
+            if (map[r][c] == FDOT && teleCount < 2) {
+                teleR[teleCount] = r;
+                teleC[teleCount] = c;
+                teleCount++;
+            }
+        }
+    }
+    justTeleported = false;
     for (g = 0; g < GHOST_COUNT; g++) ghosts[g].type = -1;
     totalCoins = 0;
 
@@ -187,6 +274,7 @@ static void initGame(void)
                 for (g = 0; g < GHOST_COUNT; g++)
                     if (ghosts[g].type == -1) {
                         ghosts[g].x = c; ghosts[g].y = r;
+                        origGhostX[g] = c; origGhostY[g] = r;
                         ghosts[g].under = EMPTY;
                         ghosts[g].type  = g;
                         ghosts[g].dir   = (g == 0) ? DIR_RIGHT : DIR_NONE;
@@ -195,13 +283,34 @@ static void initGame(void)
             } else if (map[r][c] == COIN) totalCoins++;
         }
     }
-
+        /* Ajusta posiciones iniciales de fantasmas:
+       solo el primero se moverá; los demás quedan en home hasta su turno */
+    {
+        int homeX = ghosts[0].x, homeY = ghosts[0].y;
+        origGhostX[0] = homeX; origGhostY[0] = homeY;
+        for (g = 1; g < GHOST_COUNT; g++) {
+            ghosts[g].x     = homeX;
+            ghosts[g].y     = homeY;
+            ghosts[g].under = EMPTY;
+            ghosts[g].dir   = DIR_NONE;
+            origGhostX[g]   = homeX;
+            origGhostY[g]   = homeY;
+        }
+    }
+    /* Reinicia estado power-up y flags de liberación */
+    powerMode        = false;
+    powerTickCounter = 0;
+    ghostReleaseStepCounter = 0;
+    ghostsReleasedCount     = 0;
+    for (g = 0; g < GHOST_COUNT; g++)
+        ghostReleased[g] = false;
     lives = 3; score = 0;
     desiredDir = currentDir = DIR_NONE;
-
+/*
     struct timeval tv;
     gettimeofday(&tv, NULL);
     srand((unsigned)tv.tv_usec);
+    */
 }
 
 /* =================================================================== */
@@ -229,7 +338,18 @@ static void drawTile(int r, int c)
         case COIN:   		XPM_PintaAtxNyN(px, py, 81, pacman);  break;
         case EMPTY:  		XPM_PintaAtxNyN(px, py, 61, pacman);  break;
 	case POWER_UP:  	XPM_PintaAtxNyN(px, py, 80, pacman);  break;
-        case GHOST:  		XPM_PintaAtxNyN(px, py, 0, pacman);   break;
+        case GHOST:  		XPM_PintaAtxNyN(px, py, 61, pacman);   break;
+        case ARRIBA_IZQ_X2: XPM_PintaAtxNyN(px, py, 51, pacman);   break;
+        case ABAJO_IZQ_X2: XPM_PintaAtxNyN(px, py, 75, pacman);   break;
+        case ARRIBA_DER_X2: XPM_PintaAtxNyN(px, py, 53, pacman);   break;
+        case ABAJO_DER_X2: XPM_PintaAtxNyN(px, py, 77, pacman);   break;
+        case DOT: XPM_PintaAtxNyN(px, py, 67, pacman);   break;
+        case FDOT: XPM_PintaAtxNyN(px, py, 61, pacman);   break;
+        case cross1: XPM_PintaAtxNyN(px, py, 52, pacman);   break;
+        case cross2: XPM_PintaAtxNyN(px, py, 65, pacman);   break;
+        case cross3: XPM_PintaAtxNyN(px, py, 76, pacman);   break;
+        case cross4: XPM_PintaAtxNyN(px, py, 63, pacman);   break;
+        case cross: XPM_PintaAtxNyN(px, py, 64, pacman);   break;
         default:     		XPM_PintaAtxNyN(px, py, 11, pacman);
     }
 }
@@ -253,155 +373,259 @@ static void dibuja_hud(void)
     TFT_DrawFillSquareS(0, 0, SCREEN_W, Y_OFFSET, TFT_Color(50, 50, 50));
     FG_Color = WHITE; BG_Color = TFT_Color(50, 50, 50);
     CF = BigFont;
-    //_sprintf(printdir, "VIDAS: %d  PUNTOS: %d", lives, score);
+    //sprintf(buf, "VIDAS: %d  PUNTOS: %d", lives, score);
     TFT_print_xNyN(X_OFFSET, Y_OFFSET / 2 - 8, buf);
 }
 
 /* =================================================================== */
-/*                   ANIMACI�N PAC-MAN (suave)                         */
+/*                   ANIMACI�N PAC-MAN (suave)                         */
 /* =================================================================== */
+
+static int getPacmanFrame(Direction dir) {
+    /* si no hay dirección, apunta a la derecha por defecto */
+    if (dir == DIR_NONE) dir = DIR_RIGHT;
+    if (pacMouthOpen) {
+        switch (dir) {
+            case DIR_RIGHT: return 11;
+            case DIR_DOWN:  return 23;
+            case DIR_LEFT:  return 35;
+            case DIR_UP:    return 47;
+        }
+    } else {
+        switch (dir) {
+            case DIR_RIGHT: return 10;
+            case DIR_DOWN:  return 22;
+            case DIR_LEFT:  return 34;
+            case DIR_UP:    return 46;
+        }
+    }
+    return 11; /* fallback */
+}
+
 static void animatePacmanMove(int nx, int ny)
 {
-    int dx = (nx > pacPixX) ? STEP_PX : (nx < pacPixX ? -STEP_PX : 0);
-    int dy = (ny > pacPixY) ? STEP_PX : (ny < pacPixY ? -STEP_PX : 0);
-
-    while (pacPixX != nx || pacPixY != ny) {
-        XPM_PintaAtxNyN(pacPixX, pacPixY,10,pacman);
-        if (pacPixX != nx) pacPixX += dx;
-        if (pacPixY != ny) pacPixY += dy;
-        drawPacman(pacPixX, pacPixY);
+    int dx    = (nx > pacPixX) ? STEP_PX : (nx < pacPixX ? -STEP_PX : 0);
+    int dy    = (ny > pacPixY) ? STEP_PX : (ny < pacPixY ? -STEP_PX : 0);
+    int steps = (abs(nx - pacPixX) + abs(ny - pacPixY)) / STEP_PX;
+    int i;
+    for (i = 0; i < steps; i++) {
+        restoreBackground(pacPixX, pacPixY);
+        pacPixX += dx;
+        pacPixY += dy;
+        /* alterna boca */
+        if (++pacMouthCounter >= PAC_MOUTH_TOGGLE_STEPS) {
+            pacMouthOpen    = !pacMouthOpen;
+            pacMouthCounter = 0;
+        }
+        /* dibuja según dirección actual */
+        int frame = getPacmanFrame(currentDir);
+        XPM_PintaAtxNyN(pacPixX, pacPixY, frame, pacman);
         if (PAC_DELAY_MS) _delay_ms(PAC_DELAY_MS);
     }
 }
 
-/* --------------------- Movimiento de Pac-Man ----------------------- */
+/* ------------ Lógica de movimiento de Pac-Man ------------ */
 static void movePacman(void)
 {
     int keys = GetAction();
-    if (keys & UP)      desiredDir = DIR_UP;
+    if      (keys & UP)    desiredDir = DIR_UP;
     else if (keys & DOWN)  desiredDir = DIR_DOWN;
     else if (keys & LEFT)  desiredDir = DIR_LEFT;
     else if (keys & RIGHT) desiredDir = DIR_RIGHT;
 
-    bool ax = ((pacPixX - X_OFFSET) % TW) == 0;
-    bool ay = ((pacPixY - Y_OFFSET) % TW) == 0;
+    /* Sólo en cruces chequea monedas y posible cambio de dirección */
+    bool onTileX = ((pacPixX - X_OFFSET) % TW) == 0;
+    bool onTileY = ((pacPixY - Y_OFFSET) % TW) == 0;
 
-    if (ax && ay) {
+    if (onTileX && onTileY) {
         int cx = (pacPixX - X_OFFSET) / TW;
         int cy = (pacPixY - Y_OFFSET) / TW;
 
+    /* Power-up: si come 'V' */
+    if (map[cy][cx] == POWER_UP) {
+            map[cy][cx] = EMPTY;
+            drawTile(cy, cx);
+            powerMode        = true;
+            powerTickCounter = 0;
+            /* quizá sumar puntos aquí */
+        }
+        /* Si acabamos de teleportar, reseteamos la flag y seguimos movimiento */
+        if (justTeleported) {
+                justTeleported = false;
+            }
+            /* Teletransporte: si estamos en 'O' y no aún teleportando */
+            else if (map[cy][cx] == FDOT) {
+                /* índice de origen y destino */
+                int srcIdx  = (cy == teleR[0] && cx == teleC[0]) ? 0 : 1;
+                int destIdx = 1 - srcIdx;
+                /* Limpia el sprite en la casilla actual */
+                restoreBackground(pacPixX, pacPixY);
+                /* Mueve a la otra salida */
+                pacPixX = X_OFFSET + teleC[destIdx] * TW;
+                pacPixY = Y_OFFSET + teleR[destIdx] * TW;
+                /* Cuando venga del primer O (srcIdx=0) gira a izquierda */
+                /* Cuando venga del segundo O (srcIdx=1) gira abajo */
+                if (srcIdx == 0) {
+                    desiredDir = currentDir = DIR_LEFT;
+                } else {
+                    desiredDir = currentDir = DIR_DOWN;
+                }
+                /* Marcamos para no retrigger */
+                justTeleported = true;
+                /* Dibuja Pac-Man en la nueva posición */
+                drawPacman(pacPixX, pacPixY);
+                return;
+            }
+        /* Come moneda */
         if (map[cy][cx] == COIN) {
-            map[cy][cx] = EMPTY; drawTile(cy, cx);
+            map[cy][cx] = EMPTY;
+            drawTile(cy, cx);
             score++; totalCoins--; hudDirty = true;
         }
+
+        /* Cambia dirección si es posible */
         if (desiredDir != DIR_NONE && canMoveDir(pacPixX, pacPixY, desiredDir))
             currentDir = desiredDir;
         if (!canMoveDir(pacPixX, pacPixY, currentDir))
             currentDir = DIR_NONE;
     }
 
+    /* Si no puede moverse, simplemente repinta su sprite actual */
     if (currentDir == DIR_NONE) {
-        /* Si est� parado, aseg�rate de que sigue visible */
-        drawPacman(pacPixX, pacPixY);
+        int frame = getPacmanFrame(desiredDir);
+        XPM_PintaAtxNyN(pacPixX, pacPixY, frame, pacman);
         return;
     }
 
+    /* cálculo de destino y animación */
     int tx = pacPixX, ty = pacPixY;
     if (currentDir == DIR_UP)    ty -= TW;
     if (currentDir == DIR_DOWN)  ty += TW;
     if (currentDir == DIR_LEFT)  tx -= TW;
     if (currentDir == DIR_RIGHT) tx += TW;
-
     animatePacmanMove(tx, ty);
 }
 
+static int getGhostFrame(Ghost *g) {
+        /* Calcula dirección del fantasma hacia Pac-Man */
+        int gx = X_OFFSET + g->x * TW;
+        int gy = Y_OFFSET + g->y * TW;
+        int dx = pacPixX - gx;
+        int dy = pacPixY - gy;
+        Direction dir;
+        if (abs(dx) > abs(dy))
+            dir = (dx >= 0) ? DIR_RIGHT : DIR_LEFT;
+        else
+            dir = (dy >= 0) ? DIR_DOWN  : DIR_UP;
+    
+        bool open = ghostsEyeOpen;
+        switch (g->type) {
+          case 0: /* Rojo */
+            switch (dir) {
+              case DIR_RIGHT: return open?  0:  1;
+              case DIR_DOWN:  return open? 12: 13;
+              case DIR_LEFT:  return open? 24: 25;
+              case DIR_UP:    return open? 36: 37;
+            }
+            break;
+          case 1: /* Amarillo */
+            switch (dir) {
+              case DIR_RIGHT: return open?  2:  3;
+              case DIR_DOWN:  return open? 14: 15;
+              case DIR_LEFT:  return open? 26: 27;
+              case DIR_UP:    return open? 38: 39;
+            }
+            break;
+          case 2: /* Azul */
+            switch (dir) {
+              case DIR_RIGHT: return open?  6:  7;
+              case DIR_DOWN:  return open? 18: 19;
+              case DIR_LEFT:  return open? 30: 31;
+              case DIR_UP:    return open? 42: 43;
+            }
+            break;
+          case 3: /* Morado */
+            switch (dir) {
+              case DIR_RIGHT: return open?  8:  9;
+              case DIR_DOWN:  return open? 20: 21;
+              case DIR_LEFT:  return open? 32: 33;
+              case DIR_UP:    return open? 44: 45;
+            }
+            break;
+        }
+        return 0;
+    }
+
 /* =================================================================== */
-/*                      ANIMACI�N FANTASMAS                            */
+/*                      ANIMACI�N FANTASMAS                            */
 /* =================================================================== */
 static void animateGhostMove(Ghost *g, int nx, int ny)
 {
-    map[g->y][g->x] = g->under; drawTile(g->y, g->x);
+    /* Restaura celda anterior */
+    map[g->y][g->x] = g->under;
+    drawTile(g->y, g->x);
 
-    int px = X_OFFSET + g->x * TW;
-    int py = Y_OFFSET + g->y * TW;
-    int tx = X_OFFSET + nx * TW;
-    int ty = Y_OFFSET + ny * TW;
-    int dx = (tx > px) ? STEP_PX : (tx < px ? -STEP_PX : 0);
-    int dy = (ty > py) ? STEP_PX : (ty < py ? -STEP_PX : 0);
+    int px    = X_OFFSET + g->x * TW;
+    int py    = Y_OFFSET + g->y * TW;
+    int tx    = X_OFFSET + nx    * TW;
+    int ty    = Y_OFFSET + ny    * TW;
+    int dx    = (tx > px) ? STEP_PX : (tx < px ? -STEP_PX : 0);
+    int dy    = (ty > py) ? STEP_PX : (ty < py ? -STEP_PX : 0);
+    int steps = (abs(tx - px) + abs(ty - py)) / STEP_PX;
+    int i;
+    for (i = 0; i < steps; i++) {
+                restoreBackground(px, py);
+                px += dx;
+                py += dy;
+                /* Parpadeo de ojos */
+                if (++ghostsEyeCounter >= PAC_MOUTH_TOGGLE_STEPS) {
+                    ghostsEyeOpen    = !ghostsEyeOpen;
+                    ghostsEyeCounter = 0;
+                }
+                /* Dibuja fantasma orientado y animado */
+                int frame = getGhostFrame(g);
+                frame = powerMode ? 59 : getGhostFrame(g);
+                XPM_PintaAtxNyN(px, py, frame, pacman);
+                //if (GHOST_DELAY_MS) _delay_ms(GHOST_DELAY_MS);
+            }
 
-    while (px != tx || py != ty) {
-        restoreBackground(px, py);
-        if (px != tx) px += dx;
-        if (py != ty) py += dy;
-        XPM_PintaAtxNyN(px, py, 1, pacman);
-        if (GHOST_DELAY_MS) _delay_ms(GHOST_DELAY_MS);
-    }
-
-    g->x = nx; g->y = ny;
+    /* Actualiza lógica */
+    g->x     = nx;
+    g->y     = ny;
     g->under = map[ny][nx];
     map[ny][nx] = GHOST;
-    XPM_PintaAtxNyN(tx, ty, 0, pacman); 
 }
 
-/* ------------------ Movimientos l�gicos fantasmas ------------------ */
-static void moveGhosts(int tick)
+/* ------------ Movimiento aleatorio de Fantasmas ------------ */
+static void moveGhosts(void)
 {
-    int i, nx, ny, t, k;
-    int dirs[4] = { DIR_UP, DIR_DOWN, DIR_LEFT, DIR_RIGHT };
-
+    static const Direction dirs[4] = { DIR_UP, DIR_DOWN, DIR_LEFT, DIR_RIGHT };
+    int i, t;
     for (i = 0; i < GHOST_COUNT; i++) {
+        if (!ghostReleased[i]) continue;
         Ghost *g = &ghosts[i];
-        nx = g->x; ny = g->y;
 
-        if (g->type == 0) {
-            if (g->dir == DIR_RIGHT) { nx++; if (wallAt(ny, nx)) { g->dir = DIR_LEFT;  nx = g->x - 1; } }
-            else                     { nx--; if (wallAt(ny, nx)) { g->dir = DIR_RIGHT; nx = g->x + 1; } }
-        }
-        else if (g->type == 1) {
-            if ((tick & 3) == 0) {
-                for (t = 0; t < 10; t++) {
-                    g->dir = dirs[rand() % 4];
-                    nx = g->x; ny = g->y;
-                    if (g->dir == DIR_UP)    ny--;
-                    if (g->dir == DIR_DOWN)  ny++;
-                    if (g->dir == DIR_LEFT)  nx--;
-                    if (g->dir == DIR_RIGHT) nx++;
-                    if (!wallAt(ny, nx)) break;
-                }
-            } else {
-                if (g->dir == DIR_UP)    ny--;
-                if (g->dir == DIR_DOWN)  ny++;
-                if (g->dir == DIR_LEFT)  nx--;
-                if (g->dir == DIR_RIGHT) nx++;
-                if (wallAt(ny, nx)) { g->dir = DIR_NONE; nx = g->x; ny = g->y; }
-            }
-        }
-        else {
-            int dx = ((pacPixX - X_OFFSET) / TW) - g->x;
-            int dy = ((pacPixY - Y_OFFSET) / TW) - g->y;
-            g->dir = (abs(dx) > abs(dy))
-                        ? (dx > 0 ? DIR_RIGHT : DIR_LEFT)
-                        : (dy > 0 ? DIR_DOWN  : DIR_UP);
-
-            nx = g->x; ny = g->y;
-            if (g->dir == DIR_UP)    ny--;
-            if (g->dir == DIR_DOWN)  ny++;
-            if (g->dir == DIR_LEFT)  nx--;
-            if (g->dir == DIR_RIGHT) nx++;
-            if (wallAt(ny, nx)) {
-                for (k = 0; k < 4; k++) {
-                    g->dir = dirs[rand() % 4];
-                    nx = g->x; ny = g->y;
-                    if (g->dir == DIR_UP)    ny--;
-                    if (g->dir == DIR_DOWN)  ny++;
-                    if (g->dir == DIR_LEFT)  nx--;
-                    if (g->dir == DIR_RIGHT) nx++;
-                    if (!wallAt(ny, nx)) break;
+        /* A veces elige nueva dirección al azar */
+        if (g->dir == DIR_NONE || (rand() & 7) == 0) {
+            for (t = 0; t < 8; t++) {
+                Direction d = dirs[rand() % 4];
+                int nx = g->x + (d==DIR_RIGHT) - (d==DIR_LEFT);
+                int ny = g->y + (d==DIR_DOWN)  - (d==DIR_UP);
+                if (!wallAt(ny, nx)) {
+                    g->dir = d;
+                    break;
                 }
             }
         }
 
-        if (nx != g->x || ny != g->y) animateGhostMove(g, nx, ny);
+        /* Intenta mover en esa dirección */
+        int nx = g->x + (g->dir==DIR_RIGHT) - (g->dir==DIR_LEFT);
+        int ny = g->y + (g->dir==DIR_DOWN)  - (g->dir==DIR_UP);
+
+        if (!wallAt(ny, nx) && (nx!=g->x || ny!=g->y))
+            animateGhostMove(g, nx, ny);
+        else
+            g->dir = DIR_NONE;  /* colisión: reinicia dir */
     }
 }
 
@@ -414,6 +638,7 @@ static void checkCollisions(void)
     int ty = (pacPixY - Y_OFFSET + TW / 2) / TW;
     int g;
     for (g = 0; g < GHOST_COUNT; g++) {
+        if (!ghostReleased[g]) continue;
         if (tx == ghosts[g].x && ty == ghosts[g].y) {
             lives--; hudDirty = true;
             if (lives > 0) {
@@ -430,7 +655,7 @@ static void checkCollisions(void)
 /* =================================================================== */
 int main(void)
 {
-    /* -------- NO TOCAR CONFIGURACI�N DE PINES ---------------------- */
+    /* -------- NO TOCAR CONFIGURACI�N DE PINES ---------------------- */
     SCS = 1;
     FIODIR  = 0b11111111111111111111111111011101;
     FIOSET  = 0xFFFFFFFF;
@@ -444,33 +669,83 @@ int main(void)
     AMPLIF_OFF;
     TFT_Init();
     TP_Init();
-    VibratorON(50);
-   
+
     TFT_DrawFillSquareS(0, 0, LENX, LENY, TFT_Color(0, 0, 0));
 
     initGame();
     dibuja_mapa(map);
     dibuja_hud();
-
-    int tick = 0;
+    /* ———————————————————————————————— */
+    /* Prepara la XPM de fantasmas para poder dibujarlos */
+    xpm_sx = TILE; xpm_sy = TILE;
+    XPM_SetxNyN(SCALE, SCALE);
+    /* ———————————————————————————————— */
+    /* Dibuja todos los fantasmas en home (quietos) */
+    int i;
+    for (i = 0; i < GHOST_COUNT; i++) {
+            int px    = X_OFFSET + ghosts[i].x * TW;
+            int py    = Y_OFFSET + ghosts[i].y * TW;
+            int frame = powerMode ? 60 : getGhostFrame(&ghosts[i]);
+            XPM_PintaAtxNyN(px, py, frame, pacman);
+        }
+    int ghostStepCounter=0;
+    
+   PARTITURE_On(PARTITURE[0], sizeof(PARTITURE) / sizeof(PARTITURE[0]), 120); // Tempo de 120 BPM
+	
+	
     while (1) {
         if (totalCoins == 0) break;
         if (lives     <= 0) break;
 
         movePacman();
-        //moveGhosts(tick);
-        checkCollisions();
-	
-
+        if (powerMode) {
+            if (++powerTickCounter >= POWERUP_DURATION_STEPS) {
+            powerMode = false;
+            }
+            }
+        if (++ghostStepCounter >= GHOST_MOVE_INTERVAL_STEPS) {
+            moveGhosts();
+            ghostStepCounter = 0;
+        }
+            if (++ghostReleaseStepCounter >= GHOST_RELEASE_INTERVAL_STEPS
+                    && ghostsReleasedCount < GHOST_COUNT) {
+                    ghostReleased[ghostsReleasedCount++] = true;
+                    ghostReleaseStepCounter = 0;
+                }
+            {
+                    int tx = (pacPixX - X_OFFSET + TW/2) / TW;
+                    int ty = (pacPixY - Y_OFFSET + TW/2) / TW;
+                    int g;
+                    for (g = 0; g < GHOST_COUNT; g++) {
+                        if (tx == ghosts[g].x && ty == ghosts[g].y) {
+                            if (powerMode) {
+                                /* come fantasma: respawn */
+                                restoreBackground(pacPixX, pacPixY);
+                                ghosts[g].x = origGhostX[g];
+                                ghosts[g].y = origGhostY[g];
+                                ghosts[g].dir   = DIR_NONE;
+                                ghosts[g].under = EMPTY;
+                                map[origGhostY[g]][origGhostX[g]] = EMPTY;
+                                /* dibuja fantasma en casa */
+                                drawTile(origGhostY[g], origGhostX[g]);
+                            } else {
+                                lives--; hudDirty = true;
+                                if (lives > 0) {
+                                    restoreBackground(pacPixX, pacPixY);
+                                    initGame(); dibuja_mapa(map); dibuja_hud();
+                                }
+                            }
+                        }
+                    }
+                }
+            checkCollisions();    
         if (hudDirty) { dibuja_hud(); hudDirty = false; }
-        tick++;
+        
     }
     return 0;
 }
+/*
 
-/* =================================================================== */
-/*                        STUBS NEWLIB                                 */
-/* =================================================================== */
 int _gettimeofday(struct timeval *tv, void *tz)
 {
     (void)tz;
@@ -489,3 +764,159 @@ void *_sbrk(ptrdiff_t incr)
     heap_end += incr;
     return (void *)prev_heap_end;
 }
+
+
+
+// _exit: Exit a program without cleaning up library data structures.
+// Should not return. Typically halts the processor.
+void _exit(int status) {
+    (void)status; // Avoid unused parameter warning
+    while (1) {
+        ; // Infinite loop to halt execution
+    }
+}
+
+// _close: Close a file. Not typically used in simple bare-metal.
+int _close(int file) {
+    (void)file; // Avoid unused parameter warning
+    errno = ENOSYS; // Indicate function not implemented
+    return -1;
+}
+
+// _execve: Transfer control to a new process. Not applicable.
+int _execve(char *name, char **argv, char **env) {
+    (void)name; (void)argv; (void)env; // Avoid unused parameter warning
+    errno = ENOSYS;
+    return -1;
+}
+
+// _fork: Create a new process. Not applicable.
+int _fork(void) {
+    errno = ENOSYS;
+    return -1;
+}
+
+// _fstat: Status of an open file. Assume files are character devices.
+int _fstat(int file, struct stat *st) {
+    (void)file; // Avoid unused parameter warning
+    st->st_mode = S_IFCHR; // Mark as character device (simplest assumption)
+    return 0;
+}
+
+// _getpid: Get process ID. Return a fixed dummy value.
+int _getpid(void) {
+    return 1; // Only one "process"
+}
+
+// _isatty: Query whether output stream is a terminal.
+int _isatty(int file) {
+    // Assume standard streams (0, 1, 2) are TTYs if you plan basic printf debugging via UART
+    // Otherwise, return 0 or set ENOSYS
+    switch (file){
+    case STDOUT_FILENO:
+    case STDERR_FILENO:
+    case STDIN_FILENO:
+        return 1; // Pretend they are TTYs
+    default:
+        //errno = ENOTTY; // Or ENOSYS
+        errno = ENOSYS;
+        return 0;
+    }
+}
+
+// _kill: Send a signal. Not applicable.
+int _kill(int pid, int sig) {
+    (void)pid; (void)sig; // Avoid unused parameter warning
+    errno = ENOSYS;
+    return -1;
+}
+
+// _link: Establish a new name for an existing file. Not applicable.
+int _link(char *old, char *new) {
+    (void)old; (void)new; // Avoid unused parameter warning
+    errno = ENOSYS;
+    return -1;
+}
+
+// _lseek: Set position in a file.
+int _lseek(int file, int ptr, int dir) {
+    (void)file; (void)ptr; (void)dir; // Avoid unused parameter warning
+    errno = ENOSYS;
+    return 0; // Or -1 ? Check newlib docs if seeking needed
+}
+
+// _open: Open a file. Not typically used directly.
+int _open(const char *name, int flags, int mode) {
+    (void)name; (void)flags; (void)mode; // Avoid unused parameter warning
+    errno = ENOSYS;
+    return -1;
+}
+
+// _read: Read from a file. Potentially needed for scanf via UART.
+int _read(int file, char *ptr, int len) {
+    (void)file; (void)ptr; (void)len; // Avoid unused parameter warning
+    // Add UART receive code here if needed for stdin
+    errno = ENOSYS;
+    return -1; // Or return 0 for EOF, or number of bytes read
+}
+
+// _sbrk: Increase program data space. Needed for malloc/heap.
+// You MUST provide a working implementation if you use dynamic memory allocation.
+// This is a common one to need.
+caddr_t _sbrk(int incr) {
+    extern char _heap_start; // Defined in linker script
+    extern char _heap_end;   // Defined in linker script (top of allocated heap space)
+    static char *heap_ptr = &_heap_start; // Current end of allocated heap
+
+    caddr_t prev_heap_ptr = (caddr_t)heap_ptr;
+
+    if (heap_ptr + incr > &_heap_end) {
+        // Heap overflow
+        errno = ENOMEM;
+        return (caddr_t)-1;
+    }
+
+    heap_ptr += incr;
+    return prev_heap_ptr;
+}
+
+// _stat: Status of a file (by name).
+int _stat(const char *name, struct stat *st) {
+    (void)name; // Avoid unused parameter warning
+    // Can potentially check if name exists if you have a filesystem
+    // Simple stub: Assume character device
+    st->st_mode = S_IFCHR;
+    return 0; // Or -1 if file doesn't exist, setting errno to ENOENT
+}
+
+// _times: Timing information for current process. Not applicable.
+clock_t _times(struct tms *buf) {
+    (void)buf; // Avoid unused parameter warning
+    errno = ENOSYS;
+    return (clock_t)-1;
+}
+
+// _unlink: Remove a file's directory entry. Not applicable.
+int _unlink(char *name) {
+    (void)name; // Avoid unused parameter warning
+    errno = ENOSYS;
+    return -1;
+}
+
+// _wait: Wait for a child process. Not applicable.
+int _wait(int *status) {
+    (void)status; // Avoid unused parameter warning
+    errno = ENOSYS;
+    return -1;
+}
+
+// _write: Write to a file. Potentially needed for printf via UART.
+int _write(int file, char *ptr, int len) {
+    (void)file; // Avoid unused parameter warning
+    // Add UART transmit code here if needed for stdout/stderr
+    // Example: if (file == STDOUT_FILENO || file == STDERR_FILENO) {  UART_Write(ptr, len);  }
+    // Return the number of bytes written
+    errno = ENOSYS; // Remove this if implemented
+    return -1;      // Return len if implemented successfully, -1 on error
+}
+*/

@@ -17,8 +17,8 @@ unsigned int NOTE[] = { 0,
 	 DO7, DO7_, RE7, RE7_, MI7, FA7, FA7_, SOL7, SOL7_, LA7, LA7_, SI7,
 };
 // ------------------------------------------------------------------------
-//#define SINUS_WAVE
-#define SQUARE_WAVE
+#define SINUS_WAVE
+//#define SQUARE_WAVE
 // ------------------------------------------------------------------------
 // Sinus table. Angles from 0 to 2*PI.
 // 256 elements. Amplitude 512 with sign
@@ -94,16 +94,63 @@ const short TABLA_SQUARE_WAVE[]={
   511,  511,  511,  511,  511,  511,  511,  511,
   511,  511,  511,  511,  511,  511,  511,  511
 };
+
 #endif
+
+
 // ------------------------------------------------------------------------
 // Volatile variables
+#define TABLA1 TABLA_SINUS_WAVE
 
+#define duration 30000
+
+  volatile unsigned short Fase1=0;
+   volatile  unsigned short Fase2=0;
+   volatile  unsigned short Fase3=0;
+   volatile  unsigned short Fase4=0;
+
+   volatile unsigned short Delta_Fase1;
+   volatile  unsigned short Delta_Fase2;
+   volatile  unsigned short Delta_Fase3;
+   volatile  unsigned short Delta_Fase4;
+
+   volatile unsigned short nota1, nota2, nota3, nota4;
+
+	volatile unsigned char *Part;
+
+	volatile unsigned int Next;
+	
+
+   volatile  unsigned int silence=0;
+
+   volatile unsigned int cont=0; //contador de la partitura
+   
+   volatile int defecto=0;
+   
+     // Duración fija del efecto en iteraciones de retardo
+    
+
+volatile unsigned short fase = 0;
+volatile unsigned short delta_fase;
+ volatile unsigned int exCount = 0;  
+volatile unsigned char expl=0;  
+volatile unsigned int effectType;
+volatile unsigned short freq;
+    
 
 // ------------------------------------------------------------------------
 void TIMER0_ISR(void) __attribute__ ((interrupt("IRQ")));
 void PWM0_ISR(void) __attribute__ ((interrupt("IRQ")));
 void IRQ_Spurious_Routine (void)  __attribute__ ((interrupt("IRQ")));
 // ------------------------------------------------------------------------
+
+//Usado para generar numeros pseudoaleatorios
+unsigned int rnd(unsigned int x) {
+    x = ((x >> 16) ^ x) * 0x45d9f3b;
+    x = ((x >> 16) ^ x) * 0x45d9f3b;
+    x = (x >> 16) ^ x;
+    return x;
+}
 
 void PWM0_ISR(void)
 {
@@ -112,22 +159,92 @@ void PWM0_ISR(void)
  /// and special effects channels.
  // Remember it is called 57600 times per second. Don't waste your time here.
  // Variables
-
- PWMIR = 0xFFFF;	   // Clear all interrupt notifications
-
+  static int d1,d2,d3,d4, dtotalIzq, dtotalDch;
+    PWMIR = 0xFFFF;	   // Clear all interrupt notifications
+  static  int NT1=8; //256 elementos de la tabla
+   
+   
+   
  // Get data
+   d1 = TABLA1[Fase1>>NT1];
+   d2 = TABLA1[Fase2>>NT1];
+   d3 = TABLA1[Fase3>>NT1];
+   d4 = TABLA1[Fase4>>NT1];
+   
 
  // Attenuate
- 
+   d1=(d1>>2); //Divido entre 3
+   d2=(d2>>2);
+   d3=(d3>>2);
+   d4=(d4>>2);
+   
  // Increment phases
+    Fase1+=Delta_Fase1;
+    Fase2+=Delta_Fase2;
+    Fase3+=Delta_Fase3;
+    Fase4+=Delta_Fase4;
  
  // Special effects
+   if (expl && exCount < duration){
+		if (effectType == GUN_EFFECT) {
+			defecto = TABLA_SINUS_WAVE[fase >> 8];  // Usar tabla de ondas sinusoidales
+			defecto=(defecto>>4); // Atenuo el efecto
+		}
+		else if (effectType == EXPLOSION_EFFECT) {
+			if (exCount % 100 == 0) {
+				defecto = ((int)(rnd(defecto) & 0x3FF) - 512) >> 4;
+			}
+		}
+		
+		//_printf("\r\n defecto %d",defecto);
 
+        // Limitar la amplitud para evitar saturación
+        if (defecto > 511) defecto = 511;
+        if (defecto < -511) defecto = -511;
+
+        // Incrementar la fase
+        delta_fase = (unsigned short)((256L * freq) / 225);
+        fase += delta_fase;
+
+        // Disminuir la frecuencia para simular el decaimiento de la explosión
+        if (exCount % 100 == 0) {
+            freq -= 10;
+        }
+
+		exCount++;
+     }
+     else{
+		defecto = 0;
+		expl=0;
+     }
  // Add components (cuadraphonic sound)
+    dtotalIzq=d1+d2+defecto;
+    if(dtotalIzq> 511) dtotalIzq = 511; //Saturación
+    if(dtotalIzq<-511) dtotalIzq = -511;
+      //Canal Derecho
+    dtotalDch=d3+d4+defecto;
+    if(dtotalDch> 511) dtotalDch = 511; //Saturación
+    if(dtotalDch<-511) dtotalDch = -511;
 
- // Silence? 
-
+ // Silence?
+   /*
+   if(silence||(CH1_ON+CH2_ON==0))
+	  dtotalIzq=511;
+   if(silence||(CH3_ON+CH4_ON==0))
+	 dtotalDch=511;
+   */
+    
+   
+   
  // PMW output
+   PWMMR4 = dtotalIzq +512; //Centrado
+
+   //PWM2
+   PWMMR2 = dtotalDch + 512;//Centrado
+
+ 
+ PWMLER = (1<<4) | (1 << 2);
+
 
  VICVectAddr=-1;  	   // EOI for interrupt controller
 }
@@ -144,7 +261,25 @@ void TIMER0_ISR(void)
  // It depends on tempo
  T0IR = 0xFFFF;	   	   // Clear all interrupt notifications	
  // Next note, if any, update delta phases
-
+   nota1=((Part[cont*4+0]) & 0b00111111);
+   Delta_Fase1= (unsigned int)((256L*NOTE[nota1])/22500); //coger solo los bits del 5:0
+   
+   
+   nota2=((Part[cont*4+1]) & 0b00111111);
+   Delta_Fase2= (unsigned int)((256L*NOTE[nota2])/22500);
+   
+   
+   nota3=((Part[cont*4+2]) & 0b00111111);
+   Delta_Fase3= (unsigned int)((256L*NOTE[nota3])/22500);
+   
+   
+   nota4=((Part[cont*4+3]) & 0b00111111);
+   Delta_Fase4= (unsigned int)((256L*NOTE[nota4])/22500);
+   
+   
+   cont++;
+   if(cont==Next)	cont=0; //Para que se repita cuando acabe
+   
 
  VICVectAddr=-1;  	   // EOI for interrupt controller	
 }
@@ -157,17 +292,24 @@ void AUDIO_Timer_On()
 
  PINSEL0 &=~(0b11<<16);
  PINSEL0 |= (0b10<<16);     // PWM4/P0.8 as PWM
-// PWM2 configuration missing
+
+// PWM2 configuration 
+ PINSEL0 &=~(0b11<<14);
+ PINSEL0 |= (0b10<<14); 
 
  PWMTCR = 0b00000010;       // Reset & PWM mode enabled
  PWMPR  = 0;                // Prescale = 1/1
  PWMMCR = 3;                // Interrupt and Reset on match (channel #0)
- PWMPCR = (1<<12);		    // PWM4 single edge  and output enabled
+ PWMPCR = (1<<12) | (1<<10) ;		    // PWM4 single edge  and output enabled
+	//PWM2 single edge and output enabled
 
  PWMMR0 = 1024-1;			// Interrupt frequency 57600 Hz. Exact 10-bit PWM
  PWMMR4 = PWMMR0;
- PWMLER = (1<< 4); 			// Copy to duty reg from shadow PWM4
+ PWMMR2 = PWMMR0;
+ //PWMLER = (1<< 4) | (1<< 2); 			// Copy to duty reg from shadow PWM4
 // PWM2 configuration mising
+
+
 
  PWMTCR = 0b00001001;       // Counter enable and PWM mode enabled
 
@@ -182,8 +324,10 @@ void AUDIO_Timer_On()
  asm volatile ("mrs r0,cpsr\n orr r0,r0,#0x80\n msr cpsr,r0");
 }
 // ------------------------------------------------------------------------
-void PARTITURE_On(unsigned char* P, unsigned int N, unsigned int tempo)
+void PARTITURE_On(unsigned char *P, unsigned int N, unsigned int tempo)
 {
+Part=P;
+Next=N;
  int ms_negra = 60000/tempo;
  int ms_semicorchea = ms_negra/4; 
  #define PCTIM0 (1)
@@ -204,6 +348,7 @@ void PARTITURE_On(unsigned char* P, unsigned int N, unsigned int tempo)
 
  // Prepare audio 
  
+   
  // Instruments asignment
  
  //
@@ -219,8 +364,11 @@ void PARTITURE_Off()
  T0TCR = 0; // Deactivate timer 0
 }
 // ------------------------------------------------------------------------
-void AUDIO_Effect(int note, int duration, int volume)
-{ // duration in ms
- // Activate an extra note for duration ms
-
+void AUDIO_Effect(int type)
+{ 
+   expl=1;
+   effectType = type;
+   exCount=0;
+   fase = 0;
+   freq = duration / 100 * 10 + 10;
 }

@@ -75,6 +75,10 @@
 #define PACMAN_OPEN_FRAME    11
 #define PACMAN_CLOSED_FRAME  10
 #define GHOST_COUNT 4
+
+
+
+
 /* --- Parpadeo de ojos de los fantasmas --- */
 static bool ghostsEyeOpen    = true;
 static int  ghostsEyeCounter = 0;
@@ -171,10 +175,46 @@ static void      initGame(void);
 static void      dibuja_hud(void);
 static void      dibuja_mapa(const char m[][MAP_COLS + 1]);
 static void      drawTile(int r, int c);
-
+static char 		*ft_itoa(int n);
 /* =================================================================== */
 /*                     FUNCIONES AUXILIARES                            */
 /* =================================================================== */
+static int	get_digits(int n)
+{
+	size_t	i;
+
+	i = 1;
+	while (n /= 10)
+		i++;
+	return (i);
+}
+
+static char  *ft_itoa(int n)
+{
+	char		*str_num;
+	int		digits;
+	int	num;
+
+	num = n;
+	digits = get_digits(n);
+	if (n < 0)
+	{
+		num *= -1;
+		digits++;
+	}
+	if (!(str_num = (char *)malloc(sizeof(char) * (digits + 1))))
+		return (NULL);
+	*(str_num + digits) = 0;
+	while (digits--)
+	{
+		*(str_num + digits) = num % 10 + '0';
+		num = num / 10;
+	}
+	if (n < 0)
+		*(str_num + 0) = '-';
+	return (str_num);
+}
+
 static bool wallAt(int r, int c)
 {
     if (c < 0 || c >= MAP_COLS || r < 0 || r >= MAP_ROWS) {
@@ -368,12 +408,26 @@ static void dibuja_mapa(const char m[][MAP_COLS + 1])
 
 static void dibuja_hud(void)
 {
-    char buf[40];
+    // char buf[40]; // This variable is declared but not used. Can be removed if not needed.
     TFT_DrawFillSquareS(0, 0, SCREEN_W, Y_OFFSET, TFT_Color(50, 50, 50));
-    FG_Color = WHITE; BG_Color = TFT_Color(50, 50, 50);
-    CF = BigFont;
-    //sprintf(buf, "VIDAS: %d  PUNTOS: %d", lives, score);
-    TFT_print_xNyN(X_OFFSET, Y_OFFSET / 2 - 8, buf);
+    FG_Color = WHITE; BG_Color = TFT_Color(50, 50, 50); // Ensure WHITE is defined
+    CF = BigFont; // Ensure BigFont is defined
+
+    TFT_print_xNyN(X_OFFSET, Y_OFFSET / 2 - 8, "VIDAS:");
+    char *tmp_lives_str = ft_itoa(lives); // Declare a local variable for the string
+    if (tmp_lives_str) {
+        TFT_print_xNyN(X_OFFSET + 170, Y_OFFSET / 2 - 8, tmp_lives_str); // Use original offset
+        free(tmp_lives_str); // Free memory allocated by ft_itoa
+    }
+
+    TFT_print_xNyN(X_OFFSET + 250, Y_OFFSET / 2 - 8, "PUNTOS:"); // Use original offset
+    char *tmp_score_str = ft_itoa(score); // Use global 'score' and declare local string variable
+    if (tmp_score_str) {
+       TFT_print_xNyN(X_OFFSET + 500, Y_OFFSET / 2 - 8, tmp_score_str); // Print score string, use original offset
+       free(tmp_score_str); // Free memory allocated by ft_itoa
+    }
+    // hudDirty should be set to false in the main loop after this function is called.
+    // The original code already does this: if (hudDirty) { dibuja_hud(); hudDirty = false; }
 }
 
 /* =================================================================== */
@@ -652,6 +706,17 @@ static void checkCollisions(void)
 /* =================================================================== */
 /*                                MAIN                                 */
 /* =================================================================== */
+#define PACMANIA_TEMPO 150
+void start_pacmania_music(void) {
+    // El array PARTITURE se define en "pacmania.mod.txt.c"
+    // Calculamos N, el n�mero de eventos (cada evento son 4 bytes)
+   
+    int numero_de_eventos = 131;
+
+    // Llamamos a la funci�n principal para iniciar la partitura
+    PARTITURE_On(PARTITURE, numero_de_eventos, 90);
+}
+
 int main(void)
 {
     /* -------- NO TOCAR CONFIGURACI�N DE PINES ---------------------- */
@@ -665,7 +730,10 @@ int main(void)
     _printf("Desarrollo Practico de Sistemas Electronicos\r\n"
             "Ingenieria de Sistemas Electronicos\r\n");
 
-    AMPLIF_OFF;
+    AMPLIF_ON;
+   
+       start_pacmania_music();
+   
     TFT_Init();
     TP_Init();
 
@@ -674,12 +742,11 @@ int main(void)
     initGame();
     dibuja_mapa(map);
     dibuja_hud();
-    /* ———————————————————————————————— */
-    /* Prepara la XPM de fantasmas para poder dibujarlos */
+    start_pacmania_music();
+
     xpm_sx = TILE; xpm_sy = TILE;
     XPM_SetxNyN(SCALE, SCALE);
-    /* ———————————————————————————————— */
-    /* Dibuja todos los fantasmas en home (quietos) */
+
     int i;
     for (i = 0; i < GHOST_COUNT; i++) {
             int px    = X_OFFSET + ghosts[i].x * TW;
@@ -706,6 +773,7 @@ int main(void)
             if (++ghostReleaseStepCounter >= GHOST_RELEASE_INTERVAL_STEPS
                     && ghostsReleasedCount < GHOST_COUNT) {
                     ghostReleased[ghostsReleasedCount++] = true;
+		    VibratorON(200);
                     ghostReleaseStepCounter = 0;
                 }
             {

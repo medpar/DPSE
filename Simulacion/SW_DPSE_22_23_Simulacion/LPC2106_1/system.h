@@ -124,5 +124,8 @@ void _delay_loop(unsigned int);
 // Cuenta microsegundos, desborda en 2^32 usec -> 4000 segundos
 
 #define Get_Time() T1TC
+#define VIBRATOR_ON FIOCLR = VIBRADOR
+#define VIBRATOR_OFF FIOSET = VIBRADOR
+
 
 void VibratorON(unsigned int ms);

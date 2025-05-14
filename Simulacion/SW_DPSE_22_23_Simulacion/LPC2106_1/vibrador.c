@@ -13,11 +13,12 @@ void TIMER1_ISR(void)
  T1IR = 0xFFFF;	   	   // Clear all interrupt notifications	
  //  Para el temporizador 1
  // ...
-
+ VIBRATOR_OFF;
  // Para el vibrador
- // ...
+ // ...	
+   T1TCR = 0x02;
  
- VICVectAddr=-1;  	   // EOI for interrupt controller	
+ VICVectAddr=0;  	   // EOI for interrupt controller	
 }
 // ----------------------------------------------------------------------------------
 void VibratorON(unsigned int ms)
@@ -27,7 +28,11 @@ void VibratorON(unsigned int ms)
  PCONP |= (1<<PCTIM1);      // Power TIMER1 peripheral 	
  // Configura el temporizador 1 para que genere interrupción a los 'ms' milisegundos
  // ...
-
+ T1TCR =0x02,
+  T1PR = 0;
+  T1MR0 = (60000 * ms);
+  T1MCR = 3;
+  T1TCR = 1; 
 
  #define TIMER1_INT (5)
  // Interrupt setup
@@ -36,7 +41,7 @@ void VibratorON(unsigned int ms)
  VICVectCntl2=(1<<5)|TIMER1_INT;                    // Slot 2 for TIMER1 and enabled
  // Activa el vibrador 
  // ...
- 
+ VIBRATOR_ON;
  // Enable both IRQ interrupts
  asm volatile (
   " mrs r0,cpsr\n"

@@ -1,0 +1,1 @@
+bloques.o: ../bloques.c

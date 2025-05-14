@@ -2,6 +2,7 @@
 // ModPlug Tracker MOD
 // Orders: 0,1,2,3,4,5,6,7
 // Musical notes english notation
+
 enum notes { 
  	C2=1,C2_,D2,D2_,E2,F2,F2_,G2,G2_,A2,A2_,B2,
  	C3  ,C3_,D3,D3_,E3,F3,F3_,G3,G3_,A3,A3_,B3,
@@ -11,7 +12,7 @@ enum notes {
 	C7  ,C7_,D7,D7_,E7,F7,F7_,G7,G7_,A7,A7_,B7 
 };
 
-unsigned char PARTITURE[][4] = { 
+unsigned char PARTITURE[131][4] = { 
 
    C6 ,A5_,A5_,0  ,// |C-601......|A#506......|A#508......|...........
    0  ,0  ,D5 ,0  ,// |...........|...........|D-508...3FF|...........

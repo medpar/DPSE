@@ -1,5 +1,9 @@
 #ifndef _AUDIO_H_
 #define _AUDIO_H_
+
+#define GUN_EFFECT 0
+#define EXPLOSION_EFFECT 1
+
 // Musical note frequencies x 100. Character _ means sustained note (# sostenido)
 #define DO2     6541L
 #define DO2_    6930L
@@ -89,39 +93,7 @@
 #define FUSA        (SEMICORCHEA/2)
 #define SEMIFUSA    (FUSA/2)
 // ------------------------------------------------------------------------
-/*
-unsigned char PARTITURE[][4] = { 
-// Base-time on demisemiquaver (fusas) notes
-// CH1_NOTE, CH2_NOTE, CH3_NOTE, CH4_NOTE, // 	
-	G4,		0,		G6,		0,
-	G4,		0,		G6,		0,
-	0,		G5,		A6,		0,
-	0,		G5,		A6_,	0,	
-	G4,		0,		A6,		0,
-	G4,		0,		A6,		0,
-	0,		G5,		G6,		0,
-	0,		G5,		G6,		0,
-	F4,		0,		A6,		0,
-	F4,		0,		A6,		0,
-	0,		F5,		D7,		0,
-	0,		F5,		D7,		0,
-	F4,		0,		A6,		0,
-	F4,		0,		A6,		0,
-	0,		F5,		A6,		0,
-	0,		F5,		A6,		0,
-	D4_,	0,		G6,		0,
-	D4_,	0,		G6,		0,
-	0,		D5_,	A6,		0,
-	0,		D5_,	A6_,	0,
-	D4_,	0,		A6,		0,
-	D4_,	0,		A6,		0,	
-	0,		D5_,	G6,		0,
-	0,		D5_,	G6,		0,	
-	D4,		0,		G6,		0,
-	D4,		0,		G6,		0,	
-	
-};
-*/
+
 
 // ------------------------------------------------------------------------
 // Musical notes english notation
@@ -136,9 +108,11 @@ enum notes {
 
 extern volatile int CH1_ON,CH2_ON,CH3_ON,CH4_ON;
 extern volatile int iPP, rPP;
-extern unsigned char PARTITURE[112][4];
+extern unsigned char PARTITURE[131][4];
 
-void AUDIO_Effect(int note, int duration, int volume);
+
+
+void AUDIO_Effect(int type);
 void PARTITURE_On(unsigned char *P, unsigned int N, unsigned int tempo);
 void PARTITURE_Off();
 #endif // _AUDIO_H_

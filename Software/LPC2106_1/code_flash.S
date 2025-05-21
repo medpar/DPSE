@@ -483,7 +483,7 @@ Reset_Code:
 	/* Enter the C code */
 
 		bl		main
-     344:	eb002679 	bl	9d30 <main>
+     344:	eb002642 	bl	9c54 <main>
 
 00000348 <_Halt>:
         .size   _start, . - _start
@@ -889,11 +889,11 @@ _U0getch:
      5dc:	e000c000 	.word	0xe000c000
      5e0:	40010000 	.word	0x40010000
      5e4:	e01fc000 	.word	0xe01fc000
-     5e8:	00017ce4 	.word	0x00017ce4
+     5e8:	00017c10 	.word	0x00017c10
      5ec:	40000000 	.word	0x40000000
-     5f0:	40000f68 	.word	0x40000f68
-     5f4:	40000f68 	.word	0x40000f68
-     5f8:	400013fc 	.word	0x400013fc
+     5f0:	40001078 	.word	0x40001078
+     5f4:	40001078 	.word	0x40001078
+     5f8:	40001510 	.word	0x40001510
      5fc:	e01fc0c0 	.word	0xe01fc0c0
      600:	40000000 	.word	0x40000000
      604:	40000004 	.word	0x40000004
@@ -1335,7 +1335,7 @@ static int getGhostFrame(Ghost *g) {
      8b0:	03a00003 	moveq	r0, #3
      8b4:	13a00002 	movne	r0, #2
      8b8:	eaffffd1 	b	804 <getGhostFrame+0x130>
-     8bc:	40000f68 	.word	0x40000f68
+     8bc:	40001078 	.word	0x40001078
      8c0:	40000008 	.word	0x40000008
 
 000008c4 <drawTile>:
@@ -1708,7 +1708,7 @@ static void drawTile(int r, int c)
      b68:	e59f3008 	ldr	r3, [pc, #8]	; b78 <drawTile+0x2b4>
      b6c:	eb001df1 	bl	8338 <XPM_PintaAtxNyN>
      b70:	eaffff91 	b	9bc <drawTile+0xf8>
-     b74:	40000f68 	.word	0x40000f68
+     b74:	40001078 	.word	0x40001078
      b78:	40000174 	.word	0x40000174
 
 00000b7c <restoreBackground>:
@@ -2325,18 +2325,18 @@ static void initGame(void)
 
     struct timeval tv;
     gettimeofday(&tv, NULL);
-     ea0:	eb0022b0 	bl	9968 <gettimeofday>
+     ea0:	eb002279 	bl	988c <gettimeofday>
     srand((unsigned)tv.tv_usec);
      ea4:	e59d0004 	ldr	r0, [sp, #4]
-     ea8:	eb002268 	bl	9850 <srand>
+     ea8:	eb002231 	bl	9774 <srand>
 }
      eac:	e28dd00c 	add	sp, sp, #12
      eb0:	e8bd4ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
      eb4:	e12fff1e 	bx	lr
-     eb8:	40000f70 	.word	0x40000f70
-     ebc:	0000a7e0 	.word	0x0000a7e0
-     ec0:	40000f68 	.word	0x40000f68
-     ec4:	400011ec 	.word	0x400011ec
+     eb8:	40001080 	.word	0x40001080
+     ebc:	0000a704 	.word	0x0000a704
+     ec0:	40001078 	.word	0x40001078
+     ec4:	400012fc 	.word	0x400012fc
      ec8:	40000008 	.word	0x40000008
 
 00000ecc <ft_itoa>:
@@ -2411,7 +2411,7 @@ static int	get_digits(int n)
 		digits++;
 	}
 	if (!(str_num = (char *)malloc(sizeof(char) * (digits + 1))))
-     f1c:	eb002074 	bl	90f4 <malloc>
+     f1c:	eb00203d 	bl	9018 <malloc>
      f20:	e3500000 	cmp	r0, #0
      f24:	0a000013 	beq	f78 <ft_itoa+0xac>
 		return (NULL);
@@ -2559,7 +2559,7 @@ static void dibuja_hud(void)
      ff8:	eb0017f2 	bl	6fc8 <TFT_print_xNyN>
         free(tmp_lives_str); // Free memory allocated by ft_itoa
      ffc:	e1a00005 	mov	r0, r5
-    1000:	eb002043 	bl	9114 <free>
+    1000:	eb00200c 	bl	9038 <free>
     }
 
     TFT_print_xNyN(X_OFFSET + 250, Y_OFFSET / 2 - 8, "PUNTOS:"); // Use original offset
@@ -2580,7 +2580,7 @@ static void dibuja_hud(void)
     1030:	eb0017e4 	bl	6fc8 <TFT_print_xNyN>
        free(tmp_score_str); // Free memory allocated by ft_itoa
     1034:	e1a00004 	mov	r0, r4
-    1038:	eb002035 	bl	9114 <free>
+    1038:	eb001ffe 	bl	9038 <free>
     }
     // hudDirty should be set to false in the main loop after this function is called.
     // The original code already does this: if (hudDirty) { dibuja_hud(); hudDirty = false; }
@@ -2590,12 +2590,12 @@ static void dibuja_hud(void)
     1044:	e12fff1e 	bx	lr
     1048:	00003186 	.word	0x00003186
     104c:	40000010 	.word	0x40000010
-    1050:	40001280 	.word	0x40001280
-    1054:	0000aa48 	.word	0x0000aa48
+    1050:	40001390 	.word	0x40001390
+    1054:	0000a96c 	.word	0x0000a96c
     1058:	40000014 	.word	0x40000014
-    105c:	40000f68 	.word	0x40000f68
-    1060:	0000b830 	.word	0x0000b830
-    1064:	0000b838 	.word	0x0000b838
+    105c:	40001078 	.word	0x40001078
+    1060:	0000b754 	.word	0x0000b754
+    1064:	0000b75c 	.word	0x0000b75c
 
 00001068 <wallAt>:
 	return (str_num);
@@ -2685,7 +2685,7 @@ static bool wallAt(int r, int c)
            tile == cross;
 }
     110c:	e12fff1e 	bx	lr
-    1110:	40000f68 	.word	0x40000f68
+    1110:	40001078 	.word	0x40001078
 
 00001114 <canMoveDir>:
 #define cross2 'L'
@@ -2870,16 +2870,16 @@ static void drawPacman(int px, int py)
     1208:	e8bd4038 	pop	{r3, r4, r5, lr}
     120c:	e12fff1e 	bx	lr
     1210:	40000174 	.word	0x40000174
-    1214:	4000135c 	.word	0x4000135c
-    1218:	40001360 	.word	0x40001360
-    121c:	40000f68 	.word	0x40000f68
+    1214:	4000146c 	.word	0x4000146c
+    1218:	40001470 	.word	0x40001470
+    121c:	40001078 	.word	0x40001078
     1220:	40000008 	.word	0x40000008
 
 00001224 <start_pacmania_music>:
-
-/* =================================================================== */
 /*                                MAIN                                 */
 /* =================================================================== */
+
+
 #define PACMANIA_TEMPO 150
 void start_pacmania_music(void) {
     1224:	e92d4008 	push	{r3, lr}
@@ -2892,11 +2892,16 @@ void start_pacmania_music(void) {
     1228:	e59f0010 	ldr	r0, [pc, #16]	; 1240 <start_pacmania_music+0x1c>
     122c:	e3a01083 	mov	r1, #131	; 0x83
     1230:	e3a0205a 	mov	r2, #90	; 0x5a
-    1234:	eb001eaf 	bl	8cf8 <PARTITURE_On>
+    1234:	eb001e59 	bl	8ba0 <PARTITURE_On>
+   
+    //PARTITURE_On(PARTITURE_galaga_intro_txt, 64, 90);
+   
+   
+   
 }
     1238:	e8bd4008 	pop	{r3, lr}
     123c:	e12fff1e 	bx	lr
-    1240:	40000518 	.word	0x40000518
+    1240:	4000062c 	.word	0x4000062c
 
 00001244 <_gettimeofday>:
 /*                        STUBS NEWLIB                                 */
@@ -2934,8 +2939,8 @@ int _gettimeofday(struct timeval *tv, void *tz)
 }
     1278:	e1a00003 	mov	r0, r3
     127c:	e12fff1e 	bx	lr
-    1280:	40000f68 	.word	0x40000f68
-    1284:	40001800 	.word	0x40001800
+    1280:	40001078 	.word	0x40001078
+    1284:	40001a00 	.word	0x40001a00
 
 00001288 <NT35510_Cmd>:
 int LENX, LENY;
@@ -11939,7 +11944,7 @@ void NT35510_Reg( unsigned short cmd, unsigned short data)
     4494:	ff030000 	.word	0xff030000
     4498:	001affb7 	.word	0x001affb7
     449c:	ffff2000 	.word	0xffff2000
-    44a0:	40001278 	.word	0x40001278
+    44a0:	40001388 	.word	0x40001388
 
 000044a4 <TFT_FillArea>:
 unsigned short FG_Color = 0xFFFF;
@@ -12863,7 +12868,7 @@ void NT35510_Data( unsigned short data)
 }
     4808:	e8bd01f0 	pop	{r4, r5, r6, r7, r8}
     480c:	e12fff1e 	bx	lr
-    4810:	40001278 	.word	0x40001278
+    4810:	40001388 	.word	0x40001388
     4814:	3fffcfff 	.word	0x3fffcfff
     4818:	ffff2000 	.word	0xffff2000
     481c:	ffff0000 	.word	0xffff0000
@@ -13207,7 +13212,7 @@ void NT35510_Data( unsigned short data)
 }
     4948:	e8bd05f0 	pop	{r4, r5, r6, r7, r8, sl}
     494c:	e12fff1e 	bx	lr
-    4950:	40001278 	.word	0x40001278
+    4950:	40001388 	.word	0x40001388
     4954:	3fffcfff 	.word	0x3fffcfff
     4958:	ffff2000 	.word	0xffff2000
     495c:	ffff0000 	.word	0xffff0000
@@ -14242,7 +14247,7 @@ inline void TFT_PutPixel(int x0, int y0)
     4d64:	eafffff4 	b	4d3c <TFT_DrawLine+0x3d8>
     4d68:	0000ffff 	.word	0x0000ffff
     4d6c:	40000010 	.word	0x40000010
-    4d70:	40001278 	.word	0x40001278
+    4d70:	40001388 	.word	0x40001388
     4d74:	ffff2000 	.word	0xffff2000
     4d78:	3fffcfff 	.word	0x3fffcfff
     4d7c:	ffff0000 	.word	0xffff0000
@@ -14838,7 +14843,7 @@ void NT35510_Data_( unsigned short data)
     4fa4:	e3a02a01 	mov	r2, #4096	; 0x1000
     4fa8:	e5032fe7 	str	r2, [r3, #-4071]	; 0xfe7
     4fac:	eaffff7b 	b	4da0 <TFT_HorizontalLine+0x18>
-    4fb0:	40001278 	.word	0x40001278
+    4fb0:	40001388 	.word	0x40001388
     4fb4:	3fffcfff 	.word	0x3fffcfff
     4fb8:	ffff2000 	.word	0xffff2000
     4fbc:	ffff0000 	.word	0xffff0000
@@ -19268,7 +19273,7 @@ void NT35510_Data( unsigned short data)
     61e8:	e503afe7 	str	sl, [r3, #-4071]	; 0xfe7
     61ec:	ea000006 	b	620c <TFT_DrawCircle+0xfac>
     61f0:	40000010 	.word	0x40000010
-    61f4:	40001278 	.word	0x40001278
+    61f4:	40001388 	.word	0x40001388
     61f8:	3fffcfff 	.word	0x3fffcfff
     61fc:	ffff2000 	.word	0xffff2000
     6200:	ffff0000 	.word	0xffff0000
@@ -21148,20 +21153,20 @@ void TFT_DumpBinaryFont()
 }
     69e8:	e8bd45f8 	pop	{r3, r4, r5, r6, r7, r8, sl, lr}
     69ec:	e12fff1e 	bx	lr
-    69f0:	0000b894 	.word	0x0000b894
+    69f0:	0000b7b8 	.word	0x0000b7b8
     69f4:	40000010 	.word	0x40000010
-    69f8:	0000b8a0 	.word	0x0000b8a0
-    69fc:	0000b8c0 	.word	0x0000b8c0
-    6a00:	0000b8d4 	.word	0x0000b8d4
-    6a04:	0000b8e8 	.word	0x0000b8e8
-    6a08:	0000b900 	.word	0x0000b900
-    6a0c:	0000b914 	.word	0x0000b914
-    6a10:	0000b92c 	.word	0x0000b92c
-    6a14:	0000b934 	.word	0x0000b934
-    6a18:	0000b930 	.word	0x0000b930
-    6a1c:	0000b938 	.word	0x0000b938
-    6a20:	0000b970 	.word	0x0000b970
-    6a24:	0000b93c 	.word	0x0000b93c
+    69f8:	0000b7c4 	.word	0x0000b7c4
+    69fc:	0000b7e4 	.word	0x0000b7e4
+    6a00:	0000b7f8 	.word	0x0000b7f8
+    6a04:	0000b80c 	.word	0x0000b80c
+    6a08:	0000b824 	.word	0x0000b824
+    6a0c:	0000b838 	.word	0x0000b838
+    6a10:	0000b850 	.word	0x0000b850
+    6a14:	0000b858 	.word	0x0000b858
+    6a18:	0000b854 	.word	0x0000b854
+    6a1c:	0000b85c 	.word	0x0000b85c
+    6a20:	0000b894 	.word	0x0000b894
+    6a24:	0000b860 	.word	0x0000b860
 
 00006a28 <TFT_putch>:
  }
@@ -21878,7 +21883,7 @@ CS_ON;
     6ce0:	2a010000 	.word	0x2a010000
     6ce4:	2a020000 	.word	0x2a020000
     6ce8:	2b020000 	.word	0x2b020000
-    6cec:	40001278 	.word	0x40001278
+    6cec:	40001388 	.word	0x40001388
 
 00006cf0 <TFT_print>:
 // -----------------------------------------------------------------------
@@ -21945,7 +21950,7 @@ void TFT_print_centered_x(int y1, char * s)
     6d5c:	e1a05001 	mov	r5, r1
  int i=0, x1;
  x1 = LENX/2 - (strlen(s)*CF->x_step)/2;
-    6d60:	eb000ae8 	bl	9908 <strlen>
+    6d60:	eb000ab1 	bl	982c <strlen>
     6d64:	e59f605c 	ldr	r6, [pc, #92]	; 6dc8 <TFT_print_centered_x+0x78>
     6d68:	e5963004 	ldr	r3, [r6, #4]
     6d6c:	e5d33002 	ldrb	r3, [r3, #2]
@@ -21996,7 +22001,7 @@ void TFT_print_centered_x(int y1, char * s)
     6dc0:	e8bd41f0 	pop	{r4, r5, r6, r7, r8, lr}
     6dc4:	e12fff1e 	bx	lr
     6dc8:	40000010 	.word	0x40000010
-    6dcc:	40001278 	.word	0x40001278
+    6dcc:	40001388 	.word	0x40001388
 
 00006dd0 <TFT_putchar>:
 // -----------------------------------------------------------------------
@@ -22027,7 +22032,7 @@ void TFT_putchar(unsigned char c)
 }
     6e00:	e8bd4010 	pop	{r4, lr}
     6e04:	e12fff1e 	bx	lr
-    6e08:	40001278 	.word	0x40001278
+    6e08:	40001388 	.word	0x40001388
     6e0c:	40000010 	.word	0x40000010
 
 00006e10 <TFT_putch_xNyN>:
@@ -22263,7 +22268,7 @@ void TFT_putch_xNyN(int x1, int y1, unsigned char c)
     6f74:	e8bd4ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
     6f78:	e12fff1e 	bx	lr
     6f7c:	40000010 	.word	0x40000010
-    6f80:	40001278 	.word	0x40001278
+    6f80:	40001388 	.word	0x40001388
 
 00006f84 <TFT_putchar_xNyN>:
 // -----------------------------------------------------------------------
@@ -22294,7 +22299,7 @@ void TFT_putchar_xNyN(unsigned char c)
 }
     6fb8:	e8bd4010 	pop	{r4, lr}
     6fbc:	e12fff1e 	bx	lr
-    6fc0:	40001278 	.word	0x40001278
+    6fc0:	40001388 	.word	0x40001388
     6fc4:	40000010 	.word	0x40000010
 
 00006fc8 <TFT_print_xNyN>:
@@ -22365,7 +22370,7 @@ int TFT_print_centered_x_xNyN(int y1, char * s)
     7040:	e1a06001 	mov	r6, r1
  int i=0, x1;
  x1 = LENX/2 - (strlen(s)*CF->x_step*xN)/2;
-    7044:	eb000a2f 	bl	9908 <strlen>
+    7044:	eb0009f8 	bl	982c <strlen>
     7048:	e59f5070 	ldr	r5, [pc, #112]	; 70c0 <TFT_print_centered_x_xNyN+0x8c>
     704c:	e5952004 	ldr	r2, [r5, #4]
     7050:	e595300c 	ldr	r3, [r5, #12]
@@ -22422,7 +22427,7 @@ int TFT_print_centered_x_xNyN(int y1, char * s)
     70b8:	e8bd41f0 	pop	{r4, r5, r6, r7, r8, lr}
     70bc:	e12fff1e 	bx	lr
     70c0:	40000010 	.word	0x40000010
-    70c4:	40001278 	.word	0x40001278
+    70c4:	40001388 	.word	0x40001388
 
 000070c8 <TFT_Off>:
 #endif
@@ -24419,7 +24424,7 @@ int getDisplayPoint( POINT * displayPtr,
                         ) / matrixPtr->Divider ;
     7824:	e1a01005 	mov	r1, r5
     7828:	e0800003 	add	r0, r0, r3
-    782c:	eb0005dd 	bl	8fa8 <__aeabi_idiv>
+    782c:	eb0005a6 	bl	8ecc <__aeabi_idiv>
 
         displayPtr->y = ( (matrixPtr->Dn * screenPtr->x) + 
                           (matrixPtr->En * screenPtr->y) + 
@@ -24446,7 +24451,7 @@ int getDisplayPoint( POINT * displayPtr,
                         ) / matrixPtr->Divider ;
     784c:	e1a01005 	mov	r1, r5
     7850:	e0800003 	add	r0, r0, r3
-    7854:	eb0005d3 	bl	8fa8 <__aeabi_idiv>
+    7854:	eb00059c 	bl	8ecc <__aeabi_idiv>
         displayPtr->x = ( (matrixPtr->An * screenPtr->x) + 
                           (matrixPtr->Bn * screenPtr->y) + 
                            matrixPtr->Cn 
@@ -24785,8 +24790,8 @@ unsigned char TP_EnviaRecibe(unsigned char d)
     7a44:	e12fff1e 	bx	lr
     7a48:	3fffcfff 	.word	0x3fffcfff
     7a4c:	e0020000 	.word	0xe0020000
-    7a50:	40001278 	.word	0x40001278
-    7a54:	4000127c 	.word	0x4000127c
+    7a50:	40001388 	.word	0x40001388
+    7a54:	4000138c 	.word	0x4000138c
     7a58:	40000020 	.word	0x40000020
 
 00007a5c <TP_Get_XY_Cal>:
@@ -25165,24 +25170,24 @@ void TP_Calibrate()
     7d1c:	e28dd040 	add	sp, sp, #64	; 0x40
     7d20:	e8bd41f0 	pop	{r4, r5, r6, r7, r8, lr}
     7d24:	e12fff1e 	bx	lr
-    7d28:	40001278 	.word	0x40001278
-    7d2c:	4000127c 	.word	0x4000127c
-    7d30:	40001280 	.word	0x40001280
+    7d28:	40001388 	.word	0x40001388
+    7d2c:	4000138c 	.word	0x4000138c
+    7d30:	40001390 	.word	0x40001390
     7d34:	40000010 	.word	0x40000010
-    7d38:	0000b94c 	.word	0x0000b94c
+    7d38:	0000b870 	.word	0x0000b870
     7d3c:	66666667 	.word	0x66666667
     7d40:	00023ff9 	.word	0x00023ff9
-    7d44:	0000b968 	.word	0x0000b968
-    7d48:	0000b974 	.word	0x0000b974
+    7d44:	0000b88c 	.word	0x0000b88c
+    7d48:	0000b898 	.word	0x0000b898
     7d4c:	40000020 	.word	0x40000020
-    7d50:	0000b984 	.word	0x0000b984
-    7d54:	0000b99c 	.word	0x0000b99c
-    7d58:	0000b9a8 	.word	0x0000b9a8
-    7d5c:	0000b9b4 	.word	0x0000b9b4
-    7d60:	0000b9c0 	.word	0x0000b9c0
-    7d64:	0000b9cc 	.word	0x0000b9cc
-    7d68:	0000b9d8 	.word	0x0000b9d8
-    7d6c:	0000b9e4 	.word	0x0000b9e4
+    7d50:	0000b8a8 	.word	0x0000b8a8
+    7d54:	0000b8c0 	.word	0x0000b8c0
+    7d58:	0000b8cc 	.word	0x0000b8cc
+    7d5c:	0000b8d8 	.word	0x0000b8d8
+    7d60:	0000b8e4 	.word	0x0000b8e4
+    7d64:	0000b8f0 	.word	0x0000b8f0
+    7d68:	0000b8fc 	.word	0x0000b8fc
+    7d6c:	0000b908 	.word	0x0000b908
 
 00007d70 <_atoi>:
 int xpm_sx, xpm_sy; // Tama駉 en pixel de los sprites
@@ -25784,8 +25789,8 @@ int _atoi(char * s)
     80f0:	e1a08006 	mov	r8, r6
     80f4:	e1a0900a 	mov	r9, sl
     80f8:	eaffff49 	b	7e24 <XPM_Extract+0x54>
-    80fc:	4000128c 	.word	0x4000128c
-    8100:	0000b9f0 	.word	0x0000b9f0
+    80fc:	4000139c 	.word	0x4000139c
+    8100:	0000b914 	.word	0x0000b914
 
 00008104 <XPM_PintaAll>:
  _printf("OK\n");
@@ -25923,7 +25928,7 @@ void XPM_PintaAll(int x, int y, char** xpm)
 }
     81ac:	e8bd41f0 	pop	{r4, r5, r6, r7, r8, lr}
     81b0:	e12fff1e 	bx	lr
-    81b4:	4000128c 	.word	0x4000128c
+    81b4:	4000139c 	.word	0x4000139c
     81b8:	3fffcfff 	.word	0x3fffcfff
 
 000081bc <XPM_PintaAt>:
@@ -26030,11 +26035,11 @@ inline void XPM_PintaAt(int x, int y, int sprite, char** xpm)
     8230:	e5083fe7 	str	r3, [r8, #-4071]	; 0xfe7
  
  ny = sprite/TESELAS_X;
-    8234:	eb00035b 	bl	8fa8 <__aeabi_idiv>
+    8234:	eb000324 	bl	8ecc <__aeabi_idiv>
     8238:	e1a08000 	mov	r8, r0
     823c:	e1a01008 	mov	r1, r8
     8240:	e1a00006 	mov	r0, r6
-    8244:	eb000357 	bl	8fa8 <__aeabi_idiv>
+    8244:	eb000320 	bl	8ecc <__aeabi_idiv>
  nx = sprite - TESELAS_X*ny; 
     8248:	e0080890 	mul	r8, r0, r8
  col  = nx*xpm_sx;
@@ -26143,9 +26148,9 @@ inline void XPM_PintaAt(int x, int y, int sprite, char** xpm)
     82cc:	e3a02a01 	mov	r2, #4096	; 0x1000
     82d0:	e5032fe7 	str	r2, [r3, #-4071]	; 0xfe7
     82d4:	eaffffc4 	b	81ec <XPM_PintaAt+0x30>
-    82d8:	40001278 	.word	0x40001278
-    82dc:	4000127c 	.word	0x4000127c
-    82e0:	4000128c 	.word	0x4000128c
+    82d8:	40001388 	.word	0x40001388
+    82dc:	4000138c 	.word	0x4000138c
+    82e0:	4000139c 	.word	0x4000139c
     82e4:	3fffcfff 	.word	0x3fffcfff
 
 000082e8 <XPM_SetxNyN>:
@@ -26207,12 +26212,12 @@ void XPM_SetxNyN(int xn, int yn)
  xpm_syn = yn * xpm_sy;
     831c:	e583500c 	str	r5, [r3, #12]
  teselas_x = TESELAS_X;
-    8320:	eb000320 	bl	8fa8 <__aeabi_idiv>
+    8320:	eb0002e9 	bl	8ecc <__aeabi_idiv>
     8324:	e58400d8 	str	r0, [r4, #216]	; 0xd8
 }
     8328:	e8bd4070 	pop	{r4, r5, r6, lr}
     832c:	e12fff1e 	bx	lr
-    8330:	4000128c 	.word	0x4000128c
+    8330:	4000139c 	.word	0x4000139c
     8334:	40000040 	.word	0x40000040
 
 00008338 <XPM_PintaAtxNyN>:
@@ -26310,7 +26315,7 @@ inline void XPM_PintaAtxNyN(int x, int y, int sprite, char** xpm)
     8378:	e0678006 	rsb	r8, r7, r6
     837c:	e1a00008 	mov	r0, r8
     8380:	e3a01000 	mov	r1, #0
-    8384:	eb000307 	bl	8fa8 <__aeabi_idiv>
+    8384:	eb0002d0 	bl	8ecc <__aeabi_idiv>
     8388:	e58d001c 	str	r0, [sp, #28]
  
  if(x>=LENX || y>= LENY) return;
@@ -26383,7 +26388,7 @@ inline void XPM_PintaAtxNyN(int x, int y, int sprite, char** xpm)
  nx = sprite % teselas_x;
     83f0:	e1a00009 	mov	r0, r9
     83f4:	e1a01008 	mov	r1, r8
-    83f8:	eb000334 	bl	90d0 <__aeabi_idivmod>
+    83f8:	eb0002fd 	bl	8ff4 <__aeabi_idivmod>
  
  col  = nx*xpm_sx;
     83fc:	e59530d0 	ldr	r3, [r5, #208]	; 0xd0
@@ -26406,7 +26411,7 @@ inline void XPM_PintaAtxNyN(int x, int y, int sprite, char** xpm)
  ny = sprite / teselas_x;
     8408:	e1a01008 	mov	r1, r8
     840c:	e58d3004 	str	r3, [sp, #4]
-    8410:	eb0002e4 	bl	8fa8 <__aeabi_idiv>
+    8410:	eb0002ad 	bl	8ecc <__aeabi_idiv>
  nx = sprite % teselas_x;
  
  col  = nx*xpm_sx;
@@ -26796,9 +26801,9 @@ inline void XPM_PintaAtxNyN(int x, int y, int sprite, char** xpm)
     864c:	caffffc1 	bgt	8558 <XPM_PintaAtxNyN+0x220>
     8650:	eaffffb0 	b	8518 <XPM_PintaAtxNyN+0x1e0>
     8654:	40000040 	.word	0x40000040
-    8658:	40001278 	.word	0x40001278
-    865c:	4000128c 	.word	0x4000128c
-    8660:	4000127c 	.word	0x4000127c
+    8658:	40001388 	.word	0x40001388
+    865c:	4000139c 	.word	0x4000139c
+    8660:	4000138c 	.word	0x4000138c
     8664:	3fffcfff 	.word	0x3fffcfff
 
 00008668 <TIMER1_ISR>:
@@ -26962,15 +26967,15 @@ void PWM0_ISR(void)
  // Variables
   static int d1,d2,d3,d4, dtotalIzq, dtotalDch;
     PWMIR = 0xFFFF;	   // Clear all interrupt notifications
-    8748:	e59f12fc 	ldr	r1, [pc, #764]	; 8a4c <PWM0_ISR+0x308>
-    874c:	e59f22fc 	ldr	r2, [pc, #764]	; 8a50 <PWM0_ISR+0x30c>
+    8748:	e59f11a0 	ldr	r1, [pc, #416]	; 88f0 <PWM0_ISR+0x1ac>
+    874c:	e59f21a0 	ldr	r2, [pc, #416]	; 88f4 <PWM0_ISR+0x1b0>
   static  int NT1=8; //256 elementos de la tabla
    
    
    
  // Get data
    d1 = TABLA1[Fase1>>NT1];
-    8750:	e59f32fc 	ldr	r3, [pc, #764]	; 8a54 <PWM0_ISR+0x310>
+    8750:	e59f31a0 	ldr	r3, [pc, #416]	; 88f8 <PWM0_ISR+0x1b4>
  //  generate different waveforms: channels 1-4 from partiture 
  /// and special effects channels.
  // Remember it is called 57600 times per second. Don't waste your time here.
@@ -26984,7098 +26989,7079 @@ void PWM0_ISR(void)
    
  // Get data
    d1 = TABLA1[Fase1>>NT1];
-    8758:	e1d300b0 	ldrh	r0, [r3]
+    8758:	e1d310b0 	ldrh	r1, [r3]
    d2 = TABLA1[Fase2>>NT1];
-    875c:	e1d310b2 	ldrh	r1, [r3, #2]
+    875c:	e1d340b2 	ldrh	r4, [r3, #2]
    d3 = TABLA1[Fase3>>NT1];
-    8760:	e1d340b4 	ldrh	r4, [r3, #4]
+    8760:	e1d3c0b4 	ldrh	ip, [r3, #4]
    d4 = TABLA1[Fase4>>NT1];
-    8764:	e1d3c0b6 	ldrh	ip, [r3, #6]
+    8764:	e1d300b6 	ldrh	r0, [r3, #6]
+   
+   
+   
+ // Get data
+   d1 = TABLA1[Fase1>>NT1];
+   d2 = TABLA1[Fase2>>NT1];
+    8768:	e59f218c 	ldr	r2, [pc, #396]	; 88fc <PWM0_ISR+0x1b8>
+    876c:	e1a04424 	lsr	r4, r4, #8
+   d3 = TABLA1[Fase3>>NT1];
+    8770:	e1a0c42c 	lsr	ip, ip, #8
+   d4 = TABLA1[Fase4>>NT1];
+    8774:	e1a00420 	lsr	r0, r0, #8
+  static  int NT1=8; //256 elementos de la tabla
+   
+   
+   
+ // Get data
+   d1 = TABLA1[Fase1>>NT1];
+    8778:	e1a01421 	lsr	r1, r1, #8
+   d2 = TABLA1[Fase2>>NT1];
+    877c:	e1a04084 	lsl	r4, r4, #1
+   d3 = TABLA1[Fase3>>NT1];
+    8780:	e1a0c08c 	lsl	ip, ip, #1
+   d4 = TABLA1[Fase4>>NT1];
+    8784:	e1a00080 	lsl	r0, r0, #1
+  static  int NT1=8; //256 elementos de la tabla
+   
+   
+   
+ // Get data
+   d1 = TABLA1[Fase1>>NT1];
+    8788:	e1a01081 	lsl	r1, r1, #1
+   d2 = TABLA1[Fase2>>NT1];
+    878c:	e19250f4 	ldrsh	r5, [r2, r4]
+  static  int NT1=8; //256 elementos de la tabla
+   
+   
+   
+ // Get data
+   d1 = TABLA1[Fase1>>NT1];
+    8790:	e19210f1 	ldrsh	r1, [r2, r1]
+   d2 = TABLA1[Fase2>>NT1];
+   d3 = TABLA1[Fase3>>NT1];
+    8794:	e19240fc 	ldrsh	r4, [r2, ip]
+   d4 = TABLA1[Fase4>>NT1];
+    8798:	e192c0f0 	ldrsh	ip, [r2, r0]
    d2=(d2>>2);
    d3=(d3>>2);
    d4=(d4>>2);
    
- // Increment phases
-    Fase1+=Delta_Fase1;
-    8768:	e1d320b0 	ldrh	r2, [r3]
-    876c:	e1d351b8 	ldrh	r5, [r3, #24]
-    8770:	e0852002 	add	r2, r5, r2
-    8774:	e1a02802 	lsl	r2, r2, #16
-    8778:	e1a02822 	lsr	r2, r2, #16
-    877c:	e1c320b0 	strh	r2, [r3]
-    Fase2+=Delta_Fase2;
-    8780:	e1d320b2 	ldrh	r2, [r3, #2]
-    8784:	e1d351ba 	ldrh	r5, [r3, #26]
-    8788:	e0852002 	add	r2, r5, r2
-    878c:	e1a02802 	lsl	r2, r2, #16
-    8790:	e1a02822 	lsr	r2, r2, #16
-    8794:	e1c320b2 	strh	r2, [r3, #2]
-    Fase3+=Delta_Fase3;
-    8798:	e1d320b4 	ldrh	r2, [r3, #4]
-    879c:	e1d351bc 	ldrh	r5, [r3, #28]
-    87a0:	e0852002 	add	r2, r5, r2
-    87a4:	e1a02802 	lsl	r2, r2, #16
-    87a8:	e1a02822 	lsr	r2, r2, #16
-    87ac:	e1c320b4 	strh	r2, [r3, #4]
-    Fase4+=Delta_Fase4;
-    87b0:	e1d320b6 	ldrh	r2, [r3, #6]
-    87b4:	e1d351be 	ldrh	r5, [r3, #30]
-    87b8:	e0855002 	add	r5, r5, r2
-    87bc:	e1a05805 	lsl	r5, r5, #16
-    87c0:	e1a05825 	lsr	r5, r5, #16
    
-   
-   
- // Get data
-   d1 = TABLA1[Fase1>>NT1];
-   d2 = TABLA1[Fase2>>NT1];
-    87c4:	e59f228c 	ldr	r2, [pc, #652]	; 8a58 <PWM0_ISR+0x314>
-    87c8:	e1a01421 	lsr	r1, r1, #8
-   d3 = TABLA1[Fase3>>NT1];
-    87cc:	e1a04424 	lsr	r4, r4, #8
-   d4 = TABLA1[Fase4>>NT1];
-    87d0:	e1a0c42c 	lsr	ip, ip, #8
-  static  int NT1=8; //256 elementos de la tabla
-   
-   
-   
- // Get data
-   d1 = TABLA1[Fase1>>NT1];
-    87d4:	e1a00420 	lsr	r0, r0, #8
-   
- // Increment phases
-    Fase1+=Delta_Fase1;
-    Fase2+=Delta_Fase2;
-    Fase3+=Delta_Fase3;
-    Fase4+=Delta_Fase4;
-    87d8:	e1c350b6 	strh	r5, [r3, #6]
-   
-   
-   
- // Get data
-   d1 = TABLA1[Fase1>>NT1];
-   d2 = TABLA1[Fase2>>NT1];
-    87dc:	e1a01081 	lsl	r1, r1, #1
-   d3 = TABLA1[Fase3>>NT1];
-    87e0:	e1a04084 	lsl	r4, r4, #1
-   d4 = TABLA1[Fase4>>NT1];
-    87e4:	e1a0c08c 	lsl	ip, ip, #1
-  static  int NT1=8; //256 elementos de la tabla
-   
-   
-   
- // Get data
-   d1 = TABLA1[Fase1>>NT1];
-    87e8:	e1a00080 	lsl	r0, r0, #1
-   d2 = TABLA1[Fase2>>NT1];
-    87ec:	e19210f1 	ldrsh	r1, [r2, r1]
-   d3 = TABLA1[Fase3>>NT1];
-    87f0:	e19240f4 	ldrsh	r4, [r2, r4]
-   d4 = TABLA1[Fase4>>NT1];
-    87f4:	e192c0fc 	ldrsh	ip, [r2, ip]
-  static  int NT1=8; //256 elementos de la tabla
-   
-   
-   
- // Get data
-   d1 = TABLA1[Fase1>>NT1];
-    87f8:	e19200f0 	ldrsh	r0, [r2, r0]
-    Fase2+=Delta_Fase2;
-    Fase3+=Delta_Fase3;
-    Fase4+=Delta_Fase4;
- 
- // Special effects
-   if (expl && exCount < duration){
-    87fc:	e5d35020 	ldrb	r5, [r3, #32]
-   d3 = TABLA1[Fase3>>NT1];
+   if(!nota1)   d1=0;
+    879c:	e1d301b8 	ldrh	r0, [r3, #24]
    d4 = TABLA1[Fase4>>NT1];
    
 
  // Attenuate
+  
    d1=(d1>>2); //Divido entre 3
-    8800:	e1a00140 	asr	r0, r0, #2
+    87a0:	e1a01141 	asr	r1, r1, #2
    d2=(d2>>2);
-    8804:	e1a01141 	asr	r1, r1, #2
    d3=(d3>>2);
-    8808:	e1a04144 	asr	r4, r4, #2
    d4=(d4>>2);
-    880c:	e1a0c14c 	asr	ip, ip, #2
-    Fase2+=Delta_Fase2;
-    Fase3+=Delta_Fase3;
-    Fase4+=Delta_Fase4;
- 
- // Special effects
-   if (expl && exCount < duration){
-    8810:	e3550000 	cmp	r5, #0
-   d3 = TABLA1[Fase3>>NT1];
+   
+   
+   if(!nota1)   d1=0;
+    87a4:	e3500000 	cmp	r0, #0
    d4 = TABLA1[Fase4>>NT1];
    
 
  // Attenuate
+  
    d1=(d1>>2); //Divido entre 3
-    8814:	e5830008 	str	r0, [r3, #8]
+    87a8:	e5831008 	str	r1, [r3, #8]
    d2=(d2>>2);
-    8818:	e583100c 	str	r1, [r3, #12]
    d3=(d3>>2);
-    881c:	e5834010 	str	r4, [r3, #16]
    d4=(d4>>2);
-    8820:	e583c014 	str	ip, [r3, #20]
+   
+   
+   if(!nota1)   d1=0;
+    87ac:	01a01000 	moveq	r1, r0
+    87b0:	05830008 	streq	r0, [r3, #8]
+   if(!nota2)   d2=0;
+    87b4:	e1d301ba 	ldrh	r0, [r3, #26]
+   
+
+ // Attenuate
+  
+   d1=(d1>>2); //Divido entre 3
+   d2=(d2>>2);
+    87b8:	e1a02145 	asr	r2, r5, #2
+   d3=(d3>>2);
+   d4=(d4>>2);
+   
+   
+   if(!nota1)   d1=0;
+   if(!nota2)   d2=0;
+    87bc:	e3500000 	cmp	r0, #0
+   
+
+ // Attenuate
+  
+   d1=(d1>>2); //Divido entre 3
+   d2=(d2>>2);
+    87c0:	e583200c 	str	r2, [r3, #12]
+   d3=(d3>>2);
+   d4=(d4>>2);
+   
+   
+   if(!nota1)   d1=0;
+   if(!nota2)   d2=0;
+    87c4:	059f212c 	ldreq	r2, [pc, #300]	; 88f8 <PWM0_ISR+0x1b4>
+    87c8:	0582000c 	streq	r0, [r2, #12]
+    87cc:	01a02000 	moveq	r2, r0
+   if(!nota3)   d3=0;
+    87d0:	e1d301bc 	ldrh	r0, [r3, #28]
+ // Attenuate
+  
+   d1=(d1>>2); //Divido entre 3
+   d2=(d2>>2);
+   d3=(d3>>2);
+   d4=(d4>>2);
+    87d4:	e1a0c14c 	asr	ip, ip, #2
+   
+   
+   if(!nota1)   d1=0;
+   if(!nota2)   d2=0;
+   if(!nota3)   d3=0;
+    87d8:	e3500000 	cmp	r0, #0
+ // Attenuate
+  
+   d1=(d1>>2); //Divido entre 3
+   d2=(d2>>2);
+   d3=(d3>>2);
+   d4=(d4>>2);
+    87dc:	e583c014 	str	ip, [r3, #20]
+   
+   
+   if(!nota1)   d1=0;
+   if(!nota2)   d2=0;
+   if(!nota3)   d3=0;
+    87e0:	059fc110 	ldreq	ip, [pc, #272]	; 88f8 <PWM0_ISR+0x1b4>
+
+ // Attenuate
+  
+   d1=(d1>>2); //Divido entre 3
+   d2=(d2>>2);
+   d3=(d3>>2);
+    87e4:	e1a04144 	asr	r4, r4, #2
+    87e8:	e5834010 	str	r4, [r3, #16]
+   d4=(d4>>2);
+   
+   
+   if(!nota1)   d1=0;
+   if(!nota2)   d2=0;
+   if(!nota3)   d3=0;
+    87ec:	058c0010 	streq	r0, [ip, #16]
+   if(!nota4)   d4=0;   
+    87f0:	e1d301be 	ldrh	r0, [r3, #30]
+    87f4:	e3500000 	cmp	r0, #0
+    87f8:	059fc0f8 	ldreq	ip, [pc, #248]	; 88f8 <PWM0_ISR+0x1b4>
+    87fc:	058c0014 	streq	r0, [ip, #20]
+   
+   
+   
+   
+ // Increment phases
+    Fase1+=Delta_Fase1;
+    8800:	e1d300b0 	ldrh	r0, [r3]
+    8804:	e1d3c2b0 	ldrh	ip, [r3, #32]
+    8808:	e08c0000 	add	r0, ip, r0
+    880c:	e1a00800 	lsl	r0, r0, #16
+    8810:	e1a00820 	lsr	r0, r0, #16
+    8814:	e1c300b0 	strh	r0, [r3]
+    Fase2+=Delta_Fase2;
+    8818:	e1d300b2 	ldrh	r0, [r3, #2]
+    881c:	e1d3c2b2 	ldrh	ip, [r3, #34]	; 0x22
+    8820:	e08c0000 	add	r0, ip, r0
+    8824:	e1a00800 	lsl	r0, r0, #16
+    8828:	e1a00820 	lsr	r0, r0, #16
+    882c:	e1c300b2 	strh	r0, [r3, #2]
+    Fase3+=Delta_Fase3;
+    8830:	e1d300b4 	ldrh	r0, [r3, #4]
+    8834:	e1d3c2b4 	ldrh	ip, [r3, #36]	; 0x24
+    8838:	e08c0000 	add	r0, ip, r0
+    883c:	e1a00800 	lsl	r0, r0, #16
+    8840:	e1a00820 	lsr	r0, r0, #16
+    8844:	e1c300b4 	strh	r0, [r3, #4]
+    Fase4+=Delta_Fase4;
+    8848:	e1d3c0b6 	ldrh	ip, [r3, #6]
+    884c:	e1d342b6 	ldrh	r4, [r3, #38]	; 0x26
+ 
+
+ // Add components (cuadraphonic sound)
+    dtotalIzq=d1+d2;
+    if(dtotalIzq> 511) dtotalIzq = 511; //Saturaci髇
+    8850:	e59f00a8 	ldr	r0, [pc, #168]	; 8900 <PWM0_ISR+0x1bc>
+   
+ // Increment phases
+    Fase1+=Delta_Fase1;
     Fase2+=Delta_Fase2;
     Fase3+=Delta_Fase3;
     Fase4+=Delta_Fase4;
+    8854:	e084c00c 	add	ip, r4, ip
  
- // Special effects
-   if (expl && exCount < duration){
-    8824:	0a000003 	beq	8838 <PWM0_ISR+0xf4>
-    8828:	e5934024 	ldr	r4, [r3, #36]	; 0x24
-    882c:	e59fc228 	ldr	ip, [pc, #552]	; 8a5c <PWM0_ISR+0x318>
-    8830:	e154000c 	cmp	r4, ip
-    8834:	9a00002a 	bls	88e4 <PWM0_ISR+0x1a0>
-        }
 
-		exCount++;
-     }
-     else{
-		defecto = 0;
-    8838:	e3a02000 	mov	r2, #0
-    883c:	e5832030 	str	r2, [r3, #48]	; 0x30
-		expl=0;
-    8840:	e5c32020 	strb	r2, [r3, #32]
-     }
  // Add components (cuadraphonic sound)
-    dtotalIzq=d1+d2+defecto;
-    8844:	e5934030 	ldr	r4, [r3, #48]	; 0x30
-    8848:	e0802001 	add	r2, r0, r1
-    if(dtotalIzq> 511) dtotalIzq = 511; //Saturaci髇
-    884c:	e59fc20c 	ldr	ip, [pc, #524]	; 8a60 <PWM0_ISR+0x31c>
-     else{
-		defecto = 0;
-		expl=0;
-     }
+    dtotalIzq=d1+d2;
+    8858:	e0812002 	add	r2, r1, r2
+   
+ // Increment phases
+    Fase1+=Delta_Fase1;
+    Fase2+=Delta_Fase2;
+    Fase3+=Delta_Fase3;
+    Fase4+=Delta_Fase4;
+    885c:	e1a0c80c 	lsl	ip, ip, #16
+    8860:	e1a0c82c 	lsr	ip, ip, #16
+ 
+
  // Add components (cuadraphonic sound)
-    dtotalIzq=d1+d2+defecto;
-    8850:	e0822004 	add	r2, r2, r4
-    8854:	e59f11f8 	ldr	r1, [pc, #504]	; 8a54 <PWM0_ISR+0x310>
+    dtotalIzq=d1+d2;
     if(dtotalIzq> 511) dtotalIzq = 511; //Saturaci髇
-    8858:	e152000c 	cmp	r2, ip
-     else{
-		defecto = 0;
-		expl=0;
-     }
+    8864:	e1520000 	cmp	r2, r0
+   
+ // Increment phases
+    Fase1+=Delta_Fase1;
+    Fase2+=Delta_Fase2;
+    Fase3+=Delta_Fase3;
+    Fase4+=Delta_Fase4;
+    8868:	e1c3c0b6 	strh	ip, [r3, #6]
+   
+   
+   
+   
+ // Increment phases
+    Fase1+=Delta_Fase1;
+    886c:	e59f1084 	ldr	r1, [pc, #132]	; 88f8 <PWM0_ISR+0x1b4>
+    Fase3+=Delta_Fase3;
+    Fase4+=Delta_Fase4;
+ 
+
  // Add components (cuadraphonic sound)
-    dtotalIzq=d1+d2+defecto;
-    885c:	e5832038 	str	r2, [r3, #56]	; 0x38
+    dtotalIzq=d1+d2;
+    8870:	e5832028 	str	r2, [r3, #40]	; 0x28
     if(dtotalIzq> 511) dtotalIzq = 511; //Saturaci髇
-    8860:	c581c038 	strgt	ip, [r1, #56]	; 0x38
-    8864:	ca000002 	bgt	8874 <PWM0_ISR+0x130>
+    8874:	ca000002 	bgt	8884 <PWM0_ISR+0x140>
     if(dtotalIzq<-511) dtotalIzq = -511;
-    8868:	e59f01f4 	ldr	r0, [pc, #500]	; 8a64 <PWM0_ISR+0x320>
-    886c:	e1520000 	cmp	r2, r0
-    8870:	b5810038 	strlt	r0, [r1, #56]	; 0x38
+    8878:	e59f0084 	ldr	r0, [pc, #132]	; 8904 <PWM0_ISR+0x1c0>
+    887c:	e1520000 	cmp	r2, r0
+    8880:	aa000000 	bge	8888 <PWM0_ISR+0x144>
+    8884:	e5810028 	str	r0, [r1, #40]	; 0x28
       //Canal Derecho
-    dtotalDch=d3+d4+defecto;
-    8874:	e2831010 	add	r1, r3, #16
-    8878:	e8910003 	ldm	r1, {r0, r1}
-    887c:	e0800001 	add	r0, r0, r1
-    8880:	e5932030 	ldr	r2, [r3, #48]	; 0x30
+    dtotalDch=d3+d4;
+    8888:	e2831010 	add	r1, r3, #16
+    888c:	e8910006 	ldm	r1, {r1, r2}
+    8890:	e0812002 	add	r2, r1, r2
     if(dtotalDch> 511) dtotalDch = 511; //Saturaci髇
-    8884:	e59f11d4 	ldr	r1, [pc, #468]	; 8a60 <PWM0_ISR+0x31c>
+    8894:	e59f1064 	ldr	r1, [pc, #100]	; 8900 <PWM0_ISR+0x1bc>
  // Add components (cuadraphonic sound)
-    dtotalIzq=d1+d2+defecto;
-    if(dtotalIzq> 511) dtotalIzq = 511; //Saturaci髇
-    if(dtotalIzq<-511) dtotalIzq = -511;
-      //Canal Derecho
-    dtotalDch=d3+d4+defecto;
-    8888:	e0802002 	add	r2, r0, r2
-    888c:	e59f01c0 	ldr	r0, [pc, #448]	; 8a54 <PWM0_ISR+0x310>
-    if(dtotalDch> 511) dtotalDch = 511; //Saturaci髇
-    8890:	e1520001 	cmp	r2, r1
- // Add components (cuadraphonic sound)
-    dtotalIzq=d1+d2+defecto;
+    dtotalIzq=d1+d2;
     if(dtotalIzq> 511) dtotalIzq = 511; //Saturaci髇
     if(dtotalIzq<-511) dtotalIzq = -511;
       //Canal Derecho
-    dtotalDch=d3+d4+defecto;
-    8894:	e583203c 	str	r2, [r3, #60]	; 0x3c
+    dtotalDch=d3+d4;
+    8898:	e59f0058 	ldr	r0, [pc, #88]	; 88f8 <PWM0_ISR+0x1b4>
     if(dtotalDch> 511) dtotalDch = 511; //Saturaci髇
-    8898:	c580103c 	strgt	r1, [r0, #60]	; 0x3c
-    889c:	c59f21c4 	ldrgt	r2, [pc, #452]	; 8a68 <PWM0_ISR+0x324>
-    88a0:	ca000004 	bgt	88b8 <PWM0_ISR+0x174>
+    889c:	e1520001 	cmp	r2, r1
+ // Add components (cuadraphonic sound)
+    dtotalIzq=d1+d2;
+    if(dtotalIzq> 511) dtotalIzq = 511; //Saturaci髇
+    if(dtotalIzq<-511) dtotalIzq = -511;
+      //Canal Derecho
+    dtotalDch=d3+d4;
+    88a0:	e583202c 	str	r2, [r3, #44]	; 0x2c
+    if(dtotalDch> 511) dtotalDch = 511; //Saturaci髇
+    88a4:	c580102c 	strgt	r1, [r0, #44]	; 0x2c
+    88a8:	c59f2058 	ldrgt	r2, [pc, #88]	; 8908 <PWM0_ISR+0x1c4>
+    88ac:	ca000004 	bgt	88c4 <PWM0_ISR+0x180>
     if(dtotalDch<-511) dtotalDch = -511;
-    88a4:	e59f11b8 	ldr	r1, [pc, #440]	; 8a64 <PWM0_ISR+0x320>
-    88a8:	e1520001 	cmp	r2, r1
-    88ac:	b580103c 	strlt	r1, [r0, #60]	; 0x3c
-    88b0:	a2822c02 	addge	r2, r2, #512	; 0x200
-    88b4:	b3a02001 	movlt	r2, #1
+    88b0:	e59f104c 	ldr	r1, [pc, #76]	; 8904 <PWM0_ISR+0x1c0>
+    88b4:	e1520001 	cmp	r2, r1
+    88b8:	b580102c 	strlt	r1, [r0, #44]	; 0x2c
+    88bc:	a2822c02 	addge	r2, r2, #512	; 0x200
+    88c0:	b3a02001 	movlt	r2, #1
    */
     
    
    
  // PMW output
    PWMMR4 = dtotalIzq +512; //Centrado
-    88b8:	e5930038 	ldr	r0, [r3, #56]	; 0x38
-    88bc:	e59f318c 	ldr	r3, [pc, #396]	; 8a50 <PWM0_ISR+0x30c>
-    88c0:	e2800c02 	add	r0, r0, #512	; 0x200
-    88c4:	e5830040 	str	r0, [r3, #64]	; 0x40
+    88c4:	e5930028 	ldr	r0, [r3, #40]	; 0x28
+    88c8:	e59f3024 	ldr	r3, [pc, #36]	; 88f4 <PWM0_ISR+0x1b0>
+    88cc:	e2800c02 	add	r0, r0, #512	; 0x200
+    88d0:	e5830040 	str	r0, [r3, #64]	; 0x40
 
  
  PWMLER = (1<<4) | (1 << 2);
 
 
  VICVectAddr=-1;  	   // EOI for interrupt controller
-    88c8:	e3e01000 	mvn	r1, #0
+    88d4:	e3e01000 	mvn	r1, #0
    
  // PMW output
    PWMMR4 = dtotalIzq +512; //Centrado
 
    //PWM2
    PWMMR2 = dtotalDch + 512;//Centrado
-    88cc:	e5832020 	str	r2, [r3, #32]
+    88d8:	e5832020 	str	r2, [r3, #32]
 
  
  PWMLER = (1<<4) | (1 << 2);
-    88d0:	e3a02014 	mov	r2, #20
-    88d4:	e5832050 	str	r2, [r3, #80]	; 0x50
+    88dc:	e3a02014 	mov	r2, #20
+    88e0:	e5832050 	str	r2, [r3, #80]	; 0x50
 
 
  VICVectAddr=-1;  	   // EOI for interrupt controller
-    88d8:	e5011fcf 	str	r1, [r1, #-4047]	; 0xfcf
+    88e4:	e5011fcf 	str	r1, [r1, #-4047]	; 0xfcf
 }
-    88dc:	e8bd103f 	pop	{r0, r1, r2, r3, r4, r5, ip}
-    88e0:	e25ef004 	subs	pc, lr, #4
-    Fase3+=Delta_Fase3;
-    Fase4+=Delta_Fase4;
- 
- // Special effects
-   if (expl && exCount < duration){
-		if (effectType == GUN_EFFECT) {
-    88e4:	e5931028 	ldr	r1, [r3, #40]	; 0x28
-    88e8:	e3510000 	cmp	r1, #0
-    88ec:	0a00002d 	beq	89a8 <PWM0_ISR+0x264>
-			defecto = TABLA_SINUS_WAVE[fase >> 8];  // Usar tabla de ondas sinusoidales
-			defecto=(defecto>>4); // Atenuo el efecto
-		}
-		else if (effectType == EXPLOSION_EFFECT) {
-    88f0:	e5932028 	ldr	r2, [r3, #40]	; 0x28
-    88f4:	e3520001 	cmp	r2, #1
-    88f8:	0a000033 	beq	89cc <PWM0_ISR+0x288>
-		}
-		
-		//_printf("\r\n defecto %d",defecto);
+    88e8:	e8bd103f 	pop	{r0, r1, r2, r3, r4, r5, ip}
+    88ec:	e25ef004 	subs	pc, lr, #4
+    88f0:	0000ffff 	.word	0x0000ffff
+    88f4:	e0014000 	.word	0xe0014000
+    88f8:	4000147c 	.word	0x4000147c
+    88fc:	0000b554 	.word	0x0000b554
+    8900:	000001ff 	.word	0x000001ff
+    8904:	fffffe01 	.word	0xfffffe01
+    8908:	000003ff 	.word	0x000003ff
 
-        // Limitar la amplitud para evitar saturaci髇
-        if (defecto > 511) defecto = 511;
-    88fc:	e5931030 	ldr	r1, [r3, #48]	; 0x30
-    8900:	e59f2158 	ldr	r2, [pc, #344]	; 8a60 <PWM0_ISR+0x31c>
-    8904:	e1510002 	cmp	r1, r2
-    8908:	c59f1144 	ldrgt	r1, [pc, #324]	; 8a54 <PWM0_ISR+0x310>
-    890c:	c5812030 	strgt	r2, [r1, #48]	; 0x30
-        if (defecto < -511) defecto = -511;
-    8910:	e59f214c 	ldr	r2, [pc, #332]	; 8a64 <PWM0_ISR+0x320>
-    8914:	e5931030 	ldr	r1, [r3, #48]	; 0x30
-    8918:	e1510002 	cmp	r1, r2
-    891c:	b59f1130 	ldrlt	r1, [pc, #304]	; 8a54 <PWM0_ISR+0x310>
-    8920:	b5812030 	strlt	r2, [r1, #48]	; 0x30
-
-        // Incrementar la fase
-        delta_fase = (unsigned short)((256L * freq) / 225);
-    8924:	e1d323b4 	ldrh	r2, [r3, #52]	; 0x34
-    8928:	e59f113c 	ldr	r1, [pc, #316]	; 8a6c <PWM0_ISR+0x328>
-    892c:	e1a02402 	lsl	r2, r2, #8
-    8930:	e0c10192 	smull	r0, r1, r2, r1
-    8934:	e0812002 	add	r2, r1, r2
-    8938:	e1a02482 	lsl	r2, r2, #9
-    893c:	e1a02822 	lsr	r2, r2, #16
-    8940:	e1c323b6 	strh	r2, [r3, #54]	; 0x36
-        fase += delta_fase;
-    8944:	e1d322bc 	ldrh	r2, [r3, #44]	; 0x2c
-    8948:	e1d313b6 	ldrh	r1, [r3, #54]	; 0x36
-    894c:	e0812002 	add	r2, r1, r2
-    8950:	e1a02802 	lsl	r2, r2, #16
-    8954:	e1a02822 	lsr	r2, r2, #16
-    8958:	e1c322bc 	strh	r2, [r3, #44]	; 0x2c
-
-        // Disminuir la frecuencia para simular el decaimiento de la explosi髇
-        if (exCount % 100 == 0) {
-    895c:	e59f110c 	ldr	r1, [pc, #268]	; 8a70 <PWM0_ISR+0x32c>
-    8960:	e5932024 	ldr	r2, [r3, #36]	; 0x24
-    8964:	e0810192 	umull	r0, r1, r2, r1
-    8968:	e1a012a1 	lsr	r1, r1, #5
-    896c:	e0811101 	add	r1, r1, r1, lsl #2
-    8970:	e0811101 	add	r1, r1, r1, lsl #2
-    8974:	e1520101 	cmp	r2, r1, lsl #2
-        // Limitar la amplitud para evitar saturaci髇
-        if (defecto > 511) defecto = 511;
-        if (defecto < -511) defecto = -511;
-
-        // Incrementar la fase
-        delta_fase = (unsigned short)((256L * freq) / 225);
-    8978:	e59f20d4 	ldr	r2, [pc, #212]	; 8a54 <PWM0_ISR+0x310>
-        fase += delta_fase;
-
-        // Disminuir la frecuencia para simular el decaimiento de la explosi髇
-        if (exCount % 100 == 0) {
-            freq -= 10;
-    897c:	01d213b4 	ldrheq	r1, [r2, #52]	; 0x34
-    8980:	0241100a 	subeq	r1, r1, #10
-    8984:	01a01801 	lsleq	r1, r1, #16
-    8988:	01a01821 	lsreq	r1, r1, #16
-    898c:	01c213b4 	strheq	r1, [r2, #52]	; 0x34
-        }
-
-		exCount++;
-    8990:	e5932024 	ldr	r2, [r3, #36]	; 0x24
-    8994:	e2830008 	add	r0, r3, #8
-    8998:	e2822001 	add	r2, r2, #1
-    899c:	e5832024 	str	r2, [r3, #36]	; 0x24
-    89a0:	e8900003 	ldm	r0, {r0, r1}
-    89a4:	eaffffa6 	b	8844 <PWM0_ISR+0x100>
-    Fase4+=Delta_Fase4;
- 
- // Special effects
-   if (expl && exCount < duration){
-		if (effectType == GUN_EFFECT) {
-			defecto = TABLA_SINUS_WAVE[fase >> 8];  // Usar tabla de ondas sinusoidales
-    89a8:	e1d312bc 	ldrh	r1, [r3, #44]	; 0x2c
-    89ac:	e1a01421 	lsr	r1, r1, #8
-    89b0:	e1a01081 	lsl	r1, r1, #1
-    89b4:	e19220f1 	ldrsh	r2, [r2, r1]
-    89b8:	e5832030 	str	r2, [r3, #48]	; 0x30
-			defecto=(defecto>>4); // Atenuo el efecto
-    89bc:	e5932030 	ldr	r2, [r3, #48]	; 0x30
-    89c0:	e1a02242 	asr	r2, r2, #4
-    89c4:	e5832030 	str	r2, [r3, #48]	; 0x30
-    89c8:	eaffffcb 	b	88fc <PWM0_ISR+0x1b8>
-		}
-		else if (effectType == EXPLOSION_EFFECT) {
-			if (exCount % 100 == 0) {
-    89cc:	e5932024 	ldr	r2, [r3, #36]	; 0x24
-    89d0:	e59f1098 	ldr	r1, [pc, #152]	; 8a70 <PWM0_ISR+0x32c>
-    89d4:	e0810192 	umull	r0, r1, r2, r1
-    89d8:	e1a012a1 	lsr	r1, r1, #5
-    89dc:	e0811101 	add	r1, r1, r1, lsl #2
-    89e0:	e0811101 	add	r1, r1, r1, lsl #2
-    89e4:	e1520101 	cmp	r2, r1, lsl #2
-    89e8:	1affffc3 	bne	88fc <PWM0_ISR+0x1b8>
-				defecto = ((int)(rnd(defecto) & 0x3FF) - 512) >> 4;
-    89ec:	e5932030 	ldr	r2, [r3, #48]	; 0x30
-void IRQ_Spurious_Routine (void)  __attribute__ ((interrupt("IRQ")));
-// ------------------------------------------------------------------------
-
-//Usado para generar numeros pseudoaleatorios
-unsigned int rnd(unsigned int x) {
-    x = ((x >> 16) ^ x) * 0x45d9f3b;
-    89f0:	e0222822 	eor	r2, r2, r2, lsr #16
-    89f4:	e0821102 	add	r1, r2, r2, lsl #2
-    89f8:	e0821181 	add	r1, r2, r1, lsl #3
-    89fc:	e0821301 	add	r1, r2, r1, lsl #6
-    8a00:	e0822101 	add	r2, r2, r1, lsl #2
-    8a04:	e0622202 	rsb	r2, r2, r2, lsl #4
-    8a08:	e0622202 	rsb	r2, r2, r2, lsl #4
-    8a0c:	e0622282 	rsb	r2, r2, r2, lsl #5
-    x = ((x >> 16) ^ x) * 0x45d9f3b;
-    8a10:	e0222822 	eor	r2, r2, r2, lsr #16
-    8a14:	e0821102 	add	r1, r2, r2, lsl #2
-    8a18:	e0821181 	add	r1, r2, r1, lsl #3
-    8a1c:	e0821301 	add	r1, r2, r1, lsl #6
-    8a20:	e0822101 	add	r2, r2, r1, lsl #2
-    8a24:	e0622202 	rsb	r2, r2, r2, lsl #4
-    8a28:	e0622202 	rsb	r2, r2, r2, lsl #4
-    8a2c:	e0622282 	rsb	r2, r2, r2, lsl #5
-    x = (x >> 16) ^ x;
-    8a30:	e0222822 	eor	r2, r2, r2, lsr #16
-			defecto = TABLA_SINUS_WAVE[fase >> 8];  // Usar tabla de ondas sinusoidales
-			defecto=(defecto>>4); // Atenuo el efecto
-		}
-		else if (effectType == EXPLOSION_EFFECT) {
-			if (exCount % 100 == 0) {
-				defecto = ((int)(rnd(defecto) & 0x3FF) - 512) >> 4;
-    8a34:	e1a02b02 	lsl	r2, r2, #22
-    8a38:	e1a02b22 	lsr	r2, r2, #22
-    8a3c:	e2422c02 	sub	r2, r2, #512	; 0x200
-    8a40:	e1a02242 	asr	r2, r2, #4
-    8a44:	e5832030 	str	r2, [r3, #48]	; 0x30
-    8a48:	eaffffab 	b	88fc <PWM0_ISR+0x1b8>
-    8a4c:	0000ffff 	.word	0x0000ffff
-    8a50:	e0014000 	.word	0xe0014000
-    8a54:	4000136c 	.word	0x4000136c
-    8a58:	0000b630 	.word	0x0000b630
-    8a5c:	0000752f 	.word	0x0000752f
-    8a60:	000001ff 	.word	0x000001ff
-    8a64:	fffffe01 	.word	0xfffffe01
-    8a68:	000003ff 	.word	0x000003ff
-    8a6c:	91a2b3c5 	.word	0x91a2b3c5
-    8a70:	51eb851f 	.word	0x51eb851f
-
-00008a74 <TIMER0_ISR>:
+0000890c <TIMER0_ISR>:
  _printf("\r\n--- IRQ, Spurious interrupt\r\n");
  VICVectAddr=-1;  // End of interrupt: update priority logic
 }
 // ------------------------------------------------------------------------
 void TIMER0_ISR(void)
 {
-    8a74:	e92d101f 	push	{r0, r1, r2, r3, r4, ip}
+    890c:	e92d101f 	push	{r0, r1, r2, r3, r4, ip}
  // Interrupt service routine for changing the partitures' notes
  // It is called each 128 ms (duration of the sixteenth (semicorchea) note)
  // It depends on tempo
  T0IR = 0xFFFF;	   	   // Clear all interrupt notifications	
-    8a78:	e59f111c 	ldr	r1, [pc, #284]	; 8b9c <TIMER0_ISR+0x128>
-    8a7c:	e59f211c 	ldr	r2, [pc, #284]	; 8ba0 <TIMER0_ISR+0x12c>
+    8910:	e59f112c 	ldr	r1, [pc, #300]	; 8a44 <TIMER0_ISR+0x138>
+    8914:	e59f212c 	ldr	r2, [pc, #300]	; 8a48 <TIMER0_ISR+0x13c>
  // Next note, if any, update delta phases
    nota1=((Part[cont*4+0]) & 0b00111111);
-    8a80:	e59f311c 	ldr	r3, [pc, #284]	; 8ba4 <TIMER0_ISR+0x130>
+    8918:	e59f312c 	ldr	r3, [pc, #300]	; 8a4c <TIMER0_ISR+0x140>
 void TIMER0_ISR(void)
 {
  // Interrupt service routine for changing the partitures' notes
  // It is called each 128 ms (duration of the sixteenth (semicorchea) note)
  // It depends on tempo
  T0IR = 0xFFFF;	   	   // Clear all interrupt notifications	
-    8a84:	e5821000 	str	r1, [r2]
+    891c:	e5821000 	str	r1, [r2]
  // Next note, if any, update delta phases
    nota1=((Part[cont*4+0]) & 0b00111111);
-    8a88:	e5930040 	ldr	r0, [r3, #64]	; 0x40
-    8a8c:	e5932044 	ldr	r2, [r3, #68]	; 0x44
-    8a90:	e7d02102 	ldrb	r2, [r0, r2, lsl #2]
-    8a94:	e202203f 	and	r2, r2, #63	; 0x3f
-    8a98:	e1c324b8 	strh	r2, [r3, #72]	; 0x48
-   Delta_Fase1= (unsigned int)((256L*NOTE[nota1])/22500); //coger solo los bits del 5:0
-    8a9c:	e59f1104 	ldr	r1, [pc, #260]	; 8ba8 <TIMER0_ISR+0x134>
-    8aa0:	e1d324b8 	ldrh	r2, [r3, #72]	; 0x48
-    8aa4:	e791c102 	ldr	ip, [r1, r2, lsl #2]
-    8aa8:	e59f20fc 	ldr	r2, [pc, #252]	; 8bac <TIMER0_ISR+0x138>
-    8aac:	e1a0c40c 	lsl	ip, ip, #8
-    8ab0:	e1a0c12c 	lsr	ip, ip, #2
-    8ab4:	e08c4c92 	umull	r4, ip, r2, ip
-    8ab8:	e1a0c48c 	lsl	ip, ip, #9
-    8abc:	e1a0c82c 	lsr	ip, ip, #16
-    8ac0:	e1c3c1b8 	strh	ip, [r3, #24]
-   
+    8920:	e5930030 	ldr	r0, [r3, #48]	; 0x30
+    8924:	e5932034 	ldr	r2, [r3, #52]	; 0x34
+    8928:	e7d02102 	ldrb	r2, [r0, r2, lsl #2]
+    892c:	e202203f 	and	r2, r2, #63	; 0x3f
+    8930:	e1c321b8 	strh	r2, [r3, #24]
+   Delta_Fase1= (unsigned int)((114L*NOTE[nota1])/10000); //coger solo los bits del 5:0
+    8934:	e59f1114 	ldr	r1, [pc, #276]	; 8a50 <TIMER0_ISR+0x144>
+    8938:	e1d321b8 	ldrh	r2, [r3, #24]
+    893c:	e791c102 	ldr	ip, [r1, r2, lsl #2]
+    8940:	e06c418c 	rsb	r4, ip, ip, lsl #3
+    8944:	e59f2108 	ldr	r2, [pc, #264]	; 8a54 <TIMER0_ISR+0x148>
+    8948:	e08cc184 	add	ip, ip, r4, lsl #3
+    894c:	e1a0c08c 	lsl	ip, ip, #1
+    8950:	e08c4c92 	umull	r4, ip, r2, ip
+    8954:	e1a0c18c 	lsl	ip, ip, #3
+    8958:	e1a0c82c 	lsr	ip, ip, #16
+    895c:	e1c3c2b0 	strh	ip, [r3, #32]
+  
    
    nota2=((Part[cont*4+1]) & 0b00111111);
-    8ac4:	e593c044 	ldr	ip, [r3, #68]	; 0x44
-    8ac8:	e1a0c10c 	lsl	ip, ip, #2
-    8acc:	e28cc001 	add	ip, ip, #1
-    8ad0:	e7d0c00c 	ldrb	ip, [r0, ip]
-    8ad4:	e20cc03f 	and	ip, ip, #63	; 0x3f
-    8ad8:	e1c3c4ba 	strh	ip, [r3, #74]	; 0x4a
-   Delta_Fase2= (unsigned int)((256L*NOTE[nota2])/22500);
-    8adc:	e1d3c4ba 	ldrh	ip, [r3, #74]	; 0x4a
-    8ae0:	e791c10c 	ldr	ip, [r1, ip, lsl #2]
-    8ae4:	e1a0c40c 	lsl	ip, ip, #8
-    8ae8:	e1a0c12c 	lsr	ip, ip, #2
-    8aec:	e08c4c92 	umull	r4, ip, r2, ip
-    8af0:	e1a0c48c 	lsl	ip, ip, #9
-    8af4:	e1a0c82c 	lsr	ip, ip, #16
-    8af8:	e1c3c1ba 	strh	ip, [r3, #26]
+    8960:	e593c034 	ldr	ip, [r3, #52]	; 0x34
+    8964:	e1a0c10c 	lsl	ip, ip, #2
+    8968:	e28cc001 	add	ip, ip, #1
+    896c:	e7d0c00c 	ldrb	ip, [r0, ip]
+    8970:	e20cc03f 	and	ip, ip, #63	; 0x3f
+    8974:	e1c3c1ba 	strh	ip, [r3, #26]
+   Delta_Fase2= (unsigned int)((114L*NOTE[nota2])/10000);
+    8978:	e1d3c1ba 	ldrh	ip, [r3, #26]
+    897c:	e791c10c 	ldr	ip, [r1, ip, lsl #2]
+    8980:	e06c418c 	rsb	r4, ip, ip, lsl #3
+    8984:	e08cc184 	add	ip, ip, r4, lsl #3
+    8988:	e1a0c08c 	lsl	ip, ip, #1
+    898c:	e08c4c92 	umull	r4, ip, r2, ip
+    8990:	e1a0c18c 	lsl	ip, ip, #3
+    8994:	e1a0c82c 	lsr	ip, ip, #16
+    8998:	e1c3c2b2 	strh	ip, [r3, #34]	; 0x22
    
    
    nota3=((Part[cont*4+2]) & 0b00111111);
-    8afc:	e593c044 	ldr	ip, [r3, #68]	; 0x44
-    8b00:	e1a0c10c 	lsl	ip, ip, #2
-    8b04:	e28cc002 	add	ip, ip, #2
-    8b08:	e7d0c00c 	ldrb	ip, [r0, ip]
-    8b0c:	e20cc03f 	and	ip, ip, #63	; 0x3f
-    8b10:	e1c3c4bc 	strh	ip, [r3, #76]	; 0x4c
-   Delta_Fase3= (unsigned int)((256L*NOTE[nota3])/22500);
-    8b14:	e1d3c4bc 	ldrh	ip, [r3, #76]	; 0x4c
-    8b18:	e791c10c 	ldr	ip, [r1, ip, lsl #2]
-    8b1c:	e1a0c40c 	lsl	ip, ip, #8
-    8b20:	e1a0c12c 	lsr	ip, ip, #2
-    8b24:	e08c4c92 	umull	r4, ip, r2, ip
-    8b28:	e1a0c48c 	lsl	ip, ip, #9
-    8b2c:	e1a0c82c 	lsr	ip, ip, #16
-    8b30:	e1c3c1bc 	strh	ip, [r3, #28]
+    899c:	e593c034 	ldr	ip, [r3, #52]	; 0x34
+    89a0:	e1a0c10c 	lsl	ip, ip, #2
+    89a4:	e28cc002 	add	ip, ip, #2
+    89a8:	e7d0c00c 	ldrb	ip, [r0, ip]
+    89ac:	e20cc03f 	and	ip, ip, #63	; 0x3f
+    89b0:	e1c3c1bc 	strh	ip, [r3, #28]
+   Delta_Fase3= (unsigned int)((114L*NOTE[nota3])/10000);
+    89b4:	e1d3c1bc 	ldrh	ip, [r3, #28]
+    89b8:	e791c10c 	ldr	ip, [r1, ip, lsl #2]
+    89bc:	e06c418c 	rsb	r4, ip, ip, lsl #3
+    89c0:	e08cc184 	add	ip, ip, r4, lsl #3
+    89c4:	e1a0c08c 	lsl	ip, ip, #1
+    89c8:	e08c4c92 	umull	r4, ip, r2, ip
+    89cc:	e1a0c18c 	lsl	ip, ip, #3
+    89d0:	e1a0c82c 	lsr	ip, ip, #16
+    89d4:	e1c3c2b4 	strh	ip, [r3, #36]	; 0x24
    
    
    nota4=((Part[cont*4+3]) & 0b00111111);
-    8b34:	e593c044 	ldr	ip, [r3, #68]	; 0x44
-    8b38:	e1a0c10c 	lsl	ip, ip, #2
-    8b3c:	e28cc003 	add	ip, ip, #3
-    8b40:	e7d0000c 	ldrb	r0, [r0, ip]
-    8b44:	e200003f 	and	r0, r0, #63	; 0x3f
-    8b48:	e1c304be 	strh	r0, [r3, #78]	; 0x4e
-   Delta_Fase4= (unsigned int)((256L*NOTE[nota4])/22500);
-    8b4c:	e1d304be 	ldrh	r0, [r3, #78]	; 0x4e
-    8b50:	e7911100 	ldr	r1, [r1, r0, lsl #2]
-    8b54:	e1a01401 	lsl	r1, r1, #8
-    8b58:	e1a01121 	lsr	r1, r1, #2
-    8b5c:	e0820291 	umull	r0, r2, r1, r2
-    8b60:	e1a02482 	lsl	r2, r2, #9
-    8b64:	e1a02822 	lsr	r2, r2, #16
-    8b68:	e1c321be 	strh	r2, [r3, #30]
+    89d8:	e593c034 	ldr	ip, [r3, #52]	; 0x34
+    89dc:	e1a0c10c 	lsl	ip, ip, #2
+    89e0:	e28cc003 	add	ip, ip, #3
+    89e4:	e7d0000c 	ldrb	r0, [r0, ip]
+    89e8:	e200003f 	and	r0, r0, #63	; 0x3f
+    89ec:	e1c301be 	strh	r0, [r3, #30]
+   Delta_Fase4= (unsigned int)((114L*NOTE[nota4])/10000);
+    89f0:	e1d301be 	ldrh	r0, [r3, #30]
+    89f4:	e7911100 	ldr	r1, [r1, r0, lsl #2]
+    89f8:	e0610181 	rsb	r0, r1, r1, lsl #3
+    89fc:	e0811180 	add	r1, r1, r0, lsl #3
+    8a00:	e1a01081 	lsl	r1, r1, #1
+    8a04:	e0820291 	umull	r0, r2, r1, r2
+    8a08:	e1a02182 	lsl	r2, r2, #3
+    8a0c:	e1a02822 	lsr	r2, r2, #16
+    8a10:	e1c322b6 	strh	r2, [r3, #38]	; 0x26
    
    
    cont++;
-    8b6c:	e5932044 	ldr	r2, [r3, #68]	; 0x44
-    8b70:	e2822001 	add	r2, r2, #1
-    8b74:	e5832044 	str	r2, [r3, #68]	; 0x44
+    8a14:	e5932034 	ldr	r2, [r3, #52]	; 0x34
+    8a18:	e2822001 	add	r2, r2, #1
+    8a1c:	e5832034 	str	r2, [r3, #52]	; 0x34
    if(cont==Next)	cont=0; //Para que se repita cuando acabe
-    8b78:	e5931044 	ldr	r1, [r3, #68]	; 0x44
-    8b7c:	e5932050 	ldr	r2, [r3, #80]	; 0x50
-    8b80:	e1510002 	cmp	r1, r2
-    8b84:	03a02000 	moveq	r2, #0
-    8b88:	05832044 	streq	r2, [r3, #68]	; 0x44
+    8a20:	e5931034 	ldr	r1, [r3, #52]	; 0x34
+    8a24:	e5932038 	ldr	r2, [r3, #56]	; 0x38
+    8a28:	e1510002 	cmp	r1, r2
+    8a2c:	03a02000 	moveq	r2, #0
+    8a30:	05832034 	streq	r2, [r3, #52]	; 0x34
    
 
  VICVectAddr=-1;  	   // EOI for interrupt controller	
-    8b8c:	e3e03000 	mvn	r3, #0
-    8b90:	e5033fcf 	str	r3, [r3, #-4047]	; 0xfcf
+    8a34:	e3e03000 	mvn	r3, #0
+    8a38:	e5033fcf 	str	r3, [r3, #-4047]	; 0xfcf
 }
-    8b94:	e8bd101f 	pop	{r0, r1, r2, r3, r4, ip}
-    8b98:	e25ef004 	subs	pc, lr, #4
-    8b9c:	0000ffff 	.word	0x0000ffff
-    8ba0:	e0004000 	.word	0xe0004000
-    8ba4:	4000136c 	.word	0x4000136c
-    8ba8:	40000050 	.word	0x40000050
-    8bac:	05d34edf 	.word	0x05d34edf
+    8a3c:	e8bd101f 	pop	{r0, r1, r2, r3, r4, ip}
+    8a40:	e25ef004 	subs	pc, lr, #4
+    8a44:	0000ffff 	.word	0x0000ffff
+    8a48:	e0004000 	.word	0xe0004000
+    8a4c:	4000147c 	.word	0x4000147c
+    8a50:	40000050 	.word	0x40000050
+    8a54:	d1b71759 	.word	0xd1b71759
 
-00008bb0 <IRQ_Spurious_Routine>:
+00008a58 <IRQ_Spurious_Routine>:
 
 
  VICVectAddr=-1;  	   // EOI for interrupt controller
 }
 // ------------------------------------------------------------------------
 void IRQ_Spurious_Routine (void) {
-    8bb0:	e24ee004 	sub	lr, lr, #4
-    8bb4:	e92d500f 	push	{r0, r1, r2, r3, ip, lr}
+    8a58:	e24ee004 	sub	lr, lr, #4
+    8a5c:	e92d500f 	push	{r0, r1, r2, r3, ip, lr}
  _printf("\r\n--- IRQ, Spurious interrupt\r\n");
-    8bb8:	e59f000c 	ldr	r0, [pc, #12]	; 8bcc <IRQ_Spurious_Routine+0x1c>
-    8bbc:	ebffde2e 	bl	47c <_printf>
+    8a60:	e59f000c 	ldr	r0, [pc, #12]	; 8a74 <IRQ_Spurious_Routine+0x1c>
+    8a64:	ebffde84 	bl	47c <_printf>
  VICVectAddr=-1;  // End of interrupt: update priority logic
-    8bc0:	e3e03000 	mvn	r3, #0
-    8bc4:	e5033fcf 	str	r3, [r3, #-4047]	; 0xfcf
+    8a68:	e3e03000 	mvn	r3, #0
+    8a6c:	e5033fcf 	str	r3, [r3, #-4047]	; 0xfcf
 }
-    8bc8:	e8fd900f 	ldm	sp!, {r0, r1, r2, r3, ip, pc}^
-    8bcc:	0000ba10 	.word	0x0000ba10
+    8a70:	e8fd900f 	ldm	sp!, {r0, r1, r2, r3, ip, pc}^
+    8a74:	0000b934 	.word	0x0000b934
 
-00008bd0 <rnd>:
+00008a78 <rnd>:
 void IRQ_Spurious_Routine (void)  __attribute__ ((interrupt("IRQ")));
 // ------------------------------------------------------------------------
 
 //Usado para generar numeros pseudoaleatorios
 unsigned int rnd(unsigned int x) {
     x = ((x >> 16) ^ x) * 0x45d9f3b;
-    8bd0:	e0200820 	eor	r0, r0, r0, lsr #16
-    8bd4:	e0803100 	add	r3, r0, r0, lsl #2
-    8bd8:	e0803183 	add	r3, r0, r3, lsl #3
-    8bdc:	e0803303 	add	r3, r0, r3, lsl #6
-    8be0:	e0803103 	add	r3, r0, r3, lsl #2
-    8be4:	e0633203 	rsb	r3, r3, r3, lsl #4
-    8be8:	e0633203 	rsb	r3, r3, r3, lsl #4
-    8bec:	e0633283 	rsb	r3, r3, r3, lsl #5
+    8a78:	e0200820 	eor	r0, r0, r0, lsr #16
+    8a7c:	e0803100 	add	r3, r0, r0, lsl #2
+    8a80:	e0803183 	add	r3, r0, r3, lsl #3
+    8a84:	e0803303 	add	r3, r0, r3, lsl #6
+    8a88:	e0803103 	add	r3, r0, r3, lsl #2
+    8a8c:	e0633203 	rsb	r3, r3, r3, lsl #4
+    8a90:	e0633203 	rsb	r3, r3, r3, lsl #4
+    8a94:	e0633283 	rsb	r3, r3, r3, lsl #5
     x = ((x >> 16) ^ x) * 0x45d9f3b;
-    8bf0:	e0233823 	eor	r3, r3, r3, lsr #16
-    8bf4:	e0830103 	add	r0, r3, r3, lsl #2
-    8bf8:	e0830180 	add	r0, r3, r0, lsl #3
-    8bfc:	e0830300 	add	r0, r3, r0, lsl #6
-    8c00:	e0830100 	add	r0, r3, r0, lsl #2
-    8c04:	e0600200 	rsb	r0, r0, r0, lsl #4
-    8c08:	e0600200 	rsb	r0, r0, r0, lsl #4
-    8c0c:	e0600280 	rsb	r0, r0, r0, lsl #5
+    8a98:	e0233823 	eor	r3, r3, r3, lsr #16
+    8a9c:	e0830103 	add	r0, r3, r3, lsl #2
+    8aa0:	e0830180 	add	r0, r3, r0, lsl #3
+    8aa4:	e0830300 	add	r0, r3, r0, lsl #6
+    8aa8:	e0830100 	add	r0, r3, r0, lsl #2
+    8aac:	e0600200 	rsb	r0, r0, r0, lsl #4
+    8ab0:	e0600200 	rsb	r0, r0, r0, lsl #4
+    8ab4:	e0600280 	rsb	r0, r0, r0, lsl #5
     x = (x >> 16) ^ x;
     return x;
 }
-    8c10:	e0200820 	eor	r0, r0, r0, lsr #16
-    8c14:	e12fff1e 	bx	lr
+    8ab8:	e0200820 	eor	r0, r0, r0, lsr #16
+    8abc:	e12fff1e 	bx	lr
 
-00008c18 <AUDIO_Timer_On>:
+00008ac0 <AUDIO_Timer_On>:
 // ------------------------------------------------------------------------
 void AUDIO_Timer_On()
 {
  // Interrupt frequency will be 57600 Hz
  #define PCPWM0 (5)
  PCONP |= (1<<PCPWM0);      // Power PWM peripheral
-    8c18:	e59f30c0 	ldr	r3, [pc, #192]	; 8ce0 <AUDIO_Timer_On+0xc8>
-    8c1c:	e59320c4 	ldr	r2, [r3, #196]	; 0xc4
-    8c20:	e3822020 	orr	r2, r2, #32
-    8c24:	e58320c4 	str	r2, [r3, #196]	; 0xc4
+    8ac0:	e59f30c0 	ldr	r3, [pc, #192]	; 8b88 <AUDIO_Timer_On+0xc8>
+    8ac4:	e59320c4 	ldr	r2, [r3, #196]	; 0xc4
+    8ac8:	e3822020 	orr	r2, r2, #32
+    8acc:	e58320c4 	str	r2, [r3, #196]	; 0xc4
 
  PINSEL0 &=~(0b11<<16);
-    8c28:	e59f20b4 	ldr	r2, [pc, #180]	; 8ce4 <AUDIO_Timer_On+0xcc>
-    8c2c:	e5923000 	ldr	r3, [r2]
-    8c30:	e3c33803 	bic	r3, r3, #196608	; 0x30000
-    8c34:	e5823000 	str	r3, [r2]
+    8ad0:	e59f20b4 	ldr	r2, [pc, #180]	; 8b8c <AUDIO_Timer_On+0xcc>
+    8ad4:	e5923000 	ldr	r3, [r2]
+    8ad8:	e3c33803 	bic	r3, r3, #196608	; 0x30000
+    8adc:	e5823000 	str	r3, [r2]
  PINSEL0 |= (0b10<<16);     // PWM4/P0.8 as PWM
-    8c38:	e5923000 	ldr	r3, [r2]
-    8c3c:	e3833802 	orr	r3, r3, #131072	; 0x20000
-    8c40:	e5823000 	str	r3, [r2]
+    8ae0:	e5923000 	ldr	r3, [r2]
+    8ae4:	e3833802 	orr	r3, r3, #131072	; 0x20000
+    8ae8:	e5823000 	str	r3, [r2]
 
 // PWM2 configuration 
  PINSEL0 &=~(0b11<<14);
-    8c44:	e5923000 	ldr	r3, [r2]
-    8c48:	e3c33903 	bic	r3, r3, #49152	; 0xc000
-    8c4c:	e5823000 	str	r3, [r2]
+    8aec:	e5923000 	ldr	r3, [r2]
+    8af0:	e3c33903 	bic	r3, r3, #49152	; 0xc000
+    8af4:	e5823000 	str	r3, [r2]
  PINSEL0 |= (0b10<<14); 
-    8c50:	e5921000 	ldr	r1, [r2]
+    8af8:	e5921000 	ldr	r1, [r2]
 
  PWMTCR = 0b00000010;       // Reset & PWM mode enabled
-    8c54:	e59f308c 	ldr	r3, [pc, #140]	; 8ce8 <AUDIO_Timer_On+0xd0>
+    8afc:	e59f308c 	ldr	r3, [pc, #140]	; 8b90 <AUDIO_Timer_On+0xd0>
  PINSEL0 &=~(0b11<<16);
  PINSEL0 |= (0b10<<16);     // PWM4/P0.8 as PWM
 
 // PWM2 configuration 
  PINSEL0 &=~(0b11<<14);
  PINSEL0 |= (0b10<<14); 
-    8c58:	e3811902 	orr	r1, r1, #32768	; 0x8000
-    8c5c:	e5821000 	str	r1, [r2]
+    8b00:	e3811902 	orr	r1, r1, #32768	; 0x8000
+    8b04:	e5821000 	str	r1, [r2]
 
  PWMTCR = 0b00000010;       // Reset & PWM mode enabled
-    8c60:	e3a02002 	mov	r2, #2
-    8c64:	e5832004 	str	r2, [r3, #4]
+    8b08:	e3a02002 	mov	r2, #2
+    8b0c:	e5832004 	str	r2, [r3, #4]
  PWMPR  = 0;                // Prescale = 1/1
-    8c68:	e3a02000 	mov	r2, #0
-    8c6c:	e583200c 	str	r2, [r3, #12]
+    8b10:	e3a02000 	mov	r2, #0
+    8b14:	e583200c 	str	r2, [r3, #12]
  PWMMCR = 3;                // Interrupt and Reset on match (channel #0)
-    8c70:	e3a02003 	mov	r2, #3
-    8c74:	e5832014 	str	r2, [r3, #20]
+    8b18:	e3a02003 	mov	r2, #3
+    8b1c:	e5832014 	str	r2, [r3, #20]
  PWMPCR = (1<<12) | (1<<10) ;		    // PWM4 single edge  and output enabled
-    8c78:	e3a02b05 	mov	r2, #5120	; 0x1400
-    8c7c:	e583204c 	str	r2, [r3, #76]	; 0x4c
+    8b20:	e3a02b05 	mov	r2, #5120	; 0x1400
+    8b24:	e583204c 	str	r2, [r3, #76]	; 0x4c
 	//PWM2 single edge and output enabled
 
  PWMMR0 = 1024-1;			// Interrupt frequency 57600 Hz. Exact 10-bit PWM
-    8c80:	e59f2064 	ldr	r2, [pc, #100]	; 8cec <AUDIO_Timer_On+0xd4>
-    8c84:	e5832018 	str	r2, [r3, #24]
+    8b28:	e59f2064 	ldr	r2, [pc, #100]	; 8b94 <AUDIO_Timer_On+0xd4>
+    8b2c:	e5832018 	str	r2, [r3, #24]
  PWMMR4 = PWMMR0;
-    8c88:	e5932018 	ldr	r2, [r3, #24]
-    8c8c:	e5832040 	str	r2, [r3, #64]	; 0x40
+    8b30:	e5932018 	ldr	r2, [r3, #24]
+    8b34:	e5832040 	str	r2, [r3, #64]	; 0x40
  PWMMR2 = PWMMR0;
-    8c90:	e5931018 	ldr	r1, [r3, #24]
-    8c94:	e5831020 	str	r1, [r3, #32]
+    8b38:	e5931018 	ldr	r1, [r3, #24]
+    8b3c:	e5831020 	str	r1, [r3, #32]
  //PWMLER = (1<< 4) | (1<< 2); 			// Copy to duty reg from shadow PWM4
 // PWM2 configuration mising
 
 
 
  PWMTCR = 0b00001001;       // Counter enable and PWM mode enabled
-    8c98:	e3a01009 	mov	r1, #9
-    8c9c:	e5831004 	str	r1, [r3, #4]
+    8b40:	e3a01009 	mov	r1, #9
+    8b44:	e5831004 	str	r1, [r3, #4]
 
  #define PWM0_INT (8)
  // Interrupt setup
  VICIntEnable=(1<<PWM0_INT);                  		// PWM0 interrupt enable
-    8ca0:	e3e02000 	mvn	r2, #0
-    8ca4:	e3a03c01 	mov	r3, #256	; 0x100
-    8ca8:	e5023fef 	str	r3, [r2, #-4079]	; 0xfef
+    8b48:	e3e02000 	mvn	r2, #0
+    8b4c:	e3a03c01 	mov	r3, #256	; 0x100
+    8b50:	e5023fef 	str	r3, [r2, #-4079]	; 0xfef
  VICDefVectAddr=(unsigned int)IRQ_Spurious_Routine; // unvectored IRQs
-    8cac:	e59f303c 	ldr	r3, [pc, #60]	; 8cf0 <AUDIO_Timer_On+0xd8>
-    8cb0:	e5023fcb 	str	r3, [r2, #-4043]	; 0xfcb
+    8b54:	e59f303c 	ldr	r3, [pc, #60]	; 8b98 <AUDIO_Timer_On+0xd8>
+    8b58:	e5023fcb 	str	r3, [r2, #-4043]	; 0xfcb
  VICVectAddr0=(unsigned int)PWM0_ISR;               // Vector for slot 0
-    8cb4:	e59f3038 	ldr	r3, [pc, #56]	; 8cf4 <AUDIO_Timer_On+0xdc>
-    8cb8:	e5023eff 	str	r3, [r2, #-3839]	; 0xeff
+    8b5c:	e59f3038 	ldr	r3, [pc, #56]	; 8b9c <AUDIO_Timer_On+0xdc>
+    8b60:	e5023eff 	str	r3, [r2, #-3839]	; 0xeff
  VICVectCntl0=(1<<5)|PWM0_INT;                      // Slot 0 for PWM0 and enabled
-    8cbc:	e3a03028 	mov	r3, #40	; 0x28
-    8cc0:	e5023dff 	str	r3, [r2, #-3583]	; 0xdff
+    8b64:	e3a03028 	mov	r3, #40	; 0x28
+    8b68:	e5023dff 	str	r3, [r2, #-3583]	; 0xdff
  // Enable both IRQ interrupts
  asm volatile ("mrs r0,cpsr\n bic r0,r0,#0x80\n msr cpsr,r0");
-    8cc4:	e10f0000 	mrs	r0, CPSR
-    8cc8:	e3c00080 	bic	r0, r0, #128	; 0x80
-    8ccc:	e129f000 	msr	CPSR_fc, r0
+    8b6c:	e10f0000 	mrs	r0, CPSR
+    8b70:	e3c00080 	bic	r0, r0, #128	; 0x80
+    8b74:	e129f000 	msr	CPSR_fc, r0
  asm volatile ("mrs r0,cpsr\n orr r0,r0,#0x80\n msr cpsr,r0");
-    8cd0:	e10f0000 	mrs	r0, CPSR
-    8cd4:	e3800080 	orr	r0, r0, #128	; 0x80
-    8cd8:	e129f000 	msr	CPSR_fc, r0
+    8b78:	e10f0000 	mrs	r0, CPSR
+    8b7c:	e3800080 	orr	r0, r0, #128	; 0x80
+    8b80:	e129f000 	msr	CPSR_fc, r0
 }
-    8cdc:	e12fff1e 	bx	lr
-    8ce0:	e01fc000 	.word	0xe01fc000
-    8ce4:	e002c000 	.word	0xe002c000
-    8ce8:	e0014000 	.word	0xe0014000
-    8cec:	000003ff 	.word	0x000003ff
-    8cf0:	00008bb0 	.word	0x00008bb0
-    8cf4:	00008744 	.word	0x00008744
+    8b84:	e12fff1e 	bx	lr
+    8b88:	e01fc000 	.word	0xe01fc000
+    8b8c:	e002c000 	.word	0xe002c000
+    8b90:	e0014000 	.word	0xe0014000
+    8b94:	000003ff 	.word	0x000003ff
+    8b98:	00008a58 	.word	0x00008a58
+    8b9c:	00008744 	.word	0x00008744
 
-00008cf8 <PARTITURE_On>:
+00008ba0 <PARTITURE_On>:
 // ------------------------------------------------------------------------
 void PARTITURE_On(unsigned char *P, unsigned int N, unsigned int tempo)
 {
-    8cf8:	e92d4010 	push	{r4, lr}
 Part=P;
-    8cfc:	e59fe0ac 	ldr	lr, [pc, #172]	; 8db0 <PARTITURE_On+0xb8>
-Next=N;
+    8ba0:	e59fc0b4 	ldr	ip, [pc, #180]	; 8c5c <PARTITURE_On+0xbc>
+Next=N; cont=0;
+    8ba4:	e3a03000 	mov	r3, #0
+ asm volatile ("mrs r0,cpsr\n bic r0,r0,#0x80\n msr cpsr,r0");
+ asm volatile ("mrs r0,cpsr\n orr r0,r0,#0x80\n msr cpsr,r0");
+}
+// ------------------------------------------------------------------------
+void PARTITURE_On(unsigned char *P, unsigned int N, unsigned int tempo)
+{
+    8ba8:	e92d4010 	push	{r4, lr}
+Part=P;
+Next=N; cont=0;
+    8bac:	e58c1038 	str	r1, [ip, #56]	; 0x38
  int ms_negra = 60000/tempo;
  int ms_semicorchea = ms_negra/4; 
  #define PCTIM0 (1)
  PCONP |= (1<<PCTIM0);      // Power TIMER0 peripheral 	
-    8d00:	e59fc0ac 	ldr	ip, [pc, #172]	; 8db4 <PARTITURE_On+0xbc>
+    8bb0:	e59fe0a8 	ldr	lr, [pc, #168]	; 8c60 <PARTITURE_On+0xc0>
 }
 // ------------------------------------------------------------------------
 void PARTITURE_On(unsigned char *P, unsigned int N, unsigned int tempo)
 {
 Part=P;
-Next=N;
-    8d04:	e58e1050 	str	r1, [lr, #80]	; 0x50
+Next=N; cont=0;
+    8bb4:	e58c3034 	str	r3, [ip, #52]	; 0x34
  int ms_negra = 60000/tempo;
  int ms_semicorchea = ms_negra/4; 
  #define PCTIM0 (1)
  PCONP |= (1<<PCTIM0);      // Power TIMER0 peripheral 	
-    8d08:	e59c10c4 	ldr	r1, [ip, #196]	; 0xc4
+    8bb8:	e59e10c4 	ldr	r1, [lr, #196]	; 0xc4
  T0TCR = 0b00000010;		// Reset	 
-    8d0c:	e59f40a4 	ldr	r4, [pc, #164]	; 8db8 <PARTITURE_On+0xc0>
+    8bbc:	e59f40a0 	ldr	r4, [pc, #160]	; 8c64 <PARTITURE_On+0xc4>
  asm volatile ("mrs r0,cpsr\n orr r0,r0,#0x80\n msr cpsr,r0");
 }
 // ------------------------------------------------------------------------
 void PARTITURE_On(unsigned char *P, unsigned int N, unsigned int tempo)
 {
 Part=P;
-    8d10:	e58e0040 	str	r0, [lr, #64]	; 0x40
+    8bc0:	e58c0030 	str	r0, [ip, #48]	; 0x30
+Next=N; cont=0;
  int ms_negra = 60000/tempo;
  int ms_semicorchea = ms_negra/4; 
  #define PCTIM0 (1)
  PCONP |= (1<<PCTIM0);      // Power TIMER0 peripheral 	
- T0TCR = 0b00000010;		// Reset	 
- T0CTCR= 0b00000000;		// Timer mode
-    8d14:	e3a03000 	mov	r3, #0
-Part=P;
-Next=N;
- int ms_negra = 60000/tempo;
- int ms_semicorchea = ms_negra/4; 
- #define PCTIM0 (1)
- PCONP |= (1<<PCTIM0);      // Power TIMER0 peripheral 	
-    8d18:	e381e002 	orr	lr, r1, #2
+    8bc4:	e381c002 	orr	ip, r1, #2
 // ------------------------------------------------------------------------
 void PARTITURE_On(unsigned char *P, unsigned int N, unsigned int tempo)
 {
 Part=P;
-Next=N;
+Next=N; cont=0;
  int ms_negra = 60000/tempo;
-    8d1c:	e1a01002 	mov	r1, r2
+    8bc8:	e1a01002 	mov	r1, r2
  int ms_semicorchea = ms_negra/4; 
  #define PCTIM0 (1)
  PCONP |= (1<<PCTIM0);      // Power TIMER0 peripheral 	
  T0TCR = 0b00000010;		// Reset	 
-    8d20:	e3a02002 	mov	r2, #2
+    8bcc:	e3a02002 	mov	r2, #2
 Part=P;
-Next=N;
+Next=N; cont=0;
  int ms_negra = 60000/tempo;
  int ms_semicorchea = ms_negra/4; 
  #define PCTIM0 (1)
  PCONP |= (1<<PCTIM0);      // Power TIMER0 peripheral 	
-    8d24:	e58ce0c4 	str	lr, [ip, #196]	; 0xc4
+    8bd0:	e58ec0c4 	str	ip, [lr, #196]	; 0xc4
 // ------------------------------------------------------------------------
 void PARTITURE_On(unsigned char *P, unsigned int N, unsigned int tempo)
 {
 Part=P;
-Next=N;
+Next=N; cont=0;
  int ms_negra = 60000/tempo;
-    8d28:	e59f008c 	ldr	r0, [pc, #140]	; 8dbc <PARTITURE_On+0xc4>
+    8bd4:	e59f008c 	ldr	r0, [pc, #140]	; 8c68 <PARTITURE_On+0xc8>
  int ms_semicorchea = ms_negra/4; 
  #define PCTIM0 (1)
  PCONP |= (1<<PCTIM0);      // Power TIMER0 peripheral 	
  T0TCR = 0b00000010;		// Reset	 
-    8d2c:	e5842004 	str	r2, [r4, #4]
+    8bd8:	e5842004 	str	r2, [r4, #4]
  T0CTCR= 0b00000000;		// Timer mode
-    8d30:	e5c43070 	strb	r3, [r4, #112]	; 0x70
+    8bdc:	e5c43070 	strb	r3, [r4, #112]	; 0x70
  T0PR  = 0;					// Prescale 1:1
-    8d34:	e584300c 	str	r3, [r4, #12]
+    8be0:	e584300c 	str	r3, [r4, #12]
  T0PC  = 0;
-    8d38:	e5843010 	str	r3, [r4, #16]
+    8be4:	e5843010 	str	r3, [r4, #16]
 // ------------------------------------------------------------------------
 void PARTITURE_On(unsigned char *P, unsigned int N, unsigned int tempo)
 {
 Part=P;
-Next=N;
+Next=N; cont=0;
  int ms_negra = 60000/tempo;
-    8d3c:	eb000054 	bl	8e94 <__aeabi_uidiv>
+    8be8:	eb000072 	bl	8db8 <__aeabi_uidiv>
  int ms_semicorchea = ms_negra/4; 
-    8d40:	e1a00140 	asr	r0, r0, #2
+    8bec:	e1a00140 	asr	r0, r0, #2
  PCONP |= (1<<PCTIM0);      // Power TIMER0 peripheral 	
  T0TCR = 0b00000010;		// Reset	 
  T0CTCR= 0b00000000;		// Timer mode
  T0PR  = 0;					// Prescale 1:1
  T0PC  = 0;
  T0MR0 = (PCLK/1000)*ms_semicorchea - 1; // SEMICORCHEA ms  ->aprox. 128 ms
-    8d44:	e0803280 	add	r3, r0, r0, lsl #5
-    8d48:	e0603183 	rsb	r3, r0, r3, lsl #3
-    8d4c:	e0803103 	add	r3, r0, r3, lsl #2
-    8d50:	e0800103 	add	r0, r0, r3, lsl #2
-    8d54:	e0600180 	rsb	r0, r0, r0, lsl #3
+    8bf0:	e0803280 	add	r3, r0, r0, lsl #5
+    8bf4:	e0603183 	rsb	r3, r0, r3, lsl #3
+    8bf8:	e0803103 	add	r3, r0, r3, lsl #2
+    8bfc:	e0800103 	add	r0, r0, r3, lsl #2
+    8c00:	e0600180 	rsb	r0, r0, r0, lsl #3
  T0MCR = 3;					// Interrupt and reset counter
  T0TCR = 0b00000001;		// Counter enable
  #define TIMER_INT (4)
  // Interrupt setup
  VICIntEnable=(1<<TIMER_INT);                  		// TIMER0 interrupt enable
-    8d58:	e3e03000 	mvn	r3, #0
+    8c04:	e3e03000 	mvn	r3, #0
  PCONP |= (1<<PCTIM0);      // Power TIMER0 peripheral 	
  T0TCR = 0b00000010;		// Reset	 
  T0CTCR= 0b00000000;		// Timer mode
  T0PR  = 0;					// Prescale 1:1
  T0PC  = 0;
  T0MR0 = (PCLK/1000)*ms_semicorchea - 1; // SEMICORCHEA ms  ->aprox. 128 ms
-    8d5c:	e1a00080 	lsl	r0, r0, #1
-    8d60:	e0800003 	add	r0, r0, r3
+    8c08:	e1a00080 	lsl	r0, r0, #1
+    8c0c:	e0800003 	add	r0, r0, r3
  T0MCR = 3;					// Interrupt and reset counter
-    8d64:	e3a02003 	mov	r2, #3
+    8c10:	e3a02003 	mov	r2, #3
  PCONP |= (1<<PCTIM0);      // Power TIMER0 peripheral 	
  T0TCR = 0b00000010;		// Reset	 
  T0CTCR= 0b00000000;		// Timer mode
  T0PR  = 0;					// Prescale 1:1
  T0PC  = 0;
  T0MR0 = (PCLK/1000)*ms_semicorchea - 1; // SEMICORCHEA ms  ->aprox. 128 ms
-    8d68:	e5840018 	str	r0, [r4, #24]
+    8c14:	e5840018 	str	r0, [r4, #24]
  T0MCR = 3;					// Interrupt and reset counter
-    8d6c:	e5842014 	str	r2, [r4, #20]
+    8c18:	e5842014 	str	r2, [r4, #20]
  T0TCR = 0b00000001;		// Counter enable
-    8d70:	e3a02001 	mov	r2, #1
-    8d74:	e5842004 	str	r2, [r4, #4]
+    8c1c:	e3a02001 	mov	r2, #1
+    8c20:	e5842004 	str	r2, [r4, #4]
  #define TIMER_INT (4)
  // Interrupt setup
  VICIntEnable=(1<<TIMER_INT);                  		// TIMER0 interrupt enable
-    8d78:	e3a02010 	mov	r2, #16
-    8d7c:	e5032fef 	str	r2, [r3, #-4079]	; 0xfef
+    8c24:	e3a02010 	mov	r2, #16
+    8c28:	e5032fef 	str	r2, [r3, #-4079]	; 0xfef
  VICDefVectAddr=(unsigned int)IRQ_Spurious_Routine; // unvectored IRQs
-    8d80:	e59f2038 	ldr	r2, [pc, #56]	; 8dc0 <PARTITURE_On+0xc8>
-    8d84:	e5032fcb 	str	r2, [r3, #-4043]	; 0xfcb
+    8c2c:	e59f2038 	ldr	r2, [pc, #56]	; 8c6c <PARTITURE_On+0xcc>
+    8c30:	e5032fcb 	str	r2, [r3, #-4043]	; 0xfcb
  VICVectAddr1=(unsigned int)TIMER0_ISR;             // Vector for slot 1
-    8d88:	e59f2034 	ldr	r2, [pc, #52]	; 8dc4 <PARTITURE_On+0xcc>
-    8d8c:	e5032efb 	str	r2, [r3, #-3835]	; 0xefb
+    8c34:	e59f2034 	ldr	r2, [pc, #52]	; 8c70 <PARTITURE_On+0xd0>
+    8c38:	e5032efb 	str	r2, [r3, #-3835]	; 0xefb
  VICVectCntl1=(1<<5)|TIMER_INT;                     // Slot 1 for TIMER0 and enabled
-    8d90:	e3a02024 	mov	r2, #36	; 0x24
-    8d94:	e5032dfb 	str	r2, [r3, #-3579]	; 0xdfb
+    8c3c:	e3a02024 	mov	r2, #36	; 0x24
+    8c40:	e5032dfb 	str	r2, [r3, #-3579]	; 0xdfb
  
    
  // Instruments asignment
  
  //
  AUDIO_Timer_On();
-    8d98:	ebffff9e 	bl	8c18 <AUDIO_Timer_On>
+    8c44:	ebffff9d 	bl	8ac0 <AUDIO_Timer_On>
 
  // Enable both IRQ interrupts
  asm volatile ("mrs r0,cpsr\n bic r0,r0,#0x80\n msr cpsr,r0");	
-    8d9c:	e10f0000 	mrs	r0, CPSR
-    8da0:	e3c00080 	bic	r0, r0, #128	; 0x80
-    8da4:	e129f000 	msr	CPSR_fc, r0
+    8c48:	e10f0000 	mrs	r0, CPSR
+    8c4c:	e3c00080 	bic	r0, r0, #128	; 0x80
+    8c50:	e129f000 	msr	CPSR_fc, r0
 }
-    8da8:	e8bd4010 	pop	{r4, lr}
-    8dac:	e12fff1e 	bx	lr
-    8db0:	4000136c 	.word	0x4000136c
-    8db4:	e01fc000 	.word	0xe01fc000
-    8db8:	e0004000 	.word	0xe0004000
-    8dbc:	0000ea60 	.word	0x0000ea60
-    8dc0:	00008bb0 	.word	0x00008bb0
-    8dc4:	00008a74 	.word	0x00008a74
+    8c54:	e8bd4010 	pop	{r4, lr}
+    8c58:	e12fff1e 	bx	lr
+    8c5c:	4000147c 	.word	0x4000147c
+    8c60:	e01fc000 	.word	0xe01fc000
+    8c64:	e0004000 	.word	0xe0004000
+    8c68:	0000ea60 	.word	0x0000ea60
+    8c6c:	00008a58 	.word	0x00008a58
+    8c70:	0000890c 	.word	0x0000890c
 
-00008dc8 <PARTITURE_Off>:
+00008c74 <PARTITURE_Off>:
 // ------------------------------------------------------------------------
 void PARTITURE_Off()
 { 
 
  T0TCR = 0; // Deactivate timer 0
-    8dc8:	e59f3008 	ldr	r3, [pc, #8]	; 8dd8 <PARTITURE_Off+0x10>
-    8dcc:	e3a02000 	mov	r2, #0
-    8dd0:	e5832004 	str	r2, [r3, #4]
+    8c74:	e59f3008 	ldr	r3, [pc, #8]	; 8c84 <PARTITURE_Off+0x10>
+    8c78:	e3a02000 	mov	r2, #0
+    8c7c:	e5832004 	str	r2, [r3, #4]
 }
-    8dd4:	e12fff1e 	bx	lr
-    8dd8:	e0004000 	.word	0xe0004000
+    8c80:	e12fff1e 	bx	lr
+    8c84:	e0004000 	.word	0xe0004000
 
-00008ddc <AUDIO_Effect>:
+00008c88 <AUDIO_Effect>:
 // ------------------------------------------------------------------------
 void AUDIO_Effect(int type)
 { 
    expl=1;
-    8ddc:	e59f3020 	ldr	r3, [pc, #32]	; 8e04 <AUDIO_Effect+0x28>
+    8c88:	e59f3020 	ldr	r3, [pc, #32]	; 8cb0 <AUDIO_Effect+0x28>
    effectType = type;
    exCount=0;
-    8de0:	e3a02000 	mov	r2, #0
+    8c8c:	e3a02000 	mov	r2, #0
  T0TCR = 0; // Deactivate timer 0
 }
 // ------------------------------------------------------------------------
 void AUDIO_Effect(int type)
 { 
    expl=1;
-    8de4:	e3a01001 	mov	r1, #1
-    8de8:	e5c31020 	strb	r1, [r3, #32]
+    8c90:	e3a01001 	mov	r1, #1
+    8c94:	e5c3103c 	strb	r1, [r3, #60]	; 0x3c
    effectType = type;
-    8dec:	e5830028 	str	r0, [r3, #40]	; 0x28
+    8c98:	e5830040 	str	r0, [r3, #64]	; 0x40
    exCount=0;
-    8df0:	e5832024 	str	r2, [r3, #36]	; 0x24
+    8c9c:	e5832044 	str	r2, [r3, #68]	; 0x44
    fase = 0;
-    8df4:	e1c322bc 	strh	r2, [r3, #44]	; 0x2c
+    8ca0:	e1c324b8 	strh	r2, [r3, #72]	; 0x48
    freq = duration / 100 * 10 + 10;
-    8df8:	e59f2008 	ldr	r2, [pc, #8]	; 8e08 <AUDIO_Effect+0x2c>
-    8dfc:	e1c323b4 	strh	r2, [r3, #52]	; 0x34
-    8e00:	e12fff1e 	bx	lr
-    8e04:	4000136c 	.word	0x4000136c
-    8e08:	00000bc2 	.word	0x00000bc2
+    8ca4:	e59f2008 	ldr	r2, [pc, #8]	; 8cb4 <AUDIO_Effect+0x2c>
+    8ca8:	e1c324ba 	strh	r2, [r3, #74]	; 0x4a
+}
+    8cac:	e12fff1e 	bx	lr
+    8cb0:	4000147c 	.word	0x4000147c
+    8cb4:	00000bc2 	.word	0x00000bc2
 
-00008e0c <GetAction>:
+00008cb8 <Nota>:
+
+
+void Nota(unsigned int f)
+{
+    8cb8:	e92d4010 	push	{r4, lr}
+    8cbc:	e1a04000 	mov	r4, r0
+  AUDIO_Timer_On();
+    8cc0:	ebffff7e 	bl	8ac0 <AUDIO_Timer_On>
+  asm volatile ("mrs r0,cpsr\n bic r0,r0,#0x80\n msr cpsr,r0");	
+    8cc4:	e10f0000 	mrs	r0, CPSR
+    8cc8:	e3c00080 	bic	r0, r0, #128	; 0x80
+    8ccc:	e129f000 	msr	CPSR_fc, r0
+  nota1 = 1;
+  Delta_Fase1= (unsigned int)((114L*f)/10000);
+    8cd0:	e0643184 	rsb	r3, r4, r4, lsl #3
+    8cd4:	e0843183 	add	r3, r4, r3, lsl #3
+    8cd8:	e59f2040 	ldr	r2, [pc, #64]	; 8d20 <Nota+0x68>
+    8cdc:	e1a03083 	lsl	r3, r3, #1
+    8ce0:	e0831392 	umull	r1, r3, r2, r3
+
+void Nota(unsigned int f)
+{
+  AUDIO_Timer_On();
+  asm volatile ("mrs r0,cpsr\n bic r0,r0,#0x80\n msr cpsr,r0");	
+  nota1 = 1;
+    8ce4:	e59f4038 	ldr	r4, [pc, #56]	; 8d24 <Nota+0x6c>
+  Delta_Fase1= (unsigned int)((114L*f)/10000);
+    8ce8:	e1a03183 	lsl	r3, r3, #3
+    8cec:	e1a03823 	lsr	r3, r3, #16
+
+void Nota(unsigned int f)
+{
+  AUDIO_Timer_On();
+  asm volatile ("mrs r0,cpsr\n bic r0,r0,#0x80\n msr cpsr,r0");	
+  nota1 = 1;
+    8cf0:	e3a02001 	mov	r2, #1
+    8cf4:	e1c421b8 	strh	r2, [r4, #24]
+  Delta_Fase1= (unsigned int)((114L*f)/10000);
+    8cf8:	e1c432b0 	strh	r3, [r4, #32]
+  _printf(" %8d\n", Delta_Fase1); 
+    8cfc:	e59f0024 	ldr	r0, [pc, #36]	; 8d28 <Nota+0x70>
+    8d00:	e1d412b0 	ldrh	r1, [r4, #32]
+    8d04:	ebffdddc 	bl	47c <_printf>
+  _delay_ms(500); 
+    8d08:	e59f001c 	ldr	r0, [pc, #28]	; 8d2c <Nota+0x74>
+    8d0c:	ebffdd93 	bl	360 <_delay_loop>
+   nota1 = 0;
+    8d10:	e3a03000 	mov	r3, #0
+    8d14:	e1c431b8 	strh	r3, [r4, #24]
+
+    8d18:	e8bd4010 	pop	{r4, lr}
+    8d1c:	e12fff1e 	bx	lr
+    8d20:	d1b71759 	.word	0xd1b71759
+    8d24:	4000147c 	.word	0x4000147c
+    8d28:	0000b954 	.word	0x0000b954
+    8d2c:	00707ed3 	.word	0x00707ed3
+
+00008d30 <GetAction>:
 #define T_RIGHT (1<< 6)
 #define T_UP    (1<< 7)
 
 // -----------------------------------------------------------------------
 int GetAction()
 {
-    8e0c:	e92d4010 	push	{r4, lr}
+    8d30:	e92d4010 	push	{r4, lr}
  int x, out=0;
  // Pines como entradas
  FIODIR &= ~0b111111110000000000000000;
-    8e10:	e59f4074 	ldr	r4, [pc, #116]	; 8e8c <GetAction+0x80>
-    8e14:	e5143fff 	ldr	r3, [r4, #-4095]	; 0xfff
-    8e18:	e3c338ff 	bic	r3, r3, #16711680	; 0xff0000
-    8e1c:	e5043fff 	str	r3, [r4, #-4095]	; 0xfff
+    8d34:	e59f4074 	ldr	r4, [pc, #116]	; 8db0 <GetAction+0x80>
+    8d38:	e5143fff 	ldr	r3, [r4, #-4095]	; 0xfff
+    8d3c:	e3c338ff 	bic	r3, r3, #16711680	; 0xff0000
+    8d40:	e5043fff 	str	r3, [r4, #-4095]	; 0xfff
  _delay_ms(5);
-    8e20:	e59f0068 	ldr	r0, [pc, #104]	; 8e90 <GetAction+0x84>
-    8e24:	ebffdd4d 	bl	360 <_delay_loop>
+    8d44:	e59f0068 	ldr	r0, [pc, #104]	; 8db4 <GetAction+0x84>
+    8d48:	ebffdd84 	bl	360 <_delay_loop>
  // Lectura
  x = ~((FIOPIN >>16))&0xFF;
-    8e28:	e5143feb 	ldr	r3, [r4, #-4075]	; 0xfeb
-    8e2c:	e1e03823 	mvn	r3, r3, lsr #16
+    8d4c:	e5143feb 	ldr	r3, [r4, #-4075]	; 0xfeb
+    8d50:	e1e03823 	mvn	r3, r3, lsr #16
  if(x & (1<<0)) out |= UP;
-    8e30:	e2130001 	ands	r0, r3, #1
-    8e34:	13a00004 	movne	r0, #4
+    8d54:	e2130001 	ands	r0, r3, #1
+    8d58:	13a00004 	movne	r0, #4
  if(x & (1<<1)) out |= LEFT;
-    8e38:	e3130002 	tst	r3, #2
+    8d5c:	e3130002 	tst	r3, #2
  int x, out=0;
  // Pines como entradas
  FIODIR &= ~0b111111110000000000000000;
  _delay_ms(5);
  // Lectura
  x = ~((FIOPIN >>16))&0xFF;
-    8e3c:	e20330ff 	and	r3, r3, #255	; 0xff
+    8d60:	e20330ff 	and	r3, r3, #255	; 0xff
  if(x & (1<<0)) out |= UP;
  if(x & (1<<1)) out |= LEFT;
-    8e40:	13800001 	orrne	r0, r0, #1
+    8d64:	13800001 	orrne	r0, r0, #1
  if(x & (1<<2)) out |= RIGHT;
-    8e44:	e3130004 	tst	r3, #4
-    8e48:	13800002 	orrne	r0, r0, #2
+    8d68:	e3130004 	tst	r3, #4
+    8d6c:	13800002 	orrne	r0, r0, #2
  if(x & (1<<3)) out |= DOWN;
-    8e4c:	e3130008 	tst	r3, #8
-    8e50:	13800008 	orrne	r0, r0, #8
+    8d70:	e3130008 	tst	r3, #8
+    8d74:	13800008 	orrne	r0, r0, #8
  
  if(x & (1<<4)) out |= T_UP;
-    8e54:	e3130010 	tst	r3, #16
-    8e58:	13800080 	orrne	r0, r0, #128	; 0x80
+    8d78:	e3130010 	tst	r3, #16
+    8d7c:	13800080 	orrne	r0, r0, #128	; 0x80
  if(x & (1<<5)) out |= T_LEFT;
-    8e5c:	e3130020 	tst	r3, #32
-    8e60:	13800020 	orrne	r0, r0, #32
+    8d80:	e3130020 	tst	r3, #32
+    8d84:	13800020 	orrne	r0, r0, #32
  if(x & (1<<6)) out |= T_RIGHT;
-    8e64:	e3130040 	tst	r3, #64	; 0x40
-    8e68:	13800040 	orrne	r0, r0, #64	; 0x40
+    8d88:	e3130040 	tst	r3, #64	; 0x40
+    8d8c:	13800040 	orrne	r0, r0, #64	; 0x40
  if(x & (1<<7)) out |= T_DOWN;
-    8e6c:	e3130080 	tst	r3, #128	; 0x80
+    8d90:	e3130080 	tst	r3, #128	; 0x80
  // Pines como salidas
  FIODIR |= 0b111111110000000000000000;
-    8e70:	e59f3014 	ldr	r3, [pc, #20]	; 8e8c <GetAction+0x80>
-    8e74:	e5132fff 	ldr	r2, [r3, #-4095]	; 0xfff
-    8e78:	e38228ff 	orr	r2, r2, #16711680	; 0xff0000
+    8d94:	e59f3014 	ldr	r3, [pc, #20]	; 8db0 <GetAction+0x80>
+    8d98:	e5132fff 	ldr	r2, [r3, #-4095]	; 0xfff
+    8d9c:	e38228ff 	orr	r2, r2, #16711680	; 0xff0000
  if(x & (1<<3)) out |= DOWN;
  
  if(x & (1<<4)) out |= T_UP;
  if(x & (1<<5)) out |= T_LEFT;
  if(x & (1<<6)) out |= T_RIGHT;
  if(x & (1<<7)) out |= T_DOWN;
-    8e7c:	13800010 	orrne	r0, r0, #16
+    8da0:	13800010 	orrne	r0, r0, #16
  // Pines como salidas
  FIODIR |= 0b111111110000000000000000;
-    8e80:	e5032fff 	str	r2, [r3, #-4095]	; 0xfff
+    8da4:	e5032fff 	str	r2, [r3, #-4095]	; 0xfff
  
  return out;
-    8e84:	e8bd4010 	pop	{r4, lr}
-    8e88:	e12fff1e 	bx	lr
-    8e8c:	3fffcfff 	.word	0x3fffcfff
-    8e90:	00011ffc 	.word	0x00011ffc
+    8da8:	e8bd4010 	pop	{r4, lr}
+    8dac:	e12fff1e 	bx	lr
+    8db0:	3fffcfff 	.word	0x3fffcfff
+    8db4:	00011ffc 	.word	0x00011ffc
 
-00008e94 <__aeabi_uidiv>:
-    8e94:	e2512001 	subs	r2, r1, #1
-    8e98:	012fff1e 	bxeq	lr
-    8e9c:	3a000036 	bcc	8f7c <__aeabi_uidiv+0xe8>
-    8ea0:	e1500001 	cmp	r0, r1
-    8ea4:	9a000022 	bls	8f34 <__aeabi_uidiv+0xa0>
-    8ea8:	e1110002 	tst	r1, r2
-    8eac:	0a000023 	beq	8f40 <__aeabi_uidiv+0xac>
-    8eb0:	e311020e 	tst	r1, #-536870912	; 0xe0000000
-    8eb4:	01a01181 	lsleq	r1, r1, #3
-    8eb8:	03a03008 	moveq	r3, #8
-    8ebc:	13a03001 	movne	r3, #1
-    8ec0:	e3510201 	cmp	r1, #268435456	; 0x10000000
-    8ec4:	31510000 	cmpcc	r1, r0
-    8ec8:	31a01201 	lslcc	r1, r1, #4
-    8ecc:	31a03203 	lslcc	r3, r3, #4
-    8ed0:	3afffffa 	bcc	8ec0 <__aeabi_uidiv+0x2c>
-    8ed4:	e3510102 	cmp	r1, #-2147483648	; 0x80000000
-    8ed8:	31510000 	cmpcc	r1, r0
-    8edc:	31a01081 	lslcc	r1, r1, #1
-    8ee0:	31a03083 	lslcc	r3, r3, #1
-    8ee4:	3afffffa 	bcc	8ed4 <__aeabi_uidiv+0x40>
-    8ee8:	e3a02000 	mov	r2, #0
-    8eec:	e1500001 	cmp	r0, r1
-    8ef0:	20400001 	subcs	r0, r0, r1
-    8ef4:	21822003 	orrcs	r2, r2, r3
-    8ef8:	e15000a1 	cmp	r0, r1, lsr #1
-    8efc:	204000a1 	subcs	r0, r0, r1, lsr #1
-    8f00:	218220a3 	orrcs	r2, r2, r3, lsr #1
-    8f04:	e1500121 	cmp	r0, r1, lsr #2
-    8f08:	20400121 	subcs	r0, r0, r1, lsr #2
-    8f0c:	21822123 	orrcs	r2, r2, r3, lsr #2
-    8f10:	e15001a1 	cmp	r0, r1, lsr #3
-    8f14:	204001a1 	subcs	r0, r0, r1, lsr #3
-    8f18:	218221a3 	orrcs	r2, r2, r3, lsr #3
-    8f1c:	e3500000 	cmp	r0, #0
-    8f20:	11b03223 	lsrsne	r3, r3, #4
-    8f24:	11a01221 	lsrne	r1, r1, #4
-    8f28:	1affffef 	bne	8eec <__aeabi_uidiv+0x58>
-    8f2c:	e1a00002 	mov	r0, r2
-    8f30:	e12fff1e 	bx	lr
-    8f34:	03a00001 	moveq	r0, #1
-    8f38:	13a00000 	movne	r0, #0
-    8f3c:	e12fff1e 	bx	lr
-    8f40:	e3510801 	cmp	r1, #65536	; 0x10000
-    8f44:	21a01821 	lsrcs	r1, r1, #16
-    8f48:	23a02010 	movcs	r2, #16
-    8f4c:	33a02000 	movcc	r2, #0
-    8f50:	e3510c01 	cmp	r1, #256	; 0x100
-    8f54:	21a01421 	lsrcs	r1, r1, #8
-    8f58:	22822008 	addcs	r2, r2, #8
-    8f5c:	e3510010 	cmp	r1, #16
-    8f60:	21a01221 	lsrcs	r1, r1, #4
-    8f64:	22822004 	addcs	r2, r2, #4
-    8f68:	e3510004 	cmp	r1, #4
-    8f6c:	82822003 	addhi	r2, r2, #3
-    8f70:	908220a1 	addls	r2, r2, r1, lsr #1
-    8f74:	e1a00230 	lsr	r0, r0, r2
-    8f78:	e12fff1e 	bx	lr
-    8f7c:	e3500000 	cmp	r0, #0
-    8f80:	13e00000 	mvnne	r0, #0
-    8f84:	ea000059 	b	90f0 <__aeabi_idiv0>
+00008db8 <__aeabi_uidiv>:
+    8db8:	e2512001 	subs	r2, r1, #1
+    8dbc:	012fff1e 	bxeq	lr
+    8dc0:	3a000036 	bcc	8ea0 <__aeabi_uidiv+0xe8>
+    8dc4:	e1500001 	cmp	r0, r1
+    8dc8:	9a000022 	bls	8e58 <__aeabi_uidiv+0xa0>
+    8dcc:	e1110002 	tst	r1, r2
+    8dd0:	0a000023 	beq	8e64 <__aeabi_uidiv+0xac>
+    8dd4:	e311020e 	tst	r1, #-536870912	; 0xe0000000
+    8dd8:	01a01181 	lsleq	r1, r1, #3
+    8ddc:	03a03008 	moveq	r3, #8
+    8de0:	13a03001 	movne	r3, #1
+    8de4:	e3510201 	cmp	r1, #268435456	; 0x10000000
+    8de8:	31510000 	cmpcc	r1, r0
+    8dec:	31a01201 	lslcc	r1, r1, #4
+    8df0:	31a03203 	lslcc	r3, r3, #4
+    8df4:	3afffffa 	bcc	8de4 <__aeabi_uidiv+0x2c>
+    8df8:	e3510102 	cmp	r1, #-2147483648	; 0x80000000
+    8dfc:	31510000 	cmpcc	r1, r0
+    8e00:	31a01081 	lslcc	r1, r1, #1
+    8e04:	31a03083 	lslcc	r3, r3, #1
+    8e08:	3afffffa 	bcc	8df8 <__aeabi_uidiv+0x40>
+    8e0c:	e3a02000 	mov	r2, #0
+    8e10:	e1500001 	cmp	r0, r1
+    8e14:	20400001 	subcs	r0, r0, r1
+    8e18:	21822003 	orrcs	r2, r2, r3
+    8e1c:	e15000a1 	cmp	r0, r1, lsr #1
+    8e20:	204000a1 	subcs	r0, r0, r1, lsr #1
+    8e24:	218220a3 	orrcs	r2, r2, r3, lsr #1
+    8e28:	e1500121 	cmp	r0, r1, lsr #2
+    8e2c:	20400121 	subcs	r0, r0, r1, lsr #2
+    8e30:	21822123 	orrcs	r2, r2, r3, lsr #2
+    8e34:	e15001a1 	cmp	r0, r1, lsr #3
+    8e38:	204001a1 	subcs	r0, r0, r1, lsr #3
+    8e3c:	218221a3 	orrcs	r2, r2, r3, lsr #3
+    8e40:	e3500000 	cmp	r0, #0
+    8e44:	11b03223 	lsrsne	r3, r3, #4
+    8e48:	11a01221 	lsrne	r1, r1, #4
+    8e4c:	1affffef 	bne	8e10 <__aeabi_uidiv+0x58>
+    8e50:	e1a00002 	mov	r0, r2
+    8e54:	e12fff1e 	bx	lr
+    8e58:	03a00001 	moveq	r0, #1
+    8e5c:	13a00000 	movne	r0, #0
+    8e60:	e12fff1e 	bx	lr
+    8e64:	e3510801 	cmp	r1, #65536	; 0x10000
+    8e68:	21a01821 	lsrcs	r1, r1, #16
+    8e6c:	23a02010 	movcs	r2, #16
+    8e70:	33a02000 	movcc	r2, #0
+    8e74:	e3510c01 	cmp	r1, #256	; 0x100
+    8e78:	21a01421 	lsrcs	r1, r1, #8
+    8e7c:	22822008 	addcs	r2, r2, #8
+    8e80:	e3510010 	cmp	r1, #16
+    8e84:	21a01221 	lsrcs	r1, r1, #4
+    8e88:	22822004 	addcs	r2, r2, #4
+    8e8c:	e3510004 	cmp	r1, #4
+    8e90:	82822003 	addhi	r2, r2, #3
+    8e94:	908220a1 	addls	r2, r2, r1, lsr #1
+    8e98:	e1a00230 	lsr	r0, r0, r2
+    8e9c:	e12fff1e 	bx	lr
+    8ea0:	e3500000 	cmp	r0, #0
+    8ea4:	13e00000 	mvnne	r0, #0
+    8ea8:	ea000059 	b	9014 <__aeabi_idiv0>
 
-00008f88 <__aeabi_uidivmod>:
-    8f88:	e3510000 	cmp	r1, #0
-    8f8c:	0afffffa 	beq	8f7c <__aeabi_uidiv+0xe8>
-    8f90:	e92d4003 	push	{r0, r1, lr}
-    8f94:	ebffffbe 	bl	8e94 <__aeabi_uidiv>
-    8f98:	e8bd4006 	pop	{r1, r2, lr}
-    8f9c:	e0030092 	mul	r3, r2, r0
-    8fa0:	e0411003 	sub	r1, r1, r3
-    8fa4:	e12fff1e 	bx	lr
+00008eac <__aeabi_uidivmod>:
+    8eac:	e3510000 	cmp	r1, #0
+    8eb0:	0afffffa 	beq	8ea0 <__aeabi_uidiv+0xe8>
+    8eb4:	e92d4003 	push	{r0, r1, lr}
+    8eb8:	ebffffbe 	bl	8db8 <__aeabi_uidiv>
+    8ebc:	e8bd4006 	pop	{r1, r2, lr}
+    8ec0:	e0030092 	mul	r3, r2, r0
+    8ec4:	e0411003 	sub	r1, r1, r3
+    8ec8:	e12fff1e 	bx	lr
 
-00008fa8 <__aeabi_idiv>:
-    8fa8:	e3510000 	cmp	r1, #0
-    8fac:	0a000043 	beq	90c0 <.divsi3_skip_div0_test+0x110>
+00008ecc <__aeabi_idiv>:
+    8ecc:	e3510000 	cmp	r1, #0
+    8ed0:	0a000043 	beq	8fe4 <.divsi3_skip_div0_test+0x110>
 
-00008fb0 <.divsi3_skip_div0_test>:
-    8fb0:	e020c001 	eor	ip, r0, r1
-    8fb4:	42611000 	rsbmi	r1, r1, #0
-    8fb8:	e2512001 	subs	r2, r1, #1
-    8fbc:	0a000027 	beq	9060 <.divsi3_skip_div0_test+0xb0>
-    8fc0:	e1b03000 	movs	r3, r0
-    8fc4:	42603000 	rsbmi	r3, r0, #0
-    8fc8:	e1530001 	cmp	r3, r1
-    8fcc:	9a000026 	bls	906c <.divsi3_skip_div0_test+0xbc>
-    8fd0:	e1110002 	tst	r1, r2
-    8fd4:	0a000028 	beq	907c <.divsi3_skip_div0_test+0xcc>
-    8fd8:	e311020e 	tst	r1, #-536870912	; 0xe0000000
-    8fdc:	01a01181 	lsleq	r1, r1, #3
-    8fe0:	03a02008 	moveq	r2, #8
-    8fe4:	13a02001 	movne	r2, #1
-    8fe8:	e3510201 	cmp	r1, #268435456	; 0x10000000
-    8fec:	31510003 	cmpcc	r1, r3
-    8ff0:	31a01201 	lslcc	r1, r1, #4
-    8ff4:	31a02202 	lslcc	r2, r2, #4
-    8ff8:	3afffffa 	bcc	8fe8 <.divsi3_skip_div0_test+0x38>
-    8ffc:	e3510102 	cmp	r1, #-2147483648	; 0x80000000
-    9000:	31510003 	cmpcc	r1, r3
-    9004:	31a01081 	lslcc	r1, r1, #1
-    9008:	31a02082 	lslcc	r2, r2, #1
-    900c:	3afffffa 	bcc	8ffc <.divsi3_skip_div0_test+0x4c>
-    9010:	e3a00000 	mov	r0, #0
-    9014:	e1530001 	cmp	r3, r1
-    9018:	20433001 	subcs	r3, r3, r1
-    901c:	21800002 	orrcs	r0, r0, r2
-    9020:	e15300a1 	cmp	r3, r1, lsr #1
-    9024:	204330a1 	subcs	r3, r3, r1, lsr #1
-    9028:	218000a2 	orrcs	r0, r0, r2, lsr #1
-    902c:	e1530121 	cmp	r3, r1, lsr #2
-    9030:	20433121 	subcs	r3, r3, r1, lsr #2
-    9034:	21800122 	orrcs	r0, r0, r2, lsr #2
-    9038:	e15301a1 	cmp	r3, r1, lsr #3
-    903c:	204331a1 	subcs	r3, r3, r1, lsr #3
-    9040:	218001a2 	orrcs	r0, r0, r2, lsr #3
-    9044:	e3530000 	cmp	r3, #0
-    9048:	11b02222 	lsrsne	r2, r2, #4
-    904c:	11a01221 	lsrne	r1, r1, #4
-    9050:	1affffef 	bne	9014 <.divsi3_skip_div0_test+0x64>
-    9054:	e35c0000 	cmp	ip, #0
-    9058:	42600000 	rsbmi	r0, r0, #0
-    905c:	e12fff1e 	bx	lr
-    9060:	e13c0000 	teq	ip, r0
-    9064:	42600000 	rsbmi	r0, r0, #0
-    9068:	e12fff1e 	bx	lr
-    906c:	33a00000 	movcc	r0, #0
-    9070:	01a00fcc 	asreq	r0, ip, #31
-    9074:	03800001 	orreq	r0, r0, #1
-    9078:	e12fff1e 	bx	lr
-    907c:	e3510801 	cmp	r1, #65536	; 0x10000
-    9080:	21a01821 	lsrcs	r1, r1, #16
-    9084:	23a02010 	movcs	r2, #16
-    9088:	33a02000 	movcc	r2, #0
-    908c:	e3510c01 	cmp	r1, #256	; 0x100
-    9090:	21a01421 	lsrcs	r1, r1, #8
-    9094:	22822008 	addcs	r2, r2, #8
-    9098:	e3510010 	cmp	r1, #16
-    909c:	21a01221 	lsrcs	r1, r1, #4
-    90a0:	22822004 	addcs	r2, r2, #4
-    90a4:	e3510004 	cmp	r1, #4
-    90a8:	82822003 	addhi	r2, r2, #3
-    90ac:	908220a1 	addls	r2, r2, r1, lsr #1
-    90b0:	e35c0000 	cmp	ip, #0
-    90b4:	e1a00233 	lsr	r0, r3, r2
-    90b8:	42600000 	rsbmi	r0, r0, #0
-    90bc:	e12fff1e 	bx	lr
-    90c0:	e3500000 	cmp	r0, #0
-    90c4:	c3e00102 	mvngt	r0, #-2147483648	; 0x80000000
-    90c8:	b3a00102 	movlt	r0, #-2147483648	; 0x80000000
-    90cc:	ea000007 	b	90f0 <__aeabi_idiv0>
+00008ed4 <.divsi3_skip_div0_test>:
+    8ed4:	e020c001 	eor	ip, r0, r1
+    8ed8:	42611000 	rsbmi	r1, r1, #0
+    8edc:	e2512001 	subs	r2, r1, #1
+    8ee0:	0a000027 	beq	8f84 <.divsi3_skip_div0_test+0xb0>
+    8ee4:	e1b03000 	movs	r3, r0
+    8ee8:	42603000 	rsbmi	r3, r0, #0
+    8eec:	e1530001 	cmp	r3, r1
+    8ef0:	9a000026 	bls	8f90 <.divsi3_skip_div0_test+0xbc>
+    8ef4:	e1110002 	tst	r1, r2
+    8ef8:	0a000028 	beq	8fa0 <.divsi3_skip_div0_test+0xcc>
+    8efc:	e311020e 	tst	r1, #-536870912	; 0xe0000000
+    8f00:	01a01181 	lsleq	r1, r1, #3
+    8f04:	03a02008 	moveq	r2, #8
+    8f08:	13a02001 	movne	r2, #1
+    8f0c:	e3510201 	cmp	r1, #268435456	; 0x10000000
+    8f10:	31510003 	cmpcc	r1, r3
+    8f14:	31a01201 	lslcc	r1, r1, #4
+    8f18:	31a02202 	lslcc	r2, r2, #4
+    8f1c:	3afffffa 	bcc	8f0c <.divsi3_skip_div0_test+0x38>
+    8f20:	e3510102 	cmp	r1, #-2147483648	; 0x80000000
+    8f24:	31510003 	cmpcc	r1, r3
+    8f28:	31a01081 	lslcc	r1, r1, #1
+    8f2c:	31a02082 	lslcc	r2, r2, #1
+    8f30:	3afffffa 	bcc	8f20 <.divsi3_skip_div0_test+0x4c>
+    8f34:	e3a00000 	mov	r0, #0
+    8f38:	e1530001 	cmp	r3, r1
+    8f3c:	20433001 	subcs	r3, r3, r1
+    8f40:	21800002 	orrcs	r0, r0, r2
+    8f44:	e15300a1 	cmp	r3, r1, lsr #1
+    8f48:	204330a1 	subcs	r3, r3, r1, lsr #1
+    8f4c:	218000a2 	orrcs	r0, r0, r2, lsr #1
+    8f50:	e1530121 	cmp	r3, r1, lsr #2
+    8f54:	20433121 	subcs	r3, r3, r1, lsr #2
+    8f58:	21800122 	orrcs	r0, r0, r2, lsr #2
+    8f5c:	e15301a1 	cmp	r3, r1, lsr #3
+    8f60:	204331a1 	subcs	r3, r3, r1, lsr #3
+    8f64:	218001a2 	orrcs	r0, r0, r2, lsr #3
+    8f68:	e3530000 	cmp	r3, #0
+    8f6c:	11b02222 	lsrsne	r2, r2, #4
+    8f70:	11a01221 	lsrne	r1, r1, #4
+    8f74:	1affffef 	bne	8f38 <.divsi3_skip_div0_test+0x64>
+    8f78:	e35c0000 	cmp	ip, #0
+    8f7c:	42600000 	rsbmi	r0, r0, #0
+    8f80:	e12fff1e 	bx	lr
+    8f84:	e13c0000 	teq	ip, r0
+    8f88:	42600000 	rsbmi	r0, r0, #0
+    8f8c:	e12fff1e 	bx	lr
+    8f90:	33a00000 	movcc	r0, #0
+    8f94:	01a00fcc 	asreq	r0, ip, #31
+    8f98:	03800001 	orreq	r0, r0, #1
+    8f9c:	e12fff1e 	bx	lr
+    8fa0:	e3510801 	cmp	r1, #65536	; 0x10000
+    8fa4:	21a01821 	lsrcs	r1, r1, #16
+    8fa8:	23a02010 	movcs	r2, #16
+    8fac:	33a02000 	movcc	r2, #0
+    8fb0:	e3510c01 	cmp	r1, #256	; 0x100
+    8fb4:	21a01421 	lsrcs	r1, r1, #8
+    8fb8:	22822008 	addcs	r2, r2, #8
+    8fbc:	e3510010 	cmp	r1, #16
+    8fc0:	21a01221 	lsrcs	r1, r1, #4
+    8fc4:	22822004 	addcs	r2, r2, #4
+    8fc8:	e3510004 	cmp	r1, #4
+    8fcc:	82822003 	addhi	r2, r2, #3
+    8fd0:	908220a1 	addls	r2, r2, r1, lsr #1
+    8fd4:	e35c0000 	cmp	ip, #0
+    8fd8:	e1a00233 	lsr	r0, r3, r2
+    8fdc:	42600000 	rsbmi	r0, r0, #0
+    8fe0:	e12fff1e 	bx	lr
+    8fe4:	e3500000 	cmp	r0, #0
+    8fe8:	c3e00102 	mvngt	r0, #-2147483648	; 0x80000000
+    8fec:	b3a00102 	movlt	r0, #-2147483648	; 0x80000000
+    8ff0:	ea000007 	b	9014 <__aeabi_idiv0>
 
-000090d0 <__aeabi_idivmod>:
-    90d0:	e3510000 	cmp	r1, #0
-    90d4:	0afffff9 	beq	90c0 <.divsi3_skip_div0_test+0x110>
-    90d8:	e92d4003 	push	{r0, r1, lr}
-    90dc:	ebffffb3 	bl	8fb0 <.divsi3_skip_div0_test>
-    90e0:	e8bd4006 	pop	{r1, r2, lr}
-    90e4:	e0030092 	mul	r3, r2, r0
-    90e8:	e0411003 	sub	r1, r1, r3
-    90ec:	e12fff1e 	bx	lr
+00008ff4 <__aeabi_idivmod>:
+    8ff4:	e3510000 	cmp	r1, #0
+    8ff8:	0afffff9 	beq	8fe4 <.divsi3_skip_div0_test+0x110>
+    8ffc:	e92d4003 	push	{r0, r1, lr}
+    9000:	ebffffb3 	bl	8ed4 <.divsi3_skip_div0_test>
+    9004:	e8bd4006 	pop	{r1, r2, lr}
+    9008:	e0030092 	mul	r3, r2, r0
+    900c:	e0411003 	sub	r1, r1, r3
+    9010:	e12fff1e 	bx	lr
 
-000090f0 <__aeabi_idiv0>:
-    90f0:	e12fff1e 	bx	lr
+00009014 <__aeabi_idiv0>:
+    9014:	e12fff1e 	bx	lr
 
-000090f4 <malloc>:
-    90f4:	e92d4008 	push	{r3, lr}
-    90f8:	e59f3010 	ldr	r3, [pc, #16]	; 9110 <malloc+0x1c>
-    90fc:	e1a01000 	mov	r1, r0
-    9100:	e5930000 	ldr	r0, [r3]
-    9104:	eb00000a 	bl	9134 <_malloc_r>
-    9108:	e8bd4008 	pop	{r3, lr}
-    910c:	e12fff1e 	bx	lr
-    9110:	40000b38 	.word	0x40000b38
+00009018 <malloc>:
+    9018:	e92d4008 	push	{r3, lr}
+    901c:	e59f3010 	ldr	r3, [pc, #16]	; 9034 <malloc+0x1c>
+    9020:	e1a01000 	mov	r1, r0
+    9024:	e5930000 	ldr	r0, [r3]
+    9028:	eb00000a 	bl	9058 <_malloc_r>
+    902c:	e8bd4008 	pop	{r3, lr}
+    9030:	e12fff1e 	bx	lr
+    9034:	40000c48 	.word	0x40000c48
 
-00009114 <free>:
-    9114:	e92d4008 	push	{r3, lr}
-    9118:	e59f3010 	ldr	r3, [pc, #16]	; 9130 <free+0x1c>
-    911c:	e1a01000 	mov	r1, r0
-    9120:	e5930000 	ldr	r0, [r3]
-    9124:	eb000258 	bl	9a8c <_free_r>
-    9128:	e8bd4008 	pop	{r3, lr}
-    912c:	e12fff1e 	bx	lr
-    9130:	40000b38 	.word	0x40000b38
+00009038 <free>:
+    9038:	e92d4008 	push	{r3, lr}
+    903c:	e59f3010 	ldr	r3, [pc, #16]	; 9054 <free+0x1c>
+    9040:	e1a01000 	mov	r1, r0
+    9044:	e5930000 	ldr	r0, [r3]
+    9048:	eb000258 	bl	99b0 <_free_r>
+    904c:	e8bd4008 	pop	{r3, lr}
+    9050:	e12fff1e 	bx	lr
+    9054:	40000c48 	.word	0x40000c48
 
-00009134 <_malloc_r>:
-    9134:	e92d4ff8 	push	{r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
-    9138:	e281400b 	add	r4, r1, #11
-    913c:	e3540016 	cmp	r4, #22
-    9140:	83c44007 	bichi	r4, r4, #7
-    9144:	81a03fa4 	lsrhi	r3, r4, #31
-    9148:	93a03000 	movls	r3, #0
-    914c:	93a04010 	movls	r4, #16
-    9150:	e1540001 	cmp	r4, r1
-    9154:	21a01003 	movcs	r1, r3
-    9158:	33831001 	orrcc	r1, r3, #1
-    915c:	e3510000 	cmp	r1, #0
-    9160:	13a0300c 	movne	r3, #12
-    9164:	e1a05000 	mov	r5, r0
-    9168:	15803000 	strne	r3, [r0]
-    916c:	13a07000 	movne	r7, #0
-    9170:	1a000015 	bne	91cc <_malloc_r+0x98>
-    9174:	eb0001b3 	bl	9848 <__malloc_lock>
-    9178:	e3540f7e 	cmp	r4, #504	; 0x1f8
-    917c:	2a000015 	bcs	91d8 <_malloc_r+0xa4>
-    9180:	e59f66b4 	ldr	r6, [pc, #1716]	; 983c <_malloc_r+0x708>
-    9184:	e1a0e1a4 	lsr	lr, r4, #3
-    9188:	e086318e 	add	r3, r6, lr, lsl #3
-    918c:	e593700c 	ldr	r7, [r3, #12]
-    9190:	e1570003 	cmp	r7, r3
-    9194:	0a000168 	beq	973c <_malloc_r+0x608>
-    9198:	e5973004 	ldr	r3, [r7, #4]
-    919c:	e3c33003 	bic	r3, r3, #3
-    91a0:	e0873003 	add	r3, r7, r3
-    91a4:	e5930004 	ldr	r0, [r3, #4]
-    91a8:	e2871008 	add	r1, r7, #8
-    91ac:	e8910006 	ldm	r1, {r1, r2}
-    91b0:	e3800001 	orr	r0, r0, #1
-    91b4:	e5830004 	str	r0, [r3, #4]
-    91b8:	e581200c 	str	r2, [r1, #12]
-    91bc:	e5821008 	str	r1, [r2, #8]
-    91c0:	e1a00005 	mov	r0, r5
-    91c4:	eb0001a0 	bl	984c <__malloc_unlock>
-    91c8:	e2877008 	add	r7, r7, #8
-    91cc:	e1a00007 	mov	r0, r7
-    91d0:	e8bd4ff8 	pop	{r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
-    91d4:	e12fff1e 	bx	lr
-    91d8:	e1b0e4a4 	lsrs	lr, r4, #9
-    91dc:	01a0e1a4 	lsreq	lr, r4, #3
-    91e0:	01a0118e 	lsleq	r1, lr, #3
-    91e4:	1a000061 	bne	9370 <_malloc_r+0x23c>
-    91e8:	e59f664c 	ldr	r6, [pc, #1612]	; 983c <_malloc_r+0x708>
-    91ec:	e0861001 	add	r1, r6, r1
-    91f0:	e591700c 	ldr	r7, [r1, #12]
-    91f4:	e1510007 	cmp	r1, r7
-    91f8:	1a000005 	bne	9214 <_malloc_r+0xe0>
-    91fc:	ea00000a 	b	922c <_malloc_r+0xf8>
-    9200:	e3530000 	cmp	r3, #0
-    9204:	aa0000e5 	bge	95a0 <_malloc_r+0x46c>
-    9208:	e597700c 	ldr	r7, [r7, #12]
-    920c:	e1510007 	cmp	r1, r7
-    9210:	0a000005 	beq	922c <_malloc_r+0xf8>
-    9214:	e5972004 	ldr	r2, [r7, #4]
-    9218:	e3c22003 	bic	r2, r2, #3
-    921c:	e0643002 	rsb	r3, r4, r2
-    9220:	e353000f 	cmp	r3, #15
-    9224:	dafffff5 	ble	9200 <_malloc_r+0xcc>
-    9228:	e24ee001 	sub	lr, lr, #1
-    922c:	e28ee001 	add	lr, lr, #1
-    9230:	e59f3604 	ldr	r3, [pc, #1540]	; 983c <_malloc_r+0x708>
-    9234:	e5967010 	ldr	r7, [r6, #16]
-    9238:	e2838008 	add	r8, r3, #8
-    923c:	e1570008 	cmp	r7, r8
-    9240:	05931004 	ldreq	r1, [r3, #4]
-    9244:	0a000016 	beq	92a4 <_malloc_r+0x170>
-    9248:	e5972004 	ldr	r2, [r7, #4]
-    924c:	e3c22003 	bic	r2, r2, #3
-    9250:	e0641002 	rsb	r1, r4, r2
-    9254:	e351000f 	cmp	r1, #15
-    9258:	ca000115 	bgt	96b4 <_malloc_r+0x580>
-    925c:	e3510000 	cmp	r1, #0
-    9260:	e5838014 	str	r8, [r3, #20]
-    9264:	e5838010 	str	r8, [r3, #16]
-    9268:	aa00005b 	bge	93dc <_malloc_r+0x2a8>
-    926c:	e3520c02 	cmp	r2, #512	; 0x200
-    9270:	2a0000e0 	bcs	95f8 <_malloc_r+0x4c4>
-    9274:	e5930004 	ldr	r0, [r3, #4]
-    9278:	e1a021a2 	lsr	r2, r2, #3
-    927c:	e1a01142 	asr	r1, r2, #2
-    9280:	e3a0c001 	mov	ip, #1
-    9284:	e180111c 	orr	r1, r0, ip, lsl r1
-    9288:	e0832182 	add	r2, r3, r2, lsl #3
-    928c:	e5920008 	ldr	r0, [r2, #8]
-    9290:	e587200c 	str	r2, [r7, #12]
-    9294:	e5870008 	str	r0, [r7, #8]
-    9298:	e5831004 	str	r1, [r3, #4]
-    929c:	e5827008 	str	r7, [r2, #8]
-    92a0:	e580700c 	str	r7, [r0, #12]
-    92a4:	e1a0314e 	asr	r3, lr, #2
-    92a8:	e3a00001 	mov	r0, #1
-    92ac:	e1a00310 	lsl	r0, r0, r3
-    92b0:	e1500001 	cmp	r0, r1
-    92b4:	8a000050 	bhi	93fc <_malloc_r+0x2c8>
-    92b8:	e1110000 	tst	r1, r0
-    92bc:	1a000008 	bne	92e4 <_malloc_r+0x1b0>
-    92c0:	e1a00080 	lsl	r0, r0, #1
-    92c4:	e3cee003 	bic	lr, lr, #3
-    92c8:	e1110000 	tst	r1, r0
-    92cc:	e28ee004 	add	lr, lr, #4
-    92d0:	1a000003 	bne	92e4 <_malloc_r+0x1b0>
-    92d4:	e1a00080 	lsl	r0, r0, #1
-    92d8:	e1100001 	tst	r0, r1
-    92dc:	e28ee004 	add	lr, lr, #4
-    92e0:	0afffffb 	beq	92d4 <_malloc_r+0x1a0>
-    92e4:	e086a18e 	add	sl, r6, lr, lsl #3
-    92e8:	e1a0c00a 	mov	ip, sl
-    92ec:	e1a0700e 	mov	r7, lr
-    92f0:	e59c300c 	ldr	r3, [ip, #12]
-    92f4:	e15c0003 	cmp	ip, r3
-    92f8:	1a000005 	bne	9314 <_malloc_r+0x1e0>
-    92fc:	ea0000f9 	b	96e8 <_malloc_r+0x5b4>
-    9300:	e3520000 	cmp	r2, #0
-    9304:	aa000112 	bge	9754 <_malloc_r+0x620>
-    9308:	e593300c 	ldr	r3, [r3, #12]
-    930c:	e15c0003 	cmp	ip, r3
-    9310:	0a0000f4 	beq	96e8 <_malloc_r+0x5b4>
-    9314:	e5931004 	ldr	r1, [r3, #4]
-    9318:	e3c11003 	bic	r1, r1, #3
-    931c:	e0642001 	rsb	r2, r4, r1
-    9320:	e352000f 	cmp	r2, #15
-    9324:	dafffff5 	ble	9300 <_malloc_r+0x1cc>
-    9328:	e1a07003 	mov	r7, r3
-    932c:	e593000c 	ldr	r0, [r3, #12]
-    9330:	e5b7c008 	ldr	ip, [r7, #8]!
-    9334:	e0831004 	add	r1, r3, r4
-    9338:	e382e001 	orr	lr, r2, #1
-    933c:	e3844001 	orr	r4, r4, #1
-    9340:	e58c000c 	str	r0, [ip, #12]
-    9344:	e580c008 	str	ip, [r0, #8]
-    9348:	e5834004 	str	r4, [r3, #4]
-    934c:	e5861014 	str	r1, [r6, #20]
-    9350:	e5861010 	str	r1, [r6, #16]
-    9354:	e581800c 	str	r8, [r1, #12]
-    9358:	e5818008 	str	r8, [r1, #8]
-    935c:	e581e004 	str	lr, [r1, #4]
-    9360:	e7812002 	str	r2, [r1, r2]
-    9364:	e1a00005 	mov	r0, r5
-    9368:	eb000137 	bl	984c <__malloc_unlock>
-    936c:	eaffff96 	b	91cc <_malloc_r+0x98>
-    9370:	e35e0004 	cmp	lr, #4
-    9374:	91a0e324 	lsrls	lr, r4, #6
-    9378:	928ee038 	addls	lr, lr, #56	; 0x38
-    937c:	91a0118e 	lslls	r1, lr, #3
-    9380:	9affff98 	bls	91e8 <_malloc_r+0xb4>
-    9384:	e35e0014 	cmp	lr, #20
-    9388:	928ee05b 	addls	lr, lr, #91	; 0x5b
-    938c:	91a0118e 	lslls	r1, lr, #3
-    9390:	9affff94 	bls	91e8 <_malloc_r+0xb4>
-    9394:	e35e0054 	cmp	lr, #84	; 0x54
-    9398:	91a0e624 	lsrls	lr, r4, #12
-    939c:	928ee06e 	addls	lr, lr, #110	; 0x6e
-    93a0:	91a0118e 	lslls	r1, lr, #3
-    93a4:	9affff8f 	bls	91e8 <_malloc_r+0xb4>
-    93a8:	e35e0f55 	cmp	lr, #340	; 0x154
-    93ac:	91a0e7a4 	lsrls	lr, r4, #15
-    93b0:	928ee077 	addls	lr, lr, #119	; 0x77
-    93b4:	91a0118e 	lslls	r1, lr, #3
-    93b8:	9affff8a 	bls	91e8 <_malloc_r+0xb4>
-    93bc:	e59f347c 	ldr	r3, [pc, #1148]	; 9840 <_malloc_r+0x70c>
-    93c0:	e15e0003 	cmp	lr, r3
-    93c4:	91a0e924 	lsrls	lr, r4, #18
-    93c8:	928ee07c 	addls	lr, lr, #124	; 0x7c
-    93cc:	91a0118e 	lslls	r1, lr, #3
-    93d0:	83a01e3f 	movhi	r1, #1008	; 0x3f0
-    93d4:	83a0e07e 	movhi	lr, #126	; 0x7e
-    93d8:	eaffff82 	b	91e8 <_malloc_r+0xb4>
-    93dc:	e0872002 	add	r2, r7, r2
-    93e0:	e5923004 	ldr	r3, [r2, #4]
-    93e4:	e3833001 	orr	r3, r3, #1
-    93e8:	e5823004 	str	r3, [r2, #4]
-    93ec:	e1a00005 	mov	r0, r5
-    93f0:	eb000115 	bl	984c <__malloc_unlock>
-    93f4:	e2877008 	add	r7, r7, #8
-    93f8:	eaffff73 	b	91cc <_malloc_r+0x98>
-    93fc:	e5967008 	ldr	r7, [r6, #8]
-    9400:	e5978004 	ldr	r8, [r7, #4]
-    9404:	e3c88003 	bic	r8, r8, #3
-    9408:	e1540008 	cmp	r4, r8
-    940c:	93a03000 	movls	r3, #0
-    9410:	83a03001 	movhi	r3, #1
-    9414:	e0642008 	rsb	r2, r4, r8
-    9418:	e352000f 	cmp	r2, #15
-    941c:	d3833001 	orrle	r3, r3, #1
-    9420:	e3530000 	cmp	r3, #0
-    9424:	0a000069 	beq	95d0 <_malloc_r+0x49c>
-    9428:	e59f9414 	ldr	r9, [pc, #1044]	; 9844 <_malloc_r+0x710>
-    942c:	e59f3408 	ldr	r3, [pc, #1032]	; 983c <_malloc_r+0x708>
-    9430:	e599b000 	ldr	fp, [r9]
-    9434:	e5933408 	ldr	r3, [r3, #1032]	; 0x408
-    9438:	e084b00b 	add	fp, r4, fp
-    943c:	e3730001 	cmn	r3, #1
-    9440:	128bba01 	addne	fp, fp, #4096	; 0x1000
-    9444:	128bb00f 	addne	fp, fp, #15
-    9448:	13cbbeff 	bicne	fp, fp, #4080	; 0xff0
-    944c:	028bb010 	addeq	fp, fp, #16
-    9450:	13cbb00f 	bicne	fp, fp, #15
-    9454:	e1a00005 	mov	r0, r5
-    9458:	e1a0100b 	mov	r1, fp
-    945c:	eb000119 	bl	98c8 <_sbrk_r>
-    9460:	e3700001 	cmn	r0, #1
-    9464:	e1a0a000 	mov	sl, r0
-    9468:	0a0000de 	beq	97e8 <_malloc_r+0x6b4>
-    946c:	e0872008 	add	r2, r7, r8
-    9470:	e1520000 	cmp	r2, r0
-    9474:	8a0000c2 	bhi	9784 <_malloc_r+0x650>
-    9478:	e5993004 	ldr	r3, [r9, #4]
-    947c:	e152000a 	cmp	r2, sl
-    9480:	e08b3003 	add	r3, fp, r3
-    9484:	e5893004 	str	r3, [r9, #4]
-    9488:	0a0000da 	beq	97f8 <_malloc_r+0x6c4>
-    948c:	e5961408 	ldr	r1, [r6, #1032]	; 0x408
-    9490:	e3710001 	cmn	r1, #1
-    9494:	1062200a 	rsbne	r2, r2, sl
-    9498:	059f339c 	ldreq	r3, [pc, #924]	; 983c <_malloc_r+0x708>
-    949c:	10833002 	addne	r3, r3, r2
-    94a0:	0583a408 	streq	sl, [r3, #1032]	; 0x408
-    94a4:	15893004 	strne	r3, [r9, #4]
-    94a8:	e21a3007 	ands	r3, sl, #7
-    94ac:	12632008 	rsbne	r2, r3, #8
-    94b0:	108aa002 	addne	sl, sl, r2
-    94b4:	12633a01 	rsbne	r3, r3, #4096	; 0x1000
-    94b8:	12832008 	addne	r2, r3, #8
-    94bc:	e08a300b 	add	r3, sl, fp
-    94c0:	03a02a01 	moveq	r2, #4096	; 0x1000
-    94c4:	e1a03a03 	lsl	r3, r3, #20
-    94c8:	e042ba23 	sub	fp, r2, r3, lsr #20
-    94cc:	e1a0100b 	mov	r1, fp
-    94d0:	e1a00005 	mov	r0, r5
-    94d4:	eb0000fb 	bl	98c8 <_sbrk_r>
-    94d8:	e3700001 	cmn	r0, #1
-    94dc:	106a2000 	rsbne	r2, sl, r0
-    94e0:	e5993004 	ldr	r3, [r9, #4]
-    94e4:	1082200b 	addne	r2, r2, fp
-    94e8:	03a0b000 	moveq	fp, #0
-    94ec:	13822001 	orrne	r2, r2, #1
-    94f0:	03a02001 	moveq	r2, #1
-    94f4:	e08b3003 	add	r3, fp, r3
-    94f8:	e1570006 	cmp	r7, r6
-    94fc:	e5893004 	str	r3, [r9, #4]
-    9500:	e586a008 	str	sl, [r6, #8]
-    9504:	e58a2004 	str	r2, [sl, #4]
-    9508:	0a00000d 	beq	9544 <_malloc_r+0x410>
-    950c:	e358000f 	cmp	r8, #15
-    9510:	9a0000af 	bls	97d4 <_malloc_r+0x6a0>
-    9514:	e597c004 	ldr	ip, [r7, #4]
-    9518:	e248200c 	sub	r2, r8, #12
-    951c:	e3c22007 	bic	r2, r2, #7
-    9520:	e20cc001 	and	ip, ip, #1
-    9524:	e0871002 	add	r1, r7, r2
-    9528:	e3a00005 	mov	r0, #5
-    952c:	e182c00c 	orr	ip, r2, ip
-    9530:	e352000f 	cmp	r2, #15
-    9534:	e587c004 	str	ip, [r7, #4]
-    9538:	e5810004 	str	r0, [r1, #4]
-    953c:	e5810008 	str	r0, [r1, #8]
-    9540:	8a0000b3 	bhi	9814 <_malloc_r+0x6e0>
-    9544:	e599202c 	ldr	r2, [r9, #44]	; 0x2c
-    9548:	e1530002 	cmp	r3, r2
-    954c:	859f22f0 	ldrhi	r2, [pc, #752]	; 9844 <_malloc_r+0x710>
-    9550:	8582302c 	strhi	r3, [r2, #44]	; 0x2c
-    9554:	e5992030 	ldr	r2, [r9, #48]	; 0x30
-    9558:	e5967008 	ldr	r7, [r6, #8]
-    955c:	e1530002 	cmp	r3, r2
-    9560:	859f12dc 	ldrhi	r1, [pc, #732]	; 9844 <_malloc_r+0x710>
-    9564:	e5972004 	ldr	r2, [r7, #4]
-    9568:	85813030 	strhi	r3, [r1, #48]	; 0x30
-    956c:	e3c22003 	bic	r2, r2, #3
-    9570:	e1540002 	cmp	r4, r2
-    9574:	93a03000 	movls	r3, #0
-    9578:	83a03001 	movhi	r3, #1
-    957c:	e0642002 	rsb	r2, r4, r2
-    9580:	e352000f 	cmp	r2, #15
-    9584:	d3833001 	orrle	r3, r3, #1
-    9588:	e3530000 	cmp	r3, #0
-    958c:	0a00000f 	beq	95d0 <_malloc_r+0x49c>
-    9590:	e1a00005 	mov	r0, r5
-    9594:	eb0000ac 	bl	984c <__malloc_unlock>
-    9598:	e3a07000 	mov	r7, #0
-    959c:	eaffff0a 	b	91cc <_malloc_r+0x98>
-    95a0:	e0872002 	add	r2, r7, r2
-    95a4:	e5920004 	ldr	r0, [r2, #4]
-    95a8:	e2871008 	add	r1, r7, #8
-    95ac:	e891000a 	ldm	r1, {r1, r3}
-    95b0:	e3800001 	orr	r0, r0, #1
-    95b4:	e5820004 	str	r0, [r2, #4]
-    95b8:	e581300c 	str	r3, [r1, #12]
-    95bc:	e5831008 	str	r1, [r3, #8]
-    95c0:	e1a00005 	mov	r0, r5
-    95c4:	eb0000a0 	bl	984c <__malloc_unlock>
-    95c8:	e2877008 	add	r7, r7, #8
-    95cc:	eafffefe 	b	91cc <_malloc_r+0x98>
-    95d0:	e0873004 	add	r3, r7, r4
-    95d4:	e3822001 	orr	r2, r2, #1
-    95d8:	e3844001 	orr	r4, r4, #1
-    95dc:	e5874004 	str	r4, [r7, #4]
-    95e0:	e1a00005 	mov	r0, r5
-    95e4:	e5832004 	str	r2, [r3, #4]
-    95e8:	e5863008 	str	r3, [r6, #8]
-    95ec:	e2877008 	add	r7, r7, #8
-    95f0:	eb000095 	bl	984c <__malloc_unlock>
-    95f4:	eafffef4 	b	91cc <_malloc_r+0x98>
-    95f8:	e1a034a2 	lsr	r3, r2, #9
-    95fc:	e3530004 	cmp	r3, #4
-    9600:	91a0a322 	lsrls	sl, r2, #6
-    9604:	928aa038 	addls	sl, sl, #56	; 0x38
-    9608:	91a0018a 	lslls	r0, sl, #3
-    960c:	9a000014 	bls	9664 <_malloc_r+0x530>
-    9610:	e3530014 	cmp	r3, #20
-    9614:	9283a05b 	addls	sl, r3, #91	; 0x5b
-    9618:	91a0018a 	lslls	r0, sl, #3
-    961c:	9a000010 	bls	9664 <_malloc_r+0x530>
-    9620:	e3530054 	cmp	r3, #84	; 0x54
-    9624:	91a0a622 	lsrls	sl, r2, #12
-    9628:	928aa06e 	addls	sl, sl, #110	; 0x6e
-    962c:	91a0018a 	lslls	r0, sl, #3
-    9630:	9a00000b 	bls	9664 <_malloc_r+0x530>
-    9634:	e3530f55 	cmp	r3, #340	; 0x154
-    9638:	91a0a7a2 	lsrls	sl, r2, #15
-    963c:	928aa077 	addls	sl, sl, #119	; 0x77
-    9640:	91a0018a 	lslls	r0, sl, #3
-    9644:	9a000006 	bls	9664 <_malloc_r+0x530>
-    9648:	e59f11f0 	ldr	r1, [pc, #496]	; 9840 <_malloc_r+0x70c>
-    964c:	e1530001 	cmp	r3, r1
-    9650:	91a0a922 	lsrls	sl, r2, #18
-    9654:	928aa07c 	addls	sl, sl, #124	; 0x7c
-    9658:	91a0018a 	lslls	r0, sl, #3
-    965c:	83a00e3f 	movhi	r0, #1008	; 0x3f0
-    9660:	83a0a07e 	movhi	sl, #126	; 0x7e
-    9664:	e0860000 	add	r0, r6, r0
-    9668:	e5903008 	ldr	r3, [r0, #8]
-    966c:	e1530000 	cmp	r3, r0
-    9670:	e59fc1c4 	ldr	ip, [pc, #452]	; 983c <_malloc_r+0x708>
-    9674:	1a000003 	bne	9688 <_malloc_r+0x554>
-    9678:	ea00004e 	b	97b8 <_malloc_r+0x684>
-    967c:	e5933008 	ldr	r3, [r3, #8]
-    9680:	e1500003 	cmp	r0, r3
-    9684:	0a000003 	beq	9698 <_malloc_r+0x564>
-    9688:	e5931004 	ldr	r1, [r3, #4]
-    968c:	e3c11003 	bic	r1, r1, #3
-    9690:	e1520001 	cmp	r2, r1
-    9694:	3afffff8 	bcc	967c <_malloc_r+0x548>
-    9698:	e593200c 	ldr	r2, [r3, #12]
-    969c:	e5961004 	ldr	r1, [r6, #4]
-    96a0:	e587200c 	str	r2, [r7, #12]
-    96a4:	e5873008 	str	r3, [r7, #8]
-    96a8:	e583700c 	str	r7, [r3, #12]
-    96ac:	e5827008 	str	r7, [r2, #8]
-    96b0:	eafffefb 	b	92a4 <_malloc_r+0x170>
-    96b4:	e0872004 	add	r2, r7, r4
-    96b8:	e3810001 	orr	r0, r1, #1
-    96bc:	e3844001 	orr	r4, r4, #1
-    96c0:	e5874004 	str	r4, [r7, #4]
-    96c4:	e5832014 	str	r2, [r3, #20]
-    96c8:	e5832010 	str	r2, [r3, #16]
-    96cc:	e582800c 	str	r8, [r2, #12]
-    96d0:	e9820101 	stmib	r2, {r0, r8}
-    96d4:	e7821001 	str	r1, [r2, r1]
-    96d8:	e1a00005 	mov	r0, r5
-    96dc:	eb00005a 	bl	984c <__malloc_unlock>
-    96e0:	e2877008 	add	r7, r7, #8
-    96e4:	eafffeb8 	b	91cc <_malloc_r+0x98>
-    96e8:	e2877001 	add	r7, r7, #1
-    96ec:	e3170003 	tst	r7, #3
-    96f0:	e28cc008 	add	ip, ip, #8
-    96f4:	1afffefd 	bne	92f0 <_malloc_r+0x1bc>
-    96f8:	e31e0003 	tst	lr, #3
-    96fc:	e24a3008 	sub	r3, sl, #8
-    9700:	0a000049 	beq	982c <_malloc_r+0x6f8>
-    9704:	e59aa000 	ldr	sl, [sl]
-    9708:	e15a0003 	cmp	sl, r3
-    970c:	e24ee001 	sub	lr, lr, #1
-    9710:	0afffff8 	beq	96f8 <_malloc_r+0x5c4>
-    9714:	e5963004 	ldr	r3, [r6, #4]
-    9718:	e1a00080 	lsl	r0, r0, #1
-    971c:	e1500003 	cmp	r0, r3
-    9720:	8affff35 	bhi	93fc <_malloc_r+0x2c8>
-    9724:	e3500000 	cmp	r0, #0
-    9728:	0affff33 	beq	93fc <_malloc_r+0x2c8>
-    972c:	e1130000 	tst	r3, r0
-    9730:	0a00001a 	beq	97a0 <_malloc_r+0x66c>
-    9734:	e1a0e007 	mov	lr, r7
-    9738:	eafffee9 	b	92e4 <_malloc_r+0x1b0>
-    973c:	e2873008 	add	r3, r7, #8
-    9740:	e5977014 	ldr	r7, [r7, #20]
-    9744:	e1530007 	cmp	r3, r7
-    9748:	028ee002 	addeq	lr, lr, #2
-    974c:	0afffeb7 	beq	9230 <_malloc_r+0xfc>
-    9750:	eafffe90 	b	9198 <_malloc_r+0x64>
-    9754:	e0831001 	add	r1, r3, r1
-    9758:	e5910004 	ldr	r0, [r1, #4]
-    975c:	e1a07003 	mov	r7, r3
-    9760:	e5b72008 	ldr	r2, [r7, #8]!
-    9764:	e593300c 	ldr	r3, [r3, #12]
-    9768:	e3800001 	orr	r0, r0, #1
-    976c:	e5810004 	str	r0, [r1, #4]
-    9770:	e582300c 	str	r3, [r2, #12]
-    9774:	e5832008 	str	r2, [r3, #8]
-    9778:	e1a00005 	mov	r0, r5
-    977c:	eb000032 	bl	984c <__malloc_unlock>
-    9780:	eafffe91 	b	91cc <_malloc_r+0x98>
-    9784:	e1570006 	cmp	r7, r6
-    9788:	0affff3a 	beq	9478 <_malloc_r+0x344>
-    978c:	e59f30a8 	ldr	r3, [pc, #168]	; 983c <_malloc_r+0x708>
-    9790:	e5937008 	ldr	r7, [r3, #8]
-    9794:	e5972004 	ldr	r2, [r7, #4]
-    9798:	e3c22003 	bic	r2, r2, #3
-    979c:	eaffff73 	b	9570 <_malloc_r+0x43c>
-    97a0:	e1a00080 	lsl	r0, r0, #1
-    97a4:	e1100003 	tst	r0, r3
-    97a8:	e2877004 	add	r7, r7, #4
-    97ac:	0afffffb 	beq	97a0 <_malloc_r+0x66c>
-    97b0:	e1a0e007 	mov	lr, r7
-    97b4:	eafffeca 	b	92e4 <_malloc_r+0x1b0>
-    97b8:	e59c2004 	ldr	r2, [ip, #4]
-    97bc:	e1a0a14a 	asr	sl, sl, #2
-    97c0:	e3a01001 	mov	r1, #1
-    97c4:	e1821a11 	orr	r1, r2, r1, lsl sl
-    97c8:	e1a02003 	mov	r2, r3
-    97cc:	e58c1004 	str	r1, [ip, #4]
-    97d0:	eaffffb2 	b	96a0 <_malloc_r+0x56c>
-    97d4:	e3a03001 	mov	r3, #1
-    97d8:	e58a3004 	str	r3, [sl, #4]
-    97dc:	e1a0700a 	mov	r7, sl
-    97e0:	e3a02000 	mov	r2, #0
-    97e4:	eaffff61 	b	9570 <_malloc_r+0x43c>
-    97e8:	e5967008 	ldr	r7, [r6, #8]
-    97ec:	e5972004 	ldr	r2, [r7, #4]
-    97f0:	e3c22003 	bic	r2, r2, #3
-    97f4:	eaffff5d 	b	9570 <_malloc_r+0x43c>
-    97f8:	e1b01a02 	lsls	r1, r2, #20
-    97fc:	1affff22 	bne	948c <_malloc_r+0x358>
-    9800:	e5962008 	ldr	r2, [r6, #8]
-    9804:	e08b1008 	add	r1, fp, r8
-    9808:	e3811001 	orr	r1, r1, #1
-    980c:	e5821004 	str	r1, [r2, #4]
-    9810:	eaffff4b 	b	9544 <_malloc_r+0x410>
-    9814:	e1a00005 	mov	r0, r5
-    9818:	e2871008 	add	r1, r7, #8
-    981c:	eb00009a 	bl	9a8c <_free_r>
-    9820:	e59f301c 	ldr	r3, [pc, #28]	; 9844 <_malloc_r+0x710>
-    9824:	e5933004 	ldr	r3, [r3, #4]
-    9828:	eaffff45 	b	9544 <_malloc_r+0x410>
-    982c:	e5963004 	ldr	r3, [r6, #4]
-    9830:	e1c33000 	bic	r3, r3, r0
-    9834:	e5863004 	str	r3, [r6, #4]
-    9838:	eaffffb6 	b	9718 <_malloc_r+0x5e4>
-    983c:	40000724 	.word	0x40000724
-    9840:	00000554 	.word	0x00000554
-    9844:	400013c4 	.word	0x400013c4
+00009058 <_malloc_r>:
+    9058:	e92d4ff8 	push	{r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+    905c:	e281400b 	add	r4, r1, #11
+    9060:	e3540016 	cmp	r4, #22
+    9064:	83c44007 	bichi	r4, r4, #7
+    9068:	81a03fa4 	lsrhi	r3, r4, #31
+    906c:	93a03000 	movls	r3, #0
+    9070:	93a04010 	movls	r4, #16
+    9074:	e1540001 	cmp	r4, r1
+    9078:	21a01003 	movcs	r1, r3
+    907c:	33831001 	orrcc	r1, r3, #1
+    9080:	e3510000 	cmp	r1, #0
+    9084:	13a0300c 	movne	r3, #12
+    9088:	e1a05000 	mov	r5, r0
+    908c:	15803000 	strne	r3, [r0]
+    9090:	13a07000 	movne	r7, #0
+    9094:	1a000015 	bne	90f0 <_malloc_r+0x98>
+    9098:	eb0001b3 	bl	976c <__malloc_lock>
+    909c:	e3540f7e 	cmp	r4, #504	; 0x1f8
+    90a0:	2a000015 	bcs	90fc <_malloc_r+0xa4>
+    90a4:	e59f66b4 	ldr	r6, [pc, #1716]	; 9760 <_malloc_r+0x708>
+    90a8:	e1a0e1a4 	lsr	lr, r4, #3
+    90ac:	e086318e 	add	r3, r6, lr, lsl #3
+    90b0:	e593700c 	ldr	r7, [r3, #12]
+    90b4:	e1570003 	cmp	r7, r3
+    90b8:	0a000168 	beq	9660 <_malloc_r+0x608>
+    90bc:	e5973004 	ldr	r3, [r7, #4]
+    90c0:	e3c33003 	bic	r3, r3, #3
+    90c4:	e0873003 	add	r3, r7, r3
+    90c8:	e5930004 	ldr	r0, [r3, #4]
+    90cc:	e2871008 	add	r1, r7, #8
+    90d0:	e8910006 	ldm	r1, {r1, r2}
+    90d4:	e3800001 	orr	r0, r0, #1
+    90d8:	e5830004 	str	r0, [r3, #4]
+    90dc:	e581200c 	str	r2, [r1, #12]
+    90e0:	e5821008 	str	r1, [r2, #8]
+    90e4:	e1a00005 	mov	r0, r5
+    90e8:	eb0001a0 	bl	9770 <__malloc_unlock>
+    90ec:	e2877008 	add	r7, r7, #8
+    90f0:	e1a00007 	mov	r0, r7
+    90f4:	e8bd4ff8 	pop	{r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+    90f8:	e12fff1e 	bx	lr
+    90fc:	e1b0e4a4 	lsrs	lr, r4, #9
+    9100:	01a0e1a4 	lsreq	lr, r4, #3
+    9104:	01a0118e 	lsleq	r1, lr, #3
+    9108:	1a000061 	bne	9294 <_malloc_r+0x23c>
+    910c:	e59f664c 	ldr	r6, [pc, #1612]	; 9760 <_malloc_r+0x708>
+    9110:	e0861001 	add	r1, r6, r1
+    9114:	e591700c 	ldr	r7, [r1, #12]
+    9118:	e1510007 	cmp	r1, r7
+    911c:	1a000005 	bne	9138 <_malloc_r+0xe0>
+    9120:	ea00000a 	b	9150 <_malloc_r+0xf8>
+    9124:	e3530000 	cmp	r3, #0
+    9128:	aa0000e5 	bge	94c4 <_malloc_r+0x46c>
+    912c:	e597700c 	ldr	r7, [r7, #12]
+    9130:	e1510007 	cmp	r1, r7
+    9134:	0a000005 	beq	9150 <_malloc_r+0xf8>
+    9138:	e5972004 	ldr	r2, [r7, #4]
+    913c:	e3c22003 	bic	r2, r2, #3
+    9140:	e0643002 	rsb	r3, r4, r2
+    9144:	e353000f 	cmp	r3, #15
+    9148:	dafffff5 	ble	9124 <_malloc_r+0xcc>
+    914c:	e24ee001 	sub	lr, lr, #1
+    9150:	e28ee001 	add	lr, lr, #1
+    9154:	e59f3604 	ldr	r3, [pc, #1540]	; 9760 <_malloc_r+0x708>
+    9158:	e5967010 	ldr	r7, [r6, #16]
+    915c:	e2838008 	add	r8, r3, #8
+    9160:	e1570008 	cmp	r7, r8
+    9164:	05931004 	ldreq	r1, [r3, #4]
+    9168:	0a000016 	beq	91c8 <_malloc_r+0x170>
+    916c:	e5972004 	ldr	r2, [r7, #4]
+    9170:	e3c22003 	bic	r2, r2, #3
+    9174:	e0641002 	rsb	r1, r4, r2
+    9178:	e351000f 	cmp	r1, #15
+    917c:	ca000115 	bgt	95d8 <_malloc_r+0x580>
+    9180:	e3510000 	cmp	r1, #0
+    9184:	e5838014 	str	r8, [r3, #20]
+    9188:	e5838010 	str	r8, [r3, #16]
+    918c:	aa00005b 	bge	9300 <_malloc_r+0x2a8>
+    9190:	e3520c02 	cmp	r2, #512	; 0x200
+    9194:	2a0000e0 	bcs	951c <_malloc_r+0x4c4>
+    9198:	e5930004 	ldr	r0, [r3, #4]
+    919c:	e1a021a2 	lsr	r2, r2, #3
+    91a0:	e1a01142 	asr	r1, r2, #2
+    91a4:	e3a0c001 	mov	ip, #1
+    91a8:	e180111c 	orr	r1, r0, ip, lsl r1
+    91ac:	e0832182 	add	r2, r3, r2, lsl #3
+    91b0:	e5920008 	ldr	r0, [r2, #8]
+    91b4:	e587200c 	str	r2, [r7, #12]
+    91b8:	e5870008 	str	r0, [r7, #8]
+    91bc:	e5831004 	str	r1, [r3, #4]
+    91c0:	e5827008 	str	r7, [r2, #8]
+    91c4:	e580700c 	str	r7, [r0, #12]
+    91c8:	e1a0314e 	asr	r3, lr, #2
+    91cc:	e3a00001 	mov	r0, #1
+    91d0:	e1a00310 	lsl	r0, r0, r3
+    91d4:	e1500001 	cmp	r0, r1
+    91d8:	8a000050 	bhi	9320 <_malloc_r+0x2c8>
+    91dc:	e1110000 	tst	r1, r0
+    91e0:	1a000008 	bne	9208 <_malloc_r+0x1b0>
+    91e4:	e1a00080 	lsl	r0, r0, #1
+    91e8:	e3cee003 	bic	lr, lr, #3
+    91ec:	e1110000 	tst	r1, r0
+    91f0:	e28ee004 	add	lr, lr, #4
+    91f4:	1a000003 	bne	9208 <_malloc_r+0x1b0>
+    91f8:	e1a00080 	lsl	r0, r0, #1
+    91fc:	e1100001 	tst	r0, r1
+    9200:	e28ee004 	add	lr, lr, #4
+    9204:	0afffffb 	beq	91f8 <_malloc_r+0x1a0>
+    9208:	e086a18e 	add	sl, r6, lr, lsl #3
+    920c:	e1a0c00a 	mov	ip, sl
+    9210:	e1a0700e 	mov	r7, lr
+    9214:	e59c300c 	ldr	r3, [ip, #12]
+    9218:	e15c0003 	cmp	ip, r3
+    921c:	1a000005 	bne	9238 <_malloc_r+0x1e0>
+    9220:	ea0000f9 	b	960c <_malloc_r+0x5b4>
+    9224:	e3520000 	cmp	r2, #0
+    9228:	aa000112 	bge	9678 <_malloc_r+0x620>
+    922c:	e593300c 	ldr	r3, [r3, #12]
+    9230:	e15c0003 	cmp	ip, r3
+    9234:	0a0000f4 	beq	960c <_malloc_r+0x5b4>
+    9238:	e5931004 	ldr	r1, [r3, #4]
+    923c:	e3c11003 	bic	r1, r1, #3
+    9240:	e0642001 	rsb	r2, r4, r1
+    9244:	e352000f 	cmp	r2, #15
+    9248:	dafffff5 	ble	9224 <_malloc_r+0x1cc>
+    924c:	e1a07003 	mov	r7, r3
+    9250:	e593000c 	ldr	r0, [r3, #12]
+    9254:	e5b7c008 	ldr	ip, [r7, #8]!
+    9258:	e0831004 	add	r1, r3, r4
+    925c:	e382e001 	orr	lr, r2, #1
+    9260:	e3844001 	orr	r4, r4, #1
+    9264:	e58c000c 	str	r0, [ip, #12]
+    9268:	e580c008 	str	ip, [r0, #8]
+    926c:	e5834004 	str	r4, [r3, #4]
+    9270:	e5861014 	str	r1, [r6, #20]
+    9274:	e5861010 	str	r1, [r6, #16]
+    9278:	e581800c 	str	r8, [r1, #12]
+    927c:	e5818008 	str	r8, [r1, #8]
+    9280:	e581e004 	str	lr, [r1, #4]
+    9284:	e7812002 	str	r2, [r1, r2]
+    9288:	e1a00005 	mov	r0, r5
+    928c:	eb000137 	bl	9770 <__malloc_unlock>
+    9290:	eaffff96 	b	90f0 <_malloc_r+0x98>
+    9294:	e35e0004 	cmp	lr, #4
+    9298:	91a0e324 	lsrls	lr, r4, #6
+    929c:	928ee038 	addls	lr, lr, #56	; 0x38
+    92a0:	91a0118e 	lslls	r1, lr, #3
+    92a4:	9affff98 	bls	910c <_malloc_r+0xb4>
+    92a8:	e35e0014 	cmp	lr, #20
+    92ac:	928ee05b 	addls	lr, lr, #91	; 0x5b
+    92b0:	91a0118e 	lslls	r1, lr, #3
+    92b4:	9affff94 	bls	910c <_malloc_r+0xb4>
+    92b8:	e35e0054 	cmp	lr, #84	; 0x54
+    92bc:	91a0e624 	lsrls	lr, r4, #12
+    92c0:	928ee06e 	addls	lr, lr, #110	; 0x6e
+    92c4:	91a0118e 	lslls	r1, lr, #3
+    92c8:	9affff8f 	bls	910c <_malloc_r+0xb4>
+    92cc:	e35e0f55 	cmp	lr, #340	; 0x154
+    92d0:	91a0e7a4 	lsrls	lr, r4, #15
+    92d4:	928ee077 	addls	lr, lr, #119	; 0x77
+    92d8:	91a0118e 	lslls	r1, lr, #3
+    92dc:	9affff8a 	bls	910c <_malloc_r+0xb4>
+    92e0:	e59f347c 	ldr	r3, [pc, #1148]	; 9764 <_malloc_r+0x70c>
+    92e4:	e15e0003 	cmp	lr, r3
+    92e8:	91a0e924 	lsrls	lr, r4, #18
+    92ec:	928ee07c 	addls	lr, lr, #124	; 0x7c
+    92f0:	91a0118e 	lslls	r1, lr, #3
+    92f4:	83a01e3f 	movhi	r1, #1008	; 0x3f0
+    92f8:	83a0e07e 	movhi	lr, #126	; 0x7e
+    92fc:	eaffff82 	b	910c <_malloc_r+0xb4>
+    9300:	e0872002 	add	r2, r7, r2
+    9304:	e5923004 	ldr	r3, [r2, #4]
+    9308:	e3833001 	orr	r3, r3, #1
+    930c:	e5823004 	str	r3, [r2, #4]
+    9310:	e1a00005 	mov	r0, r5
+    9314:	eb000115 	bl	9770 <__malloc_unlock>
+    9318:	e2877008 	add	r7, r7, #8
+    931c:	eaffff73 	b	90f0 <_malloc_r+0x98>
+    9320:	e5967008 	ldr	r7, [r6, #8]
+    9324:	e5978004 	ldr	r8, [r7, #4]
+    9328:	e3c88003 	bic	r8, r8, #3
+    932c:	e1540008 	cmp	r4, r8
+    9330:	93a03000 	movls	r3, #0
+    9334:	83a03001 	movhi	r3, #1
+    9338:	e0642008 	rsb	r2, r4, r8
+    933c:	e352000f 	cmp	r2, #15
+    9340:	d3833001 	orrle	r3, r3, #1
+    9344:	e3530000 	cmp	r3, #0
+    9348:	0a000069 	beq	94f4 <_malloc_r+0x49c>
+    934c:	e59f9414 	ldr	r9, [pc, #1044]	; 9768 <_malloc_r+0x710>
+    9350:	e59f3408 	ldr	r3, [pc, #1032]	; 9760 <_malloc_r+0x708>
+    9354:	e599b000 	ldr	fp, [r9]
+    9358:	e5933408 	ldr	r3, [r3, #1032]	; 0x408
+    935c:	e084b00b 	add	fp, r4, fp
+    9360:	e3730001 	cmn	r3, #1
+    9364:	128bba01 	addne	fp, fp, #4096	; 0x1000
+    9368:	128bb00f 	addne	fp, fp, #15
+    936c:	13cbbeff 	bicne	fp, fp, #4080	; 0xff0
+    9370:	028bb010 	addeq	fp, fp, #16
+    9374:	13cbb00f 	bicne	fp, fp, #15
+    9378:	e1a00005 	mov	r0, r5
+    937c:	e1a0100b 	mov	r1, fp
+    9380:	eb000119 	bl	97ec <_sbrk_r>
+    9384:	e3700001 	cmn	r0, #1
+    9388:	e1a0a000 	mov	sl, r0
+    938c:	0a0000de 	beq	970c <_malloc_r+0x6b4>
+    9390:	e0872008 	add	r2, r7, r8
+    9394:	e1520000 	cmp	r2, r0
+    9398:	8a0000c2 	bhi	96a8 <_malloc_r+0x650>
+    939c:	e5993004 	ldr	r3, [r9, #4]
+    93a0:	e152000a 	cmp	r2, sl
+    93a4:	e08b3003 	add	r3, fp, r3
+    93a8:	e5893004 	str	r3, [r9, #4]
+    93ac:	0a0000da 	beq	971c <_malloc_r+0x6c4>
+    93b0:	e5961408 	ldr	r1, [r6, #1032]	; 0x408
+    93b4:	e3710001 	cmn	r1, #1
+    93b8:	1062200a 	rsbne	r2, r2, sl
+    93bc:	059f339c 	ldreq	r3, [pc, #924]	; 9760 <_malloc_r+0x708>
+    93c0:	10833002 	addne	r3, r3, r2
+    93c4:	0583a408 	streq	sl, [r3, #1032]	; 0x408
+    93c8:	15893004 	strne	r3, [r9, #4]
+    93cc:	e21a3007 	ands	r3, sl, #7
+    93d0:	12632008 	rsbne	r2, r3, #8
+    93d4:	108aa002 	addne	sl, sl, r2
+    93d8:	12633a01 	rsbne	r3, r3, #4096	; 0x1000
+    93dc:	12832008 	addne	r2, r3, #8
+    93e0:	e08a300b 	add	r3, sl, fp
+    93e4:	03a02a01 	moveq	r2, #4096	; 0x1000
+    93e8:	e1a03a03 	lsl	r3, r3, #20
+    93ec:	e042ba23 	sub	fp, r2, r3, lsr #20
+    93f0:	e1a0100b 	mov	r1, fp
+    93f4:	e1a00005 	mov	r0, r5
+    93f8:	eb0000fb 	bl	97ec <_sbrk_r>
+    93fc:	e3700001 	cmn	r0, #1
+    9400:	106a2000 	rsbne	r2, sl, r0
+    9404:	e5993004 	ldr	r3, [r9, #4]
+    9408:	1082200b 	addne	r2, r2, fp
+    940c:	03a0b000 	moveq	fp, #0
+    9410:	13822001 	orrne	r2, r2, #1
+    9414:	03a02001 	moveq	r2, #1
+    9418:	e08b3003 	add	r3, fp, r3
+    941c:	e1570006 	cmp	r7, r6
+    9420:	e5893004 	str	r3, [r9, #4]
+    9424:	e586a008 	str	sl, [r6, #8]
+    9428:	e58a2004 	str	r2, [sl, #4]
+    942c:	0a00000d 	beq	9468 <_malloc_r+0x410>
+    9430:	e358000f 	cmp	r8, #15
+    9434:	9a0000af 	bls	96f8 <_malloc_r+0x6a0>
+    9438:	e597c004 	ldr	ip, [r7, #4]
+    943c:	e248200c 	sub	r2, r8, #12
+    9440:	e3c22007 	bic	r2, r2, #7
+    9444:	e20cc001 	and	ip, ip, #1
+    9448:	e0871002 	add	r1, r7, r2
+    944c:	e3a00005 	mov	r0, #5
+    9450:	e182c00c 	orr	ip, r2, ip
+    9454:	e352000f 	cmp	r2, #15
+    9458:	e587c004 	str	ip, [r7, #4]
+    945c:	e5810004 	str	r0, [r1, #4]
+    9460:	e5810008 	str	r0, [r1, #8]
+    9464:	8a0000b3 	bhi	9738 <_malloc_r+0x6e0>
+    9468:	e599202c 	ldr	r2, [r9, #44]	; 0x2c
+    946c:	e1530002 	cmp	r3, r2
+    9470:	859f22f0 	ldrhi	r2, [pc, #752]	; 9768 <_malloc_r+0x710>
+    9474:	8582302c 	strhi	r3, [r2, #44]	; 0x2c
+    9478:	e5992030 	ldr	r2, [r9, #48]	; 0x30
+    947c:	e5967008 	ldr	r7, [r6, #8]
+    9480:	e1530002 	cmp	r3, r2
+    9484:	859f12dc 	ldrhi	r1, [pc, #732]	; 9768 <_malloc_r+0x710>
+    9488:	e5972004 	ldr	r2, [r7, #4]
+    948c:	85813030 	strhi	r3, [r1, #48]	; 0x30
+    9490:	e3c22003 	bic	r2, r2, #3
+    9494:	e1540002 	cmp	r4, r2
+    9498:	93a03000 	movls	r3, #0
+    949c:	83a03001 	movhi	r3, #1
+    94a0:	e0642002 	rsb	r2, r4, r2
+    94a4:	e352000f 	cmp	r2, #15
+    94a8:	d3833001 	orrle	r3, r3, #1
+    94ac:	e3530000 	cmp	r3, #0
+    94b0:	0a00000f 	beq	94f4 <_malloc_r+0x49c>
+    94b4:	e1a00005 	mov	r0, r5
+    94b8:	eb0000ac 	bl	9770 <__malloc_unlock>
+    94bc:	e3a07000 	mov	r7, #0
+    94c0:	eaffff0a 	b	90f0 <_malloc_r+0x98>
+    94c4:	e0872002 	add	r2, r7, r2
+    94c8:	e5920004 	ldr	r0, [r2, #4]
+    94cc:	e2871008 	add	r1, r7, #8
+    94d0:	e891000a 	ldm	r1, {r1, r3}
+    94d4:	e3800001 	orr	r0, r0, #1
+    94d8:	e5820004 	str	r0, [r2, #4]
+    94dc:	e581300c 	str	r3, [r1, #12]
+    94e0:	e5831008 	str	r1, [r3, #8]
+    94e4:	e1a00005 	mov	r0, r5
+    94e8:	eb0000a0 	bl	9770 <__malloc_unlock>
+    94ec:	e2877008 	add	r7, r7, #8
+    94f0:	eafffefe 	b	90f0 <_malloc_r+0x98>
+    94f4:	e0873004 	add	r3, r7, r4
+    94f8:	e3822001 	orr	r2, r2, #1
+    94fc:	e3844001 	orr	r4, r4, #1
+    9500:	e5874004 	str	r4, [r7, #4]
+    9504:	e1a00005 	mov	r0, r5
+    9508:	e5832004 	str	r2, [r3, #4]
+    950c:	e5863008 	str	r3, [r6, #8]
+    9510:	e2877008 	add	r7, r7, #8
+    9514:	eb000095 	bl	9770 <__malloc_unlock>
+    9518:	eafffef4 	b	90f0 <_malloc_r+0x98>
+    951c:	e1a034a2 	lsr	r3, r2, #9
+    9520:	e3530004 	cmp	r3, #4
+    9524:	91a0a322 	lsrls	sl, r2, #6
+    9528:	928aa038 	addls	sl, sl, #56	; 0x38
+    952c:	91a0018a 	lslls	r0, sl, #3
+    9530:	9a000014 	bls	9588 <_malloc_r+0x530>
+    9534:	e3530014 	cmp	r3, #20
+    9538:	9283a05b 	addls	sl, r3, #91	; 0x5b
+    953c:	91a0018a 	lslls	r0, sl, #3
+    9540:	9a000010 	bls	9588 <_malloc_r+0x530>
+    9544:	e3530054 	cmp	r3, #84	; 0x54
+    9548:	91a0a622 	lsrls	sl, r2, #12
+    954c:	928aa06e 	addls	sl, sl, #110	; 0x6e
+    9550:	91a0018a 	lslls	r0, sl, #3
+    9554:	9a00000b 	bls	9588 <_malloc_r+0x530>
+    9558:	e3530f55 	cmp	r3, #340	; 0x154
+    955c:	91a0a7a2 	lsrls	sl, r2, #15
+    9560:	928aa077 	addls	sl, sl, #119	; 0x77
+    9564:	91a0018a 	lslls	r0, sl, #3
+    9568:	9a000006 	bls	9588 <_malloc_r+0x530>
+    956c:	e59f11f0 	ldr	r1, [pc, #496]	; 9764 <_malloc_r+0x70c>
+    9570:	e1530001 	cmp	r3, r1
+    9574:	91a0a922 	lsrls	sl, r2, #18
+    9578:	928aa07c 	addls	sl, sl, #124	; 0x7c
+    957c:	91a0018a 	lslls	r0, sl, #3
+    9580:	83a00e3f 	movhi	r0, #1008	; 0x3f0
+    9584:	83a0a07e 	movhi	sl, #126	; 0x7e
+    9588:	e0860000 	add	r0, r6, r0
+    958c:	e5903008 	ldr	r3, [r0, #8]
+    9590:	e1530000 	cmp	r3, r0
+    9594:	e59fc1c4 	ldr	ip, [pc, #452]	; 9760 <_malloc_r+0x708>
+    9598:	1a000003 	bne	95ac <_malloc_r+0x554>
+    959c:	ea00004e 	b	96dc <_malloc_r+0x684>
+    95a0:	e5933008 	ldr	r3, [r3, #8]
+    95a4:	e1500003 	cmp	r0, r3
+    95a8:	0a000003 	beq	95bc <_malloc_r+0x564>
+    95ac:	e5931004 	ldr	r1, [r3, #4]
+    95b0:	e3c11003 	bic	r1, r1, #3
+    95b4:	e1520001 	cmp	r2, r1
+    95b8:	3afffff8 	bcc	95a0 <_malloc_r+0x548>
+    95bc:	e593200c 	ldr	r2, [r3, #12]
+    95c0:	e5961004 	ldr	r1, [r6, #4]
+    95c4:	e587200c 	str	r2, [r7, #12]
+    95c8:	e5873008 	str	r3, [r7, #8]
+    95cc:	e583700c 	str	r7, [r3, #12]
+    95d0:	e5827008 	str	r7, [r2, #8]
+    95d4:	eafffefb 	b	91c8 <_malloc_r+0x170>
+    95d8:	e0872004 	add	r2, r7, r4
+    95dc:	e3810001 	orr	r0, r1, #1
+    95e0:	e3844001 	orr	r4, r4, #1
+    95e4:	e5874004 	str	r4, [r7, #4]
+    95e8:	e5832014 	str	r2, [r3, #20]
+    95ec:	e5832010 	str	r2, [r3, #16]
+    95f0:	e582800c 	str	r8, [r2, #12]
+    95f4:	e9820101 	stmib	r2, {r0, r8}
+    95f8:	e7821001 	str	r1, [r2, r1]
+    95fc:	e1a00005 	mov	r0, r5
+    9600:	eb00005a 	bl	9770 <__malloc_unlock>
+    9604:	e2877008 	add	r7, r7, #8
+    9608:	eafffeb8 	b	90f0 <_malloc_r+0x98>
+    960c:	e2877001 	add	r7, r7, #1
+    9610:	e3170003 	tst	r7, #3
+    9614:	e28cc008 	add	ip, ip, #8
+    9618:	1afffefd 	bne	9214 <_malloc_r+0x1bc>
+    961c:	e31e0003 	tst	lr, #3
+    9620:	e24a3008 	sub	r3, sl, #8
+    9624:	0a000049 	beq	9750 <_malloc_r+0x6f8>
+    9628:	e59aa000 	ldr	sl, [sl]
+    962c:	e15a0003 	cmp	sl, r3
+    9630:	e24ee001 	sub	lr, lr, #1
+    9634:	0afffff8 	beq	961c <_malloc_r+0x5c4>
+    9638:	e5963004 	ldr	r3, [r6, #4]
+    963c:	e1a00080 	lsl	r0, r0, #1
+    9640:	e1500003 	cmp	r0, r3
+    9644:	8affff35 	bhi	9320 <_malloc_r+0x2c8>
+    9648:	e3500000 	cmp	r0, #0
+    964c:	0affff33 	beq	9320 <_malloc_r+0x2c8>
+    9650:	e1130000 	tst	r3, r0
+    9654:	0a00001a 	beq	96c4 <_malloc_r+0x66c>
+    9658:	e1a0e007 	mov	lr, r7
+    965c:	eafffee9 	b	9208 <_malloc_r+0x1b0>
+    9660:	e2873008 	add	r3, r7, #8
+    9664:	e5977014 	ldr	r7, [r7, #20]
+    9668:	e1530007 	cmp	r3, r7
+    966c:	028ee002 	addeq	lr, lr, #2
+    9670:	0afffeb7 	beq	9154 <_malloc_r+0xfc>
+    9674:	eafffe90 	b	90bc <_malloc_r+0x64>
+    9678:	e0831001 	add	r1, r3, r1
+    967c:	e5910004 	ldr	r0, [r1, #4]
+    9680:	e1a07003 	mov	r7, r3
+    9684:	e5b72008 	ldr	r2, [r7, #8]!
+    9688:	e593300c 	ldr	r3, [r3, #12]
+    968c:	e3800001 	orr	r0, r0, #1
+    9690:	e5810004 	str	r0, [r1, #4]
+    9694:	e582300c 	str	r3, [r2, #12]
+    9698:	e5832008 	str	r2, [r3, #8]
+    969c:	e1a00005 	mov	r0, r5
+    96a0:	eb000032 	bl	9770 <__malloc_unlock>
+    96a4:	eafffe91 	b	90f0 <_malloc_r+0x98>
+    96a8:	e1570006 	cmp	r7, r6
+    96ac:	0affff3a 	beq	939c <_malloc_r+0x344>
+    96b0:	e59f30a8 	ldr	r3, [pc, #168]	; 9760 <_malloc_r+0x708>
+    96b4:	e5937008 	ldr	r7, [r3, #8]
+    96b8:	e5972004 	ldr	r2, [r7, #4]
+    96bc:	e3c22003 	bic	r2, r2, #3
+    96c0:	eaffff73 	b	9494 <_malloc_r+0x43c>
+    96c4:	e1a00080 	lsl	r0, r0, #1
+    96c8:	e1100003 	tst	r0, r3
+    96cc:	e2877004 	add	r7, r7, #4
+    96d0:	0afffffb 	beq	96c4 <_malloc_r+0x66c>
+    96d4:	e1a0e007 	mov	lr, r7
+    96d8:	eafffeca 	b	9208 <_malloc_r+0x1b0>
+    96dc:	e59c2004 	ldr	r2, [ip, #4]
+    96e0:	e1a0a14a 	asr	sl, sl, #2
+    96e4:	e3a01001 	mov	r1, #1
+    96e8:	e1821a11 	orr	r1, r2, r1, lsl sl
+    96ec:	e1a02003 	mov	r2, r3
+    96f0:	e58c1004 	str	r1, [ip, #4]
+    96f4:	eaffffb2 	b	95c4 <_malloc_r+0x56c>
+    96f8:	e3a03001 	mov	r3, #1
+    96fc:	e58a3004 	str	r3, [sl, #4]
+    9700:	e1a0700a 	mov	r7, sl
+    9704:	e3a02000 	mov	r2, #0
+    9708:	eaffff61 	b	9494 <_malloc_r+0x43c>
+    970c:	e5967008 	ldr	r7, [r6, #8]
+    9710:	e5972004 	ldr	r2, [r7, #4]
+    9714:	e3c22003 	bic	r2, r2, #3
+    9718:	eaffff5d 	b	9494 <_malloc_r+0x43c>
+    971c:	e1b01a02 	lsls	r1, r2, #20
+    9720:	1affff22 	bne	93b0 <_malloc_r+0x358>
+    9724:	e5962008 	ldr	r2, [r6, #8]
+    9728:	e08b1008 	add	r1, fp, r8
+    972c:	e3811001 	orr	r1, r1, #1
+    9730:	e5821004 	str	r1, [r2, #4]
+    9734:	eaffff4b 	b	9468 <_malloc_r+0x410>
+    9738:	e1a00005 	mov	r0, r5
+    973c:	e2871008 	add	r1, r7, #8
+    9740:	eb00009a 	bl	99b0 <_free_r>
+    9744:	e59f301c 	ldr	r3, [pc, #28]	; 9768 <_malloc_r+0x710>
+    9748:	e5933004 	ldr	r3, [r3, #4]
+    974c:	eaffff45 	b	9468 <_malloc_r+0x410>
+    9750:	e5963004 	ldr	r3, [r6, #4]
+    9754:	e1c33000 	bic	r3, r3, r0
+    9758:	e5863004 	str	r3, [r6, #4]
+    975c:	eaffffb6 	b	963c <_malloc_r+0x5e4>
+    9760:	40000838 	.word	0x40000838
+    9764:	00000554 	.word	0x00000554
+    9768:	400014d8 	.word	0x400014d8
 
-00009848 <__malloc_lock>:
-    9848:	e12fff1e 	bx	lr
+0000976c <__malloc_lock>:
+    976c:	e12fff1e 	bx	lr
 
-0000984c <__malloc_unlock>:
-    984c:	e12fff1e 	bx	lr
+00009770 <__malloc_unlock>:
+    9770:	e12fff1e 	bx	lr
 
-00009850 <srand>:
-    9850:	e59f3010 	ldr	r3, [pc, #16]	; 9868 <srand+0x18>
-    9854:	e5933000 	ldr	r3, [r3]
-    9858:	e3a02000 	mov	r2, #0
-    985c:	e58300a8 	str	r0, [r3, #168]	; 0xa8
-    9860:	e58320ac 	str	r2, [r3, #172]	; 0xac
-    9864:	e12fff1e 	bx	lr
-    9868:	40000b38 	.word	0x40000b38
+00009774 <srand>:
+    9774:	e59f3010 	ldr	r3, [pc, #16]	; 978c <srand+0x18>
+    9778:	e5933000 	ldr	r3, [r3]
+    977c:	e3a02000 	mov	r2, #0
+    9780:	e58300a8 	str	r0, [r3, #168]	; 0xa8
+    9784:	e58320ac 	str	r2, [r3, #172]	; 0xac
+    9788:	e12fff1e 	bx	lr
+    978c:	40000c48 	.word	0x40000c48
 
-0000986c <rand>:
-    986c:	e92d0030 	push	{r4, r5}
-    9870:	e59f3044 	ldr	r3, [pc, #68]	; 98bc <rand+0x50>
-    9874:	e5931000 	ldr	r1, [r3]
-    9878:	e59f0040 	ldr	r0, [pc, #64]	; 98c0 <rand+0x54>
-    987c:	e59120a8 	ldr	r2, [r1, #168]	; 0xa8
-    9880:	e0000092 	mul	r0, r2, r0
-    9884:	e591c0ac 	ldr	ip, [r1, #172]	; 0xac
-    9888:	e59f3034 	ldr	r3, [pc, #52]	; 98c4 <rand+0x58>
-    988c:	e0854392 	umull	r4, r5, r2, r3
-    9890:	e0200c93 	mla	r0, r3, ip, r0
-    9894:	e3a02001 	mov	r2, #1
-    9898:	e0805005 	add	r5, r0, r5
-    989c:	e0922004 	adds	r2, r2, r4
-    98a0:	e3a03000 	mov	r3, #0
-    98a4:	e0a33005 	adc	r3, r3, r5
-    98a8:	e58120a8 	str	r2, [r1, #168]	; 0xa8
-    98ac:	e58130ac 	str	r3, [r1, #172]	; 0xac
-    98b0:	e3c30102 	bic	r0, r3, #-2147483648	; 0x80000000
-    98b4:	e8bd0030 	pop	{r4, r5}
-    98b8:	e12fff1e 	bx	lr
-    98bc:	40000b38 	.word	0x40000b38
-    98c0:	5851f42d 	.word	0x5851f42d
-    98c4:	4c957f2d 	.word	0x4c957f2d
+00009790 <rand>:
+    9790:	e92d0030 	push	{r4, r5}
+    9794:	e59f3044 	ldr	r3, [pc, #68]	; 97e0 <rand+0x50>
+    9798:	e5931000 	ldr	r1, [r3]
+    979c:	e59f0040 	ldr	r0, [pc, #64]	; 97e4 <rand+0x54>
+    97a0:	e59120a8 	ldr	r2, [r1, #168]	; 0xa8
+    97a4:	e0000092 	mul	r0, r2, r0
+    97a8:	e591c0ac 	ldr	ip, [r1, #172]	; 0xac
+    97ac:	e59f3034 	ldr	r3, [pc, #52]	; 97e8 <rand+0x58>
+    97b0:	e0854392 	umull	r4, r5, r2, r3
+    97b4:	e0200c93 	mla	r0, r3, ip, r0
+    97b8:	e3a02001 	mov	r2, #1
+    97bc:	e0805005 	add	r5, r0, r5
+    97c0:	e0922004 	adds	r2, r2, r4
+    97c4:	e3a03000 	mov	r3, #0
+    97c8:	e0a33005 	adc	r3, r3, r5
+    97cc:	e58120a8 	str	r2, [r1, #168]	; 0xa8
+    97d0:	e58130ac 	str	r3, [r1, #172]	; 0xac
+    97d4:	e3c30102 	bic	r0, r3, #-2147483648	; 0x80000000
+    97d8:	e8bd0030 	pop	{r4, r5}
+    97dc:	e12fff1e 	bx	lr
+    97e0:	40000c48 	.word	0x40000c48
+    97e4:	5851f42d 	.word	0x5851f42d
+    97e8:	4c957f2d 	.word	0x4c957f2d
 
-000098c8 <_sbrk_r>:
-    98c8:	e92d4038 	push	{r3, r4, r5, lr}
-    98cc:	e59f4030 	ldr	r4, [pc, #48]	; 9904 <_sbrk_r+0x3c>
-    98d0:	e3a03000 	mov	r3, #0
-    98d4:	e1a05000 	mov	r5, r0
-    98d8:	e1a00001 	mov	r0, r1
-    98dc:	e5843000 	str	r3, [r4]
-    98e0:	ebffde5d 	bl	125c <_sbrk>
-    98e4:	e3700001 	cmn	r0, #1
-    98e8:	0a000001 	beq	98f4 <_sbrk_r+0x2c>
-    98ec:	e8bd4038 	pop	{r3, r4, r5, lr}
-    98f0:	e12fff1e 	bx	lr
-    98f4:	e5943000 	ldr	r3, [r4]
-    98f8:	e3530000 	cmp	r3, #0
-    98fc:	15853000 	strne	r3, [r5]
-    9900:	eafffff9 	b	98ec <_sbrk_r+0x24>
-    9904:	400013f8 	.word	0x400013f8
+000097ec <_sbrk_r>:
+    97ec:	e92d4038 	push	{r3, r4, r5, lr}
+    97f0:	e59f4030 	ldr	r4, [pc, #48]	; 9828 <_sbrk_r+0x3c>
+    97f4:	e3a03000 	mov	r3, #0
+    97f8:	e1a05000 	mov	r5, r0
+    97fc:	e1a00001 	mov	r0, r1
+    9800:	e5843000 	str	r3, [r4]
+    9804:	ebffde94 	bl	125c <_sbrk>
+    9808:	e3700001 	cmn	r0, #1
+    980c:	0a000001 	beq	9818 <_sbrk_r+0x2c>
+    9810:	e8bd4038 	pop	{r3, r4, r5, lr}
+    9814:	e12fff1e 	bx	lr
+    9818:	e5943000 	ldr	r3, [r4]
+    981c:	e3530000 	cmp	r3, #0
+    9820:	15853000 	strne	r3, [r5]
+    9824:	eafffff9 	b	9810 <_sbrk_r+0x24>
+    9828:	4000150c 	.word	0x4000150c
 
-00009908 <strlen>:
-    9908:	e3c01003 	bic	r1, r0, #3
-    990c:	e2100003 	ands	r0, r0, #3
-    9910:	e2600000 	rsb	r0, r0, #0
-    9914:	e4913004 	ldr	r3, [r1], #4
-    9918:	e280c004 	add	ip, r0, #4
-    991c:	e1a0c18c 	lsl	ip, ip, #3
-    9920:	e3e02000 	mvn	r2, #0
-    9924:	11833c32 	orrne	r3, r3, r2, lsr ip
-    9928:	e3a0c001 	mov	ip, #1
-    992c:	e18cc40c 	orr	ip, ip, ip, lsl #8
-    9930:	e18cc80c 	orr	ip, ip, ip, lsl #16
-    9934:	e043200c 	sub	r2, r3, ip
-    9938:	e1c22003 	bic	r2, r2, r3
-    993c:	e012238c 	ands	r2, r2, ip, lsl #7
-    9940:	04913004 	ldreq	r3, [r1], #4
-    9944:	02800004 	addeq	r0, r0, #4
-    9948:	0afffff9 	beq	9934 <strlen+0x2c>
-    994c:	e31300ff 	tst	r3, #255	; 0xff
-    9950:	12800001 	addne	r0, r0, #1
-    9954:	13130cff 	tstne	r3, #65280	; 0xff00
-    9958:	12800001 	addne	r0, r0, #1
-    995c:	131308ff 	tstne	r3, #16711680	; 0xff0000
-    9960:	12800001 	addne	r0, r0, #1
-    9964:	e12fff1e 	bx	lr
+0000982c <strlen>:
+    982c:	e3c01003 	bic	r1, r0, #3
+    9830:	e2100003 	ands	r0, r0, #3
+    9834:	e2600000 	rsb	r0, r0, #0
+    9838:	e4913004 	ldr	r3, [r1], #4
+    983c:	e280c004 	add	ip, r0, #4
+    9840:	e1a0c18c 	lsl	ip, ip, #3
+    9844:	e3e02000 	mvn	r2, #0
+    9848:	11833c32 	orrne	r3, r3, r2, lsr ip
+    984c:	e3a0c001 	mov	ip, #1
+    9850:	e18cc40c 	orr	ip, ip, ip, lsl #8
+    9854:	e18cc80c 	orr	ip, ip, ip, lsl #16
+    9858:	e043200c 	sub	r2, r3, ip
+    985c:	e1c22003 	bic	r2, r2, r3
+    9860:	e012238c 	ands	r2, r2, ip, lsl #7
+    9864:	04913004 	ldreq	r3, [r1], #4
+    9868:	02800004 	addeq	r0, r0, #4
+    986c:	0afffff9 	beq	9858 <strlen+0x2c>
+    9870:	e31300ff 	tst	r3, #255	; 0xff
+    9874:	12800001 	addne	r0, r0, #1
+    9878:	13130cff 	tstne	r3, #65280	; 0xff00
+    987c:	12800001 	addne	r0, r0, #1
+    9880:	131308ff 	tstne	r3, #16711680	; 0xff0000
+    9884:	12800001 	addne	r0, r0, #1
+    9888:	e12fff1e 	bx	lr
 
-00009968 <gettimeofday>:
-    9968:	e1a02001 	mov	r2, r1
-    996c:	e59f1018 	ldr	r1, [pc, #24]	; 998c <gettimeofday+0x24>
-    9970:	e92d4008 	push	{r3, lr}
-    9974:	e1a03000 	mov	r3, r0
-    9978:	e5910000 	ldr	r0, [r1]
-    997c:	e1a01003 	mov	r1, r3
-    9980:	eb0000da 	bl	9cf0 <_gettimeofday_r>
-    9984:	e8bd4008 	pop	{r3, lr}
-    9988:	e12fff1e 	bx	lr
-    998c:	40000b38 	.word	0x40000b38
+0000988c <gettimeofday>:
+    988c:	e1a02001 	mov	r2, r1
+    9890:	e59f1018 	ldr	r1, [pc, #24]	; 98b0 <gettimeofday+0x24>
+    9894:	e92d4008 	push	{r3, lr}
+    9898:	e1a03000 	mov	r3, r0
+    989c:	e5910000 	ldr	r0, [r1]
+    98a0:	e1a01003 	mov	r1, r3
+    98a4:	eb0000da 	bl	9c14 <_gettimeofday_r>
+    98a8:	e8bd4008 	pop	{r3, lr}
+    98ac:	e12fff1e 	bx	lr
+    98b0:	40000c48 	.word	0x40000c48
 
-00009990 <_malloc_trim_r>:
-    9990:	e92d40f8 	push	{r3, r4, r5, r6, r7, lr}
-    9994:	e59f50e4 	ldr	r5, [pc, #228]	; 9a80 <_malloc_trim_r+0xf0>
-    9998:	e1a07001 	mov	r7, r1
-    999c:	e1a04000 	mov	r4, r0
-    99a0:	ebffffa8 	bl	9848 <__malloc_lock>
-    99a4:	e5953008 	ldr	r3, [r5, #8]
-    99a8:	e5936004 	ldr	r6, [r3, #4]
-    99ac:	e3c66003 	bic	r6, r6, #3
-    99b0:	e2863efe 	add	r3, r6, #4064	; 0xfe0
-    99b4:	e283300f 	add	r3, r3, #15
-    99b8:	e0677003 	rsb	r7, r7, r3
-    99bc:	e1a07627 	lsr	r7, r7, #12
-    99c0:	e2477001 	sub	r7, r7, #1
-    99c4:	e1a07607 	lsl	r7, r7, #12
-    99c8:	e3570a01 	cmp	r7, #4096	; 0x1000
-    99cc:	e1a00004 	mov	r0, r4
-    99d0:	ba000006 	blt	99f0 <_malloc_trim_r+0x60>
-    99d4:	e3a01000 	mov	r1, #0
-    99d8:	ebffffba 	bl	98c8 <_sbrk_r>
-    99dc:	e5953008 	ldr	r3, [r5, #8]
-    99e0:	e0833006 	add	r3, r3, r6
-    99e4:	e1500003 	cmp	r0, r3
-    99e8:	e1a00004 	mov	r0, r4
-    99ec:	0a000003 	beq	9a00 <_malloc_trim_r+0x70>
-    99f0:	ebffff95 	bl	984c <__malloc_unlock>
-    99f4:	e3a00000 	mov	r0, #0
-    99f8:	e8bd40f8 	pop	{r3, r4, r5, r6, r7, lr}
-    99fc:	e12fff1e 	bx	lr
-    9a00:	e2671000 	rsb	r1, r7, #0
-    9a04:	ebffffaf 	bl	98c8 <_sbrk_r>
-    9a08:	e3700001 	cmn	r0, #1
-    9a0c:	0a00000b 	beq	9a40 <_malloc_trim_r+0xb0>
-    9a10:	e59f306c 	ldr	r3, [pc, #108]	; 9a84 <_malloc_trim_r+0xf4>
-    9a14:	e5931000 	ldr	r1, [r3]
-    9a18:	e5952008 	ldr	r2, [r5, #8]
-    9a1c:	e0676006 	rsb	r6, r7, r6
-    9a20:	e3866001 	orr	r6, r6, #1
-    9a24:	e0677001 	rsb	r7, r7, r1
-    9a28:	e1a00004 	mov	r0, r4
-    9a2c:	e5826004 	str	r6, [r2, #4]
-    9a30:	e5837000 	str	r7, [r3]
-    9a34:	ebffff84 	bl	984c <__malloc_unlock>
-    9a38:	e3a00001 	mov	r0, #1
-    9a3c:	eaffffed 	b	99f8 <_malloc_trim_r+0x68>
-    9a40:	e1a00004 	mov	r0, r4
-    9a44:	e3a01000 	mov	r1, #0
-    9a48:	ebffff9e 	bl	98c8 <_sbrk_r>
-    9a4c:	e5953008 	ldr	r3, [r5, #8]
-    9a50:	e0632000 	rsb	r2, r3, r0
-    9a54:	e352000f 	cmp	r2, #15
-    9a58:	da000006 	ble	9a78 <_malloc_trim_r+0xe8>
-    9a5c:	e59f1024 	ldr	r1, [pc, #36]	; 9a88 <_malloc_trim_r+0xf8>
-    9a60:	e5911000 	ldr	r1, [r1]
-    9a64:	e0610000 	rsb	r0, r1, r0
-    9a68:	e59f1014 	ldr	r1, [pc, #20]	; 9a84 <_malloc_trim_r+0xf4>
-    9a6c:	e3822001 	orr	r2, r2, #1
-    9a70:	e5810000 	str	r0, [r1]
-    9a74:	e5832004 	str	r2, [r3, #4]
-    9a78:	e1a00004 	mov	r0, r4
-    9a7c:	eaffffdb 	b	99f0 <_malloc_trim_r+0x60>
-    9a80:	40000724 	.word	0x40000724
-    9a84:	400013c8 	.word	0x400013c8
-    9a88:	40000b2c 	.word	0x40000b2c
+000098b4 <_malloc_trim_r>:
+    98b4:	e92d40f8 	push	{r3, r4, r5, r6, r7, lr}
+    98b8:	e59f50e4 	ldr	r5, [pc, #228]	; 99a4 <_malloc_trim_r+0xf0>
+    98bc:	e1a07001 	mov	r7, r1
+    98c0:	e1a04000 	mov	r4, r0
+    98c4:	ebffffa8 	bl	976c <__malloc_lock>
+    98c8:	e5953008 	ldr	r3, [r5, #8]
+    98cc:	e5936004 	ldr	r6, [r3, #4]
+    98d0:	e3c66003 	bic	r6, r6, #3
+    98d4:	e2863efe 	add	r3, r6, #4064	; 0xfe0
+    98d8:	e283300f 	add	r3, r3, #15
+    98dc:	e0677003 	rsb	r7, r7, r3
+    98e0:	e1a07627 	lsr	r7, r7, #12
+    98e4:	e2477001 	sub	r7, r7, #1
+    98e8:	e1a07607 	lsl	r7, r7, #12
+    98ec:	e3570a01 	cmp	r7, #4096	; 0x1000
+    98f0:	e1a00004 	mov	r0, r4
+    98f4:	ba000006 	blt	9914 <_malloc_trim_r+0x60>
+    98f8:	e3a01000 	mov	r1, #0
+    98fc:	ebffffba 	bl	97ec <_sbrk_r>
+    9900:	e5953008 	ldr	r3, [r5, #8]
+    9904:	e0833006 	add	r3, r3, r6
+    9908:	e1500003 	cmp	r0, r3
+    990c:	e1a00004 	mov	r0, r4
+    9910:	0a000003 	beq	9924 <_malloc_trim_r+0x70>
+    9914:	ebffff95 	bl	9770 <__malloc_unlock>
+    9918:	e3a00000 	mov	r0, #0
+    991c:	e8bd40f8 	pop	{r3, r4, r5, r6, r7, lr}
+    9920:	e12fff1e 	bx	lr
+    9924:	e2671000 	rsb	r1, r7, #0
+    9928:	ebffffaf 	bl	97ec <_sbrk_r>
+    992c:	e3700001 	cmn	r0, #1
+    9930:	0a00000b 	beq	9964 <_malloc_trim_r+0xb0>
+    9934:	e59f306c 	ldr	r3, [pc, #108]	; 99a8 <_malloc_trim_r+0xf4>
+    9938:	e5931000 	ldr	r1, [r3]
+    993c:	e5952008 	ldr	r2, [r5, #8]
+    9940:	e0676006 	rsb	r6, r7, r6
+    9944:	e3866001 	orr	r6, r6, #1
+    9948:	e0677001 	rsb	r7, r7, r1
+    994c:	e1a00004 	mov	r0, r4
+    9950:	e5826004 	str	r6, [r2, #4]
+    9954:	e5837000 	str	r7, [r3]
+    9958:	ebffff84 	bl	9770 <__malloc_unlock>
+    995c:	e3a00001 	mov	r0, #1
+    9960:	eaffffed 	b	991c <_malloc_trim_r+0x68>
+    9964:	e1a00004 	mov	r0, r4
+    9968:	e3a01000 	mov	r1, #0
+    996c:	ebffff9e 	bl	97ec <_sbrk_r>
+    9970:	e5953008 	ldr	r3, [r5, #8]
+    9974:	e0632000 	rsb	r2, r3, r0
+    9978:	e352000f 	cmp	r2, #15
+    997c:	da000006 	ble	999c <_malloc_trim_r+0xe8>
+    9980:	e59f1024 	ldr	r1, [pc, #36]	; 99ac <_malloc_trim_r+0xf8>
+    9984:	e5911000 	ldr	r1, [r1]
+    9988:	e0610000 	rsb	r0, r1, r0
+    998c:	e59f1014 	ldr	r1, [pc, #20]	; 99a8 <_malloc_trim_r+0xf4>
+    9990:	e3822001 	orr	r2, r2, #1
+    9994:	e5810000 	str	r0, [r1]
+    9998:	e5832004 	str	r2, [r3, #4]
+    999c:	e1a00004 	mov	r0, r4
+    99a0:	eaffffdb 	b	9914 <_malloc_trim_r+0x60>
+    99a4:	40000838 	.word	0x40000838
+    99a8:	400014dc 	.word	0x400014dc
+    99ac:	40000c40 	.word	0x40000c40
 
-00009a8c <_free_r>:
-    9a8c:	e92d40f8 	push	{r3, r4, r5, r6, r7, lr}
-    9a90:	e2515000 	subs	r5, r1, #0
-    9a94:	e1a04000 	mov	r4, r0
-    9a98:	0a00005c 	beq	9c10 <_free_r+0x184>
-    9a9c:	ebffff69 	bl	9848 <__malloc_lock>
-    9aa0:	e5150004 	ldr	r0, [r5, #-4]
-    9aa4:	e59fc230 	ldr	ip, [pc, #560]	; 9cdc <_free_r+0x250>
-    9aa8:	e2451008 	sub	r1, r5, #8
-    9aac:	e3c03001 	bic	r3, r0, #1
-    9ab0:	e0812003 	add	r2, r1, r3
-    9ab4:	e59c6008 	ldr	r6, [ip, #8]
-    9ab8:	e592e004 	ldr	lr, [r2, #4]
-    9abc:	e1560002 	cmp	r6, r2
-    9ac0:	e3cee003 	bic	lr, lr, #3
-    9ac4:	0a000060 	beq	9c4c <_free_r+0x1c0>
-    9ac8:	e2100001 	ands	r0, r0, #1
-    9acc:	e582e004 	str	lr, [r2, #4]
-    9ad0:	13a00000 	movne	r0, #0
-    9ad4:	1a000009 	bne	9b00 <_free_r+0x74>
-    9ad8:	e5156008 	ldr	r6, [r5, #-8]
-    9adc:	e0661001 	rsb	r1, r6, r1
-    9ae0:	e5915008 	ldr	r5, [r1, #8]
-    9ae4:	e28c7008 	add	r7, ip, #8
-    9ae8:	e1550007 	cmp	r5, r7
-    9aec:	e0833006 	add	r3, r3, r6
-    9af0:	1591600c 	ldrne	r6, [r1, #12]
-    9af4:	1585600c 	strne	r6, [r5, #12]
-    9af8:	15865008 	strne	r5, [r6, #8]
-    9afc:	03a00001 	moveq	r0, #1
-    9b00:	e082500e 	add	r5, r2, lr
-    9b04:	e5955004 	ldr	r5, [r5, #4]
-    9b08:	e3150001 	tst	r5, #1
-    9b0c:	1a000009 	bne	9b38 <_free_r+0xac>
-    9b10:	e3500000 	cmp	r0, #0
-    9b14:	e083300e 	add	r3, r3, lr
-    9b18:	e592e008 	ldr	lr, [r2, #8]
-    9b1c:	1a000002 	bne	9b2c <_free_r+0xa0>
-    9b20:	e59f51b8 	ldr	r5, [pc, #440]	; 9ce0 <_free_r+0x254>
-    9b24:	e15e0005 	cmp	lr, r5
-    9b28:	0a00005d 	beq	9ca4 <_free_r+0x218>
-    9b2c:	e592200c 	ldr	r2, [r2, #12]
-    9b30:	e58e200c 	str	r2, [lr, #12]
-    9b34:	e582e008 	str	lr, [r2, #8]
-    9b38:	e3832001 	orr	r2, r3, #1
-    9b3c:	e3500000 	cmp	r0, #0
-    9b40:	e5812004 	str	r2, [r1, #4]
-    9b44:	e7813003 	str	r3, [r1, r3]
-    9b48:	1a00002e 	bne	9c08 <_free_r+0x17c>
-    9b4c:	e3530c02 	cmp	r3, #512	; 0x200
-    9b50:	3a000030 	bcc	9c18 <_free_r+0x18c>
-    9b54:	e1a024a3 	lsr	r2, r3, #9
-    9b58:	e3520004 	cmp	r2, #4
-    9b5c:	91a0e323 	lsrls	lr, r3, #6
-    9b60:	928ee038 	addls	lr, lr, #56	; 0x38
-    9b64:	91a0018e 	lslls	r0, lr, #3
-    9b68:	9a000014 	bls	9bc0 <_free_r+0x134>
-    9b6c:	e3520014 	cmp	r2, #20
-    9b70:	9282e05b 	addls	lr, r2, #91	; 0x5b
-    9b74:	91a0018e 	lslls	r0, lr, #3
-    9b78:	9a000010 	bls	9bc0 <_free_r+0x134>
-    9b7c:	e3520054 	cmp	r2, #84	; 0x54
-    9b80:	91a0e623 	lsrls	lr, r3, #12
-    9b84:	928ee06e 	addls	lr, lr, #110	; 0x6e
-    9b88:	91a0018e 	lslls	r0, lr, #3
-    9b8c:	9a00000b 	bls	9bc0 <_free_r+0x134>
-    9b90:	e3520f55 	cmp	r2, #340	; 0x154
-    9b94:	91a0e7a3 	lsrls	lr, r3, #15
-    9b98:	928ee077 	addls	lr, lr, #119	; 0x77
-    9b9c:	91a0018e 	lslls	r0, lr, #3
-    9ba0:	9a000006 	bls	9bc0 <_free_r+0x134>
-    9ba4:	e59f0138 	ldr	r0, [pc, #312]	; 9ce4 <_free_r+0x258>
-    9ba8:	e1520000 	cmp	r2, r0
-    9bac:	91a0e923 	lsrls	lr, r3, #18
-    9bb0:	928ee07c 	addls	lr, lr, #124	; 0x7c
-    9bb4:	91a0018e 	lslls	r0, lr, #3
-    9bb8:	83a00e3f 	movhi	r0, #1008	; 0x3f0
-    9bbc:	83a0e07e 	movhi	lr, #126	; 0x7e
-    9bc0:	e08cc000 	add	ip, ip, r0
-    9bc4:	e59c2008 	ldr	r2, [ip, #8]
-    9bc8:	e152000c 	cmp	r2, ip
-    9bcc:	e59f0108 	ldr	r0, [pc, #264]	; 9cdc <_free_r+0x250>
-    9bd0:	1a000003 	bne	9be4 <_free_r+0x158>
-    9bd4:	ea000039 	b	9cc0 <_free_r+0x234>
-    9bd8:	e5922008 	ldr	r2, [r2, #8]
-    9bdc:	e15c0002 	cmp	ip, r2
-    9be0:	0a000003 	beq	9bf4 <_free_r+0x168>
-    9be4:	e5920004 	ldr	r0, [r2, #4]
-    9be8:	e3c00003 	bic	r0, r0, #3
-    9bec:	e1530000 	cmp	r3, r0
-    9bf0:	3afffff8 	bcc	9bd8 <_free_r+0x14c>
-    9bf4:	e592300c 	ldr	r3, [r2, #12]
-    9bf8:	e581300c 	str	r3, [r1, #12]
-    9bfc:	e5812008 	str	r2, [r1, #8]
-    9c00:	e582100c 	str	r1, [r2, #12]
-    9c04:	e5831008 	str	r1, [r3, #8]
-    9c08:	e1a00004 	mov	r0, r4
-    9c0c:	ebffff0e 	bl	984c <__malloc_unlock>
-    9c10:	e8bd40f8 	pop	{r3, r4, r5, r6, r7, lr}
-    9c14:	e12fff1e 	bx	lr
-    9c18:	e59c2004 	ldr	r2, [ip, #4]
-    9c1c:	e1a031a3 	lsr	r3, r3, #3
-    9c20:	e1a00143 	asr	r0, r3, #2
-    9c24:	e3a0e001 	mov	lr, #1
-    9c28:	e182001e 	orr	r0, r2, lr, lsl r0
-    9c2c:	e08c3183 	add	r3, ip, r3, lsl #3
-    9c30:	e5932008 	ldr	r2, [r3, #8]
-    9c34:	e581300c 	str	r3, [r1, #12]
-    9c38:	e5812008 	str	r2, [r1, #8]
-    9c3c:	e58c0004 	str	r0, [ip, #4]
-    9c40:	e5831008 	str	r1, [r3, #8]
-    9c44:	e582100c 	str	r1, [r2, #12]
-    9c48:	eaffffee 	b	9c08 <_free_r+0x17c>
-    9c4c:	e3100001 	tst	r0, #1
-    9c50:	e08e3003 	add	r3, lr, r3
-    9c54:	1a000006 	bne	9c74 <_free_r+0x1e8>
-    9c58:	e5152008 	ldr	r2, [r5, #-8]
-    9c5c:	e0621001 	rsb	r1, r2, r1
-    9c60:	e591000c 	ldr	r0, [r1, #12]
-    9c64:	e591e008 	ldr	lr, [r1, #8]
-    9c68:	e58e000c 	str	r0, [lr, #12]
-    9c6c:	e580e008 	str	lr, [r0, #8]
-    9c70:	e0833002 	add	r3, r3, r2
-    9c74:	e59f206c 	ldr	r2, [pc, #108]	; 9ce8 <_free_r+0x25c>
-    9c78:	e5920000 	ldr	r0, [r2]
-    9c7c:	e3832001 	orr	r2, r3, #1
-    9c80:	e1530000 	cmp	r3, r0
-    9c84:	e5812004 	str	r2, [r1, #4]
-    9c88:	e58c1008 	str	r1, [ip, #8]
-    9c8c:	3affffdd 	bcc	9c08 <_free_r+0x17c>
-    9c90:	e59f3054 	ldr	r3, [pc, #84]	; 9cec <_free_r+0x260>
-    9c94:	e1a00004 	mov	r0, r4
-    9c98:	e5931000 	ldr	r1, [r3]
-    9c9c:	ebffff3b 	bl	9990 <_malloc_trim_r>
-    9ca0:	eaffffd8 	b	9c08 <_free_r+0x17c>
-    9ca4:	e3832001 	orr	r2, r3, #1
-    9ca8:	e58c1014 	str	r1, [ip, #20]
-    9cac:	e58c1010 	str	r1, [ip, #16]
-    9cb0:	e581e00c 	str	lr, [r1, #12]
-    9cb4:	e9814004 	stmib	r1, {r2, lr}
-    9cb8:	e7813003 	str	r3, [r1, r3]
-    9cbc:	eaffffd1 	b	9c08 <_free_r+0x17c>
-    9cc0:	e5903004 	ldr	r3, [r0, #4]
-    9cc4:	e1a0e14e 	asr	lr, lr, #2
-    9cc8:	e3a0c001 	mov	ip, #1
-    9ccc:	e183ce1c 	orr	ip, r3, ip, lsl lr
-    9cd0:	e1a03002 	mov	r3, r2
-    9cd4:	e580c004 	str	ip, [r0, #4]
-    9cd8:	eaffffc6 	b	9bf8 <_free_r+0x16c>
-    9cdc:	40000724 	.word	0x40000724
-    9ce0:	4000072c 	.word	0x4000072c
-    9ce4:	00000554 	.word	0x00000554
-    9ce8:	40000b30 	.word	0x40000b30
-    9cec:	400013c4 	.word	0x400013c4
+000099b0 <_free_r>:
+    99b0:	e92d40f8 	push	{r3, r4, r5, r6, r7, lr}
+    99b4:	e2515000 	subs	r5, r1, #0
+    99b8:	e1a04000 	mov	r4, r0
+    99bc:	0a00005c 	beq	9b34 <_free_r+0x184>
+    99c0:	ebffff69 	bl	976c <__malloc_lock>
+    99c4:	e5150004 	ldr	r0, [r5, #-4]
+    99c8:	e59fc230 	ldr	ip, [pc, #560]	; 9c00 <_free_r+0x250>
+    99cc:	e2451008 	sub	r1, r5, #8
+    99d0:	e3c03001 	bic	r3, r0, #1
+    99d4:	e0812003 	add	r2, r1, r3
+    99d8:	e59c6008 	ldr	r6, [ip, #8]
+    99dc:	e592e004 	ldr	lr, [r2, #4]
+    99e0:	e1560002 	cmp	r6, r2
+    99e4:	e3cee003 	bic	lr, lr, #3
+    99e8:	0a000060 	beq	9b70 <_free_r+0x1c0>
+    99ec:	e2100001 	ands	r0, r0, #1
+    99f0:	e582e004 	str	lr, [r2, #4]
+    99f4:	13a00000 	movne	r0, #0
+    99f8:	1a000009 	bne	9a24 <_free_r+0x74>
+    99fc:	e5156008 	ldr	r6, [r5, #-8]
+    9a00:	e0661001 	rsb	r1, r6, r1
+    9a04:	e5915008 	ldr	r5, [r1, #8]
+    9a08:	e28c7008 	add	r7, ip, #8
+    9a0c:	e1550007 	cmp	r5, r7
+    9a10:	e0833006 	add	r3, r3, r6
+    9a14:	1591600c 	ldrne	r6, [r1, #12]
+    9a18:	1585600c 	strne	r6, [r5, #12]
+    9a1c:	15865008 	strne	r5, [r6, #8]
+    9a20:	03a00001 	moveq	r0, #1
+    9a24:	e082500e 	add	r5, r2, lr
+    9a28:	e5955004 	ldr	r5, [r5, #4]
+    9a2c:	e3150001 	tst	r5, #1
+    9a30:	1a000009 	bne	9a5c <_free_r+0xac>
+    9a34:	e3500000 	cmp	r0, #0
+    9a38:	e083300e 	add	r3, r3, lr
+    9a3c:	e592e008 	ldr	lr, [r2, #8]
+    9a40:	1a000002 	bne	9a50 <_free_r+0xa0>
+    9a44:	e59f51b8 	ldr	r5, [pc, #440]	; 9c04 <_free_r+0x254>
+    9a48:	e15e0005 	cmp	lr, r5
+    9a4c:	0a00005d 	beq	9bc8 <_free_r+0x218>
+    9a50:	e592200c 	ldr	r2, [r2, #12]
+    9a54:	e58e200c 	str	r2, [lr, #12]
+    9a58:	e582e008 	str	lr, [r2, #8]
+    9a5c:	e3832001 	orr	r2, r3, #1
+    9a60:	e3500000 	cmp	r0, #0
+    9a64:	e5812004 	str	r2, [r1, #4]
+    9a68:	e7813003 	str	r3, [r1, r3]
+    9a6c:	1a00002e 	bne	9b2c <_free_r+0x17c>
+    9a70:	e3530c02 	cmp	r3, #512	; 0x200
+    9a74:	3a000030 	bcc	9b3c <_free_r+0x18c>
+    9a78:	e1a024a3 	lsr	r2, r3, #9
+    9a7c:	e3520004 	cmp	r2, #4
+    9a80:	91a0e323 	lsrls	lr, r3, #6
+    9a84:	928ee038 	addls	lr, lr, #56	; 0x38
+    9a88:	91a0018e 	lslls	r0, lr, #3
+    9a8c:	9a000014 	bls	9ae4 <_free_r+0x134>
+    9a90:	e3520014 	cmp	r2, #20
+    9a94:	9282e05b 	addls	lr, r2, #91	; 0x5b
+    9a98:	91a0018e 	lslls	r0, lr, #3
+    9a9c:	9a000010 	bls	9ae4 <_free_r+0x134>
+    9aa0:	e3520054 	cmp	r2, #84	; 0x54
+    9aa4:	91a0e623 	lsrls	lr, r3, #12
+    9aa8:	928ee06e 	addls	lr, lr, #110	; 0x6e
+    9aac:	91a0018e 	lslls	r0, lr, #3
+    9ab0:	9a00000b 	bls	9ae4 <_free_r+0x134>
+    9ab4:	e3520f55 	cmp	r2, #340	; 0x154
+    9ab8:	91a0e7a3 	lsrls	lr, r3, #15
+    9abc:	928ee077 	addls	lr, lr, #119	; 0x77
+    9ac0:	91a0018e 	lslls	r0, lr, #3
+    9ac4:	9a000006 	bls	9ae4 <_free_r+0x134>
+    9ac8:	e59f0138 	ldr	r0, [pc, #312]	; 9c08 <_free_r+0x258>
+    9acc:	e1520000 	cmp	r2, r0
+    9ad0:	91a0e923 	lsrls	lr, r3, #18
+    9ad4:	928ee07c 	addls	lr, lr, #124	; 0x7c
+    9ad8:	91a0018e 	lslls	r0, lr, #3
+    9adc:	83a00e3f 	movhi	r0, #1008	; 0x3f0
+    9ae0:	83a0e07e 	movhi	lr, #126	; 0x7e
+    9ae4:	e08cc000 	add	ip, ip, r0
+    9ae8:	e59c2008 	ldr	r2, [ip, #8]
+    9aec:	e152000c 	cmp	r2, ip
+    9af0:	e59f0108 	ldr	r0, [pc, #264]	; 9c00 <_free_r+0x250>
+    9af4:	1a000003 	bne	9b08 <_free_r+0x158>
+    9af8:	ea000039 	b	9be4 <_free_r+0x234>
+    9afc:	e5922008 	ldr	r2, [r2, #8]
+    9b00:	e15c0002 	cmp	ip, r2
+    9b04:	0a000003 	beq	9b18 <_free_r+0x168>
+    9b08:	e5920004 	ldr	r0, [r2, #4]
+    9b0c:	e3c00003 	bic	r0, r0, #3
+    9b10:	e1530000 	cmp	r3, r0
+    9b14:	3afffff8 	bcc	9afc <_free_r+0x14c>
+    9b18:	e592300c 	ldr	r3, [r2, #12]
+    9b1c:	e581300c 	str	r3, [r1, #12]
+    9b20:	e5812008 	str	r2, [r1, #8]
+    9b24:	e582100c 	str	r1, [r2, #12]
+    9b28:	e5831008 	str	r1, [r3, #8]
+    9b2c:	e1a00004 	mov	r0, r4
+    9b30:	ebffff0e 	bl	9770 <__malloc_unlock>
+    9b34:	e8bd40f8 	pop	{r3, r4, r5, r6, r7, lr}
+    9b38:	e12fff1e 	bx	lr
+    9b3c:	e59c2004 	ldr	r2, [ip, #4]
+    9b40:	e1a031a3 	lsr	r3, r3, #3
+    9b44:	e1a00143 	asr	r0, r3, #2
+    9b48:	e3a0e001 	mov	lr, #1
+    9b4c:	e182001e 	orr	r0, r2, lr, lsl r0
+    9b50:	e08c3183 	add	r3, ip, r3, lsl #3
+    9b54:	e5932008 	ldr	r2, [r3, #8]
+    9b58:	e581300c 	str	r3, [r1, #12]
+    9b5c:	e5812008 	str	r2, [r1, #8]
+    9b60:	e58c0004 	str	r0, [ip, #4]
+    9b64:	e5831008 	str	r1, [r3, #8]
+    9b68:	e582100c 	str	r1, [r2, #12]
+    9b6c:	eaffffee 	b	9b2c <_free_r+0x17c>
+    9b70:	e3100001 	tst	r0, #1
+    9b74:	e08e3003 	add	r3, lr, r3
+    9b78:	1a000006 	bne	9b98 <_free_r+0x1e8>
+    9b7c:	e5152008 	ldr	r2, [r5, #-8]
+    9b80:	e0621001 	rsb	r1, r2, r1
+    9b84:	e591000c 	ldr	r0, [r1, #12]
+    9b88:	e591e008 	ldr	lr, [r1, #8]
+    9b8c:	e58e000c 	str	r0, [lr, #12]
+    9b90:	e580e008 	str	lr, [r0, #8]
+    9b94:	e0833002 	add	r3, r3, r2
+    9b98:	e59f206c 	ldr	r2, [pc, #108]	; 9c0c <_free_r+0x25c>
+    9b9c:	e5920000 	ldr	r0, [r2]
+    9ba0:	e3832001 	orr	r2, r3, #1
+    9ba4:	e1530000 	cmp	r3, r0
+    9ba8:	e5812004 	str	r2, [r1, #4]
+    9bac:	e58c1008 	str	r1, [ip, #8]
+    9bb0:	3affffdd 	bcc	9b2c <_free_r+0x17c>
+    9bb4:	e59f3054 	ldr	r3, [pc, #84]	; 9c10 <_free_r+0x260>
+    9bb8:	e1a00004 	mov	r0, r4
+    9bbc:	e5931000 	ldr	r1, [r3]
+    9bc0:	ebffff3b 	bl	98b4 <_malloc_trim_r>
+    9bc4:	eaffffd8 	b	9b2c <_free_r+0x17c>
+    9bc8:	e3832001 	orr	r2, r3, #1
+    9bcc:	e58c1014 	str	r1, [ip, #20]
+    9bd0:	e58c1010 	str	r1, [ip, #16]
+    9bd4:	e581e00c 	str	lr, [r1, #12]
+    9bd8:	e9814004 	stmib	r1, {r2, lr}
+    9bdc:	e7813003 	str	r3, [r1, r3]
+    9be0:	eaffffd1 	b	9b2c <_free_r+0x17c>
+    9be4:	e5903004 	ldr	r3, [r0, #4]
+    9be8:	e1a0e14e 	asr	lr, lr, #2
+    9bec:	e3a0c001 	mov	ip, #1
+    9bf0:	e183ce1c 	orr	ip, r3, ip, lsl lr
+    9bf4:	e1a03002 	mov	r3, r2
+    9bf8:	e580c004 	str	ip, [r0, #4]
+    9bfc:	eaffffc6 	b	9b1c <_free_r+0x16c>
+    9c00:	40000838 	.word	0x40000838
+    9c04:	40000840 	.word	0x40000840
+    9c08:	00000554 	.word	0x00000554
+    9c0c:	40000c44 	.word	0x40000c44
+    9c10:	400014d8 	.word	0x400014d8
 
-00009cf0 <_gettimeofday_r>:
-    9cf0:	e92d4038 	push	{r3, r4, r5, lr}
-    9cf4:	e59f4030 	ldr	r4, [pc, #48]	; 9d2c <_gettimeofday_r+0x3c>
-    9cf8:	e3a03000 	mov	r3, #0
-    9cfc:	e1a05000 	mov	r5, r0
-    9d00:	e1a00001 	mov	r0, r1
-    9d04:	e1a01002 	mov	r1, r2
-    9d08:	e5843000 	str	r3, [r4]
-    9d0c:	ebffdd4c 	bl	1244 <_gettimeofday>
-    9d10:	e3700001 	cmn	r0, #1
-    9d14:	1a000002 	bne	9d24 <_gettimeofday_r+0x34>
-    9d18:	e5943000 	ldr	r3, [r4]
-    9d1c:	e3530000 	cmp	r3, #0
-    9d20:	15853000 	strne	r3, [r5]
-    9d24:	e8bd4038 	pop	{r3, r4, r5, lr}
-    9d28:	e12fff1e 	bx	lr
-    9d2c:	400013f8 	.word	0x400013f8
+00009c14 <_gettimeofday_r>:
+    9c14:	e92d4038 	push	{r3, r4, r5, lr}
+    9c18:	e59f4030 	ldr	r4, [pc, #48]	; 9c50 <_gettimeofday_r+0x3c>
+    9c1c:	e3a03000 	mov	r3, #0
+    9c20:	e1a05000 	mov	r5, r0
+    9c24:	e1a00001 	mov	r0, r1
+    9c28:	e1a01002 	mov	r1, r2
+    9c2c:	e5843000 	str	r3, [r4]
+    9c30:	ebffdd83 	bl	1244 <_gettimeofday>
+    9c34:	e3700001 	cmn	r0, #1
+    9c38:	1a000002 	bne	9c48 <_gettimeofday_r+0x34>
+    9c3c:	e5943000 	ldr	r3, [r4]
+    9c40:	e3530000 	cmp	r3, #0
+    9c44:	15853000 	strne	r3, [r5]
+    9c48:	e8bd4038 	pop	{r3, r4, r5, lr}
+    9c4c:	e12fff1e 	bx	lr
+    9c50:	4000150c 	.word	0x4000150c
 
-00009d30 <main>:
-}
+00009c54 <main>:
 
+extern unsigned int NOTE[] ;
 int main(void)
 {
     /* -------- NO TOCAR CONFIGURACI锟絅 DE PINES ---------------------- */
     SCS = 1;
-    9d30:	e59f2a54 	ldr	r2, [pc, #2644]	; a78c <main+0xa5c>
-    // Llamamos a la funci髇 principal para iniciar la partitura
-    PARTITURE_On(PARTITURE, numero_de_eventos, 90);
+    9c54:	e59f2a54 	ldr	r2, [pc, #2644]	; a6b0 <main+0xa5c>
 }
 
+
+extern unsigned int NOTE[] ;
 int main(void)
 {
-    9d34:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+    9c58:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
     /* -------- NO TOCAR CONFIGURACI锟絅 DE PINES ---------------------- */
     SCS = 1;
     FIODIR  = 0b11111111111111111111111111011101;
-    9d38:	e59f6a50 	ldr	r6, [pc, #2640]	; a790 <main+0xa60>
-}
+    9c5c:	e59f6a50 	ldr	r6, [pc, #2640]	; a6b4 <main+0xa60>
 
+extern unsigned int NOTE[] ;
 int main(void)
 {
     /* -------- NO TOCAR CONFIGURACI锟絅 DE PINES ---------------------- */
     SCS = 1;
-    9d3c:	e3a04001 	mov	r4, #1
-    9d40:	e58241a0 	str	r4, [r2, #416]	; 0x1a0
+    9c60:	e3a04001 	mov	r4, #1
+    9c64:	e58241a0 	str	r4, [r2, #416]	; 0x1a0
     FIODIR  = 0b11111111111111111111111111011101;
-    9d44:	e3e02022 	mvn	r2, #34	; 0x22
-    9d48:	e5062fff 	str	r2, [r6, #-4095]	; 0xfff
+    9c68:	e3e02022 	mvn	r2, #34	; 0x22
+    9c6c:	e5062fff 	str	r2, [r6, #-4095]	; 0xfff
     FIOSET  = 0xFFFFFFFF;
-    9d4c:	e3e02000 	mvn	r2, #0
+    9c70:	e3e02000 	mvn	r2, #0
     PINSEL0 = 0x00029505;
-    9d50:	e59f3a3c 	ldr	r3, [pc, #2620]	; a794 <main+0xa64>
+    9c74:	e59f3a3c 	ldr	r3, [pc, #2620]	; a6b8 <main+0xa64>
 int main(void)
 {
     /* -------- NO TOCAR CONFIGURACI锟絅 DE PINES ---------------------- */
     SCS = 1;
     FIODIR  = 0b11111111111111111111111111011101;
     FIOSET  = 0xFFFFFFFF;
-    9d54:	e5062fe7 	str	r2, [r6, #-4071]	; 0xfe7
+    9c78:	e5062fe7 	str	r2, [r6, #-4071]	; 0xfe7
     PINSEL0 = 0x00029505;
-    9d58:	e59f2a38 	ldr	r2, [pc, #2616]	; a798 <main+0xa68>
+    9c7c:	e59f2a38 	ldr	r2, [pc, #2616]	; a6bc <main+0xa68>
     PINSEL1 = 0x00000000;
-    9d5c:	e3a05000 	mov	r5, #0
-    // Llamamos a la funci髇 principal para iniciar la partitura
-    PARTITURE_On(PARTITURE, numero_de_eventos, 90);
+    9c80:	e3a05000 	mov	r5, #0
 }
 
+
+extern unsigned int NOTE[] ;
 int main(void)
 {
-    9d60:	e24dd024 	sub	sp, sp, #36	; 0x24
+    9c84:	e24dd024 	sub	sp, sp, #36	; 0x24
     /* -------- NO TOCAR CONFIGURACI锟絅 DE PINES ---------------------- */
     SCS = 1;
     FIODIR  = 0b11111111111111111111111111011101;
     FIOSET  = 0xFFFFFFFF;
     PINSEL0 = 0x00029505;
-    9d64:	e5832000 	str	r2, [r3]
+    9c88:	e5832000 	str	r2, [r3]
     PINSEL1 = 0x00000000;
     _delay_ms(100);
-    9d68:	e59f0a2c 	ldr	r0, [pc, #2604]	; a79c <main+0xa6c>
+    9c8c:	e59f0a2c 	ldr	r0, [pc, #2604]	; a6c0 <main+0xa6c>
     /* -------- NO TOCAR CONFIGURACI锟絅 DE PINES ---------------------- */
     SCS = 1;
     FIODIR  = 0b11111111111111111111111111011101;
     FIOSET  = 0xFFFFFFFF;
     PINSEL0 = 0x00029505;
     PINSEL1 = 0x00000000;
-    9d6c:	e5835004 	str	r5, [r3, #4]
+    9c90:	e5835004 	str	r5, [r3, #4]
     _delay_ms(100);
-    9d70:	ebffd97a 	bl	360 <_delay_loop>
+    9c94:	ebffd9b1 	bl	360 <_delay_loop>
 
     _printf("Desarrollo Practico de Sistemas Electronicos\r\n"
-    9d74:	e59f0a24 	ldr	r0, [pc, #2596]	; a7a0 <main+0xa70>
-    9d78:	ebffd9bf 	bl	47c <_printf>
+    9c98:	e59f0a24 	ldr	r0, [pc, #2596]	; a6c4 <main+0xa70>
+    9c9c:	ebffd9f6 	bl	47c <_printf>
             "Ingenieria de Sistemas Electronicos\r\n");
-
+   int i=0;
     AMPLIF_ON;
-    9d7c:	e3a03901 	mov	r3, #16384	; 0x4000
-    9d80:	e5063fe7 	str	r3, [r6, #-4071]	; 0xfe7
+    9ca0:	e3a03901 	mov	r3, #16384	; 0x4000
+    9ca4:	e5063fe7 	str	r3, [r6, #-4071]	; 0xfe7
+   */
+   
+   
+   
    
        start_pacmania_music();
-    9d84:	ebffdd26 	bl	1224 <start_pacmania_music>
+    9ca8:	ebffdd5d 	bl	1224 <start_pacmania_music>
    
     TFT_Init();
-    9d88:	ebffde79 	bl	1774 <TFT_Init>
+    9cac:	ebffdeb0 	bl	1774 <TFT_Init>
     TP_Init();
-    9d8c:	ebfff6b6 	bl	786c <TP_Init>
+    9cb0:	ebfff6ed 	bl	786c <TP_Init>
 
     TFT_DrawFillSquareS(0, 0, LENX, LENY, TFT_Color(0, 0, 0));
-    9d90:	e59f3a0c 	ldr	r3, [pc, #2572]	; a7a4 <main+0xa74>
-    9d94:	e5932000 	ldr	r2, [r3]
-    9d98:	e59f3a08 	ldr	r3, [pc, #2568]	; a7a8 <main+0xa78>
-    9d9c:	e1a00005 	mov	r0, r5
-    9da0:	e5933000 	ldr	r3, [r3]
-    9da4:	e1a01005 	mov	r1, r5
-    9da8:	e58d5000 	str	r5, [sp]
-    9dac:	ebfff22e 	bl	666c <TFT_DrawFillSquareS>
+    9cb4:	e59f3a0c 	ldr	r3, [pc, #2572]	; a6c8 <main+0xa74>
+    9cb8:	e5932000 	ldr	r2, [r3]
+    9cbc:	e59f3a08 	ldr	r3, [pc, #2568]	; a6cc <main+0xa78>
+    9cc0:	e1a00005 	mov	r0, r5
+    9cc4:	e5933000 	ldr	r3, [r3]
+    9cc8:	e1a01005 	mov	r1, r5
+    9ccc:	e58d5000 	str	r5, [sp]
+    9cd0:	ebfff265 	bl	666c <TFT_DrawFillSquareS>
 
     initGame();
-    9db0:	ebffdba3 	bl	c44 <initGame>
+    9cd4:	ebffdbda 	bl	c44 <initGame>
     dibuja_mapa(map);
-    9db4:	ebffdcf2 	bl	1184 <dibuja_mapa.isra.1>
+    9cd8:	ebffdd29 	bl	1184 <dibuja_mapa.isra.1>
     dibuja_hud();
-    9db8:	ebffdc71 	bl	f84 <dibuja_hud>
+    9cdc:	ebffdca8 	bl	f84 <dibuja_hud>
     start_pacmania_music();
-    9dbc:	ebffdd18 	bl	1224 <start_pacmania_music>
+    9ce0:	ebffdd4f 	bl	1224 <start_pacmania_music>
 
     xpm_sx = TILE; xpm_sy = TILE;
-    9dc0:	e59f29e4 	ldr	r2, [pc, #2532]	; a7ac <main+0xa7c>
-    9dc4:	e3a03018 	mov	r3, #24
-    9dc8:	e5823000 	str	r3, [r2]
-    9dcc:	e59f29dc 	ldr	r2, [pc, #2524]	; a7b0 <main+0xa80>
+    9ce4:	e59f29e4 	ldr	r2, [pc, #2532]	; a6d0 <main+0xa7c>
+    9ce8:	e3a03018 	mov	r3, #24
+    9cec:	e5823000 	str	r3, [r2]
+    9cf0:	e59f29dc 	ldr	r2, [pc, #2524]	; a6d4 <main+0xa80>
     XPM_SetxNyN(SCALE, SCALE);
-    9dd0:	e1a00004 	mov	r0, r4
-    9dd4:	e1a01004 	mov	r1, r4
+    9cf4:	e1a00004 	mov	r0, r4
+    9cf8:	e1a01004 	mov	r1, r4
     initGame();
     dibuja_mapa(map);
     dibuja_hud();
     start_pacmania_music();
 
     xpm_sx = TILE; xpm_sy = TILE;
-    9dd8:	e5823000 	str	r3, [r2]
+    9cfc:	e5823000 	str	r3, [r2]
     XPM_SetxNyN(SCALE, SCALE);
-    9ddc:	ebfff941 	bl	82e8 <XPM_SetxNyN>
-    9de0:	e59f49cc 	ldr	r4, [pc, #2508]	; a7b4 <main+0xa84>
+    9d00:	ebfff978 	bl	82e8 <XPM_SetxNyN>
+    9d04:	e59f49cc 	ldr	r4, [pc, #2508]	; a6d8 <main+0xa84>
 
-    int i;
+
     for (i = 0; i < GHOST_COUNT; i++) {
-    9de4:	e1a06005 	mov	r6, r5
+    9d08:	e1a06005 	mov	r6, r5
             int px    = X_OFFSET + ghosts[i].x * TW;
-    9de8:	e2847fa1 	add	r7, r4, #644	; 0x284
-    9dec:	e59f39c4 	ldr	r3, [pc, #2500]	; a7b8 <main+0xa88>
-    9df0:	e7b32005 	ldr	r2, [r3, r5]!
+    9d0c:	e2847fa1 	add	r7, r4, #644	; 0x284
+    9d10:	e59f39c4 	ldr	r3, [pc, #2500]	; a6dc <main+0xa88>
+    9d14:	e7b32005 	ldr	r2, [r3, r5]!
             int py    = Y_OFFSET + ghosts[i].y * TW;
-    9df4:	e5933004 	ldr	r3, [r3, #4]
+    9d18:	e5933004 	ldr	r3, [r3, #4]
             int frame = powerMode ? 60 : getGhostFrame(&ghosts[i]);
-    9df8:	e5d412e8 	ldrb	r1, [r4, #744]	; 0x2e8
+    9d1c:	e5d412e8 	ldrb	r1, [r4, #744]	; 0x2e8
     xpm_sx = TILE; xpm_sy = TILE;
     XPM_SetxNyN(SCALE, SCALE);
 
-    int i;
+
     for (i = 0; i < GHOST_COUNT; i++) {
             int px    = X_OFFSET + ghosts[i].x * TW;
-    9dfc:	e0822082 	add	r2, r2, r2, lsl #1
+    9d20:	e0822082 	add	r2, r2, r2, lsl #1
             int py    = Y_OFFSET + ghosts[i].y * TW;
-    9e00:	e0833083 	add	r3, r3, r3, lsl #1
+    9d24:	e0833083 	add	r3, r3, r3, lsl #1
     xpm_sx = TILE; xpm_sy = TILE;
     XPM_SetxNyN(SCALE, SCALE);
 
-    int i;
+
     for (i = 0; i < GHOST_COUNT; i++) {
             int px    = X_OFFSET + ghosts[i].x * TW;
-    9e04:	e1a0a182 	lsl	sl, r2, #3
+    9d28:	e1a0a182 	lsl	sl, r2, #3
             int py    = Y_OFFSET + ghosts[i].y * TW;
-    9e08:	e1a08183 	lsl	r8, r3, #3
+    9d2c:	e1a08183 	lsl	r8, r3, #3
             int frame = powerMode ? 60 : getGhostFrame(&ghosts[i]);
-    9e0c:	e3510000 	cmp	r1, #0
+    9d30:	e3510000 	cmp	r1, #0
     xpm_sx = TILE; xpm_sy = TILE;
     XPM_SetxNyN(SCALE, SCALE);
 
-    int i;
+
     for (i = 0; i < GHOST_COUNT; i++) {
             int px    = X_OFFSET + ghosts[i].x * TW;
-    9e10:	e28aa004 	add	sl, sl, #4
+    9d34:	e28aa004 	add	sl, sl, #4
             int py    = Y_OFFSET + ghosts[i].y * TW;
-    9e14:	e2888030 	add	r8, r8, #48	; 0x30
+    9d38:	e2888030 	add	r8, r8, #48	; 0x30
             int frame = powerMode ? 60 : getGhostFrame(&ghosts[i]);
-    9e18:	13a0203c 	movne	r2, #60	; 0x3c
-    9e1c:	1a000002 	bne	9e2c <main+0xfc>
-    9e20:	e0870206 	add	r0, r7, r6, lsl #4
-    9e24:	ebffda2a 	bl	6d4 <getGhostFrame>
-    9e28:	e1a02000 	mov	r2, r0
+    9d3c:	13a0203c 	movne	r2, #60	; 0x3c
+    9d40:	1a000002 	bne	9d50 <main+0xfc>
+    9d44:	e0870206 	add	r0, r7, r6, lsl #4
+    9d48:	ebffda61 	bl	6d4 <getGhostFrame>
+    9d4c:	e1a02000 	mov	r2, r0
             XPM_PintaAtxNyN(px, py, frame, pacman);
-    9e2c:	e1a0000a 	mov	r0, sl
-    9e30:	e1a01008 	mov	r1, r8
-    9e34:	e59f3980 	ldr	r3, [pc, #2432]	; a7bc <main+0xa8c>
+    9d50:	e1a0000a 	mov	r0, sl
+    9d54:	e1a01008 	mov	r1, r8
+    9d58:	e59f3980 	ldr	r3, [pc, #2432]	; a6e0 <main+0xa8c>
 
     xpm_sx = TILE; xpm_sy = TILE;
     XPM_SetxNyN(SCALE, SCALE);
 
-    int i;
+
     for (i = 0; i < GHOST_COUNT; i++) {
-    9e38:	e2855010 	add	r5, r5, #16
+    9d5c:	e2855010 	add	r5, r5, #16
             int px    = X_OFFSET + ghosts[i].x * TW;
             int py    = Y_OFFSET + ghosts[i].y * TW;
             int frame = powerMode ? 60 : getGhostFrame(&ghosts[i]);
             XPM_PintaAtxNyN(px, py, frame, pacman);
-    9e3c:	ebfff93d 	bl	8338 <XPM_PintaAtxNyN>
+    9d60:	ebfff974 	bl	8338 <XPM_PintaAtxNyN>
 
     xpm_sx = TILE; xpm_sy = TILE;
     XPM_SetxNyN(SCALE, SCALE);
 
-    int i;
+
     for (i = 0; i < GHOST_COUNT; i++) {
-    9e40:	e3550040 	cmp	r5, #64	; 0x40
-    9e44:	e2866001 	add	r6, r6, #1
-    9e48:	1affffe7 	bne	9dec <main+0xbc>
+    9d64:	e3550040 	cmp	r5, #64	; 0x40
+    9d68:	e2866001 	add	r6, r6, #1
+    9d6c:	1affffe7 	bne	9d10 <main+0xbc>
             XPM_PintaAtxNyN(px, py, frame, pacman);
         }
     int ghostStepCounter=0;
     //AUDIO_Play_Pacmania();
     while (1) {
         if (totalCoins == 0) break;
-    9e4c:	e59432c4 	ldr	r3, [r4, #708]	; 0x2c4
-    9e50:	e3530000 	cmp	r3, #0
-    9e54:	0a000126 	beq	a2f4 <main+0x5c4>
+    9d70:	e59432c4 	ldr	r3, [r4, #708]	; 0x2c4
+    9d74:	e3530000 	cmp	r3, #0
+    9d78:	0a000126 	beq	a218 <main+0x5c4>
         if (lives     <= 0) break;
-    9e58:	e59f0954 	ldr	r0, [pc, #2388]	; a7b4 <main+0xa84>
-    9e5c:	e59032fc 	ldr	r3, [r0, #764]	; 0x2fc
-    9e60:	e3530000 	cmp	r3, #0
-    9e64:	da000122 	ble	a2f4 <main+0x5c4>
+    9d7c:	e59f0954 	ldr	r0, [pc, #2388]	; a6d8 <main+0xa84>
+    9d80:	e59032fc 	ldr	r3, [r0, #764]	; 0x2fc
+    9d84:	e3530000 	cmp	r3, #0
+    9d88:	da000122 	ble	a218 <main+0x5c4>
 }
 
 /* ------------ L贸gica de movimiento de Pac-Man ------------ */
 static void movePacman(void)
 {
     int keys = GetAction();
-    9e68:	ebfffbe7 	bl	8e0c <GetAction>
+    9d8c:	ebfffbe7 	bl	8d30 <GetAction>
     if      (keys & UP)    desiredDir = DIR_UP;
-    9e6c:	e59f894c 	ldr	r8, [pc, #2380]	; a7c0 <main+0xa90>
-    9e70:	e3100004 	tst	r0, #4
-    9e74:	13a03000 	movne	r3, #0
-    9e78:	15c83003 	strbne	r3, [r8, #3]
-    9e7c:	1a00000a 	bne	9eac <main+0x17c>
+    9d90:	e59f894c 	ldr	r8, [pc, #2380]	; a6e4 <main+0xa90>
+    9d94:	e3100004 	tst	r0, #4
+    9d98:	13a03000 	movne	r3, #0
+    9d9c:	15c83003 	strbne	r3, [r8, #3]
+    9da0:	1a00000a 	bne	9dd0 <main+0x17c>
     else if (keys & DOWN)  desiredDir = DIR_DOWN;
-    9e80:	e3100008 	tst	r0, #8
-    9e84:	13a03001 	movne	r3, #1
-    9e88:	15c83003 	strbne	r3, [r8, #3]
-    9e8c:	1a000006 	bne	9eac <main+0x17c>
+    9da4:	e3100008 	tst	r0, #8
+    9da8:	13a03001 	movne	r3, #1
+    9dac:	15c83003 	strbne	r3, [r8, #3]
+    9db0:	1a000006 	bne	9dd0 <main+0x17c>
     else if (keys & LEFT)  desiredDir = DIR_LEFT;
-    9e90:	e3100001 	tst	r0, #1
-    9e94:	13a03002 	movne	r3, #2
-    9e98:	15c83003 	strbne	r3, [r8, #3]
-    9e9c:	1a000002 	bne	9eac <main+0x17c>
+    9db4:	e3100001 	tst	r0, #1
+    9db8:	13a03002 	movne	r3, #2
+    9dbc:	15c83003 	strbne	r3, [r8, #3]
+    9dc0:	1a000002 	bne	9dd0 <main+0x17c>
     else if (keys & RIGHT) desiredDir = DIR_RIGHT;
-    9ea0:	e3100002 	tst	r0, #2
-    9ea4:	13a03003 	movne	r3, #3
-    9ea8:	15c83003 	strbne	r3, [r8, #3]
+    9dc4:	e3100002 	tst	r0, #2
+    9dc8:	13a03003 	movne	r3, #3
+    9dcc:	15c83003 	strbne	r3, [r8, #3]
 
     /* S贸lo en cruces chequea monedas y posible cambio de direcci贸n */
     bool onTileX = ((pacPixX - X_OFFSET) % TW) == 0;
-    9eac:	e594a000 	ldr	sl, [r4]
-    9eb0:	e59f190c 	ldr	r1, [pc, #2316]	; a7c4 <main+0xa94>
-    9eb4:	e24a3004 	sub	r3, sl, #4
-    9eb8:	e0c52391 	smull	r2, r5, r1, r3
-    9ebc:	e1a02fc3 	asr	r2, r3, #31
-    9ec0:	e0625145 	rsb	r5, r2, r5, asr #2
-    9ec4:	e0852085 	add	r2, r5, r5, lsl #1
+    9dd0:	e594a000 	ldr	sl, [r4]
+    9dd4:	e59f190c 	ldr	r1, [pc, #2316]	; a6e8 <main+0xa94>
+    9dd8:	e24a3004 	sub	r3, sl, #4
+    9ddc:	e0c52391 	smull	r2, r5, r1, r3
+    9de0:	e1a02fc3 	asr	r2, r3, #31
+    9de4:	e0625145 	rsb	r5, r2, r5, asr #2
+    9de8:	e0852085 	add	r2, r5, r5, lsl #1
     bool onTileY = ((pacPixY - Y_OFFSET) % TW) == 0;
 
     if (onTileX && onTileY) {
-    9ec8:	e1530182 	cmp	r3, r2, lsl #3
-    else if (keys & LEFT)  desiredDir = DIR_LEFT;
-    else if (keys & RIGHT) desiredDir = DIR_RIGHT;
-
-    /* S贸lo en cruces chequea monedas y posible cambio de direcci贸n */
-    bool onTileX = ((pacPixX - X_OFFSET) % TW) == 0;
-    bool onTileY = ((pacPixY - Y_OFFSET) % TW) == 0;
-    9ecc:	e5947004 	ldr	r7, [r4, #4]
-
-    if (onTileX && onTileY) {
-    9ed0:	1a00018e 	bne	a510 <main+0x7e0>
+    9dec:	e1530182 	cmp	r3, r2, lsl #3
     else if (keys & LEFT)  desiredDir = DIR_LEFT;
     else if (keys & RIGHT) desiredDir = DIR_RIGHT;
 
     /* S贸lo en cruces chequea monedas y posible cambio de direcci贸n */
     bool onTileX = ((pacPixX - X_OFFSET) % TW) == 0;
     bool onTileY = ((pacPixY - Y_OFFSET) % TW) == 0;
-    9ed4:	e2473030 	sub	r3, r7, #48	; 0x30
-    9ed8:	e0c6c391 	smull	ip, r6, r1, r3
-    9edc:	e1a02fc3 	asr	r2, r3, #31
-    9ee0:	e0626146 	rsb	r6, r2, r6, asr #2
-    9ee4:	e0869086 	add	r9, r6, r6, lsl #1
+    9df0:	e5947004 	ldr	r7, [r4, #4]
 
     if (onTileX && onTileY) {
-    9ee8:	e0539189 	subs	r9, r3, r9, lsl #3
-    9eec:	1a000187 	bne	a510 <main+0x7e0>
+    9df4:	1a00018e 	bne	a434 <main+0x7e0>
+    else if (keys & LEFT)  desiredDir = DIR_LEFT;
+    else if (keys & RIGHT) desiredDir = DIR_RIGHT;
+
+    /* S贸lo en cruces chequea monedas y posible cambio de direcci贸n */
+    bool onTileX = ((pacPixX - X_OFFSET) % TW) == 0;
+    bool onTileY = ((pacPixY - Y_OFFSET) % TW) == 0;
+    9df8:	e2473030 	sub	r3, r7, #48	; 0x30
+    9dfc:	e0c6c391 	smull	ip, r6, r1, r3
+    9e00:	e1a02fc3 	asr	r2, r3, #31
+    9e04:	e0626146 	rsb	r6, r2, r6, asr #2
+    9e08:	e0869086 	add	r9, r6, r6, lsl #1
+
+    if (onTileX && onTileY) {
+    9e0c:	e0539189 	subs	r9, r3, r9, lsl #3
+    9e10:	1a000187 	bne	a434 <main+0x7e0>
         int cx = (pacPixX - X_OFFSET) / TW;
         int cy = (pacPixY - Y_OFFSET) / TW;
 
     /* Power-up: si come 'V' */
     if (map[cy][cx] == POWER_UP) {
-    9ef0:	e59f08bc 	ldr	r0, [pc, #2236]	; a7b4 <main+0xa84>
-    9ef4:	e0863206 	add	r3, r6, r6, lsl #4
-    9ef8:	e0803083 	add	r3, r0, r3, lsl #1
-    9efc:	e0833005 	add	r3, r3, r5
-    9f00:	e5d33008 	ldrb	r3, [r3, #8]
-    9f04:	e3530056 	cmp	r3, #86	; 0x56
-    9f08:	0a0001e9 	beq	a6b4 <main+0x984>
+    9e14:	e59f08bc 	ldr	r0, [pc, #2236]	; a6d8 <main+0xa84>
+    9e18:	e0863206 	add	r3, r6, r6, lsl #4
+    9e1c:	e0803083 	add	r3, r0, r3, lsl #1
+    9e20:	e0833005 	add	r3, r3, r5
+    9e24:	e5d33008 	ldrb	r3, [r3, #8]
+    9e28:	e3530056 	cmp	r3, #86	; 0x56
+    9e2c:	0a0001e9 	beq	a5d8 <main+0x984>
             powerMode        = true;
             powerTickCounter = 0;
             /* quiz谩 sumar puntos aqu铆 */
         }
         /* Si acabamos de teleportar, reseteamos la flag y seguimos movimiento */
         if (justTeleported) {
-    9f0c:	e5d42280 	ldrb	r2, [r4, #640]	; 0x280
-    9f10:	e3520000 	cmp	r2, #0
-    9f14:	0a0001ad 	beq	a5d0 <main+0x8a0>
+    9e30:	e5d42280 	ldrb	r2, [r4, #640]	; 0x280
+    9e34:	e3520000 	cmp	r2, #0
+    9e38:	0a0001ad 	beq	a4f4 <main+0x8a0>
                 justTeleported = false;
-    9f18:	e59f7894 	ldr	r7, [pc, #2196]	; a7b4 <main+0xa84>
-    9f1c:	e3a02000 	mov	r2, #0
-    9f20:	e5c72280 	strb	r2, [r7, #640]	; 0x280
+    9e3c:	e59f7894 	ldr	r7, [pc, #2196]	; a6d8 <main+0xa84>
+    9e40:	e3a02000 	mov	r2, #0
+    9e44:	e5c72280 	strb	r2, [r7, #640]	; 0x280
                 /* Dibuja Pac-Man en la nueva posici贸n */
                 drawPacman(pacPixX, pacPixY);
                 return;
             }
         /* Come moneda */
         if (map[cy][cx] == COIN) {
-    9f24:	e3530043 	cmp	r3, #67	; 0x43
-    9f28:	0a0001ef 	beq	a6ec <main+0x9bc>
+    9e48:	e3530043 	cmp	r3, #67	; 0x43
+    9e4c:	0a0001ef 	beq	a610 <main+0x9bc>
             drawTile(cy, cx);
             score++; totalCoins--; hudDirty = true;
         }
 
         /* Cambia direcci贸n si es posible */
         if (desiredDir != DIR_NONE && canMoveDir(pacPixX, pacPixY, desiredDir))
-    9f2c:	e5d85003 	ldrb	r5, [r8, #3]
-    9f30:	e3550004 	cmp	r5, #4
-    9f34:	e594a000 	ldr	sl, [r4]
-    9f38:	e5947004 	ldr	r7, [r4, #4]
-    9f3c:	e59f687c 	ldr	r6, [pc, #2172]	; a7c0 <main+0xa90>
-    9f40:	0a0000ef 	beq	a304 <main+0x5d4>
-    9f44:	e1a0000a 	mov	r0, sl
-    9f48:	e1a01007 	mov	r1, r7
-    9f4c:	e1a02005 	mov	r2, r5
-    9f50:	ebffdc6f 	bl	1114 <canMoveDir>
-    9f54:	e3500000 	cmp	r0, #0
+    9e50:	e5d85003 	ldrb	r5, [r8, #3]
+    9e54:	e3550004 	cmp	r5, #4
+    9e58:	e594a000 	ldr	sl, [r4]
+    9e5c:	e5947004 	ldr	r7, [r4, #4]
+    9e60:	e59f687c 	ldr	r6, [pc, #2172]	; a6e4 <main+0xa90>
+    9e64:	0a0000ef 	beq	a228 <main+0x5d4>
+    9e68:	e1a0000a 	mov	r0, sl
+    9e6c:	e1a01007 	mov	r1, r7
+    9e70:	e1a02005 	mov	r2, r5
+    9e74:	ebffdca6 	bl	1114 <canMoveDir>
+    9e78:	e3500000 	cmp	r0, #0
             currentDir = desiredDir;
-    9f58:	15c65002 	strbne	r5, [r6, #2]
+    9e7c:	15c65002 	strbne	r5, [r6, #2]
             drawTile(cy, cx);
             score++; totalCoins--; hudDirty = true;
         }
 
         /* Cambia direcci贸n si es posible */
         if (desiredDir != DIR_NONE && canMoveDir(pacPixX, pacPixY, desiredDir))
-    9f5c:	0a0000e8 	beq	a304 <main+0x5d4>
+    9e80:	0a0000e8 	beq	a228 <main+0x5d4>
             currentDir = desiredDir;
         if (!canMoveDir(pacPixX, pacPixY, currentDir))
-    9f60:	e1a0000a 	mov	r0, sl
-    9f64:	e1a01007 	mov	r1, r7
-    9f68:	e1a02005 	mov	r2, r5
-    9f6c:	ebffdc68 	bl	1114 <canMoveDir>
-    9f70:	e3500000 	cmp	r0, #0
+    9e84:	e1a0000a 	mov	r0, sl
+    9e88:	e1a01007 	mov	r1, r7
+    9e8c:	e1a02005 	mov	r2, r5
+    9e90:	ebffdc9f 	bl	1114 <canMoveDir>
+    9e94:	e3500000 	cmp	r0, #0
             currentDir = DIR_NONE;
-    9f74:	03a03004 	moveq	r3, #4
-    9f78:	05c83002 	strbeq	r3, [r8, #2]
+    9e98:	03a03004 	moveq	r3, #4
+    9e9c:	05c83002 	strbeq	r3, [r8, #2]
         }
 
         /* Cambia direcci贸n si es posible */
         if (desiredDir != DIR_NONE && canMoveDir(pacPixX, pacPixY, desiredDir))
             currentDir = desiredDir;
         if (!canMoveDir(pacPixX, pacPixY, currentDir))
-    9f7c:	1a0000e9 	bne	a328 <main+0x5f8>
+    9ea0:	1a0000e9 	bne	a24c <main+0x5f8>
             currentDir = DIR_NONE;
     }
 
     /* Si no puede moverse, simplemente repinta su sprite actual */
     if (currentDir == DIR_NONE) {
         int frame = getPacmanFrame(desiredDir);
-    9f80:	e5d80003 	ldrb	r0, [r8, #3]
-    9f84:	ebffd9ad 	bl	640 <getPacmanFrame>
+    9ea4:	e5d80003 	ldrb	r0, [r8, #3]
+    9ea8:	ebffd9e4 	bl	640 <getPacmanFrame>
         XPM_PintaAtxNyN(pacPixX, pacPixY, frame, pacman);
-    9f88:	e1a01007 	mov	r1, r7
+    9eac:	e1a01007 	mov	r1, r7
             currentDir = DIR_NONE;
     }
 
     /* Si no puede moverse, simplemente repinta su sprite actual */
     if (currentDir == DIR_NONE) {
         int frame = getPacmanFrame(desiredDir);
-    9f8c:	e1a02000 	mov	r2, r0
+    9eb0:	e1a02000 	mov	r2, r0
         XPM_PintaAtxNyN(pacPixX, pacPixY, frame, pacman);
-    9f90:	e59f3824 	ldr	r3, [pc, #2084]	; a7bc <main+0xa8c>
-    9f94:	e1a0000a 	mov	r0, sl
-    9f98:	ebfff8e6 	bl	8338 <XPM_PintaAtxNyN>
+    9eb4:	e59f3824 	ldr	r3, [pc, #2084]	; a6e0 <main+0xa8c>
+    9eb8:	e1a0000a 	mov	r0, sl
+    9ebc:	ebfff91d 	bl	8338 <XPM_PintaAtxNyN>
     while (1) {
         if (totalCoins == 0) break;
         if (lives     <= 0) break;
 
         movePacman();
         if (powerMode) {
-    9f9c:	e5d432e8 	ldrb	r3, [r4, #744]	; 0x2e8
-    9fa0:	e3530000 	cmp	r3, #0
-    9fa4:	0a000006 	beq	9fc4 <main+0x294>
+    9ec0:	e5d432e8 	ldrb	r3, [r4, #744]	; 0x2e8
+    9ec4:	e3530000 	cmp	r3, #0
+    9ec8:	0a000006 	beq	9ee8 <main+0x294>
             if (++powerTickCounter >= POWERUP_DURATION_STEPS) {
-    9fa8:	e59f1804 	ldr	r1, [pc, #2052]	; a7b4 <main+0xa84>
-    9fac:	e59132ec 	ldr	r3, [r1, #748]	; 0x2ec
-    9fb0:	e2833001 	add	r3, r3, #1
-    9fb4:	e3530046 	cmp	r3, #70	; 0x46
-    9fb8:	e58132ec 	str	r3, [r1, #748]	; 0x2ec
+    9ecc:	e59f1804 	ldr	r1, [pc, #2052]	; a6d8 <main+0xa84>
+    9ed0:	e59132ec 	ldr	r3, [r1, #748]	; 0x2ec
+    9ed4:	e2833001 	add	r3, r3, #1
+    9ed8:	e3530046 	cmp	r3, #70	; 0x46
+    9edc:	e58132ec 	str	r3, [r1, #748]	; 0x2ec
             powerMode = false;
-    9fbc:	c3a03000 	movgt	r3, #0
-    9fc0:	c5c132e8 	strbgt	r3, [r1, #744]	; 0x2e8
+    9ee0:	c3a03000 	movgt	r3, #0
+    9ee4:	c5c132e8 	strbgt	r3, [r1, #744]	; 0x2e8
 {
     int dx    = (nx > pacPixX) ? STEP_PX : (nx < pacPixX ? -STEP_PX : 0);
     int dy    = (ny > pacPixY) ? STEP_PX : (ny < pacPixY ? -STEP_PX : 0);
     int steps = (abs(nx - pacPixX) + abs(ny - pacPixY)) / STEP_PX;
     int i;
     for (i = 0; i < steps; i++) {
-    9fc4:	e3a05000 	mov	r5, #0
-    9fc8:	e58d500c 	str	r5, [sp, #12]
-    9fcc:	e58d8010 	str	r8, [sp, #16]
+    9ee8:	e3a05000 	mov	r5, #0
+    9eec:	e58d500c 	str	r5, [sp, #12]
+    9ef0:	e58d8010 	str	r8, [sp, #16]
 static void moveGhosts(void)
 {
     static const Direction dirs[4] = { DIR_UP, DIR_DOWN, DIR_LEFT, DIR_RIGHT };
     int i, t;
     for (i = 0; i < GHOST_COUNT; i++) {
         if (!ghostReleased[i]) continue;
-    9fd0:	e59fa7f0 	ldr	sl, [pc, #2032]	; a7c8 <main+0xa98>
-    9fd4:	e59d700c 	ldr	r7, [sp, #12]
-    9fd8:	e7da3007 	ldrb	r3, [sl, r7]
-    9fdc:	e3530000 	cmp	r3, #0
-    9fe0:	0a00007e 	beq	a1e0 <main+0x4b0>
+    9ef4:	e59fa7f0 	ldr	sl, [pc, #2032]	; a6ec <main+0xa98>
+    9ef8:	e59d700c 	ldr	r7, [sp, #12]
+    9efc:	e7da3007 	ldrb	r3, [sl, r7]
+    9f00:	e3530000 	cmp	r3, #0
+    9f04:	0a00007e 	beq	a104 <main+0x4b0>
         Ghost *g = &ghosts[i];
-    9fe4:	e1a0c207 	lsl	ip, r7, #4
-    9fe8:	e24a0074 	sub	r0, sl, #116	; 0x74
-    9fec:	e080700c 	add	r7, r0, ip
+    9f08:	e1a0c207 	lsl	ip, r7, #4
+    9f0c:	e24a0074 	sub	r0, sl, #116	; 0x74
+    9f10:	e080700c 	add	r7, r0, ip
 
         /* A veces elige nueva direcci贸n al azar */
         if (g->dir == DIR_NONE || (rand() & 7) == 0) {
-    9ff0:	e5d73008 	ldrb	r3, [r7, #8]
-    9ff4:	e3530004 	cmp	r3, #4
+    9f14:	e5d73008 	ldrb	r3, [r7, #8]
+    9f18:	e3530004 	cmp	r3, #4
 {
     static const Direction dirs[4] = { DIR_UP, DIR_DOWN, DIR_LEFT, DIR_RIGHT };
     int i, t;
     for (i = 0; i < GHOST_COUNT; i++) {
         if (!ghostReleased[i]) continue;
         Ghost *g = &ghosts[i];
-    9ff8:	e58dc014 	str	ip, [sp, #20]
+    9f1c:	e58dc014 	str	ip, [sp, #20]
 
         /* A veces elige nueva direcci贸n al azar */
         if (g->dir == DIR_NONE || (rand() & 7) == 0) {
-    9ffc:	0a0000fe 	beq	a3fc <main+0x6cc>
-    a000:	ebfffe19 	bl	986c <rand>
-    a004:	e3100007 	tst	r0, #7
-    a008:	0a0000fb 	beq	a3fc <main+0x6cc>
-    a00c:	e59d5014 	ldr	r5, [sp, #20]
-    a010:	e24aa074 	sub	sl, sl, #116	; 0x74
-    a014:	e5d73008 	ldrb	r3, [r7, #8]
-    a018:	e79ab005 	ldr	fp, [sl, r5]
-    a01c:	e5978004 	ldr	r8, [r7, #4]
-    a020:	e3530003 	cmp	r3, #3
-    a024:	11a0900b 	movne	r9, fp
-    a028:	028b9001 	addeq	r9, fp, #1
-    a02c:	e3530001 	cmp	r3, #1
-    a030:	11a0a008 	movne	sl, r8
-    a034:	0288a001 	addeq	sl, r8, #1
-    a038:	e3530002 	cmp	r3, #2
-    a03c:	02499001 	subeq	r9, r9, #1
-    a040:	e3530000 	cmp	r3, #0
-    a044:	024aa001 	subeq	sl, sl, #1
+    9f20:	0a0000fe 	beq	a320 <main+0x6cc>
+    9f24:	ebfffe19 	bl	9790 <rand>
+    9f28:	e3100007 	tst	r0, #7
+    9f2c:	0a0000fb 	beq	a320 <main+0x6cc>
+    9f30:	e59d5014 	ldr	r5, [sp, #20]
+    9f34:	e24aa074 	sub	sl, sl, #116	; 0x74
+    9f38:	e5d73008 	ldrb	r3, [r7, #8]
+    9f3c:	e79ab005 	ldr	fp, [sl, r5]
+    9f40:	e5978004 	ldr	r8, [r7, #4]
+    9f44:	e3530003 	cmp	r3, #3
+    9f48:	11a0900b 	movne	r9, fp
+    9f4c:	028b9001 	addeq	r9, fp, #1
+    9f50:	e3530001 	cmp	r3, #1
+    9f54:	11a0a008 	movne	sl, r8
+    9f58:	0288a001 	addeq	sl, r8, #1
+    9f5c:	e3530002 	cmp	r3, #2
+    9f60:	02499001 	subeq	r9, r9, #1
+    9f64:	e3530000 	cmp	r3, #0
+    9f68:	024aa001 	subeq	sl, sl, #1
 
         /* Intenta mover en esa direcci贸n */
         int nx = g->x + (g->dir==DIR_RIGHT) - (g->dir==DIR_LEFT);
         int ny = g->y + (g->dir==DIR_DOWN)  - (g->dir==DIR_UP);
 
         if (!wallAt(ny, nx) && (nx!=g->x || ny!=g->y))
-    a048:	e1a0000a 	mov	r0, sl
-    a04c:	e1a01009 	mov	r1, r9
-    a050:	ebffdc04 	bl	1068 <wallAt>
-    a054:	e3500000 	cmp	r0, #0
-    a058:	1a000114 	bne	a4b0 <main+0x780>
-    a05c:	e15b0009 	cmp	fp, r9
-    a060:	1a000001 	bne	a06c <main+0x33c>
-    a064:	e158000a 	cmp	r8, sl
-    a068:	0a000110 	beq	a4b0 <main+0x780>
+    9f6c:	e1a0000a 	mov	r0, sl
+    9f70:	e1a01009 	mov	r1, r9
+    9f74:	ebffdc3b 	bl	1068 <wallAt>
+    9f78:	e3500000 	cmp	r0, #0
+    9f7c:	1a000114 	bne	a3d4 <main+0x780>
+    9f80:	e15b0009 	cmp	fp, r9
+    9f84:	1a000001 	bne	9f90 <main+0x33c>
+    9f88:	e158000a 	cmp	r8, sl
+    9f8c:	0a000110 	beq	a3d4 <main+0x780>
 /*                      ANIMACI锟絅 FANTASMAS                            */
 /* =================================================================== */
 static void animateGhostMove(Ghost *g, int nx, int ny)
 {
     /* Restaura celda anterior */
     map[g->y][g->x] = g->under;
-    a06c:	e0883208 	add	r3, r8, r8, lsl #4
-    a070:	e5d72009 	ldrb	r2, [r7, #9]
-    a074:	e0843083 	add	r3, r4, r3, lsl #1
-    a078:	e083300b 	add	r3, r3, fp
-    a07c:	e5c32008 	strb	r2, [r3, #8]
+    9f90:	e0883208 	add	r3, r8, r8, lsl #4
+    9f94:	e5d72009 	ldrb	r2, [r7, #9]
+    9f98:	e0843083 	add	r3, r4, r3, lsl #1
+    9f9c:	e083300b 	add	r3, r3, fp
+    9fa0:	e5c32008 	strb	r2, [r3, #8]
     drawTile(g->y, g->x);
-    a080:	e1a00008 	mov	r0, r8
-    a084:	e1a0100b 	mov	r1, fp
-    a088:	ebffda0d 	bl	8c4 <drawTile>
+    9fa4:	e1a00008 	mov	r0, r8
+    9fa8:	e1a0100b 	mov	r1, fp
+    9fac:	ebffda44 	bl	8c4 <drawTile>
 
     int px    = X_OFFSET + g->x * TW;
-    a08c:	e59f0724 	ldr	r0, [pc, #1828]	; a7b8 <main+0xa88>
-    a090:	e59dc014 	ldr	ip, [sp, #20]
-    a094:	e790500c 	ldr	r5, [r0, ip]
+    9fb0:	e59f0724 	ldr	r0, [pc, #1828]	; a6dc <main+0xa88>
+    9fb4:	e59dc014 	ldr	ip, [sp, #20]
+    9fb8:	e790500c 	ldr	r5, [r0, ip]
     int py    = Y_OFFSET + g->y * TW;
-    a098:	e5976004 	ldr	r6, [r7, #4]
+    9fbc:	e5976004 	ldr	r6, [r7, #4]
 {
     /* Restaura celda anterior */
     map[g->y][g->x] = g->under;
     drawTile(g->y, g->x);
 
     int px    = X_OFFSET + g->x * TW;
-    a09c:	e0855085 	add	r5, r5, r5, lsl #1
+    9fc0:	e0855085 	add	r5, r5, r5, lsl #1
     int py    = Y_OFFSET + g->y * TW;
     int tx    = X_OFFSET + nx    * TW;
-    a0a0:	e0893089 	add	r3, r9, r9, lsl #1
+    9fc4:	e0893089 	add	r3, r9, r9, lsl #1
 {
     /* Restaura celda anterior */
     map[g->y][g->x] = g->under;
     drawTile(g->y, g->x);
 
     int px    = X_OFFSET + g->x * TW;
-    a0a4:	e1a05185 	lsl	r5, r5, #3
+    9fc8:	e1a05185 	lsl	r5, r5, #3
     int py    = Y_OFFSET + g->y * TW;
     int tx    = X_OFFSET + nx    * TW;
-    a0a8:	e1a03183 	lsl	r3, r3, #3
+    9fcc:	e1a03183 	lsl	r3, r3, #3
 {
     /* Restaura celda anterior */
     map[g->y][g->x] = g->under;
     drawTile(g->y, g->x);
 
     int px    = X_OFFSET + g->x * TW;
-    a0ac:	e2855004 	add	r5, r5, #4
+    9fd0:	e2855004 	add	r5, r5, #4
     int py    = Y_OFFSET + g->y * TW;
-    a0b0:	e0866086 	add	r6, r6, r6, lsl #1
+    9fd4:	e0866086 	add	r6, r6, r6, lsl #1
     int tx    = X_OFFSET + nx    * TW;
-    a0b4:	e2833004 	add	r3, r3, #4
+    9fd8:	e2833004 	add	r3, r3, #4
     int ty    = Y_OFFSET + ny    * TW;
-    a0b8:	e08a208a 	add	r2, sl, sl, lsl #1
+    9fdc:	e08a208a 	add	r2, sl, sl, lsl #1
     /* Restaura celda anterior */
     map[g->y][g->x] = g->under;
     drawTile(g->y, g->x);
 
     int px    = X_OFFSET + g->x * TW;
     int py    = Y_OFFSET + g->y * TW;
-    a0bc:	e1a06186 	lsl	r6, r6, #3
+    9fe0:	e1a06186 	lsl	r6, r6, #3
     int tx    = X_OFFSET + nx    * TW;
     int ty    = Y_OFFSET + ny    * TW;
-    a0c0:	e1a02182 	lsl	r2, r2, #3
+    9fe4:	e1a02182 	lsl	r2, r2, #3
     int dx    = (tx > px) ? STEP_PX : (tx < px ? -STEP_PX : 0);
-    a0c4:	e1550003 	cmp	r5, r3
+    9fe8:	e1550003 	cmp	r5, r3
     /* Restaura celda anterior */
     map[g->y][g->x] = g->under;
     drawTile(g->y, g->x);
 
     int px    = X_OFFSET + g->x * TW;
     int py    = Y_OFFSET + g->y * TW;
-    a0c8:	e2866030 	add	r6, r6, #48	; 0x30
+    9fec:	e2866030 	add	r6, r6, #48	; 0x30
     int tx    = X_OFFSET + nx    * TW;
     int ty    = Y_OFFSET + ny    * TW;
-    a0cc:	e2822030 	add	r2, r2, #48	; 0x30
+    9ff0:	e2822030 	add	r2, r2, #48	; 0x30
     int dx    = (tx > px) ? STEP_PX : (tx < px ? -STEP_PX : 0);
-    a0d0:	b3a00002 	movlt	r0, #2
-    a0d4:	ba000001 	blt	a0e0 <main+0x3b0>
-    a0d8:	c3e00001 	mvngt	r0, #1
-    a0dc:	d3a00000 	movle	r0, #0
+    9ff4:	b3a00002 	movlt	r0, #2
+    9ff8:	ba000001 	blt	a004 <main+0x3b0>
+    9ffc:	c3e00001 	mvngt	r0, #1
+    a000:	d3a00000 	movle	r0, #0
     int dy    = (ty > py) ? STEP_PX : (ty < py ? -STEP_PX : 0);
-    a0e0:	e1560002 	cmp	r6, r2
-    a0e4:	b3a01002 	movlt	r1, #2
-    a0e8:	ba000001 	blt	a0f4 <main+0x3c4>
-    a0ec:	c3e01001 	mvngt	r1, #1
-    a0f0:	d3a01000 	movle	r1, #0
+    a004:	e1560002 	cmp	r6, r2
+    a008:	b3a01002 	movlt	r1, #2
+    a00c:	ba000001 	blt	a018 <main+0x3c4>
+    a010:	c3e01001 	mvngt	r1, #1
+    a014:	d3a01000 	movle	r1, #0
     int steps = (abs(tx - px) + abs(ty - py)) / STEP_PX;
-    a0f4:	e0653003 	rsb	r3, r5, r3
-    a0f8:	e0662002 	rsb	r2, r6, r2
-    a0fc:	e3530000 	cmp	r3, #0
-    a100:	b2633000 	rsblt	r3, r3, #0
-    a104:	e3520000 	cmp	r2, #0
-    a108:	b2622000 	rsblt	r2, r2, #0
-    a10c:	e0832002 	add	r2, r3, r2
-    a110:	e1a0b0c2 	asr	fp, r2, #1
+    a018:	e0653003 	rsb	r3, r5, r3
+    a01c:	e0662002 	rsb	r2, r6, r2
+    a020:	e3530000 	cmp	r3, #0
+    a024:	b2633000 	rsblt	r3, r3, #0
+    a028:	e3520000 	cmp	r2, #0
+    a02c:	b2622000 	rsblt	r2, r2, #0
+    a030:	e0832002 	add	r2, r3, r2
+    a034:	e1a0b0c2 	asr	fp, r2, #1
     int i;
     for (i = 0; i < steps; i++) {
-    a114:	e35b0000 	cmp	fp, #0
-    a118:	da000025 	ble	a1b4 <main+0x484>
+    a038:	e35b0000 	cmp	fp, #0
+    a03c:	da000025 	ble	a0d8 <main+0x484>
                 px += dx;
                 py += dy;
                 /* Parpadeo de ojos */
                 if (++ghostsEyeCounter >= PAC_MOUTH_TOGGLE_STEPS) {
                     ghostsEyeOpen    = !ghostsEyeOpen;
                     ghostsEyeCounter = 0;
-    a11c:	e58d9018 	str	r9, [sp, #24]
-    a120:	e58da01c 	str	sl, [sp, #28]
+    a040:	e58d9018 	str	r9, [sp, #24]
+    a044:	e58da01c 	str	sl, [sp, #28]
     int ty    = Y_OFFSET + ny    * TW;
     int dx    = (tx > px) ? STEP_PX : (tx < px ? -STEP_PX : 0);
     int dy    = (ty > py) ? STEP_PX : (ty < py ? -STEP_PX : 0);
     int steps = (abs(tx - px) + abs(ty - py)) / STEP_PX;
     int i;
     for (i = 0; i < steps; i++) {
-    a124:	e3a08000 	mov	r8, #0
+    a048:	e3a08000 	mov	r8, #0
                 px += dx;
                 py += dy;
                 /* Parpadeo de ojos */
                 if (++ghostsEyeCounter >= PAC_MOUTH_TOGGLE_STEPS) {
                     ghostsEyeOpen    = !ghostsEyeOpen;
                     ghostsEyeCounter = 0;
-    a128:	e1a09000 	mov	r9, r0
-    a12c:	e1a0a001 	mov	sl, r1
+    a04c:	e1a09000 	mov	r9, r0
+    a050:	e1a0a001 	mov	sl, r1
     int dx    = (tx > px) ? STEP_PX : (tx < px ? -STEP_PX : 0);
     int dy    = (ty > py) ? STEP_PX : (ty < py ? -STEP_PX : 0);
     int steps = (abs(tx - px) + abs(ty - py)) / STEP_PX;
     int i;
     for (i = 0; i < steps; i++) {
                 restoreBackground(px, py);
-    a130:	e1a01006 	mov	r1, r6
-    a134:	e1a00005 	mov	r0, r5
-    a138:	ebffda8f 	bl	b7c <restoreBackground>
+    a054:	e1a01006 	mov	r1, r6
+    a058:	e1a00005 	mov	r0, r5
+    a05c:	ebffdac6 	bl	b7c <restoreBackground>
                 px += dx;
                 py += dy;
                 /* Parpadeo de ojos */
                 if (++ghostsEyeCounter >= PAC_MOUTH_TOGGLE_STEPS) {
-    a13c:	e5943308 	ldr	r3, [r4, #776]	; 0x308
-    a140:	e2833001 	add	r3, r3, #1
-    a144:	e3530013 	cmp	r3, #19
-    a148:	e5843308 	str	r3, [r4, #776]	; 0x308
-
-    // Llamamos a la funci髇 principal para iniciar la partitura
-    PARTITURE_On(PARTITURE, numero_de_eventos, 90);
+    a060:	e5943308 	ldr	r3, [r4, #776]	; 0x308
+    a064:	e2833001 	add	r3, r3, #1
+    a068:	e3530013 	cmp	r3, #19
+    a06c:	e5843308 	str	r3, [r4, #776]	; 0x308
+   
 }
 
+
+extern unsigned int NOTE[] ;
 int main(void)
-    a14c:	e0855009 	add	r5, r5, r9
-    a150:	e086600a 	add	r6, r6, sl
+    a070:	e0855009 	add	r5, r5, r9
+    a074:	e086600a 	add	r6, r6, sl
     for (i = 0; i < steps; i++) {
                 restoreBackground(px, py);
                 px += dx;
                 py += dy;
                 /* Parpadeo de ojos */
                 if (++ghostsEyeCounter >= PAC_MOUTH_TOGGLE_STEPS) {
-    a154:	da000006 	ble	a174 <main+0x444>
+    a078:	da000006 	ble	a098 <main+0x444>
                     ghostsEyeOpen    = !ghostsEyeOpen;
-    a158:	e59dc010 	ldr	ip, [sp, #16]
-    a15c:	e5dc3001 	ldrb	r3, [ip, #1]
+    a07c:	e59dc010 	ldr	ip, [sp, #16]
+    a080:	e5dc3001 	ldrb	r3, [ip, #1]
                     ghostsEyeCounter = 0;
-    a160:	e59f064c 	ldr	r0, [pc, #1612]	; a7b4 <main+0xa84>
+    a084:	e59f064c 	ldr	r0, [pc, #1612]	; a6d8 <main+0xa84>
                 restoreBackground(px, py);
                 px += dx;
                 py += dy;
                 /* Parpadeo de ojos */
                 if (++ghostsEyeCounter >= PAC_MOUTH_TOGGLE_STEPS) {
                     ghostsEyeOpen    = !ghostsEyeOpen;
-    a164:	e2233001 	eor	r3, r3, #1
+    a088:	e2233001 	eor	r3, r3, #1
                     ghostsEyeCounter = 0;
-    a168:	e3a01000 	mov	r1, #0
+    a08c:	e3a01000 	mov	r1, #0
                 restoreBackground(px, py);
                 px += dx;
                 py += dy;
                 /* Parpadeo de ojos */
                 if (++ghostsEyeCounter >= PAC_MOUTH_TOGGLE_STEPS) {
                     ghostsEyeOpen    = !ghostsEyeOpen;
-    a16c:	e5cc3001 	strb	r3, [ip, #1]
+    a090:	e5cc3001 	strb	r3, [ip, #1]
                     ghostsEyeCounter = 0;
-    a170:	e5801308 	str	r1, [r0, #776]	; 0x308
+    a094:	e5801308 	str	r1, [r0, #776]	; 0x308
                 }
                 /* Dibuja fantasma orientado y animado */
                 int frame = getGhostFrame(g);
                 frame = powerMode ? 59 : getGhostFrame(g);
-    a174:	e5d432e8 	ldrb	r3, [r4, #744]	; 0x2e8
-    a178:	e3530000 	cmp	r3, #0
-    a17c:	13a0203b 	movne	r2, #59	; 0x3b
-    a180:	1a000002 	bne	a190 <main+0x460>
-    a184:	e1a00007 	mov	r0, r7
-    a188:	ebffd951 	bl	6d4 <getGhostFrame>
-    a18c:	e1a02000 	mov	r2, r0
+    a098:	e5d432e8 	ldrb	r3, [r4, #744]	; 0x2e8
+    a09c:	e3530000 	cmp	r3, #0
+    a0a0:	13a0203b 	movne	r2, #59	; 0x3b
+    a0a4:	1a000002 	bne	a0b4 <main+0x460>
+    a0a8:	e1a00007 	mov	r0, r7
+    a0ac:	ebffd988 	bl	6d4 <getGhostFrame>
+    a0b0:	e1a02000 	mov	r2, r0
                 XPM_PintaAtxNyN(px, py, frame, pacman);
-    a190:	e1a00005 	mov	r0, r5
-    a194:	e1a01006 	mov	r1, r6
-    a198:	e59f361c 	ldr	r3, [pc, #1564]	; a7bc <main+0xa8c>
+    a0b4:	e1a00005 	mov	r0, r5
+    a0b8:	e1a01006 	mov	r1, r6
+    a0bc:	e59f361c 	ldr	r3, [pc, #1564]	; a6e0 <main+0xa8c>
     int ty    = Y_OFFSET + ny    * TW;
     int dx    = (tx > px) ? STEP_PX : (tx < px ? -STEP_PX : 0);
     int dy    = (ty > py) ? STEP_PX : (ty < py ? -STEP_PX : 0);
     int steps = (abs(tx - px) + abs(ty - py)) / STEP_PX;
     int i;
     for (i = 0; i < steps; i++) {
-    a19c:	e2888001 	add	r8, r8, #1
+    a0c0:	e2888001 	add	r8, r8, #1
                     ghostsEyeCounter = 0;
                 }
                 /* Dibuja fantasma orientado y animado */
                 int frame = getGhostFrame(g);
                 frame = powerMode ? 59 : getGhostFrame(g);
                 XPM_PintaAtxNyN(px, py, frame, pacman);
-    a1a0:	ebfff864 	bl	8338 <XPM_PintaAtxNyN>
+    a0c4:	ebfff89b 	bl	8338 <XPM_PintaAtxNyN>
     int ty    = Y_OFFSET + ny    * TW;
     int dx    = (tx > px) ? STEP_PX : (tx < px ? -STEP_PX : 0);
     int dy    = (ty > py) ? STEP_PX : (ty < py ? -STEP_PX : 0);
     int steps = (abs(tx - px) + abs(ty - py)) / STEP_PX;
     int i;
     for (i = 0; i < steps; i++) {
-    a1a4:	e158000b 	cmp	r8, fp
-    a1a8:	1affffe0 	bne	a130 <main+0x400>
-    a1ac:	e28d9018 	add	r9, sp, #24
-    a1b0:	e8990600 	ldm	r9, {r9, sl}
+    a0c8:	e158000b 	cmp	r8, fp
+    a0cc:	1affffe0 	bne	a054 <main+0x400>
+    a0d0:	e28d9018 	add	r9, sp, #24
+    a0d4:	e8990600 	ldm	r9, {r9, sl}
             }
 
     /* Actualiza l贸gica */
     g->x     = nx;
     g->y     = ny;
     g->under = map[ny][nx];
-    a1b4:	e08a320a 	add	r3, sl, sl, lsl #4
-    a1b8:	e0843083 	add	r3, r4, r3, lsl #1
-    a1bc:	e0833009 	add	r3, r3, r9
-    a1c0:	e5d32008 	ldrb	r2, [r3, #8]
+    a0d8:	e08a320a 	add	r3, sl, sl, lsl #4
+    a0dc:	e0843083 	add	r3, r4, r3, lsl #1
+    a0e0:	e0833009 	add	r3, r3, r9
+    a0e4:	e5d32008 	ldrb	r2, [r3, #8]
                 XPM_PintaAtxNyN(px, py, frame, pacman);
                 //if (GHOST_DELAY_MS) _delay_ms(GHOST_DELAY_MS);
             }
 
     /* Actualiza l贸gica */
     g->x     = nx;
-    a1c4:	e59fc5ec 	ldr	ip, [pc, #1516]	; a7b8 <main+0xa88>
-    a1c8:	e59d5014 	ldr	r5, [sp, #20]
+    a0e8:	e59fc5ec 	ldr	ip, [pc, #1516]	; a6dc <main+0xa88>
+    a0ec:	e59d5014 	ldr	r5, [sp, #20]
     g->y     = ny;
     g->under = map[ny][nx];
-    a1cc:	e5c72009 	strb	r2, [r7, #9]
+    a0f0:	e5c72009 	strb	r2, [r7, #9]
     map[ny][nx] = GHOST;
-    a1d0:	e3a02047 	mov	r2, #71	; 0x47
+    a0f4:	e3a02047 	mov	r2, #71	; 0x47
                 XPM_PintaAtxNyN(px, py, frame, pacman);
                 //if (GHOST_DELAY_MS) _delay_ms(GHOST_DELAY_MS);
             }
 
     /* Actualiza l贸gica */
     g->x     = nx;
-    a1d4:	e78c9005 	str	r9, [ip, r5]
+    a0f8:	e78c9005 	str	r9, [ip, r5]
     g->y     = ny;
-    a1d8:	e587a004 	str	sl, [r7, #4]
+    a0fc:	e587a004 	str	sl, [r7, #4]
     g->under = map[ny][nx];
     map[ny][nx] = GHOST;
-    a1dc:	e5c32008 	strb	r2, [r3, #8]
+    a100:	e5c32008 	strb	r2, [r3, #8]
 /* ------------ Movimiento aleatorio de Fantasmas ------------ */
 static void moveGhosts(void)
 {
     static const Direction dirs[4] = { DIR_UP, DIR_DOWN, DIR_LEFT, DIR_RIGHT };
     int i, t;
     for (i = 0; i < GHOST_COUNT; i++) {
-    a1e0:	e59d500c 	ldr	r5, [sp, #12]
-    a1e4:	e2855001 	add	r5, r5, #1
-    a1e8:	e3550004 	cmp	r5, #4
-    a1ec:	e58d500c 	str	r5, [sp, #12]
-    a1f0:	1affff76 	bne	9fd0 <main+0x2a0>
+    a104:	e59d500c 	ldr	r5, [sp, #12]
+    a108:	e2855001 	add	r5, r5, #1
+    a10c:	e3550004 	cmp	r5, #4
+    a110:	e58d500c 	str	r5, [sp, #12]
+    a114:	1affff76 	bne	9ef4 <main+0x2a0>
             }
         if (++ghostStepCounter >= GHOST_MOVE_INTERVAL_STEPS) {
             moveGhosts();
             ghostStepCounter = 0;
         }
             if (++ghostReleaseStepCounter >= GHOST_RELEASE_INTERVAL_STEPS
-    a1f4:	e59432f0 	ldr	r3, [r4, #752]	; 0x2f0
-    a1f8:	e2833001 	add	r3, r3, #1
-    a1fc:	e35300e4 	cmp	r3, #228	; 0xe4
-    a200:	e59d8010 	ldr	r8, [sp, #16]
-    a204:	e58432f0 	str	r3, [r4, #752]	; 0x2f0
-    a208:	da000003 	ble	a21c <main+0x4ec>
+    a118:	e59432f0 	ldr	r3, [r4, #752]	; 0x2f0
+    a11c:	e2833001 	add	r3, r3, #1
+    a120:	e35300e4 	cmp	r3, #228	; 0xe4
+    a124:	e59d8010 	ldr	r8, [sp, #16]
+    a128:	e58432f0 	str	r3, [r4, #752]	; 0x2f0
+    a12c:	da000003 	ble	a140 <main+0x4ec>
                     && ghostsReleasedCount < GHOST_COUNT) {
-    a20c:	e59f75a0 	ldr	r7, [pc, #1440]	; a7b4 <main+0xa84>
-    a210:	e59732f4 	ldr	r3, [r7, #756]	; 0x2f4
-    a214:	e3530003 	cmp	r3, #3
-    a218:	da0000e2 	ble	a5a8 <main+0x878>
+    a130:	e59f75a0 	ldr	r7, [pc, #1440]	; a6d8 <main+0xa84>
+    a134:	e59732f4 	ldr	r3, [r7, #756]	; 0x2f4
+    a138:	e3530003 	cmp	r3, #3
+    a13c:	da0000e2 	ble	a4cc <main+0x878>
                     ghostReleased[ghostsReleasedCount++] = true;
 		    VibratorON(200);
                     ghostReleaseStepCounter = 0;
                 }
             {
                     int tx = (pacPixX - X_OFFSET + TW/2) / TW;
-    a21c:	e59fa5a0 	ldr	sl, [pc, #1440]	; a7c4 <main+0xa94>
+    a140:	e59fa5a0 	ldr	sl, [pc, #1440]	; a6e8 <main+0xa94>
                     int ty = (pacPixY - Y_OFFSET + TW/2) / TW;
-    a220:	e894000c 	ldm	r4, {r2, r3}
-    a224:	e1a0000a 	mov	r0, sl
+    a144:	e894000c 	ldm	r4, {r2, r3}
+    a148:	e1a0000a 	mov	r0, sl
                     ghostReleased[ghostsReleasedCount++] = true;
 		    VibratorON(200);
                     ghostReleaseStepCounter = 0;
                 }
             {
                     int tx = (pacPixX - X_OFFSET + TW/2) / TW;
-    a228:	e2822008 	add	r2, r2, #8
+    a14c:	e2822008 	add	r2, r2, #8
                     int ty = (pacPixY - Y_OFFSET + TW/2) / TW;
-    a22c:	e2433024 	sub	r3, r3, #36	; 0x24
+    a150:	e2433024 	sub	r3, r3, #36	; 0x24
                     ghostReleased[ghostsReleasedCount++] = true;
 		    VibratorON(200);
                     ghostReleaseStepCounter = 0;
                 }
             {
                     int tx = (pacPixX - X_OFFSET + TW/2) / TW;
-    a230:	e0c7c29a 	smull	ip, r7, sl, r2
+    a154:	e0c7c29a 	smull	ip, r7, sl, r2
                     int ty = (pacPixY - Y_OFFSET + TW/2) / TW;
-    a234:	e0ca1390 	smull	r1, sl, r0, r3
-    a238:	e59f558c 	ldr	r5, [pc, #1420]	; a7cc <main+0xa9c>
+    a158:	e0ca1390 	smull	r1, sl, r0, r3
+    a15c:	e59f558c 	ldr	r5, [pc, #1420]	; a6f0 <main+0xa9c>
                     ghostReleased[ghostsReleasedCount++] = true;
 		    VibratorON(200);
                     ghostReleaseStepCounter = 0;
                 }
             {
                     int tx = (pacPixX - X_OFFSET + TW/2) / TW;
-    a23c:	e1a02fc2 	asr	r2, r2, #31
+    a160:	e1a02fc2 	asr	r2, r2, #31
                     int ty = (pacPixY - Y_OFFSET + TW/2) / TW;
-    a240:	e1a03fc3 	asr	r3, r3, #31
+    a164:	e1a03fc3 	asr	r3, r3, #31
                     ghostReleased[ghostsReleasedCount++] = true;
 		    VibratorON(200);
                     ghostReleaseStepCounter = 0;
                 }
             {
                     int tx = (pacPixX - X_OFFSET + TW/2) / TW;
-    a244:	e0627147 	rsb	r7, r2, r7, asr #2
+    a168:	e0627147 	rsb	r7, r2, r7, asr #2
                     int ty = (pacPixY - Y_OFFSET + TW/2) / TW;
-    a248:	e063a14a 	rsb	sl, r3, sl, asr #2
-    a24c:	e3a06000 	mov	r6, #0
+    a16c:	e063a14a 	rsb	sl, r3, sl, asr #2
+    a170:	e3a06000 	mov	r6, #0
                                 ghosts[g].under = EMPTY;
                                 map[origGhostY[g]][origGhostX[g]] = EMPTY;
                                 /* dibuja fantasma en casa */
                                 drawTile(origGhostY[g], origGhostX[g]);
                             } else {
                                 lives--; hudDirty = true;
-    a250:	e3a09001 	mov	r9, #1
+    a174:	e3a09001 	mov	r9, #1
                     for (g = 0; g < GHOST_COUNT; g++) {
                         if (tx == ghosts[g].x && ty == ghosts[g].y) {
                             if (powerMode) {
                                 /* come fantasma: respawn */
                                 restoreBackground(pacPixX, pacPixY);
                                 ghosts[g].x = origGhostX[g];
-    a254:	e285b03c 	add	fp, r5, #60	; 0x3c
+    a178:	e285b03c 	add	fp, r5, #60	; 0x3c
             {
                     int tx = (pacPixX - X_OFFSET + TW/2) / TW;
                     int ty = (pacPixY - Y_OFFSET + TW/2) / TW;
                     int g;
                     for (g = 0; g < GHOST_COUNT; g++) {
                         if (tx == ghosts[g].x && ty == ghosts[g].y) {
-    a258:	e5153008 	ldr	r3, [r5, #-8]
-    a25c:	e1530007 	cmp	r3, r7
-    a260:	0a000095 	beq	a4bc <main+0x78c>
+    a17c:	e5153008 	ldr	r3, [r5, #-8]
+    a180:	e1530007 	cmp	r3, r7
+    a184:	0a000095 	beq	a3e0 <main+0x78c>
                                 drawTile(origGhostY[g], origGhostX[g]);
                             } else {
                                 lives--; hudDirty = true;
                                 if (lives > 0) {
                                     restoreBackground(pacPixX, pacPixY);
                                     initGame(); dibuja_mapa(map); dibuja_hud();
-    a264:	e2866004 	add	r6, r6, #4
+    a188:	e2866004 	add	r6, r6, #4
                 }
             {
                     int tx = (pacPixX - X_OFFSET + TW/2) / TW;
                     int ty = (pacPixY - Y_OFFSET + TW/2) / TW;
                     int g;
                     for (g = 0; g < GHOST_COUNT; g++) {
-    a268:	e3560010 	cmp	r6, #16
+    a18c:	e3560010 	cmp	r6, #16
                                 drawTile(origGhostY[g], origGhostX[g]);
                             } else {
                                 lives--; hudDirty = true;
                                 if (lives > 0) {
                                     restoreBackground(pacPixX, pacPixY);
                                     initGame(); dibuja_mapa(map); dibuja_hud();
-    a26c:	e2855010 	add	r5, r5, #16
+    a190:	e2855010 	add	r5, r5, #16
                 }
             {
                     int tx = (pacPixX - X_OFFSET + TW/2) / TW;
                     int ty = (pacPixY - Y_OFFSET + TW/2) / TW;
                     int g;
                     for (g = 0; g < GHOST_COUNT; g++) {
-    a270:	1afffff8 	bne	a258 <main+0x528>
+    a194:	1afffff8 	bne	a17c <main+0x528>
 /*                           COLISIONES                                */
 /* =================================================================== */
 static void checkCollisions(void)
 {
     int tx = (pacPixX - X_OFFSET + TW / 2) / TW;
     int ty = (pacPixY - Y_OFFSET + TW / 2) / TW;
-    a274:	e8940003 	ldm	r4, {r0, r1}
+    a198:	e8940003 	ldm	r4, {r0, r1}
 /* =================================================================== */
 /*                           COLISIONES                                */
 /* =================================================================== */
 static void checkCollisions(void)
 {
     int tx = (pacPixX - X_OFFSET + TW / 2) / TW;
-    a278:	e59f5544 	ldr	r5, [pc, #1348]	; a7c4 <main+0xa94>
-    a27c:	e2802008 	add	r2, r0, #8
+    a19c:	e59f5544 	ldr	r5, [pc, #1348]	; a6e8 <main+0xa94>
+    a1a0:	e2802008 	add	r2, r0, #8
     int ty = (pacPixY - Y_OFFSET + TW / 2) / TW;
-    a280:	e2413024 	sub	r3, r1, #36	; 0x24
+    a1a4:	e2413024 	sub	r3, r1, #36	; 0x24
 /* =================================================================== */
 /*                           COLISIONES                                */
 /* =================================================================== */
 static void checkCollisions(void)
 {
     int tx = (pacPixX - X_OFFSET + TW / 2) / TW;
-    a284:	e0c67295 	smull	r7, r6, r5, r2
+    a1a8:	e0c67295 	smull	r7, r6, r5, r2
     int ty = (pacPixY - Y_OFFSET + TW / 2) / TW;
-    a288:	e0cca395 	smull	sl, ip, r5, r3
+    a1ac:	e0cca395 	smull	sl, ip, r5, r3
 /* =================================================================== */
 /*                           COLISIONES                                */
 /* =================================================================== */
 static void checkCollisions(void)
 {
     int tx = (pacPixX - X_OFFSET + TW / 2) / TW;
-    a28c:	e1a05fc2 	asr	r5, r2, #31
+    a1b0:	e1a05fc2 	asr	r5, r2, #31
     int ty = (pacPixY - Y_OFFSET + TW / 2) / TW;
-    a290:	e1a03fc3 	asr	r3, r3, #31
-    a294:	e59f2534 	ldr	r2, [pc, #1332]	; a7d0 <main+0xaa0>
+    a1b4:	e1a03fc3 	asr	r3, r3, #31
+    a1b8:	e59f2534 	ldr	r2, [pc, #1332]	; a6f4 <main+0xaa0>
 /* =================================================================== */
 /*                           COLISIONES                                */
 /* =================================================================== */
 static void checkCollisions(void)
 {
     int tx = (pacPixX - X_OFFSET + TW / 2) / TW;
-    a298:	e0655146 	rsb	r5, r5, r6, asr #2
+    a1bc:	e0655146 	rsb	r5, r5, r6, asr #2
     int ty = (pacPixY - Y_OFFSET + TW / 2) / TW;
-    a29c:	e063614c 	rsb	r6, r3, ip, asr #2
-    a2a0:	e3a03000 	mov	r3, #0
+    a1c0:	e063614c 	rsb	r6, r3, ip, asr #2
+    a1c4:	e3a03000 	mov	r3, #0
     int g;
     for (g = 0; g < GHOST_COUNT; g++) {
         if (!ghostReleased[g]) continue;
-    a2a4:	e5f2c001 	ldrb	ip, [r2, #1]!
-    a2a8:	e35c0000 	cmp	ip, #0
-    a2ac:	0a000004 	beq	a2c4 <main+0x594>
+    a1c8:	e5f2c001 	ldrb	ip, [r2, #1]!
+    a1cc:	e35c0000 	cmp	ip, #0
+    a1d0:	0a000004 	beq	a1e8 <main+0x594>
         if (tx == ghosts[g].x && ty == ghosts[g].y) {
-    a2b0:	e59f7500 	ldr	r7, [pc, #1280]	; a7b8 <main+0xa88>
-    a2b4:	e797c003 	ldr	ip, [r7, r3]
-    a2b8:	e155000c 	cmp	r5, ip
-    a2bc:	e247cfa1 	sub	ip, r7, #644	; 0x284
-    a2c0:	0a000094 	beq	a518 <main+0x7e8>
+    a1d4:	e59f7500 	ldr	r7, [pc, #1280]	; a6dc <main+0xa88>
+    a1d8:	e797c003 	ldr	ip, [r7, r3]
+    a1dc:	e155000c 	cmp	r5, ip
+    a1e0:	e247cfa1 	sub	ip, r7, #644	; 0x284
+    a1e4:	0a000094 	beq	a43c <main+0x7e8>
             lives--; hudDirty = true;
             if (lives > 0) {
                 restoreBackground(pacPixX, pacPixY);
                 initGame(); dibuja_mapa(map); dibuja_hud();
-    a2c4:	e2833010 	add	r3, r3, #16
+    a1e8:	e2833010 	add	r3, r3, #16
 static void checkCollisions(void)
 {
     int tx = (pacPixX - X_OFFSET + TW / 2) / TW;
     int ty = (pacPixY - Y_OFFSET + TW / 2) / TW;
     int g;
     for (g = 0; g < GHOST_COUNT; g++) {
-    a2c8:	e3530040 	cmp	r3, #64	; 0x40
-    a2cc:	1afffff4 	bne	a2a4 <main+0x574>
+    a1ec:	e3530040 	cmp	r3, #64	; 0x40
+    a1f0:	1afffff4 	bne	a1c8 <main+0x574>
                             }
                         }
                     }
                 }
             checkCollisions();    
         if (hudDirty) { dibuja_hud(); hudDirty = false; }
-    a2d0:	e5d83004 	ldrb	r3, [r8, #4]
-    a2d4:	e3530000 	cmp	r3, #0
-    a2d8:	0afffedb 	beq	9e4c <main+0x11c>
-    a2dc:	ebffdb28 	bl	f84 <dibuja_hud>
-    a2e0:	e3a03000 	mov	r3, #0
-    a2e4:	e5c83004 	strb	r3, [r8, #4]
+    a1f4:	e5d83004 	ldrb	r3, [r8, #4]
+    a1f8:	e3530000 	cmp	r3, #0
+    a1fc:	0afffedb 	beq	9d70 <main+0x11c>
+    a200:	ebffdb5f 	bl	f84 <dibuja_hud>
+    a204:	e3a03000 	mov	r3, #0
+    a208:	e5c83004 	strb	r3, [r8, #4]
             XPM_PintaAtxNyN(px, py, frame, pacman);
         }
     int ghostStepCounter=0;
     //AUDIO_Play_Pacmania();
     while (1) {
         if (totalCoins == 0) break;
-    a2e8:	e59432c4 	ldr	r3, [r4, #708]	; 0x2c4
-    a2ec:	e3530000 	cmp	r3, #0
-    a2f0:	1afffed8 	bne	9e58 <main+0x128>
+    a20c:	e59432c4 	ldr	r3, [r4, #708]	; 0x2c4
+    a210:	e3530000 	cmp	r3, #0
+    a214:	1afffed8 	bne	9d7c <main+0x128>
             checkCollisions();    
         if (hudDirty) { dibuja_hud(); hudDirty = false; }
         
     }
     return 0;
 }
-    a2f4:	e3a00000 	mov	r0, #0
-    a2f8:	e28dd024 	add	sp, sp, #36	; 0x24
-    a2fc:	e8bd4ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
-    a300:	e12fff1e 	bx	lr
+    a218:	e3a00000 	mov	r0, #0
+    a21c:	e28dd024 	add	sp, sp, #36	; 0x24
+    a220:	e8bd4ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+    a224:	e12fff1e 	bx	lr
             drawTile(cy, cx);
             score++; totalCoins--; hudDirty = true;
         }
 
         /* Cambia direcci贸n si es posible */
         if (desiredDir != DIR_NONE && canMoveDir(pacPixX, pacPixY, desiredDir))
-    a304:	e5d65002 	ldrb	r5, [r6, #2]
+    a228:	e5d65002 	ldrb	r5, [r6, #2]
             currentDir = desiredDir;
         if (!canMoveDir(pacPixX, pacPixY, currentDir))
-    a308:	e1a0000a 	mov	r0, sl
-    a30c:	e1a01007 	mov	r1, r7
-    a310:	e1a02005 	mov	r2, r5
-    a314:	ebffdb7e 	bl	1114 <canMoveDir>
-    a318:	e3500000 	cmp	r0, #0
+    a22c:	e1a0000a 	mov	r0, sl
+    a230:	e1a01007 	mov	r1, r7
+    a234:	e1a02005 	mov	r2, r5
+    a238:	ebffdbb5 	bl	1114 <canMoveDir>
+    a23c:	e3500000 	cmp	r0, #0
             currentDir = DIR_NONE;
-    a31c:	03a03004 	moveq	r3, #4
-    a320:	05c83002 	strbeq	r3, [r8, #2]
+    a240:	03a03004 	moveq	r3, #4
+    a244:	05c83002 	strbeq	r3, [r8, #2]
         }
 
         /* Cambia direcci贸n si es posible */
         if (desiredDir != DIR_NONE && canMoveDir(pacPixX, pacPixY, desiredDir))
             currentDir = desiredDir;
         if (!canMoveDir(pacPixX, pacPixY, currentDir))
-    a324:	0affff15 	beq	9f80 <main+0x250>
+    a248:	0affff15 	beq	9ea4 <main+0x250>
             currentDir = DIR_NONE;
     }
 
     /* Si no puede moverse, simplemente repinta su sprite actual */
     if (currentDir == DIR_NONE) {
-    a328:	e3550004 	cmp	r5, #4
-    a32c:	0affff13 	beq	9f80 <main+0x250>
+    a24c:	e3550004 	cmp	r5, #4
+    a250:	0affff13 	beq	9ea4 <main+0x250>
         return;
     }
 
     /* c谩lculo de destino y animaci贸n */
     int tx = pacPixX, ty = pacPixY;
     if (currentDir == DIR_UP)    ty -= TW;
-    a330:	e3550000 	cmp	r5, #0
-    a334:	02473018 	subeq	r3, r7, #24
-    a338:	1a000086 	bne	a558 <main+0x828>
+    a254:	e3550000 	cmp	r5, #0
+    a258:	02473018 	subeq	r3, r7, #24
+    a25c:	1a000086 	bne	a47c <main+0x828>
                 pacPixX = X_OFFSET + teleC[destIdx] * TW;
                 pacPixY = Y_OFFSET + teleR[destIdx] * TW;
                 /* Cuando venga del primer O (srcIdx=0) gira a izquierda */
                 /* Cuando venga del segundo O (srcIdx=1) gira abajo */
                 if (srcIdx == 0) {
                     desiredDir = currentDir = DIR_LEFT;
-    a33c:	e0672003 	rsb	r2, r7, r3
-    a340:	e3520000 	cmp	r2, #0
-    a344:	b2622000 	rsblt	r2, r2, #0
+    a260:	e0672003 	rsb	r2, r7, r3
+    a264:	e3520000 	cmp	r2, #0
+    a268:	b2622000 	rsblt	r2, r2, #0
     return 11; /* fallback */
 }
 
 static void animatePacmanMove(int nx, int ny)
 {
     int dx    = (nx > pacPixX) ? STEP_PX : (nx < pacPixX ? -STEP_PX : 0);
-    a348:	e3a06000 	mov	r6, #0
+    a26c:	e3a06000 	mov	r6, #0
     int dy    = (ny > pacPixY) ? STEP_PX : (ny < pacPixY ? -STEP_PX : 0);
-    a34c:	e1570003 	cmp	r7, r3
+    a270:	e1570003 	cmp	r7, r3
     return 11; /* fallback */
 }
 
 static void animatePacmanMove(int nx, int ny)
 {
     int dx    = (nx > pacPixX) ? STEP_PX : (nx < pacPixX ? -STEP_PX : 0);
-    a350:	e3a09000 	mov	r9, #0
+    a274:	e3a09000 	mov	r9, #0
     int dy    = (ny > pacPixY) ? STEP_PX : (ny < pacPixY ? -STEP_PX : 0);
-    a354:	b3a0b002 	movlt	fp, #2
-    a358:	aa00008c 	bge	a590 <main+0x860>
+    a278:	b3a0b002 	movlt	fp, #2
+    a27c:	aa00008c 	bge	a4b4 <main+0x860>
     int steps = (abs(nx - pacPixX) + abs(ny - pacPixY)) / STEP_PX;
-    a35c:	e0866002 	add	r6, r6, r2
-    a360:	e1a060c6 	asr	r6, r6, #1
+    a280:	e0866002 	add	r6, r6, r2
+    a284:	e1a060c6 	asr	r6, r6, #1
     int i;
     for (i = 0; i < steps; i++) {
-    a364:	e3560000 	cmp	r6, #0
-    a368:	daffff0b 	ble	9f9c <main+0x26c>
-    a36c:	e3a05000 	mov	r5, #0
+    a288:	e3560000 	cmp	r6, #0
+    a28c:	daffff0b 	ble	9ec0 <main+0x26c>
+    a290:	e3a05000 	mov	r5, #0
         pacPixX += dx;
         pacPixY += dy;
         /* alterna boca */
         if (++pacMouthCounter >= PAC_MOUTH_TOGGLE_STEPS) {
             pacMouthOpen    = !pacMouthOpen;
             pacMouthCounter = 0;
-    a370:	e1a0000a 	mov	r0, sl
-    a374:	e1a01007 	mov	r1, r7
-    a378:	ea000000 	b	a380 <main+0x650>
+    a294:	e1a0000a 	mov	r0, sl
+    a298:	e1a01007 	mov	r1, r7
+    a29c:	ea000000 	b	a2a4 <main+0x650>
 {
     int dx    = (nx > pacPixX) ? STEP_PX : (nx < pacPixX ? -STEP_PX : 0);
     int dy    = (ny > pacPixY) ? STEP_PX : (ny < pacPixY ? -STEP_PX : 0);
     int steps = (abs(nx - pacPixX) + abs(ny - pacPixY)) / STEP_PX;
     int i;
     for (i = 0; i < steps; i++) {
-    a37c:	e8940003 	ldm	r4, {r0, r1}
+    a2a0:	e8940003 	ldm	r4, {r0, r1}
         restoreBackground(pacPixX, pacPixY);
-    a380:	ebffd9fd 	bl	b7c <restoreBackground>
+    a2a4:	ebffda34 	bl	b7c <restoreBackground>
         pacPixX += dx;
         pacPixY += dy;
         /* alterna boca */
         if (++pacMouthCounter >= PAC_MOUTH_TOGGLE_STEPS) {
-    a384:	e5943304 	ldr	r3, [r4, #772]	; 0x304
+    a2a8:	e5943304 	ldr	r3, [r4, #772]	; 0x304
     int dy    = (ny > pacPixY) ? STEP_PX : (ny < pacPixY ? -STEP_PX : 0);
     int steps = (abs(nx - pacPixX) + abs(ny - pacPixY)) / STEP_PX;
     int i;
     for (i = 0; i < steps; i++) {
         restoreBackground(pacPixX, pacPixY);
         pacPixX += dx;
-    a388:	e594a000 	ldr	sl, [r4]
+    a2ac:	e594a000 	ldr	sl, [r4]
         pacPixY += dy;
-    a38c:	e5947004 	ldr	r7, [r4, #4]
+    a2b0:	e5947004 	ldr	r7, [r4, #4]
         /* alterna boca */
         if (++pacMouthCounter >= PAC_MOUTH_TOGGLE_STEPS) {
-    a390:	e2833001 	add	r3, r3, #1
+    a2b4:	e2833001 	add	r3, r3, #1
     int dy    = (ny > pacPixY) ? STEP_PX : (ny < pacPixY ? -STEP_PX : 0);
     int steps = (abs(nx - pacPixX) + abs(ny - pacPixY)) / STEP_PX;
     int i;
     for (i = 0; i < steps; i++) {
         restoreBackground(pacPixX, pacPixY);
         pacPixX += dx;
-    a394:	e089a00a 	add	sl, r9, sl
+    a2b8:	e089a00a 	add	sl, r9, sl
         pacPixY += dy;
-    a398:	e08b7007 	add	r7, fp, r7
+    a2bc:	e08b7007 	add	r7, fp, r7
         /* alterna boca */
         if (++pacMouthCounter >= PAC_MOUTH_TOGGLE_STEPS) {
-    a39c:	e3530013 	cmp	r3, #19
+    a2c0:	e3530013 	cmp	r3, #19
 {
     int dx    = (nx > pacPixX) ? STEP_PX : (nx < pacPixX ? -STEP_PX : 0);
     int dy    = (ny > pacPixY) ? STEP_PX : (ny < pacPixY ? -STEP_PX : 0);
     int steps = (abs(nx - pacPixX) + abs(ny - pacPixY)) / STEP_PX;
     int i;
     for (i = 0; i < steps; i++) {
-    a3a0:	e2855001 	add	r5, r5, #1
+    a2c4:	e2855001 	add	r5, r5, #1
         restoreBackground(pacPixX, pacPixY);
         pacPixX += dx;
         pacPixY += dy;
         /* alterna boca */
         if (++pacMouthCounter >= PAC_MOUTH_TOGGLE_STEPS) {
-    a3a4:	e5843304 	str	r3, [r4, #772]	; 0x304
+    a2c8:	e5843304 	str	r3, [r4, #772]	; 0x304
     int dy    = (ny > pacPixY) ? STEP_PX : (ny < pacPixY ? -STEP_PX : 0);
     int steps = (abs(nx - pacPixX) + abs(ny - pacPixY)) / STEP_PX;
     int i;
     for (i = 0; i < steps; i++) {
         restoreBackground(pacPixX, pacPixY);
         pacPixX += dx;
-    a3a8:	e584a000 	str	sl, [r4]
+    a2cc:	e584a000 	str	sl, [r4]
         pacPixY += dy;
-    a3ac:	e5847004 	str	r7, [r4, #4]
+    a2d0:	e5847004 	str	r7, [r4, #4]
         /* alterna boca */
         if (++pacMouthCounter >= PAC_MOUTH_TOGGLE_STEPS) {
-    a3b0:	da000005 	ble	a3cc <main+0x69c>
+    a2d4:	da000005 	ble	a2f0 <main+0x69c>
             pacMouthOpen    = !pacMouthOpen;
-    a3b4:	e5d83000 	ldrb	r3, [r8]
+    a2d8:	e5d83000 	ldrb	r3, [r8]
             pacMouthCounter = 0;
-    a3b8:	e59fc3f4 	ldr	ip, [pc, #1012]	; a7b4 <main+0xa84>
+    a2dc:	e59fc3f4 	ldr	ip, [pc, #1012]	; a6d8 <main+0xa84>
         restoreBackground(pacPixX, pacPixY);
         pacPixX += dx;
         pacPixY += dy;
         /* alterna boca */
         if (++pacMouthCounter >= PAC_MOUTH_TOGGLE_STEPS) {
             pacMouthOpen    = !pacMouthOpen;
-    a3bc:	e2233001 	eor	r3, r3, #1
+    a2e0:	e2233001 	eor	r3, r3, #1
             pacMouthCounter = 0;
-    a3c0:	e3a00000 	mov	r0, #0
+    a2e4:	e3a00000 	mov	r0, #0
         restoreBackground(pacPixX, pacPixY);
         pacPixX += dx;
         pacPixY += dy;
         /* alterna boca */
         if (++pacMouthCounter >= PAC_MOUTH_TOGGLE_STEPS) {
             pacMouthOpen    = !pacMouthOpen;
-    a3c4:	e5c83000 	strb	r3, [r8]
+    a2e8:	e5c83000 	strb	r3, [r8]
             pacMouthCounter = 0;
-    a3c8:	e58c0304 	str	r0, [ip, #772]	; 0x304
+    a2ec:	e58c0304 	str	r0, [ip, #772]	; 0x304
         }
         /* dibuja seg煤n direcci贸n actual */
         int frame = getPacmanFrame(currentDir);
-    a3cc:	e5d80002 	ldrb	r0, [r8, #2]
-    a3d0:	ebffd89a 	bl	640 <getPacmanFrame>
+    a2f0:	e5d80002 	ldrb	r0, [r8, #2]
+    a2f4:	ebffd8d1 	bl	640 <getPacmanFrame>
         XPM_PintaAtxNyN(pacPixX, pacPixY, frame, pacman);
-    a3d4:	e1a01007 	mov	r1, r7
+    a2f8:	e1a01007 	mov	r1, r7
         if (++pacMouthCounter >= PAC_MOUTH_TOGGLE_STEPS) {
             pacMouthOpen    = !pacMouthOpen;
             pacMouthCounter = 0;
         }
         /* dibuja seg煤n direcci贸n actual */
         int frame = getPacmanFrame(currentDir);
-    a3d8:	e1a02000 	mov	r2, r0
+    a2fc:	e1a02000 	mov	r2, r0
         XPM_PintaAtxNyN(pacPixX, pacPixY, frame, pacman);
-    a3dc:	e59f33d8 	ldr	r3, [pc, #984]	; a7bc <main+0xa8c>
-    a3e0:	e1a0000a 	mov	r0, sl
-    a3e4:	ebfff7d3 	bl	8338 <XPM_PintaAtxNyN>
+    a300:	e59f33d8 	ldr	r3, [pc, #984]	; a6e0 <main+0xa8c>
+    a304:	e1a0000a 	mov	r0, sl
+    a308:	ebfff80a 	bl	8338 <XPM_PintaAtxNyN>
         if (PAC_DELAY_MS) _delay_ms(PAC_DELAY_MS);
-    a3e8:	e59f03e4 	ldr	r0, [pc, #996]	; a7d4 <main+0xaa4>
-    a3ec:	ebffd7db 	bl	360 <_delay_loop>
+    a30c:	e59f03e4 	ldr	r0, [pc, #996]	; a6f8 <main+0xaa4>
+    a310:	ebffd812 	bl	360 <_delay_loop>
 {
     int dx    = (nx > pacPixX) ? STEP_PX : (nx < pacPixX ? -STEP_PX : 0);
     int dy    = (ny > pacPixY) ? STEP_PX : (ny < pacPixY ? -STEP_PX : 0);
     int steps = (abs(nx - pacPixX) + abs(ny - pacPixY)) / STEP_PX;
     int i;
     for (i = 0; i < steps; i++) {
-    a3f0:	e1550006 	cmp	r5, r6
-    a3f4:	1affffe0 	bne	a37c <main+0x64c>
-    a3f8:	eafffee7 	b	9f9c <main+0x26c>
-    a3fc:	e3a06008 	mov	r6, #8
+    a314:	e1550006 	cmp	r5, r6
+    a318:	1affffe0 	bne	a2a0 <main+0x64c>
+    a31c:	eafffee7 	b	9ec0 <main+0x26c>
+    a320:	e3a06008 	mov	r6, #8
         Ghost *g = &ghosts[i];
 
         /* A veces elige nueva direcci贸n al azar */
         if (g->dir == DIR_NONE || (rand() & 7) == 0) {
             for (t = 0; t < 8; t++) {
                 Direction d = dirs[rand() % 4];
-    a400:	ebfffd19 	bl	986c <rand>
-    a404:	e1a03fc0 	asr	r3, r0, #31
-    a408:	e1a03f23 	lsr	r3, r3, #30
-    a40c:	e0800003 	add	r0, r0, r3
-    a410:	e2000003 	and	r0, r0, #3
-    a414:	e59fc3bc 	ldr	ip, [pc, #956]	; a7d8 <main+0xaa8>
-    a418:	e0633000 	rsb	r3, r3, r0
-    a41c:	e08c3003 	add	r3, ip, r3
-    a420:	e5d35264 	ldrb	r5, [r3, #612]	; 0x264
+    a324:	ebfffd19 	bl	9790 <rand>
+    a328:	e1a03fc0 	asr	r3, r0, #31
+    a32c:	e1a03f23 	lsr	r3, r3, #30
+    a330:	e0800003 	add	r0, r0, r3
+    a334:	e2000003 	and	r0, r0, #3
+    a338:	e59fc3bc 	ldr	ip, [pc, #956]	; a6fc <main+0xaa8>
+    a33c:	e0633000 	rsb	r3, r3, r0
+    a340:	e08c3003 	add	r3, ip, r3
+    a344:	e5d35264 	ldrb	r5, [r3, #612]	; 0x264
                 int nx = g->x + (d==DIR_RIGHT) - (d==DIR_LEFT);
-    a424:	e597b000 	ldr	fp, [r7]
+    a348:	e597b000 	ldr	fp, [r7]
                 int ny = g->y + (d==DIR_DOWN)  - (d==DIR_UP);
-    a428:	e5978004 	ldr	r8, [r7, #4]
+    a34c:	e5978004 	ldr	r8, [r7, #4]
 
         /* A veces elige nueva direcci贸n al azar */
         if (g->dir == DIR_NONE || (rand() & 7) == 0) {
             for (t = 0; t < 8; t++) {
                 Direction d = dirs[rand() % 4];
                 int nx = g->x + (d==DIR_RIGHT) - (d==DIR_LEFT);
-    a42c:	e3550003 	cmp	r5, #3
-    a430:	11a0900b 	movne	r9, fp
-    a434:	028b9001 	addeq	r9, fp, #1
+    a350:	e3550003 	cmp	r5, #3
+    a354:	11a0900b 	movne	r9, fp
+    a358:	028b9001 	addeq	r9, fp, #1
                 int ny = g->y + (d==DIR_DOWN)  - (d==DIR_UP);
-    a438:	e3550001 	cmp	r5, #1
-    a43c:	11a0a008 	movne	sl, r8
-    a440:	0288a001 	addeq	sl, r8, #1
+    a35c:	e3550001 	cmp	r5, #1
+    a360:	11a0a008 	movne	sl, r8
+    a364:	0288a001 	addeq	sl, r8, #1
 
         /* A veces elige nueva direcci贸n al azar */
         if (g->dir == DIR_NONE || (rand() & 7) == 0) {
             for (t = 0; t < 8; t++) {
                 Direction d = dirs[rand() % 4];
                 int nx = g->x + (d==DIR_RIGHT) - (d==DIR_LEFT);
-    a444:	e3550002 	cmp	r5, #2
-    a448:	02499001 	subeq	r9, r9, #1
+    a368:	e3550002 	cmp	r5, #2
+    a36c:	02499001 	subeq	r9, r9, #1
                 int ny = g->y + (d==DIR_DOWN)  - (d==DIR_UP);
-    a44c:	e3550000 	cmp	r5, #0
-    a450:	024aa001 	subeq	sl, sl, #1
+    a370:	e3550000 	cmp	r5, #0
+    a374:	024aa001 	subeq	sl, sl, #1
                 if (!wallAt(ny, nx)) {
-    a454:	e1a0000a 	mov	r0, sl
-    a458:	e1a01009 	mov	r1, r9
-    a45c:	ebffdb01 	bl	1068 <wallAt>
-    a460:	e3500000 	cmp	r0, #0
-    a464:	0a00004d 	beq	a5a0 <main+0x870>
+    a378:	e1a0000a 	mov	r0, sl
+    a37c:	e1a01009 	mov	r1, r9
+    a380:	ebffdb38 	bl	1068 <wallAt>
+    a384:	e3500000 	cmp	r0, #0
+    a388:	0a00004d 	beq	a4c4 <main+0x870>
         if (!ghostReleased[i]) continue;
         Ghost *g = &ghosts[i];
 
         /* A veces elige nueva direcci贸n al azar */
         if (g->dir == DIR_NONE || (rand() & 7) == 0) {
             for (t = 0; t < 8; t++) {
-    a468:	e2566001 	subs	r6, r6, #1
-    a46c:	1affffe3 	bne	a400 <main+0x6d0>
-    a470:	e5d73008 	ldrb	r3, [r7, #8]
-    a474:	e3530003 	cmp	r3, #3
-    a478:	11a0900b 	movne	r9, fp
-    a47c:	028b9001 	addeq	r9, fp, #1
-    a480:	e3530001 	cmp	r3, #1
-    a484:	11a0a008 	movne	sl, r8
-    a488:	0288a001 	addeq	sl, r8, #1
-    a48c:	e3530002 	cmp	r3, #2
-    a490:	02499001 	subeq	r9, r9, #1
-    a494:	e3530000 	cmp	r3, #0
-    a498:	024aa001 	subeq	sl, sl, #1
+    a38c:	e2566001 	subs	r6, r6, #1
+    a390:	1affffe3 	bne	a324 <main+0x6d0>
+    a394:	e5d73008 	ldrb	r3, [r7, #8]
+    a398:	e3530003 	cmp	r3, #3
+    a39c:	11a0900b 	movne	r9, fp
+    a3a0:	028b9001 	addeq	r9, fp, #1
+    a3a4:	e3530001 	cmp	r3, #1
+    a3a8:	11a0a008 	movne	sl, r8
+    a3ac:	0288a001 	addeq	sl, r8, #1
+    a3b0:	e3530002 	cmp	r3, #2
+    a3b4:	02499001 	subeq	r9, r9, #1
+    a3b8:	e3530000 	cmp	r3, #0
+    a3bc:	024aa001 	subeq	sl, sl, #1
 
         /* Intenta mover en esa direcci贸n */
         int nx = g->x + (g->dir==DIR_RIGHT) - (g->dir==DIR_LEFT);
         int ny = g->y + (g->dir==DIR_DOWN)  - (g->dir==DIR_UP);
 
         if (!wallAt(ny, nx) && (nx!=g->x || ny!=g->y))
-    a49c:	e1a0000a 	mov	r0, sl
-    a4a0:	e1a01009 	mov	r1, r9
-    a4a4:	ebffdaef 	bl	1068 <wallAt>
-    a4a8:	e3500000 	cmp	r0, #0
-    a4ac:	0afffeea 	beq	a05c <main+0x32c>
+    a3c0:	e1a0000a 	mov	r0, sl
+    a3c4:	e1a01009 	mov	r1, r9
+    a3c8:	ebffdb26 	bl	1068 <wallAt>
+    a3cc:	e3500000 	cmp	r0, #0
+    a3d0:	0afffeea 	beq	9f80 <main+0x32c>
             animateGhostMove(g, nx, ny);
         else
             g->dir = DIR_NONE;  /* colisi贸n: reinicia dir */
-    a4b0:	e3a03004 	mov	r3, #4
-    a4b4:	e5c73008 	strb	r3, [r7, #8]
-    a4b8:	eaffff48 	b	a1e0 <main+0x4b0>
+    a3d4:	e3a03004 	mov	r3, #4
+    a3d8:	e5c73008 	strb	r3, [r7, #8]
+    a3dc:	eaffff48 	b	a104 <main+0x4b0>
             {
                     int tx = (pacPixX - X_OFFSET + TW/2) / TW;
                     int ty = (pacPixY - Y_OFFSET + TW/2) / TW;
                     int g;
                     for (g = 0; g < GHOST_COUNT; g++) {
                         if (tx == ghosts[g].x && ty == ghosts[g].y) {
-    a4bc:	e5153004 	ldr	r3, [r5, #-4]
-    a4c0:	e153000a 	cmp	r3, sl
-    a4c4:	1affff66 	bne	a264 <main+0x534>
+    a3e0:	e5153004 	ldr	r3, [r5, #-4]
+    a3e4:	e153000a 	cmp	r3, sl
+    a3e8:	1affff66 	bne	a188 <main+0x534>
                             if (powerMode) {
-    a4c8:	e5d432e8 	ldrb	r3, [r4, #744]	; 0x2e8
-    a4cc:	e3530000 	cmp	r3, #0
-    a4d0:	1a00005d 	bne	a64c <main+0x91c>
+    a3ec:	e5d432e8 	ldrb	r3, [r4, #744]	; 0x2e8
+    a3f0:	e3530000 	cmp	r3, #0
+    a3f4:	1a00005d 	bne	a570 <main+0x91c>
                                 ghosts[g].under = EMPTY;
                                 map[origGhostY[g]][origGhostX[g]] = EMPTY;
                                 /* dibuja fantasma en casa */
                                 drawTile(origGhostY[g], origGhostX[g]);
                             } else {
                                 lives--; hudDirty = true;
-    a4d4:	e59f02d8 	ldr	r0, [pc, #728]	; a7b4 <main+0xa84>
-    a4d8:	e59032fc 	ldr	r3, [r0, #764]	; 0x2fc
-    a4dc:	e2433001 	sub	r3, r3, #1
+    a3f8:	e59f02d8 	ldr	r0, [pc, #728]	; a6d8 <main+0xa84>
+    a3fc:	e59032fc 	ldr	r3, [r0, #764]	; 0x2fc
+    a400:	e2433001 	sub	r3, r3, #1
                                 if (lives > 0) {
-    a4e0:	e3530000 	cmp	r3, #0
+    a404:	e3530000 	cmp	r3, #0
                                 ghosts[g].under = EMPTY;
                                 map[origGhostY[g]][origGhostX[g]] = EMPTY;
                                 /* dibuja fantasma en casa */
                                 drawTile(origGhostY[g], origGhostX[g]);
                             } else {
                                 lives--; hudDirty = true;
-    a4e4:	e58032fc 	str	r3, [r0, #764]	; 0x2fc
-    a4e8:	e5c89004 	strb	r9, [r8, #4]
+    a408:	e58032fc 	str	r3, [r0, #764]	; 0x2fc
+    a40c:	e5c89004 	strb	r9, [r8, #4]
                                 if (lives > 0) {
-    a4ec:	daffff5c 	ble	a264 <main+0x534>
+    a410:	daffff5c 	ble	a188 <main+0x534>
                                     restoreBackground(pacPixX, pacPixY);
-    a4f0:	e59f22bc 	ldr	r2, [pc, #700]	; a7b4 <main+0xa84>
-    a4f4:	e5900000 	ldr	r0, [r0]
-    a4f8:	e5921004 	ldr	r1, [r2, #4]
-    a4fc:	ebffd99e 	bl	b7c <restoreBackground>
+    a414:	e59f22bc 	ldr	r2, [pc, #700]	; a6d8 <main+0xa84>
+    a418:	e5900000 	ldr	r0, [r0]
+    a41c:	e5921004 	ldr	r1, [r2, #4]
+    a420:	ebffd9d5 	bl	b7c <restoreBackground>
                                     initGame(); dibuja_mapa(map); dibuja_hud();
-    a500:	ebffd9cf 	bl	c44 <initGame>
-    a504:	ebffdb1e 	bl	1184 <dibuja_mapa.isra.1>
-    a508:	ebffda9d 	bl	f84 <dibuja_hud>
-    a50c:	eaffff54 	b	a264 <main+0x534>
+    a424:	ebffda06 	bl	c44 <initGame>
+    a428:	ebffdb55 	bl	1184 <dibuja_mapa.isra.1>
+    a42c:	ebffdad4 	bl	f84 <dibuja_hud>
+    a430:	eaffff54 	b	a188 <main+0x534>
 
         /* Cambia direcci贸n si es posible */
         if (desiredDir != DIR_NONE && canMoveDir(pacPixX, pacPixY, desiredDir))
             currentDir = desiredDir;
         if (!canMoveDir(pacPixX, pacPixY, currentDir))
             currentDir = DIR_NONE;
-    a510:	e5d85002 	ldrb	r5, [r8, #2]
-    a514:	eaffff83 	b	a328 <main+0x5f8>
-
-    // Llamamos a la funci髇 principal para iniciar la partitura
-    PARTITURE_On(PARTITURE, numero_de_eventos, 90);
+    a434:	e5d85002 	ldrb	r5, [r8, #2]
+    a438:	eaffff83 	b	a24c <main+0x5f8>
+   
 }
 
+
+extern unsigned int NOTE[] ;
 int main(void)
-    a518:	e0877003 	add	r7, r7, r3
+    a43c:	e0877003 	add	r7, r7, r3
     int tx = (pacPixX - X_OFFSET + TW / 2) / TW;
     int ty = (pacPixY - Y_OFFSET + TW / 2) / TW;
     int g;
     for (g = 0; g < GHOST_COUNT; g++) {
         if (!ghostReleased[g]) continue;
         if (tx == ghosts[g].x && ty == ghosts[g].y) {
-    a51c:	e5977004 	ldr	r7, [r7, #4]
-    a520:	e1560007 	cmp	r6, r7
-    a524:	1affff66 	bne	a2c4 <main+0x594>
+    a440:	e5977004 	ldr	r7, [r7, #4]
+    a444:	e1560007 	cmp	r6, r7
+    a448:	1affff66 	bne	a1e8 <main+0x594>
             lives--; hudDirty = true;
-    a528:	e59c32fc 	ldr	r3, [ip, #764]	; 0x2fc
-    a52c:	e2433001 	sub	r3, r3, #1
+    a44c:	e59c32fc 	ldr	r3, [ip, #764]	; 0x2fc
+    a450:	e2433001 	sub	r3, r3, #1
             if (lives > 0) {
-    a530:	e3530000 	cmp	r3, #0
+    a454:	e3530000 	cmp	r3, #0
     int ty = (pacPixY - Y_OFFSET + TW / 2) / TW;
     int g;
     for (g = 0; g < GHOST_COUNT; g++) {
         if (!ghostReleased[g]) continue;
         if (tx == ghosts[g].x && ty == ghosts[g].y) {
             lives--; hudDirty = true;
-    a534:	e58c32fc 	str	r3, [ip, #764]	; 0x2fc
-    a538:	e3a03001 	mov	r3, #1
-    a53c:	e5c83004 	strb	r3, [r8, #4]
+    a458:	e58c32fc 	str	r3, [ip, #764]	; 0x2fc
+    a45c:	e3a03001 	mov	r3, #1
+    a460:	e5c83004 	strb	r3, [r8, #4]
             if (lives > 0) {
-    a540:	daffff65 	ble	a2dc <main+0x5ac>
+    a464:	daffff65 	ble	a200 <main+0x5ac>
                 restoreBackground(pacPixX, pacPixY);
-    a544:	ebffd98c 	bl	b7c <restoreBackground>
+    a468:	ebffd9c3 	bl	b7c <restoreBackground>
                 initGame(); dibuja_mapa(map); dibuja_hud();
-    a548:	ebffd9bd 	bl	c44 <initGame>
-    a54c:	ebffdb0c 	bl	1184 <dibuja_mapa.isra.1>
-    a550:	ebffda8b 	bl	f84 <dibuja_hud>
-    a554:	eaffff5d 	b	a2d0 <main+0x5a0>
+    a46c:	ebffd9f4 	bl	c44 <initGame>
+    a470:	ebffdb43 	bl	1184 <dibuja_mapa.isra.1>
+    a474:	ebffdac2 	bl	f84 <dibuja_hud>
+    a478:	eaffff5d 	b	a1f4 <main+0x5a0>
     }
 
     /* c谩lculo de destino y animaci贸n */
     int tx = pacPixX, ty = pacPixY;
     if (currentDir == DIR_UP)    ty -= TW;
     if (currentDir == DIR_DOWN)  ty += TW;
-    a558:	e3550001 	cmp	r5, #1
-    a55c:	02873018 	addeq	r3, r7, #24
-    a560:	0affff75 	beq	a33c <main+0x60c>
+    a47c:	e3550001 	cmp	r5, #1
+    a480:	02873018 	addeq	r3, r7, #24
+    a484:	0affff75 	beq	a260 <main+0x60c>
     if (currentDir == DIR_LEFT)  tx -= TW;
-    a564:	e3550002 	cmp	r5, #2
-    a568:	024a3018 	subeq	r3, sl, #24
-    a56c:	1a000081 	bne	a778 <main+0xa48>
+    a488:	e3550002 	cmp	r5, #2
+    a48c:	024a3018 	subeq	r3, sl, #24
+    a490:	1a000081 	bne	a69c <main+0xa48>
     return 11; /* fallback */
 }
 
 static void animatePacmanMove(int nx, int ny)
 {
     int dx    = (nx > pacPixX) ? STEP_PX : (nx < pacPixX ? -STEP_PX : 0);
-    a570:	e06a6003 	rsb	r6, sl, r3
-    a574:	e3560000 	cmp	r6, #0
-    a578:	b2666000 	rsblt	r6, r6, #0
-    a57c:	e153000a 	cmp	r3, sl
-    a580:	c3a09002 	movgt	r9, #2
-    a584:	da000044 	ble	a69c <main+0x96c>
-    a588:	e1a03007 	mov	r3, r7
-    a58c:	e3a02000 	mov	r2, #0
+    a494:	e06a6003 	rsb	r6, sl, r3
+    a498:	e3560000 	cmp	r6, #0
+    a49c:	b2666000 	rsblt	r6, r6, #0
+    a4a0:	e153000a 	cmp	r3, sl
+    a4a4:	c3a09002 	movgt	r9, #2
+    a4a8:	da000044 	ble	a5c0 <main+0x96c>
+    a4ac:	e1a03007 	mov	r3, r7
+    a4b0:	e3a02000 	mov	r2, #0
     int dy    = (ny > pacPixY) ? STEP_PX : (ny < pacPixY ? -STEP_PX : 0);
-    a590:	e1530007 	cmp	r3, r7
-    a594:	a3a0b000 	movge	fp, #0
-    a598:	b3e0b001 	mvnlt	fp, #1
-    a59c:	eaffff6e 	b	a35c <main+0x62c>
+    a4b4:	e1530007 	cmp	r3, r7
+    a4b8:	a3a0b000 	movge	fp, #0
+    a4bc:	b3e0b001 	mvnlt	fp, #1
+    a4c0:	eaffff6e 	b	a280 <main+0x62c>
             for (t = 0; t < 8; t++) {
                 Direction d = dirs[rand() % 4];
                 int nx = g->x + (d==DIR_RIGHT) - (d==DIR_LEFT);
                 int ny = g->y + (d==DIR_DOWN)  - (d==DIR_UP);
                 if (!wallAt(ny, nx)) {
                     g->dir = d;
-    a5a0:	e5c75008 	strb	r5, [r7, #8]
-    a5a4:	eafffea7 	b	a048 <main+0x318>
+    a4c4:	e5c75008 	strb	r5, [r7, #8]
+    a4c8:	eafffea7 	b	9f6c <main+0x318>
             moveGhosts();
             ghostStepCounter = 0;
         }
             if (++ghostReleaseStepCounter >= GHOST_RELEASE_INTERVAL_STEPS
                     && ghostsReleasedCount < GHOST_COUNT) {
                     ghostReleased[ghostsReleasedCount++] = true;
-    a5a8:	e0872003 	add	r2, r7, r3
-    a5ac:	e3a01001 	mov	r1, #1
-    a5b0:	e2833001 	add	r3, r3, #1
-    a5b4:	e58732f4 	str	r3, [r7, #756]	; 0x2f4
+    a4cc:	e0872003 	add	r2, r7, r3
+    a4d0:	e3a01001 	mov	r1, #1
+    a4d4:	e2833001 	add	r3, r3, #1
+    a4d8:	e58732f4 	str	r3, [r7, #756]	; 0x2f4
 		    VibratorON(200);
-    a5b8:	e3a000c8 	mov	r0, #200	; 0xc8
+    a4dc:	e3a000c8 	mov	r0, #200	; 0xc8
             moveGhosts();
             ghostStepCounter = 0;
         }
             if (++ghostReleaseStepCounter >= GHOST_RELEASE_INTERVAL_STEPS
                     && ghostsReleasedCount < GHOST_COUNT) {
                     ghostReleased[ghostsReleasedCount++] = true;
-    a5bc:	e5c212f8 	strb	r1, [r2, #760]	; 0x2f8
+    a4e0:	e5c212f8 	strb	r1, [r2, #760]	; 0x2f8
 		    VibratorON(200);
-    a5c0:	ebfff839 	bl	86ac <VibratorON>
+    a4e4:	ebfff870 	bl	86ac <VibratorON>
                     ghostReleaseStepCounter = 0;
-    a5c4:	e3a03000 	mov	r3, #0
-    a5c8:	e58732f0 	str	r3, [r7, #752]	; 0x2f0
-    a5cc:	eaffff12 	b	a21c <main+0x4ec>
+    a4e8:	e3a03000 	mov	r3, #0
+    a4ec:	e58732f0 	str	r3, [r7, #752]	; 0x2f0
+    a4f0:	eaffff12 	b	a140 <main+0x4ec>
         /* Si acabamos de teleportar, reseteamos la flag y seguimos movimiento */
         if (justTeleported) {
                 justTeleported = false;
             }
             /* Teletransporte: si estamos en 'O' y no a煤n teleportando */
             else if (map[cy][cx] == FDOT) {
-    a5d0:	e353004f 	cmp	r3, #79	; 0x4f
-    a5d4:	1afffe52 	bne	9f24 <main+0x1f4>
+    a4f4:	e353004f 	cmp	r3, #79	; 0x4f
+    a4f8:	1afffe52 	bne	9e48 <main+0x1f4>
                 /* 铆ndice de origen y destino */
                 int srcIdx  = (cy == teleR[0] && cx == teleC[0]) ? 0 : 1;
-    a5d8:	e59fa1d4 	ldr	sl, [pc, #468]	; a7b4 <main+0xa84>
-    a5dc:	e59a3270 	ldr	r3, [sl, #624]	; 0x270
-    a5e0:	e1560003 	cmp	r6, r3
-    a5e4:	0a000051 	beq	a730 <main+0xa00>
+    a4fc:	e59fa1d4 	ldr	sl, [pc, #468]	; a6d8 <main+0xa84>
+    a500:	e59a3270 	ldr	r3, [sl, #624]	; 0x270
+    a504:	e1560003 	cmp	r6, r3
+    a508:	0a000051 	beq	a654 <main+0xa00>
                 int destIdx = 1 - srcIdx;
                 /* Limpia el sprite en la casilla actual */
                 restoreBackground(pacPixX, pacPixY);
-    a5e8:	e8940003 	ldm	r4, {r0, r1}
-    a5ec:	ebffd962 	bl	b7c <restoreBackground>
+    a50c:	e8940003 	ldm	r4, {r0, r1}
+    a510:	ebffd999 	bl	b7c <restoreBackground>
                 /* Mueve a la otra salida */
                 pacPixX = X_OFFSET + teleC[destIdx] * TW;
-    a5f0:	e5941278 	ldr	r1, [r4, #632]	; 0x278
+    a514:	e5941278 	ldr	r1, [r4, #632]	; 0x278
                 pacPixY = Y_OFFSET + teleR[destIdx] * TW;
-    a5f4:	e5942270 	ldr	r2, [r4, #624]	; 0x270
+    a518:	e5942270 	ldr	r2, [r4, #624]	; 0x270
                 int srcIdx  = (cy == teleR[0] && cx == teleC[0]) ? 0 : 1;
                 int destIdx = 1 - srcIdx;
                 /* Limpia el sprite en la casilla actual */
                 restoreBackground(pacPixX, pacPixY);
                 /* Mueve a la otra salida */
                 pacPixX = X_OFFSET + teleC[destIdx] * TW;
-    a5f8:	e3a03018 	mov	r3, #24
-    a5fc:	e0010193 	mul	r1, r3, r1
+    a51c:	e3a03018 	mov	r3, #24
+    a520:	e0010193 	mul	r1, r3, r1
                 pacPixY = Y_OFFSET + teleR[destIdx] * TW;
-    a600:	e0020293 	mul	r2, r3, r2
+    a524:	e0020293 	mul	r2, r3, r2
                 int srcIdx  = (cy == teleR[0] && cx == teleC[0]) ? 0 : 1;
                 int destIdx = 1 - srcIdx;
                 /* Limpia el sprite en la casilla actual */
                 restoreBackground(pacPixX, pacPixY);
                 /* Mueve a la otra salida */
                 pacPixX = X_OFFSET + teleC[destIdx] * TW;
-    a604:	e2811004 	add	r1, r1, #4
+    a528:	e2811004 	add	r1, r1, #4
                 pacPixY = Y_OFFSET + teleR[destIdx] * TW;
-    a608:	e2822030 	add	r2, r2, #48	; 0x30
+    a52c:	e2822030 	add	r2, r2, #48	; 0x30
                 /* Cuando venga del primer O (srcIdx=0) gira a izquierda */
                 /* Cuando venga del segundo O (srcIdx=1) gira abajo */
                 if (srcIdx == 0) {
                     desiredDir = currentDir = DIR_LEFT;
                 } else {
                     desiredDir = currentDir = DIR_DOWN;
-    a60c:	e3a03001 	mov	r3, #1
+    a530:	e3a03001 	mov	r3, #1
                 int destIdx = 1 - srcIdx;
                 /* Limpia el sprite en la casilla actual */
                 restoreBackground(pacPixX, pacPixY);
                 /* Mueve a la otra salida */
                 pacPixX = X_OFFSET + teleC[destIdx] * TW;
                 pacPixY = Y_OFFSET + teleR[destIdx] * TW;
-    a610:	e8840006 	stm	r4, {r1, r2}
+    a534:	e8840006 	stm	r4, {r1, r2}
                 /* Cuando venga del primer O (srcIdx=0) gira a izquierda */
                 /* Cuando venga del segundo O (srcIdx=1) gira abajo */
                 if (srcIdx == 0) {
                     desiredDir = currentDir = DIR_LEFT;
                 } else {
                     desiredDir = currentDir = DIR_DOWN;
-    a614:	e5c83002 	strb	r3, [r8, #2]
-    a618:	e5c83003 	strb	r3, [r8, #3]
+    a538:	e5c83002 	strb	r3, [r8, #2]
+    a53c:	e5c83003 	strb	r3, [r8, #3]
                 }
                 /* Marcamos para no retrigger */
                 justTeleported = true;
-    a61c:	e3a03001 	mov	r3, #1
-    a620:	e5c43280 	strb	r3, [r4, #640]	; 0x280
+    a540:	e3a03001 	mov	r3, #1
+    a544:	e5c43280 	strb	r3, [r4, #640]	; 0x280
 
 static void drawPacman(int px, int py)
 {
     /* usa currentDir (o derecha si NONE) para orientar */
     Direction dir = currentDir;
     int tile= getPacmanFrame(dir);
-    a624:	e5d80002 	ldrb	r0, [r8, #2]
-    a628:	ebffd804 	bl	640 <getPacmanFrame>
+    a548:	e5d80002 	ldrb	r0, [r8, #2]
+    a54c:	ebffd83b 	bl	640 <getPacmanFrame>
                     desiredDir = currentDir = DIR_DOWN;
                 }
                 /* Marcamos para no retrigger */
                 justTeleported = true;
                 /* Dibuja Pac-Man en la nueva posici贸n */
                 drawPacman(pacPixX, pacPixY);
-    a62c:	e5946000 	ldr	r6, [r4]
-    a630:	e5945004 	ldr	r5, [r4, #4]
+    a550:	e5946000 	ldr	r6, [r4]
+    a554:	e5945004 	ldr	r5, [r4, #4]
 
 static void drawPacman(int px, int py)
 {
     /* usa currentDir (o derecha si NONE) para orientar */
     Direction dir = currentDir;
     int tile= getPacmanFrame(dir);
-    a634:	e1a02000 	mov	r2, r0
+    a558:	e1a02000 	mov	r2, r0
     XPM_PintaAtxNyN(px, py, tile, pacman);
-    a638:	e1a01005 	mov	r1, r5
-    a63c:	e1a00006 	mov	r0, r6
-    a640:	e59f3174 	ldr	r3, [pc, #372]	; a7bc <main+0xa8c>
-    a644:	ebfff73b 	bl	8338 <XPM_PintaAtxNyN>
-    a648:	eafffe53 	b	9f9c <main+0x26c>
+    a55c:	e1a01005 	mov	r1, r5
+    a560:	e1a00006 	mov	r0, r6
+    a564:	e59f3174 	ldr	r3, [pc, #372]	; a6e0 <main+0xa8c>
+    a568:	ebfff772 	bl	8338 <XPM_PintaAtxNyN>
+    a56c:	eafffe53 	b	9ec0 <main+0x26c>
                     int g;
                     for (g = 0; g < GHOST_COUNT; g++) {
                         if (tx == ghosts[g].x && ty == ghosts[g].y) {
                             if (powerMode) {
                                 /* come fantasma: respawn */
                                 restoreBackground(pacPixX, pacPixY);
-    a64c:	e59f2160 	ldr	r2, [pc, #352]	; a7b4 <main+0xa84>
-    a650:	e8920003 	ldm	r2, {r0, r1}
-    a654:	ebffd948 	bl	b7c <restoreBackground>
+    a570:	e59f2160 	ldr	r2, [pc, #352]	; a6d8 <main+0xa84>
+    a574:	e8920003 	ldm	r2, {r0, r1}
+    a578:	ebffd97f 	bl	b7c <restoreBackground>
                                 ghosts[g].x = origGhostX[g];
                                 ghosts[g].y = origGhostY[g];
-    a658:	e59f317c 	ldr	r3, [pc, #380]	; a7dc <main+0xaac>
-    a65c:	e7963003 	ldr	r3, [r6, r3]
+    a57c:	e59f317c 	ldr	r3, [pc, #380]	; a700 <main+0xaac>
+    a580:	e7963003 	ldr	r3, [r6, r3]
                                 ghosts[g].dir   = DIR_NONE;
                                 ghosts[g].under = EMPTY;
                                 map[origGhostY[g]][origGhostX[g]] = EMPTY;
-    a660:	e59fc14c 	ldr	ip, [pc, #332]	; a7b4 <main+0xa84>
+    a584:	e59fc14c 	ldr	ip, [pc, #332]	; a6d8 <main+0xa84>
                     for (g = 0; g < GHOST_COUNT; g++) {
                         if (tx == ghosts[g].x && ty == ghosts[g].y) {
                             if (powerMode) {
                                 /* come fantasma: respawn */
                                 restoreBackground(pacPixX, pacPixY);
                                 ghosts[g].x = origGhostX[g];
-    a664:	e796200b 	ldr	r2, [r6, fp]
+    a588:	e796200b 	ldr	r2, [r6, fp]
                                 ghosts[g].y = origGhostY[g];
                                 ghosts[g].dir   = DIR_NONE;
                                 ghosts[g].under = EMPTY;
                                 map[origGhostY[g]][origGhostX[g]] = EMPTY;
-    a668:	e083e203 	add	lr, r3, r3, lsl #4
-    a66c:	e08ce08e 	add	lr, ip, lr, lsl #1
-    a670:	e08ee002 	add	lr, lr, r2
+    a58c:	e083e203 	add	lr, r3, r3, lsl #4
+    a590:	e08ce08e 	add	lr, ip, lr, lsl #1
+    a594:	e08ee002 	add	lr, lr, r2
                                 /* come fantasma: respawn */
                                 restoreBackground(pacPixX, pacPixY);
                                 ghosts[g].x = origGhostX[g];
                                 ghosts[g].y = origGhostY[g];
                                 ghosts[g].dir   = DIR_NONE;
                                 ghosts[g].under = EMPTY;
-    a674:	e3a0c045 	mov	ip, #69	; 0x45
+    a598:	e3a0c045 	mov	ip, #69	; 0x45
                                 map[origGhostY[g]][origGhostX[g]] = EMPTY;
                                 /* dibuja fantasma en casa */
                                 drawTile(origGhostY[g], origGhostX[g]);
-    a678:	e1a00003 	mov	r0, r3
+    a59c:	e1a00003 	mov	r0, r3
                         if (tx == ghosts[g].x && ty == ghosts[g].y) {
                             if (powerMode) {
                                 /* come fantasma: respawn */
                                 restoreBackground(pacPixX, pacPixY);
                                 ghosts[g].x = origGhostX[g];
                                 ghosts[g].y = origGhostY[g];
-    a67c:	e905000c 	stmdb	r5, {r2, r3}
+    a5a0:	e905000c 	stmdb	r5, {r2, r3}
                                 ghosts[g].dir   = DIR_NONE;
-    a680:	e3a03004 	mov	r3, #4
+    a5a4:	e3a03004 	mov	r3, #4
                                 ghosts[g].under = EMPTY;
                                 map[origGhostY[g]][origGhostX[g]] = EMPTY;
                                 /* dibuja fantasma en casa */
                                 drawTile(origGhostY[g], origGhostX[g]);
-    a684:	e1a01002 	mov	r1, r2
+    a5a8:	e1a01002 	mov	r1, r2
                             if (powerMode) {
                                 /* come fantasma: respawn */
                                 restoreBackground(pacPixX, pacPixY);
                                 ghosts[g].x = origGhostX[g];
                                 ghosts[g].y = origGhostY[g];
                                 ghosts[g].dir   = DIR_NONE;
-    a688:	e5c53000 	strb	r3, [r5]
+    a5ac:	e5c53000 	strb	r3, [r5]
                                 ghosts[g].under = EMPTY;
-    a68c:	e5c5c001 	strb	ip, [r5, #1]
+    a5b0:	e5c5c001 	strb	ip, [r5, #1]
                                 map[origGhostY[g]][origGhostX[g]] = EMPTY;
-    a690:	e5cec008 	strb	ip, [lr, #8]
+    a5b4:	e5cec008 	strb	ip, [lr, #8]
                                 /* dibuja fantasma en casa */
                                 drawTile(origGhostY[g], origGhostX[g]);
-    a694:	ebffd88a 	bl	8c4 <drawTile>
-    a698:	eafffef1 	b	a264 <main+0x534>
+    a5b8:	ebffd8c1 	bl	8c4 <drawTile>
+    a5bc:	eafffef1 	b	a188 <main+0x534>
     return 11; /* fallback */
 }
 
 static void animatePacmanMove(int nx, int ny)
 {
     int dx    = (nx > pacPixX) ? STEP_PX : (nx < pacPixX ? -STEP_PX : 0);
-    a69c:	e153000a 	cmp	r3, sl
-    a6a0:	b3e09001 	mvnlt	r9, #1
-    a6a4:	baffffb7 	blt	a588 <main+0x858>
-    a6a8:	e1a03007 	mov	r3, r7
-    a6ac:	e3a02000 	mov	r2, #0
-    a6b0:	eaffff25 	b	a34c <main+0x61c>
+    a5c0:	e153000a 	cmp	r3, sl
+    a5c4:	b3e09001 	mvnlt	r9, #1
+    a5c8:	baffffb7 	blt	a4ac <main+0x858>
+    a5cc:	e1a03007 	mov	r3, r7
+    a5d0:	e3a02000 	mov	r2, #0
+    a5d4:	eaffff25 	b	a270 <main+0x61c>
         int cx = (pacPixX - X_OFFSET) / TW;
         int cy = (pacPixY - Y_OFFSET) / TW;
 
     /* Power-up: si come 'V' */
     if (map[cy][cx] == POWER_UP) {
             map[cy][cx] = EMPTY;
-    a6b4:	e3a07022 	mov	r7, #34	; 0x22
-    a6b8:	e0270796 	mla	r7, r6, r7, r0
-    a6bc:	e3a03045 	mov	r3, #69	; 0x45
-    a6c0:	e0877005 	add	r7, r7, r5
+    a5d8:	e3a07022 	mov	r7, #34	; 0x22
+    a5dc:	e0270796 	mla	r7, r6, r7, r0
+    a5e0:	e3a03045 	mov	r3, #69	; 0x45
+    a5e4:	e0877005 	add	r7, r7, r5
             drawTile(cy, cx);
-    a6c4:	e1a01005 	mov	r1, r5
+    a5e8:	e1a01005 	mov	r1, r5
         int cx = (pacPixX - X_OFFSET) / TW;
         int cy = (pacPixY - Y_OFFSET) / TW;
 
     /* Power-up: si come 'V' */
     if (map[cy][cx] == POWER_UP) {
             map[cy][cx] = EMPTY;
-    a6c8:	e5c73008 	strb	r3, [r7, #8]
+    a5ec:	e5c73008 	strb	r3, [r7, #8]
             drawTile(cy, cx);
-    a6cc:	e1a00006 	mov	r0, r6
-    a6d0:	ebffd87b 	bl	8c4 <drawTile>
+    a5f0:	e1a00006 	mov	r0, r6
+    a5f4:	ebffd8b2 	bl	8c4 <drawTile>
             powerMode        = true;
-    a6d4:	e59f10d8 	ldr	r1, [pc, #216]	; a7b4 <main+0xa84>
-    a6d8:	e3a03001 	mov	r3, #1
-    a6dc:	e5c132e8 	strb	r3, [r1, #744]	; 0x2e8
+    a5f8:	e59f10d8 	ldr	r1, [pc, #216]	; a6d8 <main+0xa84>
+    a5fc:	e3a03001 	mov	r3, #1
+    a600:	e5c132e8 	strb	r3, [r1, #744]	; 0x2e8
             powerTickCounter = 0;
-    a6e0:	e58192ec 	str	r9, [r1, #748]	; 0x2ec
-    a6e4:	e5d73008 	ldrb	r3, [r7, #8]
-    a6e8:	eafffe07 	b	9f0c <main+0x1dc>
+    a604:	e58192ec 	str	r9, [r1, #748]	; 0x2ec
+    a608:	e5d73008 	ldrb	r3, [r7, #8]
+    a60c:	eafffe07 	b	9e30 <main+0x1dc>
                 drawPacman(pacPixX, pacPixY);
                 return;
             }
         /* Come moneda */
         if (map[cy][cx] == COIN) {
             map[cy][cx] = EMPTY;
-    a6ec:	e3a03022 	mov	r3, #34	; 0x22
-    a6f0:	e0234396 	mla	r3, r6, r3, r4
-    a6f4:	e3a02045 	mov	r2, #69	; 0x45
-    a6f8:	e0833005 	add	r3, r3, r5
-    a6fc:	e5c32008 	strb	r2, [r3, #8]
+    a610:	e3a03022 	mov	r3, #34	; 0x22
+    a614:	e0234396 	mla	r3, r6, r3, r4
+    a618:	e3a02045 	mov	r2, #69	; 0x45
+    a61c:	e0833005 	add	r3, r3, r5
+    a620:	e5c32008 	strb	r2, [r3, #8]
             drawTile(cy, cx);
-    a700:	e1a00006 	mov	r0, r6
-    a704:	e1a01005 	mov	r1, r5
-    a708:	ebffd86d 	bl	8c4 <drawTile>
+    a624:	e1a00006 	mov	r0, r6
+    a628:	e1a01005 	mov	r1, r5
+    a62c:	ebffd8a4 	bl	8c4 <drawTile>
             score++; totalCoins--; hudDirty = true;
-    a70c:	e59432c4 	ldr	r3, [r4, #708]	; 0x2c4
-    a710:	e5942300 	ldr	r2, [r4, #768]	; 0x300
-    a714:	e2433001 	sub	r3, r3, #1
-    a718:	e2822001 	add	r2, r2, #1
-    a71c:	e58432c4 	str	r3, [r4, #708]	; 0x2c4
-    a720:	e3a03001 	mov	r3, #1
-    a724:	e5842300 	str	r2, [r4, #768]	; 0x300
-    a728:	e5c83004 	strb	r3, [r8, #4]
-    a72c:	eafffdfe 	b	9f2c <main+0x1fc>
+    a630:	e59432c4 	ldr	r3, [r4, #708]	; 0x2c4
+    a634:	e5942300 	ldr	r2, [r4, #768]	; 0x300
+    a638:	e2433001 	sub	r3, r3, #1
+    a63c:	e2822001 	add	r2, r2, #1
+    a640:	e58432c4 	str	r3, [r4, #708]	; 0x2c4
+    a644:	e3a03001 	mov	r3, #1
+    a648:	e5842300 	str	r2, [r4, #768]	; 0x300
+    a64c:	e5c83004 	strb	r3, [r8, #4]
+    a650:	eafffdfe 	b	9e50 <main+0x1fc>
                 justTeleported = false;
             }
             /* Teletransporte: si estamos en 'O' y no a煤n teleportando */
             else if (map[cy][cx] == FDOT) {
                 /* 铆ndice de origen y destino */
                 int srcIdx  = (cy == teleR[0] && cx == teleC[0]) ? 0 : 1;
-    a730:	e59a3278 	ldr	r3, [sl, #632]	; 0x278
-    a734:	e1550003 	cmp	r5, r3
-    a738:	1affffaa 	bne	a5e8 <main+0x8b8>
+    a654:	e59a3278 	ldr	r3, [sl, #632]	; 0x278
+    a658:	e1550003 	cmp	r5, r3
+    a65c:	1affffaa 	bne	a50c <main+0x8b8>
                 int destIdx = 1 - srcIdx;
                 /* Limpia el sprite en la casilla actual */
                 restoreBackground(pacPixX, pacPixY);
-    a73c:	e59fa070 	ldr	sl, [pc, #112]	; a7b4 <main+0xa84>
-    a740:	e89a0003 	ldm	sl, {r0, r1}
-    a744:	ebffd90c 	bl	b7c <restoreBackground>
+    a660:	e59fa070 	ldr	sl, [pc, #112]	; a6d8 <main+0xa84>
+    a664:	e89a0003 	ldm	sl, {r0, r1}
+    a668:	ebffd943 	bl	b7c <restoreBackground>
                 /* Mueve a la otra salida */
                 pacPixX = X_OFFSET + teleC[destIdx] * TW;
-    a748:	e59a127c 	ldr	r1, [sl, #636]	; 0x27c
+    a66c:	e59a127c 	ldr	r1, [sl, #636]	; 0x27c
                 pacPixY = Y_OFFSET + teleR[destIdx] * TW;
-    a74c:	e59a2274 	ldr	r2, [sl, #628]	; 0x274
+    a670:	e59a2274 	ldr	r2, [sl, #628]	; 0x274
                 int srcIdx  = (cy == teleR[0] && cx == teleC[0]) ? 0 : 1;
                 int destIdx = 1 - srcIdx;
                 /* Limpia el sprite en la casilla actual */
                 restoreBackground(pacPixX, pacPixY);
                 /* Mueve a la otra salida */
                 pacPixX = X_OFFSET + teleC[destIdx] * TW;
-    a750:	e3a03018 	mov	r3, #24
-    a754:	e0010193 	mul	r1, r3, r1
+    a674:	e3a03018 	mov	r3, #24
+    a678:	e0010193 	mul	r1, r3, r1
                 pacPixY = Y_OFFSET + teleR[destIdx] * TW;
-    a758:	e0020293 	mul	r2, r3, r2
+    a67c:	e0020293 	mul	r2, r3, r2
                 int srcIdx  = (cy == teleR[0] && cx == teleC[0]) ? 0 : 1;
                 int destIdx = 1 - srcIdx;
                 /* Limpia el sprite en la casilla actual */
                 restoreBackground(pacPixX, pacPixY);
                 /* Mueve a la otra salida */
                 pacPixX = X_OFFSET + teleC[destIdx] * TW;
-    a75c:	e2811004 	add	r1, r1, #4
+    a680:	e2811004 	add	r1, r1, #4
                 pacPixY = Y_OFFSET + teleR[destIdx] * TW;
                 /* Cuando venga del primer O (srcIdx=0) gira a izquierda */
                 /* Cuando venga del segundo O (srcIdx=1) gira abajo */
                 if (srcIdx == 0) {
                     desiredDir = currentDir = DIR_LEFT;
-    a760:	e3a03002 	mov	r3, #2
+    a684:	e3a03002 	mov	r3, #2
                 int destIdx = 1 - srcIdx;
                 /* Limpia el sprite en la casilla actual */
                 restoreBackground(pacPixX, pacPixY);
                 /* Mueve a la otra salida */
                 pacPixX = X_OFFSET + teleC[destIdx] * TW;
                 pacPixY = Y_OFFSET + teleR[destIdx] * TW;
-    a764:	e2822030 	add	r2, r2, #48	; 0x30
-    a768:	e88a0006 	stm	sl, {r1, r2}
+    a688:	e2822030 	add	r2, r2, #48	; 0x30
+    a68c:	e88a0006 	stm	sl, {r1, r2}
                 /* Cuando venga del primer O (srcIdx=0) gira a izquierda */
                 /* Cuando venga del segundo O (srcIdx=1) gira abajo */
                 if (srcIdx == 0) {
                     desiredDir = currentDir = DIR_LEFT;
-    a76c:	e5c83002 	strb	r3, [r8, #2]
-    a770:	e5c83003 	strb	r3, [r8, #3]
-    a774:	eaffffa8 	b	a61c <main+0x8ec>
+    a690:	e5c83002 	strb	r3, [r8, #2]
+    a694:	e5c83003 	strb	r3, [r8, #3]
+    a698:	eaffffa8 	b	a540 <main+0x8ec>
     /* c谩lculo de destino y animaci贸n */
     int tx = pacPixX, ty = pacPixY;
     if (currentDir == DIR_UP)    ty -= TW;
     if (currentDir == DIR_DOWN)  ty += TW;
     if (currentDir == DIR_LEFT)  tx -= TW;
     if (currentDir == DIR_RIGHT) tx += TW;
-    a778:	e3550003 	cmp	r5, #3
-    a77c:	028a3018 	addeq	r3, sl, #24
-    a780:	0affff7a 	beq	a570 <main+0x840>
-    a784:	e1a03007 	mov	r3, r7
-    a788:	eafffeeb 	b	a33c <main+0x60c>
-    a78c:	e01fc000 	.word	0xe01fc000
-    a790:	3fffcfff 	.word	0x3fffcfff
-    a794:	e002c000 	.word	0xe002c000
-    a798:	00029505 	.word	0x00029505
-    a79c:	00167fc3 	.word	0x00167fc3
-    a7a0:	0000b840 	.word	0x0000b840
-    a7a4:	40001278 	.word	0x40001278
-    a7a8:	4000127c 	.word	0x4000127c
-    a7ac:	4000135c 	.word	0x4000135c
-    a7b0:	40001360 	.word	0x40001360
-    a7b4:	40000f68 	.word	0x40000f68
-    a7b8:	400011ec 	.word	0x400011ec
-    a7bc:	40000174 	.word	0x40000174
-    a7c0:	40000008 	.word	0x40000008
-    a7c4:	2aaaaaab 	.word	0x2aaaaaab
-    a7c8:	40001260 	.word	0x40001260
-    a7cc:	400011f4 	.word	0x400011f4
-    a7d0:	4000125f 	.word	0x4000125f
-    a7d4:	0001932e 	.word	0x0001932e
-    a7d8:	0000a7e0 	.word	0x0000a7e0
-    a7dc:	40001240 	.word	0x40001240
+    a69c:	e3550003 	cmp	r5, #3
+    a6a0:	028a3018 	addeq	r3, sl, #24
+    a6a4:	0affff7a 	beq	a494 <main+0x840>
+    a6a8:	e1a03007 	mov	r3, r7
+    a6ac:	eafffeeb 	b	a260 <main+0x60c>
+    a6b0:	e01fc000 	.word	0xe01fc000
+    a6b4:	3fffcfff 	.word	0x3fffcfff
+    a6b8:	e002c000 	.word	0xe002c000
+    a6bc:	00029505 	.word	0x00029505
+    a6c0:	00167fc3 	.word	0x00167fc3
+    a6c4:	0000b764 	.word	0x0000b764
+    a6c8:	40001388 	.word	0x40001388
+    a6cc:	4000138c 	.word	0x4000138c
+    a6d0:	4000146c 	.word	0x4000146c
+    a6d4:	40001470 	.word	0x40001470
+    a6d8:	40001078 	.word	0x40001078
+    a6dc:	400012fc 	.word	0x400012fc
+    a6e0:	40000174 	.word	0x40000174
+    a6e4:	40000008 	.word	0x40000008
+    a6e8:	2aaaaaab 	.word	0x2aaaaaab
+    a6ec:	40001370 	.word	0x40001370
+    a6f0:	40001304 	.word	0x40001304
+    a6f4:	4000136f 	.word	0x4000136f
+    a6f8:	0001932e 	.word	0x0001932e
+    a6fc:	0000a704 	.word	0x0000a704
+    a700:	40001350 	.word	0x40001350
 
-0000a7e0 <originalMap>:
-    a7e0:	3838384d 55383838 38384d4f 45455538     M888888UOM888UEE
-    a7f0:	38384d45 38383838 38383838 38383846     EM8888888888F888
-    a800:	56390055 43434350 39453943 54434343     U.9VPCCCC9E9CCCT
-    a810:	49383838 43434343 43434343 43394343     888ICCCCCCCCCC9C
-    a820:	00395643 38414339 39434238 59433945     CV9.9CA88BC9E9CY
-    a830:	43434343 4d434343 38463838 43553838     CCCCCCCM88F888UC
-    a840:	43594339 43390039 43434343 5a435a43     9CYC9.9CCCCCCZCZ
-    a850:	38384a43 43434238 43564c41 4343435a     CJ888BCCALVCZCCC
-    a860:	435a435a 00394339 5538384a 43434343     ZCZC9C9.J88UCCCC
-    a870:	39434343 43434343 39434343 43434343     CCC9CCCCCCC9CCCC
-    a880:	43434359 43394343 43390039 41435a43     YCCCCC9C9.9CCZCA
-    a890:	42383838 41435a43 42383838 41435a43     888BCZCA888BCZCA
-    a8a0:	46483838 38383838 00394349 43434339     88HF8888IC9.9CCC
-    a8b0:	43434343 43474343 43434343 43434343     CCCCCCGCCCCCCCCC
-    a8c0:	43434343 43433943 43434343 43390039     CCCCC9CCCCCC9.9C
-    a8d0:	5538384d 384d4343 43553838 3838384d     M88UCCM888UCM888
-    a8e0:	384d4342 39434238 4d435943 00493838     BCM88BC9CYCM88I.
-    a8f0:	45394339 43555445 47474739 43394339     9C9EETUC9GGG9C9C
-    a900:	43434343 43434339 39435a43 45453943     CCCC9CCCCZC9C9EE
-    a910:	43390045 45454539 45394339 43394545     E.9C9EEE9C9EEE9C
-    a920:	38383854 384a4355 43434238 54433943     T888UCJ88BCCC9CT
-    a930:	00383838 45394339 43394545 3838384a     888.9C9EEE9CJ888
-    a940:	43434349 43394343 43434339 4c384143     ICCCCC9C9CCCCA8L
-    a950:	45454543 4339004f 45454539 43394339     CEEEO.9C9EEE9C9C
-    a960:	43434343 38383841 38544349 43434238     CCCCA888ICT88BCC
-    a970:	4d433943 00383838 45394339 43494d45     C9CM888.9C9EEMIC
-    a980:	43594339 43434359 43434343 43434343     9CYCYCCCCCCCCCCC
-    a990:	39435943 45453943 43390045 49383854     CYC9C9EEE.9CT88I
-    a9a0:	435a4343 38544339 38383838 384d4342     CCZC9CT88888BCM8
-    a9b0:	39434238 54435a43 00553838 43434339     8BC9CZCT88U.9CCC
-    a9c0:	43434343 43394343 43434343 43434343     CCCCCC9CCCCCCCCC
-    a9d0:	4343435a 43433943 43434343 43390039     ZCCCC9CCCCCC9.9C
-    a9e0:	43423841 38414359 38383848 43434238     A8BCYCA8H8888BCC
-    a9f0:	43434359 48414359 38383838 00394342     YCCCYCAH8888BC9.
-    aa00:	43435639 43394343 43434343 43434343     9VCCCC9CCCCCCCCC
-    aa10:	55484d43 43394343 43434343 56434343     CMHUCC9CCCCCCCCV
-    aa20:	38540039 38383838 38383848 38383838     9.T88888H8888888
-    aa30:	49383838 38385445 38383848 38383838     888IET88H8888888
-    aa40:	00493838                                88I.
+0000a704 <originalMap>:
+    a704:	3838384d 55383838 38384d4f 45455538     M888888UOM888UEE
+    a714:	38384d45 38383838 38383838 38383846     EM8888888888F888
+    a724:	56390055 43434350 39453943 54434343     U.9VPCCCC9E9CCCT
+    a734:	49383838 43434343 43434343 43394343     888ICCCCCCCCCC9C
+    a744:	00395643 38414339 39434238 59433945     CV9.9CA88BC9E9CY
+    a754:	43434343 4d434343 38463838 43553838     CCCCCCCM88F888UC
+    a764:	43594339 43390039 43434343 5a435a43     9CYC9.9CCCCCCZCZ
+    a774:	38384a43 43434238 43564c41 4343435a     CJ888BCCALVCZCCC
+    a784:	435a435a 00394339 5538384a 43434343     ZCZC9C9.J88UCCCC
+    a794:	39434343 43434343 39434343 43434343     CCC9CCCCCCC9CCCC
+    a7a4:	43434359 43394343 43390039 41435a43     YCCCCC9C9.9CCZCA
+    a7b4:	42383838 41435a43 42383838 41435a43     888BCZCA888BCZCA
+    a7c4:	46483838 38383838 00394349 43434339     88HF8888IC9.9CCC
+    a7d4:	43434343 43474343 43434343 43434343     CCCCCCGCCCCCCCCC
+    a7e4:	43434343 43433943 43434343 43390039     CCCCC9CCCCCC9.9C
+    a7f4:	5538384d 384d4343 43553838 3838384d     M88UCCM888UCM888
+    a804:	384d4342 39434238 4d435943 00493838     BCM88BC9CYCM88I.
+    a814:	45394339 43555445 47474739 43394339     9C9EETUC9GGG9C9C
+    a824:	43434343 43434339 39435a43 45453943     CCCC9CCCCZC9C9EE
+    a834:	43390045 45454539 45394339 43394545     E.9C9EEE9C9EEE9C
+    a844:	38383854 384a4355 43434238 54433943     T888UCJ88BCCC9CT
+    a854:	00383838 45394339 43394545 3838384a     888.9C9EEE9CJ888
+    a864:	43434349 43394343 43434339 4c384143     ICCCCC9C9CCCCA8L
+    a874:	45454543 4339004f 45454539 43394339     CEEEO.9C9EEE9C9C
+    a884:	43434343 38383841 38544349 43434238     CCCCA888ICT88BCC
+    a894:	4d433943 00383838 45394339 43494d45     C9CM888.9C9EEMIC
+    a8a4:	43594339 43434359 43434343 43434343     9CYCYCCCCCCCCCCC
+    a8b4:	39435943 45453943 43390045 49383854     CYC9C9EEE.9CT88I
+    a8c4:	435a4343 38544339 38383838 384d4342     CCZC9CT88888BCM8
+    a8d4:	39434238 54435a43 00553838 43434339     8BC9CZCT88U.9CCC
+    a8e4:	43434343 43394343 43434343 43434343     CCCCCC9CCCCCCCCC
+    a8f4:	4343435a 43433943 43434343 43390039     ZCCCC9CCCCCC9.9C
+    a904:	43423841 38414359 38383848 43434238     A8BCYCA8H8888BCC
+    a914:	43434359 48414359 38383838 00394342     YCCCYCAH8888BC9.
+    a924:	43435639 43394343 43434343 43434343     9VCCCC9CCCCCCCCC
+    a934:	55484d43 43394343 43434343 56434343     CMHUCC9CCCCCCCCV
+    a944:	38540039 38383838 38383848 38383838     9.T88888H8888888
+    a954:	49383838 38385445 38383848 38383838     888IET88H8888888
+    a964:	00493838                                88I.
 
-0000aa44 <dirs.3629>:
-    aa44:	03020100                                ....
+0000a968 <dirs.3630>:
+    a968:	03020100                                ....
 
-0000aa48 <BigFont>:
-    aa48:	200d1010 0000005f 00000000 00000000     ... _...........
+0000a96c <BigFont>:
+    a96c:	200d1010 0000005f 00000000 00000000     ... _...........
 	...
-    aa70:	0f000700 0f800f80 0f800f80 07000780     ................
-    aa80:	00000000 07000700 00000700 0e000000     ................
-    aa90:	0e380e38 06380e38 00000030 00000000     8.8.8.8.0.......
+    a994:	0f000700 0f800f80 0f800f80 07000780     ................
+    a9a4:	00000000 07000700 00000700 0e000000     ................
+    a9b4:	0e380e38 06380e38 00000030 00000000     8.8.8.8.0.......
 	...
-    aaac:	0c000000 0c300c30 7ffe7f30 0c300cfe     ....0.0.0.....0.
-    aabc:	0c300c30 7ffe7f30 0c300cfe 00300c30     0.0.0.....0.0.0.
-    aacc:	02000000 0f400240 1af81ff8 1f401a40     ....@.@.....@.@.
-    aadc:	02f80ff0 1f580258 02f01ff8 00400240     ....X.X.....@.@.
-    aaec:	00000000 0e000000 0e300e10 01e00070     ..........0.p...
-    aafc:	078003c0 0c700e00 00700870 00000000     ......p.p.p.....
-    ab0c:	00000000 19000f00 19801980 0f000f80     ................
-    ab1c:	19980f08 18f018f8 0ff019e0 00000098     ................
-    ab2c:	00000000 07000700 0e000700 00000000     ................
+    a9d0:	0c000000 0c300c30 7ffe7f30 0c300cfe     ....0.0.0.....0.
+    a9e0:	0c300c30 7ffe7f30 0c300cfe 00300c30     0.0.0.....0.0.0.
+    a9f0:	02000000 0f400240 1af81ff8 1f401a40     ....@.@.....@.@.
+    aa00:	02f80ff0 1f580258 02f01ff8 00400240     ....X.X.....@.@.
+    aa10:	00000000 0e000000 0e300e10 01e00070     ..........0.p...
+    aa20:	078003c0 0c700e00 00700870 00000000     ......p.p.p.....
+    aa30:	00000000 19000f00 19801980 0f000f80     ................
+    aa40:	19980f08 18f018f8 0ff019e0 00000098     ................
+    aa50:	00000000 07000700 0e000700 00000000     ................
 	...
-    ab50:	01f00000 078003c0 0e000e00 0e000e00     ................
-    ab60:	03000700 00c00180 000000f0 00000000     ................
-    ab70:	03000f00 00c00180 007000e0 00700070     ..........p.p.p.
-    ab80:	01e00070 0f8003c0 00000000 00000000     p...............
-    ab90:	11800100 07900988 3fe007e0 07fc3ffc     ...........?.?..
-    aba0:	09e007e0 01881190 00000080 00000000     ................
-    abb0:	00000000 01800100 0f800180 01f00ff0     ................
-    abc0:	01800180 00000080 00000000 00000000     ................
+    aa74:	01f00000 078003c0 0e000e00 0e000e00     ................
+    aa84:	03000700 00c00180 000000f0 00000000     ................
+    aa94:	03000f00 00c00180 007000e0 00700070     ..........p.p.p.
+    aaa4:	01e00070 0f8003c0 00000000 00000000     p...............
+    aab4:	11800100 07900988 3fe007e0 07fc3ffc     ...........?.?..
+    aac4:	09e007e0 01881190 00000080 00000000     ................
+    aad4:	00000000 01800100 0f800180 01f00ff0     ................
+    aae4:	01800180 00000080 00000000 00000000     ................
 	...
-    abe0:	07000000 07000700 00000e00 00000000     ................
+    ab04:	07000000 07000700 00000e00 00000000     ................
 	...
-    abf8:	1f000000 00f81ff8 00000000 00000000     ................
+    ab1c:	1f000000 00f81ff8 00000000 00000000     ................
 	...
-    ac20:	07000000 07000700 00000000 00000000     ................
-    ac30:	00020000 000e0006 0038001c 01e00070     ..........8.p...
-    ac40:	078003c0 1c000e00 00000000 00000000     ................
-    ac50:	1cf00f00 1c781c38 1df81cf8 1fb81db8     ....8.x.........
-    ac60:	1e381f38 0f381c38 000000f0 00000000     8.8.8.8.........
-    ac70:	01800100 1f800380 03801f80 03800380     ................
-    ac80:	03800380 1f800380 000000f0 00000000     ................
-    ac90:	1ce00f00 00381c70 00700038 03c001e0     ....p.8.8.p.....
-    aca0:	0e000780 1f381c38 000000f8 00000000     ....8.8.........
-    acb0:	1ce00f00 00381c70 03700038 00c003c0     ....p.8.8.p.....
-    acc0:	1c380070 0f701c38 000000e0 00000000     p.8.8.p.........
-    acd0:	01e00000 06e003e0 18e00ce0 1ff81fe0     ................
-    ace0:	00e000f8 03e000e0 000000f8 00000000     ................
-    acf0:	1cf81f00 1c001c00 1f001c00 00f01fe0     ................
-    ad00:	1c380078 0f701c38 000000e0 00000000     x.8.8.p.........
-    ad10:	07e00300 1c000e00 1f001c00 1cf81ff0     ................
-    ad20:	1c381c38 0f381c38 000000f0 00000000     8.8.8.8.........
-    ad30:	1cfc1f00 1c1c1c1c 001c001c 00700038     ............8.p.
-    ad40:	03c001e0 03800380 00000080 00000000     ................
-    ad50:	1cf00f00 1c381c38 07381f38 1ce007e0     ....8.8.8.8.....
-    ad60:	1c381cf8 0f381c38 000000f0 00000000     ..8.8.8.........
-    ad70:	1cf00f00 1c381c38 1f381c38 00f80ff8     ....8.8.8.8.....
-    ad80:	00380038 07e00070 000000c0 00000000     8.8.p...........
-    ad90:	00000000 03800300 00800380 03000000     ................
-    ada0:	03800380 00000080 00000000 00000000     ................
-    adb0:	00000000 03800300 00800380 03000000     ................
-    adc0:	03800380 00000780 00000000 00000000     ................
-    add0:	01e00070 078003c0 1c000e00 0e001c00     p...............
-    ade0:	03000700 00c00180 007000e0 00000000     ..........p.....
-    adf0:	00000000 3f000000 00fc3ffc 3f000000     .......?.?.....?
-    ae00:	00fc3ffc 00000000 00000000 1c000000     .?..............
-    ae10:	07000e00 01800300 00e000c0 00700070     ............p.p.
-    ae20:	03c001e0 0e000780 00001c00 03000000     ................
-    ae30:	1ef00fc0 00381878 00700038 01c001e0     ....x.8.8.p.....
-    ae40:	000000c0 01c00100 00c001c0 0f000000     ................
-    ae50:	1c1c1cf8 1c1c1c1c 1cfc1c1c 1cfc1cfc     ................
-    ae60:	1c001cfc 1f001c00 00f807f0 00000000     ................
-    ae70:	07c00300 1c700ee0 1c381c38 1f381c38     ......p.8.8.8.8.
-    ae80:	1c381cf8 1c381c38 00000038 00000000     ..8.8.8.8.......
-    ae90:	0ef01f00 0e380e38 0f380e38 0ef00ff0     ....8.8.8.8.....
-    aea0:	0e380e38 1f380e38 000000f0 00000000     8.8.8.8.........
-    aeb0:	0ef00700 1c381c38 1c001c00 1c001c00     ....8.8.........
-    aec0:	1c001c00 07380e38 000000f0 00000000     ....8.8.........
-    aed0:	0ee01f00 0e380e70 0e380e38 0e380e38     ....p.8.8.8.8.8.
-    aee0:	0e380e38 1f700e38 000000e0 00000000     8.8.8.p.........
-    aef0:	0ef81f00 0e080e18 0f300e00 0ef00ff0     ..........0.....
-    af00:	0e000e30 1f180e08 000000f8 00000000     0...............
-    af10:	0ef81f00 0e080e18 0f300e00 0ef00ff0     ..........0.....
-    af20:	0e000e30 1f000e00 00000000 00000000     0...............
-    af30:	0ef00700 1c381c38 1c001c38 1c001c00     ....8.8.8.......
-    af40:	1c381cf8 07380e38 000000f8 00000000     ..8.8.8.........
-    af50:	1c701c00 1c701c70 1f701c70 1cf01ff0     ..p.p.p.p.p.....
-    af60:	1c701c70 1c701c70 00000070 00000000     p.p.p.p.p.......
-    af70:	03e00f00 03800380 03800380 03800380     ................
-    af80:	03800380 0f800380 000000e0 00000000     ................
-    af90:	00fc0100 00700070 00700070 38700070     ....p.p.p.p.p.p8
-    afa0:	38703870 0f703870 000000e0 00000000     p8p8p8p.........
-    afb0:	0e381e00 0e700e38 0fc00fe0 0f800f80     ..8.8.p.........
-    afc0:	0ee00ec0 1e380e70 00000038 00000000     ....p.8.8.......
-    afd0:	0e001f00 0e000e00 0e000e00 0e000e00     ................
-    afe0:	0e080e00 1f380e18 000000f8 00000000     ......8.........
-    aff0:	1e1c1c00 1f7c1f3c 1dfc1ffc 1c9c1cdc     ....<.|.........
-    b000:	1c1c1c1c 1c1c1c1c 0000001c 00000000     ................
-    b010:	1c1c1c00 1f1c1e1c 1d9c1f1c 1cfc1cdc     ................
-    b020:	1c3c1c7c 1c1c1c1c 0000001c 00000000     |.<.............
-    b030:	07e00300 1c380ef0 1c1c1c1c 1c1c1c1c     ......8.........
-    b040:	0e1c1c1c 03f00738 000000e0 00000000     ....8...........
-    b050:	0ef01f00 0e380e38 0e380e38 0ef00f38     ....8.8.8.8.8...
-    b060:	0e000e00 1f000e00 00000000 00000000     ................
-    b070:	0fe00300 1c380e78 1c1c1c1c 1c1c1c1c     ....x.8.........
-    b080:	0ffc1c7c 00f80ff8 00fc0038 00000000     |.......8.......
-    b090:	0ef01f00 0e380e38 0f380e38 0ef00ff0     ....8.8.8.8.....
-    b0a0:	0e380e70 1e380e38 00000038 00000000     p.8.8.8.8.......
-    b0b0:	1cf00f00 1c381c38 0f001c38 00f007e0     ....8.8.8.......
-    b0c0:	1c381c38 0f381c38 000000f0 00000000     8.8.8.8.........
-    b0d0:	19fc1f00 01c411cc 01c001c0 01c001c0     ................
-    b0e0:	01c001c0 07c001c0 000000f0 00000000     ................
-    b0f0:	1c701c00 1c701c70 1c701c70 1c701c70     ..p.p.p.p.p.p.p.
-    b100:	1c701c70 0f701c70 000000e0 00000000     p.p.p.p.........
-    b110:	1c701c00 1c701c70 1c701c70 1c701c70     ..p.p.p.p.p.p.p.
-    b120:	0e701c70 03c007e0 00000080 00000000     p.p.............
-    b130:	1c1c1c00 1c1c1c1c 1c1c1c1c 1c9c1c9c     ................
-    b140:	0ff80f9c 077007f8 00000070 00000000     ......p.p.......
-    b150:	1c701c00 0e701c70 03c007e0 07800380     ..p.p.p.........
-    b160:	1ce00ec0 1c701c70 00000070 00000000     ....p.p.p.......
-    b170:	1c701c00 1c701c70 0e701c70 03c007e0     ..p.p.p.p.p.....
-    b180:	03800380 0f800380 000000e0 00000000     ................
-    b190:	1cf81f00 10381838 01e00070 078003c0     ....8.8.p.......
-    b1a0:	1c080e00 1f381c18 000000f8 00000000     ......8.........
-    b1b0:	07f00700 07000700 07000700 07000700     ................
-    b1c0:	07000700 07000700 000000f0 00000000     ................
-    b1d0:	18001000 0e001c00 03000700 00c00180     ................
-    b1e0:	007000e0 001c0038 00000007 00000000     ..p.8...........
-    b1f0:	00f00700 00700070 00700070 00700070     ....p.p.p.p.p.p.
-    b200:	00700070 07700070 000000f0 01000000     p.p.p.p.........
-    b210:	07c00380 1c700ee0 00000038 00000000     ......p.8.......
+    ab44:	07000000 07000700 00000000 00000000     ................
+    ab54:	00020000 000e0006 0038001c 01e00070     ..........8.p...
+    ab64:	078003c0 1c000e00 00000000 00000000     ................
+    ab74:	1cf00f00 1c781c38 1df81cf8 1fb81db8     ....8.x.........
+    ab84:	1e381f38 0f381c38 000000f0 00000000     8.8.8.8.........
+    ab94:	01800100 1f800380 03801f80 03800380     ................
+    aba4:	03800380 1f800380 000000f0 00000000     ................
+    abb4:	1ce00f00 00381c70 00700038 03c001e0     ....p.8.8.p.....
+    abc4:	0e000780 1f381c38 000000f8 00000000     ....8.8.........
+    abd4:	1ce00f00 00381c70 03700038 00c003c0     ....p.8.8.p.....
+    abe4:	1c380070 0f701c38 000000e0 00000000     p.8.8.p.........
+    abf4:	01e00000 06e003e0 18e00ce0 1ff81fe0     ................
+    ac04:	00e000f8 03e000e0 000000f8 00000000     ................
+    ac14:	1cf81f00 1c001c00 1f001c00 00f01fe0     ................
+    ac24:	1c380078 0f701c38 000000e0 00000000     x.8.8.p.........
+    ac34:	07e00300 1c000e00 1f001c00 1cf81ff0     ................
+    ac44:	1c381c38 0f381c38 000000f0 00000000     8.8.8.8.........
+    ac54:	1cfc1f00 1c1c1c1c 001c001c 00700038     ............8.p.
+    ac64:	03c001e0 03800380 00000080 00000000     ................
+    ac74:	1cf00f00 1c381c38 07381f38 1ce007e0     ....8.8.8.8.....
+    ac84:	1c381cf8 0f381c38 000000f0 00000000     ..8.8.8.........
+    ac94:	1cf00f00 1c381c38 1f381c38 00f80ff8     ....8.8.8.8.....
+    aca4:	00380038 07e00070 000000c0 00000000     8.8.p...........
+    acb4:	00000000 03800300 00800380 03000000     ................
+    acc4:	03800380 00000080 00000000 00000000     ................
+    acd4:	00000000 03800300 00800380 03000000     ................
+    ace4:	03800380 00000780 00000000 00000000     ................
+    acf4:	01e00070 078003c0 1c000e00 0e001c00     p...............
+    ad04:	03000700 00c00180 007000e0 00000000     ..........p.....
+    ad14:	00000000 3f000000 00fc3ffc 3f000000     .......?.?.....?
+    ad24:	00fc3ffc 00000000 00000000 1c000000     .?..............
+    ad34:	07000e00 01800300 00e000c0 00700070     ............p.p.
+    ad44:	03c001e0 0e000780 00001c00 03000000     ................
+    ad54:	1ef00fc0 00381878 00700038 01c001e0     ....x.8.8.p.....
+    ad64:	000000c0 01c00100 00c001c0 0f000000     ................
+    ad74:	1c1c1cf8 1c1c1c1c 1cfc1c1c 1cfc1cfc     ................
+    ad84:	1c001cfc 1f001c00 00f807f0 00000000     ................
+    ad94:	07c00300 1c700ee0 1c381c38 1f381c38     ......p.8.8.8.8.
+    ada4:	1c381cf8 1c381c38 00000038 00000000     ..8.8.8.8.......
+    adb4:	0ef01f00 0e380e38 0f380e38 0ef00ff0     ....8.8.8.8.....
+    adc4:	0e380e38 1f380e38 000000f0 00000000     8.8.8.8.........
+    add4:	0ef00700 1c381c38 1c001c00 1c001c00     ....8.8.........
+    ade4:	1c001c00 07380e38 000000f0 00000000     ....8.8.........
+    adf4:	0ee01f00 0e380e70 0e380e38 0e380e38     ....p.8.8.8.8.8.
+    ae04:	0e380e38 1f700e38 000000e0 00000000     8.8.8.p.........
+    ae14:	0ef81f00 0e080e18 0f300e00 0ef00ff0     ..........0.....
+    ae24:	0e000e30 1f180e08 000000f8 00000000     0...............
+    ae34:	0ef81f00 0e080e18 0f300e00 0ef00ff0     ..........0.....
+    ae44:	0e000e30 1f000e00 00000000 00000000     0...............
+    ae54:	0ef00700 1c381c38 1c001c38 1c001c00     ....8.8.8.......
+    ae64:	1c381cf8 07380e38 000000f8 00000000     ..8.8.8.........
+    ae74:	1c701c00 1c701c70 1f701c70 1cf01ff0     ..p.p.p.p.p.....
+    ae84:	1c701c70 1c701c70 00000070 00000000     p.p.p.p.p.......
+    ae94:	03e00f00 03800380 03800380 03800380     ................
+    aea4:	03800380 0f800380 000000e0 00000000     ................
+    aeb4:	00fc0100 00700070 00700070 38700070     ....p.p.p.p.p.p8
+    aec4:	38703870 0f703870 000000e0 00000000     p8p8p8p.........
+    aed4:	0e381e00 0e700e38 0fc00fe0 0f800f80     ..8.8.p.........
+    aee4:	0ee00ec0 1e380e70 00000038 00000000     ....p.8.8.......
+    aef4:	0e001f00 0e000e00 0e000e00 0e000e00     ................
+    af04:	0e080e00 1f380e18 000000f8 00000000     ......8.........
+    af14:	1e1c1c00 1f7c1f3c 1dfc1ffc 1c9c1cdc     ....<.|.........
+    af24:	1c1c1c1c 1c1c1c1c 0000001c 00000000     ................
+    af34:	1c1c1c00 1f1c1e1c 1d9c1f1c 1cfc1cdc     ................
+    af44:	1c3c1c7c 1c1c1c1c 0000001c 00000000     |.<.............
+    af54:	07e00300 1c380ef0 1c1c1c1c 1c1c1c1c     ......8.........
+    af64:	0e1c1c1c 03f00738 000000e0 00000000     ....8...........
+    af74:	0ef01f00 0e380e38 0e380e38 0ef00f38     ....8.8.8.8.8...
+    af84:	0e000e00 1f000e00 00000000 00000000     ................
+    af94:	0fe00300 1c380e78 1c1c1c1c 1c1c1c1c     ....x.8.........
+    afa4:	0ffc1c7c 00f80ff8 00fc0038 00000000     |.......8.......
+    afb4:	0ef01f00 0e380e38 0f380e38 0ef00ff0     ....8.8.8.8.....
+    afc4:	0e380e70 1e380e38 00000038 00000000     p.8.8.8.8.......
+    afd4:	1cf00f00 1c381c38 0f001c38 00f007e0     ....8.8.8.......
+    afe4:	1c381c38 0f381c38 000000f0 00000000     8.8.8.8.........
+    aff4:	19fc1f00 01c411cc 01c001c0 01c001c0     ................
+    b004:	01c001c0 07c001c0 000000f0 00000000     ................
+    b014:	1c701c00 1c701c70 1c701c70 1c701c70     ..p.p.p.p.p.p.p.
+    b024:	1c701c70 0f701c70 000000e0 00000000     p.p.p.p.........
+    b034:	1c701c00 1c701c70 1c701c70 1c701c70     ..p.p.p.p.p.p.p.
+    b044:	0e701c70 03c007e0 00000080 00000000     p.p.............
+    b054:	1c1c1c00 1c1c1c1c 1c1c1c1c 1c9c1c9c     ................
+    b064:	0ff80f9c 077007f8 00000070 00000000     ......p.p.......
+    b074:	1c701c00 0e701c70 03c007e0 07800380     ..p.p.p.........
+    b084:	1ce00ec0 1c701c70 00000070 00000000     ....p.p.p.......
+    b094:	1c701c00 1c701c70 0e701c70 03c007e0     ..p.p.p.p.p.....
+    b0a4:	03800380 0f800380 000000e0 00000000     ................
+    b0b4:	1cf81f00 10381838 01e00070 078003c0     ....8.8.p.......
+    b0c4:	1c080e00 1f381c18 000000f8 00000000     ......8.........
+    b0d4:	07f00700 07000700 07000700 07000700     ................
+    b0e4:	07000700 07000700 000000f0 00000000     ................
+    b0f4:	18001000 0e001c00 03000700 00c00180     ................
+    b104:	007000e0 001c0038 00000007 00000000     ..p.8...........
+    b114:	00f00700 00700070 00700070 00700070     ....p.p.p.p.p.p.
+    b124:	00700070 07700070 000000f0 01000000     p.p.p.p.........
+    b134:	07c00380 1c700ee0 00000038 00000000     ......p.8.......
 	...
-    b248:	7fff7f00 000000ff 1c001c00 07000700     ................
+    b16c:	7fff7f00 000000ff 1c001c00 07000700     ................
 	...
-    b278:	00e00f00 0f700070 1c701cf0 0f701c70     ....p.p...p.p.p.
-    b288:	000000d8 00000000 0e001e00 0e000e00     ................
-    b298:	0ef00f00 0e380e38 0e380e38 1b380e38     ....8.8.8.8.8.8.
-    b2a8:	000000f0 00000000 00000000 00000000     ................
-    b2b8:	1ce00f00 1c701c70 1c001c00 0f701c70     ....p.p.....p.p.
-    b2c8:	000000e0 00000000 00f80000 00700070     ............p.p.
-    b2d8:	1cf00f70 1c701c70 1c701c70 0f701c70     p...p.p.p.p.p.p.
-    b2e8:	000000d8 00000000 00000000 00000000     ................
-    b2f8:	1ce00f00 1f701c70 1c001cf0 0f701c70     ....p.p.....p.p.
-    b308:	000000e0 00000000 07e00300 07700770     ............p.p.
-    b318:	1f000700 07e01fe0 07000700 1f000700     ................
-    b328:	000000c0 00000000 00000000 00000000     ................
-    b338:	1cd80f00 1c701c70 0f701c70 00f007f0     ....p.p.p.p.....
-    b348:	0f701c70 000000e0 0e001e00 0e000e00     p.p.............
-    b358:	0ff00e00 0e380f38 0e380e38 1e380e38     ....8.8.8.8.8.8.
-    b368:	00000038 00000000 01c00100 00c001c0     8...............
-    b378:	01c00f00 01c001c0 01c001c0 0fc001c0     ................
-    b388:	000000f8 00000000 00700000 00700070     ..........p.p.p.
-    b398:	00f00300 00700070 00700070 1c700070     ....p.p.p.p.p.p.
-    b3a8:	07f00c70 000000e0 0e001e00 0e000e00     p...............
-    b3b8:	0e380e00 0fe00e70 0ee00ec0 1e380e70     ..8.p.......p.8.
-    b3c8:	00000038 00000000 01c00f00 01c001c0     8...............
-    b3d8:	01c001c0 01c001c0 01c001c0 0fc001c0     ................
-    b3e8:	000000f8 00000000 00000000 00000000     ................
-    b3f8:	1cf81f00 1c9c1c9c 1c9c1c9c 1c9c1c9c     ................
-    b408:	0000009c 00000000 00000000 00000000     ................
-    b418:	1ce01f00 1c701c70 1c701c70 1c701c70     ....p.p.p.p.p.p.
-    b428:	00000070 00000000 00000000 00000000     p...............
-    b438:	1ce00f00 1c701c70 1c701c70 0f701c70     ....p.p.p.p.p.p.
-    b448:	000000e0 00000000 00000000 00000000     ................
-    b458:	0ef01b00 0e380e38 0e380e38 0ef00f38     ....8.8.8.8.8...
-    b468:	1f000e00 00000000 00000000 00000000     ................
-    b478:	38b01f00 38e038e0 38e038e0 00e01fe0     ...8.8.8.8.8....
-    b488:	01e000e0 000000f0 00000000 00000000     ................
-    b498:	0ff01e00 0e380ff8 0e000e00 1f000e00     ......8.........
+    b19c:	00e00f00 0f700070 1c701cf0 0f701c70     ....p.p...p.p.p.
+    b1ac:	000000d8 00000000 0e001e00 0e000e00     ................
+    b1bc:	0ef00f00 0e380e38 0e380e38 1b380e38     ....8.8.8.8.8.8.
+    b1cc:	000000f0 00000000 00000000 00000000     ................
+    b1dc:	1ce00f00 1c701c70 1c001c00 0f701c70     ....p.p.....p.p.
+    b1ec:	000000e0 00000000 00f80000 00700070     ............p.p.
+    b1fc:	1cf00f70 1c701c70 1c701c70 0f701c70     p...p.p.p.p.p.p.
+    b20c:	000000d8 00000000 00000000 00000000     ................
+    b21c:	1ce00f00 1f701c70 1c001cf0 0f701c70     ....p.p.....p.p.
+    b22c:	000000e0 00000000 07e00300 07700770     ............p.p.
+    b23c:	1f000700 07e01fe0 07000700 1f000700     ................
+    b24c:	000000c0 00000000 00000000 00000000     ................
+    b25c:	1cd80f00 1c701c70 0f701c70 00f007f0     ....p.p.p.p.....
+    b26c:	0f701c70 000000e0 0e001e00 0e000e00     p.p.............
+    b27c:	0ff00e00 0e380f38 0e380e38 1e380e38     ....8.8.8.8.8.8.
+    b28c:	00000038 00000000 01c00100 00c001c0     8...............
+    b29c:	01c00f00 01c001c0 01c001c0 0fc001c0     ................
+    b2ac:	000000f8 00000000 00700000 00700070     ..........p.p.p.
+    b2bc:	00f00300 00700070 00700070 1c700070     ....p.p.p.p.p.p.
+    b2cc:	07f00c70 000000e0 0e001e00 0e000e00     p...............
+    b2dc:	0e380e00 0fe00e70 0ee00ec0 1e380e70     ..8.p.......p.8.
+    b2ec:	00000038 00000000 01c00f00 01c001c0     8...............
+    b2fc:	01c001c0 01c001c0 01c001c0 0fc001c0     ................
+    b30c:	000000f8 00000000 00000000 00000000     ................
+    b31c:	1cf81f00 1c9c1c9c 1c9c1c9c 1c9c1c9c     ................
+    b32c:	0000009c 00000000 00000000 00000000     ................
+    b33c:	1ce01f00 1c701c70 1c701c70 1c701c70     ....p.p.p.p.p.p.
+    b34c:	00000070 00000000 00000000 00000000     p...............
+    b35c:	1ce00f00 1c701c70 1c701c70 0f701c70     ....p.p.p.p.p.p.
+    b36c:	000000e0 00000000 00000000 00000000     ................
+    b37c:	0ef01b00 0e380e38 0e380e38 0ef00f38     ....8.8.8.8.8...
+    b38c:	1f000e00 00000000 00000000 00000000     ................
+    b39c:	38b01f00 38e038e0 38e038e0 00e01fe0     ...8.8.8.8.8....
+    b3ac:	01e000e0 000000f0 00000000 00000000     ................
+    b3bc:	0ff01e00 0e380ff8 0e000e00 1f000e00     ......8.........
 	...
-    b4b8:	1ce00f00 0f301c30 18e00380 0f701870     ....0.0.....p.p.
-    b4c8:	000000e0 00000000 01000000 07000300     ................
-    b4d8:	07f01f00 07000700 07000700 03700770     ............p.p.
-    b4e8:	000000e0 00000000 00000000 00000000     ................
-    b4f8:	1c701c00 1c701c70 1c701c70 0f701c70     ..p.p.p.p.p.p.p.
-    b508:	000000d8 00000000 00000000 00000000     ................
-    b518:	1c701c00 1c701c70 0e701c70 03c007e0     ..p.p.p.p.p.....
-    b528:	00000080 00000000 00000000 00000000     ................
-    b538:	1c1c1c00 1c1c1c1c 0f9c1c9c 077007f8     ..............p.
-    b548:	00000070 00000000 00000000 00000000     p...............
-    b558:	1ce01c00 07c00fe0 0f800780 1ce01cc0     ................
-    b568:	000000e0 00000000 00000000 00000000     ................
-    b578:	0e380e00 0e380e38 07380e38 00e003f0     ..8.8.8.8.8.....
-    b588:	1fc001e0 00000080 00000000 00000000     ................
-    b598:	18e01f00 03c011e0 0e000780 1f601c20     ............ .`.
-    b5a8:	000000e0 00000000 03f80100 03800380     ................
-    b5b8:	1c000780 07001c00 03800300 01800380     ................
-    b5c8:	000000f8 01000000 01c001c0 01c001c0     ................
-    b5d8:	01c001c0 01c001c0 01c001c0 01c001c0     ................
-    b5e8:	00c001c0 00000000 01801f00 01c001c0     ................
-    b5f8:	00e000c0 00380038 01c001e0 1fc001c0     ....8.8.........
-    b608:	00000080 00000000 3b1c1f00 38dc399c     ...........;.9.8
-    b618:	000000f8 00000000 00000000 00000000     ................
+    b3dc:	1ce00f00 0f301c30 18e00380 0f701870     ....0.0.....p.p.
+    b3ec:	000000e0 00000000 01000000 07000300     ................
+    b3fc:	07f01f00 07000700 07000700 03700770     ............p.p.
+    b40c:	000000e0 00000000 00000000 00000000     ................
+    b41c:	1c701c00 1c701c70 1c701c70 0f701c70     ..p.p.p.p.p.p.p.
+    b42c:	000000d8 00000000 00000000 00000000     ................
+    b43c:	1c701c00 1c701c70 0e701c70 03c007e0     ..p.p.p.p.p.....
+    b44c:	00000080 00000000 00000000 00000000     ................
+    b45c:	1c1c1c00 1c1c1c1c 0f9c1c9c 077007f8     ..............p.
+    b46c:	00000070 00000000 00000000 00000000     p...............
+    b47c:	1ce01c00 07c00fe0 0f800780 1ce01cc0     ................
+    b48c:	000000e0 00000000 00000000 00000000     ................
+    b49c:	0e380e00 0e380e38 07380e38 00e003f0     ..8.8.8.8.8.....
+    b4ac:	1fc001e0 00000080 00000000 00000000     ................
+    b4bc:	18e01f00 03c011e0 0e000780 1f601c20     ............ .`.
+    b4cc:	000000e0 00000000 03f80100 03800380     ................
+    b4dc:	1c000780 07001c00 03800300 01800380     ................
+    b4ec:	000000f8 01000000 01c001c0 01c001c0     ................
+    b4fc:	01c001c0 01c001c0 01c001c0 01c001c0     ................
+    b50c:	00c001c0 00000000 01801f00 01c001c0     ................
+    b51c:	00e000c0 00380038 01c001e0 1fc001c0     ....8.8.........
+    b52c:	00000080 00000000 3b1c1f00 38dc399c     ...........;.9.8
+    b53c:	000000f8 00000000 00000000 00000000     ................
 	...
 
-0000b630 <TABLA_SINUS_WAVE>:
-    b630:	000c0000 00250019 003e0032 0057004b     ......%.2.>.K.W.
-    b640:	00700063 0088007c 00a00094 00b800ac     c.p.|...........
-    b650:	00cf00c3 00e600da 00fc00f1 01110107     ................
-    b660:	0126011c 013a0130 014e0144 01610157     ..&.0.:.D.N.W.a.
-    b670:	0172016a 0183017b 0193018b 01a2019b     j.r.{...........
-    b680:	01b001a9 01bd01b7 01c901c3 01d401ce     ................
-    b690:	01dd01d9 01e601e2 01ed01e9 01f301f0     ................
-    b6a0:	01f801f6 01fc01fa 01fe01fd 01ff01ff     ................
-    b6b0:	01ff0200 01fe01ff 01fc01fd 01f801fa     ................
-    b6c0:	01f301f6 01ed01f0 01e601e9 01dd01e2     ................
-    b6d0:	01d401d9 01c901ce 01bd01c3 01b001b7     ................
-    b6e0:	01a201a9 0193019b 0183018b 0172017b     ............{.r.
-    b6f0:	0161016a 014e0157 013a0144 01260130     j.a.W.N.D.:.0.&.
-    b700:	0111011c 00fc0107 00e600f1 00cf00da     ................
-    b710:	00b800c3 00a000ac 00880094 0070007c     ............|.p.
-    b720:	00570063 003e004b 00250032 000c0019     c.W.K.>.2.%.....
-    b730:	fff40000 ffdbffe7 ffc2ffce ffa9ffb5     ................
-    b740:	ff90ff9d ff78ff84 ff60ff6c ff48ff54     ......x.l.`.T.H.
-    b750:	ff31ff3d ff1aff26 ff04ff0f feeffef9     =.1.&...........
-    b760:	fedafee4 fec6fed0 feb2febc fe9ffea9     ................
-    b770:	fe8efe96 fe7dfe85 fe6dfe75 fe5efe65     ......}.u.m.e.^.
-    b780:	fe50fe57 fe43fe49 fe37fe3d fe2cfe32     W.P.I.C.=.7.2.,.
-    b790:	fe23fe27 fe1afe1e fe13fe17 fe0dfe10     '.#.............
-    b7a0:	fe08fe0a fe04fe06 fe02fe03 fe01fe01     ................
-    b7b0:	fe01fe00 fe02fe01 fe04fe03 fe08fe06     ................
-    b7c0:	fe0dfe0a fe13fe10 fe1afe17 fe23fe1e     ..............#.
-    b7d0:	fe2cfe27 fe37fe32 fe43fe3d fe50fe49     '.,.2.7.=.C.I.P.
-    b7e0:	fe5efe57 fe6dfe65 fe7dfe75 fe8efe85     W.^.e.m.u.}.....
-    b7f0:	fe9ffe96 feb2fea9 fec6febc fedafed0     ................
-    b800:	feeffee4 ff04fef9 ff1aff0f ff31ff26     ............&.1.
-    b810:	ff48ff3d ff60ff54 ff78ff6c ff90ff84     =.H.T.`.l.x.....
-    b820:	ffa9ff9d ffc2ffb5 ffdbffce fff4ffe7     ................
-    b830:	41444956 00003a53 544e5550 003a534f     VIDAS:..PUNTOS:.
-    b840:	61736544 6c6f7272 50206f6c 74636172     Desarrollo Pract
-    b850:	206f6369 53206564 65747369 2073616d     ico de Sistemas 
-    b860:	63656c45 6e6f7274 736f6369 6e490a0d     Electronicos..In
-    b870:	696e6567 61697265 20656420 74736953     genieria de Sist
-    b880:	73616d65 656c4520 6f727463 6f63696e     emas Electronico
-    b890:	000a0d73 2d2d2f2f 2d2d2d2d 000a202d     s...//------- ..
-    b8a0:	736e6f63 6e752074 6e676973 63206465     const unsigned c
-    b8b0:	20726168 746e6f46 3d205d5b 00000a7b     har Font[] ={...
-    b8c0:	2c642520 202c6425 73202f2f 73202c78      %d,%d, // sx, s
-    b8d0:	00000a79 2c642520 20202020 78202f2f     y... %d,    // x
-    b8e0:	6574735f 00000a70 63252720 20202c27     _step... '%c',  
-    b8f0:	202f2f20 73726966 68635f74 000a7261      // first_char..
-    b900:	64332520 2f20202c 5f6e202f 72616863      %3d,  // n_char
-    b910:	00000a73 43202f2f 61726168 72657463     s...// Character
-    b920:	64332520 63252720 00000a27 00623020      %3d '%c'... 0b.
-    b930:	00000031 00000030 0000002c 2f0a3b7d     1...0...,...};./
-    b940:	2d2d2d2f 2d2d2d2d 00000a20 63756f54     /------- ...Touc
-    b950:	61502068 6c656e6e 6c614320 61726269     h Pannel Calibra
-    b960:	6e6f6974 00000000 3a643325 0d643325     tion....%3d:%3d.
-    b970:	0000000a 253e2d2d 253a6433 0a0d6433     ....-->%3d:%3d..
-    b980:	00000000 7274614d 64207a69 61632065     ....Matriz de ca
-    b990:	7262696c 6f696361 000a0d6e 3d206e41     libracion...An =
-    b9a0:	64382520 00000a0d 3d206e42 64382520      %8d....Bn = %8d
-    b9b0:	00000a0d 3d206e43 64382520 00000a0d     ....Cn = %8d....
-    b9c0:	3d206e44 64382520 00000a0d 3d206e45     Dn = %8d....En =
-    b9d0:	64382520 00000a0d 3d206e46 64382520      %8d....Fn = %8d
-    b9e0:	00000a0d 20766944 3725203d 000a0d64     ....Div = %7d...
-    b9f0:	204d5058 656c6170 20657474 6f727265     XPM palette erro
-    ba00:	25282072 6f632064 73726f6c 00000a29     r (%d colors)...
-    ba10:	2d2d0a0d 5249202d 53202c51 69727570     ..--- IRQ, Spuri
-    ba20:	2073756f 65746e69 70757272 000a0d74     ous interrupt...
-    ba30:	20383832 20383631 31203436 00000020     288 168 64 1 ...
-    ba40:	20632020 30303023 00303030 2063202e       c #000000.. c 
-    ba50:	30303023 00363130 20632058 30313123     #000016.X c #110
-    ba60:	00413044 2063206f 31433223 00383032     D0A.o c #2C1208.
-    ba70:	2063204f 30303023 00463330 2063202b     O c #00003F.+ c 
-    ba80:	30303123 00393246 20632040 32343223     #100F29.@ c #242
-    ba90:	00423243 20632023 32323523 00393044     C2B.# c #522D09.
-    baa0:	20632024 31343623 00303141 20632025     $ c #641A10.% c 
-    bab0:	34433623 00443045 20632026 31413123     #6C4E0D.& c #1A1
-    bac0:	00323538 2063202a 35323023 00373537     852.* c #025757.
-    bad0:	2063203d 37333023 00303730 2063202d     = c #037070.- c 
-    bae0:	35353223 00373643 2063203b 35443523     #255C67.; c #5D5
-    baf0:	00313644 2063203a 33383423 00313735     D61.: c #483571.
-    bb00:	2063203e 30413823 00313032 2063202c     > c #8A0201., c 
-    bb10:	30393923 00373043 2063203c 31434123     #990C07.< c #AC1
-    bb20:	00313145 20632031 32424323 00393133     E11.1 c #CB2319.
-    bb30:	20632032 36353923 00373037 20632033     2 c #956707.3 c 
-    bb40:	34434323 00313142 20632034 35314523     #CC4B11.4 c #E15
-    bb50:	00323144 20632035 35354123 00383541     D12.5 c #A55A58.
-    bb60:	20632036 35364423 00353541 20632037     6 c #D65A55.7 c 
-    bb70:	36374623 00393641 20632038 36384423     #F76A69.8 c #D86
-    bb80:	00343644 20632039 33453823 00313438     D64.9 c #8E3841.
-    bb90:	20632030 39424223 00313035 20632071     0 c #BB9501.q c 
-    bba0:	38444123 00313037 20632077 39354223     #AD8701.w c #B59
-    bbb0:	00383231 20632065 41364523 00373137     128.e c #E6A717.
-    bbc0:	20632072 43384623 00333245 20632074     r c #F8CE23.t c 
-    bbd0:	42424423 00373632 20632079 31393023     #DBB267.y c #091
-    bbe0:	00314135 20632075 33383423 00423841     5A1.u c #483A8B.
-    bbf0:	20632069 33353623 00373846 20632070     i c #653F87.p c 
-    bc00:	36383023 00303946 20632061 35433623     #086F90.a c #6C5
-    bc10:	00413932 20632073 32303023 00394537     29A.s c #0027E9.
-    bc20:	20632064 33303023 00374639 20632066     d c #0039F7.f c 
-    bc30:	32443023 00464337 20632067 34303023     #0D27CF.g c #004
-    bc40:	00464632 20632068 34343323 00464344     2FF.h c #344DCF.
-    bc50:	2063206a 36363523 00314444 2063206b     j c #566DD1.k c 
-    bc60:	35373823 00334239 2063206c 37464123     #8759B3.l c #AF7
-    bc70:	00384245 2063207a 38353023 00463846     EB8.z c #058F8F.
-    bc80:	20632078 42353023 00304230 20632063     x c #05B0B0.c c 
-    bc90:	39463223 00334143 20632076 42393523     #2F9CA3.v c #59B
-    bca0:	00334430 20632062 41443423 00464135     0D3.b c #4DA5AF.
-    bcb0:	2063206e 39393923 00374138 2063206d     n c #9998A7.m c 
-    bcc0:	38364623 00373837 2063204d 42464523     #F68787.M c #EFB
-    bcd0:	00464130 2063204e 44394623 00364143     0AF.N c #F9DCA6.
-    bce0:	20632042 41364123 00304434 20632056     B c #A6A4D0.V c 
-    bcf0:	43414323 00414441 20632043 43424623     #CACADA.C c #FBC
-    bd00:	00424342 2063205a 46444623 00434644     BCB.Z c #FDFDFC.
-    bd10:	20632041 45434523 00454544 20632053     A c #ECEDEE.S c 
-    bd20:	44444423 00324543 20632044 43434223     #DDDCE2.D c #BCC
-    bd30:	00374437 20632046 38423123 00443730     7D7.F c #1B807D.
-    bd40:	20202020 2e202020 6f6f6f20 58406f24            . ooo$o@X
-    bd50:	20202020 20202020 20202020 2e202020                    .
-    bd60:	6f6f6f20 58406f24 20202020 20202020      ooo$o@X        
-    bd70:	20202020 20202020 23232358 2e232323             X######.
-    bd80:	20202020 20202020 20202020 20202020                     
-    bd90:	23232358 2e232323 20202020 20202020     X######.        
-    bda0:	20202020 20202020 3a232358 58402323             X##:##@X
-    bdb0:	20202020 20202020 20202020 20202020                     
-    bdc0:	3a232358 58402323 20202020 20202020     X##:##@X        
-    bdd0:	20202020 20202020 40404020 2e404040              @@@@@@.
-    bde0:	20202020 20202020 20202020 20202020                     
-    bdf0:	40404020 2e404040 20202020 20202020      @@@@@@.        
-    be00:	20202020 58202020 26264020 5826403a            X @&&:@&X
-    be10:	20202020 20202020 20202020 20202020                     
-    be20:	3a264020 20403a40 20202020 20202020      @&:@:@         
-    be30:	20202020 20202020 20202020 20202020                     
-    be40:	20202020 20202020 20202020 20202020                     
-    be50:	20202020 20202020 20202020 20202020                     
-    be60:	00000000 20202020 6f202020 36363124     ....       o$166
-    be70:	24393935 2020206f 20202020 20202020     599$o           
-    be80:	6f202020 36363124 24393935 2020206f        o$166599$o   
-    be90:	20202020 20202020 23202020 72726525                #%err
-    bea0:	24347765 2020206f 20202020 20202020     ew4$o           
-    beb0:	23202020 72726525 24347765 2020206f        #%errew4$o   
-    bec0:	20202020 20202020 40202020 4d434d35                @5MCM
-    bed0:	39374d4d 20202024 20202020 20202020     MM79$           
-    bee0:	40202020 4d434d35 39374d4d 20205824        @5MCMMM79$X  
-    bef0:	20202020 20202020 40202020 6262622d                @-bbb
-    bf00:	2a636362 20202058 20202020 20202020     bcc*X           
-    bf10:	40202020 6262622d 2a636362 20202058        @-bbbbcc*X   
-    bf20:	20202020 20202020 40202020 42426c3b                @;lBB
-    bf30:	266b6e6c 2020202b 20202020 20202020     lnk&+           
-    bf40:	40202020 42426c3b 26616c6c 2020202b        @;lBBlla&+   
-    bf50:	20202020 20202020 20202020 20202020                     
-    bf60:	20202020 20202020 20202020 20202020                     
-    bf70:	20202020 20202020 20202020 20202020                     
-    bf80:	20202020 00000000 20202020 38356f20         ....     o58
-    bf90:	2c31366d 3e3e3e2c 2058243e 20202020     m61,,>>>>$X     
-    bfa0:	20202020 38356f20 2c31366d 3e3e3e2c          o58m61,,>>>
-    bfb0:	2058243e 20202020 20202020 74746f20     >$X          ott
-    bfc0:	3472724e 34343434 20582c3c 20202020     Nrr44444<,X     
-    bfd0:	20202020 74746f20 3472724e 34343434          ottNrr44444
-    bfe0:	20582c3c 20202020 20202020 4d356f20     <,X          o5M
-    bff0:	6d4d4343 37373737 2e6f3936 20202020     CCMm777769o.    
-    c000:	20202020 4d355820 6d4d4343 37373737          X5MCCMm7777
-    c010:	20583936 20202020 20202020 766e2b2e     69X         .+nv
-    c020:	78627676 3d3d7a7a 20202a2a 20202020     vvbxzz==**      
-    c030:	20202020 766e2b20 78627676 3d3d7a7a          +nvvvbxzz==
-    c040:	20202a2a 20202020 20202020 426e2b20     **           +nB
-    c050:	6b6c4456 7575616b 20582675 20202020     VDlkkauuu&X     
-    c060:	20202020 426e2b20 6b6c4453 7575616b          +nBSDlkkauu
-    c070:	20582675 20202020 20202020 58582020     u&X           XX
-    c080:	32323225 58253232 20202020 20202020     %22222%X        
-    c090:	20202020 58582020 32323225 58253232           XX%22222%X
-    c0a0:	20202058 20202020 00000000 20202020     X       ....    
-    c0b0:	43566e2b 2c2c364d 3e3e3e3e 20243e3e     +nVCM6,,>>>>>>$ 
-    c0c0:	20202020 20202020 43566e2b 2c2c364d             +nVCM6,,
-    c0d0:	3e3e3e3e 58243e3e 20202020 20202020     >>>>>>$X        
-    c0e0:	415a6e40 3465724e 34343434 6f2c3333     @nZANre4444433,o
-    c0f0:	20202020 20202020 415a6e40 3465724e             @nZANre4
-    c100:	34343434 6f2c3333 20202020 20202020     444433,o        
-    c110:	43436e6f 6d6d4d43 3737376d 58353737     onCCCMmmm777775X
-    c120:	20202020 20202020 4343742b 6d6d4d43             +tCCCMmm
-    c130:	3737376d 58353737 20202020 20202020     m777775X        
-    c140:	56416e2b 7a787644 3d707a7a 582a3d3d     +nAVDvxzzzp===*X
-    c150:	20202020 20202020 5641422b 7a787644             +BAVDvxz
-    c160:	3d707a7a 582a3d3d 20202020 20202020     zzp===*X        
-    c170:	415a426f 6b6b4253 7575616b 583a7575     oBZASBkkkauuuu:X
-    c180:	20202020 20202020 415a426f 6b6b4256             oBZAVBkk
-    c190:	7575616b 583a7575 20202020 20202020     kauuuu:X        
-    c1a0:	30255820 30656565 71303030 20585825      X%0eee0000q%XX 
-    c1b0:	20202020 20202020 30255820 30656565              X%0eee0
-    c1c0:	71303030 58585823 20202020 00000000     000q#XXX    ....
-    c1d0:	20202020 43564325 3e2c3c37 3e3e3e3e         %CVC7<,>>>>>
-    c1e0:	6f243e3e 20202020 20202020 43564325     >>$o        %CVC
-    c1f0:	3e2c3c37 3e3e3e3e 6f3e3e3e 20202020     7<,>>>>>>>>o    
-    c200:	20202020 5a5a413b 34346574 33343334         ;AZZte444343
-    c210:	24313133 20202020 20202020 5a5a413b     311$        ;AZZ
-    c220:	34346574 33343334 24313133 20202020     te444343311$    
-    c230:	20202020 43434335 6d6d6d4d 37373737         5CCCMmmm7777
-    c240:	24363737 20202020 20202020 43434335     776$        5CCC
-    c250:	6d6d6d4d 37373737 24363737 20202020     Mmmm7777776$    
-    c260:	20202020 5641533b 78787842 3d3d7a7a         ;SAVBxxxzz==
-    c270:	402a3d3d 20202020 20202020 5641533b     ==*@        ;SAV
-    c280:	78787842 3d3d7a7a 402a3d3d 20202020     Bxxxzz====*@    
-    c290:	20202020 415a5a3b 6b6b6b56 7575616b         ;ZZAVkkkkauu
-    c2a0:	26757575 20202020 20202020 415a5a3b     uuu&        ;ZZA
-    c2b0:	6b6b6b56 7575616b 26757575 20202020     Vkkkkauuuuu&    
-    c2c0:	20202020 7265306f 30656572 30303030         o0erree00000
-    c2d0:	58232571 20202020 20202020 7265306f     q%#X        o0er
-    c2e0:	30656572 30303030 58232571 20202020     ree00000q%#X    
-    c2f0:	00000000 6f202020 4d434d36 3e2c3136     ....   o6MCM61,>
-    c300:	2c2c3e3e 233e3e3e 20202058 6f202020     >>,,>>>#X      o
-    c310:	4d434d36 3e2c3136 2c2c3e3e 23243e3e     6MCM61,>>>,,>>$#
-    c320:	20202058 6f582020 4e5a4e74 34656572     X     XotNZNree4
-    c330:	34343434 2c313333 2020206f 6f202020     4444331,o      o
-    c340:	4e5a4e74 34656572 34343434 2c313333     tNZNree44444331,
-    c350:	2020206f 40582020 4e43434d 6d6d6d6d     o     X@MCCNmmmm
-    c360:	3737376d 36363737 2020206f 40202020     m7777766o      @
-    c370:	4343434d 6d6d6d6d 3737376d 36363737     MCCCmmmmm7777766
-    c380:	2020206f 40202020 42564463 7a7a7876     o      @cDVBvxzz
-    c390:	7a7a7a7a 2a2a3d3d 20202058 40202020     zzzz==**X      @
-    c3a0:	42564463 7a7a7876 7a7a7a7a 2a2a3d3d     cDVBvxzzzzzz==**
-    c3b0:	20202058 40202020 53415342 6b6b6b6c     X      @BSASlkkk
-    c3c0:	6975616b 75757575 2020202b 40202020     kauiuuuu+      @
-    c3d0:	53415342 6b6b6b6c 7575616b 75757575     BSASlkkkkauuuuuu
-    c3e0:	2020202b 6f202020 4e4e7430 65657274     +      o0tNNtree
-    c3f0:	30256f32 6f257130 20202020 6f202020     2o%00q%o       o
-    c400:	4e4e7430 65657274 30256f32 6f257130     0tNNtree2o%00q%o
-    c410:	20202020 00000000 24202020 436d6d31         ....   $1mmC
-    c420:	3e354d43 534d393e 243e394d 2020206f     CM5>>9MSM9>$o   
-    c430:	24202020 436d6d31 3e354d43 534d393e        $1mmCCM5>>9MS
-    c440:	243e394d 2020206f 25202020 4e4e4e72     M9>$o      %rNNN
-    c450:	34384341 434d7434 3c31334d 20202024     AC844tMCM31<$   
-    c460:	25202020 4e4e4e72 34384341 434d7434        %rNNNAC844tMC
-    c470:	3c31334d 20202024 3b202020 41434343     M31<$      ;CCCA
-    c480:	6d4d4341 43436d37 3836374d 20202024     ACMm7mCCM768$   
-    c490:	3b202020 41434343 6d4d4341 43436d37        ;CCCAACMm7mCC
-    c4a0:	36363743 20202e24 2a202020 53444276     C766$.     *vBDS
-    c4b0:	7a784441 5344627a 3d2a6344 20202040     ADxzzbDSDc*=@   
-    c4c0:	2a202020 53444276 7a784441 5344627a        *vBDSADxzzbDS
-    c4d0:	3d2a6344 20202040 3a202020 53565642     Dc*=@      :BVVS
-    c4e0:	6b6b5641 53566b6b 75756144 20202040     AVkkkkVSDauu@   
-    c4f0:	3a202020 53565642 6b6b5641 53566b6b        :BVVSAVkkkkVS
-    c500:	75756144 20202040 25202020 5a5a4e72     Dauu@      %rNZZ
-    c510:	3072724e 30585858 25713030 20202058     Nrr0XXX000q%X   
-    c520:	25202020 5a5a4e72 6565724e 30582058        %rNZZNreeX X0
-    c530:	23713030 20202058 00000000 3c582020     00q#X   ....  X<
-    c540:	5a433731 394d5641 535a563c 242c6e53     17CZAVM9<VZSSn,$
-    c550:	20202024 3c582020 5a433731 394d5641     $     X<17CZAVM9
-    c560:	535a563c 242c6e56 20205824 65582020     <VZSVn,$$X    Xe
-    c570:	5a4e4e72 34435641 535a4334 31316d56     rNNZAVC44CZSVm11
-    c580:	2020202c 72582020 5a4e4e72 34435641     ,     XrrNNZAVC4
-    c590:	535a4334 31316d56 2020202c 4d582020     4CZSVm11,     XM
-    c5a0:	5a414343 6d435641 535a436d 36384d56     CCAZAVCmmCZSVM86
-    c5b0:	20205833 4d582020 5a414343 6d435641     3X    XMCCAZAVCm
-    c5c0:	535a436d 36384d56 20205833 782e2020     mCZSVM863X    .x
-    c5d0:	5a537676 7a444441 535a5363 2a3d4256     vvSZADDzcSZSVB=*
-    c5e0:	2020582a 78582020 5a537676 7a444441     *X    XxvvSZADDz
-    c5f0:	535a5363 2a3d4256 20202e2a 61582020     cSZSVB=**.    Xa
-    c600:	5a53446c 6b565653 535a566b 75754256     lDSZSVVkkVZSVBuu
-    c610:	20202e75 61582020 5a41446c 6b565653     u.    XalDAZSVVk
-    c620:	535a566b 75754256 20202e75 30582020     kVZSVBuuu.    X0
-    c630:	5a5a4e72 65727243 306f5823 32303030     rNZZCrre#Xo00002
-    c640:	2020206f 30582020 5a5a4e72 65727243     o     X0rNZZCrre
-    c650:	30235823 71303030 2020206f 00000000     #X#0000qo   ....
-    c660:	3c582020 41413831 393b403b 3b565a39       X<18AA;@;99ZV;
-    c670:	24246e40 20205823 31582020 41413831     @n$$#X    X118AA
-    c680:	3961403b 3b565a39 233e6e40 20202023     ;@a99ZV;@n>##   
-    c690:	72582020 535a7272 343b403b 3b565a65       XrrrZS;@;4eZV;
-    c6a0:	3c316e40 2020582c 65582020 415a7272     @n1<,X    XerrZA
-    c6b0:	346b403b 3b565a38 3c316e40 20206f2c     ;@k48ZV;@n1<,o  
-    c6c0:	4d2b2020 415a4343 6d3b403b 3b565a4d       +MCCZA;@;mMZV;
-    c6d0:	36386e40 20202033 4d2b2020 415a4343     @n863     +MCCZA
-    c6e0:	6d61403b 3a565a4d 36386e40 20205833     ;@amMZV:@n863X  
-    c6f0:	78405858 41417676 633b403b 3b565a62     XX@xvvAA;@;cbZV;
-    c700:	2a2d6240 2020582a 78405858 41417676     @b-**X  XX@xvvAA
-    c710:	6361403b 2d445a62 2a3d6240 2020202a     ;@acbZD-@b=**   
-    c720:	6b582020 415a446c 6b612669 3b565a42       XklDZAi&akBZV;
-    c730:	75756e40 20202e75 6b2e2020 415a446c     @nuuu.    .klDZA
-    c740:	6b614061 3a565a6c 75756e40 20202075     a@aklZV:@nuuu   
-    c750:	65252020 434e4e72 6565724e 30323230       %erNNCNree0220
-    c760:	71303030 20202023 65252020 434e4e72     000q#     %erNNC
-    c770:	6565724e 30713230 6f257130 20202058     Nree02q00q%oX   
-    c780:	00000000 31582020 565a3833 393b2040     ....  X138ZV@ ;9
-    c790:	586e5a39 24243b20 20202024 3c582020     9ZnX ;$$$     X<
-    c7a0:	565a3831 393b2040 58425a39 242c3b20     18ZV@ ;99ZBX ;,$
-    c7b0:	20202023 65582020 44417272 352d2040     #     XerrAD@ -5
-    c7c0:	586e5a37 31313b20 2020582c 72585820     7ZnX ;11,X   XXr
-    c7d0:	445a7272 362d2040 586e5a65 3c313b58     rrZD@ -6eZnXX;1<
-    c7e0:	2020582c 4d2b2020 445a4343 6e2d2040     ,X    +MCCZD@ -n
-    c7f0:	586e5a4d 36383b20 20205833 4d582020     MZnX ;863X    XM
-    c800:	445a4343 6d2d2040 58425a4d 36363b20     CCZD@ -mMZBX ;66
-    c810:	20205833 78585858 565a4276 632d2040     3X  XXXxvBZV@ -c
-    c820:	586e5a62 2a2a3b58 2020582a 78585820     bZnXX;***X   XXx
-    c830:	565a4276 782d2040 58425a63 2a3d3b58     vBZV@ -xcZBXX;=*
-    c840:	2020582a 612e2020 565a4442 613b5840     *X    .aBDZV@X;a
-    c850:	586e5a6e 75753b58 20205875 612e5820     nZnXX;uuuX   X.a
-    c860:	565a446c 6b3b5826 58425a6c 75753b20     lDZV&X;klZBX ;uu
-    c870:	20202075 65322020 72727265 65657272     u     2eerrrrree
-    c880:	30303030 71303030 20205825 65322020     0000000q%X    2e
-    c890:	72727265 65657272 25323030 58585823     errrrree002%#XXX
-    c8a0:	20202020 00000000 3c582020 41563831         ....  X<18VA
-    c8b0:	24613b6e 3b535339 242c6e3b 20202023     n;a$9SS;;n,$#   
-    c8c0:	3c582020 41563836 393b3b6e 3b53533c       X<68VAn;;9<SS;
-    c8d0:	23246e3b 20205824 72582020 41567272     ;n$#$X    XrrrVA
-    c8e0:	33613b6e 3b535336 3c31613b 2020582c     n;a36SS;;a1<,X  
-    c8f0:	65582020 41447272 336e3b6e 3b535336       XerrDAn;n36SS;
-    c900:	3131353b 2020582c 4d582020 41564343     ;511,X    XMCCVA
-    c910:	6d613b6e 3b53536d 36366e3b 20205833     n;ammSS;;n663X  
-    c920:	4d582020 41444343 6d6e2d6e 3b41536d       XMCCDAn-nmmSA;
-    c930:	36366e3b 20205833 78582020 41567676     ;n663X    XxvvVA
-    c940:	7a612d6e 3b535363 3d3d623b 2020202a     n-azcSS;;b==*   
-    c950:	78582020 41567676 7a6e3b6e 3b535363       XxvvVAn;nzcSS;
-    c960:	2a2a6e3b 2020202a 612e2020 5a56426c     ;n***     .alBVZ
-    c970:	61613b6c 3b53536b 7575623b 20202e75     l;aakSS;;buuu.  
-    c980:	612e2020 5a564242 616e3b6e 3b41536b       .aBBVZn;nakSA;
-    c990:	7575623b 20202e3a 65322020 65726565     ;buu:.    2eeere
-    c9a0:	30656565 30303030 32303030 20205825     eee000000002%X  
-    c9b0:	65322020 65726565 71656565 20582325       2eeereeeeq%#X 
-    c9c0:	20202020 20202020 00000000 31582020             ....  X1
-    c9d0:	53613831 246e5341 41416e24 24243b53     18aSASn$$nAAS;$$
-    c9e0:	20205824 31582020 533b3631 246e5653     $X    X116;SSVn$
-    c9f0:	41416e24 24243b56 20202024 74582020     $nAAV;$$$     Xt
-    ca00:	536e7272 336e5341 415a6e32 31313b4d     rrnSASn32nZAM;11
-    ca10:	20206f2c 72582020 53357472 326e5653     ,o    Xrrt5SSVn2
-    ca20:	41416e33 3c313b56 2020582c 4d582020     3nAAV;1<,X    XM
-    ca30:	536e4343 386e5341 41416e38 36366156     CCnSASn88nAAVa66
-    ca40:	20205833 4d582020 416e4343 386e4441     3X    XMCCnAADn8
-    ca50:	41416e38 36356156 20205833 78582020     8nAAVa563X    Xx
-    ca60:	53617676 7a6e5341 415a6e7a 2a2a6156     vvaSASnzznZAVa**
-    ca70:	2020582a 78582020 41627676 466e5653     *X    XxvvbASVnF
-    ca80:	41416e7a 2a2a6156 2020582a 612e2020     znAAVa***X    .a
-    ca90:	53614242 616e5341 41416e61 75756153     BBaSASnaanAASauu
-    caa0:	20202075 612e2020 53614242 616e5653     u     .aBBaSSVna
-    cab0:	41416e61 75756153 20202e75 30322020     anAASauuu.    20
-    cac0:	65656530 23233265 23232323 23232323     0eeee2##########
-    cad0:	2020206f 30322020 65656565 23233265     o     20eeeee2##
-    cae0:	20202058 20202020 20202020 00000000     X           ....
-    caf0:	31582020 23243636 3e233b3b 3b3b243e       X166$#;;#>>$;;
-    cb00:	24246f25 20205824 31582020 3b243631     %o$$$X    X116$;
-    cb10:	24243b3b 3b3b6f3e 24246f25 20205824     ;;$$>o;;%o$$$X  
-    cb20:	72582020 25397272 33233b3b 3b3b2333       Xrrr9%;;#33#;;
-    cb30:	3c312423 2020582c 72582020 3b397272     #$1<,X    Xrrr9;
-    cb40:	33243b3b 3b3b2333 31312423 2020582c     ;;$33#;;#$11,X  
-    cb50:	4d582020 40354343 38243b3b 3b3b2338       XMCC5@;;$88#;;
-    cb60:	3636243b 20205833 43582020 40354343     ;$663X    XCCC5@
-    cb70:	38233b3b 3b3b2338 36362525 20205833     ;;#88#;;%%663X  
-    cb80:	78582020 3b2d7676 7a2a3b3b 3b3b2a7a       Xxvv-;;;*zz*;;
-    cb90:	2a2a403b 2020202a 78582020 3b637676     ;@***     Xxvvc;
-    cba0:	7a2a3b3b 3b3b407a 2a2a2a25 2020582a     ;;*zz@;;%****X  
-    cbb0:	61582020 3b3a4242 613a3b3b 3b3b2661       XaBB:;;;:aa&;;
-    cbc0:	75752625 20202e75 61582020 3b75426c     %&uuu.    XalBu;
-    cbd0:	6b263b3b 3b3b4061 7575403b 20202e75     ;;&ka@;;;@uuu.  
-    cbe0:	30322020 30303030 71717130 71717171       2000000qqqqqqq
-    cbf0:	25327171 20205825 30322020 30303030     qq2%%X    200000
-    cc00:	32323030 20586f23 20202020 20202020     0022#oX         
-    cc10:	00000000 3c582020 24333631 2c246f6f     ....  X<163$oo$,
-    cc20:	206f243e 243e246f 20205824 3c582020     >$o o$>$$X    X<
-    cc30:	24333633 3e246f6f 586f242c 233e246f     363$oo$>,$oXo$>#
-    cc40:	20205823 65582020 23657272 3432236f     #X    Xerre#o#24
-    cc50:	6f233c34 3c313c24 2020202c 65582020     4<#o$<1<,     Xe
-    cc60:	25657274 3433236f 6f6f3c33 31313c24     tre%o#343<oo$<11
-    cc70:	2020582c 43582020 396d4343 6d352440     ,X    XCCCm9@$5m
-    cc80:	6f23356d 36363624 20205833 4d582020     m5#o$6663X    XM
-    cc90:	396d4343 6d35236f 6f24356d 36363623     CCm9o#5mm5$o#666
-    cca0:	20205833 782b2020 2a787676 7a3d4040     3X    +xvvx*@@=z
-    ccb0:	58402a7a 2a2a2a2b 2020582a 782b2020     z*@X+****X    +x
-    ccc0:	3d787676 7a3d4040 58402a7a 3d2a2a2b     vvx=@@=zz*@X+**=
-    ccd0:	2020582a 6b582020 266b426c 6b3a2b40     *X    XklBk&@+:k
-    cce0:	2b40756b 75753a26 2020583a 6b2e2020     ku@+&:uu:X    .k
-    ccf0:	266b4242 6b3a402b 2b2b3a6b 75753a40     BBk&+@:kk:++@:uu
-    cd00:	20202e75 30322020 30303030 30307130     u.    2000000q00
-    cd10:	30303030 25257130 20205825 30322020     00000q%%%X    20
-    cd20:	30303030 30303030 25253030 5820206f     0000000000%%o  X
-    cd30:	20202020 00000000 31582020 2c313633         ....  X1361,
-    cd40:	3e2c2c2c 24243e3e 243e3e24 20202024     ,,,>>>$$$>>$$   
-    cd50:	31582020 2c313631 3e2c2c2c 243e2c3e       X1161,,,,>>,>$
-    cd60:	243e3e24 20205824 72582020 65657272     $>>$$X    Xrrree
-    cd70:	34346530 33333334 3c313331 2020582c     0e444333131<,X  
-    cd80:	72582020 34727272 33346530 33333434       Xrrrr40e434433
-    cd90:	3c3c3333 2020582c 4d2b2020 6d4d4343     33<<,X    +MCCMm
-    cda0:	6d376d38 3638376d 36383736 20205833     8m7mm78667863X  
-    cdb0:	4d402020 6d4d4343 6d6d6d38 36363737       @MCCMm8mmm7766
-    cdc0:	36363736 202e5833 78585858 78787676     67663X. XXXxvvxx
-    cdd0:	7a7a7a78 3d3d7a7a 2a3d3d3d 2020582a     xzzzzz=====**X  
-    cde0:	78585858 78787676 7a787a7a 3d3d7a7a     XXXxvvxxzzxzzz==
-    cdf0:	2a2a3d3d 2020582a 612e2020 6b42446c     ==***X    .alDBk
-    ce00:	6b616161 3a75616b 75757575 20202075     aaakkau:uuuuu   
-    ce10:	6b2e2020 6b42446c 6b616161 7575616b       .klDBkaaakkauu
-    ce20:	75757575 20202075 30252020 30303030     uuuuu     %00000
-    ce30:	30303030 30303030 32323230 20202023     000000000222#   
-    ce40:	30252020 30303030 30303030 30303030       %0000000000000
-    ce50:	58232571 20202020 00000000 3c582020     q%#X    ....  X<
-    ce60:	3c313631 3e2c2c3c 2c3e3e3e 243e3e3e     161<<,,>>>>,>>>$
-    ce70:	20202023 3c582020 3c313633 3e2c2c3c     #     X<361<<,,>
-    ce80:	3e3e3e3e 243e3e3e 20202023 65582020     >>>>>>>$#     Xe
-    ce90:	65727272 34346565 33343434 31313133     rrreee4444433111
-    cea0:	2020582c 72582020 65727272 34656565     ,X    Xrrrreeee4
-    ceb0:	33333434 2c313333 2020582c 43402020     4433331,,X    @C
-    cec0:	6d4d4343 6d6d6d6d 3737376d 36363737     CCMmmmmmm7777766
-    ced0:	20205833 4d402020 6d4d4343 6d6d6d6d     3X    @MCCMmmmmm
-    cee0:	3737376d 36363737 20202e33 78585858     m77777663.  XXXx
-    cef0:	78787676 7a787878 3d7a7a7a 2a2a3d3d     vvxxxxxzzzz===**
-    cf00:	2020582a 78585858 78787676 7a787878     *X  XXXxvvxxxxxz
-    cf10:	3d7a7a7a 2a2a3d3d 2020582a 6b582020     zzz===***X    Xk
-    cf20:	6b42446c 6b6b6b6b 7575616b 75757575     lDBkkkkkkauuuuuu
-    cf30:	20202e75 61582020 6b42426c 6b6b6b6b     u.    XalBBkkkkk
-    cf40:	7575616b 75757575 20202e3a 71582020     kauuuuuu:.    Xq
-    cf50:	30303030 30303030 30303030 25253232     00000000000022%%
-    cf60:	2020206f 71582020 30303030 30303030     o     Xq00000000
-    cf70:	30303030 25252532 2020206f 00000000     00002%%%o   ....
-    cf80:	31582020 3c313631 2c2c3c3c 3e3e3e2c       X1161<<<,,,>>>
-    cf90:	24243e3e 20205823 3c582020 3c313631     >>$$#X    X<161<
-    cfa0:	3e2c3c3c 3e3e3e3e 242c3e3e 20205824     <<,>>>>>>>,$$X  
-    cfb0:	72582020 65727272 34346565 34343434       Xrrrreee444444
-    cfc0:	3c313133 2020582c 656f2020 65657272     311<,X    oerree
-    cfd0:	34346565 33343433 31313133 2020582c     ee4434433111,X  
-    cfe0:	4d2b2020 6d4d4343 6d6d6d6d 37373737       +MCCMmmmmm7777
-    cff0:	36363637 20205831 43402020 6d4d4343     76661X    @CCCMm
-    d000:	6d6d6d6d 37363637 36363737 20205833     mmmm766777663X  
-    d010:	78582020 78787676 7a787878 3d3d7a7a       Xxvvxxxxxzzz==
-    d020:	2a2a3d3d 2020582a 78582020 78787676     ==***X    Xxvvxx
-    d030:	78787878 3d7a7a7a 3d2a3d3d 2020582a     xxxxzzz===*=*X  
-    d040:	61582020 6b42446c 6b6b6b6b 7575696b       XalDBkkkkkkiuu
-    d050:	75757575 20582b75 61582020 6b42446c     uuuuu+X   XalDBk
-    d060:	6b6b6b6b 7575616b 75757575 20205875     kkkkkauuuuuuuX  
-    d070:	23202020 30303030 30303030 32303030        #000000000002
-    d080:	23322532 20202058 23202020 30303071     2%2#X      #q000
-    d090:	30303030 32713030 23322532 20202058     000000q22%2#X   
-    d0a0:	00000000 31582020 2c313631 2c2c3c3c     ....  X1161,<<,,
-    d0b0:	3e3e3e3e 243e3e3e 20205823 3c582020     >>>>>>>$#X    X<
-    d0c0:	3c313631 3e2c3c3c 3e3e3e3e 233e3e3e     161<<<,>>>>>>>>#
-    d0d0:	20202023 65582020 65727272 34346565     #     Xerrreee44
-    d0e0:	34343434 3c313333 2020582c 72582020     4444331<,X    Xr
-    d0f0:	65727272 34346565 34343434 3c313133     rrreee444444311<
-    d100:	2020582c 4d402020 6d4d4343 6d6d6d6d     ,X    @MCCMmmmmm
-    d110:	37373737 36363737 20205833 4d2b2020     777777663X    +M
-    d120:	6d4d4343 6d6d6d37 37373737 36363737     CCMm7mmm77777766
-    d130:	20205833 78582020 78787676 7a787878     3X    Xxvvxxxxxz
-    d140:	3d7a7a7a 2a2a3d3d 2020582a 782b2020     zzz===***X    +x
-    d150:	78767676 7a7a7878 3d7a7a7a 2a2a3d3d     vvvxxxzzzzz===**
-    d160:	2020582a 6b2e2020 6b42446c 6b6b6b6b     *X    .klDBkkkkk
-    d170:	7575696b 75757575 20202b75 61582020     kiuuuuuuu+    Xa
-    d180:	6b42446c 6b6b6b6b 7575616b 75757575     lDBkkkkkkauuuuuu
-    d190:	20202e3a 6f202020 30303025 30303030     :.     o%0000000
-    d1a0:	25323030 6f253225 20202020 6f202020     002%%2%o       o
-    d1b0:	30303032 30303030 32323030 6f253225     200000000022%2%o
-    d1c0:	20202020 00000000 3c582020 3c333631         ....  X<163<
-    d1d0:	3e2c3c3c 3e3e3e3e 243e3e2c 20205824     <<,>>>>>,>>$$X  
-    d1e0:	31582020 2c313631 242c3c3c 3e3e2c24       X1161,<<,$$,>>
-    d1f0:	233e3e3e 20202024 72582020 65727272     >>>#$     Xrrrre
-    d200:	34346565 34343434 3c313331 2020582c     ee444444131<,X  
-    d210:	72582020 65727272 33346565 33343433       Xrrrreee433443
-    d220:	31313133 2020582c 4d402020 6d434343     3111,X    @MCCCm
-    d230:	6d6d6d6d 37373737 36363737 20205833     mmmm777777663X  
-    d240:	432b2020 6d4d4343 386d6d6d 37373736       +CCCMmmmm86777
-    d250:	36363737 20205833 782b5858 78787676     77663X  XX+xvvxx
-    d260:	78787878 3d3d7a7a 2a3d3d3d 2020202a     xxxxzz=====**   
-    d270:	78582020 78787676 3d787878 3d3d7a3d       Xxvvxxxxx==z==
-    d280:	2a2a3d3d 2020582a 61582020 6b42446c     ==***X    XalDBk
-    d290:	6b6b6b6b 7575616b 75757575 20202e75     kkkkkauuuuuuu.  
-    d2a0:	6b582020 6b42446c 696b6b6b 75756161       XklDBkkkkiaauu
-    d2b0:	75757575 20202e75 20202020 3030256f     uuuuu.      o%00
-    d2c0:	71303030 32253271 206f2532 20202020     000qq2%22%o     
-    d2d0:	20202020 3071256f 71303030 25323232         o%q0000q222%
-    d2e0:	586f2532 20202020 00000000 31582020     2%oX    ....  X1
-    d2f0:	24243631 3e2c3c2c 3e3e3e3e 243e246f     16$$,<,>>>>>o$>$
-    d300:	20202023 3e202020 3c333636 583e3c3c     #      >663<<<>X
-    d310:	3e3e2458 243e3e3e 2020206f 72582020     X$>>>>>$o     Xr
-    d320:	25327272 34346534 31343434 31312424     rr2%4e444441$$11
-    d330:	20206f2c 32202020 65727272 58336565     ,o     2rrreee3X
-    d340:	33343c58 31313333 20202024 4d2b2020     X<433311$     +M
-    d350:	39354343 6d6d6d38 3637376d 3636392c     CC598mmmm776,966
-    d360:	20205833 35582020 6d4d4343 58366d6d     3X    X5CCMmmm6X
-    d370:	37373658 36363737 20202039 78585858     X67777669   XXXx
-    d380:	2a3d7676 78787878 3d7a7a7a 2a2a2a40     vv=*xxxxzzz=@***
-    d390:	2020582a 7a582020 78787676 583d7878     *X    Xzvvxxxx=X
-    d3a0:	3d7a3d20 2a2a3d3d 2020202a 61582020      =z===***     Xa
-    d3b0:	3a69426c 6b6b6b61 7575696b 75752626     lBi:akkkkiuu&&uu
-    d3c0:	20205875 3a202020 6b424242 2e696b6b     uX     :BBBkkki.
-    d3d0:	7575752e 75757575 20202026 20202020     .uuuuuuu&       
-    d3e0:	32256f20 32713271 25253225 20586f23      o%2q2q2%2%%#oX 
-    d3f0:	20202020 20202020 32256f20 32323232              o%22222
-    d400:	32252532 20206f23 20202020 00000000     2%%2#o      ....
-    d410:	31582020 20202431 3e2c2c6f 6f3e3e3e       X11$  o,,>>>>o
-    d420:	246f2020 20202024 20202020 3c313624       o$$       $61<
-    d430:	20583e31 3e245820 233e3e3e 20202020     1>X  X$>>>>#    
-    d440:	72582020 20582572 34346523 24313433       Xrr%X #e44341$
-    d450:	2c242020 2020582c 58202020 65727232       $,,X     X2rre
-    d460:	586f3265 34335820 24313333 20202020     e2oX X34331$    
-    d470:	4d2b2020 20583b43 6d6d6d40 6f38376d       +MC;X @mmmm78o
-    d480:	36232020 20205833 58202020 6d4d436c       #63X     XlCMm
-    d490:	2e6f356d 37356f20 2c363737 20202058     m5o. o57776,X   
-    d4a0:	78582020 20202d76 7a787a40 2b3d7a7a       Xxv-  @zxzzz=+
-    d4b0:	2a402020 2020582a 58202020 7878762d       @**X     X-vxx
-    d4c0:	20587a78 7a2a2e20 2a2a3d3d 20202020     xzX  .*z==**    
-    d4d0:	6b2e2020 20203a6c 6b6b6b2b 2b75616b       .kl:  +kkkkau+
-    d4e0:	75402020 20202e3a 2e202020 6b42563b       @u:.     .;VBk
-    d4f0:	202b696b 753a5820 3a757575 20202020     ki+  X:uuuu:    
-    d500:	20202020 6f582020 25252523 6f252525           Xo#%%%%%%o
-    d510:	20202058 20202020 20202020 6f582020     X             Xo
-    d520:	25252523 6f232525 20202058 20202020     #%%%%%#oX       
-    d530:	00000000 3c582020 20202024 3e2c6f20     ....  X<$    o,>
-    d540:	206f243e 6f202020 20202023 20202020     >$o    o#       
-    d550:	3c313958 20206f3e 24582020 20243e3e     X91<>o    X$>>$ 
-    d560:	20202020 65582020 20202025 34342320           Xe%    #44
-    d570:	206f3134 24202020 2020582c 20202020     41o    $,X      
-    d580:	65727720 20206f34 3c582020 20243c33      wre4o    X<3<$ 
-    d590:	20202020 4d402020 2020583b 6d384020           @M;X   @8m
-    d5a0:	2024366d 242e2020 20205833 20202020     m6$   .$3X      
-    d5b0:	6d433558 20206f35 36582020 58393637     X5Cm5o    X6769X
-    d5c0:	20202020 78582020 2020202a 7a7a4020           Xx*    @zz
-    d5d0:	202b3d7a 40202020 2020582a 20202020     z=+    @*X      
-    d5e0:	78786158 2020587a 2a582020 20403d3d     XaxxzX    X*==@ 
-    d5f0:	20202020 61582020 20202e26 6b614020           Xa&.   @ak
-    d600:	202b696b 26202020 20202e3a 20202020     ki+    &:.      
-    d610:	6b426158 20202e69 3a2e2020 58267575     XaBki.    .:uu&X
-    d620:	20202020 20202020 20202020 58585820                  XXX
-    d630:	20202058 20202020 20202020 20202020     X               
-    d640:	20202020 58585858 20585858 20202020         XXXXXXX     
-    d650:	20202020 00000000 6f582020 20202020         ....  Xo    
-    d660:	246f2020 20206f3e 20202020 2020206f       o$>o      o   
-    d670:	20202020 3e245820 20202058 58202020          X$>X      X
-    d680:	20202424 20202020 23582020 20202020     $$        X#    
-    d690:	336f2020 20206f33 20202020 2020206f       o33o      o   
-    d6a0:	20202020 71325820 2020206f 58202020          X2qo      X
-    d6b0:	2020243c 20202020 3b2b2020 20202020     <$        +;    
-    d6c0:	6d242e20 20204038 20202020 20205823      .$m8@      #X  
-    d6d0:	20202020 35355820 2020206f 6f202020          X55o      o
-    d6e0:	20203936 20202020 2a582020 20202020     69        X*    
-    d6f0:	7a402020 20202b7a 20202020 2020202b       @zz+      +   
-    d700:	20202020 7a3d5858 2020202b 58202020         XX=z+      X
-    d710:	20202a2a 20202020 402e2020 20202020     **        .@    
-    d720:	6b6f2020 20202b61 20202020 2020202b       oka+      +   
-    d730:	20202020 693b5858 2020202b 2e202020         XX;i+      .
-    d740:	2020263a 20202020 20202020 20202020     :&              
-    d750:	20202020 20202020 20202020 20202020                     
-    d760:	20202020 20202020 20202020 20202020                     
-    d770:	20202020 20202020 00000000 20202020             ....    
-    d780:	20202020 6f202020 20202058 20202020            oX       
-    d790:	20202020 20202020 58582020 20202020               XX    
-    d7a0:	20202020 20202058 20202020 20202020         X           
-    d7b0:	20202020 6f202020 2020206f 20202020            oo       
-    d7c0:	20202020 20202020 58582020 20202020               XX    
-    d7d0:	20202020 2020586f 20202020 20202020         oX          
-    d7e0:	20202020 6f2e2020 20205840 20202020           .o@X      
-    d7f0:	20202020 20202020 6f582020 20202020               Xo    
-    d800:	20202020 20205858 20202020 20202020         XX          
-    d810:	20202020 2b582020 20202058 20202020           X+X       
-    d820:	20202020 20202020 58582058 20202020             X XX    
-    d830:	20202020 20202058 20202020 20202020         X           
-    d840:	20202020 2b202020 2020202b 20202020            ++       
-    d850:	20202020 20202020 2b582020 20202020               X+    
-    d860:	20202020 20205858 20202020 20202020         XX          
-    d870:	20202020 20202020 20202020 20202020                     
-    d880:	20202020 20202020 20202020 20202020                     
-    d890:	20202020 20202020 20202020 00000000                 ....
-    d8a0:	20202020 2e202020 6f6f6f20 206f6f6f            . oooooo 
-    d8b0:	20202020 20202020 20202020 2e202020                    .
-    d8c0:	6f6f6f20 582b6f23 20202020 20202020      ooo#o+X        
-    d8d0:	20202020 20202020 23232320 20234023              ####@# 
-    d8e0:	20202020 20202020 20202020 20202020                     
-    d8f0:	23232358 20234023 20202020 20202020     X####@#         
-    d900:	20202020 20202020 3b406f58 58234023             Xo@;#@#X
-    d910:	20202020 20202020 20202020 20202020                     
-    d920:	2340232e 2e23233a 20202020 20202020     .#@#:##.        
-    d930:	20202020 20202020 40404058 20404040             X@@@@@@ 
-    d940:	20202020 20202020 20202020 20202020                     
-    d950:	40404020 20404040 20202020 20202020      @@@@@@         
-    d960:	20202020 20202020 40402b20 58262626              +@@&&&X
-    d970:	20202020 20202020 20202020 20202020                     
-    d980:	26262b20 20403a40 20202020 20202020      +&&@:@         
-    d990:	20202020 20202020 20202020 20202020                     
-    d9a0:	20202020 20202020 20202020 20202020                     
-    d9b0:	20202020 20202020 20202020 20202020                     
-    d9c0:	00000000 20202020 6f202020 36363624     ....       o$666
-    d9d0:	24393935 2020206f 20202020 20202020     599$o           
-    d9e0:	6f202020 35363124 24393935 2020206f        o$165599$o   
-    d9f0:	20202020 20202020 23202020 72726532                #2err
-    da00:	25346565 2020206f 20202020 20202020     ee4%o           
-    da10:	23202020 72726532 25346565 2020206f        #2erree4%o   
-    da20:	20202020 20202020 40202020 4d434d35                @5MCM
-    da30:	396d6d4d 20202e6f 20202020 20202020     Mmm9o.          
-    da40:	40202020 4d434d35 39374d4d 20205824        @5MCMMM79$X  
-    da50:	20202020 20202020 2b202020 6262623d                +=bbb
-    da60:	2a636362 20202058 20202020 20202020     bcc*X           
-    da70:	40202020 6262622d 2a636363 20202058        @-bbbccc*X   
-    da80:	20202020 20202020 40202020 4242423b                @;BBB
-    da90:	266b6b6c 2020202b 20202020 20202020     lkk&+           
-    daa0:	40202020 42426e3b 26616c6c 2020202b        @;nBBlla&+   
-    dab0:	20202020 20202020 20202020 20202020                     
-    dac0:	20202020 20202020 20202020 20202020                     
-    dad0:	20202020 20202020 20202020 20202020                     
-    dae0:	20202020 00000000 20202020 38356f20         ....     o58
-    daf0:	3c31366d 3e3e3e2c 20582424 20202020     m61<,>>>$$X     
-    db00:	20202020 38356f20 3c31366d 2c3e3e2c          o58m61<,>>,
-    db10:	2020243e 20202020 20202020 74744020     >$           @tt
-    db20:	3472744e 33343434 20582c3c 20202020     Ntr44443<,X     
-    db30:	20202020 74744020 3472744e 34343434          @ttNtr44444
-    db40:	20582c3c 20202020 20202020 4d355820     <,X          X5M
-    db50:	6d4d4343 37373737 206f3936 20202020     CCMm777769o     
-    db60:	20202020 4d355820 6d4d4343 37373737          X5MCCMm7777
-    db70:	20583936 20202020 20202020 766e2b20     69X          +nv
-    db80:	7a627676 3d3d7a7a 20582a2a 20202020     vvbzzz==**X     
-    db90:	20202020 42622b20 78627676 3d3d7a7a          +bBvvbxzz==
-    dba0:	20582a2a 20202020 20202020 426e2b20     **X          +nB
-    dbb0:	6b425656 75756b6b 20582675 20202020     VVBkkkuuu&X     
-    dbc0:	20202020 426e2b20 6b6c4453 7575616b          +nBSDlkkauu
-    dbd0:	202e3a75 20202020 20202020 58202020     u:.            X
-    dbe0:	32323225 58253232 20202020 20202020     %22222%X        
-    dbf0:	20202020 58202020 32323225 58253232            X%22222%X
-    dc00:	20202020 20202020 00000000 20202020             ....    
-    dc10:	43566e2b 3e2c366d 3e3e3e3e 58243e3e     +nVCm6,>>>>>>>$X
-    dc20:	20202020 20202020 43566e2b 3e3c366d             +nVCm6<>
-    dc30:	3e3e3e3e 58243e3e 20202020 58202020     >>>>>>$X       X
-    dc40:	415a6e6f 3434724e 33343434 6f2c3333     onZANr44444333,o
-    dc50:	20202020 58202020 415a6e6f 3434724e            XonZANr44
-    dc60:	33343434 6f2c3333 20202020 20202020     444333,o        
-    dc70:	4343742b 376d4d43 37373737 58353737     +tCCCMm77777775X
-    dc80:	20202020 20202020 4343742b 6d6d4d43             +tCCCMmm
-    dc90:	37373737 58353737 20202020 20202020     7777775X        
-    dca0:	56416e40 7a787644 3d707a7a 582a3d3d     @nAVDvxzzzp===*X
-    dcb0:	20202020 20202020 56416e40 7a787644             @nAVDvxz
-    dcc0:	3d707a7a 582a3d3d 20202020 20202020     zzp===*X        
-    dcd0:	415a426f 6b6b6c56 75756b6b 583a7575     oBZAVlkkkkuuuu:X
-    dce0:	20202020 20202020 415a426f 6b6b4253             oBZASBkk
-    dcf0:	7575616b 583a7575 20202020 20202020     kauuuu:X        
-    dd00:	30256f20 30656565 71303030 58205825      o%0eee0000q%X X
-    dd10:	20202020 20202020 30256f20 30656565              o%0eee0
-    dd20:	71303030 20585825 20202020 00000000     000q%XX     ....
-    dd30:	20202020 43564325 3e2c3c37 3e3e3e3e         %CVC7<,>>>>>
-    dd40:	6f3e3e3e 20202020 20202020 43564325     >>>o        %CVC
-    dd50:	3e2c3137 3e3e3e3e 6f3e3e3e 20202020     71,>>>>>>>>o    
-    dd60:	20202020 415a4135 34346574 33333434         5AZAte444433
-    dd70:	24313333 20202020 20202020 5a5a4135     331$        5AZZ
-    dd80:	34346574 33333433 24313333 20202020     te443433331$    
-    dd90:	20202020 43434335 6d6d6d4d 3737376d         5CCCMmmmm777
-    dda0:	24363737 20202020 20202020 43434335     776$        5CCC
-    ddb0:	6d6d6d4d 3737376d 24363737 20202020     Mmmmm777776$    
-    ddc0:	20202020 56415375 7a787842 3d3d7a7a         uSAVBxxzzz==
-    ddd0:	402a3d3d 20202020 20202020 56415375     ==*@        uSAV
-    dde0:	7a786342 3d3d7a7a 402a3d3d 20202020     Bcxzzz====*@    
-    ddf0:	20202020 415a5a3b 6b6b6b56 7575616b         ;ZZAVkkkkauu
-    de00:	26757575 20202020 20202020 415a5a3b     uuu&        ;ZZA
-    de10:	6b6b6b56 7575616b 26757575 20202020     Vkkkkauuuuu&    
-    de20:	20202020 72723023 30656572 30303030         #0rrree00000
-    de30:	58232571 20202020 20202020 72723023     q%#X        #0rr
-    de40:	30656572 30303030 206f3271 20202020     ree00000q2o     
-    de50:	00000000 6f202020 4d434d36 3e2c3c36     ....   o6MCM6<,>
-    de60:	2c2c3e3e 233e3e2c 20202058 6f202020     >>,,,>>#X      o
-    de70:	4d434d36 3e2c3c36 2c2c3e3e 233e3e3e     6MCM6<,>>>,,>>>#
-    de80:	20202058 6f582020 4e414e74 34656572     X     XotNANree4
-    de90:	34343434 2c313333 2020206f 6f202020     4444331,o      o
-    dea0:	4e414e74 33346572 34343434 2c313333     tNANre434444331,
-    deb0:	2020206f 40202020 4343434d 6d6d6d6d     o      @MCCCmmmm
-    dec0:	3737376d 36363737 2020206f 40582020     m7777766o     X@
-    ded0:	4343434d 6d6d6d6d 3737376d 36363737     MCCCmmmmm7777766
-    dee0:	2020206f 2b202020 44564463 78787862     o      +cDVDbxxx
-    def0:	7a7a7a7a 2a3d3d3d 2020202b 2b202020     zzzz===*+      +
-    df00:	44564463 78787876 7a7a7a7a 2a2a3d3d     cDVDvxxxzzzz==**
-    df10:	20202058 40202020 53415342 6b6b6b6c     X      @BSASlkkk
-    df20:	6969616b 75757575 2020202b 40202020     kaiiuuuu+      @
-    df30:	56415342 6b6b6b6c 6975616b 75757569     BSAVlkkkkauiiuuu
-    df40:	2020202b 6f202020 4e4e7430 65657274     +      o0tNNtree
-    df50:	30303030 6f257130 20202020 6f202020     00000q%o       o
-    df60:	4e4e7430 65657274 30303030 6f257130     0tNNtree00000q%o
-    df70:	20202020 00000000 24202020 436d6d31         ....   $1mmC
-    df80:	3e364d43 534d393e 243e3c4d 2020206f     CM6>>9MSM<>$o   
-    df90:	24202020 436d6d31 3e354d43 534d393e        $1mmCCM5>>9MS
-    dfa0:	233e394d 2020206f 25202020 434e4e72     M9>#o      %rNNC
-    dfb0:	34744e41 434d3834 3c31336d 2020206f     ANt448MCm31<o   
-    dfc0:	25582020 434e7472 34744e41 434d7434       X%rtNCANt44tMC
-    dfd0:	3131366d 20202024 3b202020 41434343     m611$      ;CCCA
-    dfe0:	6d6d4341 41436d37 3636374d 20202e24     ACmm7mCAM766$.  
-    dff0:	3b582020 41434343 6d6d4341 434d6d6d       X;CCCAACmmmmMC
-    e000:	36363743 20205823 2a202020 53444276     C766#X     *vBDS
-    e010:	7a784453 5344627a 3d2a4642 20202040     SDxzzbDSBF*=@   
-    e020:	2a202020 53444276 7a784453 5344627a        *vBDSSDxzzbDS
-    e030:	2a2a6342 2020202b 3a202020 53565642     Bc**+      :BVVS
-    e040:	6b6b5641 53566b6b 75756142 20202026     AVkkkkVSBauu&   
-    e050:	26202020 41535642 6b6b5653 53566b6b        &BVSASVkkkkVS
-    e060:	75756142 20202040 25202020 5a5a4e65     Bauu@      %eNZZ
-    e070:	65727243 30303030 23713030 20202058     Crre000000q#X   
-    e080:	25202020 5a5a4e65 65727243 30303030        %eNZZCrre0000
-    e090:	25713030 20202020 00000000 31582020     00q%    ....  X1
-    e0a0:	5a433731 3c435a5a 5a5a563c 243e6e5a     17CZZZC<<VZZZn>$
-    e0b0:	20205823 3c582020 5a433731 3c435a5a     #X    X<17CZZZC<
-    e0c0:	5a5a433c 242c6e5a 20205823 72582020     <CZZZn,$#X    Xr
-    e0d0:	5a434e72 34435a5a 5a5a4334 31316d5a     rNCZZZC44CZZZm11
-    e0e0:	2020582c 72582020 5a414e72 34435a5a     ,X    XrrNAZZZC4
-    e0f0:	5a5a4334 3c316d41 2020582c 4d582020     4CZZAm1<,X    XM
-    e100:	5a414343 6d435a5a 5a5a436d 36364d5a     CCAZZZCmmCZZZM66
-    e110:	20205833 4d582020 5a414343 6d415a5a     3X    XMCCAZZZAm
-    e120:	5a5a436d 36384d5a 20205833 782b2020     mCZZZM863X    +x
-    e130:	5a537676 63445a5a 5a5a5363 2a3d445a     vvSZZZDccSZZZD=*
-    e140:	2020582a 78582020 5a567676 7a565a5a     *X    XxvvVZZZVz
-    e150:	5a5a5363 3d3d445a 2020582a 61582020     cSZZZD==*X    Xa
-    e160:	5a41446c 6b565a5a 4141566b 7575445a     lDAZZZVkkVAAZDuu
-    e170:	2020583a 6b582020 5a53566c 6b535a5a     :X    XklVSZZZSk
-    e180:	5a5a566b 7575425a 20205875 30582020     kVZZZBuuuX    X0
-    e190:	5a5a4e72 65657243 30303030 71303030     rNZZCree0000000q
-    e1a0:	2020206f 30582020 5a5a4e72 65657243     o     X0rNZZCree
-    e1b0:	30303030 32303030 2020206f 00000000     00000002o   ....
-    e1c0:	3c6f2020 5a413831 335a5a5a 5a5a5a39       o<18AZZZZ39ZZZ
-    e1d0:	243c415a 20205824 3c6f2020 5a413833     ZA<$$X    o<38AZ
-    e1e0:	395a5a5a 5a5a5a33 232c535a 20205823     ZZZ93ZZZZS,##X  
-    e1f0:	656f2020 5a5a7472 385a5a5a 5a5a5a65       oertZZZZZ8eZZZ
-    e200:	3131435a 2020582c 72582020 5a5a7472     ZC11,X    XrrtZZ
-    e210:	385a5a5a 5a5a5a65 3c31435a 2020582c     ZZZ8eZZZZC1<,X  
-    e220:	4d582020 5a5a4343 4d415a5a 5a5a5a4d       XMCCZZZZAMMZZZ
-    e230:	3638415a 20205833 4d582020 5a5a4343     ZA863X    XMCCZZ
-    e240:	4d5a5a5a 415a5a6d 3638415a 20205833     ZZZMmZZAZA863X  
-    e250:	78582020 5a417676 625a5a5a 415a5a62       XxvvAZZZZbbZZA
-    e260:	2a3d415a 2020582a 78582020 5a5a7676     ZA=**X    XxvvZZ
-    e270:	625a5a5a 5a5a5a63 2a3d535a 2020582a     ZZZbcZZZZS=**X  
-    e280:	612b2020 5a414442 6c5a5a5a 5a5a5a6e       +aBDAZZZZlnZZZ
-    e290:	7561415a 2020583a 6b2e2020 5a5a4442     ZAau:X    .kBDZZ
-    e2a0:	6c5a5a41 5a5a5a6c 7575415a 20205875     AZZllZZZZAuuuX  
-    e2b0:	65252020 414e7472 6565724e 30303030       %ertNANree0000
-    e2c0:	71303030 20202023 65252020 434e4e65     000q#     %eeNNC
-    e2d0:	6565724e 30303030 71303030 20202023     Nree0000000q#   
-    e2e0:	00000000 31582020 56413831 395a6e6e     ....  X118AVnnZ9
-    e2f0:	61425a33 232c4144 20202023 3c582020     3ZBaDA,##     X<
-    e300:	44413831 35414261 61425a39 232c4156     18ADaBA59ZBaVA,#
-    e310:	20205823 72582020 565a7272 385a4261     #X    XrrrZVaBZ8
-    e320:	616e5a37 31315356 2020582c 65582020     7ZnaVS11,X    Xe
-    e330:	565a7272 385a4261 616e5a37 31315356     rrZVaBZ87ZnaVS11
-    e340:	2020582c 4d585820 56414343 4d416e6e     ,X   XXMCCAVnnAM
-    e350:	6e42416d 36384156 20205833 4d582020     mABnVA863X    XM
-    e360:	56414343 4d416e6e 6e425a4d 36384144     CCAVnnAMMZBnDA86
-    e370:	20205833 78582020 44414276 62416e62     3X    XxvBADbnAb
-    e380:	6e6e5a62 2a3d5344 2020582a 782b2020     bZnnDS=**X    +x
-    e390:	565a7676 6341446e 626e5a63 2a2d4156     vvZVnDAccZnbVA-*
-    e3a0:	2020582a 612e5820 445a446c 6e414261     *X   X.alDZDaBAn
-    e3b0:	6b6e5a6c 75614144 20202e75 612e5820     lZnkDAauu.   X.a
-    e3c0:	4441446c 6c414261 6142416c 75754144     lDADaBAllABaDAuu
-    e3d0:	20205875 65322020 72727265 32657272     uX    2eerrrrre2
-    e3e0:	30303030 32303030 20205825 65322020     00000002%X    2e
-    e3f0:	72727265 71656572 30303071 32303030     errrreeqq0000002
-    e400:	20205825 00000000 3c582020 3b423836     %X  ....  X<68B;
-    e410:	39424020 58404239 232c423b 20202024      @B99B@X;B,#$   
-    e420:	31582020 3b423836 39444058 58404439       X168B;X@D99D@X
-    e430:	252c6e3b 20202024 65582020 3b447272     ;n,%$     XerrD;
-    e440:	77444058 58404438 3c316e3b 2020582c     X@Dw8D@X;n1<,X  
-    e450:	72582020 3b447272 77444058 58404438       XrrrD;X@Dw8D@X
-    e460:	31316e3b 2020582c 4d582020 3b444343     ;n11,X    XMCCD;
-    e470:	4d424020 5840426d 3638423b 20205833      @BMmB@X;B863X  
-    e480:	4d582020 3b444343 6d424058 2040424d       XMCCD;X@BmMB@ 
-    e490:	3636423b 20205833 782b5858 3b447676     ;B663X  XX+xvvD;
-    e4a0:	63422d58 20404463 2a3d423b 2020202a     X-BccD@ ;B=**   
-    e4b0:	78582020 3b444276 63424058 58404463       XxvBD;X@BccD@X
-    e4c0:	2a3d443b 2020202a 612e2020 3b44426c     ;D=**     .alBD;
-    e4d0:	6e444020 5840426b 7575423b 20202075      @DnkB@X;Buuu   
-    e4e0:	612e2020 3b42426c 6c444058 5840446e       .alBB;X@DlnD@X
-    e4f0:	7561423b 2020583a 65322020 72656565     ;Bau:X    2eeeer
-    e500:	23656565 30303032 32303030 20205825     eee#20000002%X  
-    e510:	65322020 65726565 23656565 30303071       2eeereeee#q000
-    e520:	32303030 20205825 00000000 31582020     0002%X  ....  X1
-    e530:	3b3b3631 243b4058 583a3b24 243e3b3b     16;;X@;$$;:X;;>$
-    e540:	20202023 3c582020 3b613631 243b4058     #     X<16a;X@;$
-    e550:	58403b24 24243b3b 20202023 72582020     $;@X;;$$#     Xr
-    e560:	3a3b7272 333b4058 58403b33 3131393a     rr;:X@;33;@X:911
-    e570:	2020582c 65582020 3a3b7272 333b4058     ,X    Xerr;:X@;3
-    e580:	58403b33 3c31393a 2020582c 4d582020     3;@X:91<,X    XM
-    e590:	3b614343 6c3b4058 58403b6d 36363b3b     CCa;X@;lm;@X;;66
-    e5a0:	20205833 4d582020 3b614343 38614058     3X    XMCCa;X@a8
-    e5b0:	58406138 36363b3b 20205833 78585858     8a@X;;663X  XXXx
-    e5c0:	3b637676 7a3b4058 5840617a 2a2a3b3b     vvc;X@;zza@X;;**
-    e5d0:	2020582a 78582020 2d617676 7a3b4058     *X    Xxvva-X@;z
-    e5e0:	5840617a 2a2a3b2d 2020582a 612e2020     za@X-;***X    .a
-    e5f0:	3b614242 61614058 58406161 75752d3b     BBa;X@aaaa@X;-uu
-    e600:	20202e3a 612e2020 3b614242 61614058     :.    .aBBa;X@aa
-    e610:	58403b61 7575613b 20202e75 30322020     a;@X;auuu.    20
-    e620:	65656530 23346565 30303071 32713071     0eeeee4#q000q0q2
-    e630:	20205825 30322020 65656530 23346565     %X    200eeeee4#
-    e640:	30303032 32717171 20205825 00000000     2000qqq2%X  ....
-    e650:	31582020 40243636 2423403a 4040233e       X166$@:@#$>#@@
-    e660:	24246f40 20205823 3c582020 40243631     @o$$#X    X<16$@
-    e670:	3e6f4040 4040233e 243e6f40 20205824     @@o>>#@@@o>$$X  
-    e680:	65582020 40327272 33234040 2d402333       Xerr2@@@#33#@-
-    e690:	31312423 2020582c 65582020 40327272     #$11,X    Xerr2@
-    e6a0:	33234040 2d402333 31312423 2020582c     @@#33#@-#$11,X  
-    e6b0:	4d2b2020 40354343 38394040 3a262437       +MCC5@@@987$&:
-    e6c0:	36362440 20205833 43582020 40354343     @$663X    XCCC5@
-    e6d0:	6d25402d 3a402338 36362440 20205833     -@%m8#@:@$663X  
-    e6e0:	78582020 2d2d7676 7a2a4040 2d40407a       Xxvv--@@*zz@@-
-    e6f0:	2a2a4040 2020582a 782b5858 402d7678     @@***X  XX+xxv-@
-    e700:	7a2d4040 4040407a 2a2a4040 2020582a     @@-zz@@@@@***X  
-    e710:	61582020 403a426c 6b40402d 3a262661       XalB:@-@@ka&&:
-    e720:	75752640 20205875 61582020 40754242     @&uuuX    XaBBu@
-    e730:	6126403a 2d402661 75752640 20205875     :@&aa&@-@&uuuX  
-    e740:	30322020 30303030 23713030 23303071       20000000q#q00#
-    e750:	25322358 20205825 30322020 30303030     X#2%%X    200000
-    e760:	20253030 23303023 32322358 20205825     00% #00#X#22%X  
-    e770:	00000000 3c582020 6f333631 3e245858     ....  X<163oXX$>
-    e780:	206f243e 243e2458 20202024 31582020     >$o X$>$$     X1
-    e790:	6f333633 2c246f58 586f242c 243e246f     363oXo$,,$oXo$>$
-    e7a0:	20202023 72582020 23657272 343c236f     #     Xrrre#o#<4
-    e7b0:	586f3234 3c312c6f 2020582c 72582020     42oXo,1<,X    Xr
-    e7c0:	23657272 343c236f 586f3234 3c312c6f     rre#o#<442oXo,1<
-    e7d0:	2020582c 4d582020 406d4343 6d35406f     ,X    XMCCm@o@5m
-    e7e0:	586f396d 36383623 20205833 4d582020     m9oX#6863X    XM
-    e7f0:	406d4343 6d356f6f 586f3537 36363624     CCm@oo5m75oX$666
-    e800:	20205833 78582020 2a784276 7a3d4058     3X    XxvBx*X@=z
-    e810:	2e2b2a7a 2a3d3d2b 2020582a 78585858     z*+.+==**X  XXXx
-    e820:	2a637676 7a3d2b2e 2e2b3d7a 3d2a2a2b     vvc*.+=zz=+.+**=
-    e830:	2020582a 6b2e2020 266b426c 6b3a4058     *X    .klBk&X@:k
-    e840:	2e2b756b 7575752b 20202e3a 6b2e2020     ku+.+uuu:.    .k
-    e850:	266b446c 6b752b58 2e2b756b 75753a2b     lDk&X+ukku+.+:uu
-    e860:	20202e3a 30322020 30303030 23303030     :.    200000000#
-    e870:	58713071 32252020 20205825 30322020     q0qX  %2%X    20
-    e880:	30303030 20233030 5871716f 32252020     000000# oqqX  %2
-    e890:	20205825 00000000 3c582020 2c313633     %X  ....  X<361,
-    e8a0:	2c2c2c3e 243e3e3e 233e3e24 20202024     >,,,>>>$$>>#$   
-    e8b0:	3c582020 2c313631 3e2c2c2c 24243e3e       X<161,,,,>>>$$
-    e8c0:	243e3e24 20202024 65582020 77727272     $>>$$     Xerrrw
-    e8d0:	34343034 3c333434 3131333c 2020582c     4044443<<311,X  
-    e8e0:	65582020 77727272 34343034 3c333434       Xerrrw4044443<
-    e8f0:	3131333c 20206f2c 43402020 38434343     <311,o    @CCCC8
-    e900:	6d6d3838 31363737 36363736 20205833     88mm776167663X  
-    e910:	4d402020 37434343 6d6d3838 3536376d       @MCCC788mmm765
-    e920:	36363738 20205833 782b5858 78787676     87663X  XX+xvvxx
-    e930:	7a787a7a 2a3d7a7a 2a2a3d3d 2020202a     zzxzzz=*==***   
-    e940:	78582058 78787676 7a787a7a 2a3d7a7a     X Xxvvxxzzxzzz=*
-    e950:	2a3d3d3d 2020582a 61582020 6142446c     ===**X    XalDBa
-    e960:	6b6b6169 7575696b 75757575 20202075     iakkkiuuuuuuu   
-    e970:	61582020 6142426c 6b616b69 3a3a616b       XalBBaikakka::
-    e980:	75757575 20202075 30252020 30303030     uuuuu     %00000
-    e990:	23303030 23303071 25322320 20202025     000#q00# #2%%   
-    e9a0:	30252020 30303030 20587130 23302520       %000000qX  %0#
-    e9b0:	25322358 20205823 00000000 31582020     X#2%#X  ....  X1
-    e9c0:	3c313631 3e2c3c2c 3e3e3e3e 233e3e2c     161<,<,>>>>>,>>#
-    e9d0:	20205824 31582020 3c333631 3e2c3c3c     $X    X1163<<<,>
-    e9e0:	2c3e3e3e 233e3e3e 20202024 72582020     >>>,>>>#$     Xr
-    e9f0:	65727272 33346565 34343434 31313133     rrreee4344443111
-    ea00:	2020582c 72582020 65727272 33346565     ,X    Xrrrreee43
-    ea10:	34343434 31313133 2020582c 4d2b2020     44443111,X    +M
-    ea20:	6d4d4343 6d6d6d6d 37373737 36363737     CCMmmmmm77777766
-    ea30:	20205833 432b2020 6d4d4343 6d6d6d6d     3X    +CCCMmmmmm
-    ea40:	37373737 36363737 20205833 782b5858     777777663X  XX+x
-    ea50:	78787676 7a787878 3d707a7a 2a3d3d3d     vvxxxxxzzzp====*
-    ea60:	2020582a 782b2020 78787676 7a787878     *X    +xvvxxxxxz
-    ea70:	7a7a7a7a 2a2a3d3d 2020582a 6b582020     zzzz==***X    Xk
-    ea80:	6b42566c 6b6b6b6b 7575696b 75757575     lVBkkkkkkiuuuuuu
-    ea90:	20202e75 6b582020 6b42426c 6b6b6b6b     u.    XklBBkkkkk
-    eaa0:	7575616b 75757575 20202e75 71582020     kauuuuuuu.    Xq
-    eab0:	30303030 23303030 30303071 32253232     0000000#q00022%2
-    eac0:	2020206f 71582020 30303030 20202530     o     Xq00000%  
-    ead0:	30302520 32252532 2020206f 00000000      %002%%2o   ....
-    eae0:	3c582020 3c313631 2c2c3c3c 3e3e3e2c       X<161<<<,,,>>>
-    eaf0:	24243e3e 20205823 31582020 3c313631     >>$$#X    X1161<
-    eb00:	2c2c3c3c 3e3e3e3e 243e2c3e 20202023     <<,,>>>>>,>$#   
-    eb10:	72582020 65727272 34346565 34343434       Xrrrreee444444
-    eb20:	31313133 2020582c 65582020 65657272     3111,X    Xerree
-    eb30:	34346565 33343434 2c313333 2020582c     ee444443331,,X  
-    eb40:	4d2b2020 6d4d4343 6d6d6d6d 37373737       +MCCMmmmmm7777
-    eb50:	36363737 20205831 43402020 6d4d4343     77661X    @CCCMm
-    eb60:	6d6d6d6d 37363637 36363737 20205831     mmmm766777661X  
-    eb70:	78582020 78787676 78787878 3d7a7a7a       Xxvvxxxxxxzzz=
-    eb80:	3d2a3d3d 2020202a 78582020 78787676     ==*=*     Xxvvxx
-    eb90:	7a787878 3d3d7a7a 3d2a3d3d 2020582a     xxxzzz====*=*X  
-    eba0:	6b2e2020 6b42446c 6b6b6b6b 7575696b       .klDBkkkkkkiuu
-    ebb0:	75757575 20202e75 6b582020 6b42446c     uuuuu.    XklDBk
-    ebc0:	6b6b6b6b 7575616b 75757575 20202075     kkkkkauuuuuuu   
-    ebd0:	23582020 30303071 40303030 71303071       X#q000000@q00q
-    ebe0:	23322532 20202020 25202020 30303071     2%2#       %q000
-    ebf0:	20202330 71716f20 23322525 20202020     0#   oqq%%2#    
-    ec00:	00000000 31582020 3c313631 2c2c3c3c     ....  X1161<<<,,
-    ec10:	3e3e3e2c 243e3e3e 20205824 3c582020     ,>>>>>>$$X    X<
-    ec20:	3c313631 2c2c3c3c 3e3e3e3e 243e3e3e     161<<<,,>>>>>>>$
-    ec30:	20205824 65582e20 65727272 34346565     $X   .Xerrreee44
-    ec40:	34343434 3c313333 2020582c 72582020     4444331<,X    Xr
-    ec50:	65727272 34346565 33343434 3c313333     rrreee444443331<
-    ec60:	2020582c 4d402020 6d4d4343 6d6d6d6d     ,X    @MCCMmmmmm
-    ec70:	37373737 36363737 20205833 4d2b2020     777777663X    +M
-    ec80:	6d4d4343 6d6d6d37 37373737 36363737     CCMm7mmm77777766
-    ec90:	20205833 78582020 78787676 7a7a7878     3X    Xxvvxxxxzz
-    eca0:	3d7a7a7a 2a2a3d3d 2020582a 782b2020     zzz===***X    +x
-    ecb0:	78787676 7a787878 3d7a7a7a 2a2a3d3d     vvxxxxxzzzz===**
-    ecc0:	2020582a 6b2e2020 6b42446c 6b6b6b6b     *X    .klDBkkkkk
-    ecd0:	7575696b 75757575 20205875 612e2020     kiuuuuuuuX    .a
-    ece0:	6b42446c 6b6b6b6b 7575616b 75757575     lDBkkkkkkauuuuuu
-    ecf0:	20205875 6f582020 30307125 23303030     uX    Xo%q00000#
-    ed00:	25253071 6f253225 20202020 58202020     q0%%%2%o       X
-    ed10:	30307125 20205871 25252020 6f253225     %q00qX    %%%2%o
-    ed20:	20202020 00000000 3c582020 3c333631         ....  X<163<
-    ed30:	3e2c3c2c 3e3e3e3e 243e3e2c 20202024     ,<,>>>>>,>>$$   
-    ed40:	31582020 3c333631 242c3c3c 3e3e2c24       X1163<<<,$$,>>
-    ed50:	233e3e3e 20205824 65582020 65727272     >>>#$X    Xerrre
-    ed60:	34346565 33343434 31313331 2020582c     ee4444431311,X  
-    ed70:	65582020 65727272 33346565 33343433       Xerrreee433443
-    ed80:	31313133 2020582c 4d402020 6d434343     3111,X    @MCCCm
-    ed90:	6d6d6d6d 3737376d 36363737 20205833     mmmmm77777663X  
-    eda0:	432b2020 6d4d4343 386d6d6d 37373736       +CCCMmmmm86777
-    edb0:	36363737 20205833 782b2020 78787676     77663X    +xvvxx
-    edc0:	7a7a7878 3d7a7a7a 2a3d3d3d 2020582a     xxzzzzz====**X  
-    edd0:	78582020 78787676 7a787878 3d3d7a3d       Xxvvxxxxxz=z==
-    ede0:	2a2a3d3d 2020582a 61582020 6b42446c     ==***X    XalDBk
-    edf0:	6b6b6b6b 7575616b 75756175 20202e75     kkkkkauuuauuu.  
-    ee00:	6b582020 6b42446c 696b6b6b 75756161       XklDBkkkkiaauu
-    ee10:	75757575 20205875 20202020 3071326f     uuuuuX      o2q0
-    ee20:	23307130 25253271 206f2532 20202020     0q0#q2%%2%o     
-    ee30:	20202020 30712523 20205825 25232020         #%q0%X    #%
-    ee40:	20232532 20202020 00000000 31582020     2%#     ....  X1
-    ee50:	24243631 3e2c3c2c 3e3e3e3e 243e246f     16$$,<,>>>>>o$>$
-    ee60:	20202023 24202020 3c313831 583e3c3c     #      $181<<<>X
-    ee70:	3e2c2458 233e3e3e 2020206f 652b2020     X$,>>>>#o     +e
-    ee80:	25327272 34346565 31343434 31312424     rr2%ee444441$$11
-    ee90:	2020582c 352e2020 65727272 6f336565     ,X    .5rrreee3o
-    eea0:	33343c58 31313133 20202024 4d402020     X<433111$     @M
-    eeb0:	39354343 6d6d6d38 36373737 36363939     CC598mmm77769966
-    eec0:	20205833 35582020 6d4d4343 58366d6d     3X    X5CCMmmm6X
-    eed0:	37373658 36363737 20202039 78582020     X67777669     Xx
-    eee0:	3d7a7676 7a78787a 3d7a3d7a 2a2a2a40     vvz=zxxzz=z=@***
-    eef0:	2020582a 3d582020 78787676 583d7878     *X    X=vvxxxx=X
-    ef00:	3d7a3d58 2a2a3d3d 2020202a 61582020     X=z===***     Xa
-    ef10:	3a69426c 6b6b6b69 7575696b 75752626     lBi:ikkkkiuu&&uu
-    ef20:	20205875 3a202020 6b424242 58696b6b     uX     :BBBkkkiX
-    ef30:	75753a2e 75757575 20202026 20202020     .:uuuuuu&       
-    ef40:	32256f58 58717171 25322525 20586f23     Xo%2qqqX%%2%#oX 
-    ef50:	20202020 58202020 71236f58 2020206f            XXo#qo   
-    ef60:	25582020 20206f23 20202020 00000000       X%#o      ....
-    ef70:	31582020 20202431 3e2c2c6f 6f243e3e       X11$  o,,>>>$o
-    ef80:	246f2020 20202024 58202020 2c31362c       o$$      X,61,
-    ef90:	20583e3c 2c245820 6f3e3e3e 20202020     <>X  X$,>>>o    
-    efa0:	72582020 20202572 3434656f 24313434       Xrr%  oe44441$
-    efb0:	3c242020 2020202c 58202020 65727232       $<,      X2rre
-    efc0:	206f3465 34336f20 3e313c33 20202020     e4o  o343<1>    
-    efd0:	4d2b2020 20583b43 6d6d6d24 6f38376d       +MC;X $mmmm78o
-    efe0:	36232020 20205833 58202020 6d4d436c       #63X     XlCMm
-    eff0:	2e6f356d 37356f20 39363737 20202058     m5o. o577769X   
-    f000:	782e2020 20202d76 7a787a40 583d7a7a       .xv-  @zxzzz=X
-    f010:	2a2b2020 2020582a 58202020 78787662       +**X     Xbvxx
-    f020:	20587a78 3d2a5820 2a2a3d3d 20202020     xzX  X*===**    
-    f030:	6b582020 20203b6c 6b6b6b2b 2b3a616b       Xkl;  +kkkka:+
-    f040:	75262020 20202e3a 2e202020 6b42563b       &u:.     .;VBk
-    f050:	2058696b 753a5820 3a757575 20202020     kiX  X:uuuu:    
-    f060:	20202020 6f582020 6f252523 6f232525           Xo#%%o%%#o
-    f070:	20202058 20202020 20202020 6f582020     X             Xo
-    f080:	20205858 6f202020 20202058 20202020     XX     oX       
-    f090:	00000000 3c582020 20202024 3e3e6f20     ....  X<$    o>>
-    f0a0:	206f3e3e 6f202020 20205823 20202020     >>o    o#X      
-    f0b0:	3c333920 20206f3e 24582020 20243e3e      93<>o    X$>>$ 
-    f0c0:	20202020 65582020 20202025 34342320           Xe%    #44
-    f0d0:	206f3134 6f202020 2020582c 20202020     41o    o,X      
-    f0e0:	65727158 20206f71 3c582020 20243333     Xqreqo    X<33$ 
-    f0f0:	20202020 4d402020 2020583b 6d384058           @M;X  X@8m
-    f100:	2024366d 242e2020 20205833 20202020     m6$   .$3X      
-    f110:	6d433558 20206f35 36582020 58393737     X5Cm5o    X6779X
-    f120:	20202020 78582020 2020202a 787a4020           Xx*    @zx
-    f130:	202b3d7a 40202020 2020582a 20202020     z=+    @*X      
-    f140:	78786340 2020587a 2a582020 20403d3d     @cxxzX    X*==@ 
-    f150:	20202020 612e2020 20202e26 6b6b4020           .a&.   @kk
-    f160:	202b696b 40202020 20202e3a 20202020     ki+    @:.      
-    f170:	6b426158 20205869 3a582020 20267575     XaBkiX    X:uu& 
-    f180:	20202020 20202020 20202020 58585820                  XXX
-    f190:	58205858 20202020 20202020 20202020     XX X            
-    f1a0:	20202020 20202020 20202020 20202020                     
-    f1b0:	20202020 00000000 6f582020 20202020         ....  Xo    
-    f1c0:	3e6f2020 20206f3e 20202020 2020206f       o>>o      o   
-    f1d0:	20202020 3e242020 20202058 58202020           $>X      X
-    f1e0:	20202424 20202020 23582020 20202020     $$        X#    
-    f1f0:	336f2020 20206f33 20202020 2020586f       o33o      oX  
-    f200:	20202020 71325820 2020206f 58202020          X2qo      X
-    f210:	2058242c 20202020 3b2b2020 20202020     ,$X       +;    
-    f220:	6d402020 20204038 20202020 20205823       @m8@      #X  
-    f230:	20202020 35355820 2020206f 6f202020          X55o      o
-    f240:	20203939 20202020 2a202020 20202020     99         *    
-    f250:	7a402020 20202b7a 20202020 2020582b       @zz+      +X  
-    f260:	20202020 7a7a5820 2020202b 2e202020          Xzz+      .
-    f270:	20202a2a 20202020 402e2020 20202020     **        .@    
-    f280:	6b2b2020 20202b61 20202020 2020202b       +ka+      +   
-    f290:	20202020 69695820 20202058 2e202020          XiiX      .
-    f2a0:	202e2675 20202020 20202020 20202020     u&.             
-    f2b0:	20202020 20202020 20202020 20202020                     
-    f2c0:	20202020 20202020 20202020 20202020                     
-    f2d0:	20202020 20202020 00000000 20202020             ....    
-    f2e0:	20202020 58202020 20202058 20202020            XX       
-    f2f0:	20202020 20202020 58582020 20202020               XX    
-    f300:	20202020 20205858 20202020 20202020         XX          
-    f310:	20202020 6f582020 2020206f 20202020           Xoo       
-    f320:	20202020 20202020 6f582020 20202020               Xo    
-    f330:	20202020 20205858 20202020 20202020         XX          
-    f340:	20202020 6f585820 20205840 20202020          XXo@X      
-    f350:	20202020 20202020 6f582020 20202020               Xo    
-    f360:	20202020 20206f6f 20202020 20202020         oo          
-    f370:	20202020 58202020 2020202b 20202020            X+       
-    f380:	20202020 20202020 2b2b5820 20202020              X++    
-    f390:	20202020 20202058 20202020 20202020         X           
-    f3a0:	20202020 2b202020 2020202b 20202020            ++       
-    f3b0:	20202020 20202020 58582020 20202020               XX    
-    f3c0:	20202020 20202e2b 20202020 20202020         +.          
-    f3d0:	20202020 20202020 20202020 20202020                     
-    f3e0:	20202020 20202020 20202020 20202020                     
-    f3f0:	20202020 20202020 20202020 00000000                 ....
-    f400:	20202020 2e202020 6f6f6f20 2e6f6f24            . ooo$oo.
-    f410:	20202020 20202020 20202020 20202020                     
-    f420:	406f6f58 202b6f6f 20202020 20202020     Xoo@oo+         
-    f430:	20202020 20202020 23232320 586f6f23              ####ooX
-    f440:	20202020 20202020 20202020 20202020                     
-    f450:	23236f20 58236f23 20202020 20202020      o###o#X        
-    f460:	20202020 20202020 40232358 5840233a             X##@:#@X
-    f470:	20202020 20202020 20202020 20202020                     
-    f480:	2340232e 2e23233a 20202020 20202020     .#@#:##.        
-    f490:	20202020 20202020 4040402e 20404040             .@@@@@@ 
-    f4a0:	20202020 20202020 20202020 20202020                     
-    f4b0:	40404020 20404040 20202020 20202020      @@@@@@         
-    f4c0:	20202020 20202020 26264020 58264040              @&&@@&X
-    f4d0:	20202020 20202020 20202020 20202020                     
-    f4e0:	26402b58 2e26403a 20202020 20202020     X+@&:@&.        
-    f4f0:	20202020 20202020 20202020 20202020                     
-    f500:	20202020 20202020 20202020 20202020                     
-    f510:	20202020 20202020 20202020 20202020                     
-    f520:	00000000 20202020 6f202020 35363124     ....       o$165
-    f530:	24393935 2020206f 20202020 20202020     599$o           
-    f540:	6f202020 35363124 24393c35 2020206f        o$1655<9$o   
-    f550:	20202020 20202020 23202020 72726532                #2err
-    f560:	25346565 2020206f 20202020 20202020     ee4%o           
-    f570:	23202020 72726532 24346565 2020206f        #2erree4$o   
-    f580:	20202020 20202020 40202020 4d434d35                @5MCM
-    f590:	39376d4d 20202024 20202020 20202020     Mm79$           
-    f5a0:	40202020 4d434d35 39374d4d 20205824        @5MCMMM79$X  
-    f5b0:	20202020 20202020 40202020 6262622d                @-bbb
-    f5c0:	2a636363 2020202b 20202020 20202020     ccc*+           
-    f5d0:	40202020 6262622d 2a636363 2020202b        @-bbbccc*+   
-    f5e0:	20202020 20202020 40202020 42426c3b                @;lBB
-    f5f0:	266b426c 2020202b 20202020 20202020     lBk&+           
-    f600:	40202020 42426c61 26616c42 2020202b        @alBBBla&+   
-    f610:	20202020 20202020 20202020 20202020                     
-    f620:	20202020 20202020 20202020 20202020                     
-    f630:	20202020 20202020 20202020 20202020                     
-    f640:	20202020 00000000 20202020 38356f58         ....    Xo58
-    f650:	3c31366d 3e3e2c2c 20582424 20202020     m61<,,>>$$X     
-    f660:	20202020 38352b2e 3c31386d 3e3e2c2c         .+58m81<,,>>
-    f670:	20582424 20202020 20202020 74744020     $$X          @tt
-    f680:	3472744e 34343434 20582c3c 20202020     Ntr44444<,X     
-    f690:	20202020 74746f20 3472724e 34343434          ottNrr44444
-    f6a0:	20582433 20202020 20202020 4d355820     3$X          X5M
-    f6b0:	6d4d4343 37373737 2e583936 20202020     CCMm777769X.    
-    f6c0:	20202020 4d355820 6d4d4343 37373737          X5MCCMm7777
-    f6d0:	206f3936 20202020 20202020 766e2b20     69o          +nv
-    f6e0:	78627642 3d7a7a78 20582a3d 20202020     Bvbxxzz==*X     
-    f6f0:	20202020 42614020 78627676 3d3d7a7a          @aBvvbxzz==
-    f700:	20582a2a 20202020 20202020 426e2b20     **X          +nB
-    f710:	6b6c4453 7569616b 202e3a75 20202020     SDlkkaiuu:.     
-    f720:	20202020 426e2b20 6b6c5656 7575616b          +nBVVlkkauu
-    f730:	202e263a 20202020 20202020 58582020     :&.           XX
-    f740:	32323225 58253232 20202058 20202020     %22222%XX       
-    f750:	20202020 58582020 32323225 58253232           XX%22222%X
-    f760:	20202020 20202020 00000000 20202020             ....    
-    f770:	43536e2b 3e2c364d 3e3e3e3e 58243e3e     +nSCM6,>>>>>>>$X
-    f780:	20202020 20202020 43566e6f 3e2c366d             onVCm6,>
-    f790:	3e3e3e3e 58243e3e 20202020 20202020     >>>>>>$X        
-    f7a0:	5a5a6e6f 3365724e 33343434 582c3333     onZZNre3444333,X
-    f7b0:	20202020 20202020 415a6e40 3434724e             @nZANr44
-    f7c0:	33343434 582c3333 20202020 20202020     444333,X        
-    f7d0:	4343742b 6d6d4d43 37373737 6f353737     +tCCCMmm7777775o
-    f7e0:	20202020 20202020 4343742b 6d6d4d43             +tCCCMmm
-    f7f0:	37373737 58393737 20202020 20202020     7777779X        
-    f800:	56536e6f 7a786242 3d3d7a7a 582a3d3d     onSVBbxzzz====*X
-    f810:	20202020 20202020 56416e40 7a787644             @nAVDvxz
-    f820:	3d707a7a 582a3d3d 20202020 20202020     zzp===*X        
-    f830:	415a426f 6b6b4256 7575616b 583a7575     oBZAVBkkkauuuu:X
-    f840:	20202020 20202020 415a426f 6b6b4256             oBZAVBkk
-    f850:	7575696b 2e3a7575 20202020 20202020     kiuuuu:.        
-    f860:	30255820 30656565 71303030 20206f23      X%0eee0000q#o  
-    f870:	20202020 20202020 30255820 30656565              X%0eee0
-    f880:	71303030 20206f23 20202020 00000000     000q#o      ....
-    f890:	20202020 53564325 3e2c3137 3e3e3e3e         %CVS71,>>>>>
-    f8a0:	6f3e3e3e 20202020 20202020 43534339     >>>o        9CSC
-    f8b0:	3e2c3137 3e3e3e3e 6f3e3e3e 20202020     71,>>>>>>>>o    
-    f8c0:	20202020 5a5a5a3b 3434654e 33343434         ;ZZZNe444443
-    f8d0:	24313333 20202020 20202020 5a5a413b     331$        ;AZZ
-    f8e0:	3434654e 33343434 24313333 20202020     Ne444443331$    
-    f8f0:	20202020 43434335 6d6d6d4d 3737376d         5CCCMmmmm777
-    f900:	24363737 20202020 20202020 43434335     776$        5CCC
-    f910:	6d6d6d4d 3737376d 24363737 20202020     Mmmmm777776$    
-    f920:	2e202020 5641563b 7a787876 3d7a7a7a        .;VAVvxxzzzz=
-    f930:	402a3d3d 20202020 20202020 5641532d     ==*@        -SAV
-    f940:	7a787842 3d3d7a7a 402a3d3d 20202020     Bxxzzz====*@    
-    f950:	20202020 415a5a3b 6b6b6b56 7575616b         ;ZZAVkkkkauu
-    f960:	26757575 20202020 20202020 415a413b     uuu&        ;AZA
-    f970:	6b6b6b44 7575616b 26757575 20202020     Dkkkkauuuuu&    
-    f980:	20202020 7265306f 30657272 30303030         o0errre00000
-    f990:	206f3271 20202020 20202020 7265306f     q2o         o0er
-    f9a0:	30656572 30303030 206f3271 20202020     ree00000q2o     
-    f9b0:	00000000 6f202020 4d434d36 3e2c3c36     ....   o6MCM6<,>
-    f9c0:	2c2c3e3e 233e3e3e 20202058 6f202020     >>,,>>>#X      o
-    f9d0:	4d434d31 3e2c3c36 2c2c3e3e 243e3e3e     1MCM6<,>>>,,>>>$
-    f9e0:	20202058 6f582020 4e5a4e74 33346572     X     XotNZNre43
-    f9f0:	34343433 2c313333 2020206f 6f202020     3444331,o      o
-    fa00:	4e5a4e74 34346574 34343334 2c313333     tNZNte444344331,
-    fa10:	2020206f 40202020 4343434d 6d6d6d6d     o      @MCCCmmmm
-    fa20:	37373737 36363737 2020206f 40202020     77777766o      @
-    fa30:	4343434d 6d6d6d6d 3737376d 36363737     MCCCmmmmm7777766
-    fa40:	2020206f 40202020 42564462 7a787876     o      @bDVBvxxz
-    fa50:	7a467a7a 2a3d3d3d 20202058 40202020     zzFz===*X      @
-    fa60:	44564462 7a787862 7a7a7a7a 2a2a2a3d     bDVDbxxzzzzz=***
-    fa70:	20202058 40202020 53415342 6b6b6b6c     X      @BSASlkkk
-    fa80:	7575616b 75757569 2020202b 40202020     kauuiuuu+      @
-    fa90:	53415342 6b6b6b6c 6175616b 75757561     BSASlkkkkauaauuu
-    faa0:	2020202b 6f202020 4e4e7430 65252374     +      o0tNNt#%e
-    fab0:	30303030 6f327130 20202020 6f202020     00000q2o       o
-    fac0:	4e4e7430 65252374 30303030 6f257130     0tNNt#%e00000q%o
-    fad0:	20202020 00000000 24202020 436d6d31         ....   $1mmC
-    fae0:	3e354d43 534d393e 233e394d 2020206f     CM5>>9MSM9>#o   
-    faf0:	24202020 436d6d31 3e364d43 434d3924        $1mmCCM6>$9MC
-    fb00:	233e394d 2020206f 25202020 4e4e4e72     M9>#o      %rNNN
-    fb10:	34744e43 434d7434 3c31336d 20202024     CNt44tMCm31<$   
-    fb20:	25202020 4e4e4e72 34654341 43437434        %rNNNACe44tCC
-    fb30:	3c31336d 20202024 3b202020 41434343     m31<$      ;CCCA
-    fb40:	6d6d435a 43436d37 3636374d 20202024     ZCmm7mCCM766$   
-    fb50:	3b202020 41434343 6d6d4341 43436d37        ;CCCAACmm7mCC
-    fb60:	3636374d 20202024 3d2b2020 53444276     M766$     +=vBDS
-    fb70:	7a634441 5344627a 2a2a6342 2020202b     ADczzbDSBc**+   
-    fb80:	3d2e2020 53444276 78784441 5344627a       .=vBDSADxxzbDS
-    fb90:	3d2a6342 20202040 3a202020 41565642     Bc*=@      :BVVA
-    fba0:	6b6b5653 53566b6b 75756142 20202040     SVkkkkVSBauu@   
-    fbb0:	3a202020 41535642 6b6b5641 53566b6b        :BVSAAVkkkkVS
-    fbc0:	75756142 20202040 25202020 5a5a4e72     Bauu@      %rNZZ
-    fbd0:	71582040 30303030 25713030 20202020     @ Xq000000q%    
-    fbe0:	25202020 5a5a4e72 3258203b 30303030        %rNZZ; X20000
-    fbf0:	25303030 20202020 00000000 31582020     000%    ....  X1
-    fc00:	564d3731 3c435a53 4156443c 242c6e5a     17MVSZC<<DVAZn,$
-    fc10:	20202024 3c582020 564d3836 3c435a53     $     X<68MVSZC<
-    fc20:	5356443c 242c6e5a 20202024 72582020     <DVSZn,$$     Xr
-    fc30:	564e4e72 34435a53 41564d34 31316d5a     rNNVSZC44MVAZm11
-    fc40:	2020202c 72582020 534e4e72 34435a53     ,     XrrNNSSZC4
-    fc50:	53564334 31316d5a 2020582c 4d582020     4CVSZm11,X    XM
-    fc60:	53534343 6d415a53 4156436d 36384d5a     CCSSSZAmmCVAZM86
-    fc70:	20205833 4d582020 53534343 6d415a53     3X    XMCCSSSZAm
-    fc80:	5356436d 3638435a 20205833 782b2020     mCVSZC863X    +x
-    fc90:	56564276 7a535a53 41564463 3d3d445a     vBVVSZSzcDVAZD==
-    fca0:	2020582a 782b2020 53567676 63445a53     *X    +xvvVSSZDc
-    fcb0:	53564463 2a3d445a 2020582a 61582020     cDVSZD=**X    Xa
-    fcc0:	5653446c 6b534153 5356566b 7575425a     lDSVSASkkVVSZBuu
-    fcd0:	20205875 612e2020 5653566c 6b565a53     uX    .alVSVSZVk
-    fce0:	4156566b 7575445a 20205875 30582020     kVVAZDuuuX    X0
-    fcf0:	5a5a4e72 306f5835 30303030 32303030     rNZZ5Xo000000002
-    fd00:	2020206f 30582020 5a5a4e72 30232035     o     X0rNZZ5 #0
-    fd10:	30303030 71303030 2020206f 00000000     0000000qo   ....
-    fd20:	31582020 406e3831 395a443b 3b403b39       X118n@;DZ99;@;
-    fd30:	232c4153 20205823 31582020 406e3831     SA,##X    X118n@
-    fd40:	395a563a 3b403b39 232c4153 20205823     :VZ99;@;SA,##X  
-    fd50:	65582020 406e7272 775a563b 3b403b36       Xerrn@;VZw6;@;
-    fd60:	3c314153 2020582c 65582020 406e7272     SA1<,X    Xerrn@
-    fd70:	655a563b 3b403b36 3c314153 2020582c     ;VZe6;@;SA1<,X  
-    fd80:	43582020 40424343 4d5a563b 3b403b6d       XCCCB@;VZMm;@;
-    fd90:	36384141 20205833 4d582020 406e4343     AA863X    XMCCn@
-    fda0:	4d5a563b 3b403b6d 36384141 202e5833     ;VZMm;@;AA863X. 
-    fdb0:	78582020 406e7676 625a443b 3b403b63       Xxvvn@;DZbc;@;
-    fdc0:	2a3d4153 2020582a 78582020 406e7676     SA=**X    Xxvvn@
-    fdd0:	625a562d 3b403b63 2a3d4141 2020582a     -VZbc;@;AA=**X  
-    fde0:	612e2020 406e4442 6c5a563a 3b40616b       .aBDn@:VZlka@;
-    fdf0:	75614141 20202e75 612b2020 406e4442     AAauu.    +aBDn@
-    fe00:	6c5a563a 3b40616b 75754141 20205875     :VZlka@;AAuuuX  
-    fe10:	65252020 4e4e4e72 6530774e 30303030       %erNNNNw0e0000
-    fe20:	32303030 20202023 6f582020 4e4e7425     0002#     Xo%tNN
-    fe30:	65657774 30303030 32303030 20205823     twee00000002#X  
-    fe40:	00000000 3c582020 203b3836 395a4258     ....  X<68; XBZ9
-    fe50:	40582d3c 232c4156 20205824 3c582020     <-X@VA,#$X    X<
-    fe60:	203b3836 395a6e58 40582d3c 232c4156     68; XnZ9<-X@VA,#
-    fe70:	20205824 72582020 203b7272 385a4258     $X    Xrrr; XBZ8
-    fe80:	40582d34 31314156 2020582c 72582020     4-X@VA11,X    Xr
-    fe90:	203b7272 385a6e58 40582d33 31314156     rr; XnZ83-X@VA11
-    fea0:	2020582c 4d582020 203b4343 4d5a6e58     ,X    XMCC; XnZM
-    feb0:	40582d6e 36385a56 20205833 43582020     n-X@VZ863X    XC
-    fec0:	20614343 6d5a4258 40202d6e 36385a56     CCa XBZmn- @VZ86
-    fed0:	20205833 782b2020 583b7676 635a4258     3X    +xvv;XXBZc
-    fee0:	40203b7a 2a3d4156 2020202a 782b2020     z; @VA=**     +x
-    fef0:	583b7676 625a6e58 40202d7a 2a3d4156     vv;XXnZbz- @VA=*
-    ff00:	2020582a 61582020 20614442 6c5a4258     *X    XaBDa XBZl
-    ff10:	40582d6b 75754156 20202e75 612e2e20     k-X@VAuuu.   ..a
-    ff20:	203b446e 6c5a4258 40582d6b 75614156     nD; XBZlk-X@VAau
-    ff30:	20202e3a 65322020 72727265 30657272     :.    2eerrrrre0
-    ff40:	30303030 71303030 20205825 20582020     0000000q%X    X 
-    ff50:	77405858 30657277 30303030 32303030     XX@wwre000000002
-    ff60:	20205825 00000000 3c582020 3b6e3831     %X  ....  X<18n;
-    ff70:	3953533b 6e3b3b39 232c565a 20205823     ;SS99;;nZV,##X  
-    ff80:	3c582020 3b6e3831 3953533b 6e3b6e24       X<18n;;SS9$n;n
-    ff90:	242c5641 20205823 65582020 3b6e7272     AV,$#X    Xerrn;
-    ffa0:	3653533b 6e3b6e33 3c314d41 2020582c     ;SS63n;nAM1<,X  
-    ffb0:	65582020 3b6e7272 3653533b 6e3b6133       Xerrn;;SS63a;n
-    ffc0:	3c314d41 2020582c 4d582020 3b6e4343     AM1<,X    XMCCn;
-    ffd0:	4d53533b 6c3b6174 36365641 20205833     ;SSMta;lAV663X  
-    ffe0:	4d582020 3b6e4343 6d53533b 6c3b616d       XMCCn;;SSmma;l
-    fff0:	3638565a 20205833 78585820 3b6e7676     ZV863X   XXxvvn;
-   10000:	6353533b 6e3b627a 2a2a4441 2020582a     ;SSczb;nAD***X  
-   10010:	78585858 3b6e7676 6353533b 6e2d6e7a     XXXxvvn;;SSczn-n
-   10020:	2a2d4441 2020202a 612e2020 3b6e426c     AD-**     .alBn;
-   10030:	6b535361 6e3b6161 75754441 20202e75     aSSkaa;nADuuu.  
-   10040:	612e2020 3b6e426c 6b53533b 6e3b6161       .alBn;;SSkaa;n
-   10050:	7561445a 20202075 65322020 72656565     ZDauu     2eeeer
-   10060:	30656565 30303030 32303030 20205825     eee000000002%X  
-   10070:	20202020 20202058 71252558 30303030         X   X%%q0000
-   10080:	32303030 20205825 00000000 3c582020     0002%X  ....  X<
-   10090:	563b3631 246e4141 41536b24 24243b41     16;VAAn$$kSAA;$$
-   100a0:	20202024 3c582020 563b3631 246e5a41     $     X<16;VAZn$
-   100b0:	41536b24 24243b41 20202024 74582020     $kSAA;$$$     Xt
-   100c0:	563b7272 336e4141 41536b32 31313b43     rr;VAAn32kSAC;11
-   100d0:	20206f2c 74582020 563b7272 336e5a41     ,o    Xtrr;VAZn3
-   100e0:	41536e32 31313b43 20206f2c 43582020     2nSAC;11,o    XC
-   100f0:	56614343 386e5a41 41566e38 36366153     CCaVAZn88nVASa66
-   10100:	20205833 4d582020 566e4343 386e4141     3X    XMCCnVAAn8
-   10110:	41566e38 36363b41 20205833 782b5820     8nVAA;663X   X+x
-   10120:	53617676 7a6e4141 41566e3d 2a2a6141     vvaSAAnz=nVAAa**
-   10130:	2020582a 782b5820 53617676 7a6e4141     *X   X+xvvaSAAnz
-   10140:	41536e3d 3d2a6141 2020582a 612e2020     =nSAAa*=*X    .a
-   10150:	53614242 616e4141 41536e61 75756141     BBaSAAnaanSAAauu
-   10160:	2020583a 612e2020 56614242 616e4141     :X    .aBBaVAAna
-   10170:	41536e61 75756141 20205875 236f2020     anSAAauuuX    o#
-   10180:	23232323 23232323 30303223 32713030     #########20000q2
-   10190:	20205825 20202020 20202020 6f202020     %X             o
-   101a0:	30303223 32713030 20205825 00000000     #20000q2%X  ....
-   101b0:	3c582020 23243636 3e233b3b 3b3b6f24       X<66$#;;#>$o;;
-   101c0:	243e6f23 20202024 3c582020 23243636     #o>$$     X<66$#
-   101d0:	3e233b3b 3b3b6f24 24246f25 20205823     ;;#>$o;;%o$$#X  
-   101e0:	72582020 3b327272 33243b3b 3b3b2333       Xrrr2;;;$33#;;
-   101f0:	3c312423 2020582c 72582020 3b327272     #$1<,X    Xrrr2;
-   10200:	33243b3b 3b3b2333 3c312423 2020582c     ;;$33#;;#$1<,X  
-   10210:	43582020 40354343 37393b3b 3b3b2438       XCCC5@;;978$;;
-   10220:	3636243b 20205833 43582020 40354343     ;$663X    XCCC5@
-   10230:	6d253b3b 3b3b2438 36362425 20205833     ;;%m8$;;%$663X  
-   10240:	78582020 3b3d7676 7a2a3b3b 3b3b403d       Xxvv=;;;*z=@;;
-   10250:	2a2a4025 2020582a 78582020 3b3d7676     %@***X    Xxvv=;
-   10260:	7a2a3b3b 3b3b403d 2a2a2625 2020582a     ;;*z=@;;%&***X  
-   10270:	61582020 253a4242 61263b3b 3b3b4061       XaBB:%;;&aa@;;
-   10280:	75752625 20202e75 6b582020 3b3a426c     %&uuu.    XklB:;
-   10290:	61263b3b 3b3b4061 75752640 20202e3a     ;;&aa@;;@&uu:.  
-   102a0:	71252020 71717171 71717171 30303032       %qqqqqqqqq2000
-   102b0:	25713030 20205825 20202020 58205858     00q%%X      XX X
-   102c0:	25236f58 30307171 32323030 20205825     Xo#%qq000022%X  
-   102d0:	00000000 31582020 24333631 3e246f6f     ....  X1163$oo$>
-   102e0:	586f242c 243e246f 20205824 3c6f2020     ,$oXo$>$$X    o<
-   102f0:	24333631 2c246f6f 586f243e 243e246f     163$oo$,>$oXo$>$
-   10300:	20205823 65582020 25777272 3332236f     #X    Xerrw%o#23
-   10310:	6f6f3c34 3c312c24 2020582c 65582020     4<oo$,1<,X    Xe
-   10320:	25777272 3332236f 6f233c34 3c313c23     rrw%o#234<#o#<1<
-   10330:	2020582c 4d582020 396d4343 6d35406f     ,X    XMCCm9o@5m
-   10340:	6f233537 36363624 20205833 4d582020     75#o$6663X    XM
-   10350:	396d4343 6d354040 6f24356d 36363624     CCm9@@5mm5$o$666
-   10360:	20205833 782b2020 3d787676 7a3d2a40     3X    +xvvx=@*=z
-   10370:	2e403d7a 2a3d3d2b 2020202a 782b2020     z=@.+==**     +x
-   10380:	3d787676 783d2a2b 2e402a7a 2a3d2a2b     vvx=+*=xz*@.+*=*
-   10390:	2020582a 6b2e2020 266b426c 6b752640     *X    .klBk&@&uk
-   103a0:	40403a6b 75757526 20205875 612e2020     k:@@&uuuuX    .a
-   103b0:	3a6b426c 6b75262b 40403a6b 75757540     lBk:+&ukk:@@@uuu
-   103c0:	20205875 30322020 30713030 30303030     uX    2000q00000
-   103d0:	30303030 25323030 20205825 20202020     0000002%%X      
-   103e0:	25585858 30303025 30303030 25327130     XXX%%00000000q2%
-   103f0:	20205825 00000000 3c582020 2c313633     %X  ....  X<361,
-   10400:	3e2c2c2c 243e2c3e 243e2c24 20205823     ,,,>>,>$$,>$#X  
-   10410:	3c582020 2c313633 3e2c2c2c 243e3e3e       X<361,,,,>>>>$
-   10420:	243e3e24 20202024 72582020 65657272     $>>$$     Xrrree
-   10430:	34656530 33333434 3c313333 2020582c     0ee44433331<,X  
-   10440:	72582020 65657272 34656530 33333434       Xrrree0ee44433
-   10450:	3c313133 2020582c 4d402020 6d4d4343     311<,X    @MCCMm
-   10460:	6d6d6d38 3638376d 36383736 20205833     8mmmm78667863X  
-   10470:	4d402020 6d4d4343 6d6d6d38 36363737       @MCCMm8mmm7766
-   10480:	36363738 202e5833 78582020 78787676     87663X.   Xxvvxx
-   10490:	7a787a7a 3d3d7a7a 2a2a3d3d 2020202a     zzxzzz====***   
-   104a0:	78582020 78787676 7a787a78 3d3d7a7a       Xxvvxxxzxzzz==
-   104b0:	2a2a3d3d 2020582a 6b2e2020 6b42446c     ==***X    .klDBk
-   104c0:	6b616b61 3a75616b 75757575 20202e3a     akakkau:uuuu:.  
-   104d0:	6b582020 6b42446c 6b61616b 3a75616b       XklDBkkaakkau:
-   104e0:	75757575 20205875 30252020 30303030     uuuuuX    %00000
-   104f0:	30303030 30303030 32253230 20202025     0000000002%2%   
-   10500:	58582020 3071256f 30303030 30303030       XXo%q000000000
-   10510:	25323230 20202025 00000000 31582020     022%%   ....  X1
-   10520:	3c313631 3e2c3c2c 2c3e3e3e 24243e3e     161<,<,>>>>,>>$$
-   10530:	20202024 31582020 3c313631 3e2c2c3c     $     X1161<<,,>
-   10540:	2c3e3e3e 243e3e3e 20202023 65582020     >>>,>>>$#     Xe
-   10550:	65657272 33346565 34343434 31313133     rreeee4344443111
-   10560:	2020582c 65582020 65657272 33346565     ,X    Xerreeee43
-   10570:	33343434 31313133 2020582c 432b2020     44433111,X    +C
-   10580:	6d4d4343 6d6d6d6d 37373737 36363737     CCMmmmmm77777766
-   10590:	20205833 432b2020 6d4d4343 6d6d6d6d     3X    +CCCMmmmmm
-   105a0:	3737376d 36363737 20202e33 78582020     m77777663.    Xx
-   105b0:	78787676 7a787878 3d7a7a7a 2a3d3d3d     vvxxxxxzzzz====*
-   105c0:	2020582a 78582020 78787676 7a7a7878     *X    Xxvvxxxxzz
-   105d0:	3d7a7a7a 2a3d3d3d 2020582a 6b582020     zzz====**X    Xk
-   105e0:	6b42426c 6b6b6b6b 7575616b 75757575     lBBkkkkkkauuuuuu
-   105f0:	2020583a 61582020 6b42446c 6b6b6b6b     :X    XalDBkkkkk
-   10600:	7575616b 75757575 20202075 71582020     kauuuuuuu     Xq
-   10610:	30303030 30303030 30303030 25322532     0000000000002%2%
-   10620:	2020206f 32582020 30303071 30303030     o     X2q0000000
-   10630:	30303030 32253232 2020206f 00000000     000022%2o   ....
-   10640:	3c582020 3c313631 2c2c3c3c 3e3e3e2c       X<161<<<,,,>>>
-   10650:	243e3e3e 20202023 3c582020 3c333631     >>>$#     X<163<
-   10660:	2c2c3c3c 3e3e3e2c 243e3e3e 20202023     <<,,,>>>>>>$#   
-   10670:	72582020 65727272 34346565 31343434       Xrrrreee444441
-   10680:	31313133 2020582c 65582020 65727272     3111,X    Xerrre
-   10690:	34346565 34343434 31313333 2020582c     ee4444443311,X  
-   106a0:	4d2b2020 6d4d4343 6d6d6d6d 3737376d       +MCCMmmmmmm777
-   106b0:	36363737 20205831 43402020 6d4d4343     77661X    @CCCMm
-   106c0:	6d6d6d6d 37363637 36363737 20205833     mmmm766777663X  
-   106d0:	78405858 78787676 78787878 3d7a7a7a     XX@xvvxxxxxxzzz=
-   106e0:	3d2a3d3d 2020202a 78405858 78787676     ==*=*   XX@xvvxx
-   106f0:	7a787878 3d7a7a7a 3d2a3d3d 2020582a     xxxzzzz===*=*X  
-   10700:	61582020 6b42446c 6b6b6b6b 7575616b       XalDBkkkkkkauu
-   10710:	75757575 20205875 61582020 6b42446c     uuuuuX    XalDBk
-   10720:	6b6b6b6b 7575616b 75757575 20202e75     kkkkkauuuuuuu.  
-   10730:	23202020 30303030 30303030 32303030        #000000000002
-   10740:	23322532 20202020 23202020 30303030     2%2#       #0000
-   10750:	30303030 32303030 23253225 20202058     00000002%2%#X   
-   10760:	00000000 3c6f2020 3c313631 2c2c3c3c     ....  o<161<<<,,
-   10770:	3e3e3e3e 243e3e3e 20202023 3c582020     >>>>>>>$#     X<
-   10780:	3c313631 2c2c3c3c 3e3e3e2c 243e2c3e     161<<<,,,>>>>,>$
-   10790:	20205824 65582020 65727272 34346565     $X    Xerrreee44
-   107a0:	33343434 31313333 2020582c 72582020     44433311,X    Xr
-   107b0:	65727272 34346565 33333434 31313333     rrreee4444333311
-   107c0:	2020582c 4d402020 6d434343 6d6d6d6d     ,X    @MCCCmmmmm
-   107d0:	37373737 36363737 20205833 4d2b2020     777777663X    +M
-   107e0:	6d4d4343 6d6d6d37 37373737 36363737     CCMm7mmm77777766
-   107f0:	20205833 782b5820 78787676 7a7a7878     3X   X+xvvxxxxzz
-   10800:	3d7a7a7a 2a2a3d3d 2020582a 782b5820     zzz===***X   X+x
-   10810:	78787676 7a787878 3d3d7a7a 2a2a3d3d     vvxxxxxzzz====**
-   10820:	2020582a 612e2020 6b42446c 6b6b6b6b     *X    .alDBkkkkk
-   10830:	7575756b 75757575 20205875 6b582020     kuuuuuuuuX    Xk
-   10840:	6b42446c 6b6b6b6b 7575616b 75617575     lDBkkkkkkauuuuau
-   10850:	20205875 6f202020 30303025 30303030     uX     o%0000000
-   10860:	25323030 6f253225 20202020 6f202020     002%%2%o       o
-   10870:	30307125 30303030 25323030 6f252532     %q000000002%2%%o
-   10880:	20202020 00000000 3c582020 3c333631         ....  X<163<
-   10890:	3e2c3c2c 3e3e3e3e 233e3e3e 20205824     ,<,>>>>>>>>#$X  
-   108a0:	31582020 2c313631 242c3c3c 3e3e2c24       X1161,<<,$$,>>
-   108b0:	233e3e3e 20205824 726f2020 65727272     >>>#$X    orrrre
-   108c0:	34346565 34343434 31313333 2020582c     ee4444443311,X  
-   108d0:	72582020 65727272 31346565 33343433       Xrrrreee413443
-   108e0:	3c313333 2020582c 4d2b2020 6d4d4343     331<,X    +MCCMm
-   108f0:	6d6d6d6d 37373737 36363737 20205833     mmmm777777663X  
-   10900:	432b2020 6d4d4343 386d6d6d 37373736       +CCCMmmmm86777
-   10910:	36363737 20205833 782b2020 78787676     77663X    +xvvxx
-   10920:	7a7a7878 3d7a7a7a 2a3d3d3d 2020582a     xxzzzzz====**X  
-   10930:	78402020 78787676 3d787878 3d7a7a3d       @xvvxxxxx==zz=
-   10940:	2a2a3d3d 2020202a 6b582020 6b42446c     ==***     XklDBk
-   10950:	6b6b6b6b 7575616b 75757575 20202075     kkkkkauuuuuuu   
-   10960:	61582020 6b42446c 696b6b6b 75757569       XalDBkkkkiiuuu
-   10970:	75757575 20205875 20202020 3030256f     uuuuuX      o%00
-   10980:	71303030 32253271 206f2532 20202020     000qq2%22%o     
-   10990:	20202020 3071326f 30303030 25323271         o2q00000q22%
-   109a0:	20232532 20202020 00000000 31582020     2%#     ....  X1
-   109b0:	24243631 3e2c3c2c 3e2c3e3e 233e246f     16$$,<,>>>,>o$>#
-   109c0:	20202024 3e202020 3c313633 583e2c3c     $      >361<<,>X
-   109d0:	3e3e2458 243e3e3e 2020206f 65582020     X$>>>>>$o     Xe
-   109e0:	25327272 34346565 31343434 31312424     rr2%ee444441$$11
-   109f0:	2020582c 32202020 65727272 6f336565     ,X     2rrreee3o
-   10a00:	33343c58 2c31333c 20205824 4d402020     X<43<31,$X    @M
-   10a10:	39354343 6d6d6d38 36373737 3636392c     CC598mmm7776,966
-   10a20:	20205833 35582020 6d4d4343 58366d6d     3X    X5CCMmmm6X
-   10a30:	37373658 36363737 20202039 78402020     X67777669     @x
-   10a40:	2a3d7676 7a78787a 3d7a3d7a 2a2a2a40     vv=*zxxzz=z=@***
-   10a50:	2020582a 782b2020 78767676 583d7878     *X    +xvvvxxx=X
-   10a60:	3d7a3d58 2a2a3d3d 2020202a 61582020     X=z===***     Xa
-   10a70:	3a3b446c 6b6b6b61 7975616b 75752626     lD;:akkkkauy&&uu
-   10a80:	20202075 3a202020 6b42446c 2b756b6b     u      :lDBkkku+
-   10a90:	7575752b 75757575 20202026 20202020     +uuuuuuu&       
-   10aa0:	32256f20 32713271 25253225 20586f23      o%2q2q2%2%%#oX 
-   10ab0:	20202020 20202020 32256f20 25713271              o%2q2q%
-   10ac0:	25322525 20206f23 20202020 00000000     %%2%#o      ....
-   10ad0:	31582020 20202431 3e2c2c6f 6f243e3e       X11$  o,,>>>$o
-   10ae0:	246f2020 20202024 58202020 2c313639       o$$      X961,
-   10af0:	20583e3c 3e245820 6f242c3e 20202058     <>X  X$>>,$oX   
-   10b00:	72582020 202e2572 34346523 6f333434       Xrr%. #e44443o
-   10b10:	3c242020 2020582c 58202020 65727277       $<,X     Xwrre
-   10b20:	206f3465 33335820 24313333 20202058     e4o  X33331$X   
-   10b30:	4d402020 202e3b43 6d6d3740 2436376d       @MC;. @7mmm76$
-   10b40:	36232020 20205833 58202020 6d4d436c       #63X     XlCMm
-   10b50:	2e6f356d 37356f20 2c363737 20202058     m5o. o57776,X   
-   10b60:	78582020 20202d76 7a787a40 583d7a7a       Xxv-  @zxzzz=X
-   10b70:	2a2b2020 2020582a 58202020 78787670       +**X     Xpvxx
-   10b80:	20587a78 3d3d5820 2a2a3d3d 20202020     xzX  X====**    
-   10b90:	6b582020 20203a6c 6b6b6b2b 4f756b6b       Xkl:  +kkkkkuO
-   10ba0:	75262020 20202e75 58202020 6b424461       &uu.     XaDBk
-   10bb0:	202b696b 753a2e2e 26757575 20202020     ki+ ..:uuuu&    
-   10bc0:	20202020 6f582020 25252523 6f252525           Xo#%%%%%%o
-   10bd0:	20202058 20202020 20202020 6f582020     X             Xo
-   10be0:	25252523 6f252525 20202058 20202020     #%%%%%%oX       
-   10bf0:	00000000 3c582020 20202024 3e3e6f20     ....  X<$    o>>
-   10c00:	206f242c 6f202020 20205823 20202020     ,$o    o#X      
-   10c10:	3c313958 2020583e 24582020 20243e3e     X91<>X    X$>>$ 
-   10c20:	20202020 65582020 20202e25 34332320           Xe%.   #34
-   10c30:	206f3334 24202020 2020582c 20202020     43o    $,X      
-   10c40:	65723258 20206f32 3c6f2020 583e3333     X2re2o    o<33>X
-   10c50:	20202020 4d402020 2020203b 6d384058           @M;   X@8m
-   10c60:	20403637 242e2020 20205833 20202020     76@   .$3X      
-   10c70:	6d433558 20206f35 36582020 58393637     X5Cm5o    X6769X
-   10c80:	20202020 782b2020 2020202a 787a4020           +x*    @zx
-   10c90:	202b3d7a 40202020 2020582a 20202020     z=+    @*X      
-   10ca0:	78782d58 2020587a 2a2e2020 20403d3d     X-xxzX    .*==@ 
-   10cb0:	20202020 61582020 20202026 6b692b20           Xa&    +ik
-   10cc0:	2e2b696b 40202020 2020583a 20202020     ki+.   @:X      
-   10cd0:	6b423b58 20205869 3a2e2e2e 58267575     X;BkiX  ...:uu&X
-   10ce0:	20202020 20202020 20202020 58585820                  XXX
-   10cf0:	20202058 20202020 20202020 20202020     X               
-   10d00:	20202020 58582020 20205858 20202020           XXXX      
-   10d10:	20202020 00000000 6f582020 20202020         ....  Xo    
-   10d20:	3e6f2020 20206f3e 20202020 2020206f       o>>o      o   
-   10d30:	20202020 3e242020 20202058 58202020           $>X      X
-   10d40:	20202424 20202020 23582020 20202020     $$        X#    
-   10d50:	336f2020 20206f33 20202020 2020586f       o33o      oX  
-   10d60:	20202020 71322020 2020206f 58202020           2qo      X
-   10d70:	2020242c 20202020 3b582020 20202058     ,$        X;X   
-   10d80:	37405820 202e2437 20202020 20205823      X@77$.     #X  
-   10d90:	20202020 35355820 2020206f 6f202020          X55o      o
-   10da0:	20203936 20202020 2a582020 20202020     69        X*    
-   10db0:	7a402020 20202b7a 20202020 2020582b       @zz+      +X  
-   10dc0:	20202020 7a3d5820 2020202b 2e202020          X=z+      .
-   10dd0:	20202a2a 20202020 26582020 20202020     **        X&    
-   10de0:	6b402020 20202b6b 20202020 20202e2b       @kk+      +.  
-   10df0:	20202020 69695820 20202058 2e202020          XiiX      .
-   10e00:	2020263a 20202020 20202020 20202020     :&              
-   10e10:	20202020 20202020 20202020 20202020                     
-   10e20:	20202020 20202020 20202020 20202020                     
-   10e30:	20202020 20202020 00000000 20202020             ....    
-   10e40:	20202020 6f202020 20202058 20202020            oX       
-   10e50:	20202020 20202020 58582020 20202020               XX    
-   10e60:	20202020 20202058 20202020 20202020         X           
-   10e70:	20202020 6f202020 2020206f 20202020            oo       
-   10e80:	20202020 20202020 58582020 2020582e               XX.X  
-   10e90:	20202020 20205858 20202020 20202020         XX          
-   10ea0:	20202020 40582020 20202e40 20202020           X@@.      
-   10eb0:	20202020 20202020 6f582020 20202020               Xo    
-   10ec0:	20202020 20205858 20202020 20202020         XX          
-   10ed0:	20202020 58202020 2020202b 20202020            X+       
-   10ee0:	20202020 20202020 58582020 20202020               XX    
-   10ef0:	20202020 20202058 20202020 20202020         X           
-   10f00:	20202020 2b202020 2020202b 20202020            ++       
-   10f10:	20202020 20202020 2b582020 20202020               X+    
-   10f20:	20202020 20202e58 20202020 20202020         X.          
-   10f30:	20202020 20202020 20202020 20202020                     
-   10f40:	20202020 20202020 20202020 20202020                     
-   10f50:	20202020 20202020 20202020 00000000                 ....
-   10f60:	20202020 2e202020 6f6f6f20 206f406f            . oooo@o 
-   10f70:	20202020 20202020 20202020 20202020                     
-   10f80:	6f6f6f2e 20584024 20202020 20202020     .ooo$@X         
-   10f90:	20202020 20202020 40232320 20232323              ##@### 
-   10fa0:	20202020 20202020 20202020 20202020                     
-   10fb0:	23236f58 20236f23 20202020 20202020     Xo###o#         
-   10fc0:	20202020 20202020 23402358 206f2340             X#@#@#o 
-   10fd0:	20202020 20202020 20202020 20202020                     
-   10fe0:	2340232e 2e23233a 20202020 20202020     .#@#:##.        
-   10ff0:	20202020 20202020 40404058 20404040             X@@@@@@ 
-   11000:	20202020 20202020 20202020 20202020                     
-   11010:	40404020 20404040 20202020 20202020      @@@@@@         
-   11020:	20202020 20202020 40262b58 2e402640             X+&@@&@.
-   11030:	20202020 20202020 20202020 20202020                     
-   11040:	40402b20 58402640 20202058 20202020      +@@@&@XX       
-   11050:	20202020 20202020 20202020 20202020                     
-   11060:	20202020 20202020 20202020 20202020                     
-   11070:	20202020 20202020 20202020 20202020                     
-   11080:	00000000 20202020 6f202020 36363624     ....       o$666
-   11090:	24393936 2020206f 20202020 20202020     699$o           
-   110a0:	6f202020 35363125 24393936 2020206f        o%165699$o   
-   110b0:	20202020 20202020 23202020 72726532                #2err
-   110c0:	25343465 2020206f 20202020 20202020     e44%o           
-   110d0:	23205820 72726532 2c346565 2020206f      X #2erree4,o   
-   110e0:	20202020 20202020 40202020 4d434d35                @5MCM
-   110f0:	3c6d4d4d 20202e6f 20202020 20202020     MMm<o.          
-   11100:	40202020 4d434d35 39374d4d 20202024        @5MCMMM79$   
-   11110:	20202020 20202020 40202020 6262622d                @-bbb
-   11120:	2a636363 2020202b 20202020 20202020     ccc*+           
-   11130:	2a202020 6262622d 2a636363 2020202b        *-bbbccc*+   
-   11140:	20202020 20202020 40202020 42426c3b                @;lBB
-   11150:	266b6c6c 2020202b 20202020 20202020     llk&+           
-   11160:	40202020 4242423b 26616c42 2020202b        @;BBBBla&+   
-   11170:	20202020 20202020 20202020 20202020                     
-   11180:	20202020 20202020 20202020 20202020                     
-   11190:	20202020 20202020 20202020 20202020                     
-   111a0:	20202020 00000000 20202020 38356f20         ....     o58
-   111b0:	3c31366d 3e3e3e2c 20582424 20202020     m61<,>>>$$X     
-   111c0:	20202020 38356f20 2c313837 3e3e3e2c          o58781,,>>>
-   111d0:	20582424 20202020 20202020 74744020     $$X          @tt
-   111e0:	3472744e 34343434 20582c33 20202020     Ntr444443,X     
-   111f0:	20202020 746e5858 3472724e 34333434         XXntNrr44434
-   11200:	20582433 20202020 20202020 4d355820     3$X          X5M
-   11210:	6d4d4343 37373737 206f3936 20202020     CCMm777769o     
-   11220:	20202020 4d355820 6d4d4343 37373737          X5MCCMm7777
-   11230:	20583936 20202020 20202020 6e6e2b20     69X          +nn
-   11240:	78624276 3d7a7a78 20582a3d 20202020     vBbxxzz==*X     
-   11250:	20202020 6e614020 78627676 3d3d7a7a          @anvvbxzz==
-   11260:	20582a2a 20202020 20202020 426e2b20     **X          +nB
-   11270:	6b6c4453 7575616b 202e263a 20202020     SDlkkauu:&.     
-   11280:	20202020 426e2b20 6b425656 7575616b          +nBVVBkkauu
-   11290:	20583a75 20202020 20202020 58202020     u:X            X
-   112a0:	6f323225 58253225 20202020 20202020     %22o%2%X        
-   112b0:	20202020 58202020 20202020 58202020            X       X
-   112c0:	20202020 20202020 00000000 20202020             ....    
-   112d0:	43536e2b 3e2c366d 3e3e3e3e 58243e3e     +nSCm6,>>>>>>>$X
-   112e0:	20202020 20202020 43536e6f 3e2c366d             onSCm6,>
-   112f0:	3e3e3e3e 58243e3e 20202020 20202020     >>>>>>$X        
-   11300:	415a6e6f 3465654e 34343334 6f2c3333     onZANee4434433,o
-   11310:	20202020 20202020 415a4d58 3434724e             XMZANr44
-   11320:	34343434 6f2c3333 20202020 20202020     444433,o        
-   11330:	43437440 6d6d4d43 3737376d 58353737     @tCCCMmmm777775X
-   11340:	20202020 20202020 4343742b 6d6d4d43             +tCCCMmm
-   11350:	37373737 58353737 20202020 20202020     7777775X        
-   11360:	44416e40 7a786242 3d3d7a7a 202a3d3d     @nADBbxzzz====* 
-   11370:	20202020 20202020 56416e40 7a787644             @nAVDvxz
-   11380:	3d707a7a 202a3d3d 20202020 20202020     zzp===*         
-   11390:	415a446f 6b6b4253 7575616b 583a7575     oDZASBkkkauuuu:X
-   113a0:	20202020 20202020 415a446f 6b6b6c56             oDZAVlkk
-   113b0:	7575616b 583a7575 20202020 20202020     kauuuu:X        
-   113c0:	30256f20 23656565 71303071 20585825      o%0eee#q00q%XX 
-   113d0:	20202020 20202020 30256f20 20202023              o%0#   
-   113e0:	71582020 20206f23 20202020 00000000       Xq#o      ....
-   113f0:	20202020 53534325 3e2c3c37 3e3e3e3e         %CSS7<,>>>>>
-   11400:	6f3e3e3e 20202020 20202020 43564339     >>>o        9CVC
-   11410:	3e2c316d 3e3e3e3e 6f3e3e3e 20202020     m1,>>>>>>>>o    
-   11420:	20202020 415a5a3b 34656574 33343434         ;ZZAtee44443
-   11430:	24313333 20202058 20202020 5a5a413b     331$X       ;AZZ
-   11440:	3434654e 34343434 24313133 20202020     Ne444444311$    
-   11450:	20202020 43434335 6d6d6d4d 37373737         5CCCMmmm7777
-   11460:	24363737 2020202e 20202020 43434335     776$.       5CCC
-   11470:	6d6d6d4d 3737376d 24363737 20202020     Mmmmm777776$    
-   11480:	20202020 5641563b 7a787842 3d7a7a7a         ;VAVBxxzzzz=
-   11490:	402a3d3d 20202020 20202020 5641563b     ==*@        ;VAV
-   114a0:	78787842 3d3d7a7a 403d3d3d 20202020     Bxxxzz=====@    
-   114b0:	20202020 415a413b 6b6b6b44 7575616b         ;AZADkkkkauu
-   114c0:	26757575 20202020 20202020 415a413b     uuu&        ;AZA
-   114d0:	6b6b6b56 7575616b 26757575 20202020     Vkkkkauuuuu&    
-   114e0:	20202020 72723023 23656572 30303071         #0rrree#q000
-   114f0:	58232571 20202020 20202020 72723023     q%#X        #0rr
-   11500:	20202032 30232020 20233271 20202020     2     #0q2#     
-   11510:	00000000 6f202020 4d434d36 3e2c3c36     ....   o6MCM6<,>
-   11520:	3e2c3e3e 243e3e3e 20202058 6f202020     >>,>>>>$X      o
-   11530:	4d434d36 3e2c3c33 3e3e3e3e 243e3e3e     6MCM3<,>>>>>>>>$
-   11540:	20202058 6f202020 4e414e74 34346572     X      otNANre44
-   11550:	33343434 2c313c33 2020206f 6f582020     44433<1,o     Xo
-   11560:	4e414e74 34346574 33343434 2c313133     tNANte444443311,
-   11570:	2020206f 40202020 4e43434d 6d6d6d6d     o      @MCCNmmmm
-   11580:	3737376d 35363737 2020206f 40202020     m7777765o      @
-   11590:	4e43434d 6d6d6d6d 3737376d 36363737     MCCNmmmmm7777766
-   115a0:	2020206f 40202020 42564463 7a787862     o      @cDVBbxxz
-   115b0:	3d467a7a 2a3d3d3d 20202058 2b202020     zzF====*X      +
-   115c0:	44564462 7a7a7862 3d7a7a7a 2a2a3d3d     bDVDbxzzzzz===**
-   115d0:	20202058 40202020 56415342 6b6b6b6c     X      @BSAVlkkk
-   115e0:	7575616b 75757575 2020202b 40202020     kauuuuuu+      @
-   115f0:	5341536e 6b6b6b6c 7575616b 75757575     nSASlkkkkauuuuuu
-   11600:	2020202b 6f202020 4e4e7430 2365724e     +      o0tNNNre#
-   11610:	30303071 6f257130 20202020 6f202020     q0000q%o       o
-   11620:	4e4e7430 20205874 30252020 6f257130     0tNNtX    %00q%o
-   11630:	20202020 00000000 24202020 356d6d31         ....   $1mm5
-   11640:	2c393b3b 253b393e 24243c3b 2020206f     ;;9,>9;%;<$$o   
-   11650:	24202020 356d6d31 2c393b3b 253b393e        $1mm5;;9,>9;%
-   11660:	24243c3b 2020206f 25202020 744e4e72     ;<$$o      %rNNt
-   11670:	3477353b 25353634 3c3c3335 20202024     ;5w4465%53<<$   
-   11680:	25202020 774e4e72 3477773b 253b3634        %rNNw;ww446;%
-   11690:	31313335 20202024 3b202020 6e434343     5311$      ;CCCn
-   116a0:	6d6d353b 3b356d6d 36363735 20205824     ;5mmmm5;5766$X  
-   116b0:	3b2e2020 6e434343 6d6d353b 3b353737       .;CCCn;5mm775;
-   116c0:	36363735 20202024 3d582020 62444276     5766$     X=vBDb
-   116d0:	7a783b3b 2d2d637a 2a3d2d3b 20202040     ;;xzzc--;-=*@   
-   116e0:	3d2e2020 62424276 7a632d2d 3b2d637a       .=vBBb--czzc-;
-   116f0:	3d2a463b 20202040 26202020 6e565642     ;F*=@      &BVVn
-   11700:	6b6b3b3a 3a696b6b 7575613a 20202040     :;kkkki::auu@   
-   11710:	26202020 6e565642 6b6b693a 3a3a6b6b        &BVVn:ikkkk::
-   11720:	75756169 20202026 25582020 5a5a4e65     iauu&     X%eNZZ
-   11730:	2365724e 30303071 25713030 20202058     Nre#q00000q%X   
-   11740:	25582020 5a5a4e65 2020404e 30715820       X%eNZZN@   Xq0
-   11750:	25713030 20202058 00000000 31582020     00q%X   ....  X1
-   11760:	2d4d3731 3c6e4020 58406e3c 242c6e3b     17M- @n<<n@X;n,$
-   11770:	20202024 3c582020 2d4d3836 3c6e402e     $     X<68M-.@n<
-   11780:	20406e3c 242c6e3b 20205824 72582020     <n@ ;n,$$X    Xr
-   11790:	2d4e4e72 346e4058 58406e34 3c31742d     rNN-X@n44n@X-t1<
-   117a0:	2020582c 65582020 3b4e4e72 346e4020     ,X    XerNN; @n4
-   117b0:	20406e34 3c316d2d 2020202c 4d582020     4n@ -m1<,     XM
-   117c0:	3b564343 6d424020 20406e6d 36366d3b     CCV; @Bmmn@ ;m66
-   117d0:	20205833 4d582020 3b534343 6d444020     3X    XMCCS; @Dm
-   117e0:	20406e6d 38384d2d 20205833 782b2020     mn@ -M883X    +x
-   117f0:	3a447676 78624058 58406e63 2a3d6e2d     vvD:X@bxcn@X-n=*
-   11800:	2020582a 782e2020 3b447676 78764058     *X    .xvvD;X@vx
-   11810:	20406e63 2a3d6e3b 20202e2a 6b582020     cn@ ;n=**.    Xk
-   11820:	3b44446c 6b424020 20406e6b 7575423b     lDD; @Bkkn@ ;Buu
-   11830:	20205875 6b582020 2d445642 6b42402e     uX    XkBVD-.@Bk
-   11840:	2e406e6b 75756e3b 20202e3a 30582020     kn@.;nuu:.    X0
-   11850:	5a5a4e72 2372724e 30303071 32303030     rNZZNrr#q0000002
-   11860:	2020206f 30582020 5a5a4e72 20207743     o     X0rNZZCw  
-   11870:	30302520 32303030 2020206f 00000000      %000002o   ....
-   11880:	31582020 3b413833 39533b58 583b5639       X138A;X;S99V;X
-   11890:	232c533b 20205824 3c582020 3b533831     ;S,#$X    X<18S;
-   118a0:	39563b58 583b5333 242c533b 20202024     X;V93S;X;S,$$   
-   118b0:	65582020 3b417272 77533b20 583b5336       XerrA; ;Sw6S;X
-   118c0:	3c31433b 2020582c 72582020 3b417272     ;C1<,X    XrrrA;
-   118d0:	38563b58 583a5665 3131533b 2020582c     X;V8eV:X;S11,X  
-   118e0:	4d582020 3b414343 4d563b58 583a564d       XMCCA;X;VMMV:X
-   118f0:	3638533b 20205833 4d2b2020 3b414343     ;S863X    +MCCA;
-   11900:	4d533b58 583a564d 3638413b 20205833     X;SMMV:X;A863X  
-   11910:	78582020 3b417676 63563b58 583b5362       XxvvA;X;VcbS;X
-   11920:	3d3d533b 2020202a 78582020 61417676     ;S==*     XxvvAa
-   11930:	62563b58 583b5363 2a3d533b 2020202a     X;VbcS;X;S=**   
-   11940:	6b2e2020 6153446c 6c563b58 582d566c       .klDSaX;VllV-X
-   11950:	7561533b 2020583a 61582020 6141566c     ;Sau:X    XalVAa
-   11960:	6c563a58 583b566e 7561533b 20202e75     X:VlnV;X;Sauu.  
-   11970:	65252020 35407472 2365724e 30303032       %ert@5Nre#2000
-   11980:	32303030 20205823 65252020 35407472     0002#X    %ert@5
-   11990:	20587774 30302520 32303030 20202023     twX  %000002#   
-   119a0:	00000000 3c582020 53413831 395a566e     ....  X<18ASnVZ9
-   119b0:	42564139 233c4153 20202023 31582020     9AVBSA<##     X1
-   119c0:	41413731 395a566e 6e565a39 232c4153     17AAnVZ99ZVnSA,#
-   119d0:	20205824 72582e20 53417272 385a566e     $X   .XrrrASnVZ8
-   119e0:	42564165 31314353 2020582c 65582020     eAVBSC11,X    Xe
-   119f0:	535a7272 655a5642 42565a38 3c314153     rrZSBVZe8ZVBSA1<
-   11a00:	20206f2c 43582020 535a4343 4d415642     ,o    XCCCZSBVAM
-   11a10:	6e565a4d 36384153 20205833 4d582020     MZVnSA863X    XM
-   11a20:	535a4343 6d41566e 6e56414d 36385a53     CCZSnVAmMAVnSZ86
-   11a30:	20205833 78582020 535a4276 625a5642     3X    XxvBZSBVZb
-   11a40:	6e444163 2a3d4141 2020582a 782b2020     cADnAA=**X    +x
-   11a50:	415a7676 6241566e 42445a63 3d3d4153     vvZAnVAbcZDBSA==
-   11a60:	2020582a 6b582020 535a446c 6c5a566e     *X    XklDZSnVZl
-   11a70:	42445a6c 75614153 20202e75 61582020     lZDBSAauu.    Xa
-   11a80:	535a446c 425a4442 4256416c 75754141     lDZSBDZBlAVBAAuu
-   11a90:	20205875 65322020 58202372 23657277     uX    2er# Xwre#
-   11aa0:	30303071 32303030 20205825 65322020     q0000002%X    2e
-   11ab0:	20202372 20257277 3030306f 32303030     r#  wr% o0000002
-   11ac0:	20205825 00000000 3c582020 5a563836     %X  ....  X<68VZ
-   11ad0:	3c535a5a 5a5a5339 2424565a 20205824     ZZS<9SZZZV$$$X  
-   11ae0:	3c582020 5a563633 3c535a5a 5a5a5339       X<36VZZZS<9SZZ
-   11af0:	232c565a 20202023 65582020 5a567272     ZV,##     XerrVZ
-   11b00:	36565a5a 5a5a5336 3131565a 2020582c     ZZV66SZZZV11,X  
-   11b10:	72582020 5a447272 36535a5a 5a5a5334       XrrrDZZZS64SZZ
-   11b20:	3c31565a 2020582c 4d2b2020 5a564343     ZV1<,X    +MCCVZ
-   11b30:	6d535a5a 5a5a566d 3638565a 20205833     ZZSmmVZZZV863X  
-   11b40:	43582020 5a444343 6d535a5a 5a5a536d       XCCCDZZZSmmSZZ
-   11b50:	3638565a 20205833 782b5858 5a447676     ZV863X  XX+xvvDZ
-   11b60:	78535a5a 5a5a5363 2a3d445a 2020582a     ZZSxcSZZZD=**X  
-   11b70:	78582020 5a447676 63535a5a 5a5a5363       XxvvDZZZSccSZZ
-   11b80:	2a3d445a 2020202a 61582020 5a444442     ZD=**     XaBDDZ
-   11b90:	6b535a5a 5a5a536b 7575445a 20202e75     ZZSkkSZZZDuuu.  
-   11ba0:	6b2e2020 5a564242 6b535a5a 5a5a536b       .kBBVZZZSkkSZZ
-   11bb0:	7575445a 2020203a 65322020 6f582565     ZDuu:     2ee%Xo
-   11bc0:	23656530 30303071 32303030 20205825     0ee#q0000002%X  
-   11bd0:	65322020 6f203265 58256530 3030306f       2ee2 o0e%Xo000
-   11be0:	32303030 20205825 00000000 31582020     0002%X  ....  X1
-   11bf0:	53613631 246e415a 5a416e3e 24243b41     16aSZAn$>nAZA;$$
-   11c00:	20202024 3c582020 536b3631 246b415a     $     X<16kSZAk$
-   11c10:	5a416e24 23243b41 20205824 72582020     $nAZA;$#$X    Xr
-   11c20:	536b7272 336e415a 5a416e33 313c3b53     rrkSZAn33nAZS;<1
-   11c30:	2020582c 74582020 53357272 336e4141     ,X    Xtrr5SAAn3
-   11c40:	41416e33 31313b41 2020582c 4d582020     3nAAA;11,X    XM
-   11c50:	536e4343 386e415a 5a416e38 36366141     CCnSZAn88nAZAa66
-   11c60:	20205833 4d582020 416e4343 386e415a     3X    XMCCnAZAn8
-   11c70:	5a416e38 36366153 20205833 782b5858     8nAZSa663X  XX+x
-   11c80:	41627676 7a6e415a 41416e7a 2a2a6141     vvbAZAnzznAAAa**
-   11c90:	2020582a 78582020 41617676 7a6e4141     *X    XxvvaAAAnz
-   11ca0:	41416e7a 2a2a3b41 2020582a 61582020     znAAA;***X    Xa
-   11cb0:	5361446c 616c415a 41416e61 75756141     lDaSZAlaanAAAauu
-   11cc0:	2020583a 61582020 4161426c 616e415a     :X    XalBaAZAna
-   11cd0:	5a416e61 75756141 20202e75 30322020     anAZAauuu.    20
-   11ce0:	30716530 23303065 30303071 32713030     0eq0e00#q00000q2
-   11cf0:	20205825 30322020 30326530 6f716565     %X    200e20eeqo
-   11d00:	30303032 32713030 20205825 00000000     200000q2%X  ....
-   11d10:	31582020 25393831 24233b3b 3b3b233e       X1189%;;#$>#;;
-   11d20:	24246f25 20205823 31582020 3b243631     %o$$#X    X116$;
-   11d30:	3e243b3b 3b3b2424 24246f25 20205823     ;;$>$$;;%o$$#X  
-   11d40:	72582020 3b327272 33233b3b 3b252433       Xrrr2;;;#33$%;
-   11d50:	3c312425 2020582c 72582020 3b397472     %$1<,X    Xrrt9;
-   11d60:	33233b3b 3b3b2333 31312424 2020582c     ;;#33#;;$$11,X  
-   11d70:	432b2020 3b354d43 6d243b3b 3b3b2338       +CCM5;;;$m8#;;
-   11d80:	38382425 20205833 4d582020 40354343     %$883X    XMCC5@
-   11d90:	6d253b3b 3b3b2438 3636243b 20205833     ;;%m8$;;;$663X  
-   11da0:	78582020 3b3d7676 7a2a3b3b 3b3b407a       Xxvv=;;;*zz@;;
-   11db0:	2a2a2625 2020582a 78405858 3b2d7676     %&***X  XX@xvv-;
-   11dc0:	7a2a3b3b 3b3b2a7a 2a2a403b 2020582a     ;;*zz*;;;@***X  
-   11dd0:	612b2020 403a4242 613a3b3b 3b3b266b       +aBB:@;;:ak&;;
-   11de0:	7575263b 20202075 6b582020 3a3a4242     ;&uuu     XkBB::
-   11df0:	61403b3b 3b3b3a61 7575263b 20205875     ;;@aa:;;;&uuuX  
-   11e00:	30322020 30303030 23303030 30303071       200000000#q000
-   11e10:	32323030 20205825 30322020 30303030     0022%X    200000
-   11e20:	23303030 30303071 32713030 20205825     000#q00000q2%X  
-   11e30:	00000000 3c582020 243c3631 3e246f6f     ....  X<16<$oo$>
-   11e40:	206f243e 243e246f 20205823 3c582020     >$o o$>$#X    X<
-   11e50:	243c3636 3e246f6f 586f243e 243e246f     66<$oo$>>$oXo$>$
-   11e60:	20205823 72582020 25777272 3432236f     #X    Xrrrw%o#24
-   11e70:	6f6f3c34 31313c24 2020582c 65582020     4<oo$<11,X    Xe
-   11e80:	25657272 3433236f 6f6f3c34 3c312c24     rre%o#344<oo$,1<
-   11e90:	20206f2c 4d582020 256d4343 6d35236f     ,o    XMCCm%o#5m
-   11ea0:	6f24356d 36363624 20205833 43582020     m5$o$6663X    XC
-   11eb0:	396d4343 6d35406f 6f24356d 36363624     CCm9o@5mm5$o$666
-   11ec0:	20205833 78582020 3d784276 7a3d4040     3X    XxvBx=@@=z
-   11ed0:	2e403d7a 2a3d2a2b 2020202a 78585858     z=@.+*=**   XXXx
-   11ee0:	2a787676 7a3d4040 2b403d7a 2a3d2a2b     vvx*@@=zz=@++*=*
-   11ef0:	2020582a 6b2e2020 266e426c 6b3a2b2b     *X    .klBn&++:k
-   11f00:	2b2b3a6b 75753a40 20202e3a 61582020     k:++@:uu:.    Xa
-   11f10:	266b446c 61754040 2b2b7561 75753a40     lDk&@@uaau++@:uu
-   11f20:	20202e3a 30322020 30303030 32303030     :.    2000000002
-   11f30:	30303030 25327130 20205825 30322020     00000q2%%X    20
-   11f40:	30303030 32303030 30303030 32253030     00000002000000%2
-   11f50:	20205825 00000000 3c582020 2c313633     %X  ....  X<361,
-   11f60:	3e2c2c2c 243e3e3e 243e3e24 20205824     ,,,>>>>$$>>$$X  
-   11f70:	3c582020 2c333631 3e2c2c2c 243e3e3e       X<163,,,,>>>>$
-   11f80:	243e3e24 20202024 65582020 65727272     $>>$$     Xerrre
-   11f90:	34346530 31333434 3c313133 2020582c     0e444431311<,X  
-   11fa0:	72582020 34727272 34346530 33333434       Xrrrr40e444433
-   11fb0:	31313333 2020582c 4d2b2020 6d434343     3311,X    +MCCCm
-   11fc0:	6d6d6d38 3636376d 36363736 20205833     8mmmm76667663X  
-   11fd0:	4d2b2020 6d4d4343 6d6d6d38 36363737       +MCCMm8mmm7766
-   11fe0:	36363736 20205833 78402020 78787676     67663X    @xvvxx
-   11ff0:	7a787a78 3d3d7a7a 2a2a3d3d 2020202a     xzxzzz====***   
-   12000:	78582020 78787676 7a787a7a 3d3d7a7a       Xxvvxxzzxzzz==
-   12010:	2a2a3d3d 2020582a 612e2020 6b42446c     ==***X    .alDBk
-   12020:	6b6b6161 7575616b 75757575 20202e75     aakkkauuuuuuu.  
-   12030:	612b2020 6b42446c 6b6b6161 3a75616b       +alDBkaakkkau:
-   12040:	75757575 20202e3a 30252020 30303030     uuuu:.    %00000
-   12050:	30303030 30303030 25323230 20202025     00000000022%%   
-   12060:	30252020 30303030 30303030 30303030       %0000000000000
-   12070:	25323230 20202025 00000000 31582020     022%%   ....  X1
-   12080:	3c313631 3e2c3c3c 3e3e3e3e 243e3e3e     161<<<,>>>>>>>>$
-   12090:	20202023 31582020 2c333631 3e2c3c3c     #     X1163,<<,>
-   120a0:	2c3e3e3e 243e3e3e 20202023 72582020     >>>,>>>$#     Xr
-   120b0:	65657272 34346565 34343434 31313133     rreeee4444443111
-   120c0:	2020582c 65582020 65727272 34346565     ,X    Xerrreee44
-   120d0:	33343434 31313333 2020582c 4d2b2020     44433311,X    +M
-   120e0:	6d4d4343 6d6d6d6d 3737376d 36363737     CCMmmmmmm7777766
-   120f0:	20205833 43402020 6d4d4343 6d6d6d6d     3X    @CCCMmmmmm
-   12100:	3737376d 36363737 20205833 782b5858     m77777663X  XX+x
-   12110:	78787676 7a7a7878 3d7a7a7a 2a3d3d3d     vvxxxxzzzzz====*
-   12120:	2020582a 78582020 78787676 7a787878     *X    Xxvvxxxxxz
-   12130:	7a3d3d7a 2a2a3d3d 2020202a 612e2020     z==z==***     .a
-   12140:	6b42566c 6b6b6b6b 7575696b 75757575     lVBkkkkkkiuuuuuu
-   12150:	20205875 612e2e20 6b42446c 6b6b6b6b     uX   ..alDBkkkkk
-   12160:	75756161 75757575 20205875 71582020     aauuuuuuuX    Xq
-   12170:	30303030 30303030 30303030 32253232     00000000000022%2
-   12180:	2020206f 71582020 30303030 30303030     o     Xq00000000
-   12190:	30303030 25322532 2020206f 00000000     00002%2%o   ....
-   121a0:	3c582020 3c313631 2c2c3c3c 3e3e3e2c       X<161<<<,,,>>>
-   121b0:	233e3e3e 20205824 3c582020 3c333631     >>>#$X    X<163<
-   121c0:	2c2c3c3c 3e3e3e2c 242c3e3e 20205823     <<,,,>>>>>,$#X  
-   121d0:	65582020 65727272 34346565 31343434       Xerrreee444441
-   121e0:	31313c33 2020582c 65582020 65727272     3<11,X    Xerrre
-   121f0:	34346565 34343334 3131333c 2020582c     ee444344<311,X  
-   12200:	4d2b2020 6d4d4343 6d6d6d6d 37373737       +MCCMmmmmm7777
-   12210:	36363737 20205833 43402020 6d4d4343     77663X    @CCCMm
-   12220:	6d6d6d6d 37363637 36363737 20205833     mmmm766777663X  
-   12230:	78582020 78787676 7a787878 3d7a7a7a       Xxvvxxxxxzzzz=
-   12240:	3d2a3d3d 2020202a 78582020 78787676     ==*=*     Xxvvxx
-   12250:	7a787878 3d3d7a7a 3d2a3d3d 2020202a     xxxzzz====*=*   
-   12260:	6b582020 6b42446c 6b6b6b6b 7575616b       XklDBkkkkkkauu
-   12270:	75757575 20202e3a 612e2020 6b42426c     uuuu:.    .alBBk
-   12280:	6b6b6b6b 7575696b 75757575 20202b75     kkkkkiuuuuuuu+  
-   12290:	23582020 30303071 30303030 32303030       X#q00000000002
-   122a0:	23253225 20202058 23582020 30303071     %2%#X     X#q000
-   122b0:	30303030 32303030 23253225 20202058     00000002%2%#X   
-   122c0:	00000000 31582020 3c313631 2c2c3c3c     ....  X1161<<<,,
-   122d0:	3e3e3e3e 243e2c3e 20202023 3c582020     >>>>>,>$#     X<
-   122e0:	3c313631 2c2c3c3c 3e3e3e2c 233e3e3e     161<<<,,,>>>>>>#
-   122f0:	20202024 72582020 65727272 34346565     $     Xrrrreee44
-   12300:	33343434 3c313333 2020582c 72582020     4443331<,X    Xr
-   12310:	65727272 34346565 34343434 3c313333     rrreee444444331<
-   12320:	20206f2c 4d402020 6d434343 6d6d6d6d     ,o    @MCCCmmmmm
-   12330:	37373737 36363737 20205833 4d2b2020     777777663X    +M
-   12340:	6d4d4343 6d6d6d37 37373737 36363737     CCMm7mmm77777766
-   12350:	20205833 78582020 78787676 7a787878     3X    Xxvvxxxxxz
-   12360:	3d3d7a7a 2a2a3d3d 2020582a 782b2020     zz====***X    +x
-   12370:	78787676 7a787878 3d7a7a7a 2a2a3d3d     vvxxxxxzzzz===**
-   12380:	2020582a 61582020 6b42446c 6b6b6b6b     *X    XalDBkkkkk
-   12390:	7575616b 75757575 20205875 6b582020     kauuuuuuuX    Xk
-   123a0:	6b42446c 6b6b6b6b 7575616b 75757575     lDBkkkkkkauuuuuu
-   123b0:	20205875 6f582020 30307125 30303030     uX    Xo%q000000
-   123c0:	25323030 6f252532 20202020 6f582020     002%2%%o      Xo
-   123d0:	30307125 30303030 25323030 6f253232     %q000000002%22%o
-   123e0:	20202020 00000000 3c582020 3c333631         ....  X<163<
-   123f0:	3e2c3c2c 3e3e3e3e 243e3e3e 20205824     ,<,>>>>>>>>$$X  
-   12400:	31582020 2c313631 242c3c3c 3e3e2c24       X1161,<<,$$,>>
-   12410:	243e3e3e 20202023 65582020 65727272     >>>$#     Xerrre
-   12420:	34346565 34343434 31313333 2020582c     ee4444443311,X  
-   12430:	72582020 65727272 33346565 33343431       Xrrrreee431443
-   12440:	3c3c3333 2020582c 432b2020 6d4d4343     33<<,X    +CCCMm
-   12450:	6d6d376d 37373737 36363737 20205833     m7mm777777663X  
-   12460:	432b2020 6d4d4343 386d6d6d 37373736       +CCCMmmmm86777
-   12470:	36363737 20205833 782b2020 78787676     77663X    +xvvxx
-   12480:	7a7a7878 3d7a7a7a 2a3d3d3d 2020582a     xxzzzzz====**X  
-   12490:	78582020 78787676 7a787878 3d3d7a3d       Xxvvxxxxxz=z==
-   124a0:	2a2a3d3d 2020582a 6b2e2020 6b42446c     ==***X    .klDBk
-   124b0:	6b6b6b6b 7575616b 75757575 20202075     kkkkkauuuuuuu   
-   124c0:	61582020 6b42446c 696b6b6b 75756169       XalDBkkkkiiauu
-   124d0:	75757575 20202e75 20202020 3071326f     uuuuu.      o2q0
-   124e0:	71303030 32323232 20232532 20202020     000q22222%#     
-   124f0:	20202020 3071326f 71303030 25323271         o2q0000qq22%
-   12500:	206f2532 20202020 00000000 31582020     2%o     ....  X1
-   12510:	24243631 3e2c3c2c 3e2c3e3e 2424246f     16$$,<,>>>,>o$$$
-   12520:	20202024 3e202020 3c313633 583e2c3c     $      >361<<,>X
-   12530:	3e3e2458 243e3e3e 2020206f 72582020     X$>>>>>$o     Xr
-   12540:	25327272 34346565 31343434 3c3c2424     rr2%ee444441$$<<
-   12550:	2020582c 32582020 65727272 58336565     ,X    X2rrreee3X
-   12560:	33343c6f 3c313c33 20202024 4d402020     o<433<1<$     @M
-   12570:	39354343 6d6d6d38 36373737 36363924     CC598mmm7776$966
-   12580:	20205833 35582020 6d4d4343 58366d6d     3X    X5CCMmmm6X
-   12590:	37373658 36363737 2020583c 78582020     X6777766<X    Xx
-   125a0:	3d7a7676 7a78787a 3d7a7a7a 2a2a2a40     vvz=zxxzzzz=@***
-   125b0:	2020582a 3d582020 78787676 583d7878     *X    X=vvxxxx=X
-   125c0:	3d7a3d58 2a2a3d3d 2020202a 61582020     X=z===***     Xa
-   125d0:	3a3b4242 6b6b6b69 3a75616b 75752626     BB;:ikkkkau:&&uu
-   125e0:	20202e75 3a202020 6b42446c 2e696b6b     u.     :lDBkkki.
-   125f0:	7575752b 75757575 20205826 20202020     +uuuuuuu&X      
-   12600:	32256f20 32323232 25253225 20206f23      o%22222%2%%#o  
-   12610:	20202020 20202020 32256f58 32327132             Xo%22q22
-   12620:	25322525 20206f23 20202020 00000000     %%2%#o      ....
-   12630:	31582020 20202431 3e2c2c6f 6f243e3e       X11$  o,,>>>$o
-   12640:	246f2020 20202023 58202020 2c313639       o$#      X961,
-   12650:	20583e3c 3e245820 6f3e3e3e 20202058     <>X  X$>>>>oX   
-   12660:	72582020 2e2e2572 34346523 6f333434       Xrr%..#e44443o
-   12670:	3c242020 2020582c 58202020 65727232       $<,X     X2rre
-   12680:	586f3265 333c6f20 24313333 20202058     e2oX o<3331$X   
-   12690:	4d402020 2e203b43 6d6d6d40 6f36376d       @MC; .@mmmm76o
-   126a0:	36242020 20205833 58202020 6d43436e       $63X     XnCCm
-   126b0:	2e6f356d 37366f20 25363737 20202020     m5o. o67776%    
-   126c0:	782e2020 20202d76 7a787a40 583d7a7a       .xv-  @zxzzz=X
-   126d0:	2a2b2020 2020582a 58202020 78787662       +**X     Xbvxx
-   126e0:	20587a78 3d2a5820 2a2a3d3d 20202020     xzX  X*===**    
-   126f0:	6b582020 20583a6c 6b6b6126 2b3a616b       Xkl:X &akkka:+
-   12700:	75262020 20205875 58202020 6b42443b       &uuX     X;DBk
-   12710:	2058696b 753a2e58 26757575 20202058     kiX X.:uuuu&X   
-   12720:	20202020 6f582020 25252523 6f252525           Xo#%%%%%%o
-   12730:	20202058 20202020 20202020 6f582020     X             Xo
-   12740:	25252523 6f232525 20202058 20202020     #%%%%%#oX       
-   12750:	00000000 3c582020 20202024 3e3e6f2e     ....  X<$   .o>>
-   12760:	206f3e3e 6f202020 20202024 20202020     >>o    o$       
-   12770:	3c313958 2020583e 24582020 20243e2c     X91<>X    X$,>$ 
-   12780:	20202020 65582020 20202e25 34332320           Xe%.   #34
-   12790:	206f3334 24202020 20206f2c 20202020     43o    $,o      
-   127a0:	65723258 20206f34 326f2020 583e3333     X2re4o    o233>X
-   127b0:	20202020 4d2b2020 2020583b 6d382458           +M;X  X$8m
-   127c0:	2e24386d 242e2020 20205833 20202020     m8$.  .$3X      
-   127d0:	6d4d3558 20206f35 35582020 58393737     X5Mm5o    X5779X
-   127e0:	20202020 78582020 2020202a 787a4020           Xx*    @zx
-   127f0:	58403d7a 40202020 2020582a 20202020     z=@X   @*X      
-   12800:	78786340 2020587a 2a582020 20403d3d     @cxxzX    X*==@ 
-   12810:	20202020 612e2020 20202026 6b612b2e           .a&   .+ak
-   12820:	202b696b 40202020 20202e3a 20202020     ki+    @:.      
-   12830:	6b426158 20202b69 3a2e202e 58267575     XaBki+  . .:uu&X
-   12840:	20202020 20202020 20202020 58585820                  XXX
-   12850:	20205858 20202020 20202020 20202020     XX              
-   12860:	20202020 58585820 20585858 20202020          XXXXXX     
-   12870:	20202020 00000000 6f582020 20202020         ....  Xo    
-   12880:	3e6f2020 20206f3e 20202020 2020206f       o>>o      o   
-   12890:	20202020 3e242020 20202058 58202020           $>X      X
-   128a0:	20202424 20202020 23582020 20202020     $$        X#    
-   128b0:	336f2020 20206f33 20202020 2020586f       o33o      oX  
-   128c0:	20202020 32325858 2020206f 58202020         XX22o      X
-   128d0:	2020242c 20202020 3b582020 20202058     ,$        X;X   
-   128e0:	6d402020 20202338 20202020 20205824       @m8#      $X  
-   128f0:	20202020 35355820 2020206f 58202020          X55o      X
-   12900:	20203936 20202020 2a202020 20202020     69         *    
-   12910:	7a402020 20202b7a 20202020 2020582b       @zz+      +X  
-   12920:	20202020 7a7a5858 2020202b 2e202020         XXzz+      .
-   12930:	20202a2a 20202020 40582020 20202020     **        X@    
-   12940:	6b2b2020 20582b61 20202020 2020202b       +ka+X     +   
-   12950:	20202020 693b5820 20202058 2e202020          X;iX      .
-   12960:	2020263a 20202020 20202020 20202020     :&              
-   12970:	20202020 20202020 20202020 20202020                     
-   12980:	20202020 20202020 20202020 20202020                     
-   12990:	20202020 20202020 00000000 20202020             ....    
-   129a0:	20202020 6f202020 20202058 20202020            oX       
-   129b0:	20202020 20202020 58582020 20202020               XX    
-   129c0:	20202020 20202058 20202020 20202020         X           
-   129d0:	20202020 6f202020 2020206f 20202020            oo       
-   129e0:	20202020 20202020 6f582020 20202020               Xo    
-   129f0:	20202020 20205858 20202020 20202020         XX          
-   12a00:	20202020 402e2020 20202e40 20202020           .@@.      
-   12a10:	20202020 20202020 6f582020 20202020               Xo    
-   12a20:	20202020 20205858 20202020 20202020         XX          
-   12a30:	20202020 58202020 2020202b 20202020            X+       
-   12a40:	20202020 20202020 2b2b5820 20202020              X++    
-   12a50:	20202020 20202058 20202020 20202020         X           
-   12a60:	20202020 2b582020 2020582b 20202020           X++X      
-   12a70:	20202020 20202020 2b2e2020 20202020               .+    
-   12a80:	20202020 20205858 20202020 20202020         XX          
-   12a90:	20202020 58585820 20585858 20202020          XXXXXX     
-   12aa0:	20202020 20202020 20202020 58585820                  XXX
-   12ab0:	20585858 20202020 20202020 00000000     XXX         ....
-   12ac0:	20202020 20202020 20202020 20202020                     
-   12ad0:	20202020 20202020 20202020 20202020                     
-   12ae0:	20202020 20202020 20202020 20202020                     
-   12af0:	20202020 20202020 20202020 20202020                     
-   12b00:	20202020 20202020 20202020 20202020                     
-   12b10:	20202020 20202020 20202020 20202020                     
-   12b20:	20202020 20202020 20202020 20202020                     
-   12b30:	20202020 20202020 20202020 20202020                     
-   12b40:	20202020 20202020 20202020 20202020                     
-   12b50:	20202020 20202020 20202020 20202020                     
-   12b60:	20202020 20202020 20202020 20202020                     
-   12b70:	20202020 20202020 20202020 20202020                     
-   12b80:	20202020 20202020 20202020 20202020                     
-   12b90:	20202020 20202020 20202020 20202020                     
-   12ba0:	20202020 20202020 20202020 20202020                     
-   12bb0:	20202020 2b202020 63707a2a 2a707070            +*zpcppp*
-   12bc0:	2020202b 20202020 20202020 2b202020     +              +
-   12bd0:	7a707a2a 2a707063 2020202e 20202020     *zpzcpp*.       
-   12be0:	00000000 20202020 20202020 20202020     ....            
-   12bf0:	20202020 20202020 20202020 20202020                     
-   12c00:	20202020 20202020 20202020 20202020                     
-   12c10:	20202020 20202020 20202020 20202020                     
-   12c20:	20202020 20202020 20202020 20202020                     
-   12c30:	20202020 20202020 20202020 20202020                     
-   12c40:	20202020 20202020 20202020 20202020                     
-   12c50:	20202020 20202020 20202020 20202020                     
-   12c60:	20202020 20202020 20202020 20202020                     
-   12c70:	20202020 20202020 20202020 20202020                     
-   12c80:	20202020 20202020 20202020 20202020                     
-   12c90:	20202020 20202020 20202020 20202020                     
-   12ca0:	20202020 20202020 20202020 20202020                     
-   12cb0:	20202020 20202020 20202020 20202020                     
-   12cc0:	20202020 20202020 20202020 20202020                     
-   12cd0:	20202020 20202020 702a2e2e 68686868             ..*phhhh
-   12ce0:	68666868 20202a70 20202020 20202020     hhfhp*          
-   12cf0:	702a2e20 68686868 68666868 20202a70      .*phhhhhhfhp*  
-   12d00:	20202020 00000000 20202020 20202020         ....        
-   12d10:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   12d20:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   12d30:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   12d40:	2e2e2e2e 2e2e2e2e 20202020 20202020     ........        
-   12d50:	20202020 20202020 2e2e2e2e 2e2e2e2e             ........
-   12d60:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   12d70:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   12d80:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   12d90:	2020202e 20202020 20202020 20202020     .               
-   12da0:	2e2e2e2e 2e2e2e2e 2020202e 20202020     .........       
-   12db0:	20202020 20202020 2e2e2e2e 2e2e2e2e             ........
-   12dc0:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   12dd0:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   12de0:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   12df0:	2020202e 20202020 20202020 68683d2e     .           .=hh
-   12e00:	68686868 66666666 2e2a7066 20202020     hhhhfffffp*.    
-   12e10:	20202020 68683d2b 68686868 79666666         +=hhhhhhfffy
-   12e20:	582a7066 20202020 00000000 20202020     fp*X    ....    
-   12e30:	794f2020 73737373 73737373 73737373       Oyssssssssssss
-   12e40:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   12e50:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   12e60:	73737373 73737373 73737373 20204f79     ssssssssssssyO  
-   12e70:	20202020 20202020 794f2020 73737373               Oyssss
-   12e80:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   12e90:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   12ea0:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   12eb0:	73737373 20204f79 20202020 20202020     ssssyO          
-   12ec0:	794f2020 73737373 73737373 20204f79       OyssssssssyO  
-   12ed0:	20202020 20202020 794f2020 73737373               Oyssss
-   12ee0:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   12ef0:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   12f00:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   12f10:	73737373 20204f79 20202020 20202020     ssssyO          
-   12f20:	68686870 66686868 79667979 2d797966     phhhhhhfyyfyfyy-
-   12f30:	20202020 2e202020 68686870 66686868            .phhhhhhf
-   12f40:	66796679 2d667966 20202020 00000000     yfyffyf-    ....
-   12f50:	20202020 6764794f 67676767 67676767         Oydggggggggg
-   12f60:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   12f70:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   12f80:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   12f90:	4f796467 20202020 20202020 6464794f     gdyO        Oydd
-   12fa0:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   12fb0:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   12fc0:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   12fd0:	67676767 67676767 4f796767 20202020     ggggggggggyO    
-   12fe0:	20202020 6764794f 67676767 67676767         Oydggggggggg
-   12ff0:	4f796767 20202020 20202020 6764794f     ggyO        Oydg
-   13000:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   13010:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   13020:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   13030:	67676767 67676767 4f796767 20202020     ggggggggggyO    
-   13040:	40202020 6a6a6870 66686866 79667966        @phjjfhhffyfy
-   13050:	70797979 20202040 2a202020 6a6a6870     yyyp@      *phjj
-   13060:	66686868 66796679 70797979 20202040     hhhfyfyfyyyp@   
-   13070:	00000000 20202020 79736479 4f4f4f4f     ....    ydsyOOOO
-   13080:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   13090:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   130a0:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   130b0:	4f4f4f4f 79647379 20202020 20202020     OOOOysdy        
-   130c0:	79736479 4f4f4f4f 4f4f4f4f 4f4f4f4f     ydsyOOOOOOOOOOOO
-   130d0:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   130e0:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   130f0:	4f4f4f4f 4f4f4f4f 4f4f4f4f 26647379     OOOOOOOOOOOOysd&
-   13100:	20202020 20202020 79736479 4f4f4f4f             ydsyOOOO
-   13110:	4f4f4f4f 26647379 20202020 20202020     OOOOysd&        
-   13120:	79736479 4f4f4f4f 4f4f4f4f 4f4f4f4f     ydsyOOOOOOOOOOOO
-   13130:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   13140:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   13150:	4f4f4f4f 4f4f4f4f 4f4f4f4f 26647379     OOOOOOOOOOOOysd&
-   13160:	20202020 702e2020 68767668 66686868           .phvvhhhhf
-   13170:	66796679 79797966 20205870 702e2020     yfyffyyypX    .p
-   13180:	68767668 66686868 66797966 79797966     hvvhhhhffyyffyyy
-   13190:	20205870 00000000 4f202020 202e7364     pX  ....   Ods. 
-   131a0:	4f4f4f20 4f4f4f4f 4f4f4f4f 4f4f4f4f      OOOOOOOOOOOOOOO
-   131b0:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   131c0:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   131d0:	4f4f4f4f 204f4f4f 67734f20 2020204f     OOOOOOO  OsgO   
-   131e0:	4f202020 202e7364 4f4f4f20 4f4f4f4f        Ods.  OOOOOOO
-   131f0:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   13200:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   13210:	4f4f4f4f 4f4f4f4f 4f4f4f4f 204f4f4f     OOOOOOOOOOOOOOO 
-   13220:	64734f20 2020204f 4f202020 202e7364      OsdO      Ods. 
-   13230:	4f4f4f20 204f4f4f 64734f20 2020204f      OOOOOO  OsdO   
-   13240:	4f202020 202e7364 4f4f4f20 4f4f4f4f        Ods.  OOOOOOO
-   13250:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   13260:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   13270:	4f4f4f4f 4f4f4f4f 4f4f4f4f 204f4f4f     OOOOOOOOOOOOOOO 
-   13280:	64734f20 2020204f 78402020 42427668      OsdO     @xhvBB
-   13290:	66686a42 426b6666 79686a76 20204070     BjhfffkBvjhyp@  
-   132a0:	70402020 42424268 66686a42 426a6666       @phBBBBjhfffjB
-   132b0:	79686a76 20204070 00000000 79202020     vjhyp@  ....   y
-   132c0:	4f207964 67676779 67676767 67676767     dy Oyggggggggggg
-   132d0:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   132e0:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   132f0:	67676767 67676767 79646767 6779204f     ggggggggggdyO yg
-   13300:	20202079 79202020 4f207967 67676779     y      ygy Oyggg
-   13310:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   13320:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   13330:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   13340:	79646467 6779204f 20202079 79202020     gddyO ygy      y
-   13350:	4f207964 67676479 79646767 6779204f     dy OydggggdyO yg
-   13360:	20202079 79202020 4f207964 67676479     y      ydy Oydgg
-   13370:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   13380:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   13390:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   133a0:	79646467 6779204f 20202079 68702020     gddyO ygy     ph
-   133b0:	5653566a 68425656 53564268 79425656     jVSVVVBhhBVSVVBy
-   133c0:	20207079 687a2020 5656566a 686c5656     yp    zhjVVVVVlh
-   133d0:	56564268 79425656 20207079 00000000     hBVVVVByyp  ....
-   133e0:	732e2020 79204f67 73737364 73737373       .sgO ydsssssss
-   133f0:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   13400:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   13410:	73737373 73737373 73737373 67737373     sssssssssssssssg
-   13420:	674f2079 20202e73 732e2020 79204f67     y Ogs.    .sgO y
-   13430:	73737367 73737373 73737373 73737373     gsssssssssssssss
-   13440:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   13450:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   13460:	73737373 67737373 674f2079 20202e73     sssssssgy Ogs.  
-   13470:	732e2020 79204f67 73737364 67737373       .sgO ydssssssg
-   13480:	674f2079 20202e73 732e2020 79204f67     y Ogs.    .sgO y
-   13490:	73737364 73737373 73737373 73737373     dsssssssssssssss
-   134a0:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   134b0:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   134c0:	73737373 67737373 674f2079 20202e73     sssssssgy Ogs.  
-   134d0:	6a3d2020 3b425642 6a564235 3b44566a       =jBVB;5BVjjVD;
-   134e0:	6153423b 20203d79 6a3d2020 3b425642     ;BSay=    =jBVB;
-   134f0:	6a56423b 3b44446a 6156423b 20587a79     ;BVjjDD;;BVayzX 
-   13500:	00000000 732e2020 644f4f67 2e2e2e73     ....  .sgOOds...
-   13510:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   13520:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   13530:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   13540:	734f2e2e 674f4f64 20202e73 732e2020     ..OsdOOgs.    .s
-   13550:	644f4f67 2e2e4f73 2e2e2e2e 2e2e2e2e     gOOdsO..........
-   13560:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   13570:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   13580:	2e2e2e2e 2e2e2e2e 734f2e2e 674f4f64     ..........OsdOOg
-   13590:	20202e73 732e2020 644f4f67 2e2e2e73     s.    .sgOOds...
-   135a0:	732b2e2e 674f4f64 20202e73 732e2020     ..+sdOOgs.    .s
-   135b0:	644f4f67 2e2e2e73 2e2e2e2e 2e2e2e2e     gOOds...........
-   135c0:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   135d0:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   135e0:	2e2e2e2e 2e2e2e2e 734f2e2e 674f4f64     ..........OsdOOg
-   135f0:	20202e73 687a2020 583b5642 6e566158     s.    zhBV;XXaVn
-   13600:	2e3b566e 42563b20 20207075 68702020     nV;. ;VBup    ph
-   13610:	583b566e 6e566b58 583b566e 42563a58     nV;XXkVnnV;XX:VB
-   13620:	20203d79 00000000 732e2020 674f4f67     y=  ....  .sgOOg
-   13630:	20202e73 20202020 20202020 20202020     s.              
-   13640:	20202020 20202020 20202020 20202020                     
-   13650:	20202020 20202020 20202020 20202020                     
-   13660:	20202020 732e2020 674f4f64 20202e73           .sdOOgs.  
-   13670:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   13680:	20202020 20202020 20202020 20202020                     
-   13690:	20202020 20202020 20202020 20202020                     
-   136a0:	20202020 20202020 20202020 732e2020                   .s
-   136b0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   136c0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   136d0:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   136e0:	20202020 20202020 20202020 20202020                     
-   136f0:	20202020 20202020 20202020 20202020                     
-   13700:	20202020 20202020 20202020 732e2020                   .s
-   13710:	674f4f67 20202e73 6a3d2020 58405642     gOOgs.    =jBV@X
-   13720:	6e563b20 583b566e 6e564058 20203d79      ;VnnV;XX@Vny=  
-   13730:	6a702020 58404442 6e563b20 203b566e       pjBD@X ;VnnV; 
-   13740:	6e564058 20203d79 00000000 732e2020     X@Vny=  ....  .s
-   13750:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   13760:	20202020 20202020 20202020 20202020                     
-   13770:	20202020 20202020 20202020 20202020                     
-   13780:	20202020 20202020 732e2020 674f4f67               .sgOOg
-   13790:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   137a0:	20202020 20202020 20202020 20202020                     
-   137b0:	20202020 20202020 20202020 20202020                     
-   137c0:	20202020 20202020 20202020 20202020                     
-   137d0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   137e0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   137f0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   13800:	20202020 20202020 20202020 20202020                     
-   13810:	20202020 20202020 20202020 20202020                     
-   13820:	20202020 20202020 20202020 20202020                     
-   13830:	732e2020 674f4f67 20202e73 683d2020       .sgOOgs.    =h
-   13840:	406e566e 6156423a 3b425669 61566e40     nVn@:BVaiVB;@nVa
-   13850:	20207a79 683d2020 406e566e 6156423b     yz    =hnVn@;BVa
-   13860:	3b425661 6b536e40 20207079 00000000     aVB;@nSkyp  ....
-   13870:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   13880:	20202020 20202020 20202020 20202020                     
-   13890:	20202020 20202020 20202020 20202020                     
-   138a0:	20202020 20202020 20202020 732e2020                   .s
-   138b0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   138c0:	20202e73 20202020 20202020 20202020     s.              
-   138d0:	20202020 20202020 20202020 20202020                     
-   138e0:	20202020 20202020 20202020 20202020                     
-   138f0:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
-   13900:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   13910:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   13920:	20202e73 20202020 20202020 20202020     s.              
-   13930:	20202020 20202020 20202020 20202020                     
-   13940:	20202020 20202020 20202020 20202020                     
-   13950:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
-   13960:	68702020 56566e75 756b5656 56566e79       phunVVVVkuynVV
-   13970:	3a6e5644 20203d79 687a2020 56566e61     DVn:y=    zhanVV
-   13980:	796b5656 56566175 3a6e5356 20203d79     VVkyuaVVVSn:y=  
-   13990:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
-   139a0:	20202020 20202020 20202020 20202020                     
-   139b0:	20202020 20202020 20202020 20202020                     
-   139c0:	20202020 20202020 20202020 20202020                     
-   139d0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   139e0:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   139f0:	20202020 20202020 20202020 20202020                     
-   13a00:	20202020 20202020 20202020 20202020                     
-   13a10:	20202020 20202020 732e2020 674f4f67               .sgOOg
-   13a20:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   13a30:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   13a40:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   13a50:	20202020 20202020 20202020 20202020                     
-   13a60:	20202020 20202020 20202020 20202020                     
-   13a70:	20202020 20202020 732e2020 674f4f67               .sgOOg
-   13a80:	20202e73 687a2020 6e613a68 79263b6e     s.    zhh:ann;&y
-   13a90:	6e3b2679 7926616e 20207079 687a2020     y&;nna&yyp    zh
-   13aa0:	6e6b3a68 793a3b6b 6e3b2679 7926356e     h:knk;:yy&;nn5&y
-   13ab0:	20207079 00000000 732e2020 674f4f67     yp  ....  .sgOOg
-   13ac0:	20202e73 20202020 20202020 20202020     s.              
-   13ad0:	20202020 20202020 20202020 20202020                     
-   13ae0:	20202020 20202020 20202020 20202020                     
-   13af0:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
-   13b00:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   13b10:	2e2e2020 2e2e2e2e 2e2e2e2e 20202e2e       ............  
-   13b20:	20202020 20202020 2e2e2020 2e2e2e2e               ......
-   13b30:	2e2e2e2e 20202e2e 20202020 732e2020     ......        .s
-   13b40:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   13b50:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   13b60:	732e2020 644f4f67 2e2e4f64 2e2e2e2e       .sgOOddO......
-   13b70:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   13b80:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   13b90:	2e2e2e2e 2e2e2e2e 2e2e2e2e 732b2e2e     ..............+s
-   13ba0:	674f4f64 20202e73 687a2020 263a6a6a     dOOgs.    zhjj:&
-   13bb0:	66667926 26267966 79792626 20207079     &yfffy&&&&yyyp  
-   13bc0:	68702020 26756a6a 66757926 26267966       phjju&&yuffy&&
-   13bd0:	79792626 20203d79 00000000 732e2020     &&yyy=  ....  .s
-   13be0:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   13bf0:	20202020 20202020 20202020 20202020                     
-   13c00:	20202020 20202020 20202020 20202020                     
-   13c10:	20202020 20202020 732e2020 674f4f67               .sgOOg
-   13c20:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   13c30:	2e202020 73734f4f 73737373 73737373        .OOssssssssss
-   13c40:	4f4f7373 2020202e 2e202020 73734f4f     ssOO.      .OOss
-   13c50:	73737373 73737373 4f4f7373 2020202e     ssssssssssOO.   
-   13c60:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   13c70:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   13c80:	20202e73 732e2020 79204f67 73737364     s.    .sgO ydsss
-   13c90:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   13ca0:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   13cb0:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   13cc0:	64737373 674f2079 20202e73 68702020     sssdy Ogs.    ph
-   13cd0:	6868426a 66686868 66796679 79797979     jBhhhhhfyfyfyyyy
-   13ce0:	20203d79 687a2020 6868766a 66686868     y=    zhjvhhhhhf
-   13cf0:	79666679 79797966 20207079 00000000     yffyfyyyyp  ....
-   13d00:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   13d10:	20202020 20202020 20202020 20202020                     
-   13d20:	20202020 20202020 20202020 20202020                     
-   13d30:	20202020 20202020 20202020 732e2020                   .s
-   13d40:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   13d50:	20202e73 4f202020 67676773 67676767     s.     Osggggggg
-   13d60:	67676767 73676767 2020204f 4f202020     gggggggsO      O
-   13d70:	67676773 67676767 67676767 73676767     sggggggggggggggs
-   13d80:	2020204f 732e2020 674f4f67 20202e73     O     .sgOOgs.  
-   13d90:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   13da0:	674f4f67 20202e73 79202020 4f207967     gOOgs.     ygy O
-   13db0:	67676479 67676767 67676767 67676767     ydgggggggggggggg
-   13dc0:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   13dd0:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   13de0:	67676767 79646767 6779204f 20205879     ggggggdyO ygyX  
-   13df0:	687a2020 6868426a 66686868 66667966       zhjBhhhhhffyff
-   13e00:	79797966 20207079 68702020 6868426a     fyyyyp    phjBhh
-   13e10:	79686868 66667966 79797979 20203d79     hhhyfyffyyyyy=  
-   13e20:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
-   13e30:	20202020 20202020 20202020 20202020                     
-   13e40:	20202020 20202020 20202020 20202020                     
-   13e50:	20202020 20202020 20202020 20202020                     
-   13e60:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   13e70:	674f4f67 20202e73 4f202020 4f4f6467     gOOgs.     OgdOO
-   13e80:	4f4f4f4f 4f4f4f4f 67644f4f 2020204f     OOOOOOOOOOdgO   
-   13e90:	4f202020 4f4f6467 4f4f4f4f 4f4f4f4f        OgdOOOOOOOOOO
-   13ea0:	67674f4f 2020204f 732e2020 674f4f67     OOggO     .sgOOg
-   13eb0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   13ec0:	732e2020 674f4f67 20202e73 4f202020       .sgOOgs.     O
-   13ed0:	204f7364 4f4f4f20 4f4f4f4f 4f4f4f4f     dsO  OOOOOOOOOOO
-   13ee0:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   13ef0:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   13f00:	4f4f4f4f 4f4f4f4f 204f4f4f 64732e20     OOOOOOOOOOO  .sd
-   13f10:	2020204f 68702020 6868766a 66686868     O     phjvhhhhhf
-   13f20:	79666679 79797979 20207079 687a2020     yffyyyyyyp    zh
-   13f30:	6868766a 66686868 79796679 79797966     jvhhhhhfyfyyfyyy
-   13f40:	20207079 00000000 732e2020 674f4f67     yp  ....  .sgOOg
-   13f50:	20202e73 20202020 20202020 20202020     s.              
-   13f60:	20202020 20202020 20202020 20202020                     
-   13f70:	20202020 20202020 20202020 20202020                     
-   13f80:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
-   13f90:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   13fa0:	4f2e4f67 4f4f4f4f 4f4f4f4f 674f2e4f     gO.OOOOOOOOOO.Og
-   13fb0:	20202e73 732e2020 4f2e4f67 4f4f4f4f     s.    .sgO.OOOOO
-   13fc0:	4f4f4f4f 674f2e4f 20202e73 732e2020     OOOOO.Ogs.    .s
-   13fd0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   13fe0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   13ff0:	20202020 79736426 4f4f4f4f 4f4f4f4f         &dsyOOOOOOOO
-   14000:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   14010:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   14020:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   14030:	79677379 20202020 687a2020 68687676     ysgy      zhvvhh
-   14040:	66686868 66796679 79797966 20207079     hhhfyfyffyyyyp  
-   14050:	68702020 6868426a 68686868 66797966       phjBhhhhhhfyyf
-   14060:	79797979 20207a79 00000000 732e2020     yyyyyz  ....  .s
-   14070:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   14080:	20202020 20202020 20202020 20202020                     
-   14090:	20202020 20202020 20202020 20202020                     
-   140a0:	20202020 20202020 732e2020 674f4f67               .sgOOg
-   140b0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   140c0:	732e2020 734f4f67 67676767 67676767       .sgOOsgggggggg
-   140d0:	674f4f73 20202e73 732e2020 734f4f67     sOOgs.    .sgOOs
-   140e0:	67676767 67676767 674f4f73 20202e73     ggggggggsOOgs.  
-   140f0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   14100:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   14110:	20202e73 20202020 6764794f 67676767     s.      Oydggggg
-   14120:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   14130:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   14140:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   14150:	67676767 4f796467 20202020 68702020     gggggdyO      ph
-   14160:	706a766a 66686868 66797966 79797066     jvjphhhffyyffpyy
-   14170:	20203d79 702a2020 6868766a 3d686868     y=    *pjvhhhhh=
-   14180:	7966683d 79797966 20202a79 00000000     =hfyfyyyy*  ....
-   14190:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   141a0:	20202020 20202020 20202020 20202020                     
-   141b0:	20202020 20202020 20202020 20202020                     
-   141c0:	20202020 20202020 20202020 732e2020                   .s
-   141d0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   141e0:	20202e73 732e2020 674f4f67 73737367     s.    .sgOOggsss
-   141f0:	67737373 674f4f67 20202e73 732e2020     sssggOOgs.    .s
-   14200:	674f4f67 73737367 67737373 674f4f67     gOOggssssssggOOg
-   14210:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   14220:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   14230:	674f4f67 20202e73 20202020 794f2020     gOOgs.        Oy
-   14240:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   14250:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   14260:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   14270:	73737373 73737373 20204f79 20202020     ssssssssyO      
-   14280:	687a2020 402a636a 66686870 75687966       zhjc*@phhffyhu
-   14290:	7970402a 20203d79 2a202020 68687662     *@pyy=     *bvhh
-   142a0:	2e2a6868 79663d58 79797979 2020202a     hh*.X=fyyyyy*   
-   142b0:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
-   142c0:	20202020 20202020 20202020 20202020                     
-   142d0:	20202020 20202020 20202020 20202020                     
-   142e0:	20202020 20202020 20202020 20202020                     
-   142f0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   14300:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   14310:	2e2e4f73 734f2e2e 674f4f67 20202e73     sO....OsgOOgs.  
-   14320:	732e2020 674f4f67 2e2e4f73 734f2e2e       .sgOOgsO....Os
-   14330:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   14340:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   14350:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   14360:	2e202020 2e2e2e2e 2e2e2e2e 2e2e2e2e        .............
-   14370:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   14380:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   14390:	2e2e2e2e 2e2e2e2e 2e2e2e2e 20202020     ............    
-   143a0:	20202020 687a2020 20204070 66683d58           zhp@  X=hf
-   143b0:	58706679 70402020 20207a79 20202020     yfpX  @pyz      
-   143c0:	6868762a 20202d68 663d2020 2a707966     *vhhh-    =ffyp*
-   143d0:	20202020 00000000 732e2020 674f4f67         ....  .sgOOg
-   143e0:	20202e73 20202020 20202020 20202020     s.              
-   143f0:	20202020 20202020 20202020 20202020                     
-   14400:	20202020 20202020 20202020 20202020                     
-   14410:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
-   14420:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   14430:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   14440:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   14450:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   14460:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   14470:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   14480:	20202020 20202020 20202020 20202020                     
-   14490:	20202020 20202020 20202020 20202020                     
-   144a0:	20202020 20202020 20202020 20202020                     
-   144b0:	20202020 20202020 20202020 20202020                     
-   144c0:	20202020 20202020 7a7a2020 20202040               zz@   
-   144d0:	66705858 582e7066 40202020 20207a70     XXpffp.X   @pz  
-   144e0:	20202020 68682a20 2020583d 3d202020          *hh=X     =
-   144f0:	20266666 20202020 00000000 732e2020     ff&     ....  .s
-   14500:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   14510:	20202020 20202020 20202020 20202020                     
-   14520:	20202020 20202020 20202020 20202020                     
-   14530:	20202020 20202020 732e2020 674f4f67               .sgOOg
-   14540:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   14550:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   14560:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   14570:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   14580:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   14590:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   145a0:	20202e73 20202020 20202020 20202020     s.              
-   145b0:	20202020 20202020 20202020 20202020                     
-   145c0:	20202020 20202020 20202020 20202020                     
-   145d0:	20202020 20202020 20202020 20202020                     
-   145e0:	20202020 20202020 20202020 2b2b2020                   ++
-   145f0:	2020202e 702b5820 20582b70 20202020     .    X+pp+X     
-   14600:	20202b2b 20202020 2a2a2020 2e58582e     ++        **.XX.
-   14610:	58585858 20202a2a 20202020 00000000     XXXX**      ....
-   14620:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   14630:	20202020 20202020 20202020 20202020                     
-   14640:	20202020 20202020 20202020 20202020                     
-   14650:	20202020 20202020 20202020 732e2020                   .s
-   14660:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   14670:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   14680:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   14690:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   146a0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   146b0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   146c0:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   146d0:	20202020 20202020 20202020 20202020                     
-   146e0:	20202020 20202020 20202020 20202020                     
-   146f0:	20202020 20202020 20202020 20202020                     
-   14700:	20202020 20202020 20202020 20202020                     
-   14710:	20202020 2b202020 7662632a 2a636276            +*cbvvbc*
-   14720:	20205826 20202020 20202020 2b202020     &X             +
-   14730:	6262632a 2a626262 2058582b 20202020     *cbbbbb*+XX     
-   14740:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
-   14750:	20202020 20202020 20202020 20202020                     
-   14760:	20202020 20202020 20202020 20202020                     
-   14770:	20202020 20202020 20202020 20202020                     
-   14780:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   14790:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   147a0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   147b0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   147c0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   147d0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   147e0:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   147f0:	20202020 20202020 20202020 20202020                     
-   14800:	20202020 20202020 20202020 20202020                     
-   14810:	20202020 20202020 20202020 20202020                     
-   14820:	20202020 20202020 20202020 20202020                     
-   14830:	20202020 20202020 632a2020 5a5a4176               *cvAZZ
-   14840:	44415a5a 20583d63 20202020 20202020     ZZADc=X         
-   14850:	632a2020 5a5a4176 44415a5a 20582a63       *cvAZZZZADc*X 
-   14860:	20202020 00000000 732e2020 674f4f67         ....  .sgOOg
-   14870:	20202e73 20202020 20202020 20202020     s.              
-   14880:	20202020 20202020 20202020 20202020                     
-   14890:	20202020 20202020 20202020 20202020                     
-   148a0:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
-   148b0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   148c0:	674f4f67 2e2e4f73 734f2e2e 674f4f67     gOOgsO....OsgOOg
-   148d0:	20202e73 732e2020 674f4f67 2e2e4f73     s.    .sgOOgsO..
-   148e0:	734f2e2e 674f4f67 20202e73 732e2020     ..OsgOOgs.    .s
-   148f0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   14900:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   14910:	20202020 20202020 2e2e2e2e 2e2e2e2e             ........
-   14920:	2020202e 20202020 20202020 20202020     .               
-   14930:	20202020 20202020 20202020 20202020                     
-   14940:	20202020 20202020 20202020 20202020                     
-   14950:	20202020 20202020 20202020 41443d20                  =DA
-   14960:	5a5a5a5a 5a5a5a5a 583d4441 20202020     ZZZZZZZZAD=X    
-   14970:	20202020 41443d20 5a5a5a5a 5a5a5a5a          =DAZZZZZZZZ
-   14980:	583d4441 20202020 00000000 732e2020     AD=X    ....  .s
-   14990:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   149a0:	20202020 20202020 20202020 20202020                     
-   149b0:	20202020 20202020 20202020 20202020                     
-   149c0:	20202020 20202020 732e2020 674f4f67               .sgOOg
-   149d0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   149e0:	732e2020 674f4f67 73737367 67737373       .sgOOggssssssg
-   149f0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   14a00:	73737367 67737373 674f4f67 20202e73     gssssssggOOgs.  
-   14a10:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   14a20:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   14a30:	20202e73 20202020 794f2020 73737373     s.        Oyssss
-   14a40:	73737373 20204f79 20202020 20202020     ssssyO          
-   14a50:	20202020 20202020 20202020 20202020                     
-   14a60:	20202020 20202020 20202020 20202020                     
-   14a70:	20202020 20202020 20202020 58202020                    X
-   14a80:	5a5a533d 5a5a5a5a 5a5a5a5a 46415a5a     =SZZZZZZZZZZZZAF
-   14a90:	20202058 58202020 5a5a5346 5a5a5a5a     X      XFSZZZZZZ
-   14aa0:	5a5a5a5a 46415a5a 20202058 00000000     ZZZZZZAFX   ....
-   14ab0:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   14ac0:	20202020 20202020 20202020 20202020                     
-   14ad0:	20202020 20202020 20202020 20202020                     
-   14ae0:	20202020 20202020 20202020 732e2020                   .s
-   14af0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   14b00:	20202e73 732e2020 734f4f67 67676767     s.    .sgOOsgggg
-   14b10:	67676767 674f2e66 20202e73 732e2020     ggggf.Ogs.    .s
-   14b20:	662e4f67 67676767 67676767 674f4f73     gO.fggggggggsOOg
-   14b30:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   14b40:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   14b50:	674f4f67 20202e73 20202020 6773794f     gOOgs.      Oysg
-   14b60:	67676767 67676767 4f796767 20202020     ggggggggggyO    
-   14b70:	20202020 20202020 20202020 20202020                     
-   14b80:	20202020 20202020 20202020 20202020                     
-   14b90:	20202020 20202020 20202020 20202020                     
-   14ba0:	40202020 5a5a5a76 5a5a5a5a 5a5a5a5a        @vZZZZZZZZZZZ
-   14bb0:	765a5a5a 20202040 40202020 5a5a5a76     ZZZv@      @vZZZ
-   14bc0:	5a5a5a5a 5a5a5a5a 765a5a5a 20202040     ZZZZZZZZZZZv@   
-   14bd0:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
-   14be0:	20202020 20202020 20202020 20202020                     
-   14bf0:	20202020 20202020 20202020 20202020                     
-   14c00:	20202020 20202020 20202020 20202020                     
-   14c10:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   14c20:	674f4f67 20202e73 732e2020 4f2e4f67     gOOgs.    .sgO.O
-   14c30:	4f4f4f4f 4f4f4f4f 674f202e 20202e73     OOOOOOOO. Ogs.  
-   14c40:	732e2020 2e204f67 4f4f4f4f 4f4f4f4f       .sgO .OOOOOOOO
-   14c50:	674f2e4f 20202e73 732e2020 674f4f67     O.Ogs.    .sgOOg
-   14c60:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   14c70:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   14c80:	79736779 4f4f4f4f 4f4f4f4f 26647379     ygsyOOOOOOOOysd&
-   14c90:	20202020 20202020 20202020 20202020                     
-   14ca0:	20202020 20202020 20202020 20202020                     
-   14cb0:	20202020 20202020 20202020 20202020                     
-   14cc0:	20202020 7a582020 5a5a5a44 5a5a5a5a           XzDZZZZZZZ
-   14cd0:	5a5a5a5a 415a5a5a 20205863 63582020     ZZZZZZZAcX    Xc
-   14ce0:	5a5a5a41 5a5a5a5a 5a5a5a5a 415a5a5a     AZZZZZZZZZZZZZZA
-   14cf0:	20202e63 00000000 732e2020 674f4f67     c.  ....  .sgOOg
-   14d00:	20202e73 20202020 20202020 20202020     s.              
-   14d10:	20202020 20202020 20202020 20202020                     
-   14d20:	20202020 20202020 20202020 20202020                     
-   14d30:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
-   14d40:	732e2020 674f4f67 20202e73 4f202020       .sgOOgs.     O
-   14d50:	4f4f6467 4f4f4f4f 4f4f4f4f 67644f4f     gdOOOOOOOOOOOOdg
-   14d60:	2020204f 4f202020 4f4f6767 4f4f4f4f     O      OggOOOOOO
-   14d70:	4f4f4f4f 67644f4f 2020204f 732e2020     OOOOOOdgO     .s
-   14d80:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   14d90:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   14da0:	4f202020 202e7364 4f4f4f20 204f4f4f        Ods.  OOOOOO 
-   14db0:	64734f20 2020204f 20202020 20202020      OsdO           
-   14dc0:	20202020 20202020 20202020 20202020                     
-   14dd0:	20202020 20202020 20202020 20202020                     
-   14de0:	20202020 20202020 76402020 41414141               @vAAAA
-   14df0:	5a415353 5644415a 5a415344 20204076     SSAZZADVDSAZv@  
-   14e00:	76402020 5a415a5a 5a415341 5341415a       @vZZAZASAZZAAS
-   14e10:	5a414141 20204076 00000000 732e2020     AAAZv@  ....  .s
-   14e20:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   14e30:	20202020 20202020 20202020 20202020                     
-   14e40:	20202020 20202020 20202020 20202020                     
-   14e50:	20202020 20202020 732e2020 674f4f67               .sgOOg
-   14e60:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   14e70:	4f202020 67676773 67676767 67676767        Osggggggggggg
-   14e80:	73676767 2020204f 4f202020 67676773     gggsO      Osggg
-   14e90:	67676767 67676767 73676767 2020204f     gggggggggggsO   
-   14ea0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   14eb0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   14ec0:	20202e73 79202020 4f207967 67676479     s.     ygy Oydgg
-   14ed0:	79646467 6779204f 20202079 20202020     gddyO ygy       
-   14ee0:	20202020 20202020 20202020 20202020                     
-   14ef0:	20202020 20202020 20202020 20202020                     
-   14f00:	20202020 20202020 20202020 417a2020                   zA
-   14f10:	56564453 41424456 56564441 53445656     SDVVVDBAADVVVVDS
-   14f20:	20207a41 417a5820 56565641 41425656     Az   XzAAVVVVVBA
-   14f30:	56564441 53445656 20207a5a 00000000     ADVVVVDSZz  ....
-   14f40:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   14f50:	20202020 20202020 20202020 20202020                     
-   14f60:	20202020 20202020 20202020 20202020                     
-   14f70:	20202020 20202020 20202020 732e2020                   .s
-   14f80:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   14f90:	20202e73 2e202020 73734f4f 73737373     s.     .OOssssss
-   14fa0:	73737373 4f4f7373 2020202e 2e202020     ssssssOO.      .
-   14fb0:	73734f4f 73737373 73737373 4f4f7373     OOssssssssssssOO
-   14fc0:	2020202e 732e2020 674f4f67 20202e73     .     .sgOOgs.  
-   14fd0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   14fe0:	674f4f67 20202e73 732e2020 79204f67     gOOgs.    .sgO y
-   14ff0:	73737364 67737373 674f2079 20202e73     dssssssgy Ogs.  
-   15000:	20202020 20202020 20202020 20202020                     
-   15010:	20202020 20202020 20202020 20202020                     
-   15020:	20202020 20202020 20202020 20202020                     
-   15030:	417a2020 3b425644 4156443b 3b565641       zADVB;;DVAAVV;
-   15040:	5656423b 20207a41 417a5820 3b425656     ;BVVAz   XzAVVB;
-   15050:	4156563b 3b565641 5656423b 20207a41     ;VVAAVV;;BVVAz  
-   15060:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
-   15070:	20202020 20202020 20202020 20202020                     
-   15080:	20202020 20202020 20202020 20202020                     
-   15090:	20202020 20202020 20202020 20202020                     
-   150a0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   150b0:	674f4f67 20202e73 20202020 2e2e2020     gOOgs.        ..
-   150c0:	2e2e2e2e 2e2e2e2e 202e2e2e 20202020     ...........     
-   150d0:	20202020 2e2e2020 2e2e2e2e 2e2e2e2e           ..........
-   150e0:	202e2e2e 20202020 732e2020 674f4f67     ...       .sgOOg
-   150f0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   15100:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   15110:	644f4f67 2e2e2e73 732b2e2e 674f4f64     gOOds.....+sdOOg
-   15120:	20202e73 20202020 20202020 20202020     s.              
-   15130:	20202020 20202020 20202020 20202020                     
-   15140:	20202020 20202020 20202020 20202020                     
-   15150:	20202020 567a2020 203b5642 41563b58           zVBV; X;VA
-   15160:	58615641 42563b58 20204653 5a7a2020     AVaXX;VBSF    zZ
-   15170:	583a5653 41533b58 58615641 53563b20     SV:XX;SAAVaX ;VS
-   15180:	20207a41 00000000 732e2020 674f4f67     Az  ....  .sgOOg
-   15190:	20202e73 20202020 20202020 20202020     s.              
-   151a0:	20202020 20202020 20202020 20202020                     
-   151b0:	20202020 20202020 20202020 20202020                     
-   151c0:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
-   151d0:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   151e0:	20202020 20202020 20202020 20202020                     
-   151f0:	20202020 20202020 20202020 20202020                     
-   15200:	20202020 20202020 20202020 732e2020                   .s
-   15210:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   15220:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   15230:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   15240:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   15250:	20202020 20202020 20202020 20202020                     
-   15260:	20202020 20202020 20202020 20202020                     
-   15270:	20202020 20202020 537a2020 58405642               zSBV@X
-   15280:	41563b20 583b5641 6e564058 20207a56      ;VAAV;XX@VnVz  
-   15290:	417a2020 58405653 41563b58 583b5641       zASV@XX;VAAV;X
-   152a0:	5344402e 20587a41 00000000 732e2020     .@DSAzX ....  .s
-   152b0:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   152c0:	20202020 20202020 20202020 20202020                     
-   152d0:	20202020 20202020 20202020 20202020                     
-   152e0:	20202020 20202020 732e2020 674f4f67               .sgOOg
-   152f0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   15300:	20202020 20202020 20202020 20202020                     
-   15310:	20202020 20202020 20202020 20202020                     
-   15320:	20202020 20202020 20202020 20202020                     
-   15330:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   15340:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   15350:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   15360:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   15370:	20202020 20202020 20202020 20202020                     
-   15380:	20202020 20202020 20202020 20202020                     
-   15390:	20202020 20202020 20202020 447a2020                   zD
-   153a0:	406e536e 5356423b 3b6e5653 6b566e40     nSn@;BVSSVn;@nVk
-   153b0:	20207a44 417a2020 406e5356 41566e3a     Dz    zAVSn@:nVA
-   153c0:	3b6e5641 44566e40 20207a41 00000000     AVn;@nVDAz  ....
-   153d0:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   153e0:	20202020 20202020 20202020 20202020                     
-   153f0:	20202020 20202020 20202020 20202020                     
-   15400:	20202020 20202020 20202020 732e2020                   .s
-   15410:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   15420:	20202e73 20202020 20202020 20202020     s.              
-   15430:	20202020 20202020 20202020 20202020                     
-   15440:	20202020 20202020 20202020 20202020                     
-   15450:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
-   15460:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   15470:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   15480:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   15490:	20202020 20202020 20202020 20202020                     
-   154a0:	20202020 20202020 20202020 20202020                     
-   154b0:	20202020 20202020 20202020 20202020                     
-   154c0:	417a2020 56566e42 536e5656 56566e56       zABnVVVVnSVnVV
-   154d0:	426e5656 20207a5a 417a2020 56566e6e     VVnBZz    zAnnVV
-   154e0:	536e5656 56566e53 6e6e5644 20207a41     VVnSSnVVDVnnAz  
-   154f0:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
-   15500:	20202020 20202020 20202020 20202020                     
-   15510:	20202020 20202020 20202020 20202020                     
-   15520:	20202020 20202020 20202020 20202020                     
-   15530:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   15540:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   15550:	20202020 20202020 20202020 20202020                     
-   15560:	20202020 20202020 20202020 20202020                     
-   15570:	20202020 20202020 732e2020 674f4f67               .sgOOg
-   15580:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   15590:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   155a0:	644f4f67 20202e73 732e2020 674f4f67     gOOds.    .sgOOg
-   155b0:	20202e73 20202020 20202020 20202020     s.              
-   155c0:	20202020 20202020 20202020 20202020                     
-   155d0:	20202020 20202020 20202020 20202020                     
-   155e0:	20202020 5a7a2020 6e3b445a 5a566b6e           zZZD;nnkVZ
-   155f0:	6c3b445a 5a6e3b6e 20207a5a 5a7a2020     ZD;ln;nZZz    zZ
-   15600:	6e3b3b53 5a446b6b 566e445a 536e4256     S;;nkkDZZDnVVBnS
-   15610:	20207a5a 00000000 732e2020 674f4f67     Zz  ....  .sgOOg
-   15620:	20202e73 20202020 20202020 20202020     s.              
-   15630:	20202020 20202020 20202020 20202020                     
-   15640:	20202020 20202020 20202020 20202020                     
-   15650:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
-   15660:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   15670:	2e2e2020 2e2e2e2e 2e2e2e2e 20202e2e       ............  
-   15680:	20202020 20202020 2e2e2020 2e2e2e2e               ......
-   15690:	2e2e2e2e 20202e2e 20202020 732e2020     ......        .s
-   156a0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   156b0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   156c0:	732e2020 644f4f67 2e2e2b73 734f2e2e       .sgOOds+....Os
-   156d0:	674f4f64 20202e73 20202020 20202020     dOOgs.          
-   156e0:	20202020 20202020 20202020 20202020                     
-   156f0:	20202020 20202020 20202020 20202020                     
-   15700:	20202020 20202020 5a7a2020 56445a5a               zZZZDV
-   15710:	5a5a4d44 56565a5a 5a534456 20207a5a     DMZZZZVVVDSZZz  
-   15720:	5a7a2020 4442535a 5a5a566e 53535a5a       zZZSBDnVZZZZSS
-   15730:	5a415653 20207a5a 00000000 732e2020     SVAZZz  ....  .s
-   15740:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   15750:	20202020 20202020 20202020 20202020                     
-   15760:	20202020 20202020 20202020 20202020                     
-   15770:	20202020 20202020 732e2020 674f4f67               .sgOOg
-   15780:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   15790:	2e202020 73734f4f 73737373 73737373        .OOssssssssss
-   157a0:	4f4f7373 2020202e 2e202020 73734f4f     ssOO.      .OOss
-   157b0:	73737373 73737373 4f4f7373 2020202e     ssssssssssOO.   
-   157c0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   157d0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   157e0:	20202e73 732e2020 79204f67 73737364     s.    .sgO ydsss
-   157f0:	67737373 674f2079 20202e73 20202020     sssgy Ogs.      
-   15800:	20202020 20202020 20202020 20202020                     
-   15810:	20202020 20202020 20202020 20202020                     
-   15820:	20202020 20202020 20202020 5a7a2020                   zZ
-   15830:	5a5a5a5a 5a5a5a5a 5a5a5a5a 5a5a5a5a     ZZZZZZZZZZZZZZZZ
-   15840:	20207a5a 5a7a2020 5a5a5a5a 5a5a5a5a     Zz    zZZZZZZZZZ
-   15850:	5a5a5a5a 5a5a5a5a 20207a5a 00000000     ZZZZZZZZZz  ....
-   15860:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   15870:	20202020 20202020 20202020 20202020                     
-   15880:	20202020 20202020 20202020 20202020                     
-   15890:	20202020 20202020 20202020 732e2020                   .s
-   158a0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   158b0:	20202e73 4f202020 67676773 67676767     s.     Osggggggg
-   158c0:	67676767 73676767 2020204f 4f202020     gggggggsO      O
-   158d0:	67676773 67676767 67676767 73676767     sggggggggggggggs
-   158e0:	2020204f 732e2020 674f4f67 20202e73     O     .sgOOgs.  
-   158f0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   15900:	674f4f67 20202e73 79202020 4f207967     gOOgs.     ygy O
-   15910:	67676479 79646767 6779204f 20202079     ydggggdyO ygy   
-   15920:	20202020 20202020 20202020 20202020                     
-   15930:	20202020 20202020 20202020 20202020                     
-   15940:	20202020 20202020 20202020 20202020                     
-   15950:	417a2020 5a5a5a5a 5a5a5a5a 5a5a5a5a       zAZZZZZZZZZZZZ
-   15960:	5a5a5a5a 20207a41 417a2020 5a5a5a5a     ZZZZAz    zAZZZZ
-   15970:	5a5a5a5a 5a5a5a5a 5a5a5a5a 20207a41     ZZZZZZZZZZZZAz  
-   15980:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
-   15990:	20202020 20202020 20202020 20202020                     
-   159a0:	20202020 20202020 20202020 20202020                     
-   159b0:	20202020 20202020 20202020 20202020                     
-   159c0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   159d0:	674f4f67 20202e73 4f2e2020 4f4f6467     gOOgs.    .OgdOO
-   159e0:	4f4f4f4f 4f4f4f4f 67644f4f 2020204f     OOOOOOOOOOdgO   
-   159f0:	4f202020 4f4f6467 4f4f4f4f 4f4f4f4f        OgdOOOOOOOOOO
-   15a00:	67674f4f 2020204f 732e2020 674f4f67     OOggO     .sgOOg
-   15a10:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   15a20:	732e2020 674f4f67 20202e73 4f202020       .sgOOgs.     O
-   15a30:	204f7367 4f4f4f20 204f4f4f 64732e20     gsO  OOOOOO  .sd
-   15a40:	2020204f 20202020 20202020 20202020     O               
-   15a50:	20202020 20202020 20202020 20202020                     
-   15a60:	20202020 20202020 20202020 20202020                     
-   15a70:	20202020 417a2020 5a5a5a5a 5a5a5a5a           zAZZZZZZZZ
-   15a80:	5a5a5a5a 5a5a5a5a 20207a5a 417a2020     ZZZZZZZZZz    zA
-   15a90:	5a5a5a5a 5a5a5a5a 5a5a5a5a 5a5a5a5a     ZZZZZZZZZZZZZZZZ
-   15aa0:	20207a5a 00000000 732e2020 674f4f67     Zz  ....  .sgOOg
-   15ab0:	20202e73 20202020 20202020 20202020     s.              
-   15ac0:	20202020 20202020 20202020 20202020                     
-   15ad0:	20202020 20202020 20202020 20202020                     
-   15ae0:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
-   15af0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   15b00:	4f2e4f67 4f4f4f4f 4f4f4f4f 674f202e     gO.OOOOOOOOO. Og
-   15b10:	20202e73 732e2020 2e204f67 4f4f4f4f     s.    .sgO .OOOO
-   15b20:	4f4f4f4f 674f2e4f 20202e73 732e2020     OOOOO.Ogs.    .s
-   15b30:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   15b40:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   15b50:	20202020 79736426 4f4f4f4f 4f4f4f4f         &dsyOOOOOOOO
-   15b60:	79677379 20202020 20202020 20202020     ysgy            
-   15b70:	20202020 20202020 20202020 20202020                     
-   15b80:	20202020 20202020 20202020 20202020                     
-   15b90:	20202020 20202020 5a7a2020 5a415a5a               zZZZAZ
-   15ba0:	5a5a5a5a 5a5a5a5a 5a5a5a5a 20207a5a     ZZZZZZZZZZZZZz  
-   15bb0:	417a2020 5a5a5a5a 535a5a5a 5a5a5a53       zAZZZZZZZSSZZZ
-   15bc0:	5a5a5a5a 20207a41 00000000 732e2020     ZZZZAz  ....  .s
-   15bd0:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   15be0:	20202020 20202020 20202020 20202020                     
-   15bf0:	20202020 20202020 20202020 20202020                     
-   15c00:	20202020 20202020 732e2020 674f4f67               .sgOOg
-   15c10:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   15c20:	732e2020 734f4f67 67676767 67676767       .sgOOsgggggggg
-   15c30:	674f2e66 20202e73 732e2020 662e4f67     f.Ogs.    .sgO.f
-   15c40:	67676767 67676767 674f4f73 20202e73     ggggggggsOOgs.  
-   15c50:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   15c60:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   15c70:	20202e73 20202020 6767794f 67676767     s.      Oygggggg
-   15c80:	67676767 4f796464 20202020 20202020     ggggddyO        
-   15c90:	20202020 20202020 20202020 20202020                     
-   15ca0:	20202020 20202020 20202020 20202020                     
-   15cb0:	20202020 20202020 20202020 417a2020                   zA
-   15cc0:	76445a5a 5a5a5a41 415a5a5a 5a5a7644     ZZDvAZZZZZZADvZZ
-   15cd0:	20207a41 442a2020 5a5a5a5a 46535a5a     Az    *DZZZZZZSF
-   15ce0:	5a5a537a 5a5a5a5a 20202a44 00000000     zSZZZZZZD*  ....
-   15cf0:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   15d00:	20202020 20202020 20202020 20202020                     
-   15d10:	20202020 20202020 20202020 20202020                     
-   15d20:	20202020 20202020 20202020 732e2020                   .s
-   15d30:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   15d40:	20202e73 732e2020 674f4f67 73737367     s.    .sgOOggsss
-   15d50:	67737373 674f4f67 20202e73 732e2020     sssggOOgs.    .s
-   15d60:	674f4f67 73737367 67737373 674f4f67     gOOggssssssggOOg
-   15d70:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   15d80:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   15d90:	674f4f67 20202e73 20202020 794f2020     gOOgs.        Oy
-   15da0:	73737373 73737373 20204f79 20202020     ssssssssyO      
-   15db0:	20202020 20202020 20202020 20202020                     
-   15dc0:	20202020 20202020 20202020 20202020                     
-   15dd0:	20202020 20202020 20202020 20202020                     
-   15de0:	5a7a2020 4040765a 5a5a4163 63415a5a       zZZv@@cAZZZZAc
-   15df0:	5a762a40 20207a5a 2a202020 5a5a4144     @*vZZz     *DAZZ
-   15e00:	2e3d535a 5a413d20 445a5a5a 2020202a     ZS=. =AZZZZD*   
-   15e10:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
-   15e20:	20202020 20202020 20202020 20202020                     
-   15e30:	20202020 20202020 20202020 20202020                     
-   15e40:	20202020 20202020 20202020 20202020                     
-   15e50:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   15e60:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   15e70:	2e2e4f73 734f2e2e 674f4f67 20202e73     sO....OsgOOgs.  
-   15e80:	732e2020 674f4f67 2e2e2b73 734f2e2e       .sgOOgs+....Os
-   15e90:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   15ea0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   15eb0:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   15ec0:	20202020 2e2e2e2e 2e2e2e2e 20202020         ........    
-   15ed0:	20202020 20202020 20202020 20202020                     
-   15ee0:	20202020 20202020 20202020 20202020                     
-   15ef0:	20202020 20202020 20202020 20202020                     
-   15f00:	20202020 417a2020 58582b76 5a416358           zAv+XXXcAZ
-   15f10:	2b63415a 62402020 20207a41 20202020     ZAc+  @bAz      
-   15f20:	5a5a442a 20583d53 533d5820 2a445a5a     *DZZS=X  X=SZZD*
-   15f30:	20202020 00000000 732e2020 674f4f67         ....  .sgOOg
-   15f40:	20202e73 20202020 20202020 20202020     s.              
-   15f50:	20202020 20202020 20202020 20202020                     
-   15f60:	20202020 20202020 20202020 20202020                     
-   15f70:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
-   15f80:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   15f90:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   15fa0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   15fb0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   15fc0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   15fd0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   15fe0:	20202020 20202020 20202020 20202020                     
-   15ff0:	20202020 20202020 20202020 20202020                     
-   16000:	20202020 20202020 20202020 20202020                     
-   16010:	20202020 20202020 20202020 20202020                     
-   16020:	20202020 20202020 627a2020 2020202a               zb*   
-   16030:	41635820 20586341 40202020 20207a76      XcAAcX    @vz  
-   16040:	20202020 53442a20 20205846 3d582020          *DSFX    X=
-   16050:	202a4453 20202020 00000000 732e2020     SD*     ....  .s
-   16060:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   16070:	20202020 20202020 20202020 20202020                     
-   16080:	20202020 20202020 20202020 20202020                     
-   16090:	20202020 20202020 732e2020 674f4f67               .sgOOg
-   160a0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   160b0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   160c0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   160d0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   160e0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   160f0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   16100:	20202e73 20202020 20202020 20202020     s.              
-   16110:	20202020 20202020 20202020 20202020                     
-   16120:	20202020 20202020 20202020 20202020                     
-   16130:	20202020 20202020 20202020 20202020                     
-   16140:	20202020 20202020 20202020 2b402020                   @+
-   16150:	20202020 63582020 20202b63 20202020           Xcc+      
-   16160:	20202b40 20202020 2d2a5858 20205858     @+      XX*-XX  
-   16170:	58202020 20202d3d 20202020 00000000        X=-      ....
-   16180:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   16190:	20202020 20202020 20202020 20202020                     
-   161a0:	20202020 20202020 20202020 20202020                     
-   161b0:	20202020 20202020 20202020 732e2020                   .s
-   161c0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   161d0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   161e0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   161f0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   16200:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   16210:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   16220:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   16230:	20202020 20202020 20202020 20202020                     
-   16240:	20202020 20202020 58205858 20202058             XX XX   
-   16250:	20202020 20202020 20202020 20202020                     
-   16260:	20202020 20202020 20202020 20202020                     
-   16270:	20202020 20202020 58202020 2020202e                X.   
-   16280:	20202020 20202020 20202020 20202020                     
-   16290:	20582b20 202b2020 2020202e 20202020      +X   + .       
-   162a0:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
-   162b0:	20202020 20202020 20202020 20202020                     
-   162c0:	20202020 20202020 20202020 20202020                     
-   162d0:	20202020 20202020 20202020 20202020                     
-   162e0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   162f0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   16300:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   16310:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   16320:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   16330:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   16340:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   16350:	20202020 20202020 20202020 20202020                     
-   16360:	20202020 20202020 58582020 4040406f               XXo@@@
-   16370:	40404040 20205858 20202020 20202020     @@@@XX          
-   16380:	20202020 20202020 20202020 20202020                     
-   16390:	20202020 20202020 20202020 20202020                     
-   163a0:	20202020 20202020 20202020 20202020                     
-   163b0:	20202020 20202e20 2e202020 2020202e          .     ..   
-   163c0:	20202020 00000000 732e2020 674f4f67         ....  .sgOOg
-   163d0:	20202e73 20202020 20202020 20202020     s.              
-   163e0:	20202020 20202020 20202020 20202020                     
-   163f0:	20202020 20202020 20202020 20202020                     
-   16400:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
-   16410:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   16420:	674f4f67 2e2e4f73 734f2e2e 674f4f67     gOOgsO....OsgOOg
-   16430:	20202e73 732e2020 674f4f67 2e2e4f73     s.    .sgOOgsO..
-   16440:	734f2e2e 674f4f67 20202e73 732e2020     ..OsgOOgs.    .s
-   16450:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   16460:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   16470:	20202020 20202020 20202020 20202020                     
-   16480:	20202020 20202020 20202020 402b2020                   +@
-   16490:	3b2d2d25 403b3b3b 20586f40 20202020     %--;;;;@@oX     
-   164a0:	20202020 20202020 20202020 20202020                     
-   164b0:	20202020 20202020 20202020 20202020                     
-   164c0:	20202020 20202020 20202020 20202020                     
-   164d0:	20202020 20202020 20202020 20202020                     
-   164e0:	20202020 20202020 00000000 732e2020             ....  .s
-   164f0:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   16500:	20202020 20202020 20202020 20202020                     
-   16510:	20202020 20202020 20202020 20202020                     
-   16520:	20202020 20202020 732e2020 674f4f67               .sgOOg
-   16530:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   16540:	732e2020 674f4f67 73737367 67737373       .sgOOggssssssg
-   16550:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   16560:	73737367 67737373 674f4f67 20202e73     gssssssggOOgs.  
-   16570:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   16580:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   16590:	20202e73 20202020 20202020 20202020     s.              
-   165a0:	20202020 20202020 20202020 20202020                     
-   165b0:	3b404058 623b3b3b 3b3b3b6e 5840403b     X@@;;;;bn;;;;@@X
-   165c0:	20202058 20202020 20202020 20202020     X               
-   165d0:	20202020 20202020 20202020 20202020                     
-   165e0:	20202020 20202020 20202020 20202020                     
-   165f0:	20202020 20202020 20202020 20202020                     
-   16600:	20202020 20202020 20202020 00000000                 ....
-   16610:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   16620:	20202020 20202020 20202020 20202020                     
-   16630:	20202020 20202020 20202020 20202020                     
-   16640:	20202020 20202020 20202020 732e2020                   .s
-   16650:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   16660:	20202e73 732e2020 734f4f67 67676767     s.    .sgOOsgggg
-   16670:	67676767 674f4f73 20202e73 732e2020     ggggsOOgs.    .s
-   16680:	734f4f67 67676767 67676767 674f4f73     gOOsggggggggsOOg
-   16690:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   166a0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   166b0:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   166c0:	20202020 20202058 20202020 20202020         X           
-   166d0:	58582020 3b3b4040 44746e6e 6e6e6e44       XX@@;;nntDDnnn
-   166e0:	40403b3b 20202058 20202020 20202020     ;;@@X           
-   166f0:	20202020 20202020 20202020 20202020                     
-   16700:	20202020 20202020 20202020 20202020                     
-   16710:	20202020 20202020 20202020 20202020                     
-   16720:	20202e20 20202020 20202020 20202020      .              
-   16730:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
-   16740:	20202020 20202020 20202020 20202020                     
-   16750:	20202020 20202020 20202020 20202020                     
-   16760:	20202020 20202020 20202020 20202020                     
-   16770:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   16780:	674f4f67 20202e73 732e2020 4f2e4f67     gOOgs.    .sgO.O
-   16790:	4f4f4f4f 4f4f4f4f 674f2e4f 20202e73     OOOOOOOOO.Ogs.  
-   167a0:	732e2020 4f2e4f67 4f4f4f4f 4f4f4f4f       .sgO.OOOOOOOOO
-   167b0:	674f2e4f 20202e73 732e2020 674f4f67     O.Ogs.    .sgOOg
-   167c0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   167d0:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   167e0:	20202020 23236f58 586f2325 20202020         Xo##%#oX    
-   167f0:	20202020 58582020 6e353b40 74776e6e           XX@;5nnnwt
-   16800:	6e777774 403b3b6e 2020582b 20202020     twwnn;;@+X      
-   16810:	20202020 20202020 20202020 20202020                     
-   16820:	20202020 58202020 582b2e20 20202e58            X .+XX.  
-   16830:	582e2e20 20202e58 20202020 20202020      ..XX.          
-   16840:	75683a2e 2e4f2675 262e2e20 202e2b26     .:huu&O. ..&&+. 
-   16850:	20202020 00000000 732e2020 674f4f67         ....  .sgOOg
-   16860:	20202e73 20202020 20202020 20202020     s.              
-   16870:	20202020 20202020 20202020 20202020                     
-   16880:	20202020 20202020 20202020 20202020                     
-   16890:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
-   168a0:	732e2020 674f4f67 20202e73 4f202020       .sgOOgs.     O
-   168b0:	4f4f6767 4f4f4f4f 4f4f4f4f 67644f4f     ggOOOOOOOOOOOOdg
-   168c0:	2020204f 4f202020 4f4f6767 4f4f4f4f     O      OggOOOOOO
-   168d0:	4f4f4f4f 67644f4f 2020204f 732e2020     OOOOOOdgO     .s
-   168e0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   168f0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   16900:	20202020 6f202020 30713225 25323230            o%2q0022%
-   16910:	2020206f 20202020 40585820 4d6e3b3b     o        XX@;;nM
-   16920:	74747774 74747474 3b3b6e4e 20205840     twttttttNn;;@X  
-   16930:	20202020 20202020 20202020 20202020                     
-   16940:	20202020 20202020 2b582020 616e6a3a               X+:jna
-   16950:	2e3a6a6e 426a6626 4f26616e 2020202e     nj:.&fjBna&O.   
-   16960:	2b202020 42427675 4f686a42 766a262b        +uvBBBjhO+&jv
-   16970:	4f796142 20202020 00000000 732e2020     BayO    ....  .s
-   16980:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   16990:	20202020 20202020 20202020 20202020                     
-   169a0:	20202020 20202020 20202020 20202020                     
-   169b0:	20202020 20202020 732e2020 674f4f67               .sgOOg
-   169c0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   169d0:	4f202020 67676773 67676767 67676767        Osggggggggggg
-   169e0:	73676767 2020204f 4f202020 67676764     gggsO      Odggg
-   169f0:	67676767 67676767 73676767 2020204f     gggggggggggsO   
-   16a00:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   16a10:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   16a20:	20202e73 20202020 256f2020 65726530     s.        o%0ere
-   16a30:	30656572 20206f25 20202020 40582020     ree0%o        X@
-   16a40:	746e6e3b 4e4e7274 744e4e4e 3b6e6e74     ;nnttrNNNNNttnn;
-   16a50:	20585840 20202020 20202020 20202020     @XX             
-   16a60:	20202020 20202020 20202020 262e2020                   .&
-   16a70:	56564476 756a5656 56567668 2d425656     vDVVVVjuhvVVVVB-
-   16a80:	2020584f 26202020 5656446a 75765656     OX     &jDVVVVvu
-   16a90:	56564266 3a425656 2020202e 00000000     fBVVVVB:.   ....
-   16aa0:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   16ab0:	20202020 20202020 20202020 20202020                     
-   16ac0:	20202020 20202020 20202020 20202020                     
-   16ad0:	20202020 20202020 20202020 732e2020                   .s
-   16ae0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   16af0:	20202e73 2e202020 73734f4f 73737373     s.     .OOssssss
-   16b00:	73737373 4f4f7373 2020202e 2e202020     ssssssOO.      .
-   16b10:	73734f4f 73737373 73737373 4f4f7373     OOssssssssssssOO
-   16b20:	2020202e 732e2020 674f4f67 20202e73     .     .sgOOgs.  
-   16b30:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   16b40:	674f4f67 20202e73 20202020 30255820     gOOgs.       X%0
-   16b50:	72727265 72727272 20583230 20202020     errrrrrr02X     
-   16b60:	3b405820 74746e3b 4e4e4e4e 724e4e4e      X@;;nttNNNNNNNr
-   16b70:	3b6e7474 20584040 20202020 20202020     ttn;@@X         
-   16b80:	25235820 58585840 20202020 20202020      X#%@XXX        
-   16b90:	68582020 3b425642 6a44443b 3b44446a       XhBVB;;DDjjDD;
-   16ba0:	6156423b 20202b2b 2a2e2020 3b425642     ;BVa++    .*BVB;
-   16bb0:	6a444461 6144446a 6156423b 20202026     aDDjjDDa;BVa&   
-   16bc0:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
-   16bd0:	20202020 20202020 20202020 20202020                     
-   16be0:	20202020 20202020 20202020 20202020                     
-   16bf0:	20202020 20202020 20202020 20202020                     
-   16c00:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   16c10:	674f4f67 20202e73 20202020 2e2e2020     gOOgs.        ..
-   16c20:	2e2e2e2e 2e2e2e2e 202e2e2e 20202020     ...........     
-   16c30:	20202020 2e2e2020 2e2e2e2e 2e2e2e2e           ..........
-   16c40:	20202e2e 20202020 732e2020 674f4f67     ..        .sgOOg
-   16c50:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   16c60:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   16c70:	65326f58 72727272 72727272 206f3265     Xo2errrrrrrre2o 
-   16c80:	20202020 3b405820 4e773b6e 414e4e4e          X@;n;wNNNNA
-   16c90:	4e4e4e41 6e3b7772 2058403b 20202020     ANNNrw;n;@X     
-   16ca0:	20202020 65302558 58582530 20202020         X%0e0%XX    
-   16cb0:	20202020 6a582020 583b5642 6e566158           XjBV;XXaVn
-   16cc0:	2e3b566e 6e563b20 2020582b 752e2020     nV;. ;Vn+X    .u
-   16cd0:	203b5642 6e563b58 203b566e 42563b58     BV; X;VnnV; X;VB
-   16ce0:	2020203a 00000000 732e2020 674f4f67     :   ....  .sgOOg
-   16cf0:	20202e73 20202020 20202020 20202020     s.              
-   16d00:	20202020 20202020 20202020 20202020                     
-   16d10:	20202020 20202020 20202020 20202020                     
-   16d20:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
-   16d30:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   16d40:	20202020 20202020 20202020 20202020                     
-   16d50:	20202020 20202020 20202020 20202020                     
-   16d60:	20202020 20202020 20202020 732e2020                   .s
-   16d70:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   16d80:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   16d90:	20202020 65712320 72727272 72727272          #qerrrrrrrr
-   16da0:	58233265 20202020 3b405820 4e72776e     e2#X     X@;nwrN
-   16db0:	5a41414e 4e4e4141 6e357474 2058403b     NAAZAANNtt5n;@X 
-   16dc0:	20202020 20202020 72723023 58253072             #0rrr0%X
-   16dd0:	20202020 20202020 682b2020 58404442               +hBD@X
-   16de0:	6e563b20 583b566e 6e564058 20202e26      ;VnnV;XX@Vn&.  
-   16df0:	682e2020 58404442 6e563b20 583b566e       .hBD@X ;VnnV;X
-   16e00:	6e564020 20202e26 00000000 732e2020      @Vn&.  ....  .s
-   16e10:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   16e20:	20202020 20202020 20202020 20202020                     
-   16e30:	20202020 20202020 20202020 20202020                     
-   16e40:	20202020 20202020 732e2020 674f4f67               .sgOOg
-   16e50:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   16e60:	20202020 20202020 20202020 20202020                     
-   16e70:	20202020 20202020 20202020 20202020                     
-   16e80:	20202020 20202020 20202020 20202020                     
-   16e90:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   16ea0:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   16eb0:	20202e73 20202020 65302520 72727272     s.       %0errrr
-   16ec0:	72727272 20233072 20202020 3b405820     rrrrr0#      X@;
-   16ed0:	4e74776e 5a5a4e4e 4e41415a 6e77744e     nwtNNNZZZAANNtwn
-   16ee0:	5858403b 20202020 20202020 72723025     ;@XX        %0rr
-   16ef0:	58256572 20202020 20202020 792e2020     re%X          .y
-   16f00:	406e566e 6156423b 3b425661 61566e40     nVn@;BVaaVB;@nVa
-   16f10:	20202e26 752b2020 406e566e 6156423b     &.    +unVn@;BVa
-   16f20:	3b425661 61566e40 20204f26 00000000     aVB;@nVa&O  ....
-   16f30:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   16f40:	20202020 20202020 20202020 20202020                     
-   16f50:	20202020 20202020 20202020 20202020                     
-   16f60:	20202020 20202020 20202020 732e2020                   .s
-   16f70:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
-   16f80:	20202e73 20202020 20202020 20202020     s.              
-   16f90:	20202020 20202020 20202020 20202020                     
-   16fa0:	20202020 20202020 20202020 20202020                     
-   16fb0:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
-   16fc0:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   16fd0:	674f4f67 20202e73 20202020 72712520     gOOgs.       %qr
-   16fe0:	72727272 72727272 20233072 20202020     rrrrrrrrr0#     
-   16ff0:	3b405820 4e74776e 5a41414e 4e4e415a      X@;nwtNNAAZZANN
-   17000:	626e7474 2058403b 20202020 20202020     ttnb;@X         
-   17010:	72723025 58253072 20202020 20202020     %0rrr0%X        
-   17020:	26202020 56566e75 796e5656 44446e79        &unVVVVnyynDD
-   17030:	2d6e5656 2020584f 262e2020 56566e75     VVn-OX    .&unVV
-   17040:	796e5656 56446e26 3a6e5656 20202e4f     VVny&nDVVVn:O.  
-   17050:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
-   17060:	20202020 20202020 20202020 20202020                     
-   17070:	20202020 20202020 20202020 20202020                     
-   17080:	20202020 20202020 20202020 20202020                     
-   17090:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
-   170a0:	674f4f67 20202e73 20202020 20202020     gOOgs.          
-   170b0:	20202020 20202020 20202020 20202020                     
-   170c0:	20202020 20202020 20202020 20202020                     
-   170d0:	20202020 20202020 732e2020 674f4f67               .sgOOg
-   170e0:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
-   170f0:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
-   17100:	65712358 72727272 72727272 20233272     X#qerrrrrrrrr2# 
-   17110:	20202020 3b405820 4e74356e 4e414e4e          X@;n5tNNNAN
-   17120:	4e4e4e41 6e77774e 20584040 20202020     ANNNNwwn@@X     
-   17130:	20202020 72303258 586f7172 20202020         X20rrqoX    
-   17140:	20202020 2b582020 6e612d75 2626616e           X+u-anna&&
-   17150:	6e3b2626 4f3a3b6e 2020202e 2b202020     &&;nn;:O.      +
-   17160:	6e612d3a 2b403b6b 6e3b264f 4f2d616e     :-ank;@+O&;nna-O
-   17170:	2020202b 00000000 732e2020 644f4f67     +   ....  .sgOOd
-   17180:	2e2e2b73 2e2e2e2e 2e2e2e2e 2e2e2e2e     s+..............
-   17190:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   171a0:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   171b0:	2e2e2e2e 732e2e2e 674f4f64 20202e73     .......sdOOgs.  
-   171c0:	732e2020 644f4f67 2e2e4f73 2e2e2e2e       .sgOOdsO......
-   171d0:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   171e0:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   171f0:	2e2e2e2e 2e2e2e2e 2e2e2e2e 734f2e2e     ..............Os
-   17200:	674f4f64 20202e73 732e2020 644f4f67     dOOgs.    .sgOOd
-   17210:	2e2e2b73 734f2e2e 674f4f64 20202e73     s+....OsdOOgs.  
-   17220:	20202020 72716f20 72727272 72727272          oqrrrrrrrrr
-   17230:	206f3265 20202020 3b405820 74743b3b     e2o      X@;;;tt
-   17240:	4e4e4e4e 4e4e4e4e 3b3b7772 20584040     NNNNNNNNrw;;@@X 
-   17250:	20202020 20202020 25235858 58586f25             XX#%%oXX
-   17260:	20202020 20202020 2e582020 263a7526               X.&u:&
-   17270:	2e4f2626 2626262e 2b4f4f26 20202020     &&O..&&&&OO+    
-   17280:	202e2020 263a3a2b 202b2b26 26264f2e       . +::&&++ .O&&
-   17290:	2e2b2b26 20202e20 00000000 732e2020     &++. .  ....  .s
-   172a0:	79204f67 73737364 73737373 73737373     gO ydsssssssssss
-   172b0:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   172c0:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   172d0:	73737373 73737373 64737373 674f2079     sssssssssssdy Og
-   172e0:	20202e73 732e2020 79204f67 73737367     s.    .sgO ygsss
-   172f0:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   17300:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   17310:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   17320:	67737373 674f2079 20202e73 732e2020     sssgy Ogs.    .s
-   17330:	79204f67 73737364 67737373 674f2079     gO ydssssssgy Og
-   17340:	20202e73 20202020 30255820 72727272     s.       X%0rrrr
-   17350:	72727272 20582530 20202020 402b2020     rrrr0%X       +@
-   17360:	74773b3b 4e4e4e4e 724e4e4e 3b3b7774     ;;wtNNNNNNNrtw;;
-   17370:	58586f40 20202020 20202020 58585858     @oXX        XXXX
-   17380:	58582058 20202020 20202020 2e202020     X XX           .
-   17390:	4f4f262b 2e2e4f26 4f4f2e2e 2e2b2b4f     +&OO&O....OOO++.
-   173a0:	20202020 20582020 2b4f2b20 2020202b           X  +O++   
-   173b0:	2e2e2e20 202e2e2e 20202e20 00000000      ......  .  ....
-   173c0:	79202020 4f207967 67646479 67676767        ygy Oyddggggg
-   173d0:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   173e0:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   173f0:	67676767 67676767 67676767 79646767     ggggggggggggggdy
-   17400:	6479204f 20202079 79202020 4f207967     O ydy      ygy O
-   17410:	67676479 67676767 67676767 67676767     ydgggggggggggggg
-   17420:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   17430:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   17440:	67676767 79646767 6479204f 20202079     ggggggdyO ydy   
-   17450:	79202020 4f207967 67676479 79646767        ygy Oydggggdy
-   17460:	6779204f 20202079 20202020 256f2020     O ygy         o%
-   17470:	65656530 30656572 20206f25 20202020     0eeeree0%o      
-   17480:	40582020 776e3b40 74747274 7472744e       X@@;nwtrttNtrt
-   17490:	403b6e77 20202040 20202020 20202020     wn;@@           
-   174a0:	20202020 20202020 20202020 20202020                     
-   174b0:	20202020 20202020 20202020 20202020                     
-   174c0:	20202020 20202020 20202020 20202020                     
-   174d0:	20202020 20202020 20202020 20202020                     
-   174e0:	00000000 4f202020 204f7364 4f4f4f20     ....   OdsO  OOO
-   174f0:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   17500:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   17510:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   17520:	204f4f4f 64732e20 2020204f 4f202020     OOO  .sdO      O
-   17530:	202e7364 4f4f4f20 4f4f4f4f 4f4f4f4f     ds.  OOOOOOOOOOO
-   17540:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   17550:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   17560:	4f4f4f4f 4f4f4f4f 204f4f4f 64732e20     OOOOOOOOOOO  .sd
-   17570:	2020204f 4f202020 202e7364 4f4f4f20     O      Ods.  OOO
-   17580:	204f4f4f 64732e20 2020204f 20202020     OOO  .sdO       
-   17590:	6f202020 30303225 25323030 2020206f        o%200002%o   
-   175a0:	20202020 2b582020 6e3b3b40 74747774           X+@;;ntwtt
-   175b0:	35747474 403b3b3b 20205858 20202020     ttt5;;;@XX      
-   175c0:	20202020 20202020 20202020 20202020                     
-   175d0:	20202020 20202020 20202020 20202020                     
-   175e0:	20202020 20202020 20202020 20202020                     
-   175f0:	20202020 20202020 20202020 20202020                     
-   17600:	20202020 00000000 20202020 79736426         ....    &dsy
-   17610:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   17620:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   17630:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   17640:	4f4f4f4f 4f4f4f4f 79677379 20202020     OOOOOOOOysgy    
-   17650:	20202020 79736479 4f4f4f4f 4f4f4f4f         ydsyOOOOOOOO
-   17660:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   17670:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   17680:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
-   17690:	79677379 20202020 20202020 79736479     ysgy        ydsy
-   176a0:	4f4f4f4f 4f4f4f4f 79677379 20202020     OOOOOOOOysgy    
-   176b0:	20202020 20202020 25236f20 206f2325              o#%%#o 
-   176c0:	20202020 20202020 58202020 3b3b4040                X@@;;
-   176d0:	6e773b3b 3b3b3b77 40403b3b 20202020     ;;wnw;;;;;@@    
-   176e0:	20202020 20202020 20202020 20202020                     
-   176f0:	20202020 20202020 20202020 20202020                     
-   17700:	20202020 20202020 20202020 20202020                     
-   17710:	20202020 20202020 20202020 20202020                     
-   17720:	20202020 20202020 00000000 20202020             ....    
-   17730:	6767794f 67676767 67676767 67676767     Oygggggggggggggg
-   17740:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   17750:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   17760:	67676767 67676767 67676767 4f796467     gggggggggggggdyO
-   17770:	20202020 20202020 6764794f 67676767             Oydggggg
-   17780:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   17790:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   177a0:	67676767 67676767 67676767 67676767     gggggggggggggggg
-   177b0:	67676767 4f796467 20202020 20202020     gggggdyO        
-   177c0:	6764794f 67676767 67676767 4f796464     OydgggggggggddyO
-   177d0:	20202020 20202020 20202020 20202020                     
-   177e0:	20202020 20202020 20202020 58202020                    X
-   177f0:	40406f58 6e3b3b3b 3b3b3b3b 582b4040     Xo@@;;;n;;;;@@+X
-   17800:	20202020 20202020 20202020 20202020                     
-   17810:	20202020 20202020 20202020 20202020                     
-   17820:	20202020 20202020 20202020 20202020                     
-   17830:	20202020 20202020 20202020 20202020                     
-   17840:	20202020 20202020 20202020 00000000                 ....
-   17850:	20202020 794f2020 73737373 73737373           Oyssssssss
-   17860:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   17870:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   17880:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   17890:	20204f79 20202020 20202020 794f2020     yO            Oy
-   178a0:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   178b0:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   178c0:	73737373 73737373 73737373 73737373     ssssssssssssssss
-   178d0:	73737373 73737373 20204f79 20202020     ssssssssyO      
-   178e0:	20202020 794f2020 73737373 73737373           Oyssssssss
-   178f0:	20204f79 20202020 20202020 20202020     yO              
-   17900:	20202020 20202020 20202020 20202020                     
-   17910:	20202020 40585858 3b404040 40404040         XXX@@@@;@@@@
-   17920:	20585840 20202020 20202020 20202020     @XX             
-   17930:	20202020 20202020 20202020 20202020                     
-   17940:	20202020 20202020 20202020 20202020                     
-   17950:	20202020 20202020 20202020 20202020                     
-   17960:	20202020 20202020 20202020 20202020                     
-   17970:	00000000 20202020 20202020 2e2e2e2e     ....        ....
-   17980:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   17990:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   179a0:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   179b0:	2e2e2e2e 20202020 20202020 20202020     ....            
-   179c0:	2e202020 2e2e2e2e 2e2e2e2e 2e2e2e2e        .............
-   179d0:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   179e0:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
-   179f0:	2e2e2e2e 2e2e2e2e 2e2e2e2e 20202020     ............    
-   17a00:	20202020 20202020 2e202020 2e2e2e2e                .....
-   17a10:	2e2e2e2e 20202020 20202020 20202020     ....            
-   17a20:	20202020 20202020 20202020 20202020                     
-   17a30:	20202020 20202020 58582020 40584040               XX@@X@
-   17a40:	58404040 20205858 20202020 20202020     @@@XXX          
-   17a50:	20202020 20202020 20202020 20202020                     
-   17a60:	20202020 20202020 20202020 20202020                     
-   17a70:	20202020 20202020 20202020 20202020                     
-   17a80:	20202020 20202020 20202020 20202020                     
-   17a90:	20202020 00000000 20202020 20202020         ....        
-   17aa0:	20202020 20202020 20202020 20202020                     
-   17ab0:	20202020 20202020 20202020 20202020                     
-   17ac0:	20202020 20202020 20202020 20202020                     
-   17ad0:	20202020 20202020 20202020 20202020                     
-   17ae0:	20202020 20202020 20202020 20202020                     
-   17af0:	20202020 20202020 20202020 20202020                     
-   17b00:	20202020 20202020 20202020 20202020                     
-   17b10:	20202020 20202020 20202020 20202020                     
-   17b20:	20202020 20202020 20202020 20202020                     
-   17b30:	20202020 20202020 20202020 20202020                     
-   17b40:	20202020 20202020 20202020 20202020                     
-   17b50:	20202020 20202020 20202020 20202020                     
-   17b60:	58585820 20205858 20202020 20202020      XXXXX          
-   17b70:	20202020 20202020 20202020 20202020                     
-   17b80:	20202020 20202020 20202020 20202020                     
-   17b90:	20202020 20202020 20202020 20202020                     
-   17ba0:	20202020 20202020 20202020 20202020                     
-   17bb0:	20202020 20202020 00000000 20202020             ....    
-   17bc0:	20202020 20202020 20202020 20202020                     
-   17bd0:	20202020 20202020 20202020 20202020                     
-   17be0:	20202020 20202020 20202020 20202020                     
-   17bf0:	20202020 20202020 20202020 20202020                     
-   17c00:	20202020 20202020 20202020 20202020                     
-   17c10:	20202020 20202020 20202020 20202020                     
-   17c20:	20202020 20202020 20202020 20202020                     
-   17c30:	20202020 20202020 20202020 20202020                     
-   17c40:	20202020 20202020 20202020 20202020                     
-   17c50:	20202020 20202020 20202020 20202020                     
-   17c60:	20202020 20202020 20202020 20202020                     
-   17c70:	20202020 20202020 20202020 20202020                     
-   17c80:	20202020 58582020 20202020 20202020           XX        
-   17c90:	20202020 20202020 20202020 20202020                     
-   17ca0:	20202020 20202020 20202020 20202020                     
-   17cb0:	20202020 20202020 20202020 20202020                     
-   17cc0:	20202020 20202020 20202020 20202020                     
-   17cd0:	20202020 20202020 20202020 00000000                 ....
-   17ce0:	00000043                                C...
+0000b554 <TABLA_SINUS_WAVE>:
+    b554:	000c0000 00250019 003e0032 0057004b     ......%.2.>.K.W.
+    b564:	00700063 0088007c 00a00094 00b800ac     c.p.|...........
+    b574:	00cf00c3 00e600da 00fc00f1 01110107     ................
+    b584:	0126011c 013a0130 014e0144 01610157     ..&.0.:.D.N.W.a.
+    b594:	0172016a 0183017b 0193018b 01a2019b     j.r.{...........
+    b5a4:	01b001a9 01bd01b7 01c901c3 01d401ce     ................
+    b5b4:	01dd01d9 01e601e2 01ed01e9 01f301f0     ................
+    b5c4:	01f801f6 01fc01fa 01fe01fd 01ff01ff     ................
+    b5d4:	01ff0200 01fe01ff 01fc01fd 01f801fa     ................
+    b5e4:	01f301f6 01ed01f0 01e601e9 01dd01e2     ................
+    b5f4:	01d401d9 01c901ce 01bd01c3 01b001b7     ................
+    b604:	01a201a9 0193019b 0183018b 0172017b     ............{.r.
+    b614:	0161016a 014e0157 013a0144 01260130     j.a.W.N.D.:.0.&.
+    b624:	0111011c 00fc0107 00e600f1 00cf00da     ................
+    b634:	00b800c3 00a000ac 00880094 0070007c     ............|.p.
+    b644:	00570063 003e004b 00250032 000c0019     c.W.K.>.2.%.....
+    b654:	fff40000 ffdbffe7 ffc2ffce ffa9ffb5     ................
+    b664:	ff90ff9d ff78ff84 ff60ff6c ff48ff54     ......x.l.`.T.H.
+    b674:	ff31ff3d ff1aff26 ff04ff0f feeffef9     =.1.&...........
+    b684:	fedafee4 fec6fed0 feb2febc fe9ffea9     ................
+    b694:	fe8efe96 fe7dfe85 fe6dfe75 fe5efe65     ......}.u.m.e.^.
+    b6a4:	fe50fe57 fe43fe49 fe37fe3d fe2cfe32     W.P.I.C.=.7.2.,.
+    b6b4:	fe23fe27 fe1afe1e fe13fe17 fe0dfe10     '.#.............
+    b6c4:	fe08fe0a fe04fe06 fe02fe03 fe01fe01     ................
+    b6d4:	fe01fe00 fe02fe01 fe04fe03 fe08fe06     ................
+    b6e4:	fe0dfe0a fe13fe10 fe1afe17 fe23fe1e     ..............#.
+    b6f4:	fe2cfe27 fe37fe32 fe43fe3d fe50fe49     '.,.2.7.=.C.I.P.
+    b704:	fe5efe57 fe6dfe65 fe7dfe75 fe8efe85     W.^.e.m.u.}.....
+    b714:	fe9ffe96 feb2fea9 fec6febc fedafed0     ................
+    b724:	feeffee4 ff04fef9 ff1aff0f ff31ff26     ............&.1.
+    b734:	ff48ff3d ff60ff54 ff78ff6c ff90ff84     =.H.T.`.l.x.....
+    b744:	ffa9ff9d ffc2ffb5 ffdbffce fff4ffe7     ................
+    b754:	41444956 00003a53 544e5550 003a534f     VIDAS:..PUNTOS:.
+    b764:	61736544 6c6f7272 50206f6c 74636172     Desarrollo Pract
+    b774:	206f6369 53206564 65747369 2073616d     ico de Sistemas 
+    b784:	63656c45 6e6f7274 736f6369 6e490a0d     Electronicos..In
+    b794:	696e6567 61697265 20656420 74736953     genieria de Sist
+    b7a4:	73616d65 656c4520 6f727463 6f63696e     emas Electronico
+    b7b4:	000a0d73 2d2d2f2f 2d2d2d2d 000a202d     s...//------- ..
+    b7c4:	736e6f63 6e752074 6e676973 63206465     const unsigned c
+    b7d4:	20726168 746e6f46 3d205d5b 00000a7b     har Font[] ={...
+    b7e4:	2c642520 202c6425 73202f2f 73202c78      %d,%d, // sx, s
+    b7f4:	00000a79 2c642520 20202020 78202f2f     y... %d,    // x
+    b804:	6574735f 00000a70 63252720 20202c27     _step... '%c',  
+    b814:	202f2f20 73726966 68635f74 000a7261      // first_char..
+    b824:	64332520 2f20202c 5f6e202f 72616863      %3d,  // n_char
+    b834:	00000a73 43202f2f 61726168 72657463     s...// Character
+    b844:	64332520 63252720 00000a27 00623020      %3d '%c'... 0b.
+    b854:	00000031 00000030 0000002c 2f0a3b7d     1...0...,...};./
+    b864:	2d2d2d2f 2d2d2d2d 00000a20 63756f54     /------- ...Touc
+    b874:	61502068 6c656e6e 6c614320 61726269     h Pannel Calibra
+    b884:	6e6f6974 00000000 3a643325 0d643325     tion....%3d:%3d.
+    b894:	0000000a 253e2d2d 253a6433 0a0d6433     ....-->%3d:%3d..
+    b8a4:	00000000 7274614d 64207a69 61632065     ....Matriz de ca
+    b8b4:	7262696c 6f696361 000a0d6e 3d206e41     libracion...An =
+    b8c4:	64382520 00000a0d 3d206e42 64382520      %8d....Bn = %8d
+    b8d4:	00000a0d 3d206e43 64382520 00000a0d     ....Cn = %8d....
+    b8e4:	3d206e44 64382520 00000a0d 3d206e45     Dn = %8d....En =
+    b8f4:	64382520 00000a0d 3d206e46 64382520      %8d....Fn = %8d
+    b904:	00000a0d 20766944 3725203d 000a0d64     ....Div = %7d...
+    b914:	204d5058 656c6170 20657474 6f727265     XPM palette erro
+    b924:	25282072 6f632064 73726f6c 00000a29     r (%d colors)...
+    b934:	2d2d0a0d 5249202d 53202c51 69727570     ..--- IRQ, Spuri
+    b944:	2073756f 65746e69 70757272 000a0d74     ous interrupt...
+    b954:	64382520 0000000a 20383832 20383631      %8d....288 168 
+    b964:	31203436 00000020 20632020 30303023     64 1 ...  c #000
+    b974:	00303030 2063202e 30303023 00363130     000.. c #000016.
+    b984:	20632058 30313123 00413044 2063206f     X c #110D0A.o c 
+    b994:	31433223 00383032 2063204f 30303023     #2C1208.O c #000
+    b9a4:	00463330 2063202b 30303123 00393246     03F.+ c #100F29.
+    b9b4:	20632040 32343223 00423243 20632023     @ c #242C2B.# c 
+    b9c4:	32323523 00393044 20632024 31343623     #522D09.$ c #641
+    b9d4:	00303141 20632025 34433623 00443045     A10.% c #6C4E0D.
+    b9e4:	20632026 31413123 00323538 2063202a     & c #1A1852.* c 
+    b9f4:	35323023 00373537 2063203d 37333023     #025757.= c #037
+    ba04:	00303730 2063202d 35353223 00373643     070.- c #255C67.
+    ba14:	2063203b 35443523 00313644 2063203a     ; c #5D5D61.: c 
+    ba24:	33383423 00313735 2063203e 30413823     #483571.> c #8A0
+    ba34:	00313032 2063202c 30393923 00373043     201., c #990C07.
+    ba44:	2063203c 31434123 00313145 20632031     < c #AC1E11.1 c 
+    ba54:	32424323 00393133 20632032 36353923     #CB2319.2 c #956
+    ba64:	00373037 20632033 34434323 00313142     707.3 c #CC4B11.
+    ba74:	20632034 35314523 00323144 20632035     4 c #E15D12.5 c 
+    ba84:	35354123 00383541 20632036 35364423     #A55A58.6 c #D65
+    ba94:	00353541 20632037 36374623 00393641     A55.7 c #F76A69.
+    baa4:	20632038 36384423 00343644 20632039     8 c #D86D64.9 c 
+    bab4:	33453823 00313438 20632030 39424223     #8E3841.0 c #BB9
+    bac4:	00313035 20632071 38444123 00313037     501.q c #AD8701.
+    bad4:	20632077 39354223 00383231 20632065     w c #B59128.e c 
+    bae4:	41364523 00373137 20632072 43384623     #E6A717.r c #F8C
+    baf4:	00333245 20632074 42424423 00373632     E23.t c #DBB267.
+    bb04:	20632079 31393023 00314135 20632075     y c #0915A1.u c 
+    bb14:	33383423 00423841 20632069 33353623     #483A8B.i c #653
+    bb24:	00373846 20632070 36383023 00303946     F87.p c #086F90.
+    bb34:	20632061 35433623 00413932 20632073     a c #6C529A.s c 
+    bb44:	32303023 00394537 20632064 33303023     #0027E9.d c #003
+    bb54:	00374639 20632066 32443023 00464337     9F7.f c #0D27CF.
+    bb64:	20632067 34303023 00464632 20632068     g c #0042FF.h c 
+    bb74:	34343323 00464344 2063206a 36363523     #344DCF.j c #566
+    bb84:	00314444 2063206b 35373823 00334239     DD1.k c #8759B3.
+    bb94:	2063206c 37464123 00384245 2063207a     l c #AF7EB8.z c 
+    bba4:	38353023 00463846 20632078 42353023     #058F8F.x c #05B
+    bbb4:	00304230 20632063 39463223 00334143     0B0.c c #2F9CA3.
+    bbc4:	20632076 42393523 00334430 20632062     v c #59B0D3.b c 
+    bbd4:	41443423 00464135 2063206e 39393923     #4DA5AF.n c #999
+    bbe4:	00374138 2063206d 38364623 00373837     8A7.m c #F68787.
+    bbf4:	2063204d 42464523 00464130 2063204e     M c #EFB0AF.N c 
+    bc04:	44394623 00364143 20632042 41364123     #F9DCA6.B c #A6A
+    bc14:	00304434 20632056 43414323 00414441     4D0.V c #CACADA.
+    bc24:	20632043 43424623 00424342 2063205a     C c #FBCBCB.Z c 
+    bc34:	46444623 00434644 20632041 45434523     #FDFDFC.A c #ECE
+    bc44:	00454544 20632053 44444423 00324543     DEE.S c #DDDCE2.
+    bc54:	20632044 43434223 00374437 20632046     D c #BCC7D7.F c 
+    bc64:	38423123 00443730 20202020 2e202020     #1B807D.       .
+    bc74:	6f6f6f20 58406f24 20202020 20202020      ooo$o@X        
+    bc84:	20202020 2e202020 6f6f6f20 58406f24            . ooo$o@X
+    bc94:	20202020 20202020 20202020 20202020                     
+    bca4:	23232358 2e232323 20202020 20202020     X######.        
+    bcb4:	20202020 20202020 23232358 2e232323             X######.
+    bcc4:	20202020 20202020 20202020 20202020                     
+    bcd4:	3a232358 58402323 20202020 20202020     X##:##@X        
+    bce4:	20202020 20202020 3a232358 58402323             X##:##@X
+    bcf4:	20202020 20202020 20202020 20202020                     
+    bd04:	40404020 2e404040 20202020 20202020      @@@@@@.        
+    bd14:	20202020 20202020 40404020 2e404040              @@@@@@.
+    bd24:	20202020 20202020 20202020 58202020                    X
+    bd34:	26264020 5826403a 20202020 20202020      @&&:@&X        
+    bd44:	20202020 20202020 3a264020 20403a40              @&:@:@ 
+    bd54:	20202020 20202020 20202020 20202020                     
+    bd64:	20202020 20202020 20202020 20202020                     
+    bd74:	20202020 20202020 20202020 20202020                     
+    bd84:	20202020 20202020 00000000 20202020             ....    
+    bd94:	6f202020 36363124 24393935 2020206f        o$166599$o   
+    bda4:	20202020 20202020 6f202020 36363124                o$166
+    bdb4:	24393935 2020206f 20202020 20202020     599$o           
+    bdc4:	23202020 72726525 24347765 2020206f        #%errew4$o   
+    bdd4:	20202020 20202020 23202020 72726525                #%err
+    bde4:	24347765 2020206f 20202020 20202020     ew4$o           
+    bdf4:	40202020 4d434d35 39374d4d 20202024        @5MCMMM79$   
+    be04:	20202020 20202020 40202020 4d434d35                @5MCM
+    be14:	39374d4d 20205824 20202020 20202020     MM79$X          
+    be24:	40202020 6262622d 2a636362 20202058        @-bbbbcc*X   
+    be34:	20202020 20202020 40202020 6262622d                @-bbb
+    be44:	2a636362 20202058 20202020 20202020     bcc*X           
+    be54:	40202020 42426c3b 266b6e6c 2020202b        @;lBBlnk&+   
+    be64:	20202020 20202020 40202020 42426c3b                @;lBB
+    be74:	26616c6c 2020202b 20202020 20202020     lla&+           
+    be84:	20202020 20202020 20202020 20202020                     
+    be94:	20202020 20202020 20202020 20202020                     
+    bea4:	20202020 20202020 20202020 00000000                 ....
+    beb4:	20202020 38356f20 2c31366d 3e3e3e2c          o58m61,,>>>
+    bec4:	2058243e 20202020 20202020 38356f20     >$X          o58
+    bed4:	2c31366d 3e3e3e2c 2058243e 20202020     m61,,>>>>$X     
+    bee4:	20202020 74746f20 3472724e 34343434          ottNrr44444
+    bef4:	20582c3c 20202020 20202020 74746f20     <,X          ott
+    bf04:	3472724e 34343434 20582c3c 20202020     Nrr44444<,X     
+    bf14:	20202020 4d356f20 6d4d4343 37373737          o5MCCMm7777
+    bf24:	2e6f3936 20202020 20202020 4d355820     69o.         X5M
+    bf34:	6d4d4343 37373737 20583936 20202020     CCMm777769X     
+    bf44:	20202020 766e2b2e 78627676 3d3d7a7a         .+nvvvbxzz==
+    bf54:	20202a2a 20202020 20202020 766e2b20     **           +nv
+    bf64:	78627676 3d3d7a7a 20202a2a 20202020     vvbxzz==**      
+    bf74:	20202020 426e2b20 6b6c4456 7575616b          +nBVDlkkauu
+    bf84:	20582675 20202020 20202020 426e2b20     u&X          +nB
+    bf94:	6b6c4453 7575616b 20582675 20202020     SDlkkauuu&X     
+    bfa4:	20202020 58582020 32323225 58253232           XX%22222%X
+    bfb4:	20202020 20202020 20202020 58582020                   XX
+    bfc4:	32323225 58253232 20202058 20202020     %22222%XX       
+    bfd4:	00000000 20202020 43566e2b 2c2c364d     ....    +nVCM6,,
+    bfe4:	3e3e3e3e 20243e3e 20202020 20202020     >>>>>>$         
+    bff4:	43566e2b 2c2c364d 3e3e3e3e 58243e3e     +nVCM6,,>>>>>>$X
+    c004:	20202020 20202020 415a6e40 3465724e             @nZANre4
+    c014:	34343434 6f2c3333 20202020 20202020     444433,o        
+    c024:	415a6e40 3465724e 34343434 6f2c3333     @nZANre4444433,o
+    c034:	20202020 20202020 43436e6f 6d6d4d43             onCCCMmm
+    c044:	3737376d 58353737 20202020 20202020     m777775X        
+    c054:	4343742b 6d6d4d43 3737376d 58353737     +tCCCMmmm777775X
+    c064:	20202020 20202020 56416e2b 7a787644             +nAVDvxz
+    c074:	3d707a7a 582a3d3d 20202020 20202020     zzp===*X        
+    c084:	5641422b 7a787644 3d707a7a 582a3d3d     +BAVDvxzzzp===*X
+    c094:	20202020 20202020 415a426f 6b6b4253             oBZASBkk
+    c0a4:	7575616b 583a7575 20202020 20202020     kauuuu:X        
+    c0b4:	415a426f 6b6b4256 7575616b 583a7575     oBZAVBkkkauuuu:X
+    c0c4:	20202020 20202020 30255820 30656565              X%0eee0
+    c0d4:	71303030 20585825 20202020 20202020     000q%XX         
+    c0e4:	30255820 30656565 71303030 58585823      X%0eee0000q#XXX
+    c0f4:	20202020 00000000 20202020 43564325         ....    %CVC
+    c104:	3e2c3c37 3e3e3e3e 6f243e3e 20202020     7<,>>>>>>>$o    
+    c114:	20202020 43564325 3e2c3c37 3e3e3e3e         %CVC7<,>>>>>
+    c124:	6f3e3e3e 20202020 20202020 5a5a413b     >>>o        ;AZZ
+    c134:	34346574 33343334 24313133 20202020     te444343311$    
+    c144:	20202020 5a5a413b 34346574 33343334         ;AZZte444343
+    c154:	24313133 20202020 20202020 43434335     311$        5CCC
+    c164:	6d6d6d4d 37373737 24363737 20202020     Mmmm7777776$    
+    c174:	20202020 43434335 6d6d6d4d 37373737         5CCCMmmm7777
+    c184:	24363737 20202020 20202020 5641533b     776$        ;SAV
+    c194:	78787842 3d3d7a7a 402a3d3d 20202020     Bxxxzz====*@    
+    c1a4:	20202020 5641533b 78787842 3d3d7a7a         ;SAVBxxxzz==
+    c1b4:	402a3d3d 20202020 20202020 415a5a3b     ==*@        ;ZZA
+    c1c4:	6b6b6b56 7575616b 26757575 20202020     Vkkkkauuuuu&    
+    c1d4:	20202020 415a5a3b 6b6b6b56 7575616b         ;ZZAVkkkkauu
+    c1e4:	26757575 20202020 20202020 7265306f     uuu&        o0er
+    c1f4:	30656572 30303030 58232571 20202020     ree00000q%#X    
+    c204:	20202020 7265306f 30656572 30303030         o0erree00000
+    c214:	58232571 20202020 00000000 6f202020     q%#X    ....   o
+    c224:	4d434d36 3e2c3136 2c2c3e3e 233e3e3e     6MCM61,>>>,,>>>#
+    c234:	20202058 6f202020 4d434d36 3e2c3136     X      o6MCM61,>
+    c244:	2c2c3e3e 23243e3e 20202058 6f582020     >>,,>>$#X     Xo
+    c254:	4e5a4e74 34656572 34343434 2c313333     tNZNree44444331,
+    c264:	2020206f 6f202020 4e5a4e74 34656572     o      otNZNree4
+    c274:	34343434 2c313333 2020206f 40582020     4444331,o     X@
+    c284:	4e43434d 6d6d6d6d 3737376d 36363737     MCCNmmmmm7777766
+    c294:	2020206f 40202020 4343434d 6d6d6d6d     o      @MCCCmmmm
+    c2a4:	3737376d 36363737 2020206f 40202020     m7777766o      @
+    c2b4:	42564463 7a7a7876 7a7a7a7a 2a2a3d3d     cDVBvxzzzzzz==**
+    c2c4:	20202058 40202020 42564463 7a7a7876     X      @cDVBvxzz
+    c2d4:	7a7a7a7a 2a2a3d3d 20202058 40202020     zzzz==**X      @
+    c2e4:	53415342 6b6b6b6c 6975616b 75757575     BSASlkkkkauiuuuu
+    c2f4:	2020202b 40202020 53415342 6b6b6b6c     +      @BSASlkkk
+    c304:	7575616b 75757575 2020202b 6f202020     kauuuuuu+      o
+    c314:	4e4e7430 65657274 30256f32 6f257130     0tNNtree2o%00q%o
+    c324:	20202020 6f202020 4e4e7430 65657274            o0tNNtree
+    c334:	30256f32 6f257130 20202020 00000000     2o%00q%o    ....
+    c344:	24202020 436d6d31 3e354d43 534d393e        $1mmCCM5>>9MS
+    c354:	243e394d 2020206f 24202020 436d6d31     M9>$o      $1mmC
+    c364:	3e354d43 534d393e 243e394d 2020206f     CM5>>9MSM9>$o   
+    c374:	25202020 4e4e4e72 34384341 434d7434        %rNNNAC844tMC
+    c384:	3c31334d 20202024 25202020 4e4e4e72     M31<$      %rNNN
+    c394:	34384341 434d7434 3c31334d 20202024     AC844tMCM31<$   
+    c3a4:	3b202020 41434343 6d4d4341 43436d37        ;CCCAACMm7mCC
+    c3b4:	3836374d 20202024 3b202020 41434343     M768$      ;CCCA
+    c3c4:	6d4d4341 43436d37 36363743 20202e24     ACMm7mCCC766$.  
+    c3d4:	2a202020 53444276 7a784441 5344627a        *vBDSADxzzbDS
+    c3e4:	3d2a6344 20202040 2a202020 53444276     Dc*=@      *vBDS
+    c3f4:	7a784441 5344627a 3d2a6344 20202040     ADxzzbDSDc*=@   
+    c404:	3a202020 53565642 6b6b5641 53566b6b        :BVVSAVkkkkVS
+    c414:	75756144 20202040 3a202020 53565642     Dauu@      :BVVS
+    c424:	6b6b5641 53566b6b 75756144 20202040     AVkkkkVSDauu@   
+    c434:	25202020 5a5a4e72 3072724e 30585858        %rNZZNrr0XXX0
+    c444:	25713030 20202058 25202020 5a5a4e72     00q%X      %rNZZ
+    c454:	6565724e 30582058 23713030 20202058     NreeX X000q#X   
+    c464:	00000000 3c582020 5a433731 394d5641     ....  X<17CZAVM9
+    c474:	535a563c 242c6e53 20202024 3c582020     <VZSSn,$$     X<
+    c484:	5a433731 394d5641 535a563c 242c6e56     17CZAVM9<VZSVn,$
+    c494:	20205824 65582020 5a4e4e72 34435641     $X    XerNNZAVC4
+    c4a4:	535a4334 31316d56 2020202c 72582020     4CZSVm11,     Xr
+    c4b4:	5a4e4e72 34435641 535a4334 31316d56     rNNZAVC44CZSVm11
+    c4c4:	2020202c 4d582020 5a414343 6d435641     ,     XMCCAZAVCm
+    c4d4:	535a436d 36384d56 20205833 4d582020     mCZSVM863X    XM
+    c4e4:	5a414343 6d435641 535a436d 36384d56     CCAZAVCmmCZSVM86
+    c4f4:	20205833 782e2020 5a537676 7a444441     3X    .xvvSZADDz
+    c504:	535a5363 2a3d4256 2020582a 78582020     cSZSVB=**X    Xx
+    c514:	5a537676 7a444441 535a5363 2a3d4256     vvSZADDzcSZSVB=*
+    c524:	20202e2a 61582020 5a53446c 6b565653     *.    XalDSZSVVk
+    c534:	535a566b 75754256 20202e75 61582020     kVZSVBuuu.    Xa
+    c544:	5a41446c 6b565653 535a566b 75754256     lDAZSVVkkVZSVBuu
+    c554:	20202e75 30582020 5a5a4e72 65727243     u.    X0rNZZCrre
+    c564:	306f5823 32303030 2020206f 30582020     #Xo00002o     X0
+    c574:	5a5a4e72 65727243 30235823 71303030     rNZZCrre#X#0000q
+    c584:	2020206f 00000000 3c582020 41413831     o   ....  X<18AA
+    c594:	393b403b 3b565a39 24246e40 20205823     ;@;99ZV;@n$$#X  
+    c5a4:	31582020 41413831 3961403b 3b565a39       X118AA;@a99ZV;
+    c5b4:	233e6e40 20202023 72582020 535a7272     @n>##     XrrrZS
+    c5c4:	343b403b 3b565a65 3c316e40 2020582c     ;@;4eZV;@n1<,X  
+    c5d4:	65582020 415a7272 346b403b 3b565a38       XerrZA;@k48ZV;
+    c5e4:	3c316e40 20206f2c 4d2b2020 415a4343     @n1<,o    +MCCZA
+    c5f4:	6d3b403b 3b565a4d 36386e40 20202033     ;@;mMZV;@n863   
+    c604:	4d2b2020 415a4343 6d61403b 3a565a4d       +MCCZA;@amMZV:
+    c614:	36386e40 20205833 78405858 41417676     @n863X  XX@xvvAA
+    c624:	633b403b 3b565a62 2a2d6240 2020582a     ;@;cbZV;@b-**X  
+    c634:	78405858 41417676 6361403b 2d445a62     XX@xvvAA;@acbZD-
+    c644:	2a3d6240 2020202a 6b582020 415a446c     @b=**     XklDZA
+    c654:	6b612669 3b565a42 75756e40 20202e75     i&akBZV;@nuuu.  
+    c664:	6b2e2020 415a446c 6b614061 3a565a6c       .klDZAa@aklZV:
+    c674:	75756e40 20202075 65252020 434e4e72     @nuuu     %erNNC
+    c684:	6565724e 30323230 71303030 20202023     Nree0220000q#   
+    c694:	65252020 434e4e72 6565724e 30713230       %erNNCNree02q0
+    c6a4:	6f257130 20202058 00000000 31582020     0q%oX   ....  X1
+    c6b4:	565a3833 393b2040 586e5a39 24243b20     38ZV@ ;99ZnX ;$$
+    c6c4:	20202024 3c582020 565a3831 393b2040     $     X<18ZV@ ;9
+    c6d4:	58425a39 242c3b20 20202023 65582020     9ZBX ;,$#     Xe
+    c6e4:	44417272 352d2040 586e5a37 31313b20     rrAD@ -57ZnX ;11
+    c6f4:	2020582c 72585820 445a7272 362d2040     ,X   XXrrrZD@ -6
+    c704:	586e5a65 3c313b58 2020582c 4d2b2020     eZnXX;1<,X    +M
+    c714:	445a4343 6e2d2040 586e5a4d 36383b20     CCZD@ -nMZnX ;86
+    c724:	20205833 4d582020 445a4343 6d2d2040     3X    XMCCZD@ -m
+    c734:	58425a4d 36363b20 20205833 78585858     MZBX ;663X  XXXx
+    c744:	565a4276 632d2040 586e5a62 2a2a3b58     vBZV@ -cbZnXX;**
+    c754:	2020582a 78585820 565a4276 782d2040     *X   XXxvBZV@ -x
+    c764:	58425a63 2a3d3b58 2020582a 612e2020     cZBXX;=**X    .a
+    c774:	565a4442 613b5840 586e5a6e 75753b58     BDZV@X;anZnXX;uu
+    c784:	20205875 612e5820 565a446c 6b3b5826     uX   X.alDZV&X;k
+    c794:	58425a6c 75753b20 20202075 65322020     lZBX ;uuu     2e
+    c7a4:	72727265 65657272 30303030 71303030     errrrree0000000q
+    c7b4:	20205825 65322020 72727265 65657272     %X    2eerrrrree
+    c7c4:	25323030 58585823 20202020 00000000     002%#XXX    ....
+    c7d4:	3c582020 41563831 24613b6e 3b535339       X<18VAn;a$9SS;
+    c7e4:	242c6e3b 20202023 3c582020 41563836     ;n,$#     X<68VA
+    c7f4:	393b3b6e 3b53533c 23246e3b 20205824     n;;9<SS;;n$#$X  
+    c804:	72582020 41567272 33613b6e 3b535336       XrrrVAn;a36SS;
+    c814:	3c31613b 2020582c 65582020 41447272     ;a1<,X    XerrDA
+    c824:	336e3b6e 3b535336 3131353b 2020582c     n;n36SS;;511,X  
+    c834:	4d582020 41564343 6d613b6e 3b53536d       XMCCVAn;ammSS;
+    c844:	36366e3b 20205833 4d582020 41444343     ;n663X    XMCCDA
+    c854:	6d6e2d6e 3b41536d 36366e3b 20205833     n-nmmSA;;n663X  
+    c864:	78582020 41567676 7a612d6e 3b535363       XxvvVAn-azcSS;
+    c874:	3d3d623b 2020202a 78582020 41567676     ;b==*     XxvvVA
+    c884:	7a6e3b6e 3b535363 2a2a6e3b 2020202a     n;nzcSS;;n***   
+    c894:	612e2020 5a56426c 61613b6c 3b53536b       .alBVZl;aakSS;
+    c8a4:	7575623b 20202e75 612e2020 5a564242     ;buuu.    .aBBVZ
+    c8b4:	616e3b6e 3b41536b 7575623b 20202e3a     n;nakSA;;buu:.  
+    c8c4:	65322020 65726565 30656565 30303030       2eeereeee00000
+    c8d4:	32303030 20205825 65322020 65726565     0002%X    2eeere
+    c8e4:	71656565 20582325 20202020 20202020     eeeq%#X         
+    c8f4:	00000000 31582020 53613831 246e5341     ....  X118aSASn$
+    c904:	41416e24 24243b53 20205824 31582020     $nAAS;$$$X    X1
+    c914:	533b3631 246e5653 41416e24 24243b56     16;SSVn$$nAAV;$$
+    c924:	20202024 74582020 536e7272 336e5341     $     XtrrnSASn3
+    c934:	415a6e32 31313b4d 20206f2c 72582020     2nZAM;11,o    Xr
+    c944:	53357472 326e5653 41416e33 3c313b56     rt5SSVn23nAAV;1<
+    c954:	2020582c 4d582020 536e4343 386e5341     ,X    XMCCnSASn8
+    c964:	41416e38 36366156 20205833 4d582020     8nAAVa663X    XM
+    c974:	416e4343 386e4441 41416e38 36356156     CCnAADn88nAAVa56
+    c984:	20205833 78582020 53617676 7a6e5341     3X    XxvvaSASnz
+    c994:	415a6e7a 2a2a6156 2020582a 78582020     znZAVa***X    Xx
+    c9a4:	41627676 466e5653 41416e7a 2a2a6156     vvbASVnFznAAVa**
+    c9b4:	2020582a 612e2020 53614242 616e5341     *X    .aBBaSASna
+    c9c4:	41416e61 75756153 20202075 612e2020     anAASauuu     .a
+    c9d4:	53614242 616e5653 41416e61 75756153     BBaSSVnaanAASauu
+    c9e4:	20202e75 30322020 65656530 23233265     u.    200eeee2##
+    c9f4:	23232323 23232323 2020206f 30322020     ########o     20
+    ca04:	65656565 23233265 20202058 20202020     eeeee2##X       
+    ca14:	20202020 00000000 31582020 23243636         ....  X166$#
+    ca24:	3e233b3b 3b3b243e 24246f25 20205824     ;;#>>$;;%o$$$X  
+    ca34:	31582020 3b243631 24243b3b 3b3b6f3e       X116$;;;$$>o;;
+    ca44:	24246f25 20205824 72582020 25397272     %o$$$X    Xrrr9%
+    ca54:	33233b3b 3b3b2333 3c312423 2020582c     ;;#33#;;#$1<,X  
+    ca64:	72582020 3b397272 33243b3b 3b3b2333       Xrrr9;;;$33#;;
+    ca74:	31312423 2020582c 4d582020 40354343     #$11,X    XMCC5@
+    ca84:	38243b3b 3b3b2338 3636243b 20205833     ;;$88#;;;$663X  
+    ca94:	43582020 40354343 38233b3b 3b3b2338       XCCC5@;;#88#;;
+    caa4:	36362525 20205833 78582020 3b2d7676     %%663X    Xxvv-;
+    cab4:	7a2a3b3b 3b3b2a7a 2a2a403b 2020202a     ;;*zz*;;;@***   
+    cac4:	78582020 3b637676 7a2a3b3b 3b3b407a       Xxvvc;;;*zz@;;
+    cad4:	2a2a2a25 2020582a 61582020 3b3a4242     %****X    XaBB:;
+    cae4:	613a3b3b 3b3b2661 75752625 20202e75     ;;:aa&;;%&uuu.  
+    caf4:	61582020 3b75426c 6b263b3b 3b3b4061       XalBu;;;&ka@;;
+    cb04:	7575403b 20202e75 30322020 30303030     ;@uuu.    200000
+    cb14:	71717130 71717171 25327171 20205825     0qqqqqqqqq2%%X  
+    cb24:	30322020 30303030 32323030 20586f23       2000000022#oX 
+    cb34:	20202020 20202020 00000000 3c582020             ....  X<
+    cb44:	24333631 2c246f6f 206f243e 243e246f     163$oo$,>$o o$>$
+    cb54:	20205824 3c582020 24333633 3e246f6f     $X    X<363$oo$>
+    cb64:	586f242c 233e246f 20205823 65582020     ,$oXo$>##X    Xe
+    cb74:	23657272 3432236f 6f233c34 3c313c24     rre#o#244<#o$<1<
+    cb84:	2020202c 65582020 25657274 3433236f     ,     Xetre%o#34
+    cb94:	6f6f3c33 31313c24 2020582c 43582020     3<oo$<11,X    XC
+    cba4:	396d4343 6d352440 6f23356d 36363624     CCm9@$5mm5#o$666
+    cbb4:	20205833 4d582020 396d4343 6d35236f     3X    XMCCm9o#5m
+    cbc4:	6f24356d 36363623 20205833 782b2020     m5$o#6663X    +x
+    cbd4:	2a787676 7a3d4040 58402a7a 2a2a2a2b     vvx*@@=zz*@X+***
+    cbe4:	2020582a 782b2020 3d787676 7a3d4040     *X    +xvvx=@@=z
+    cbf4:	58402a7a 3d2a2a2b 2020582a 6b582020     z*@X+**=*X    Xk
+    cc04:	266b426c 6b3a2b40 2b40756b 75753a26     lBk&@+:kku@+&:uu
+    cc14:	2020583a 6b2e2020 266b4242 6b3a402b     :X    .kBBk&+@:k
+    cc24:	2b2b3a6b 75753a40 20202e75 30322020     k:++@:uuu.    20
+    cc34:	30303030 30307130 30303030 25257130     00000q0000000q%%
+    cc44:	20205825 30322020 30303030 30303030     %X    2000000000
+    cc54:	25253030 5820206f 20202020 00000000     00%%o  X    ....
+    cc64:	31582020 2c313633 3e2c2c2c 24243e3e       X1361,,,,>>>$$
+    cc74:	243e3e24 20202024 31582020 2c313631     $>>$$     X1161,
+    cc84:	3e2c2c2c 243e2c3e 243e3e24 20205824     ,,,>>,>$$>>$$X  
+    cc94:	72582020 65657272 34346530 33333334       Xrrree0e444333
+    cca4:	3c313331 2020582c 72582020 34727272     131<,X    Xrrrr4
+    ccb4:	33346530 33333434 3c3c3333 2020582c     0e43443333<<,X  
+    ccc4:	4d2b2020 6d4d4343 6d376d38 3638376d       +MCCMm8m7mm786
+    ccd4:	36383736 20205833 4d402020 6d4d4343     67863X    @MCCMm
+    cce4:	6d6d6d38 36363737 36363736 202e5833     8mmm776667663X. 
+    ccf4:	78585858 78787676 7a7a7a78 3d3d7a7a     XXXxvvxxxzzzzz==
+    cd04:	2a3d3d3d 2020582a 78585858 78787676     ===**X  XXXxvvxx
+    cd14:	7a787a7a 3d3d7a7a 2a2a3d3d 2020582a     zzxzzz====***X  
+    cd24:	612e2020 6b42446c 6b616161 3a75616b       .alDBkaaakkau:
+    cd34:	75757575 20202075 6b2e2020 6b42446c     uuuuu     .klDBk
+    cd44:	6b616161 7575616b 75757575 20202075     aaakkauuuuuuu   
+    cd54:	30252020 30303030 30303030 30303030       %0000000000000
+    cd64:	32323230 20202023 30252020 30303030     0222#     %00000
+    cd74:	30303030 30303030 58232571 20202020     00000000q%#X    
+    cd84:	00000000 3c582020 3c313631 3e2c2c3c     ....  X<161<<,,>
+    cd94:	2c3e3e3e 243e3e3e 20202023 3c582020     >>>,>>>$#     X<
+    cda4:	3c313633 3e2c2c3c 3e3e3e3e 243e3e3e     361<<,,>>>>>>>>$
+    cdb4:	20202023 65582020 65727272 34346565     #     Xerrreee44
+    cdc4:	33343434 31313133 2020582c 72582020     44433111,X    Xr
+    cdd4:	65727272 34656565 33333434 2c313333     rrreeee44433331,
+    cde4:	2020582c 43402020 6d4d4343 6d6d6d6d     ,X    @CCCMmmmmm
+    cdf4:	3737376d 36363737 20205833 4d402020     m77777663X    @M
+    ce04:	6d4d4343 6d6d6d6d 3737376d 36363737     CCMmmmmmm7777766
+    ce14:	20202e33 78585858 78787676 7a787878     3.  XXXxvvxxxxxz
+    ce24:	3d7a7a7a 2a2a3d3d 2020582a 78585858     zzz===***X  XXXx
+    ce34:	78787676 7a787878 3d7a7a7a 2a2a3d3d     vvxxxxxzzzz===**
+    ce44:	2020582a 6b582020 6b42446c 6b6b6b6b     *X    XklDBkkkkk
+    ce54:	7575616b 75757575 20202e75 61582020     kauuuuuuu.    Xa
+    ce64:	6b42426c 6b6b6b6b 7575616b 75757575     lBBkkkkkkauuuuuu
+    ce74:	20202e3a 71582020 30303030 30303030     :.    Xq00000000
+    ce84:	30303030 25253232 2020206f 71582020     000022%%o     Xq
+    ce94:	30303030 30303030 30303030 25252532     0000000000002%%%
+    cea4:	2020206f 00000000 31582020 3c313631     o   ....  X1161<
+    ceb4:	2c2c3c3c 3e3e3e2c 24243e3e 20205823     <<,,,>>>>>$$#X  
+    cec4:	3c582020 3c313631 3e2c3c3c 3e3e3e3e       X<161<<<,>>>>>
+    ced4:	242c3e3e 20205824 72582020 65727272     >>,$$X    Xrrrre
+    cee4:	34346565 34343434 3c313133 2020582c     ee444444311<,X  
+    cef4:	656f2020 65657272 34346565 33343433       oerreeee443443
+    cf04:	31313133 2020582c 4d2b2020 6d4d4343     3111,X    +MCCMm
+    cf14:	6d6d6d6d 37373737 36363637 20205831     mmmm777776661X  
+    cf24:	43402020 6d4d4343 6d6d6d6d 37363637       @CCCMmmmmm7667
+    cf34:	36363737 20205833 78582020 78787676     77663X    Xxvvxx
+    cf44:	7a787878 3d3d7a7a 2a2a3d3d 2020582a     xxxzzz====***X  
+    cf54:	78582020 78787676 78787878 3d7a7a7a       Xxvvxxxxxxzzz=
+    cf64:	3d2a3d3d 2020582a 61582020 6b42446c     ==*=*X    XalDBk
+    cf74:	6b6b6b6b 7575696b 75757575 20582b75     kkkkkiuuuuuuu+X 
+    cf84:	61582020 6b42446c 6b6b6b6b 7575616b       XalDBkkkkkkauu
+    cf94:	75757575 20205875 23202020 30303030     uuuuuX     #0000
+    cfa4:	30303030 32303030 23322532 20202058     000000022%2#X   
+    cfb4:	23202020 30303071 30303030 32713030        #q000000000q2
+    cfc4:	23322532 20202058 00000000 31582020     2%2#X   ....  X1
+    cfd4:	2c313631 2c2c3c3c 3e3e3e3e 243e3e3e     161,<<,,>>>>>>>$
+    cfe4:	20205823 3c582020 3c313631 3e2c3c3c     #X    X<161<<<,>
+    cff4:	3e3e3e3e 233e3e3e 20202023 65582020     >>>>>>>##     Xe
+    d004:	65727272 34346565 34343434 3c313333     rrreee444444331<
+    d014:	2020582c 72582020 65727272 34346565     ,X    Xrrrreee44
+    d024:	34343434 3c313133 2020582c 4d402020     4444311<,X    @M
+    d034:	6d4d4343 6d6d6d6d 37373737 36363737     CCMmmmmm77777766
+    d044:	20205833 4d2b2020 6d4d4343 6d6d6d37     3X    +MCCMm7mmm
+    d054:	37373737 36363737 20205833 78582020     777777663X    Xx
+    d064:	78787676 7a787878 3d7a7a7a 2a2a3d3d     vvxxxxxzzzz===**
+    d074:	2020582a 782b2020 78767676 7a7a7878     *X    +xvvvxxxzz
+    d084:	3d7a7a7a 2a2a3d3d 2020582a 6b2e2020     zzz===***X    .k
+    d094:	6b42446c 6b6b6b6b 7575696b 75757575     lDBkkkkkkiuuuuuu
+    d0a4:	20202b75 61582020 6b42446c 6b6b6b6b     u+    XalDBkkkkk
+    d0b4:	7575616b 75757575 20202e3a 6f202020     kauuuuuu:.     o
+    d0c4:	30303025 30303030 25323030 6f253225     %0000000002%%2%o
+    d0d4:	20202020 6f202020 30303032 30303030            o20000000
+    d0e4:	32323030 6f253225 20202020 00000000     0022%2%o    ....
+    d0f4:	3c582020 3c333631 3e2c3c3c 3e3e3e3e       X<163<<<,>>>>>
+    d104:	243e3e2c 20205824 31582020 2c313631     ,>>$$X    X1161,
+    d114:	242c3c3c 3e3e2c24 233e3e3e 20202024     <<,$$,>>>>>#$   
+    d124:	72582020 65727272 34346565 34343434       Xrrrreee444444
+    d134:	3c313331 2020582c 72582020 65727272     131<,X    Xrrrre
+    d144:	33346565 33343433 31313133 2020582c     ee4334433111,X  
+    d154:	4d402020 6d434343 6d6d6d6d 37373737       @MCCCmmmmm7777
+    d164:	36363737 20205833 432b2020 6d4d4343     77663X    +CCCMm
+    d174:	386d6d6d 37373736 36363737 20205833     mmm8677777663X  
+    d184:	782b5858 78787676 78787878 3d3d7a7a     XX+xvvxxxxxxzz==
+    d194:	2a3d3d3d 2020202a 78582020 78787676     ===**     Xxvvxx
+    d1a4:	3d787878 3d3d7a3d 2a2a3d3d 2020582a     xxx==z====***X  
+    d1b4:	61582020 6b42446c 6b6b6b6b 7575616b       XalDBkkkkkkauu
+    d1c4:	75757575 20202e75 6b582020 6b42446c     uuuuu.    XklDBk
+    d1d4:	696b6b6b 75756161 75757575 20202e75     kkkiaauuuuuuu.  
+    d1e4:	20202020 3030256f 71303030 32253271         o%00000qq2%2
+    d1f4:	206f2532 20202020 20202020 3071256f     2%o         o%q0
+    d204:	71303030 25323232 586f2532 20202020     000q222%2%oX    
+    d214:	00000000 31582020 24243631 3e2c3c2c     ....  X116$$,<,>
+    d224:	3e3e3e3e 243e246f 20202023 3e202020     >>>>o$>$#      >
+    d234:	3c333636 583e3c3c 3e3e2458 243e3e3e     663<<<>XX$>>>>>$
+    d244:	2020206f 72582020 25327272 34346534     o     Xrrr2%4e44
+    d254:	31343434 31312424 20206f2c 32202020     4441$$11,o     2
+    d264:	65727272 58336565 33343c58 31313333     rrreee3XX<433311
+    d274:	20202024 4d2b2020 39354343 6d6d6d38     $     +MCC598mmm
+    d284:	3637376d 3636392c 20205833 35582020     m776,9663X    X5
+    d294:	6d4d4343 58366d6d 37373658 36363737     CCMmmm6XX6777766
+    d2a4:	20202039 78585858 2a3d7676 78787878     9   XXXxvv=*xxxx
+    d2b4:	3d7a7a7a 2a2a2a40 2020582a 7a582020     zzz=@****X    Xz
+    d2c4:	78787676 583d7878 3d7a3d20 2a2a3d3d     vvxxxx=X =z===**
+    d2d4:	2020202a 61582020 3a69426c 6b6b6b61     *     XalBi:akkk
+    d2e4:	7575696b 75752626 20205875 3a202020     kiuu&&uuuX     :
+    d2f4:	6b424242 2e696b6b 7575752e 75757575     BBBkkki..uuuuuuu
+    d304:	20202026 20202020 32256f20 32713271     &        o%2q2q2
+    d314:	25253225 20586f23 20202020 20202020     %2%%#oX         
+    d324:	32256f20 32323232 32252532 20206f23      o%222222%%2#o  
+    d334:	20202020 00000000 31582020 20202431         ....  X11$  
+    d344:	3e2c2c6f 6f3e3e3e 246f2020 20202024     o,,>>>>o  o$$   
+    d354:	20202020 3c313624 20583e31 3e245820         $61<1>X  X$>
+    d364:	233e3e3e 20202020 72582020 20582572     >>>#      Xrr%X 
+    d374:	34346523 24313433 2c242020 2020582c     #e44341$  $,,X  
+    d384:	58202020 65727232 586f3265 34335820        X2rree2oX X34
+    d394:	24313333 20202020 4d2b2020 20583b43     331$      +MC;X 
+    d3a4:	6d6d6d40 6f38376d 36232020 20205833     @mmmm78o  #63X  
+    d3b4:	58202020 6d4d436c 2e6f356d 37356f20        XlCMmm5o. o57
+    d3c4:	2c363737 20202058 78582020 20202d76     776,X     Xxv-  
+    d3d4:	7a787a40 2b3d7a7a 2a402020 2020582a     @zxzzz=+  @**X  
+    d3e4:	58202020 7878762d 20587a78 7a2a2e20        X-vxxxzX  .*z
+    d3f4:	2a2a3d3d 20202020 6b2e2020 20203a6c     ==**      .kl:  
+    d404:	6b6b6b2b 2b75616b 75402020 20202e3a     +kkkkau+  @u:.  
+    d414:	2e202020 6b42563b 202b696b 753a5820        .;VBkki+  X:u
+    d424:	3a757575 20202020 20202020 6f582020     uuu:          Xo
+    d434:	25252523 6f252525 20202058 20202020     #%%%%%%oX       
+    d444:	20202020 6f582020 25252523 6f232525           Xo#%%%%%#o
+    d454:	20202058 20202020 00000000 3c582020     X       ....  X<
+    d464:	20202024 3e2c6f20 206f243e 6f202020     $    o,>>$o    o
+    d474:	20202023 20202020 3c313958 20206f3e     #       X91<>o  
+    d484:	24582020 20243e3e 20202020 65582020       X$>>$       Xe
+    d494:	20202025 34342320 206f3134 24202020     %    #4441o    $
+    d4a4:	2020582c 20202020 65727720 20206f34     ,X       wre4o  
+    d4b4:	3c582020 20243c33 20202020 4d402020       X<3<$       @M
+    d4c4:	2020583b 6d384020 2024366d 242e2020     ;X   @8mm6$   .$
+    d4d4:	20205833 20202020 6d433558 20206f35     3X      X5Cm5o  
+    d4e4:	36582020 58393637 20202020 78582020       X6769X      Xx
+    d4f4:	2020202a 7a7a4020 202b3d7a 40202020     *    @zzz=+    @
+    d504:	2020582a 20202020 78786158 2020587a     *X      XaxxzX  
+    d514:	2a582020 20403d3d 20202020 61582020       X*==@       Xa
+    d524:	20202e26 6b614020 202b696b 26202020     &.   @akki+    &
+    d534:	20202e3a 20202020 6b426158 20202e69     :.      XaBki.  
+    d544:	3a2e2020 58267575 20202020 20202020       .:uu&X        
+    d554:	20202020 58585820 20202058 20202020          XXXX       
+    d564:	20202020 20202020 20202020 58585858                 XXXX
+    d574:	20585858 20202020 20202020 00000000     XXX         ....
+    d584:	6f582020 20202020 246f2020 20206f3e       Xo      o$>o  
+    d594:	20202020 2020206f 20202020 3e245820         o        X$>
+    d5a4:	20202058 58202020 20202424 20202020     X      X$$      
+    d5b4:	23582020 20202020 336f2020 20206f33       X#      o33o  
+    d5c4:	20202020 2020206f 20202020 71325820         o        X2q
+    d5d4:	2020206f 58202020 2020243c 20202020     o      X<$      
+    d5e4:	3b2b2020 20202020 6d242e20 20204038       +;     .$m8@  
+    d5f4:	20202020 20205823 20202020 35355820         #X       X55
+    d604:	2020206f 6f202020 20203936 20202020     o      o69      
+    d614:	2a582020 20202020 7a402020 20202b7a       X*      @zz+  
+    d624:	20202020 2020202b 20202020 7a3d5858         +       XX=z
+    d634:	2020202b 58202020 20202a2a 20202020     +      X**      
+    d644:	402e2020 20202020 6b6f2020 20202b61       .@      oka+  
+    d654:	20202020 2020202b 20202020 693b5858         +       XX;i
+    d664:	2020202b 2e202020 2020263a 20202020     +      .:&      
+    d674:	20202020 20202020 20202020 20202020                     
+    d684:	20202020 20202020 20202020 20202020                     
+    d694:	20202020 20202020 20202020 20202020                     
+    d6a4:	00000000 20202020 20202020 6f202020     ....           o
+    d6b4:	20202058 20202020 20202020 20202020     X               
+    d6c4:	58582020 20202020 20202020 20202058       XX        X   
+    d6d4:	20202020 20202020 20202020 6f202020                    o
+    d6e4:	2020206f 20202020 20202020 20202020     o               
+    d6f4:	58582020 20202020 20202020 2020586f       XX        oX  
+    d704:	20202020 20202020 20202020 6f2e2020                   .o
+    d714:	20205840 20202020 20202020 20202020     @X              
+    d724:	6f582020 20202020 20202020 20205858       Xo        XX  
+    d734:	20202020 20202020 20202020 2b582020                   X+
+    d744:	20202058 20202020 20202020 20202020     X               
+    d754:	58582058 20202020 20202020 20202058     X XX        X   
+    d764:	20202020 20202020 20202020 2b202020                    +
+    d774:	2020202b 20202020 20202020 20202020     +               
+    d784:	2b582020 20202020 20202020 20205858       X+        XX  
+    d794:	20202020 20202020 20202020 20202020                     
+    d7a4:	20202020 20202020 20202020 20202020                     
+    d7b4:	20202020 20202020 20202020 20202020                     
+    d7c4:	20202020 00000000 20202020 2e202020         ....       .
+    d7d4:	6f6f6f20 206f6f6f 20202020 20202020      oooooo         
+    d7e4:	20202020 2e202020 6f6f6f20 582b6f23            . ooo#o+X
+    d7f4:	20202020 20202020 20202020 20202020                     
+    d804:	23232320 20234023 20202020 20202020      ####@#         
+    d814:	20202020 20202020 23232358 20234023             X####@# 
+    d824:	20202020 20202020 20202020 20202020                     
+    d834:	3b406f58 58234023 20202020 20202020     Xo@;#@#X        
+    d844:	20202020 20202020 2340232e 2e23233a             .#@#:##.
+    d854:	20202020 20202020 20202020 20202020                     
+    d864:	40404058 20404040 20202020 20202020     X@@@@@@         
+    d874:	20202020 20202020 40404020 20404040              @@@@@@ 
+    d884:	20202020 20202020 20202020 20202020                     
+    d894:	40402b20 58262626 20202020 20202020      +@@&&&X        
+    d8a4:	20202020 20202020 26262b20 20403a40              +&&@:@ 
+    d8b4:	20202020 20202020 20202020 20202020                     
+    d8c4:	20202020 20202020 20202020 20202020                     
+    d8d4:	20202020 20202020 20202020 20202020                     
+    d8e4:	20202020 20202020 00000000 20202020             ....    
+    d8f4:	6f202020 36363624 24393935 2020206f        o$666599$o   
+    d904:	20202020 20202020 6f202020 35363124                o$165
+    d914:	24393935 2020206f 20202020 20202020     599$o           
+    d924:	23202020 72726532 25346565 2020206f        #2erree4%o   
+    d934:	20202020 20202020 23202020 72726532                #2err
+    d944:	25346565 2020206f 20202020 20202020     ee4%o           
+    d954:	40202020 4d434d35 396d6d4d 20202e6f        @5MCMMmm9o.  
+    d964:	20202020 20202020 40202020 4d434d35                @5MCM
+    d974:	39374d4d 20205824 20202020 20202020     MM79$X          
+    d984:	2b202020 6262623d 2a636362 20202058        +=bbbbcc*X   
+    d994:	20202020 20202020 40202020 6262622d                @-bbb
+    d9a4:	2a636363 20202058 20202020 20202020     ccc*X           
+    d9b4:	40202020 4242423b 266b6b6c 2020202b        @;BBBlkk&+   
+    d9c4:	20202020 20202020 40202020 42426e3b                @;nBB
+    d9d4:	26616c6c 2020202b 20202020 20202020     lla&+           
+    d9e4:	20202020 20202020 20202020 20202020                     
+    d9f4:	20202020 20202020 20202020 20202020                     
+    da04:	20202020 20202020 20202020 00000000                 ....
+    da14:	20202020 38356f20 3c31366d 3e3e3e2c          o58m61<,>>>
+    da24:	20582424 20202020 20202020 38356f20     $$X          o58
+    da34:	3c31366d 2c3e3e2c 2020243e 20202020     m61<,>>,>$      
+    da44:	20202020 74744020 3472744e 33343434          @ttNtr44443
+    da54:	20582c3c 20202020 20202020 74744020     <,X          @tt
+    da64:	3472744e 34343434 20582c3c 20202020     Ntr44444<,X     
+    da74:	20202020 4d355820 6d4d4343 37373737          X5MCCMm7777
+    da84:	206f3936 20202020 20202020 4d355820     69o          X5M
+    da94:	6d4d4343 37373737 20583936 20202020     CCMm777769X     
+    daa4:	20202020 766e2b20 7a627676 3d3d7a7a          +nvvvbzzz==
+    dab4:	20582a2a 20202020 20202020 42622b20     **X          +bB
+    dac4:	78627676 3d3d7a7a 20582a2a 20202020     vvbxzz==**X     
+    dad4:	20202020 426e2b20 6b425656 75756b6b          +nBVVBkkkuu
+    dae4:	20582675 20202020 20202020 426e2b20     u&X          +nB
+    daf4:	6b6c4453 7575616b 202e3a75 20202020     SDlkkauuu:.     
+    db04:	20202020 58202020 32323225 58253232            X%22222%X
+    db14:	20202020 20202020 20202020 58202020                    X
+    db24:	32323225 58253232 20202020 20202020     %22222%X        
+    db34:	00000000 20202020 43566e2b 3e2c366d     ....    +nVCm6,>
+    db44:	3e3e3e3e 58243e3e 20202020 20202020     >>>>>>$X        
+    db54:	43566e2b 3e3c366d 3e3e3e3e 58243e3e     +nVCm6<>>>>>>>$X
+    db64:	20202020 58202020 415a6e6f 3434724e            XonZANr44
+    db74:	33343434 6f2c3333 20202020 58202020     444333,o       X
+    db84:	415a6e6f 3434724e 33343434 6f2c3333     onZANr44444333,o
+    db94:	20202020 20202020 4343742b 376d4d43             +tCCCMm7
+    dba4:	37373737 58353737 20202020 20202020     7777775X        
+    dbb4:	4343742b 6d6d4d43 37373737 58353737     +tCCCMmm7777775X
+    dbc4:	20202020 20202020 56416e40 7a787644             @nAVDvxz
+    dbd4:	3d707a7a 582a3d3d 20202020 20202020     zzp===*X        
+    dbe4:	56416e40 7a787644 3d707a7a 582a3d3d     @nAVDvxzzzp===*X
+    dbf4:	20202020 20202020 415a426f 6b6b6c56             oBZAVlkk
+    dc04:	75756b6b 583a7575 20202020 20202020     kkuuuu:X        
+    dc14:	415a426f 6b6b4253 7575616b 583a7575     oBZASBkkkauuuu:X
+    dc24:	20202020 20202020 30256f20 30656565              o%0eee0
+    dc34:	71303030 58205825 20202020 20202020     000q%X X        
+    dc44:	30256f20 30656565 71303030 20585825      o%0eee0000q%XX 
+    dc54:	20202020 00000000 20202020 43564325         ....    %CVC
+    dc64:	3e2c3c37 3e3e3e3e 6f3e3e3e 20202020     7<,>>>>>>>>o    
+    dc74:	20202020 43564325 3e2c3137 3e3e3e3e         %CVC71,>>>>>
+    dc84:	6f3e3e3e 20202020 20202020 415a4135     >>>o        5AZA
+    dc94:	34346574 33333434 24313333 20202020     te444433331$    
+    dca4:	20202020 5a5a4135 34346574 33333433         5AZZte443433
+    dcb4:	24313333 20202020 20202020 43434335     331$        5CCC
+    dcc4:	6d6d6d4d 3737376d 24363737 20202020     Mmmmm777776$    
+    dcd4:	20202020 43434335 6d6d6d4d 3737376d         5CCCMmmmm777
+    dce4:	24363737 20202020 20202020 56415375     776$        uSAV
+    dcf4:	7a787842 3d3d7a7a 402a3d3d 20202020     Bxxzzz====*@    
+    dd04:	20202020 56415375 7a786342 3d3d7a7a         uSAVBcxzzz==
+    dd14:	402a3d3d 20202020 20202020 415a5a3b     ==*@        ;ZZA
+    dd24:	6b6b6b56 7575616b 26757575 20202020     Vkkkkauuuuu&    
+    dd34:	20202020 415a5a3b 6b6b6b56 7575616b         ;ZZAVkkkkauu
+    dd44:	26757575 20202020 20202020 72723023     uuu&        #0rr
+    dd54:	30656572 30303030 58232571 20202020     ree00000q%#X    
+    dd64:	20202020 72723023 30656572 30303030         #0rrree00000
+    dd74:	206f3271 20202020 00000000 6f202020     q2o     ....   o
+    dd84:	4d434d36 3e2c3c36 2c2c3e3e 233e3e2c     6MCM6<,>>>,,,>>#
+    dd94:	20202058 6f202020 4d434d36 3e2c3c36     X      o6MCM6<,>
+    dda4:	2c2c3e3e 233e3e3e 20202058 6f582020     >>,,>>>#X     Xo
+    ddb4:	4e414e74 34656572 34343434 2c313333     tNANree44444331,
+    ddc4:	2020206f 6f202020 4e414e74 33346572     o      otNANre43
+    ddd4:	34343434 2c313333 2020206f 40202020     4444331,o      @
+    dde4:	4343434d 6d6d6d6d 3737376d 36363737     MCCCmmmmm7777766
+    ddf4:	2020206f 40582020 4343434d 6d6d6d6d     o     X@MCCCmmmm
+    de04:	3737376d 36363737 2020206f 2b202020     m7777766o      +
+    de14:	44564463 78787862 7a7a7a7a 2a3d3d3d     cDVDbxxxzzzz===*
+    de24:	2020202b 2b202020 44564463 78787876     +      +cDVDvxxx
+    de34:	7a7a7a7a 2a2a3d3d 20202058 40202020     zzzz==**X      @
+    de44:	53415342 6b6b6b6c 6969616b 75757575     BSASlkkkkaiiuuuu
+    de54:	2020202b 40202020 56415342 6b6b6b6c     +      @BSAVlkkk
+    de64:	6975616b 75757569 2020202b 6f202020     kauiiuuu+      o
+    de74:	4e4e7430 65657274 30303030 6f257130     0tNNtree00000q%o
+    de84:	20202020 6f202020 4e4e7430 65657274            o0tNNtree
+    de94:	30303030 6f257130 20202020 00000000     00000q%o    ....
+    dea4:	24202020 436d6d31 3e364d43 534d393e        $1mmCCM6>>9MS
+    deb4:	243e3c4d 2020206f 24202020 436d6d31     M<>$o      $1mmC
+    dec4:	3e354d43 534d393e 233e394d 2020206f     CM5>>9MSM9>#o   
+    ded4:	25202020 434e4e72 34744e41 434d3834        %rNNCANt448MC
+    dee4:	3c31336d 2020206f 25582020 434e7472     m31<o     X%rtNC
+    def4:	34744e41 434d7434 3131366d 20202024     ANt44tMCm611$   
+    df04:	3b202020 41434343 6d6d4341 41436d37        ;CCCAACmm7mCA
+    df14:	3636374d 20202e24 3b582020 41434343     M766$.    X;CCCA
+    df24:	6d6d4341 434d6d6d 36363743 20205823     ACmmmmMCC766#X  
+    df34:	2a202020 53444276 7a784453 5344627a        *vBDSSDxzzbDS
+    df44:	3d2a4642 20202040 2a202020 53444276     BF*=@      *vBDS
+    df54:	7a784453 5344627a 2a2a6342 2020202b     SDxzzbDSBc**+   
+    df64:	3a202020 53565642 6b6b5641 53566b6b        :BVVSAVkkkkVS
+    df74:	75756142 20202026 26202020 41535642     Bauu&      &BVSA
+    df84:	6b6b5653 53566b6b 75756142 20202040     SVkkkkVSBauu@   
+    df94:	25202020 5a5a4e65 65727243 30303030        %eNZZCrre0000
+    dfa4:	23713030 20202058 25202020 5a5a4e65     00q#X      %eNZZ
+    dfb4:	65727243 30303030 25713030 20202020     Crre000000q%    
+    dfc4:	00000000 31582020 5a433731 3c435a5a     ....  X117CZZZC<
+    dfd4:	5a5a563c 243e6e5a 20205823 3c582020     <VZZZn>$#X    X<
+    dfe4:	5a433731 3c435a5a 5a5a433c 242c6e5a     17CZZZC<<CZZZn,$
+    dff4:	20205823 72582020 5a434e72 34435a5a     #X    XrrNCZZZC4
+    e004:	5a5a4334 31316d5a 2020582c 72582020     4CZZZm11,X    Xr
+    e014:	5a414e72 34435a5a 5a5a4334 3c316d41     rNAZZZC44CZZAm1<
+    e024:	2020582c 4d582020 5a414343 6d435a5a     ,X    XMCCAZZZCm
+    e034:	5a5a436d 36364d5a 20205833 4d582020     mCZZZM663X    XM
+    e044:	5a414343 6d415a5a 5a5a436d 36384d5a     CCAZZZAmmCZZZM86
+    e054:	20205833 782b2020 5a537676 63445a5a     3X    +xvvSZZZDc
+    e064:	5a5a5363 2a3d445a 2020582a 78582020     cSZZZD=**X    Xx
+    e074:	5a567676 7a565a5a 5a5a5363 3d3d445a     vvVZZZVzcSZZZD==
+    e084:	2020582a 61582020 5a41446c 6b565a5a     *X    XalDAZZZVk
+    e094:	4141566b 7575445a 2020583a 6b582020     kVAAZDuu:X    Xk
+    e0a4:	5a53566c 6b535a5a 5a5a566b 7575425a     lVSZZZSkkVZZZBuu
+    e0b4:	20205875 30582020 5a5a4e72 65657243     uX    X0rNZZCree
+    e0c4:	30303030 71303030 2020206f 30582020     0000000qo     X0
+    e0d4:	5a5a4e72 65657243 30303030 32303030     rNZZCree00000002
+    e0e4:	2020206f 00000000 3c6f2020 5a413831     o   ....  o<18AZ
+    e0f4:	335a5a5a 5a5a5a39 243c415a 20205824     ZZZ39ZZZZA<$$X  
+    e104:	3c6f2020 5a413833 395a5a5a 5a5a5a33       o<38AZZZZ93ZZZ
+    e114:	232c535a 20205823 656f2020 5a5a7472     ZS,##X    oertZZ
+    e124:	385a5a5a 5a5a5a65 3131435a 2020582c     ZZZ8eZZZZC11,X  
+    e134:	72582020 5a5a7472 385a5a5a 5a5a5a65       XrrtZZZZZ8eZZZ
+    e144:	3c31435a 2020582c 4d582020 5a5a4343     ZC1<,X    XMCCZZ
+    e154:	4d415a5a 5a5a5a4d 3638415a 20205833     ZZAMMZZZZA863X  
+    e164:	4d582020 5a5a4343 4d5a5a5a 415a5a6d       XMCCZZZZZMmZZA
+    e174:	3638415a 20205833 78582020 5a417676     ZA863X    XxvvAZ
+    e184:	625a5a5a 415a5a62 2a3d415a 2020582a     ZZZbbZZAZA=**X  
+    e194:	78582020 5a5a7676 625a5a5a 5a5a5a63       XxvvZZZZZbcZZZ
+    e1a4:	2a3d535a 2020582a 612b2020 5a414442     ZS=**X    +aBDAZ
+    e1b4:	6c5a5a5a 5a5a5a6e 7561415a 2020583a     ZZZlnZZZZAau:X  
+    e1c4:	6b2e2020 5a5a4442 6c5a5a41 5a5a5a6c       .kBDZZAZZllZZZ
+    e1d4:	7575415a 20205875 65252020 414e7472     ZAuuuX    %ertNA
+    e1e4:	6565724e 30303030 71303030 20202023     Nree0000000q#   
+    e1f4:	65252020 434e4e65 6565724e 30303030       %eeNNCNree0000
+    e204:	71303030 20202023 00000000 31582020     000q#   ....  X1
+    e214:	56413831 395a6e6e 61425a33 232c4144     18AVnnZ93ZBaDA,#
+    e224:	20202023 3c582020 44413831 35414261     #     X<18ADaBA5
+    e234:	61425a39 232c4156 20205823 72582020     9ZBaVA,##X    Xr
+    e244:	565a7272 385a4261 616e5a37 31315356     rrZVaBZ87ZnaVS11
+    e254:	2020582c 65582020 565a7272 385a4261     ,X    XerrZVaBZ8
+    e264:	616e5a37 31315356 2020582c 4d585820     7ZnaVS11,X   XXM
+    e274:	56414343 4d416e6e 6e42416d 36384156     CCAVnnAMmABnVA86
+    e284:	20205833 4d582020 56414343 4d416e6e     3X    XMCCAVnnAM
+    e294:	6e425a4d 36384144 20205833 78582020     MZBnDA863X    Xx
+    e2a4:	44414276 62416e62 6e6e5a62 2a3d5344     vBADbnAbbZnnDS=*
+    e2b4:	2020582a 782b2020 565a7676 6341446e     *X    +xvvZVnDAc
+    e2c4:	626e5a63 2a2d4156 2020582a 612e5820     cZnbVA-**X   X.a
+    e2d4:	445a446c 6e414261 6b6e5a6c 75614144     lDZDaBAnlZnkDAau
+    e2e4:	20202e75 612e5820 4441446c 6c414261     u.   X.alDADaBAl
+    e2f4:	6142416c 75754144 20205875 65322020     lABaDAuuuX    2e
+    e304:	72727265 32657272 30303030 32303030     errrrre200000002
+    e314:	20205825 65322020 72727265 71656572     %X    2eerrrreeq
+    e324:	30303071 32303030 20205825 00000000     q0000002%X  ....
+    e334:	3c582020 3b423836 39424020 58404239       X<68B; @B99B@X
+    e344:	232c423b 20202024 31582020 3b423836     ;B,#$     X168B;
+    e354:	39444058 58404439 252c6e3b 20202024     X@D99D@X;n,%$   
+    e364:	65582020 3b447272 77444058 58404438       XerrD;X@Dw8D@X
+    e374:	3c316e3b 2020582c 72582020 3b447272     ;n1<,X    XrrrD;
+    e384:	77444058 58404438 31316e3b 2020582c     X@Dw8D@X;n11,X  
+    e394:	4d582020 3b444343 4d424020 5840426d       XMCCD; @BMmB@X
+    e3a4:	3638423b 20205833 4d582020 3b444343     ;B863X    XMCCD;
+    e3b4:	6d424058 2040424d 3636423b 20205833     X@BmMB@ ;B663X  
+    e3c4:	782b5858 3b447676 63422d58 20404463     XX+xvvD;X-BccD@ 
+    e3d4:	2a3d423b 2020202a 78582020 3b444276     ;B=**     XxvBD;
+    e3e4:	63424058 58404463 2a3d443b 2020202a     X@BccD@X;D=**   
+    e3f4:	612e2020 3b44426c 6e444020 5840426b       .alBD; @DnkB@X
+    e404:	7575423b 20202075 612e2020 3b42426c     ;Buuu     .alBB;
+    e414:	6c444058 5840446e 7561423b 2020583a     X@DlnD@X;Bau:X  
+    e424:	65322020 72656565 23656565 30303032       2eeeereee#2000
+    e434:	32303030 20205825 65322020 65726565     0002%X    2eeere
+    e444:	23656565 30303071 32303030 20205825     eee#q0000002%X  
+    e454:	00000000 31582020 3b3b3631 243b4058     ....  X116;;X@;$
+    e464:	583a3b24 243e3b3b 20202023 3c582020     $;:X;;>$#     X<
+    e474:	3b613631 243b4058 58403b24 24243b3b     16a;X@;$$;@X;;$$
+    e484:	20202023 72582020 3a3b7272 333b4058     #     Xrrr;:X@;3
+    e494:	58403b33 3131393a 2020582c 65582020     3;@X:911,X    Xe
+    e4a4:	3a3b7272 333b4058 58403b33 3c31393a     rr;:X@;33;@X:91<
+    e4b4:	2020582c 4d582020 3b614343 6c3b4058     ,X    XMCCa;X@;l
+    e4c4:	58403b6d 36363b3b 20205833 4d582020     m;@X;;663X    XM
+    e4d4:	3b614343 38614058 58406138 36363b3b     CCa;X@a88a@X;;66
+    e4e4:	20205833 78585858 3b637676 7a3b4058     3X  XXXxvvc;X@;z
+    e4f4:	5840617a 2a2a3b3b 2020582a 78582020     za@X;;***X    Xx
+    e504:	2d617676 7a3b4058 5840617a 2a2a3b2d     vva-X@;zza@X-;**
+    e514:	2020582a 612e2020 3b614242 61614058     *X    .aBBa;X@aa
+    e524:	58406161 75752d3b 20202e3a 612e2020     aa@X;-uu:.    .a
+    e534:	3b614242 61614058 58403b61 7575613b     BBa;X@aaa;@X;auu
+    e544:	20202e75 30322020 65656530 23346565     u.    200eeeee4#
+    e554:	30303071 32713071 20205825 30322020     q000q0q2%X    20
+    e564:	65656530 23346565 30303032 32717171     0eeeee4#2000qqq2
+    e574:	20205825 00000000 31582020 40243636     %X  ....  X166$@
+    e584:	2423403a 4040233e 24246f40 20205823     :@#$>#@@@o$$#X  
+    e594:	3c582020 40243631 3e6f4040 4040233e       X<16$@@@o>>#@@
+    e5a4:	243e6f40 20205824 65582020 40327272     @o>$$X    Xerr2@
+    e5b4:	33234040 2d402333 31312423 2020582c     @@#33#@-#$11,X  
+    e5c4:	65582020 40327272 33234040 2d402333       Xerr2@@@#33#@-
+    e5d4:	31312423 2020582c 4d2b2020 40354343     #$11,X    +MCC5@
+    e5e4:	38394040 3a262437 36362440 20205833     @@987$&:@$663X  
+    e5f4:	43582020 40354343 6d25402d 3a402338       XCCC5@-@%m8#@:
+    e604:	36362440 20205833 78582020 2d2d7676     @$663X    Xxvv--
+    e614:	7a2a4040 2d40407a 2a2a4040 2020582a     @@*zz@@-@@***X  
+    e624:	782b5858 402d7678 7a2d4040 4040407a     XX+xxv-@@@-zz@@@
+    e634:	2a2a4040 2020582a 61582020 403a426c     @@***X    XalB:@
+    e644:	6b40402d 3a262661 75752640 20205875     -@@ka&&:@&uuuX  
+    e654:	61582020 40754242 6126403a 2d402661       XaBBu@:@&aa&@-
+    e664:	75752640 20205875 30322020 30303030     @&uuuX    200000
+    e674:	23713030 23303071 25322358 20205825     00q#q00#X#2%%X  
+    e684:	30322020 30303030 20253030 23303023       20000000% #00#
+    e694:	32322358 20205825 00000000 3c582020     X#22%X  ....  X<
+    e6a4:	6f333631 3e245858 206f243e 243e2458     163oXX$>>$o X$>$
+    e6b4:	20202024 31582020 6f333633 2c246f58     $     X1363oXo$,
+    e6c4:	586f242c 243e246f 20202023 72582020     ,$oXo$>$#     Xr
+    e6d4:	23657272 343c236f 586f3234 3c312c6f     rre#o#<442oXo,1<
+    e6e4:	2020582c 72582020 23657272 343c236f     ,X    Xrrre#o#<4
+    e6f4:	586f3234 3c312c6f 2020582c 4d582020     42oXo,1<,X    XM
+    e704:	406d4343 6d35406f 586f396d 36383623     CCm@o@5mm9oX#686
+    e714:	20205833 4d582020 406d4343 6d356f6f     3X    XMCCm@oo5m
+    e724:	586f3537 36363624 20205833 78582020     75oX$6663X    Xx
+    e734:	2a784276 7a3d4058 2e2b2a7a 2a3d3d2b     vBx*X@=zz*+.+==*
+    e744:	2020582a 78585858 2a637676 7a3d2b2e     *X  XXXxvvc*.+=z
+    e754:	2e2b3d7a 3d2a2a2b 2020582a 6b2e2020     z=+.+**=*X    .k
+    e764:	266b426c 6b3a4058 2e2b756b 7575752b     lBk&X@:kku+.+uuu
+    e774:	20202e3a 6b2e2020 266b446c 6b752b58     :.    .klDk&X+uk
+    e784:	2e2b756b 75753a2b 20202e3a 30322020     ku+.+:uu:.    20
+    e794:	30303030 23303030 58713071 32252020     0000000#q0qX  %2
+    e7a4:	20205825 30322020 30303030 20233030     %X    20000000# 
+    e7b4:	5871716f 32252020 20205825 00000000     oqqX  %2%X  ....
+    e7c4:	3c582020 2c313633 2c2c2c3e 243e3e3e       X<361,>,,,>>>$
+    e7d4:	233e3e24 20202024 3c582020 2c313631     $>>#$     X<161,
+    e7e4:	3e2c2c2c 24243e3e 243e3e24 20202024     ,,,>>>$$$>>$$   
+    e7f4:	65582020 77727272 34343034 3c333434       Xerrrw4044443<
+    e804:	3131333c 2020582c 65582020 77727272     <311,X    Xerrrw
+    e814:	34343034 3c333434 3131333c 20206f2c     4044443<<311,o  
+    e824:	43402020 38434343 6d6d3838 31363737       @CCCC888mm7761
+    e834:	36363736 20205833 4d402020 37434343     67663X    @MCCC7
+    e844:	6d6d3838 3536376d 36363738 20205833     88mmm76587663X  
+    e854:	782b5858 78787676 7a787a7a 2a3d7a7a     XX+xvvxxzzxzzz=*
+    e864:	2a2a3d3d 2020202a 78582058 78787676     ==***   X Xxvvxx
+    e874:	7a787a7a 2a3d7a7a 2a3d3d3d 2020582a     zzxzzz=*===**X  
+    e884:	61582020 6142446c 6b6b6169 7575696b       XalDBaiakkkiuu
+    e894:	75757575 20202075 61582020 6142426c     uuuuu     XalBBa
+    e8a4:	6b616b69 3a3a616b 75757575 20202075     ikakka::uuuuu   
+    e8b4:	30252020 30303030 23303030 23303071       %00000000#q00#
+    e8c4:	25322320 20202025 30252020 30303030      #2%%     %00000
+    e8d4:	20587130 23302520 25322358 20205823     0qX  %0#X#2%#X  
+    e8e4:	00000000 31582020 3c313631 3e2c3c2c     ....  X1161<,<,>
+    e8f4:	3e3e3e3e 233e3e2c 20205824 31582020     >>>>,>>#$X    X1
+    e904:	3c333631 3e2c3c3c 2c3e3e3e 233e3e3e     163<<<,>>>>,>>>#
+    e914:	20202024 72582020 65727272 33346565     $     Xrrrreee43
+    e924:	34343434 31313133 2020582c 72582020     44443111,X    Xr
+    e934:	65727272 33346565 34343434 31313133     rrreee4344443111
+    e944:	2020582c 4d2b2020 6d4d4343 6d6d6d6d     ,X    +MCCMmmmmm
+    e954:	37373737 36363737 20205833 432b2020     777777663X    +C
+    e964:	6d4d4343 6d6d6d6d 37373737 36363737     CCMmmmmm77777766
+    e974:	20205833 782b5858 78787676 7a787878     3X  XX+xvvxxxxxz
+    e984:	3d707a7a 2a3d3d3d 2020582a 782b2020     zzp====**X    +x
+    e994:	78787676 7a787878 7a7a7a7a 2a2a3d3d     vvxxxxxzzzzz==**
+    e9a4:	2020582a 6b582020 6b42566c 6b6b6b6b     *X    XklVBkkkkk
+    e9b4:	7575696b 75757575 20202e75 6b582020     kiuuuuuuu.    Xk
+    e9c4:	6b42426c 6b6b6b6b 7575616b 75757575     lBBkkkkkkauuuuuu
+    e9d4:	20202e75 71582020 30303030 23303030     u.    Xq0000000#
+    e9e4:	30303071 32253232 2020206f 71582020     q00022%2o     Xq
+    e9f4:	30303030 20202530 30302520 32252532     00000%   %002%%2
+    ea04:	2020206f 00000000 3c582020 3c313631     o   ....  X<161<
+    ea14:	2c2c3c3c 3e3e3e2c 24243e3e 20205823     <<,,,>>>>>$$#X  
+    ea24:	31582020 3c313631 2c2c3c3c 3e3e3e3e       X1161<<<,,>>>>
+    ea34:	243e2c3e 20202023 72582020 65727272     >,>$#     Xrrrre
+    ea44:	34346565 34343434 31313133 2020582c     ee4444443111,X  
+    ea54:	65582020 65657272 34346565 33343434       Xerreeee444443
+    ea64:	2c313333 2020582c 4d2b2020 6d4d4343     331,,X    +MCCMm
+    ea74:	6d6d6d6d 37373737 36363737 20205831     mmmm777777661X  
+    ea84:	43402020 6d4d4343 6d6d6d6d 37363637       @CCCMmmmmm7667
+    ea94:	36363737 20205831 78582020 78787676     77661X    Xxvvxx
+    eaa4:	78787878 3d7a7a7a 3d2a3d3d 2020202a     xxxxzzz===*=*   
+    eab4:	78582020 78787676 7a787878 3d3d7a7a       Xxvvxxxxxzzz==
+    eac4:	3d2a3d3d 2020582a 6b2e2020 6b42446c     ==*=*X    .klDBk
+    ead4:	6b6b6b6b 7575696b 75757575 20202e75     kkkkkiuuuuuuu.  
+    eae4:	6b582020 6b42446c 6b6b6b6b 7575616b       XklDBkkkkkkauu
+    eaf4:	75757575 20202075 23582020 30303071     uuuuu     X#q000
+    eb04:	40303030 71303071 23322532 20202020     000@q00q2%2#    
+    eb14:	25202020 30303071 20202330 71716f20        %q0000#   oqq
+    eb24:	23322525 20202020 00000000 31582020     %%2#    ....  X1
+    eb34:	3c313631 2c2c3c3c 3e3e3e2c 243e3e3e     161<<<,,,>>>>>>$
+    eb44:	20205824 3c582020 3c313631 2c2c3c3c     $X    X<161<<<,,
+    eb54:	3e3e3e3e 243e3e3e 20205824 65582e20     >>>>>>>$$X   .Xe
+    eb64:	65727272 34346565 34343434 3c313333     rrreee444444331<
+    eb74:	2020582c 72582020 65727272 34346565     ,X    Xrrrreee44
+    eb84:	33343434 3c313333 2020582c 4d402020     4443331<,X    @M
+    eb94:	6d4d4343 6d6d6d6d 37373737 36363737     CCMmmmmm77777766
+    eba4:	20205833 4d2b2020 6d4d4343 6d6d6d37     3X    +MCCMm7mmm
+    ebb4:	37373737 36363737 20205833 78582020     777777663X    Xx
+    ebc4:	78787676 7a7a7878 3d7a7a7a 2a2a3d3d     vvxxxxzzzzz===**
+    ebd4:	2020582a 782b2020 78787676 7a787878     *X    +xvvxxxxxz
+    ebe4:	3d7a7a7a 2a2a3d3d 2020582a 6b2e2020     zzz===***X    .k
+    ebf4:	6b42446c 6b6b6b6b 7575696b 75757575     lDBkkkkkkiuuuuuu
+    ec04:	20205875 612e2020 6b42446c 6b6b6b6b     uX    .alDBkkkkk
+    ec14:	7575616b 75757575 20205875 6f582020     kauuuuuuuX    Xo
+    ec24:	30307125 23303030 25253071 6f253225     %q00000#q0%%%2%o
+    ec34:	20202020 58202020 30307125 20205871            X%q00qX  
+    ec44:	25252020 6f253225 20202020 00000000       %%%2%o    ....
+    ec54:	3c582020 3c333631 3e2c3c2c 3e3e3e3e       X<163<,<,>>>>>
+    ec64:	243e3e2c 20202024 31582020 3c333631     ,>>$$     X1163<
+    ec74:	242c3c3c 3e3e2c24 233e3e3e 20205824     <<,$$,>>>>>#$X  
+    ec84:	65582020 65727272 34346565 33343434       Xerrreee444443
+    ec94:	31313331 2020582c 65582020 65727272     1311,X    Xerrre
+    eca4:	33346565 33343433 31313133 2020582c     ee4334433111,X  
+    ecb4:	4d402020 6d434343 6d6d6d6d 3737376d       @MCCCmmmmmm777
+    ecc4:	36363737 20205833 432b2020 6d4d4343     77663X    +CCCMm
+    ecd4:	386d6d6d 37373736 36363737 20205833     mmm8677777663X  
+    ece4:	782b2020 78787676 7a7a7878 3d7a7a7a       +xvvxxxxzzzzz=
+    ecf4:	2a3d3d3d 2020582a 78582020 78787676     ===**X    Xxvvxx
+    ed04:	7a787878 3d3d7a3d 2a2a3d3d 2020582a     xxxz=z====***X  
+    ed14:	61582020 6b42446c 6b6b6b6b 7575616b       XalDBkkkkkkauu
+    ed24:	75756175 20202e75 6b582020 6b42446c     uauuu.    XklDBk
+    ed34:	696b6b6b 75756161 75757575 20205875     kkkiaauuuuuuuX  
+    ed44:	20202020 3071326f 23307130 25253271         o2q00q0#q2%%
+    ed54:	206f2532 20202020 20202020 30712523     2%o         #%q0
+    ed64:	20205825 25232020 20232532 20202020     %X    #%2%#     
+    ed74:	00000000 31582020 24243631 3e2c3c2c     ....  X116$$,<,>
+    ed84:	3e3e3e3e 243e246f 20202023 24202020     >>>>o$>$#      $
+    ed94:	3c313831 583e3c3c 3e2c2458 233e3e3e     181<<<>XX$,>>>>#
+    eda4:	2020206f 652b2020 25327272 34346565     o     +err2%ee44
+    edb4:	31343434 31312424 2020582c 352e2020     4441$$11,X    .5
+    edc4:	65727272 6f336565 33343c58 31313133     rrreee3oX<433111
+    edd4:	20202024 4d402020 39354343 6d6d6d38     $     @MCC598mmm
+    ede4:	36373737 36363939 20205833 35582020     777699663X    X5
+    edf4:	6d4d4343 58366d6d 37373658 36363737     CCMmmm6XX6777766
+    ee04:	20202039 78582020 3d7a7676 7a78787a     9     Xxvvz=zxxz
+    ee14:	3d7a3d7a 2a2a2a40 2020582a 3d582020     z=z=@****X    X=
+    ee24:	78787676 583d7878 3d7a3d58 2a2a3d3d     vvxxxx=XX=z===**
+    ee34:	2020202a 61582020 3a69426c 6b6b6b69     *     XalBi:ikkk
+    ee44:	7575696b 75752626 20205875 3a202020     kiuu&&uuuX     :
+    ee54:	6b424242 58696b6b 75753a2e 75757575     BBBkkkiX.:uuuuuu
+    ee64:	20202026 20202020 32256f58 58717171     &       Xo%2qqqX
+    ee74:	25322525 20586f23 20202020 58202020     %%2%#oX        X
+    ee84:	71236f58 2020206f 25582020 20206f23     Xo#qo     X%#o  
+    ee94:	20202020 00000000 31582020 20202431         ....  X11$  
+    eea4:	3e2c2c6f 6f243e3e 246f2020 20202024     o,,>>>$o  o$$   
+    eeb4:	58202020 2c31362c 20583e3c 2c245820        X,61,<>X  X$,
+    eec4:	6f3e3e3e 20202020 72582020 20202572     >>>o      Xrr%  
+    eed4:	3434656f 24313434 3c242020 2020202c     oe44441$  $<,   
+    eee4:	58202020 65727232 206f3465 34336f20        X2rree4o  o34
+    eef4:	3e313c33 20202020 4d2b2020 20583b43     3<1>      +MC;X 
+    ef04:	6d6d6d24 6f38376d 36232020 20205833     $mmmm78o  #63X  
+    ef14:	58202020 6d4d436c 2e6f356d 37356f20        XlCMmm5o. o57
+    ef24:	39363737 20202058 782e2020 20202d76     7769X     .xv-  
+    ef34:	7a787a40 583d7a7a 2a2b2020 2020582a     @zxzzz=X  +**X  
+    ef44:	58202020 78787662 20587a78 3d2a5820        XbvxxxzX  X*=
+    ef54:	2a2a3d3d 20202020 6b582020 20203b6c     ==**      Xkl;  
+    ef64:	6b6b6b2b 2b3a616b 75262020 20202e3a     +kkkka:+  &u:.  
+    ef74:	2e202020 6b42563b 2058696b 753a5820        .;VBkkiX  X:u
+    ef84:	3a757575 20202020 20202020 6f582020     uuu:          Xo
+    ef94:	6f252523 6f232525 20202058 20202020     #%%o%%#oX       
+    efa4:	20202020 6f582020 20205858 6f202020           XoXX     o
+    efb4:	20202058 20202020 00000000 3c582020     X       ....  X<
+    efc4:	20202024 3e3e6f20 206f3e3e 6f202020     $    o>>>>o    o
+    efd4:	20205823 20202020 3c333920 20206f3e     #X       93<>o  
+    efe4:	24582020 20243e3e 20202020 65582020       X$>>$       Xe
+    eff4:	20202025 34342320 206f3134 6f202020     %    #4441o    o
+    f004:	2020582c 20202020 65727158 20206f71     ,X      Xqreqo  
+    f014:	3c582020 20243333 20202020 4d402020       X<33$       @M
+    f024:	2020583b 6d384058 2024366d 242e2020     ;X  X@8mm6$   .$
+    f034:	20205833 20202020 6d433558 20206f35     3X      X5Cm5o  
+    f044:	36582020 58393737 20202020 78582020       X6779X      Xx
+    f054:	2020202a 787a4020 202b3d7a 40202020     *    @zxz=+    @
+    f064:	2020582a 20202020 78786340 2020587a     *X      @cxxzX  
+    f074:	2a582020 20403d3d 20202020 612e2020       X*==@       .a
+    f084:	20202e26 6b6b4020 202b696b 40202020     &.   @kkki+    @
+    f094:	20202e3a 20202020 6b426158 20205869     :.      XaBkiX  
+    f0a4:	3a582020 20267575 20202020 20202020       X:uu&         
+    f0b4:	20202020 58585820 58205858 20202020          XXXXX X    
+    f0c4:	20202020 20202020 20202020 20202020                     
+    f0d4:	20202020 20202020 20202020 00000000                 ....
+    f0e4:	6f582020 20202020 3e6f2020 20206f3e       Xo      o>>o  
+    f0f4:	20202020 2020206f 20202020 3e242020         o         $>
+    f104:	20202058 58202020 20202424 20202020     X      X$$      
+    f114:	23582020 20202020 336f2020 20206f33       X#      o33o  
+    f124:	20202020 2020586f 20202020 71325820         oX       X2q
+    f134:	2020206f 58202020 2058242c 20202020     o      X,$X     
+    f144:	3b2b2020 20202020 6d402020 20204038       +;      @m8@  
+    f154:	20202020 20205823 20202020 35355820         #X       X55
+    f164:	2020206f 6f202020 20203939 20202020     o      o99      
+    f174:	2a202020 20202020 7a402020 20202b7a        *      @zz+  
+    f184:	20202020 2020582b 20202020 7a7a5820         +X       Xzz
+    f194:	2020202b 2e202020 20202a2a 20202020     +      .**      
+    f1a4:	402e2020 20202020 6b2b2020 20202b61       .@      +ka+  
+    f1b4:	20202020 2020202b 20202020 69695820         +        Xii
+    f1c4:	20202058 2e202020 202e2675 20202020     X      .u&.     
+    f1d4:	20202020 20202020 20202020 20202020                     
+    f1e4:	20202020 20202020 20202020 20202020                     
+    f1f4:	20202020 20202020 20202020 20202020                     
+    f204:	00000000 20202020 20202020 58202020     ....           X
+    f214:	20202058 20202020 20202020 20202020     X               
+    f224:	58582020 20202020 20202020 20205858       XX        XX  
+    f234:	20202020 20202020 20202020 6f582020                   Xo
+    f244:	2020206f 20202020 20202020 20202020     o               
+    f254:	6f582020 20202020 20202020 20205858       Xo        XX  
+    f264:	20202020 20202020 20202020 6f585820                  XXo
+    f274:	20205840 20202020 20202020 20202020     @X              
+    f284:	6f582020 20202020 20202020 20206f6f       Xo        oo  
+    f294:	20202020 20202020 20202020 58202020                    X
+    f2a4:	2020202b 20202020 20202020 20202020     +               
+    f2b4:	2b2b5820 20202020 20202020 20202058      X++        X   
+    f2c4:	20202020 20202020 20202020 2b202020                    +
+    f2d4:	2020202b 20202020 20202020 20202020     +               
+    f2e4:	58582020 20202020 20202020 20202e2b       XX        +.  
+    f2f4:	20202020 20202020 20202020 20202020                     
+    f304:	20202020 20202020 20202020 20202020                     
+    f314:	20202020 20202020 20202020 20202020                     
+    f324:	20202020 00000000 20202020 2e202020         ....       .
+    f334:	6f6f6f20 2e6f6f24 20202020 20202020      ooo$oo.        
+    f344:	20202020 20202020 406f6f58 202b6f6f             Xoo@oo+ 
+    f354:	20202020 20202020 20202020 20202020                     
+    f364:	23232320 586f6f23 20202020 20202020      ####ooX        
+    f374:	20202020 20202020 23236f20 58236f23              o###o#X
+    f384:	20202020 20202020 20202020 20202020                     
+    f394:	40232358 5840233a 20202020 20202020     X##@:#@X        
+    f3a4:	20202020 20202020 2340232e 2e23233a             .#@#:##.
+    f3b4:	20202020 20202020 20202020 20202020                     
+    f3c4:	4040402e 20404040 20202020 20202020     .@@@@@@         
+    f3d4:	20202020 20202020 40404020 20404040              @@@@@@ 
+    f3e4:	20202020 20202020 20202020 20202020                     
+    f3f4:	26264020 58264040 20202020 20202020      @&&@@&X        
+    f404:	20202020 20202020 26402b58 2e26403a             X+@&:@&.
+    f414:	20202020 20202020 20202020 20202020                     
+    f424:	20202020 20202020 20202020 20202020                     
+    f434:	20202020 20202020 20202020 20202020                     
+    f444:	20202020 20202020 00000000 20202020             ....    
+    f454:	6f202020 35363124 24393935 2020206f        o$165599$o   
+    f464:	20202020 20202020 6f202020 35363124                o$165
+    f474:	24393c35 2020206f 20202020 20202020     5<9$o           
+    f484:	23202020 72726532 25346565 2020206f        #2erree4%o   
+    f494:	20202020 20202020 23202020 72726532                #2err
+    f4a4:	24346565 2020206f 20202020 20202020     ee4$o           
+    f4b4:	40202020 4d434d35 39376d4d 20202024        @5MCMMm79$   
+    f4c4:	20202020 20202020 40202020 4d434d35                @5MCM
+    f4d4:	39374d4d 20205824 20202020 20202020     MM79$X          
+    f4e4:	40202020 6262622d 2a636363 2020202b        @-bbbccc*+   
+    f4f4:	20202020 20202020 40202020 6262622d                @-bbb
+    f504:	2a636363 2020202b 20202020 20202020     ccc*+           
+    f514:	40202020 42426c3b 266b426c 2020202b        @;lBBlBk&+   
+    f524:	20202020 20202020 40202020 42426c61                @alBB
+    f534:	26616c42 2020202b 20202020 20202020     Bla&+           
+    f544:	20202020 20202020 20202020 20202020                     
+    f554:	20202020 20202020 20202020 20202020                     
+    f564:	20202020 20202020 20202020 00000000                 ....
+    f574:	20202020 38356f58 3c31366d 3e3e2c2c         Xo58m61<,,>>
+    f584:	20582424 20202020 20202020 38352b2e     $$X         .+58
+    f594:	3c31386d 3e3e2c2c 20582424 20202020     m81<,,>>$$X     
+    f5a4:	20202020 74744020 3472744e 34343434          @ttNtr44444
+    f5b4:	20582c3c 20202020 20202020 74746f20     <,X          ott
+    f5c4:	3472724e 34343434 20582433 20202020     Nrr444443$X     
+    f5d4:	20202020 4d355820 6d4d4343 37373737          X5MCCMm7777
+    f5e4:	2e583936 20202020 20202020 4d355820     69X.         X5M
+    f5f4:	6d4d4343 37373737 206f3936 20202020     CCMm777769o     
+    f604:	20202020 766e2b20 78627642 3d7a7a78          +nvBvbxxzz=
+    f614:	20582a3d 20202020 20202020 42614020     =*X          @aB
+    f624:	78627676 3d3d7a7a 20582a2a 20202020     vvbxzz==**X     
+    f634:	20202020 426e2b20 6b6c4453 7569616b          +nBSDlkkaiu
+    f644:	202e3a75 20202020 20202020 426e2b20     u:.          +nB
+    f654:	6b6c5656 7575616b 202e263a 20202020     VVlkkauu:&.     
+    f664:	20202020 58582020 32323225 58253232           XX%22222%X
+    f674:	20202058 20202020 20202020 58582020     X             XX
+    f684:	32323225 58253232 20202020 20202020     %22222%X        
+    f694:	00000000 20202020 43536e2b 3e2c364d     ....    +nSCM6,>
+    f6a4:	3e3e3e3e 58243e3e 20202020 20202020     >>>>>>$X        
+    f6b4:	43566e6f 3e2c366d 3e3e3e3e 58243e3e     onVCm6,>>>>>>>$X
+    f6c4:	20202020 20202020 5a5a6e6f 3365724e             onZZNre3
+    f6d4:	33343434 582c3333 20202020 20202020     444333,X        
+    f6e4:	415a6e40 3434724e 33343434 582c3333     @nZANr44444333,X
+    f6f4:	20202020 20202020 4343742b 6d6d4d43             +tCCCMmm
+    f704:	37373737 6f353737 20202020 20202020     7777775o        
+    f714:	4343742b 6d6d4d43 37373737 58393737     +tCCCMmm7777779X
+    f724:	20202020 20202020 56536e6f 7a786242             onSVBbxz
+    f734:	3d3d7a7a 582a3d3d 20202020 20202020     zz====*X        
+    f744:	56416e40 7a787644 3d707a7a 582a3d3d     @nAVDvxzzzp===*X
+    f754:	20202020 20202020 415a426f 6b6b4256             oBZAVBkk
+    f764:	7575616b 583a7575 20202020 20202020     kauuuu:X        
+    f774:	415a426f 6b6b4256 7575696b 2e3a7575     oBZAVBkkkiuuuu:.
+    f784:	20202020 20202020 30255820 30656565              X%0eee0
+    f794:	71303030 20206f23 20202020 20202020     000q#o          
+    f7a4:	30255820 30656565 71303030 20206f23      X%0eee0000q#o  
+    f7b4:	20202020 00000000 20202020 53564325         ....    %CVS
+    f7c4:	3e2c3137 3e3e3e3e 6f3e3e3e 20202020     71,>>>>>>>>o    
+    f7d4:	20202020 43534339 3e2c3137 3e3e3e3e         9CSC71,>>>>>
+    f7e4:	6f3e3e3e 20202020 20202020 5a5a5a3b     >>>o        ;ZZZ
+    f7f4:	3434654e 33343434 24313333 20202020     Ne444443331$    
+    f804:	20202020 5a5a413b 3434654e 33343434         ;AZZNe444443
+    f814:	24313333 20202020 20202020 43434335     331$        5CCC
+    f824:	6d6d6d4d 3737376d 24363737 20202020     Mmmmm777776$    
+    f834:	20202020 43434335 6d6d6d4d 3737376d         5CCCMmmmm777
+    f844:	24363737 20202020 2e202020 5641563b     776$       .;VAV
+    f854:	7a787876 3d7a7a7a 402a3d3d 20202020     vxxzzzz===*@    
+    f864:	20202020 5641532d 7a787842 3d3d7a7a         -SAVBxxzzz==
+    f874:	402a3d3d 20202020 20202020 415a5a3b     ==*@        ;ZZA
+    f884:	6b6b6b56 7575616b 26757575 20202020     Vkkkkauuuuu&    
+    f894:	20202020 415a413b 6b6b6b44 7575616b         ;AZADkkkkauu
+    f8a4:	26757575 20202020 20202020 7265306f     uuu&        o0er
+    f8b4:	30657272 30303030 206f3271 20202020     rre00000q2o     
+    f8c4:	20202020 7265306f 30656572 30303030         o0erree00000
+    f8d4:	206f3271 20202020 00000000 6f202020     q2o     ....   o
+    f8e4:	4d434d36 3e2c3c36 2c2c3e3e 233e3e3e     6MCM6<,>>>,,>>>#
+    f8f4:	20202058 6f202020 4d434d31 3e2c3c36     X      o1MCM6<,>
+    f904:	2c2c3e3e 243e3e3e 20202058 6f582020     >>,,>>>$X     Xo
+    f914:	4e5a4e74 33346572 34343433 2c313333     tNZNre433444331,
+    f924:	2020206f 6f202020 4e5a4e74 34346574     o      otNZNte44
+    f934:	34343334 2c313333 2020206f 40202020     4344331,o      @
+    f944:	4343434d 6d6d6d6d 37373737 36363737     MCCCmmmm77777766
+    f954:	2020206f 40202020 4343434d 6d6d6d6d     o      @MCCCmmmm
+    f964:	3737376d 36363737 2020206f 40202020     m7777766o      @
+    f974:	42564462 7a787876 7a467a7a 2a3d3d3d     bDVBvxxzzzFz===*
+    f984:	20202058 40202020 44564462 7a787862     X      @bDVDbxxz
+    f994:	7a7a7a7a 2a2a2a3d 20202058 40202020     zzzz=***X      @
+    f9a4:	53415342 6b6b6b6c 7575616b 75757569     BSASlkkkkauuiuuu
+    f9b4:	2020202b 40202020 53415342 6b6b6b6c     +      @BSASlkkk
+    f9c4:	6175616b 75757561 2020202b 6f202020     kauaauuu+      o
+    f9d4:	4e4e7430 65252374 30303030 6f327130     0tNNt#%e00000q2o
+    f9e4:	20202020 6f202020 4e4e7430 65252374            o0tNNt#%e
+    f9f4:	30303030 6f257130 20202020 00000000     00000q%o    ....
+    fa04:	24202020 436d6d31 3e354d43 534d393e        $1mmCCM5>>9MS
+    fa14:	233e394d 2020206f 24202020 436d6d31     M9>#o      $1mmC
+    fa24:	3e364d43 434d3924 233e394d 2020206f     CM6>$9MCM9>#o   
+    fa34:	25202020 4e4e4e72 34744e43 434d7434        %rNNNCNt44tMC
+    fa44:	3c31336d 20202024 25202020 4e4e4e72     m31<$      %rNNN
+    fa54:	34654341 43437434 3c31336d 20202024     ACe44tCCm31<$   
+    fa64:	3b202020 41434343 6d6d435a 43436d37        ;CCCAZCmm7mCC
+    fa74:	3636374d 20202024 3b202020 41434343     M766$      ;CCCA
+    fa84:	6d6d4341 43436d37 3636374d 20202024     ACmm7mCCM766$   
+    fa94:	3d2b2020 53444276 7a634441 5344627a       +=vBDSADczzbDS
+    faa4:	2a2a6342 2020202b 3d2e2020 53444276     Bc**+     .=vBDS
+    fab4:	78784441 5344627a 3d2a6342 20202040     ADxxzbDSBc*=@   
+    fac4:	3a202020 41565642 6b6b5653 53566b6b        :BVVASVkkkkVS
+    fad4:	75756142 20202040 3a202020 41535642     Bauu@      :BVSA
+    fae4:	6b6b5641 53566b6b 75756142 20202040     AVkkkkVSBauu@   
+    faf4:	25202020 5a5a4e72 71582040 30303030        %rNZZ@ Xq0000
+    fb04:	25713030 20202020 25202020 5a5a4e72     00q%       %rNZZ
+    fb14:	3258203b 30303030 25303030 20202020     ; X20000000%    
+    fb24:	00000000 31582020 564d3731 3c435a53     ....  X117MVSZC<
+    fb34:	4156443c 242c6e5a 20202024 3c582020     <DVAZn,$$     X<
+    fb44:	564d3836 3c435a53 5356443c 242c6e5a     68MVSZC<<DVSZn,$
+    fb54:	20202024 72582020 564e4e72 34435a53     $     XrrNNVSZC4
+    fb64:	41564d34 31316d5a 2020202c 72582020     4MVAZm11,     Xr
+    fb74:	534e4e72 34435a53 53564334 31316d5a     rNNSSZC44CVSZm11
+    fb84:	2020582c 4d582020 53534343 6d415a53     ,X    XMCCSSSZAm
+    fb94:	4156436d 36384d5a 20205833 4d582020     mCVAZM863X    XM
+    fba4:	53534343 6d415a53 5356436d 3638435a     CCSSSZAmmCVSZC86
+    fbb4:	20205833 782b2020 56564276 7a535a53     3X    +xvBVVSZSz
+    fbc4:	41564463 3d3d445a 2020582a 782b2020     cDVAZD==*X    +x
+    fbd4:	53567676 63445a53 53564463 2a3d445a     vvVSSZDccDVSZD=*
+    fbe4:	2020582a 61582020 5653446c 6b534153     *X    XalDSVSASk
+    fbf4:	5356566b 7575425a 20205875 612e2020     kVVSZBuuuX    .a
+    fc04:	5653566c 6b565a53 4156566b 7575445a     lVSVSZVkkVVAZDuu
+    fc14:	20205875 30582020 5a5a4e72 306f5835     uX    X0rNZZ5Xo0
+    fc24:	30303030 32303030 2020206f 30582020     00000002o     X0
+    fc34:	5a5a4e72 30232035 30303030 71303030     rNZZ5 #00000000q
+    fc44:	2020206f 00000000 31582020 406e3831     o   ....  X118n@
+    fc54:	395a443b 3b403b39 232c4153 20205823     ;DZ99;@;SA,##X  
+    fc64:	31582020 406e3831 395a563a 3b403b39       X118n@:VZ99;@;
+    fc74:	232c4153 20205823 65582020 406e7272     SA,##X    Xerrn@
+    fc84:	775a563b 3b403b36 3c314153 2020582c     ;VZw6;@;SA1<,X  
+    fc94:	65582020 406e7272 655a563b 3b403b36       Xerrn@;VZe6;@;
+    fca4:	3c314153 2020582c 43582020 40424343     SA1<,X    XCCCB@
+    fcb4:	4d5a563b 3b403b6d 36384141 20205833     ;VZMm;@;AA863X  
+    fcc4:	4d582020 406e4343 4d5a563b 3b403b6d       XMCCn@;VZMm;@;
+    fcd4:	36384141 202e5833 78582020 406e7676     AA863X.   Xxvvn@
+    fce4:	625a443b 3b403b63 2a3d4153 2020582a     ;DZbc;@;SA=**X  
+    fcf4:	78582020 406e7676 625a562d 3b403b63       Xxvvn@-VZbc;@;
+    fd04:	2a3d4141 2020582a 612e2020 406e4442     AA=**X    .aBDn@
+    fd14:	6c5a563a 3b40616b 75614141 20202e75     :VZlka@;AAauu.  
+    fd24:	612b2020 406e4442 6c5a563a 3b40616b       +aBDn@:VZlka@;
+    fd34:	75754141 20205875 65252020 4e4e4e72     AAuuuX    %erNNN
+    fd44:	6530774e 30303030 32303030 20202023     Nw0e00000002#   
+    fd54:	6f582020 4e4e7425 65657774 30303030       Xo%tNNtwee0000
+    fd64:	32303030 20205823 00000000 3c582020     0002#X  ....  X<
+    fd74:	203b3836 395a4258 40582d3c 232c4156     68; XBZ9<-X@VA,#
+    fd84:	20205824 3c582020 203b3836 395a6e58     $X    X<68; XnZ9
+    fd94:	40582d3c 232c4156 20205824 72582020     <-X@VA,#$X    Xr
+    fda4:	203b7272 385a4258 40582d34 31314156     rr; XBZ84-X@VA11
+    fdb4:	2020582c 72582020 203b7272 385a6e58     ,X    Xrrr; XnZ8
+    fdc4:	40582d33 31314156 2020582c 4d582020     3-X@VA11,X    XM
+    fdd4:	203b4343 4d5a6e58 40582d6e 36385a56     CC; XnZMn-X@VZ86
+    fde4:	20205833 43582020 20614343 6d5a4258     3X    XCCCa XBZm
+    fdf4:	40202d6e 36385a56 20205833 782b2020     n- @VZ863X    +x
+    fe04:	583b7676 635a4258 40203b7a 2a3d4156     vv;XXBZcz; @VA=*
+    fe14:	2020202a 782b2020 583b7676 625a6e58     *     +xvv;XXnZb
+    fe24:	40202d7a 2a3d4156 2020582a 61582020     z- @VA=**X    Xa
+    fe34:	20614442 6c5a4258 40582d6b 75754156     BDa XBZlk-X@VAuu
+    fe44:	20202e75 612e2e20 203b446e 6c5a4258     u.   ..anD; XBZl
+    fe54:	40582d6b 75614156 20202e3a 65322020     k-X@VAau:.    2e
+    fe64:	72727265 30657272 30303030 71303030     errrrre00000000q
+    fe74:	20205825 20582020 77405858 30657277     %X    X XX@wwre0
+    fe84:	30303030 32303030 20205825 00000000     00000002%X  ....
+    fe94:	3c582020 3b6e3831 3953533b 6e3b3b39       X<18n;;SS99;;n
+    fea4:	232c565a 20205823 3c582020 3b6e3831     ZV,##X    X<18n;
+    feb4:	3953533b 6e3b6e24 242c5641 20205823     ;SS9$n;nAV,$#X  
+    fec4:	65582020 3b6e7272 3653533b 6e3b6e33       Xerrn;;SS63n;n
+    fed4:	3c314d41 2020582c 65582020 3b6e7272     AM1<,X    Xerrn;
+    fee4:	3653533b 6e3b6133 3c314d41 2020582c     ;SS63a;nAM1<,X  
+    fef4:	4d582020 3b6e4343 4d53533b 6c3b6174       XMCCn;;SSMta;l
+    ff04:	36365641 20205833 4d582020 3b6e4343     AV663X    XMCCn;
+    ff14:	6d53533b 6c3b616d 3638565a 20205833     ;SSmma;lZV863X  
+    ff24:	78585820 3b6e7676 6353533b 6e3b627a      XXxvvn;;SSczb;n
+    ff34:	2a2a4441 2020582a 78585858 3b6e7676     AD***X  XXXxvvn;
+    ff44:	6353533b 6e2d6e7a 2a2d4441 2020202a     ;SSczn-nAD-**   
+    ff54:	612e2020 3b6e426c 6b535361 6e3b6161       .alBn;aSSkaa;n
+    ff64:	75754441 20202e75 612e2020 3b6e426c     ADuuu.    .alBn;
+    ff74:	6b53533b 6e3b6161 7561445a 20202075     ;SSkaa;nZDauu   
+    ff84:	65322020 72656565 30656565 30303030       2eeeereee00000
+    ff94:	32303030 20205825 20202020 20202058     0002%X      X   
+    ffa4:	71252558 30303030 32303030 20205825     X%%q00000002%X  
+    ffb4:	00000000 3c582020 563b3631 246e4141     ....  X<16;VAAn$
+    ffc4:	41536b24 24243b41 20202024 3c582020     $kSAA;$$$     X<
+    ffd4:	563b3631 246e5a41 41536b24 24243b41     16;VAZn$$kSAA;$$
+    ffe4:	20202024 74582020 563b7272 336e4141     $     Xtrr;VAAn3
+    fff4:	41536b32 31313b43 20206f2c 74582020     2kSAC;11,o    Xt
+   10004:	563b7272 336e5a41 41536e32 31313b43     rr;VAZn32nSAC;11
+   10014:	20206f2c 43582020 56614343 386e5a41     ,o    XCCCaVAZn8
+   10024:	41566e38 36366153 20205833 4d582020     8nVASa663X    XM
+   10034:	566e4343 386e4141 41566e38 36363b41     CCnVAAn88nVAA;66
+   10044:	20205833 782b5820 53617676 7a6e4141     3X   X+xvvaSAAnz
+   10054:	41566e3d 2a2a6141 2020582a 782b5820     =nVAAa***X   X+x
+   10064:	53617676 7a6e4141 41536e3d 3d2a6141     vvaSAAnz=nSAAa*=
+   10074:	2020582a 612e2020 53614242 616e4141     *X    .aBBaSAAna
+   10084:	41536e61 75756141 2020583a 612e2020     anSAAauu:X    .a
+   10094:	56614242 616e4141 41536e61 75756141     BBaVAAnaanSAAauu
+   100a4:	20205875 236f2020 23232323 23232323     uX    o#########
+   100b4:	30303223 32713030 20205825 20202020     #20000q2%X      
+   100c4:	20202020 6f202020 30303223 32713030            o#20000q2
+   100d4:	20205825 00000000 3c582020 23243636     %X  ....  X<66$#
+   100e4:	3e233b3b 3b3b6f24 243e6f23 20202024     ;;#>$o;;#o>$$   
+   100f4:	3c582020 23243636 3e233b3b 3b3b6f24       X<66$#;;#>$o;;
+   10104:	24246f25 20205823 72582020 3b327272     %o$$#X    Xrrr2;
+   10114:	33243b3b 3b3b2333 3c312423 2020582c     ;;$33#;;#$1<,X  
+   10124:	72582020 3b327272 33243b3b 3b3b2333       Xrrr2;;;$33#;;
+   10134:	3c312423 2020582c 43582020 40354343     #$1<,X    XCCC5@
+   10144:	37393b3b 3b3b2438 3636243b 20205833     ;;978$;;;$663X  
+   10154:	43582020 40354343 6d253b3b 3b3b2438       XCCC5@;;%m8$;;
+   10164:	36362425 20205833 78582020 3b3d7676     %$663X    Xxvv=;
+   10174:	7a2a3b3b 3b3b403d 2a2a4025 2020582a     ;;*z=@;;%@***X  
+   10184:	78582020 3b3d7676 7a2a3b3b 3b3b403d       Xxvv=;;;*z=@;;
+   10194:	2a2a2625 2020582a 61582020 253a4242     %&***X    XaBB:%
+   101a4:	61263b3b 3b3b4061 75752625 20202e75     ;;&aa@;;%&uuu.  
+   101b4:	6b582020 3b3a426c 61263b3b 3b3b4061       XklB:;;;&aa@;;
+   101c4:	75752640 20202e3a 71252020 71717171     @&uu:.    %qqqqq
+   101d4:	71717171 30303032 25713030 20205825     qqqq200000q%%X  
+   101e4:	20202020 58205858 25236f58 30307171         XX XXo#%qq00
+   101f4:	32323030 20205825 00000000 31582020     0022%X  ....  X1
+   10204:	24333631 3e246f6f 586f242c 243e246f     163$oo$>,$oXo$>$
+   10214:	20205824 3c6f2020 24333631 2c246f6f     $X    o<163$oo$,
+   10224:	586f243e 243e246f 20205823 65582020     >$oXo$>$#X    Xe
+   10234:	25777272 3332236f 6f6f3c34 3c312c24     rrw%o#234<oo$,1<
+   10244:	2020582c 65582020 25777272 3332236f     ,X    Xerrw%o#23
+   10254:	6f233c34 3c313c23 2020582c 4d582020     4<#o#<1<,X    XM
+   10264:	396d4343 6d35406f 6f233537 36363624     CCm9o@5m75#o$666
+   10274:	20205833 4d582020 396d4343 6d354040     3X    XMCCm9@@5m
+   10284:	6f24356d 36363624 20205833 782b2020     m5$o$6663X    +x
+   10294:	3d787676 7a3d2a40 2e403d7a 2a3d3d2b     vvx=@*=zz=@.+==*
+   102a4:	2020202a 782b2020 3d787676 783d2a2b     *     +xvvx=+*=x
+   102b4:	2e402a7a 2a3d2a2b 2020582a 6b2e2020     z*@.+*=**X    .k
+   102c4:	266b426c 6b752640 40403a6b 75757526     lBk&@&ukk:@@&uuu
+   102d4:	20205875 612e2020 3a6b426c 6b75262b     uX    .alBk:+&uk
+   102e4:	40403a6b 75757540 20205875 30322020     k:@@@uuuuX    20
+   102f4:	30713030 30303030 30303030 25323030     00q000000000002%
+   10304:	20205825 20202020 25585858 30303025     %X      XXX%%000
+   10314:	30303030 25327130 20205825 00000000     00000q2%%X  ....
+   10324:	3c582020 2c313633 3e2c2c2c 243e2c3e       X<361,,,,>>,>$
+   10334:	243e2c24 20205823 3c582020 2c313633     $,>$#X    X<361,
+   10344:	3e2c2c2c 243e3e3e 243e3e24 20202024     ,,,>>>>$$>>$$   
+   10354:	72582020 65657272 34656530 33333434       Xrrree0ee44433
+   10364:	3c313333 2020582c 72582020 65657272     331<,X    Xrrree
+   10374:	34656530 33333434 3c313133 2020582c     0ee44433311<,X  
+   10384:	4d402020 6d4d4343 6d6d6d38 3638376d       @MCCMm8mmmm786
+   10394:	36383736 20205833 4d402020 6d4d4343     67863X    @MCCMm
+   103a4:	6d6d6d38 36363737 36363738 202e5833     8mmm776687663X. 
+   103b4:	78582020 78787676 7a787a7a 3d3d7a7a       Xxvvxxzzxzzz==
+   103c4:	2a2a3d3d 2020202a 78582020 78787676     ==***     Xxvvxx
+   103d4:	7a787a78 3d3d7a7a 2a2a3d3d 2020582a     xzxzzz====***X  
+   103e4:	6b2e2020 6b42446c 6b616b61 3a75616b       .klDBkakakkau:
+   103f4:	75757575 20202e3a 6b582020 6b42446c     uuuu:.    XklDBk
+   10404:	6b61616b 3a75616b 75757575 20205875     kaakkau:uuuuuX  
+   10414:	30252020 30303030 30303030 30303030       %0000000000000
+   10424:	32253230 20202025 58582020 3071256f     02%2%     XXo%q0
+   10434:	30303030 30303030 25323230 20202025     00000000022%%   
+   10444:	00000000 31582020 3c313631 3e2c3c2c     ....  X1161<,<,>
+   10454:	2c3e3e3e 24243e3e 20202024 31582020     >>>,>>$$$     X1
+   10464:	3c313631 3e2c2c3c 2c3e3e3e 243e3e3e     161<<,,>>>>,>>>$
+   10474:	20202023 65582020 65657272 33346565     #     Xerreeee43
+   10484:	34343434 31313133 2020582c 65582020     44443111,X    Xe
+   10494:	65657272 33346565 33343434 31313133     rreeee4344433111
+   104a4:	2020582c 432b2020 6d4d4343 6d6d6d6d     ,X    +CCCMmmmmm
+   104b4:	37373737 36363737 20205833 432b2020     777777663X    +C
+   104c4:	6d4d4343 6d6d6d6d 3737376d 36363737     CCMmmmmmm7777766
+   104d4:	20202e33 78582020 78787676 7a787878     3.    Xxvvxxxxxz
+   104e4:	3d7a7a7a 2a3d3d3d 2020582a 78582020     zzz====**X    Xx
+   104f4:	78787676 7a7a7878 3d7a7a7a 2a3d3d3d     vvxxxxzzzzz====*
+   10504:	2020582a 6b582020 6b42426c 6b6b6b6b     *X    XklBBkkkkk
+   10514:	7575616b 75757575 2020583a 61582020     kauuuuuu:X    Xa
+   10524:	6b42446c 6b6b6b6b 7575616b 75757575     lDBkkkkkkauuuuuu
+   10534:	20202075 71582020 30303030 30303030     u     Xq00000000
+   10544:	30303030 25322532 2020206f 32582020     00002%2%o     X2
+   10554:	30303071 30303030 30303030 32253232     q0000000000022%2
+   10564:	2020206f 00000000 3c582020 3c313631     o   ....  X<161<
+   10574:	2c2c3c3c 3e3e3e2c 243e3e3e 20202023     <<,,,>>>>>>$#   
+   10584:	3c582020 3c333631 2c2c3c3c 3e3e3e2c       X<163<<<,,,>>>
+   10594:	243e3e3e 20202023 72582020 65727272     >>>$#     Xrrrre
+   105a4:	34346565 31343434 31313133 2020582c     ee4444413111,X  
+   105b4:	65582020 65727272 34346565 34343434       Xerrreee444444
+   105c4:	31313333 2020582c 4d2b2020 6d4d4343     3311,X    +MCCMm
+   105d4:	6d6d6d6d 3737376d 36363737 20205831     mmmmm77777661X  
+   105e4:	43402020 6d4d4343 6d6d6d6d 37363637       @CCCMmmmmm7667
+   105f4:	36363737 20205833 78405858 78787676     77663X  XX@xvvxx
+   10604:	78787878 3d7a7a7a 3d2a3d3d 2020202a     xxxxzzz===*=*   
+   10614:	78405858 78787676 7a787878 3d7a7a7a     XX@xvvxxxxxzzzz=
+   10624:	3d2a3d3d 2020582a 61582020 6b42446c     ==*=*X    XalDBk
+   10634:	6b6b6b6b 7575616b 75757575 20205875     kkkkkauuuuuuuX  
+   10644:	61582020 6b42446c 6b6b6b6b 7575616b       XalDBkkkkkkauu
+   10654:	75757575 20202e75 23202020 30303030     uuuuu.     #0000
+   10664:	30303030 32303030 23322532 20202020     000000022%2#    
+   10674:	23202020 30303030 30303030 32303030        #000000000002
+   10684:	23253225 20202058 00000000 3c6f2020     %2%#X   ....  o<
+   10694:	3c313631 2c2c3c3c 3e3e3e3e 243e3e3e     161<<<,,>>>>>>>$
+   106a4:	20202023 3c582020 3c313631 2c2c3c3c     #     X<161<<<,,
+   106b4:	3e3e3e2c 243e2c3e 20205824 65582020     ,>>>>,>$$X    Xe
+   106c4:	65727272 34346565 33343434 31313333     rrreee4444433311
+   106d4:	2020582c 72582020 65727272 34346565     ,X    Xrrrreee44
+   106e4:	33333434 31313333 2020582c 4d402020     44333311,X    @M
+   106f4:	6d434343 6d6d6d6d 37373737 36363737     CCCmmmmm77777766
+   10704:	20205833 4d2b2020 6d4d4343 6d6d6d37     3X    +MCCMm7mmm
+   10714:	37373737 36363737 20205833 782b5820     777777663X   X+x
+   10724:	78787676 7a7a7878 3d7a7a7a 2a2a3d3d     vvxxxxzzzzz===**
+   10734:	2020582a 782b5820 78787676 7a787878     *X   X+xvvxxxxxz
+   10744:	3d3d7a7a 2a2a3d3d 2020582a 612e2020     zz====***X    .a
+   10754:	6b42446c 6b6b6b6b 7575756b 75757575     lDBkkkkkkuuuuuuu
+   10764:	20205875 6b582020 6b42446c 6b6b6b6b     uX    XklDBkkkkk
+   10774:	7575616b 75617575 20205875 6f202020     kauuuuauuX     o
+   10784:	30303025 30303030 25323030 6f253225     %0000000002%%2%o
+   10794:	20202020 6f202020 30307125 30303030            o%q000000
+   107a4:	25323030 6f252532 20202020 00000000     002%2%%o    ....
+   107b4:	3c582020 3c333631 3e2c3c2c 3e3e3e3e       X<163<,<,>>>>>
+   107c4:	233e3e3e 20205824 31582020 2c313631     >>>#$X    X1161,
+   107d4:	242c3c3c 3e3e2c24 233e3e3e 20205824     <<,$$,>>>>>#$X  
+   107e4:	726f2020 65727272 34346565 34343434       orrrreee444444
+   107f4:	31313333 2020582c 72582020 65727272     3311,X    Xrrrre
+   10804:	31346565 33343433 3c313333 2020582c     ee413443331<,X  
+   10814:	4d2b2020 6d4d4343 6d6d6d6d 37373737       +MCCMmmmmm7777
+   10824:	36363737 20205833 432b2020 6d4d4343     77663X    +CCCMm
+   10834:	386d6d6d 37373736 36363737 20205833     mmm8677777663X  
+   10844:	782b2020 78787676 7a7a7878 3d7a7a7a       +xvvxxxxzzzzz=
+   10854:	2a3d3d3d 2020582a 78402020 78787676     ===**X    @xvvxx
+   10864:	3d787878 3d7a7a3d 2a2a3d3d 2020202a     xxx==zz===***   
+   10874:	6b582020 6b42446c 6b6b6b6b 7575616b       XklDBkkkkkkauu
+   10884:	75757575 20202075 61582020 6b42446c     uuuuu     XalDBk
+   10894:	696b6b6b 75757569 75757575 20205875     kkkiiuuuuuuuuX  
+   108a4:	20202020 3030256f 71303030 32253271         o%00000qq2%2
+   108b4:	206f2532 20202020 20202020 3071326f     2%o         o2q0
+   108c4:	30303030 25323271 20232532 20202020     0000q22%2%#     
+   108d4:	00000000 31582020 24243631 3e2c3c2c     ....  X116$$,<,>
+   108e4:	3e2c3e3e 233e246f 20202024 3e202020     >>,>o$>#$      >
+   108f4:	3c313633 583e2c3c 3e3e2458 243e3e3e     361<<,>XX$>>>>>$
+   10904:	2020206f 65582020 25327272 34346565     o     Xerr2%ee44
+   10914:	31343434 31312424 2020582c 32202020     4441$$11,X     2
+   10924:	65727272 6f336565 33343c58 2c31333c     rrreee3oX<43<31,
+   10934:	20205824 4d402020 39354343 6d6d6d38     $X    @MCC598mmm
+   10944:	36373737 3636392c 20205833 35582020     7776,9663X    X5
+   10954:	6d4d4343 58366d6d 37373658 36363737     CCMmmm6XX6777766
+   10964:	20202039 78402020 2a3d7676 7a78787a     9     @xvv=*zxxz
+   10974:	3d7a3d7a 2a2a2a40 2020582a 782b2020     z=z=@****X    +x
+   10984:	78767676 583d7878 3d7a3d58 2a2a3d3d     vvvxxx=XX=z===**
+   10994:	2020202a 61582020 3a3b446c 6b6b6b61     *     XalD;:akkk
+   109a4:	7975616b 75752626 20202075 3a202020     kauy&&uuu      :
+   109b4:	6b42446c 2b756b6b 7575752b 75757575     lDBkkku++uuuuuuu
+   109c4:	20202026 20202020 32256f20 32713271     &        o%2q2q2
+   109d4:	25253225 20586f23 20202020 20202020     %2%%#oX         
+   109e4:	32256f20 25713271 25322525 20206f23      o%2q2q%%%2%#o  
+   109f4:	20202020 00000000 31582020 20202431         ....  X11$  
+   10a04:	3e2c2c6f 6f243e3e 246f2020 20202024     o,,>>>$o  o$$   
+   10a14:	58202020 2c313639 20583e3c 3e245820        X961,<>X  X$>
+   10a24:	6f242c3e 20202058 72582020 202e2572     >,$oX     Xrr%. 
+   10a34:	34346523 6f333434 3c242020 2020582c     #e44443o  $<,X  
+   10a44:	58202020 65727277 206f3465 33335820        Xwrree4o  X33
+   10a54:	24313333 20202058 4d402020 202e3b43     331$X     @MC;. 
+   10a64:	6d6d3740 2436376d 36232020 20205833     @7mmm76$  #63X  
+   10a74:	58202020 6d4d436c 2e6f356d 37356f20        XlCMmm5o. o57
+   10a84:	2c363737 20202058 78582020 20202d76     776,X     Xxv-  
+   10a94:	7a787a40 583d7a7a 2a2b2020 2020582a     @zxzzz=X  +**X  
+   10aa4:	58202020 78787670 20587a78 3d3d5820        XpvxxxzX  X==
+   10ab4:	2a2a3d3d 20202020 6b582020 20203a6c     ==**      Xkl:  
+   10ac4:	6b6b6b2b 4f756b6b 75262020 20202e75     +kkkkkuO  &uu.  
+   10ad4:	58202020 6b424461 202b696b 753a2e2e        XaDBkki+ ..:u
+   10ae4:	26757575 20202020 20202020 6f582020     uuu&          Xo
+   10af4:	25252523 6f252525 20202058 20202020     #%%%%%%oX       
+   10b04:	20202020 6f582020 25252523 6f252525           Xo#%%%%%%o
+   10b14:	20202058 20202020 00000000 3c582020     X       ....  X<
+   10b24:	20202024 3e3e6f20 206f242c 6f202020     $    o>>,$o    o
+   10b34:	20205823 20202020 3c313958 2020583e     #X      X91<>X  
+   10b44:	24582020 20243e3e 20202020 65582020       X$>>$       Xe
+   10b54:	20202e25 34332320 206f3334 24202020     %.   #3443o    $
+   10b64:	2020582c 20202020 65723258 20206f32     ,X      X2re2o  
+   10b74:	3c6f2020 583e3333 20202020 4d402020       o<33>X      @M
+   10b84:	2020203b 6d384058 20403637 242e2020     ;   X@8m76@   .$
+   10b94:	20205833 20202020 6d433558 20206f35     3X      X5Cm5o  
+   10ba4:	36582020 58393637 20202020 782b2020       X6769X      +x
+   10bb4:	2020202a 787a4020 202b3d7a 40202020     *    @zxz=+    @
+   10bc4:	2020582a 20202020 78782d58 2020587a     *X      X-xxzX  
+   10bd4:	2a2e2020 20403d3d 20202020 61582020       .*==@       Xa
+   10be4:	20202026 6b692b20 2e2b696b 40202020     &    +ikki+.   @
+   10bf4:	2020583a 20202020 6b423b58 20205869     :X      X;BkiX  
+   10c04:	3a2e2e2e 58267575 20202020 20202020     ...:uu&X        
+   10c14:	20202020 58585820 20202058 20202020          XXXX       
+   10c24:	20202020 20202020 20202020 58582020                   XX
+   10c34:	20205858 20202020 20202020 00000000     XX          ....
+   10c44:	6f582020 20202020 3e6f2020 20206f3e       Xo      o>>o  
+   10c54:	20202020 2020206f 20202020 3e242020         o         $>
+   10c64:	20202058 58202020 20202424 20202020     X      X$$      
+   10c74:	23582020 20202020 336f2020 20206f33       X#      o33o  
+   10c84:	20202020 2020586f 20202020 71322020         oX        2q
+   10c94:	2020206f 58202020 2020242c 20202020     o      X,$      
+   10ca4:	3b582020 20202058 37405820 202e2437       X;X    X@77$. 
+   10cb4:	20202020 20205823 20202020 35355820         #X       X55
+   10cc4:	2020206f 6f202020 20203936 20202020     o      o69      
+   10cd4:	2a582020 20202020 7a402020 20202b7a       X*      @zz+  
+   10ce4:	20202020 2020582b 20202020 7a3d5820         +X       X=z
+   10cf4:	2020202b 2e202020 20202a2a 20202020     +      .**      
+   10d04:	26582020 20202020 6b402020 20202b6b       X&      @kk+  
+   10d14:	20202020 20202e2b 20202020 69695820         +.       Xii
+   10d24:	20202058 2e202020 2020263a 20202020     X      .:&      
+   10d34:	20202020 20202020 20202020 20202020                     
+   10d44:	20202020 20202020 20202020 20202020                     
+   10d54:	20202020 20202020 20202020 20202020                     
+   10d64:	00000000 20202020 20202020 6f202020     ....           o
+   10d74:	20202058 20202020 20202020 20202020     X               
+   10d84:	58582020 20202020 20202020 20202058       XX        X   
+   10d94:	20202020 20202020 20202020 6f202020                    o
+   10da4:	2020206f 20202020 20202020 20202020     o               
+   10db4:	58582020 2020582e 20202020 20205858       XX.X      XX  
+   10dc4:	20202020 20202020 20202020 40582020                   X@
+   10dd4:	20202e40 20202020 20202020 20202020     @.              
+   10de4:	6f582020 20202020 20202020 20205858       Xo        XX  
+   10df4:	20202020 20202020 20202020 58202020                    X
+   10e04:	2020202b 20202020 20202020 20202020     +               
+   10e14:	58582020 20202020 20202020 20202058       XX        X   
+   10e24:	20202020 20202020 20202020 2b202020                    +
+   10e34:	2020202b 20202020 20202020 20202020     +               
+   10e44:	2b582020 20202020 20202020 20202e58       X+        X.  
+   10e54:	20202020 20202020 20202020 20202020                     
+   10e64:	20202020 20202020 20202020 20202020                     
+   10e74:	20202020 20202020 20202020 20202020                     
+   10e84:	20202020 00000000 20202020 2e202020         ....       .
+   10e94:	6f6f6f20 206f406f 20202020 20202020      oooo@o         
+   10ea4:	20202020 20202020 6f6f6f2e 20584024             .ooo$@X 
+   10eb4:	20202020 20202020 20202020 20202020                     
+   10ec4:	40232320 20232323 20202020 20202020      ##@###         
+   10ed4:	20202020 20202020 23236f58 20236f23             Xo###o# 
+   10ee4:	20202020 20202020 20202020 20202020                     
+   10ef4:	23402358 206f2340 20202020 20202020     X#@#@#o         
+   10f04:	20202020 20202020 2340232e 2e23233a             .#@#:##.
+   10f14:	20202020 20202020 20202020 20202020                     
+   10f24:	40404058 20404040 20202020 20202020     X@@@@@@         
+   10f34:	20202020 20202020 40404020 20404040              @@@@@@ 
+   10f44:	20202020 20202020 20202020 20202020                     
+   10f54:	40262b58 2e402640 20202020 20202020     X+&@@&@.        
+   10f64:	20202020 20202020 40402b20 58402640              +@@@&@X
+   10f74:	20202058 20202020 20202020 20202020     X               
+   10f84:	20202020 20202020 20202020 20202020                     
+   10f94:	20202020 20202020 20202020 20202020                     
+   10fa4:	20202020 20202020 00000000 20202020             ....    
+   10fb4:	6f202020 36363624 24393936 2020206f        o$666699$o   
+   10fc4:	20202020 20202020 6f202020 35363125                o%165
+   10fd4:	24393936 2020206f 20202020 20202020     699$o           
+   10fe4:	23202020 72726532 25343465 2020206f        #2erre44%o   
+   10ff4:	20202020 20202020 23205820 72726532              X #2err
+   11004:	2c346565 2020206f 20202020 20202020     ee4,o           
+   11014:	40202020 4d434d35 3c6d4d4d 20202e6f        @5MCMMMm<o.  
+   11024:	20202020 20202020 40202020 4d434d35                @5MCM
+   11034:	39374d4d 20202024 20202020 20202020     MM79$           
+   11044:	40202020 6262622d 2a636363 2020202b        @-bbbccc*+   
+   11054:	20202020 20202020 2a202020 6262622d                *-bbb
+   11064:	2a636363 2020202b 20202020 20202020     ccc*+           
+   11074:	40202020 42426c3b 266b6c6c 2020202b        @;lBBllk&+   
+   11084:	20202020 20202020 40202020 4242423b                @;BBB
+   11094:	26616c42 2020202b 20202020 20202020     Bla&+           
+   110a4:	20202020 20202020 20202020 20202020                     
+   110b4:	20202020 20202020 20202020 20202020                     
+   110c4:	20202020 20202020 20202020 00000000                 ....
+   110d4:	20202020 38356f20 3c31366d 3e3e3e2c          o58m61<,>>>
+   110e4:	20582424 20202020 20202020 38356f20     $$X          o58
+   110f4:	2c313837 3e3e3e2c 20582424 20202020     781,,>>>$$X     
+   11104:	20202020 74744020 3472744e 34343434          @ttNtr44444
+   11114:	20582c33 20202020 20202020 746e5858     3,X         XXnt
+   11124:	3472724e 34333434 20582433 20202020     Nrr444343$X     
+   11134:	20202020 4d355820 6d4d4343 37373737          X5MCCMm7777
+   11144:	206f3936 20202020 20202020 4d355820     69o          X5M
+   11154:	6d4d4343 37373737 20583936 20202020     CCMm777769X     
+   11164:	20202020 6e6e2b20 78624276 3d7a7a78          +nnvBbxxzz=
+   11174:	20582a3d 20202020 20202020 6e614020     =*X          @an
+   11184:	78627676 3d3d7a7a 20582a2a 20202020     vvbxzz==**X     
+   11194:	20202020 426e2b20 6b6c4453 7575616b          +nBSDlkkauu
+   111a4:	202e263a 20202020 20202020 426e2b20     :&.          +nB
+   111b4:	6b425656 7575616b 20583a75 20202020     VVBkkauuu:X     
+   111c4:	20202020 58202020 6f323225 58253225            X%22o%2%X
+   111d4:	20202020 20202020 20202020 58202020                    X
+   111e4:	20202020 58202020 20202020 20202020            X        
+   111f4:	00000000 20202020 43536e2b 3e2c366d     ....    +nSCm6,>
+   11204:	3e3e3e3e 58243e3e 20202020 20202020     >>>>>>$X        
+   11214:	43536e6f 3e2c366d 3e3e3e3e 58243e3e     onSCm6,>>>>>>>$X
+   11224:	20202020 20202020 415a6e6f 3465654e             onZANee4
+   11234:	34343334 6f2c3333 20202020 20202020     434433,o        
+   11244:	415a4d58 3434724e 34343434 6f2c3333     XMZANr44444433,o
+   11254:	20202020 20202020 43437440 6d6d4d43             @tCCCMmm
+   11264:	3737376d 58353737 20202020 20202020     m777775X        
+   11274:	4343742b 6d6d4d43 37373737 58353737     +tCCCMmm7777775X
+   11284:	20202020 20202020 44416e40 7a786242             @nADBbxz
+   11294:	3d3d7a7a 202a3d3d 20202020 20202020     zz====*         
+   112a4:	56416e40 7a787644 3d707a7a 202a3d3d     @nAVDvxzzzp===* 
+   112b4:	20202020 20202020 415a446f 6b6b4253             oDZASBkk
+   112c4:	7575616b 583a7575 20202020 20202020     kauuuu:X        
+   112d4:	415a446f 6b6b6c56 7575616b 583a7575     oDZAVlkkkauuuu:X
+   112e4:	20202020 20202020 30256f20 23656565              o%0eee#
+   112f4:	71303071 20585825 20202020 20202020     q00q%XX         
+   11304:	30256f20 20202023 71582020 20206f23      o%0#     Xq#o  
+   11314:	20202020 00000000 20202020 53534325         ....    %CSS
+   11324:	3e2c3c37 3e3e3e3e 6f3e3e3e 20202020     7<,>>>>>>>>o    
+   11334:	20202020 43564339 3e2c316d 3e3e3e3e         9CVCm1,>>>>>
+   11344:	6f3e3e3e 20202020 20202020 415a5a3b     >>>o        ;ZZA
+   11354:	34656574 33343434 24313333 20202058     tee44443331$X   
+   11364:	20202020 5a5a413b 3434654e 34343434         ;AZZNe444444
+   11374:	24313133 20202020 20202020 43434335     311$        5CCC
+   11384:	6d6d6d4d 37373737 24363737 2020202e     Mmmm7777776$.   
+   11394:	20202020 43434335 6d6d6d4d 3737376d         5CCCMmmmm777
+   113a4:	24363737 20202020 20202020 5641563b     776$        ;VAV
+   113b4:	7a787842 3d7a7a7a 402a3d3d 20202020     Bxxzzzz===*@    
+   113c4:	20202020 5641563b 78787842 3d3d7a7a         ;VAVBxxxzz==
+   113d4:	403d3d3d 20202020 20202020 415a413b     ===@        ;AZA
+   113e4:	6b6b6b44 7575616b 26757575 20202020     Dkkkkauuuuu&    
+   113f4:	20202020 415a413b 6b6b6b56 7575616b         ;AZAVkkkkauu
+   11404:	26757575 20202020 20202020 72723023     uuu&        #0rr
+   11414:	23656572 30303071 58232571 20202020     ree#q000q%#X    
+   11424:	20202020 72723023 20202032 30232020         #0rr2     #0
+   11434:	20233271 20202020 00000000 6f202020     q2#     ....   o
+   11444:	4d434d36 3e2c3c36 3e2c3e3e 243e3e3e     6MCM6<,>>>,>>>>$
+   11454:	20202058 6f202020 4d434d36 3e2c3c33     X      o6MCM3<,>
+   11464:	3e3e3e3e 243e3e3e 20202058 6f202020     >>>>>>>$X      o
+   11474:	4e414e74 34346572 33343434 2c313c33     tNANre4444433<1,
+   11484:	2020206f 6f582020 4e414e74 34346574     o     XotNANte44
+   11494:	33343434 2c313133 2020206f 40202020     4443311,o      @
+   114a4:	4e43434d 6d6d6d6d 3737376d 35363737     MCCNmmmmm7777765
+   114b4:	2020206f 40202020 4e43434d 6d6d6d6d     o      @MCCNmmmm
+   114c4:	3737376d 36363737 2020206f 40202020     m7777766o      @
+   114d4:	42564463 7a787862 3d467a7a 2a3d3d3d     cDVBbxxzzzF====*
+   114e4:	20202058 2b202020 44564462 7a7a7862     X      +bDVDbxzz
+   114f4:	3d7a7a7a 2a2a3d3d 20202058 40202020     zzz===**X      @
+   11504:	56415342 6b6b6b6c 7575616b 75757575     BSAVlkkkkauuuuuu
+   11514:	2020202b 40202020 5341536e 6b6b6b6c     +      @nSASlkkk
+   11524:	7575616b 75757575 2020202b 6f202020     kauuuuuu+      o
+   11534:	4e4e7430 2365724e 30303071 6f257130     0tNNNre#q0000q%o
+   11544:	20202020 6f202020 4e4e7430 20205874            o0tNNtX  
+   11554:	30252020 6f257130 20202020 00000000       %00q%o    ....
+   11564:	24202020 356d6d31 2c393b3b 253b393e        $1mm5;;9,>9;%
+   11574:	24243c3b 2020206f 24202020 356d6d31     ;<$$o      $1mm5
+   11584:	2c393b3b 253b393e 24243c3b 2020206f     ;;9,>9;%;<$$o   
+   11594:	25202020 744e4e72 3477353b 25353634        %rNNt;5w4465%
+   115a4:	3c3c3335 20202024 25202020 774e4e72     53<<$      %rNNw
+   115b4:	3477773b 253b3634 31313335 20202024     ;ww446;%5311$   
+   115c4:	3b202020 6e434343 6d6d353b 3b356d6d        ;CCCn;5mmmm5;
+   115d4:	36363735 20205824 3b2e2020 6e434343     5766$X    .;CCCn
+   115e4:	6d6d353b 3b353737 36363735 20202024     ;5mm775;5766$   
+   115f4:	3d582020 62444276 7a783b3b 2d2d637a       X=vBDb;;xzzc--
+   11604:	2a3d2d3b 20202040 3d2e2020 62424276     ;-=*@     .=vBBb
+   11614:	7a632d2d 3b2d637a 3d2a463b 20202040     --czzc-;;F*=@   
+   11624:	26202020 6e565642 6b6b3b3a 3a696b6b        &BVVn:;kkkki:
+   11634:	7575613a 20202040 26202020 6e565642     :auu@      &BVVn
+   11644:	6b6b693a 3a3a6b6b 75756169 20202026     :ikkkk::iauu&   
+   11654:	25582020 5a5a4e65 2365724e 30303071       X%eNZZNre#q000
+   11664:	25713030 20202058 25582020 5a5a4e65     00q%X     X%eNZZ
+   11674:	2020404e 30715820 25713030 20202058     N@   Xq000q%X   
+   11684:	00000000 31582020 2d4d3731 3c6e4020     ....  X117M- @n<
+   11694:	58406e3c 242c6e3b 20202024 3c582020     <n@X;n,$$     X<
+   116a4:	2d4d3836 3c6e402e 20406e3c 242c6e3b     68M-.@n<<n@ ;n,$
+   116b4:	20205824 72582020 2d4e4e72 346e4058     $X    XrrNN-X@n4
+   116c4:	58406e34 3c31742d 2020582c 65582020     4n@X-t1<,X    Xe
+   116d4:	3b4e4e72 346e4020 20406e34 3c316d2d     rNN; @n44n@ -m1<
+   116e4:	2020202c 4d582020 3b564343 6d424020     ,     XMCCV; @Bm
+   116f4:	20406e6d 36366d3b 20205833 4d582020     mn@ ;m663X    XM
+   11704:	3b534343 6d444020 20406e6d 38384d2d     CCS; @Dmmn@ -M88
+   11714:	20205833 782b2020 3a447676 78624058     3X    +xvvD:X@bx
+   11724:	58406e63 2a3d6e2d 2020582a 782e2020     cn@X-n=**X    .x
+   11734:	3b447676 78764058 20406e63 2a3d6e3b     vvD;X@vxcn@ ;n=*
+   11744:	20202e2a 6b582020 3b44446c 6b424020     *.    XklDD; @Bk
+   11754:	20406e6b 7575423b 20205875 6b582020     kn@ ;BuuuX    Xk
+   11764:	2d445642 6b42402e 2e406e6b 75756e3b     BVD-.@Bkkn@.;nuu
+   11774:	20202e3a 30582020 5a5a4e72 2372724e     :.    X0rNZZNrr#
+   11784:	30303071 32303030 2020206f 30582020     q0000002o     X0
+   11794:	5a5a4e72 20207743 30302520 32303030     rNZZCw   %000002
+   117a4:	2020206f 00000000 31582020 3b413833     o   ....  X138A;
+   117b4:	39533b58 583b5639 232c533b 20205824     X;S99V;X;S,#$X  
+   117c4:	3c582020 3b533831 39563b58 583b5333       X<18S;X;V93S;X
+   117d4:	242c533b 20202024 65582020 3b417272     ;S,$$     XerrA;
+   117e4:	77533b20 583b5336 3c31433b 2020582c      ;Sw6S;X;C1<,X  
+   117f4:	72582020 3b417272 38563b58 583a5665       XrrrA;X;V8eV:X
+   11804:	3131533b 2020582c 4d582020 3b414343     ;S11,X    XMCCA;
+   11814:	4d563b58 583a564d 3638533b 20205833     X;VMMV:X;S863X  
+   11824:	4d2b2020 3b414343 4d533b58 583a564d       +MCCA;X;SMMV:X
+   11834:	3638413b 20205833 78582020 3b417676     ;A863X    XxvvA;
+   11844:	63563b58 583b5362 3d3d533b 2020202a     X;VcbS;X;S==*   
+   11854:	78582020 61417676 62563b58 583b5363       XxvvAaX;VbcS;X
+   11864:	2a3d533b 2020202a 6b2e2020 6153446c     ;S=**     .klDSa
+   11874:	6c563b58 582d566c 7561533b 2020583a     X;VllV-X;Sau:X  
+   11884:	61582020 6141566c 6c563a58 583b566e       XalVAaX:VlnV;X
+   11894:	7561533b 20202e75 65252020 35407472     ;Sauu.    %ert@5
+   118a4:	2365724e 30303032 32303030 20205823     Nre#20000002#X  
+   118b4:	65252020 35407472 20587774 30302520       %ert@5twX  %00
+   118c4:	32303030 20202023 00000000 3c582020     0002#   ....  X<
+   118d4:	53413831 395a566e 42564139 233c4153     18ASnVZ99AVBSA<#
+   118e4:	20202023 31582020 41413731 395a566e     #     X117AAnVZ9
+   118f4:	6e565a39 232c4153 20205824 72582e20     9ZVnSA,#$X   .Xr
+   11904:	53417272 385a566e 42564165 31314353     rrASnVZ8eAVBSC11
+   11914:	2020582c 65582020 535a7272 655a5642     ,X    XerrZSBVZe
+   11924:	42565a38 3c314153 20206f2c 43582020     8ZVBSA1<,o    XC
+   11934:	535a4343 4d415642 6e565a4d 36384153     CCZSBVAMMZVnSA86
+   11944:	20205833 4d582020 535a4343 6d41566e     3X    XMCCZSnVAm
+   11954:	6e56414d 36385a53 20205833 78582020     MAVnSZ863X    Xx
+   11964:	535a4276 625a5642 6e444163 2a3d4141     vBZSBVZbcADnAA=*
+   11974:	2020582a 782b2020 415a7676 6241566e     *X    +xvvZAnVAb
+   11984:	42445a63 3d3d4153 2020582a 6b582020     cZDBSA==*X    Xk
+   11994:	535a446c 6c5a566e 42445a6c 75614153     lDZSnVZllZDBSAau
+   119a4:	20202e75 61582020 535a446c 425a4442     u.    XalDZSBDZB
+   119b4:	4256416c 75754141 20205875 65322020     lAVBAAuuuX    2e
+   119c4:	58202372 23657277 30303071 32303030     r# Xwre#q0000002
+   119d4:	20205825 65322020 20202372 20257277     %X    2er#  wr% 
+   119e4:	3030306f 32303030 20205825 00000000     o0000002%X  ....
+   119f4:	3c582020 5a563836 3c535a5a 5a5a5339       X<68VZZZS<9SZZ
+   11a04:	2424565a 20205824 3c582020 5a563633     ZV$$$X    X<36VZ
+   11a14:	3c535a5a 5a5a5339 232c565a 20202023     ZZS<9SZZZV,##   
+   11a24:	65582020 5a567272 36565a5a 5a5a5336       XerrVZZZV66SZZ
+   11a34:	3131565a 2020582c 72582020 5a447272     ZV11,X    XrrrDZ
+   11a44:	36535a5a 5a5a5334 3c31565a 2020582c     ZZS64SZZZV1<,X  
+   11a54:	4d2b2020 5a564343 6d535a5a 5a5a566d       +MCCVZZZSmmVZZ
+   11a64:	3638565a 20205833 43582020 5a444343     ZV863X    XCCCDZ
+   11a74:	6d535a5a 5a5a536d 3638565a 20205833     ZZSmmSZZZV863X  
+   11a84:	782b5858 5a447676 78535a5a 5a5a5363     XX+xvvDZZZSxcSZZ
+   11a94:	2a3d445a 2020582a 78582020 5a447676     ZD=**X    XxvvDZ
+   11aa4:	63535a5a 5a5a5363 2a3d445a 2020202a     ZZSccSZZZD=**   
+   11ab4:	61582020 5a444442 6b535a5a 5a5a536b       XaBDDZZZSkkSZZ
+   11ac4:	7575445a 20202e75 6b2e2020 5a564242     ZDuuu.    .kBBVZ
+   11ad4:	6b535a5a 5a5a536b 7575445a 2020203a     ZZSkkSZZZDuu:   
+   11ae4:	65322020 6f582565 23656530 30303071       2ee%Xo0ee#q000
+   11af4:	32303030 20205825 65322020 6f203265     0002%X    2ee2 o
+   11b04:	58256530 3030306f 32303030 20205825     0e%Xo0000002%X  
+   11b14:	00000000 31582020 53613631 246e415a     ....  X116aSZAn$
+   11b24:	5a416e3e 24243b41 20202024 3c582020     >nAZA;$$$     X<
+   11b34:	536b3631 246b415a 5a416e24 23243b41     16kSZAk$$nAZA;$#
+   11b44:	20205824 72582020 536b7272 336e415a     $X    XrrrkSZAn3
+   11b54:	5a416e33 313c3b53 2020582c 74582020     3nAZS;<1,X    Xt
+   11b64:	53357272 336e4141 41416e33 31313b41     rr5SAAn33nAAA;11
+   11b74:	2020582c 4d582020 536e4343 386e415a     ,X    XMCCnSZAn8
+   11b84:	5a416e38 36366141 20205833 4d582020     8nAZAa663X    XM
+   11b94:	416e4343 386e415a 5a416e38 36366153     CCnAZAn88nAZSa66
+   11ba4:	20205833 782b5858 41627676 7a6e415a     3X  XX+xvvbAZAnz
+   11bb4:	41416e7a 2a2a6141 2020582a 78582020     znAAAa***X    Xx
+   11bc4:	41617676 7a6e4141 41416e7a 2a2a3b41     vvaAAAnzznAAA;**
+   11bd4:	2020582a 61582020 5361446c 616c415a     *X    XalDaSZAla
+   11be4:	41416e61 75756141 2020583a 61582020     anAAAauu:X    Xa
+   11bf4:	4161426c 616e415a 5a416e61 75756141     lBaAZAnaanAZAauu
+   11c04:	20202e75 30322020 30716530 23303065     u.    200eq0e00#
+   11c14:	30303071 32713030 20205825 30322020     q00000q2%X    20
+   11c24:	30326530 6f716565 30303032 32713030     0e20eeqo200000q2
+   11c34:	20205825 00000000 31582020 25393831     %X  ....  X1189%
+   11c44:	24233b3b 3b3b233e 24246f25 20205823     ;;#$>#;;%o$$#X  
+   11c54:	31582020 3b243631 3e243b3b 3b3b2424       X116$;;;$>$$;;
+   11c64:	24246f25 20205823 72582020 3b327272     %o$$#X    Xrrr2;
+   11c74:	33233b3b 3b252433 3c312425 2020582c     ;;#33$%;%$1<,X  
+   11c84:	72582020 3b397472 33233b3b 3b3b2333       Xrrt9;;;#33#;;
+   11c94:	31312424 2020582c 432b2020 3b354d43     $$11,X    +CCM5;
+   11ca4:	6d243b3b 3b3b2338 38382425 20205833     ;;$m8#;;%$883X  
+   11cb4:	4d582020 40354343 6d253b3b 3b3b2438       XMCC5@;;%m8$;;
+   11cc4:	3636243b 20205833 78582020 3b3d7676     ;$663X    Xxvv=;
+   11cd4:	7a2a3b3b 3b3b407a 2a2a2625 2020582a     ;;*zz@;;%&***X  
+   11ce4:	78405858 3b2d7676 7a2a3b3b 3b3b2a7a     XX@xvv-;;;*zz*;;
+   11cf4:	2a2a403b 2020582a 612b2020 403a4242     ;@***X    +aBB:@
+   11d04:	613a3b3b 3b3b266b 7575263b 20202075     ;;:ak&;;;&uuu   
+   11d14:	6b582020 3a3a4242 61403b3b 3b3b3a61       XkBB::;;@aa:;;
+   11d24:	7575263b 20205875 30322020 30303030     ;&uuuX    200000
+   11d34:	23303030 30303071 32323030 20205825     000#q0000022%X  
+   11d44:	30322020 30303030 23303030 30303071       200000000#q000
+   11d54:	32713030 20205825 00000000 3c582020     00q2%X  ....  X<
+   11d64:	243c3631 3e246f6f 206f243e 243e246f     16<$oo$>>$o o$>$
+   11d74:	20205823 3c582020 243c3636 3e246f6f     #X    X<66<$oo$>
+   11d84:	586f243e 243e246f 20205823 72582020     >$oXo$>$#X    Xr
+   11d94:	25777272 3432236f 6f6f3c34 31313c24     rrw%o#244<oo$<11
+   11da4:	2020582c 65582020 25657272 3433236f     ,X    Xerre%o#34
+   11db4:	6f6f3c34 3c312c24 20206f2c 4d582020     4<oo$,1<,o    XM
+   11dc4:	256d4343 6d35236f 6f24356d 36363624     CCm%o#5mm5$o$666
+   11dd4:	20205833 43582020 396d4343 6d35406f     3X    XCCCm9o@5m
+   11de4:	6f24356d 36363624 20205833 78582020     m5$o$6663X    Xx
+   11df4:	3d784276 7a3d4040 2e403d7a 2a3d2a2b     vBx=@@=zz=@.+*=*
+   11e04:	2020202a 78585858 2a787676 7a3d4040     *   XXXxvvx*@@=z
+   11e14:	2b403d7a 2a3d2a2b 2020582a 6b2e2020     z=@++*=**X    .k
+   11e24:	266e426c 6b3a2b2b 2b2b3a6b 75753a40     lBn&++:kk:++@:uu
+   11e34:	20202e3a 61582020 266b446c 61754040     :.    XalDk&@@ua
+   11e44:	2b2b7561 75753a40 20202e3a 30322020     au++@:uu:.    20
+   11e54:	30303030 32303030 30303030 25327130     0000000200000q2%
+   11e64:	20205825 30322020 30303030 32303030     %X    2000000002
+   11e74:	30303030 32253030 20205825 00000000     000000%2%X  ....
+   11e84:	3c582020 2c313633 3e2c2c2c 243e3e3e       X<361,,,,>>>>$
+   11e94:	243e3e24 20205824 3c582020 2c333631     $>>$$X    X<163,
+   11ea4:	3e2c2c2c 243e3e3e 243e3e24 20202024     ,,,>>>>$$>>$$   
+   11eb4:	65582020 65727272 34346530 31333434       Xerrre0e444431
+   11ec4:	3c313133 2020582c 72582020 34727272     311<,X    Xrrrr4
+   11ed4:	34346530 33333434 31313333 2020582c     0e4444333311,X  
+   11ee4:	4d2b2020 6d434343 6d6d6d38 3636376d       +MCCCm8mmmm766
+   11ef4:	36363736 20205833 4d2b2020 6d4d4343     67663X    +MCCMm
+   11f04:	6d6d6d38 36363737 36363736 20205833     8mmm776667663X  
+   11f14:	78402020 78787676 7a787a78 3d3d7a7a       @xvvxxxzxzzz==
+   11f24:	2a2a3d3d 2020202a 78582020 78787676     ==***     Xxvvxx
+   11f34:	7a787a7a 3d3d7a7a 2a2a3d3d 2020582a     zzxzzz====***X  
+   11f44:	612e2020 6b42446c 6b6b6161 7575616b       .alDBkaakkkauu
+   11f54:	75757575 20202e75 612b2020 6b42446c     uuuuu.    +alDBk
+   11f64:	6b6b6161 3a75616b 75757575 20202e3a     aakkkau:uuuu:.  
+   11f74:	30252020 30303030 30303030 30303030       %0000000000000
+   11f84:	25323230 20202025 30252020 30303030     022%%     %00000
+   11f94:	30303030 30303030 25323230 20202025     00000000022%%   
+   11fa4:	00000000 31582020 3c313631 3e2c3c3c     ....  X1161<<<,>
+   11fb4:	3e3e3e3e 243e3e3e 20202023 31582020     >>>>>>>$#     X1
+   11fc4:	2c333631 3e2c3c3c 2c3e3e3e 243e3e3e     163,<<,>>>>,>>>$
+   11fd4:	20202023 72582020 65657272 34346565     #     Xrrreeee44
+   11fe4:	34343434 31313133 2020582c 65582020     44443111,X    Xe
+   11ff4:	65727272 34346565 33343434 31313333     rrreee4444433311
+   12004:	2020582c 4d2b2020 6d4d4343 6d6d6d6d     ,X    +MCCMmmmmm
+   12014:	3737376d 36363737 20205833 43402020     m77777663X    @C
+   12024:	6d4d4343 6d6d6d6d 3737376d 36363737     CCMmmmmmm7777766
+   12034:	20205833 782b5858 78787676 7a7a7878     3X  XX+xvvxxxxzz
+   12044:	3d7a7a7a 2a3d3d3d 2020582a 78582020     zzz====**X    Xx
+   12054:	78787676 7a787878 7a3d3d7a 2a2a3d3d     vvxxxxxzz==z==**
+   12064:	2020202a 612e2020 6b42566c 6b6b6b6b     *     .alVBkkkkk
+   12074:	7575696b 75757575 20205875 612e2e20     kiuuuuuuuX   ..a
+   12084:	6b42446c 6b6b6b6b 75756161 75757575     lDBkkkkkaauuuuuu
+   12094:	20205875 71582020 30303030 30303030     uX    Xq00000000
+   120a4:	30303030 32253232 2020206f 71582020     000022%2o     Xq
+   120b4:	30303030 30303030 30303030 25322532     0000000000002%2%
+   120c4:	2020206f 00000000 3c582020 3c313631     o   ....  X<161<
+   120d4:	2c2c3c3c 3e3e3e2c 233e3e3e 20205824     <<,,,>>>>>>#$X  
+   120e4:	3c582020 3c333631 2c2c3c3c 3e3e3e2c       X<163<<<,,,>>>
+   120f4:	242c3e3e 20205823 65582020 65727272     >>,$#X    Xerrre
+   12104:	34346565 31343434 31313c33 2020582c     ee4444413<11,X  
+   12114:	65582020 65727272 34346565 34343334       Xerrreee444344
+   12124:	3131333c 2020582c 4d2b2020 6d4d4343     <311,X    +MCCMm
+   12134:	6d6d6d6d 37373737 36363737 20205833     mmmm777777663X  
+   12144:	43402020 6d4d4343 6d6d6d6d 37363637       @CCCMmmmmm7667
+   12154:	36363737 20205833 78582020 78787676     77663X    Xxvvxx
+   12164:	7a787878 3d7a7a7a 3d2a3d3d 2020202a     xxxzzzz===*=*   
+   12174:	78582020 78787676 7a787878 3d3d7a7a       Xxvvxxxxxzzz==
+   12184:	3d2a3d3d 2020202a 6b582020 6b42446c     ==*=*     XklDBk
+   12194:	6b6b6b6b 7575616b 75757575 20202e3a     kkkkkauuuuuu:.  
+   121a4:	612e2020 6b42426c 6b6b6b6b 7575696b       .alBBkkkkkkiuu
+   121b4:	75757575 20202b75 23582020 30303071     uuuuu+    X#q000
+   121c4:	30303030 32303030 23253225 20202058     00000002%2%#X   
+   121d4:	23582020 30303071 30303030 32303030       X#q00000000002
+   121e4:	23253225 20202058 00000000 31582020     %2%#X   ....  X1
+   121f4:	3c313631 2c2c3c3c 3e3e3e3e 243e2c3e     161<<<,,>>>>>,>$
+   12204:	20202023 3c582020 3c313631 2c2c3c3c     #     X<161<<<,,
+   12214:	3e3e3e2c 233e3e3e 20202024 72582020     ,>>>>>>#$     Xr
+   12224:	65727272 34346565 33343434 3c313333     rrreee444443331<
+   12234:	2020582c 72582020 65727272 34346565     ,X    Xrrrreee44
+   12244:	34343434 3c313333 20206f2c 4d402020     4444331<,o    @M
+   12254:	6d434343 6d6d6d6d 37373737 36363737     CCCmmmmm77777766
+   12264:	20205833 4d2b2020 6d4d4343 6d6d6d37     3X    +MCCMm7mmm
+   12274:	37373737 36363737 20205833 78582020     777777663X    Xx
+   12284:	78787676 7a787878 3d3d7a7a 2a2a3d3d     vvxxxxxzzz====**
+   12294:	2020582a 782b2020 78787676 7a787878     *X    +xvvxxxxxz
+   122a4:	3d7a7a7a 2a2a3d3d 2020582a 61582020     zzz===***X    Xa
+   122b4:	6b42446c 6b6b6b6b 7575616b 75757575     lDBkkkkkkauuuuuu
+   122c4:	20205875 6b582020 6b42446c 6b6b6b6b     uX    XklDBkkkkk
+   122d4:	7575616b 75757575 20205875 6f582020     kauuuuuuuX    Xo
+   122e4:	30307125 30303030 25323030 6f252532     %q000000002%2%%o
+   122f4:	20202020 6f582020 30307125 30303030           Xo%q000000
+   12304:	25323030 6f253232 20202020 00000000     002%22%o    ....
+   12314:	3c582020 3c333631 3e2c3c2c 3e3e3e3e       X<163<,<,>>>>>
+   12324:	243e3e3e 20205824 31582020 2c313631     >>>$$X    X1161,
+   12334:	242c3c3c 3e3e2c24 243e3e3e 20202023     <<,$$,>>>>>$#   
+   12344:	65582020 65727272 34346565 34343434       Xerrreee444444
+   12354:	31313333 2020582c 72582020 65727272     3311,X    Xrrrre
+   12364:	33346565 33343431 3c3c3333 2020582c     ee43144333<<,X  
+   12374:	432b2020 6d4d4343 6d6d376d 37373737       +CCCMmm7mm7777
+   12384:	36363737 20205833 432b2020 6d4d4343     77663X    +CCCMm
+   12394:	386d6d6d 37373736 36363737 20205833     mmm8677777663X  
+   123a4:	782b2020 78787676 7a7a7878 3d7a7a7a       +xvvxxxxzzzzz=
+   123b4:	2a3d3d3d 2020582a 78582020 78787676     ===**X    Xxvvxx
+   123c4:	7a787878 3d3d7a3d 2a2a3d3d 2020582a     xxxz=z====***X  
+   123d4:	6b2e2020 6b42446c 6b6b6b6b 7575616b       .klDBkkkkkkauu
+   123e4:	75757575 20202075 61582020 6b42446c     uuuuu     XalDBk
+   123f4:	696b6b6b 75756169 75757575 20202e75     kkkiiauuuuuuu.  
+   12404:	20202020 3071326f 71303030 32323232         o2q0000q2222
+   12414:	20232532 20202020 20202020 3071326f     2%#         o2q0
+   12424:	71303030 25323271 206f2532 20202020     000qq22%2%o     
+   12434:	00000000 31582020 24243631 3e2c3c2c     ....  X116$$,<,>
+   12444:	3e2c3e3e 2424246f 20202024 3e202020     >>,>o$$$$      >
+   12454:	3c313633 583e2c3c 3e3e2458 243e3e3e     361<<,>XX$>>>>>$
+   12464:	2020206f 72582020 25327272 34346565     o     Xrrr2%ee44
+   12474:	31343434 3c3c2424 2020582c 32582020     4441$$<<,X    X2
+   12484:	65727272 58336565 33343c6f 3c313c33     rrreee3Xo<433<1<
+   12494:	20202024 4d402020 39354343 6d6d6d38     $     @MCC598mmm
+   124a4:	36373737 36363924 20205833 35582020     7776$9663X    X5
+   124b4:	6d4d4343 58366d6d 37373658 36363737     CCMmmm6XX6777766
+   124c4:	2020583c 78582020 3d7a7676 7a78787a     <X    Xxvvz=zxxz
+   124d4:	3d7a7a7a 2a2a2a40 2020582a 3d582020     zzz=@****X    X=
+   124e4:	78787676 583d7878 3d7a3d58 2a2a3d3d     vvxxxx=XX=z===**
+   124f4:	2020202a 61582020 3a3b4242 6b6b6b69     *     XaBB;:ikkk
+   12504:	3a75616b 75752626 20202e75 3a202020     kau:&&uuu.     :
+   12514:	6b42446c 2e696b6b 7575752b 75757575     lDBkkki.+uuuuuuu
+   12524:	20205826 20202020 32256f20 32323232     &X       o%22222
+   12534:	25253225 20206f23 20202020 20202020     %2%%#o          
+   12544:	32256f58 32327132 25322525 20206f23     Xo%22q22%%2%#o  
+   12554:	20202020 00000000 31582020 20202431         ....  X11$  
+   12564:	3e2c2c6f 6f243e3e 246f2020 20202023     o,,>>>$o  o$#   
+   12574:	58202020 2c313639 20583e3c 3e245820        X961,<>X  X$>
+   12584:	6f3e3e3e 20202058 72582020 2e2e2572     >>>oX     Xrr%..
+   12594:	34346523 6f333434 3c242020 2020582c     #e44443o  $<,X  
+   125a4:	58202020 65727232 586f3265 333c6f20        X2rree2oX o<3
+   125b4:	24313333 20202058 4d402020 2e203b43     331$X     @MC; .
+   125c4:	6d6d6d40 6f36376d 36242020 20205833     @mmmm76o  $63X  
+   125d4:	58202020 6d43436e 2e6f356d 37366f20        XnCCmm5o. o67
+   125e4:	25363737 20202020 782e2020 20202d76     776%      .xv-  
+   125f4:	7a787a40 583d7a7a 2a2b2020 2020582a     @zxzzz=X  +**X  
+   12604:	58202020 78787662 20587a78 3d2a5820        XbvxxxzX  X*=
+   12614:	2a2a3d3d 20202020 6b582020 20583a6c     ==**      Xkl:X 
+   12624:	6b6b6126 2b3a616b 75262020 20205875     &akkka:+  &uuX  
+   12634:	58202020 6b42443b 2058696b 753a2e58        X;DBkkiX X.:u
+   12644:	26757575 20202058 20202020 6f582020     uuu&X         Xo
+   12654:	25252523 6f252525 20202058 20202020     #%%%%%%oX       
+   12664:	20202020 6f582020 25252523 6f232525           Xo#%%%%%#o
+   12674:	20202058 20202020 00000000 3c582020     X       ....  X<
+   12684:	20202024 3e3e6f2e 206f3e3e 6f202020     $   .o>>>>o    o
+   12694:	20202024 20202020 3c313958 2020583e     $       X91<>X  
+   126a4:	24582020 20243e2c 20202020 65582020       X$,>$       Xe
+   126b4:	20202e25 34332320 206f3334 24202020     %.   #3443o    $
+   126c4:	20206f2c 20202020 65723258 20206f34     ,o      X2re4o  
+   126d4:	326f2020 583e3333 20202020 4d2b2020       o233>X      +M
+   126e4:	2020583b 6d382458 2e24386d 242e2020     ;X  X$8mm8$.  .$
+   126f4:	20205833 20202020 6d4d3558 20206f35     3X      X5Mm5o  
+   12704:	35582020 58393737 20202020 78582020       X5779X      Xx
+   12714:	2020202a 787a4020 58403d7a 40202020     *    @zxz=@X   @
+   12724:	2020582a 20202020 78786340 2020587a     *X      @cxxzX  
+   12734:	2a582020 20403d3d 20202020 612e2020       X*==@       .a
+   12744:	20202026 6b612b2e 202b696b 40202020     &   .+akki+    @
+   12754:	20202e3a 20202020 6b426158 20202b69     :.      XaBki+  
+   12764:	3a2e202e 58267575 20202020 20202020     . .:uu&X        
+   12774:	20202020 58585820 20205858 20202020          XXXXX      
+   12784:	20202020 20202020 20202020 58585820                  XXX
+   12794:	20585858 20202020 20202020 00000000     XXX         ....
+   127a4:	6f582020 20202020 3e6f2020 20206f3e       Xo      o>>o  
+   127b4:	20202020 2020206f 20202020 3e242020         o         $>
+   127c4:	20202058 58202020 20202424 20202020     X      X$$      
+   127d4:	23582020 20202020 336f2020 20206f33       X#      o33o  
+   127e4:	20202020 2020586f 20202020 32325858         oX      XX22
+   127f4:	2020206f 58202020 2020242c 20202020     o      X,$      
+   12804:	3b582020 20202058 6d402020 20202338       X;X     @m8#  
+   12814:	20202020 20205824 20202020 35355820         $X       X55
+   12824:	2020206f 58202020 20203936 20202020     o      X69      
+   12834:	2a202020 20202020 7a402020 20202b7a        *      @zz+  
+   12844:	20202020 2020582b 20202020 7a7a5858         +X      XXzz
+   12854:	2020202b 2e202020 20202a2a 20202020     +      .**      
+   12864:	40582020 20202020 6b2b2020 20582b61       X@      +ka+X 
+   12874:	20202020 2020202b 20202020 693b5820         +        X;i
+   12884:	20202058 2e202020 2020263a 20202020     X      .:&      
+   12894:	20202020 20202020 20202020 20202020                     
+   128a4:	20202020 20202020 20202020 20202020                     
+   128b4:	20202020 20202020 20202020 20202020                     
+   128c4:	00000000 20202020 20202020 6f202020     ....           o
+   128d4:	20202058 20202020 20202020 20202020     X               
+   128e4:	58582020 20202020 20202020 20202058       XX        X   
+   128f4:	20202020 20202020 20202020 6f202020                    o
+   12904:	2020206f 20202020 20202020 20202020     o               
+   12914:	6f582020 20202020 20202020 20205858       Xo        XX  
+   12924:	20202020 20202020 20202020 402e2020                   .@
+   12934:	20202e40 20202020 20202020 20202020     @.              
+   12944:	6f582020 20202020 20202020 20205858       Xo        XX  
+   12954:	20202020 20202020 20202020 58202020                    X
+   12964:	2020202b 20202020 20202020 20202020     +               
+   12974:	2b2b5820 20202020 20202020 20202058      X++        X   
+   12984:	20202020 20202020 20202020 2b582020                   X+
+   12994:	2020582b 20202020 20202020 20202020     +X              
+   129a4:	2b2e2020 20202020 20202020 20205858       .+        XX  
+   129b4:	20202020 20202020 20202020 58585820                  XXX
+   129c4:	20585858 20202020 20202020 20202020     XXX             
+   129d4:	20202020 58585820 20585858 20202020          XXXXXX     
+   129e4:	20202020 00000000 20202020 20202020         ....        
+   129f4:	20202020 20202020 20202020 20202020                     
+   12a04:	20202020 20202020 20202020 20202020                     
+   12a14:	20202020 20202020 20202020 20202020                     
+   12a24:	20202020 20202020 20202020 20202020                     
+   12a34:	20202020 20202020 20202020 20202020                     
+   12a44:	20202020 20202020 20202020 20202020                     
+   12a54:	20202020 20202020 20202020 20202020                     
+   12a64:	20202020 20202020 20202020 20202020                     
+   12a74:	20202020 20202020 20202020 20202020                     
+   12a84:	20202020 20202020 20202020 20202020                     
+   12a94:	20202020 20202020 20202020 20202020                     
+   12aa4:	20202020 20202020 20202020 20202020                     
+   12ab4:	20202020 20202020 20202020 20202020                     
+   12ac4:	20202020 20202020 20202020 20202020                     
+   12ad4:	20202020 20202020 20202020 2b202020                    +
+   12ae4:	63707a2a 2a707070 2020202b 20202020     *zpcppp*+       
+   12af4:	20202020 2b202020 7a707a2a 2a707063            +*zpzcpp*
+   12b04:	2020202e 20202020 00000000 20202020     .       ....    
+   12b14:	20202020 20202020 20202020 20202020                     
+   12b24:	20202020 20202020 20202020 20202020                     
+   12b34:	20202020 20202020 20202020 20202020                     
+   12b44:	20202020 20202020 20202020 20202020                     
+   12b54:	20202020 20202020 20202020 20202020                     
+   12b64:	20202020 20202020 20202020 20202020                     
+   12b74:	20202020 20202020 20202020 20202020                     
+   12b84:	20202020 20202020 20202020 20202020                     
+   12b94:	20202020 20202020 20202020 20202020                     
+   12ba4:	20202020 20202020 20202020 20202020                     
+   12bb4:	20202020 20202020 20202020 20202020                     
+   12bc4:	20202020 20202020 20202020 20202020                     
+   12bd4:	20202020 20202020 20202020 20202020                     
+   12be4:	20202020 20202020 20202020 20202020                     
+   12bf4:	20202020 20202020 20202020 20202020                     
+   12c04:	702a2e2e 68686868 68666868 20202a70     ..*phhhhhhfhp*  
+   12c14:	20202020 20202020 702a2e20 68686868              .*phhhh
+   12c24:	68666868 20202a70 20202020 00000000     hhfhp*      ....
+   12c34:	20202020 20202020 2e2e2e2e 2e2e2e2e             ........
+   12c44:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   12c54:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   12c64:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   12c74:	20202020 20202020 20202020 20202020                     
+   12c84:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   12c94:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   12ca4:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   12cb4:	2e2e2e2e 2e2e2e2e 2020202e 20202020     .........       
+   12cc4:	20202020 20202020 2e2e2e2e 2e2e2e2e             ........
+   12cd4:	2020202e 20202020 20202020 20202020     .               
+   12ce4:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   12cf4:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   12d04:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   12d14:	2e2e2e2e 2e2e2e2e 2020202e 20202020     .........       
+   12d24:	20202020 68683d2e 68686868 66666666         .=hhhhhhffff
+   12d34:	2e2a7066 20202020 20202020 68683d2b     fp*.        +=hh
+   12d44:	68686868 79666666 582a7066 20202020     hhhhfffyfp*X    
+   12d54:	00000000 20202020 794f2020 73737373     ....      Oyssss
+   12d64:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   12d74:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   12d84:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   12d94:	73737373 20204f79 20202020 20202020     ssssyO          
+   12da4:	794f2020 73737373 73737373 73737373       Oyssssssssssss
+   12db4:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   12dc4:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   12dd4:	73737373 73737373 73737373 20204f79     ssssssssssssyO  
+   12de4:	20202020 20202020 794f2020 73737373               Oyssss
+   12df4:	73737373 20204f79 20202020 20202020     ssssyO          
+   12e04:	794f2020 73737373 73737373 73737373       Oyssssssssssss
+   12e14:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   12e24:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   12e34:	73737373 73737373 73737373 20204f79     ssssssssssssyO  
+   12e44:	20202020 20202020 68686870 66686868             phhhhhhf
+   12e54:	79667979 2d797966 20202020 2e202020     yyfyfyy-       .
+   12e64:	68686870 66686868 66796679 2d667966     phhhhhhfyfyffyf-
+   12e74:	20202020 00000000 20202020 6764794f         ....    Oydg
+   12e84:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   12e94:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   12ea4:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   12eb4:	67676767 67676767 4f796467 20202020     gggggggggdyO    
+   12ec4:	20202020 6464794f 67676767 67676767         Oyddgggggggg
+   12ed4:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   12ee4:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   12ef4:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   12f04:	4f796767 20202020 20202020 6764794f     ggyO        Oydg
+   12f14:	67676767 67676767 4f796767 20202020     ggggggggggyO    
+   12f24:	20202020 6764794f 67676767 67676767         Oydggggggggg
+   12f34:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   12f44:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   12f54:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   12f64:	4f796767 20202020 40202020 6a6a6870     ggyO       @phjj
+   12f74:	66686866 79667966 70797979 20202040     fhhffyfyyyyp@   
+   12f84:	2a202020 6a6a6870 66686868 66796679        *phjjhhhfyfyf
+   12f94:	70797979 20202040 00000000 20202020     yyyp@   ....    
+   12fa4:	79736479 4f4f4f4f 4f4f4f4f 4f4f4f4f     ydsyOOOOOOOOOOOO
+   12fb4:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   12fc4:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   12fd4:	4f4f4f4f 4f4f4f4f 4f4f4f4f 79647379     OOOOOOOOOOOOysdy
+   12fe4:	20202020 20202020 79736479 4f4f4f4f             ydsyOOOO
+   12ff4:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   13004:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   13014:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   13024:	4f4f4f4f 26647379 20202020 20202020     OOOOysd&        
+   13034:	79736479 4f4f4f4f 4f4f4f4f 26647379     ydsyOOOOOOOOysd&
+   13044:	20202020 20202020 79736479 4f4f4f4f             ydsyOOOO
+   13054:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   13064:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   13074:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   13084:	4f4f4f4f 26647379 20202020 702e2020     OOOOysd&      .p
+   13094:	68767668 66686868 66796679 79797966     hvvhhhhfyfyffyyy
+   130a4:	20205870 702e2020 68767668 66686868     pX    .phvvhhhhf
+   130b4:	66797966 79797966 20205870 00000000     fyyffyyypX  ....
+   130c4:	4f202020 202e7364 4f4f4f20 4f4f4f4f        Ods.  OOOOOOO
+   130d4:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   130e4:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   130f4:	4f4f4f4f 4f4f4f4f 4f4f4f4f 204f4f4f     OOOOOOOOOOOOOOO 
+   13104:	67734f20 2020204f 4f202020 202e7364      OsgO      Ods. 
+   13114:	4f4f4f20 4f4f4f4f 4f4f4f4f 4f4f4f4f      OOOOOOOOOOOOOOO
+   13124:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   13134:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   13144:	4f4f4f4f 204f4f4f 64734f20 2020204f     OOOOOOO  OsdO   
+   13154:	4f202020 202e7364 4f4f4f20 204f4f4f        Ods.  OOOOOO 
+   13164:	64734f20 2020204f 4f202020 202e7364      OsdO      Ods. 
+   13174:	4f4f4f20 4f4f4f4f 4f4f4f4f 4f4f4f4f      OOOOOOOOOOOOOOO
+   13184:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   13194:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   131a4:	4f4f4f4f 204f4f4f 64734f20 2020204f     OOOOOOO  OsdO   
+   131b4:	78402020 42427668 66686a42 426b6666       @xhvBBBjhfffkB
+   131c4:	79686a76 20204070 70402020 42424268     vjhyp@    @phBBB
+   131d4:	66686a42 426a6666 79686a76 20204070     BjhfffjBvjhyp@  
+   131e4:	00000000 79202020 4f207964 67676779     ....   ydy Oyggg
+   131f4:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   13204:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   13214:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   13224:	79646767 6779204f 20202079 79202020     ggdyO ygy      y
+   13234:	4f207967 67676779 67676767 67676767     gy Oyggggggggggg
+   13244:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   13254:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   13264:	67676767 67676767 79646467 6779204f     gggggggggddyO yg
+   13274:	20202079 79202020 4f207964 67676479     y      ydy Oydgg
+   13284:	79646767 6779204f 20202079 79202020     ggdyO ygy      y
+   13294:	4f207964 67676479 67676767 67676767     dy Oydgggggggggg
+   132a4:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   132b4:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   132c4:	67676767 67676767 79646467 6779204f     gggggggggddyO yg
+   132d4:	20202079 68702020 5653566a 68425656     y     phjVSVVVBh
+   132e4:	53564268 79425656 20207079 687a2020     hBVSVVByyp    zh
+   132f4:	5656566a 686c5656 56564268 79425656     jVVVVVlhhBVVVVBy
+   13304:	20207079 00000000 732e2020 79204f67     yp  ....  .sgO y
+   13314:	73737364 73737373 73737373 73737373     dsssssssssssssss
+   13324:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   13334:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   13344:	73737373 67737373 674f2079 20202e73     sssssssgy Ogs.  
+   13354:	732e2020 79204f67 73737367 73737373       .sgO ygsssssss
+   13364:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   13374:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   13384:	73737373 73737373 73737373 67737373     sssssssssssssssg
+   13394:	674f2079 20202e73 732e2020 79204f67     y Ogs.    .sgO y
+   133a4:	73737364 67737373 674f2079 20202e73     dssssssgy Ogs.  
+   133b4:	732e2020 79204f67 73737364 73737373       .sgO ydsssssss
+   133c4:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   133d4:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   133e4:	73737373 73737373 73737373 67737373     sssssssssssssssg
+   133f4:	674f2079 20202e73 6a3d2020 3b425642     y Ogs.    =jBVB;
+   13404:	6a564235 3b44566a 6153423b 20203d79     5BVjjVD;;BSay=  
+   13414:	6a3d2020 3b425642 6a56423b 3b44446a       =jBVB;;BVjjDD;
+   13424:	6156423b 20587a79 00000000 732e2020     ;BVayzX ....  .s
+   13434:	644f4f67 2e2e2e73 2e2e2e2e 2e2e2e2e     gOOds...........
+   13444:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   13454:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   13464:	2e2e2e2e 2e2e2e2e 734f2e2e 674f4f64     ..........OsdOOg
+   13474:	20202e73 732e2020 644f4f67 2e2e4f73     s.    .sgOOdsO..
+   13484:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   13494:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   134a4:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   134b4:	734f2e2e 674f4f64 20202e73 732e2020     ..OsdOOgs.    .s
+   134c4:	644f4f67 2e2e2e73 732b2e2e 674f4f64     gOOds.....+sdOOg
+   134d4:	20202e73 732e2020 644f4f67 2e2e2e73     s.    .sgOOds...
+   134e4:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   134f4:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   13504:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   13514:	734f2e2e 674f4f64 20202e73 687a2020     ..OsdOOgs.    zh
+   13524:	583b5642 6e566158 2e3b566e 42563b20     BV;XXaVnnV;. ;VB
+   13534:	20207075 68702020 583b566e 6e566b58     up    phnV;XXkVn
+   13544:	583b566e 42563a58 20203d79 00000000     nV;XX:VBy=  ....
+   13554:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   13564:	20202020 20202020 20202020 20202020                     
+   13574:	20202020 20202020 20202020 20202020                     
+   13584:	20202020 20202020 20202020 732e2020                   .s
+   13594:	674f4f64 20202e73 732e2020 674f4f67     dOOgs.    .sgOOg
+   135a4:	20202e73 20202020 20202020 20202020     s.              
+   135b4:	20202020 20202020 20202020 20202020                     
+   135c4:	20202020 20202020 20202020 20202020                     
+   135d4:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   135e4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   135f4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   13604:	20202e73 20202020 20202020 20202020     s.              
+   13614:	20202020 20202020 20202020 20202020                     
+   13624:	20202020 20202020 20202020 20202020                     
+   13634:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   13644:	6a3d2020 58405642 6e563b20 583b566e       =jBV@X ;VnnV;X
+   13654:	6e564058 20203d79 6a702020 58404442     X@Vny=    pjBD@X
+   13664:	6e563b20 203b566e 6e564058 20203d79      ;VnnV; X@Vny=  
+   13674:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
+   13684:	20202020 20202020 20202020 20202020                     
+   13694:	20202020 20202020 20202020 20202020                     
+   136a4:	20202020 20202020 20202020 20202020                     
+   136b4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   136c4:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   136d4:	20202020 20202020 20202020 20202020                     
+   136e4:	20202020 20202020 20202020 20202020                     
+   136f4:	20202020 20202020 732e2020 674f4f67               .sgOOg
+   13704:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   13714:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   13724:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   13734:	20202020 20202020 20202020 20202020                     
+   13744:	20202020 20202020 20202020 20202020                     
+   13754:	20202020 20202020 732e2020 674f4f67               .sgOOg
+   13764:	20202e73 683d2020 406e566e 6156423a     s.    =hnVn@:BVa
+   13774:	3b425669 61566e40 20207a79 683d2020     iVB;@nVayz    =h
+   13784:	406e566e 6156423b 3b425661 6b536e40     nVn@;BVaaVB;@nSk
+   13794:	20207079 00000000 732e2020 674f4f67     yp  ....  .sgOOg
+   137a4:	20202e73 20202020 20202020 20202020     s.              
+   137b4:	20202020 20202020 20202020 20202020                     
+   137c4:	20202020 20202020 20202020 20202020                     
+   137d4:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   137e4:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   137f4:	20202020 20202020 20202020 20202020                     
+   13804:	20202020 20202020 20202020 20202020                     
+   13814:	20202020 20202020 20202020 732e2020                   .s
+   13824:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   13834:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   13844:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   13854:	20202020 20202020 20202020 20202020                     
+   13864:	20202020 20202020 20202020 20202020                     
+   13874:	20202020 20202020 20202020 732e2020                   .s
+   13884:	674f4f67 20202e73 68702020 56566e75     gOOgs.    phunVV
+   13894:	756b5656 56566e79 3a6e5644 20203d79     VVkuynVVDVn:y=  
+   138a4:	687a2020 56566e61 796b5656 56566175       zhanVVVVkyuaVV
+   138b4:	3a6e5356 20203d79 00000000 732e2020     VSn:y=  ....  .s
+   138c4:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   138d4:	20202020 20202020 20202020 20202020                     
+   138e4:	20202020 20202020 20202020 20202020                     
+   138f4:	20202020 20202020 732e2020 674f4f67               .sgOOg
+   13904:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   13914:	20202020 20202020 20202020 20202020                     
+   13924:	20202020 20202020 20202020 20202020                     
+   13934:	20202020 20202020 20202020 20202020                     
+   13944:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   13954:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   13964:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   13974:	20202020 20202020 20202020 20202020                     
+   13984:	20202020 20202020 20202020 20202020                     
+   13994:	20202020 20202020 20202020 20202020                     
+   139a4:	732e2020 674f4f67 20202e73 687a2020       .sgOOgs.    zh
+   139b4:	6e613a68 79263b6e 6e3b2679 7926616e     h:ann;&yy&;nna&y
+   139c4:	20207079 687a2020 6e6b3a68 793a3b6b     yp    zhh:knk;:y
+   139d4:	6e3b2679 7926356e 20207079 00000000     y&;nn5&yyp  ....
+   139e4:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   139f4:	20202020 20202020 20202020 20202020                     
+   13a04:	20202020 20202020 20202020 20202020                     
+   13a14:	20202020 20202020 20202020 732e2020                   .s
+   13a24:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   13a34:	20202e73 20202020 2e2e2020 2e2e2e2e     s.        ......
+   13a44:	2e2e2e2e 20202e2e 20202020 20202020     ......          
+   13a54:	2e2e2020 2e2e2e2e 2e2e2e2e 20202e2e       ............  
+   13a64:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   13a74:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   13a84:	674f4f67 20202e73 732e2020 644f4f67     gOOgs.    .sgOOd
+   13a94:	2e2e4f64 2e2e2e2e 2e2e2e2e 2e2e2e2e     dO..............
+   13aa4:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   13ab4:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   13ac4:	2e2e2e2e 732b2e2e 674f4f64 20202e73     ......+sdOOgs.  
+   13ad4:	687a2020 263a6a6a 66667926 26267966       zhjj:&&yfffy&&
+   13ae4:	79792626 20207079 68702020 26756a6a     &&yyyp    phjju&
+   13af4:	66757926 26267966 79792626 20203d79     &yuffy&&&&yyy=  
+   13b04:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
+   13b14:	20202020 20202020 20202020 20202020                     
+   13b24:	20202020 20202020 20202020 20202020                     
+   13b34:	20202020 20202020 20202020 20202020                     
+   13b44:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   13b54:	674f4f67 20202e73 2e202020 73734f4f     gOOgs.     .OOss
+   13b64:	73737373 73737373 4f4f7373 2020202e     ssssssssssOO.   
+   13b74:	2e202020 73734f4f 73737373 73737373        .OOssssssssss
+   13b84:	4f4f7373 2020202e 732e2020 674f4f67     ssOO.     .sgOOg
+   13b94:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   13ba4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   13bb4:	79204f67 73737364 73737373 73737373     gO ydsssssssssss
+   13bc4:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   13bd4:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   13be4:	73737373 73737373 64737373 674f2079     sssssssssssdy Og
+   13bf4:	20202e73 68702020 6868426a 66686868     s.    phjBhhhhhf
+   13c04:	66796679 79797979 20203d79 687a2020     yfyfyyyyy=    zh
+   13c14:	6868766a 66686868 79666679 79797966     jvhhhhhfyffyfyyy
+   13c24:	20207079 00000000 732e2020 674f4f67     yp  ....  .sgOOg
+   13c34:	20202e73 20202020 20202020 20202020     s.              
+   13c44:	20202020 20202020 20202020 20202020                     
+   13c54:	20202020 20202020 20202020 20202020                     
+   13c64:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   13c74:	732e2020 674f4f67 20202e73 4f202020       .sgOOgs.     O
+   13c84:	67676773 67676767 67676767 73676767     sggggggggggggggs
+   13c94:	2020204f 4f202020 67676773 67676767     O      Osggggggg
+   13ca4:	67676767 73676767 2020204f 732e2020     gggggggsO     .s
+   13cb4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   13cc4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   13cd4:	79202020 4f207967 67676479 67676767        ygy Oydgggggg
+   13ce4:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   13cf4:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   13d04:	67676767 67676767 67676767 79646767     ggggggggggggggdy
+   13d14:	6779204f 20205879 687a2020 6868426a     O ygyX    zhjBhh
+   13d24:	66686868 66667966 79797966 20207079     hhhffyfffyyyyp  
+   13d34:	68702020 6868426a 79686868 66667966       phjBhhhhhyfyff
+   13d44:	79797979 20203d79 00000000 732e2020     yyyyy=  ....  .s
+   13d54:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   13d64:	20202020 20202020 20202020 20202020                     
+   13d74:	20202020 20202020 20202020 20202020                     
+   13d84:	20202020 20202020 732e2020 674f4f67               .sgOOg
+   13d94:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   13da4:	4f202020 4f4f6467 4f4f4f4f 4f4f4f4f        OgdOOOOOOOOOO
+   13db4:	67644f4f 2020204f 4f202020 4f4f6467     OOdgO      OgdOO
+   13dc4:	4f4f4f4f 4f4f4f4f 67674f4f 2020204f     OOOOOOOOOOggO   
+   13dd4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   13de4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   13df4:	20202e73 4f202020 204f7364 4f4f4f20     s.     OdsO  OOO
+   13e04:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   13e14:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   13e24:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   13e34:	204f4f4f 64732e20 2020204f 68702020     OOO  .sdO     ph
+   13e44:	6868766a 66686868 79666679 79797979     jvhhhhhfyffyyyyy
+   13e54:	20207079 687a2020 6868766a 66686868     yp    zhjvhhhhhf
+   13e64:	79796679 79797966 20207079 00000000     yfyyfyyyyp  ....
+   13e74:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   13e84:	20202020 20202020 20202020 20202020                     
+   13e94:	20202020 20202020 20202020 20202020                     
+   13ea4:	20202020 20202020 20202020 732e2020                   .s
+   13eb4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   13ec4:	20202e73 732e2020 4f2e4f67 4f4f4f4f     s.    .sgO.OOOOO
+   13ed4:	4f4f4f4f 674f2e4f 20202e73 732e2020     OOOOO.Ogs.    .s
+   13ee4:	4f2e4f67 4f4f4f4f 4f4f4f4f 674f2e4f     gO.OOOOOOOOOO.Og
+   13ef4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   13f04:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   13f14:	674f4f67 20202e73 20202020 79736426     gOOgs.      &dsy
+   13f24:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   13f34:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   13f44:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   13f54:	4f4f4f4f 4f4f4f4f 79677379 20202020     OOOOOOOOysgy    
+   13f64:	687a2020 68687676 66686868 66796679       zhvvhhhhhfyfyf
+   13f74:	79797966 20207079 68702020 6868426a     fyyyyp    phjBhh
+   13f84:	68686868 66797966 79797979 20207a79     hhhhfyyfyyyyyz  
+   13f94:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
+   13fa4:	20202020 20202020 20202020 20202020                     
+   13fb4:	20202020 20202020 20202020 20202020                     
+   13fc4:	20202020 20202020 20202020 20202020                     
+   13fd4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   13fe4:	674f4f67 20202e73 732e2020 734f4f67     gOOgs.    .sgOOs
+   13ff4:	67676767 67676767 674f4f73 20202e73     ggggggggsOOgs.  
+   14004:	732e2020 734f4f67 67676767 67676767       .sgOOsgggggggg
+   14014:	674f4f73 20202e73 732e2020 674f4f67     sOOgs.    .sgOOg
+   14024:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   14034:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   14044:	6764794f 67676767 67676767 67676767     Oydggggggggggggg
+   14054:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   14064:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   14074:	67676767 67676767 67676767 4f796467     gggggggggggggdyO
+   14084:	20202020 68702020 706a766a 66686868           phjvjphhhf
+   14094:	66797966 79797066 20203d79 702a2020     fyyffpyyy=    *p
+   140a4:	6868766a 3d686868 7966683d 79797966     jvhhhhh==hfyfyyy
+   140b4:	20202a79 00000000 732e2020 674f4f67     y*  ....  .sgOOg
+   140c4:	20202e73 20202020 20202020 20202020     s.              
+   140d4:	20202020 20202020 20202020 20202020                     
+   140e4:	20202020 20202020 20202020 20202020                     
+   140f4:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   14104:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   14114:	674f4f67 73737367 67737373 674f4f67     gOOggssssssggOOg
+   14124:	20202e73 732e2020 674f4f67 73737367     s.    .sgOOggsss
+   14134:	67737373 674f4f67 20202e73 732e2020     sssggOOgs.    .s
+   14144:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   14154:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   14164:	20202020 794f2020 73737373 73737373           Oyssssssss
+   14174:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   14184:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   14194:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   141a4:	20204f79 20202020 687a2020 402a636a     yO        zhjc*@
+   141b4:	66686870 75687966 7970402a 20203d79     phhffyhu*@pyy=  
+   141c4:	2a202020 68687662 2e2a6868 79663d58        *bvhhhh*.X=fy
+   141d4:	79797979 2020202a 00000000 732e2020     yyyy*   ....  .s
+   141e4:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   141f4:	20202020 20202020 20202020 20202020                     
+   14204:	20202020 20202020 20202020 20202020                     
+   14214:	20202020 20202020 732e2020 674f4f67               .sgOOg
+   14224:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   14234:	732e2020 674f4f67 2e2e4f73 734f2e2e       .sgOOgsO....Os
+   14244:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   14254:	2e2e4f73 734f2e2e 674f4f67 20202e73     sO....OsgOOgs.  
+   14264:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   14274:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   14284:	20202e73 20202020 2e202020 2e2e2e2e     s.         .....
+   14294:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   142a4:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   142b4:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   142c4:	2e2e2e2e 20202020 20202020 687a2020     ....          zh
+   142d4:	20204070 66683d58 58706679 70402020     p@  X=hfyfpX  @p
+   142e4:	20207a79 20202020 6868762a 20202d68     yz      *vhhh-  
+   142f4:	663d2020 2a707966 20202020 00000000       =ffyp*    ....
+   14304:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   14314:	20202020 20202020 20202020 20202020                     
+   14324:	20202020 20202020 20202020 20202020                     
+   14334:	20202020 20202020 20202020 732e2020                   .s
+   14344:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   14354:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   14364:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   14374:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   14384:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   14394:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   143a4:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   143b4:	20202020 20202020 20202020 20202020                     
+   143c4:	20202020 20202020 20202020 20202020                     
+   143d4:	20202020 20202020 20202020 20202020                     
+   143e4:	20202020 20202020 20202020 20202020                     
+   143f4:	7a7a2020 20202040 66705858 582e7066       zz@   XXpffp.X
+   14404:	40202020 20207a70 20202020 68682a20        @pz       *hh
+   14414:	2020583d 3d202020 20266666 20202020     =X     =ff&     
+   14424:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
+   14434:	20202020 20202020 20202020 20202020                     
+   14444:	20202020 20202020 20202020 20202020                     
+   14454:	20202020 20202020 20202020 20202020                     
+   14464:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   14474:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   14484:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   14494:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   144a4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   144b4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   144c4:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   144d4:	20202020 20202020 20202020 20202020                     
+   144e4:	20202020 20202020 20202020 20202020                     
+   144f4:	20202020 20202020 20202020 20202020                     
+   14504:	20202020 20202020 20202020 20202020                     
+   14514:	20202020 2b2b2020 2020202e 702b5820           ++.    X+p
+   14524:	20582b70 20202020 20202b2b 20202020     p+X     ++      
+   14534:	2a2a2020 2e58582e 58585858 20202a2a       **.XX.XXXX**  
+   14544:	20202020 00000000 732e2020 674f4f67         ....  .sgOOg
+   14554:	20202e73 20202020 20202020 20202020     s.              
+   14564:	20202020 20202020 20202020 20202020                     
+   14574:	20202020 20202020 20202020 20202020                     
+   14584:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   14594:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   145a4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   145b4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   145c4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   145d4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   145e4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   145f4:	20202020 20202020 20202020 20202020                     
+   14604:	20202020 20202020 20202020 20202020                     
+   14614:	20202020 20202020 20202020 20202020                     
+   14624:	20202020 20202020 20202020 20202020                     
+   14634:	20202020 20202020 20202020 2b202020                    +
+   14644:	7662632a 2a636276 20205826 20202020     *cbvvbc*&X      
+   14654:	20202020 2b202020 6262632a 2a626262            +*cbbbbb*
+   14664:	2058582b 20202020 00000000 732e2020     +XX     ....  .s
+   14674:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   14684:	20202020 20202020 20202020 20202020                     
+   14694:	20202020 20202020 20202020 20202020                     
+   146a4:	20202020 20202020 732e2020 674f4f67               .sgOOg
+   146b4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   146c4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   146d4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   146e4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   146f4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   14704:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   14714:	20202e73 20202020 20202020 20202020     s.              
+   14724:	20202020 20202020 20202020 20202020                     
+   14734:	20202020 20202020 20202020 20202020                     
+   14744:	20202020 20202020 20202020 20202020                     
+   14754:	20202020 20202020 20202020 20202020                     
+   14764:	632a2020 5a5a4176 44415a5a 20583d63       *cvAZZZZADc=X 
+   14774:	20202020 20202020 632a2020 5a5a4176               *cvAZZ
+   14784:	44415a5a 20582a63 20202020 00000000     ZZADc*X     ....
+   14794:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   147a4:	20202020 20202020 20202020 20202020                     
+   147b4:	20202020 20202020 20202020 20202020                     
+   147c4:	20202020 20202020 20202020 732e2020                   .s
+   147d4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   147e4:	20202e73 732e2020 674f4f67 2e2e4f73     s.    .sgOOgsO..
+   147f4:	734f2e2e 674f4f67 20202e73 732e2020     ..OsgOOgs.    .s
+   14804:	674f4f67 2e2e4f73 734f2e2e 674f4f67     gOOgsO....OsgOOg
+   14814:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   14824:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   14834:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   14844:	2e2e2e2e 2e2e2e2e 2020202e 20202020     .........       
+   14854:	20202020 20202020 20202020 20202020                     
+   14864:	20202020 20202020 20202020 20202020                     
+   14874:	20202020 20202020 20202020 20202020                     
+   14884:	20202020 41443d20 5a5a5a5a 5a5a5a5a          =DAZZZZZZZZ
+   14894:	583d4441 20202020 20202020 41443d20     AD=X         =DA
+   148a4:	5a5a5a5a 5a5a5a5a 583d4441 20202020     ZZZZZZZZAD=X    
+   148b4:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
+   148c4:	20202020 20202020 20202020 20202020                     
+   148d4:	20202020 20202020 20202020 20202020                     
+   148e4:	20202020 20202020 20202020 20202020                     
+   148f4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   14904:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   14914:	73737367 67737373 674f4f67 20202e73     gssssssggOOgs.  
+   14924:	732e2020 674f4f67 73737367 67737373       .sgOOggssssssg
+   14934:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   14944:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   14954:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   14964:	794f2020 73737373 73737373 20204f79       OyssssssssyO  
+   14974:	20202020 20202020 20202020 20202020                     
+   14984:	20202020 20202020 20202020 20202020                     
+   14994:	20202020 20202020 20202020 20202020                     
+   149a4:	20202020 58202020 5a5a533d 5a5a5a5a            X=SZZZZZZ
+   149b4:	5a5a5a5a 46415a5a 20202058 58202020     ZZZZZZAFX      X
+   149c4:	5a5a5346 5a5a5a5a 5a5a5a5a 46415a5a     FSZZZZZZZZZZZZAF
+   149d4:	20202058 00000000 732e2020 674f4f67     X   ....  .sgOOg
+   149e4:	20202e73 20202020 20202020 20202020     s.              
+   149f4:	20202020 20202020 20202020 20202020                     
+   14a04:	20202020 20202020 20202020 20202020                     
+   14a14:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   14a24:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   14a34:	734f4f67 67676767 67676767 674f2e66     gOOsggggggggf.Og
+   14a44:	20202e73 732e2020 662e4f67 67676767     s.    .sgO.fgggg
+   14a54:	67676767 674f4f73 20202e73 732e2020     ggggsOOgs.    .s
+   14a64:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   14a74:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   14a84:	20202020 6773794f 67676767 67676767         Oysggggggggg
+   14a94:	4f796767 20202020 20202020 20202020     ggyO            
+   14aa4:	20202020 20202020 20202020 20202020                     
+   14ab4:	20202020 20202020 20202020 20202020                     
+   14ac4:	20202020 20202020 40202020 5a5a5a76                @vZZZ
+   14ad4:	5a5a5a5a 5a5a5a5a 765a5a5a 20202040     ZZZZZZZZZZZv@   
+   14ae4:	40202020 5a5a5a76 5a5a5a5a 5a5a5a5a        @vZZZZZZZZZZZ
+   14af4:	765a5a5a 20202040 00000000 732e2020     ZZZv@   ....  .s
+   14b04:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   14b14:	20202020 20202020 20202020 20202020                     
+   14b24:	20202020 20202020 20202020 20202020                     
+   14b34:	20202020 20202020 732e2020 674f4f67               .sgOOg
+   14b44:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   14b54:	732e2020 4f2e4f67 4f4f4f4f 4f4f4f4f       .sgO.OOOOOOOOO
+   14b64:	674f202e 20202e73 732e2020 2e204f67     . Ogs.    .sgO .
+   14b74:	4f4f4f4f 4f4f4f4f 674f2e4f 20202e73     OOOOOOOOO.Ogs.  
+   14b84:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   14b94:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   14ba4:	20202e73 20202020 79736779 4f4f4f4f     s.      ygsyOOOO
+   14bb4:	4f4f4f4f 26647379 20202020 20202020     OOOOysd&        
+   14bc4:	20202020 20202020 20202020 20202020                     
+   14bd4:	20202020 20202020 20202020 20202020                     
+   14be4:	20202020 20202020 20202020 7a582020                   Xz
+   14bf4:	5a5a5a44 5a5a5a5a 5a5a5a5a 415a5a5a     DZZZZZZZZZZZZZZA
+   14c04:	20205863 63582020 5a5a5a41 5a5a5a5a     cX    XcAZZZZZZZ
+   14c14:	5a5a5a5a 415a5a5a 20202e63 00000000     ZZZZZZZAc.  ....
+   14c24:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   14c34:	20202020 20202020 20202020 20202020                     
+   14c44:	20202020 20202020 20202020 20202020                     
+   14c54:	20202020 20202020 20202020 732e2020                   .s
+   14c64:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   14c74:	20202e73 4f202020 4f4f6467 4f4f4f4f     s.     OgdOOOOOO
+   14c84:	4f4f4f4f 67644f4f 2020204f 4f202020     OOOOOOdgO      O
+   14c94:	4f4f6767 4f4f4f4f 4f4f4f4f 67644f4f     ggOOOOOOOOOOOOdg
+   14ca4:	2020204f 732e2020 674f4f67 20202e73     O     .sgOOgs.  
+   14cb4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   14cc4:	674f4f67 20202e73 4f202020 202e7364     gOOgs.     Ods. 
+   14cd4:	4f4f4f20 204f4f4f 64734f20 2020204f      OOOOOO  OsdO   
+   14ce4:	20202020 20202020 20202020 20202020                     
+   14cf4:	20202020 20202020 20202020 20202020                     
+   14d04:	20202020 20202020 20202020 20202020                     
+   14d14:	76402020 41414141 5a415353 5644415a       @vAAAASSAZZADV
+   14d24:	5a415344 20204076 76402020 5a415a5a     DSAZv@    @vZZAZ
+   14d34:	5a415341 5341415a 5a414141 20204076     ASAZZAASAAAZv@  
+   14d44:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
+   14d54:	20202020 20202020 20202020 20202020                     
+   14d64:	20202020 20202020 20202020 20202020                     
+   14d74:	20202020 20202020 20202020 20202020                     
+   14d84:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   14d94:	674f4f67 20202e73 4f202020 67676773     gOOgs.     Osggg
+   14da4:	67676767 67676767 73676767 2020204f     gggggggggggsO   
+   14db4:	4f202020 67676773 67676767 67676767        Osggggggggggg
+   14dc4:	73676767 2020204f 732e2020 674f4f67     gggsO     .sgOOg
+   14dd4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   14de4:	732e2020 674f4f67 20202e73 79202020       .sgOOgs.     y
+   14df4:	4f207967 67676479 79646467 6779204f     gy OydgggddyO yg
+   14e04:	20202079 20202020 20202020 20202020     y               
+   14e14:	20202020 20202020 20202020 20202020                     
+   14e24:	20202020 20202020 20202020 20202020                     
+   14e34:	20202020 417a2020 56564453 41424456           zASDVVVDBA
+   14e44:	56564441 53445656 20207a41 417a5820     ADVVVVDSAz   XzA
+   14e54:	56565641 41425656 56564441 53445656     AVVVVVBAADVVVVDS
+   14e64:	20207a5a 00000000 732e2020 674f4f67     Zz  ....  .sgOOg
+   14e74:	20202e73 20202020 20202020 20202020     s.              
+   14e84:	20202020 20202020 20202020 20202020                     
+   14e94:	20202020 20202020 20202020 20202020                     
+   14ea4:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   14eb4:	732e2020 674f4f67 20202e73 2e202020       .sgOOgs.     .
+   14ec4:	73734f4f 73737373 73737373 4f4f7373     OOssssssssssssOO
+   14ed4:	2020202e 2e202020 73734f4f 73737373     .      .OOssssss
+   14ee4:	73737373 4f4f7373 2020202e 732e2020     ssssssOO.     .s
+   14ef4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   14f04:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   14f14:	732e2020 79204f67 73737364 67737373       .sgO ydssssssg
+   14f24:	674f2079 20202e73 20202020 20202020     y Ogs.          
+   14f34:	20202020 20202020 20202020 20202020                     
+   14f44:	20202020 20202020 20202020 20202020                     
+   14f54:	20202020 20202020 417a2020 3b425644               zADVB;
+   14f64:	4156443b 3b565641 5656423b 20207a41     ;DVAAVV;;BVVAz  
+   14f74:	417a5820 3b425656 4156563b 3b565641      XzAVVB;;VVAAVV;
+   14f84:	5656423b 20207a41 00000000 732e2020     ;BVVAz  ....  .s
+   14f94:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   14fa4:	20202020 20202020 20202020 20202020                     
+   14fb4:	20202020 20202020 20202020 20202020                     
+   14fc4:	20202020 20202020 732e2020 674f4f67               .sgOOg
+   14fd4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   14fe4:	20202020 2e2e2020 2e2e2e2e 2e2e2e2e           ..........
+   14ff4:	202e2e2e 20202020 20202020 2e2e2020     ...           ..
+   15004:	2e2e2e2e 2e2e2e2e 202e2e2e 20202020     ...........     
+   15014:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   15024:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   15034:	20202e73 732e2020 644f4f67 2e2e2e73     s.    .sgOOds...
+   15044:	732b2e2e 674f4f64 20202e73 20202020     ..+sdOOgs.      
+   15054:	20202020 20202020 20202020 20202020                     
+   15064:	20202020 20202020 20202020 20202020                     
+   15074:	20202020 20202020 20202020 567a2020                   zV
+   15084:	203b5642 41563b58 58615641 42563b58     BV; X;VAAVaXX;VB
+   15094:	20204653 5a7a2020 583a5653 41533b58     SF    zZSV:XX;SA
+   150a4:	58615641 53563b20 20207a41 00000000     AVaX ;VSAz  ....
+   150b4:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   150c4:	20202020 20202020 20202020 20202020                     
+   150d4:	20202020 20202020 20202020 20202020                     
+   150e4:	20202020 20202020 20202020 732e2020                   .s
+   150f4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   15104:	20202e73 20202020 20202020 20202020     s.              
+   15114:	20202020 20202020 20202020 20202020                     
+   15124:	20202020 20202020 20202020 20202020                     
+   15134:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   15144:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   15154:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   15164:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   15174:	20202020 20202020 20202020 20202020                     
+   15184:	20202020 20202020 20202020 20202020                     
+   15194:	20202020 20202020 20202020 20202020                     
+   151a4:	537a2020 58405642 41563b20 583b5641       zSBV@X ;VAAV;X
+   151b4:	6e564058 20207a56 417a2020 58405653     X@VnVz    zASV@X
+   151c4:	41563b58 583b5641 5344402e 20587a41     X;VAAV;X.@DSAzX 
+   151d4:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
+   151e4:	20202020 20202020 20202020 20202020                     
+   151f4:	20202020 20202020 20202020 20202020                     
+   15204:	20202020 20202020 20202020 20202020                     
+   15214:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   15224:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   15234:	20202020 20202020 20202020 20202020                     
+   15244:	20202020 20202020 20202020 20202020                     
+   15254:	20202020 20202020 732e2020 674f4f67               .sgOOg
+   15264:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   15274:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   15284:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   15294:	20202e73 20202020 20202020 20202020     s.              
+   152a4:	20202020 20202020 20202020 20202020                     
+   152b4:	20202020 20202020 20202020 20202020                     
+   152c4:	20202020 447a2020 406e536e 5356423b           zDnSn@;BVS
+   152d4:	3b6e5653 6b566e40 20207a44 417a2020     SVn;@nVkDz    zA
+   152e4:	406e5356 41566e3a 3b6e5641 44566e40     VSn@:nVAAVn;@nVD
+   152f4:	20207a41 00000000 732e2020 674f4f67     Az  ....  .sgOOg
+   15304:	20202e73 20202020 20202020 20202020     s.              
+   15314:	20202020 20202020 20202020 20202020                     
+   15324:	20202020 20202020 20202020 20202020                     
+   15334:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   15344:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   15354:	20202020 20202020 20202020 20202020                     
+   15364:	20202020 20202020 20202020 20202020                     
+   15374:	20202020 20202020 20202020 732e2020                   .s
+   15384:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   15394:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   153a4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   153b4:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   153c4:	20202020 20202020 20202020 20202020                     
+   153d4:	20202020 20202020 20202020 20202020                     
+   153e4:	20202020 20202020 417a2020 56566e42               zABnVV
+   153f4:	536e5656 56566e56 426e5656 20207a5a     VVnSVnVVVVnBZz  
+   15404:	417a2020 56566e6e 536e5656 56566e53       zAnnVVVVnSSnVV
+   15414:	6e6e5644 20207a41 00000000 732e2020     DVnnAz  ....  .s
+   15424:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   15434:	20202020 20202020 20202020 20202020                     
+   15444:	20202020 20202020 20202020 20202020                     
+   15454:	20202020 20202020 732e2020 674f4f67               .sgOOg
+   15464:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   15474:	20202020 20202020 20202020 20202020                     
+   15484:	20202020 20202020 20202020 20202020                     
+   15494:	20202020 20202020 20202020 20202020                     
+   154a4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   154b4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   154c4:	20202e73 732e2020 644f4f67 20202e73     s.    .sgOOds.  
+   154d4:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   154e4:	20202020 20202020 20202020 20202020                     
+   154f4:	20202020 20202020 20202020 20202020                     
+   15504:	20202020 20202020 20202020 5a7a2020                   zZ
+   15514:	6e3b445a 5a566b6e 6c3b445a 5a6e3b6e     ZD;nnkVZZD;ln;nZ
+   15524:	20207a5a 5a7a2020 6e3b3b53 5a446b6b     Zz    zZS;;nkkDZ
+   15534:	566e445a 536e4256 20207a5a 00000000     ZDnVVBnSZz  ....
+   15544:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   15554:	20202020 20202020 20202020 20202020                     
+   15564:	20202020 20202020 20202020 20202020                     
+   15574:	20202020 20202020 20202020 732e2020                   .s
+   15584:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   15594:	20202e73 20202020 2e2e2020 2e2e2e2e     s.        ......
+   155a4:	2e2e2e2e 20202e2e 20202020 20202020     ......          
+   155b4:	2e2e2020 2e2e2e2e 2e2e2e2e 20202e2e       ............  
+   155c4:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   155d4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   155e4:	674f4f67 20202e73 732e2020 644f4f67     gOOgs.    .sgOOd
+   155f4:	2e2e2b73 734f2e2e 674f4f64 20202e73     s+....OsdOOgs.  
+   15604:	20202020 20202020 20202020 20202020                     
+   15614:	20202020 20202020 20202020 20202020                     
+   15624:	20202020 20202020 20202020 20202020                     
+   15634:	5a7a2020 56445a5a 5a5a4d44 56565a5a       zZZZDVDMZZZZVV
+   15644:	5a534456 20207a5a 5a7a2020 4442535a     VDSZZz    zZZSBD
+   15654:	5a5a566e 53535a5a 5a415653 20207a5a     nVZZZZSSSVAZZz  
+   15664:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
+   15674:	20202020 20202020 20202020 20202020                     
+   15684:	20202020 20202020 20202020 20202020                     
+   15694:	20202020 20202020 20202020 20202020                     
+   156a4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   156b4:	674f4f67 20202e73 2e202020 73734f4f     gOOgs.     .OOss
+   156c4:	73737373 73737373 4f4f7373 2020202e     ssssssssssOO.   
+   156d4:	2e202020 73734f4f 73737373 73737373        .OOssssssssss
+   156e4:	4f4f7373 2020202e 732e2020 674f4f67     ssOO.     .sgOOg
+   156f4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   15704:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   15714:	79204f67 73737364 67737373 674f2079     gO ydssssssgy Og
+   15724:	20202e73 20202020 20202020 20202020     s.              
+   15734:	20202020 20202020 20202020 20202020                     
+   15744:	20202020 20202020 20202020 20202020                     
+   15754:	20202020 5a7a2020 5a5a5a5a 5a5a5a5a           zZZZZZZZZZ
+   15764:	5a5a5a5a 5a5a5a5a 20207a5a 5a7a2020     ZZZZZZZZZz    zZ
+   15774:	5a5a5a5a 5a5a5a5a 5a5a5a5a 5a5a5a5a     ZZZZZZZZZZZZZZZZ
+   15784:	20207a5a 00000000 732e2020 674f4f67     Zz  ....  .sgOOg
+   15794:	20202e73 20202020 20202020 20202020     s.              
+   157a4:	20202020 20202020 20202020 20202020                     
+   157b4:	20202020 20202020 20202020 20202020                     
+   157c4:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   157d4:	732e2020 674f4f67 20202e73 4f202020       .sgOOgs.     O
+   157e4:	67676773 67676767 67676767 73676767     sggggggggggggggs
+   157f4:	2020204f 4f202020 67676773 67676767     O      Osggggggg
+   15804:	67676767 73676767 2020204f 732e2020     gggggggsO     .s
+   15814:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   15824:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   15834:	79202020 4f207967 67676479 79646767        ygy Oydggggdy
+   15844:	6779204f 20202079 20202020 20202020     O ygy           
+   15854:	20202020 20202020 20202020 20202020                     
+   15864:	20202020 20202020 20202020 20202020                     
+   15874:	20202020 20202020 417a2020 5a5a5a5a               zAZZZZ
+   15884:	5a5a5a5a 5a5a5a5a 5a5a5a5a 20207a41     ZZZZZZZZZZZZAz  
+   15894:	417a2020 5a5a5a5a 5a5a5a5a 5a5a5a5a       zAZZZZZZZZZZZZ
+   158a4:	5a5a5a5a 20207a41 00000000 732e2020     ZZZZAz  ....  .s
+   158b4:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   158c4:	20202020 20202020 20202020 20202020                     
+   158d4:	20202020 20202020 20202020 20202020                     
+   158e4:	20202020 20202020 732e2020 674f4f67               .sgOOg
+   158f4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   15904:	4f2e2020 4f4f6467 4f4f4f4f 4f4f4f4f       .OgdOOOOOOOOOO
+   15914:	67644f4f 2020204f 4f202020 4f4f6467     OOdgO      OgdOO
+   15924:	4f4f4f4f 4f4f4f4f 67674f4f 2020204f     OOOOOOOOOOggO   
+   15934:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   15944:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   15954:	20202e73 4f202020 204f7367 4f4f4f20     s.     OgsO  OOO
+   15964:	204f4f4f 64732e20 2020204f 20202020     OOO  .sdO       
+   15974:	20202020 20202020 20202020 20202020                     
+   15984:	20202020 20202020 20202020 20202020                     
+   15994:	20202020 20202020 20202020 417a2020                   zA
+   159a4:	5a5a5a5a 5a5a5a5a 5a5a5a5a 5a5a5a5a     ZZZZZZZZZZZZZZZZ
+   159b4:	20207a5a 417a2020 5a5a5a5a 5a5a5a5a     Zz    zAZZZZZZZZ
+   159c4:	5a5a5a5a 5a5a5a5a 20207a5a 00000000     ZZZZZZZZZz  ....
+   159d4:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   159e4:	20202020 20202020 20202020 20202020                     
+   159f4:	20202020 20202020 20202020 20202020                     
+   15a04:	20202020 20202020 20202020 732e2020                   .s
+   15a14:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   15a24:	20202e73 732e2020 4f2e4f67 4f4f4f4f     s.    .sgO.OOOOO
+   15a34:	4f4f4f4f 674f202e 20202e73 732e2020     OOOO. Ogs.    .s
+   15a44:	2e204f67 4f4f4f4f 4f4f4f4f 674f2e4f     gO .OOOOOOOOO.Og
+   15a54:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   15a64:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   15a74:	674f4f67 20202e73 20202020 79736426     gOOgs.      &dsy
+   15a84:	4f4f4f4f 4f4f4f4f 79677379 20202020     OOOOOOOOysgy    
+   15a94:	20202020 20202020 20202020 20202020                     
+   15aa4:	20202020 20202020 20202020 20202020                     
+   15ab4:	20202020 20202020 20202020 20202020                     
+   15ac4:	5a7a2020 5a415a5a 5a5a5a5a 5a5a5a5a       zZZZAZZZZZZZZZ
+   15ad4:	5a5a5a5a 20207a5a 417a2020 5a5a5a5a     ZZZZZz    zAZZZZ
+   15ae4:	535a5a5a 5a5a5a53 5a5a5a5a 20207a41     ZZZSSZZZZZZZAz  
+   15af4:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
+   15b04:	20202020 20202020 20202020 20202020                     
+   15b14:	20202020 20202020 20202020 20202020                     
+   15b24:	20202020 20202020 20202020 20202020                     
+   15b34:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   15b44:	674f4f67 20202e73 732e2020 734f4f67     gOOgs.    .sgOOs
+   15b54:	67676767 67676767 674f2e66 20202e73     ggggggggf.Ogs.  
+   15b64:	732e2020 662e4f67 67676767 67676767       .sgO.fgggggggg
+   15b74:	674f4f73 20202e73 732e2020 674f4f67     sOOgs.    .sgOOg
+   15b84:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   15b94:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   15ba4:	6767794f 67676767 67676767 4f796464     OyggggggggggddyO
+   15bb4:	20202020 20202020 20202020 20202020                     
+   15bc4:	20202020 20202020 20202020 20202020                     
+   15bd4:	20202020 20202020 20202020 20202020                     
+   15be4:	20202020 417a2020 76445a5a 5a5a5a41           zAZZDvAZZZ
+   15bf4:	415a5a5a 5a5a7644 20207a41 442a2020     ZZZADvZZAz    *D
+   15c04:	5a5a5a5a 46535a5a 5a5a537a 5a5a5a5a     ZZZZZZSFzSZZZZZZ
+   15c14:	20202a44 00000000 732e2020 674f4f67     D*  ....  .sgOOg
+   15c24:	20202e73 20202020 20202020 20202020     s.              
+   15c34:	20202020 20202020 20202020 20202020                     
+   15c44:	20202020 20202020 20202020 20202020                     
+   15c54:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   15c64:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   15c74:	674f4f67 73737367 67737373 674f4f67     gOOggssssssggOOg
+   15c84:	20202e73 732e2020 674f4f67 73737367     s.    .sgOOggsss
+   15c94:	67737373 674f4f67 20202e73 732e2020     sssggOOgs.    .s
+   15ca4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   15cb4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   15cc4:	20202020 794f2020 73737373 73737373           Oyssssssss
+   15cd4:	20204f79 20202020 20202020 20202020     yO              
+   15ce4:	20202020 20202020 20202020 20202020                     
+   15cf4:	20202020 20202020 20202020 20202020                     
+   15d04:	20202020 20202020 5a7a2020 4040765a               zZZv@@
+   15d14:	5a5a4163 63415a5a 5a762a40 20207a5a     cAZZZZAc@*vZZz  
+   15d24:	2a202020 5a5a4144 2e3d535a 5a413d20        *DAZZZS=. =AZ
+   15d34:	445a5a5a 2020202a 00000000 732e2020     ZZZD*   ....  .s
+   15d44:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   15d54:	20202020 20202020 20202020 20202020                     
+   15d64:	20202020 20202020 20202020 20202020                     
+   15d74:	20202020 20202020 732e2020 674f4f67               .sgOOg
+   15d84:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   15d94:	732e2020 674f4f67 2e2e4f73 734f2e2e       .sgOOgsO....Os
+   15da4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   15db4:	2e2e2b73 734f2e2e 674f4f67 20202e73     s+....OsgOOgs.  
+   15dc4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   15dd4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   15de4:	20202e73 20202020 20202020 2e2e2e2e     s.          ....
+   15df4:	2e2e2e2e 20202020 20202020 20202020     ....            
+   15e04:	20202020 20202020 20202020 20202020                     
+   15e14:	20202020 20202020 20202020 20202020                     
+   15e24:	20202020 20202020 20202020 417a2020                   zA
+   15e34:	58582b76 5a416358 2b63415a 62402020     v+XXXcAZZAc+  @b
+   15e44:	20207a41 20202020 5a5a442a 20583d53     Az      *DZZS=X 
+   15e54:	533d5820 2a445a5a 20202020 00000000      X=SZZD*    ....
+   15e64:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   15e74:	20202020 20202020 20202020 20202020                     
+   15e84:	20202020 20202020 20202020 20202020                     
+   15e94:	20202020 20202020 20202020 732e2020                   .s
+   15ea4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   15eb4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   15ec4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   15ed4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   15ee4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   15ef4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   15f04:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   15f14:	20202020 20202020 20202020 20202020                     
+   15f24:	20202020 20202020 20202020 20202020                     
+   15f34:	20202020 20202020 20202020 20202020                     
+   15f44:	20202020 20202020 20202020 20202020                     
+   15f54:	627a2020 2020202a 41635820 20586341       zb*    XcAAcX 
+   15f64:	40202020 20207a76 20202020 53442a20        @vz       *DS
+   15f74:	20205846 3d582020 202a4453 20202020     FX    X=SD*     
+   15f84:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
+   15f94:	20202020 20202020 20202020 20202020                     
+   15fa4:	20202020 20202020 20202020 20202020                     
+   15fb4:	20202020 20202020 20202020 20202020                     
+   15fc4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   15fd4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   15fe4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   15ff4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   16004:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   16014:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   16024:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   16034:	20202020 20202020 20202020 20202020                     
+   16044:	20202020 20202020 20202020 20202020                     
+   16054:	20202020 20202020 20202020 20202020                     
+   16064:	20202020 20202020 20202020 20202020                     
+   16074:	20202020 2b402020 20202020 63582020           @+      Xc
+   16084:	20202b63 20202020 20202b40 20202020     c+      @+      
+   16094:	2d2a5858 20205858 58202020 20202d3d     XX*-XX     X=-  
+   160a4:	20202020 00000000 732e2020 674f4f67         ....  .sgOOg
+   160b4:	20202e73 20202020 20202020 20202020     s.              
+   160c4:	20202020 20202020 20202020 20202020                     
+   160d4:	20202020 20202020 20202020 20202020                     
+   160e4:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   160f4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   16104:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   16114:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   16124:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   16134:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   16144:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   16154:	20202020 20202020 20202020 20202020                     
+   16164:	20202020 20202020 20202020 20202020                     
+   16174:	58205858 20202058 20202020 20202020     XX XX           
+   16184:	20202020 20202020 20202020 20202020                     
+   16194:	20202020 20202020 20202020 20202020                     
+   161a4:	58202020 2020202e 20202020 20202020        X.           
+   161b4:	20202020 20202020 20582b20 202b2020              +X   + 
+   161c4:	2020202e 20202020 00000000 732e2020     .       ....  .s
+   161d4:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   161e4:	20202020 20202020 20202020 20202020                     
+   161f4:	20202020 20202020 20202020 20202020                     
+   16204:	20202020 20202020 732e2020 674f4f67               .sgOOg
+   16214:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   16224:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   16234:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   16244:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   16254:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   16264:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   16274:	20202e73 20202020 20202020 20202020     s.              
+   16284:	20202020 20202020 20202020 20202020                     
+   16294:	58582020 4040406f 40404040 20205858       XXo@@@@@@@XX  
+   162a4:	20202020 20202020 20202020 20202020                     
+   162b4:	20202020 20202020 20202020 20202020                     
+   162c4:	20202020 20202020 20202020 20202020                     
+   162d4:	20202020 20202020 20202020 20202e20                  .  
+   162e4:	2e202020 2020202e 20202020 00000000        ..       ....
+   162f4:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   16304:	20202020 20202020 20202020 20202020                     
+   16314:	20202020 20202020 20202020 20202020                     
+   16324:	20202020 20202020 20202020 732e2020                   .s
+   16334:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   16344:	20202e73 732e2020 674f4f67 2e2e4f73     s.    .sgOOgsO..
+   16354:	734f2e2e 674f4f67 20202e73 732e2020     ..OsgOOgs.    .s
+   16364:	674f4f67 2e2e4f73 734f2e2e 674f4f67     gOOgsO....OsgOOg
+   16374:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   16384:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   16394:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   163a4:	20202020 20202020 20202020 20202020                     
+   163b4:	20202020 402b2020 3b2d2d25 403b3b3b           +@%--;;;;@
+   163c4:	20586f40 20202020 20202020 20202020     @oX             
+   163d4:	20202020 20202020 20202020 20202020                     
+   163e4:	20202020 20202020 20202020 20202020                     
+   163f4:	20202020 20202020 20202020 20202020                     
+   16404:	20202020 20202020 20202020 20202020                     
+   16414:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
+   16424:	20202020 20202020 20202020 20202020                     
+   16434:	20202020 20202020 20202020 20202020                     
+   16444:	20202020 20202020 20202020 20202020                     
+   16454:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   16464:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   16474:	73737367 67737373 674f4f67 20202e73     gssssssggOOgs.  
+   16484:	732e2020 674f4f67 73737367 67737373       .sgOOggssssssg
+   16494:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   164a4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   164b4:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   164c4:	20202020 20202020 20202020 20202020                     
+   164d4:	20202020 20202020 3b404058 623b3b3b             X@@;;;;b
+   164e4:	3b3b3b6e 5840403b 20202058 20202020     n;;;;@@XX       
+   164f4:	20202020 20202020 20202020 20202020                     
+   16504:	20202020 20202020 20202020 20202020                     
+   16514:	20202020 20202020 20202020 20202020                     
+   16524:	20202020 20202020 20202020 20202020                     
+   16534:	20202020 00000000 732e2020 674f4f67         ....  .sgOOg
+   16544:	20202e73 20202020 20202020 20202020     s.              
+   16554:	20202020 20202020 20202020 20202020                     
+   16564:	20202020 20202020 20202020 20202020                     
+   16574:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   16584:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   16594:	734f4f67 67676767 67676767 674f4f73     gOOsggggggggsOOg
+   165a4:	20202e73 732e2020 734f4f67 67676767     s.    .sgOOsgggg
+   165b4:	67676767 674f4f73 20202e73 732e2020     ggggsOOgs.    .s
+   165c4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   165d4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   165e4:	20202020 20202020 20202020 20202058                 X   
+   165f4:	20202020 20202020 58582020 3b3b4040               XX@@;;
+   16604:	44746e6e 6e6e6e44 40403b3b 20202058     nntDDnnn;;@@X   
+   16614:	20202020 20202020 20202020 20202020                     
+   16624:	20202020 20202020 20202020 20202020                     
+   16634:	20202020 20202020 20202020 20202020                     
+   16644:	20202020 20202020 20202e20 20202020              .      
+   16654:	20202020 20202020 00000000 732e2020             ....  .s
+   16664:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   16674:	20202020 20202020 20202020 20202020                     
+   16684:	20202020 20202020 20202020 20202020                     
+   16694:	20202020 20202020 732e2020 674f4f67               .sgOOg
+   166a4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   166b4:	732e2020 4f2e4f67 4f4f4f4f 4f4f4f4f       .sgO.OOOOOOOOO
+   166c4:	674f2e4f 20202e73 732e2020 4f2e4f67     O.Ogs.    .sgO.O
+   166d4:	4f4f4f4f 4f4f4f4f 674f2e4f 20202e73     OOOOOOOOO.Ogs.  
+   166e4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   166f4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   16704:	20202e73 20202020 20202020 23236f58     s.          Xo##
+   16714:	586f2325 20202020 20202020 58582020     %#oX          XX
+   16724:	6e353b40 74776e6e 6e777774 403b3b6e     @;5nnnwttwwnn;;@
+   16734:	2020582b 20202020 20202020 20202020     +X              
+   16744:	20202020 20202020 20202020 58202020                    X
+   16754:	582b2e20 20202e58 582e2e20 20202e58      .+XX.   ..XX.  
+   16764:	20202020 20202020 75683a2e 2e4f2675             .:huu&O.
+   16774:	262e2e20 202e2b26 20202020 00000000      ..&&+.     ....
+   16784:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   16794:	20202020 20202020 20202020 20202020                     
+   167a4:	20202020 20202020 20202020 20202020                     
+   167b4:	20202020 20202020 20202020 732e2020                   .s
+   167c4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   167d4:	20202e73 4f202020 4f4f6767 4f4f4f4f     s.     OggOOOOOO
+   167e4:	4f4f4f4f 67644f4f 2020204f 4f202020     OOOOOOdgO      O
+   167f4:	4f4f6767 4f4f4f4f 4f4f4f4f 67644f4f     ggOOOOOOOOOOOOdg
+   16804:	2020204f 732e2020 674f4f67 20202e73     O     .sgOOgs.  
+   16814:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   16824:	674f4f67 20202e73 20202020 6f202020     gOOgs.         o
+   16834:	30713225 25323230 2020206f 20202020     %2q0022%o       
+   16844:	40585820 4d6e3b3b 74747774 74747474      XX@;;nMtwtttttt
+   16854:	3b3b6e4e 20205840 20202020 20202020     Nn;;@X          
+   16864:	20202020 20202020 20202020 20202020                     
+   16874:	2b582020 616e6a3a 2e3a6a6e 426a6626       X+:jnanj:.&fjB
+   16884:	4f26616e 2020202e 2b202020 42427675     na&O.      +uvBB
+   16894:	4f686a42 766a262b 4f796142 20202020     BjhO+&jvBayO    
+   168a4:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
+   168b4:	20202020 20202020 20202020 20202020                     
+   168c4:	20202020 20202020 20202020 20202020                     
+   168d4:	20202020 20202020 20202020 20202020                     
+   168e4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   168f4:	674f4f67 20202e73 4f202020 67676773     gOOgs.     Osggg
+   16904:	67676767 67676767 73676767 2020204f     gggggggggggsO   
+   16914:	4f202020 67676764 67676767 67676767        Odggggggggggg
+   16924:	73676767 2020204f 732e2020 674f4f67     gggsO     .sgOOg
+   16934:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   16944:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   16954:	256f2020 65726530 30656572 20206f25       o%0ereree0%o  
+   16964:	20202020 40582020 746e6e3b 4e4e7274           X@;nnttrNN
+   16974:	744e4e4e 3b6e6e74 20585840 20202020     NNNttnn;@XX     
+   16984:	20202020 20202020 20202020 20202020                     
+   16994:	20202020 262e2020 56564476 756a5656           .&vDVVVVju
+   169a4:	56567668 2d425656 2020584f 26202020     hvVVVVB-OX     &
+   169b4:	5656446a 75765656 56564266 3a425656     jDVVVVvufBVVVVB:
+   169c4:	2020202e 00000000 732e2020 674f4f67     .   ....  .sgOOg
+   169d4:	20202e73 20202020 20202020 20202020     s.              
+   169e4:	20202020 20202020 20202020 20202020                     
+   169f4:	20202020 20202020 20202020 20202020                     
+   16a04:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   16a14:	732e2020 674f4f67 20202e73 2e202020       .sgOOgs.     .
+   16a24:	73734f4f 73737373 73737373 4f4f7373     OOssssssssssssOO
+   16a34:	2020202e 2e202020 73734f4f 73737373     .      .OOssssss
+   16a44:	73737373 4f4f7373 2020202e 732e2020     ssssssOO.     .s
+   16a54:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   16a64:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   16a74:	20202020 30255820 72727265 72727272          X%0errrrrrr
+   16a84:	20583230 20202020 3b405820 74746e3b     02X      X@;;ntt
+   16a94:	4e4e4e4e 724e4e4e 3b6e7474 20584040     NNNNNNNrttn;@@X 
+   16aa4:	20202020 20202020 25235820 58585840              X#%@XXX
+   16ab4:	20202020 20202020 68582020 3b425642               XhBVB;
+   16ac4:	6a44443b 3b44446a 6156423b 20202b2b     ;DDjjDD;;BVa++  
+   16ad4:	2a2e2020 3b425642 6a444461 6144446a       .*BVB;aDDjjDDa
+   16ae4:	6156423b 20202026 00000000 732e2020     ;BVa&   ....  .s
+   16af4:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   16b04:	20202020 20202020 20202020 20202020                     
+   16b14:	20202020 20202020 20202020 20202020                     
+   16b24:	20202020 20202020 732e2020 674f4f67               .sgOOg
+   16b34:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   16b44:	20202020 2e2e2020 2e2e2e2e 2e2e2e2e           ..........
+   16b54:	202e2e2e 20202020 20202020 2e2e2020     ...           ..
+   16b64:	2e2e2e2e 2e2e2e2e 20202e2e 20202020     ..........      
+   16b74:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   16b84:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   16b94:	20202e73 20202020 65326f58 72727272     s.      Xo2errrr
+   16ba4:	72727272 206f3265 20202020 3b405820     rrrre2o      X@;
+   16bb4:	4e773b6e 414e4e4e 4e4e4e41 6e3b7772     n;wNNNNAANNNrw;n
+   16bc4:	2058403b 20202020 20202020 65302558     ;@X         X%0e
+   16bd4:	58582530 20202020 20202020 6a582020     0%XX          Xj
+   16be4:	583b5642 6e566158 2e3b566e 6e563b20     BV;XXaVnnV;. ;Vn
+   16bf4:	2020582b 752e2020 203b5642 6e563b58     +X    .uBV; X;Vn
+   16c04:	203b566e 42563b58 2020203a 00000000     nV; X;VB:   ....
+   16c14:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   16c24:	20202020 20202020 20202020 20202020                     
+   16c34:	20202020 20202020 20202020 20202020                     
+   16c44:	20202020 20202020 20202020 732e2020                   .s
+   16c54:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   16c64:	20202e73 20202020 20202020 20202020     s.              
+   16c74:	20202020 20202020 20202020 20202020                     
+   16c84:	20202020 20202020 20202020 20202020                     
+   16c94:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   16ca4:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   16cb4:	674f4f67 20202e73 20202020 65712320     gOOgs.       #qe
+   16cc4:	72727272 72727272 58233265 20202020     rrrrrrrre2#X    
+   16cd4:	3b405820 4e72776e 5a41414e 4e4e4141      X@;nwrNNAAZAANN
+   16ce4:	6e357474 2058403b 20202020 20202020     tt5n;@X         
+   16cf4:	72723023 58253072 20202020 20202020     #0rrr0%X        
+   16d04:	682b2020 58404442 6e563b20 583b566e       +hBD@X ;VnnV;X
+   16d14:	6e564058 20202e26 682e2020 58404442     X@Vn&.    .hBD@X
+   16d24:	6e563b20 583b566e 6e564020 20202e26      ;VnnV;X @Vn&.  
+   16d34:	00000000 732e2020 674f4f67 20202e73     ....  .sgOOgs.  
+   16d44:	20202020 20202020 20202020 20202020                     
+   16d54:	20202020 20202020 20202020 20202020                     
+   16d64:	20202020 20202020 20202020 20202020                     
+   16d74:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   16d84:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   16d94:	20202020 20202020 20202020 20202020                     
+   16da4:	20202020 20202020 20202020 20202020                     
+   16db4:	20202020 20202020 732e2020 674f4f67               .sgOOg
+   16dc4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   16dd4:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   16de4:	65302520 72727272 72727272 20233072      %0errrrrrrrr0# 
+   16df4:	20202020 3b405820 4e74776e 5a5a4e4e          X@;nwtNNNZZ
+   16e04:	4e41415a 6e77744e 5858403b 20202020     ZAANNtwn;@XX    
+   16e14:	20202020 72723025 58256572 20202020         %0rrre%X    
+   16e24:	20202020 792e2020 406e566e 6156423b           .ynVn@;BVa
+   16e34:	3b425661 61566e40 20202e26 752b2020     aVB;@nVa&.    +u
+   16e44:	406e566e 6156423b 3b425661 61566e40     nVn@;BVaaVB;@nVa
+   16e54:	20204f26 00000000 732e2020 674f4f67     &O  ....  .sgOOg
+   16e64:	20202e73 20202020 20202020 20202020     s.              
+   16e74:	20202020 20202020 20202020 20202020                     
+   16e84:	20202020 20202020 20202020 20202020                     
+   16e94:	20202020 732e2020 674f4f67 20202e73           .sgOOgs.  
+   16ea4:	732e2020 674f4f67 20202e73 20202020       .sgOOgs.      
+   16eb4:	20202020 20202020 20202020 20202020                     
+   16ec4:	20202020 20202020 20202020 20202020                     
+   16ed4:	20202020 20202020 20202020 732e2020                   .s
+   16ee4:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   16ef4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   16f04:	20202020 72712520 72727272 72727272          %qrrrrrrrrr
+   16f14:	20233072 20202020 3b405820 4e74776e     r0#      X@;nwtN
+   16f24:	5a41414e 4e4e415a 626e7474 2058403b     NAAZZANNttnb;@X 
+   16f34:	20202020 20202020 72723025 58253072             %0rrr0%X
+   16f44:	20202020 20202020 26202020 56566e75                &unVV
+   16f54:	796e5656 44446e79 2d6e5656 2020584f     VVnyynDDVVn-OX  
+   16f64:	262e2020 56566e75 796e5656 56446e26       .&unVVVVny&nDV
+   16f74:	3a6e5656 20202e4f 00000000 732e2020     VVn:O.  ....  .s
+   16f84:	674f4f67 20202e73 20202020 20202020     gOOgs.          
+   16f94:	20202020 20202020 20202020 20202020                     
+   16fa4:	20202020 20202020 20202020 20202020                     
+   16fb4:	20202020 20202020 732e2020 674f4f67               .sgOOg
+   16fc4:	20202e73 732e2020 674f4f67 20202e73     s.    .sgOOgs.  
+   16fd4:	20202020 20202020 20202020 20202020                     
+   16fe4:	20202020 20202020 20202020 20202020                     
+   16ff4:	20202020 20202020 20202020 20202020                     
+   17004:	732e2020 674f4f67 20202e73 732e2020       .sgOOgs.    .s
+   17014:	674f4f67 20202e73 732e2020 674f4f67     gOOgs.    .sgOOg
+   17024:	20202e73 20202020 65712358 72727272     s.      X#qerrrr
+   17034:	72727272 20233272 20202020 3b405820     rrrrr2#      X@;
+   17044:	4e74356e 4e414e4e 4e4e4e41 6e77774e     n5tNNNANANNNNwwn
+   17054:	20584040 20202020 20202020 72303258     @@X         X20r
+   17064:	586f7172 20202020 20202020 2b582020     rqoX          X+
+   17074:	6e612d75 2626616e 6e3b2626 4f3a3b6e     u-anna&&&&;nn;:O
+   17084:	2020202e 2b202020 6e612d3a 2b403b6b     .      +:-ank;@+
+   17094:	6e3b264f 4f2d616e 2020202b 00000000     O&;nna-O+   ....
+   170a4:	732e2020 644f4f67 2e2e2b73 2e2e2e2e       .sgOOds+......
+   170b4:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   170c4:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   170d4:	2e2e2e2e 2e2e2e2e 2e2e2e2e 732e2e2e     ...............s
+   170e4:	674f4f64 20202e73 732e2020 644f4f67     dOOgs.    .sgOOd
+   170f4:	2e2e4f73 2e2e2e2e 2e2e2e2e 2e2e2e2e     sO..............
+   17104:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   17114:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   17124:	2e2e2e2e 734f2e2e 674f4f64 20202e73     ......OsdOOgs.  
+   17134:	732e2020 644f4f67 2e2e2b73 734f2e2e       .sgOOds+....Os
+   17144:	674f4f64 20202e73 20202020 72716f20     dOOgs.       oqr
+   17154:	72727272 72727272 206f3265 20202020     rrrrrrrre2o     
+   17164:	3b405820 74743b3b 4e4e4e4e 4e4e4e4e      X@;;;ttNNNNNNNN
+   17174:	3b3b7772 20584040 20202020 20202020     rw;;@@X         
+   17184:	25235858 58586f25 20202020 20202020     XX#%%oXX        
+   17194:	2e582020 263a7526 2e4f2626 2626262e       X.&u:&&&O..&&&
+   171a4:	2b4f4f26 20202020 202e2020 263a3a2b     &OO+      . +::&
+   171b4:	202b2b26 26264f2e 2e2b2b26 20202e20     &++ .O&&&++. .  
+   171c4:	00000000 732e2020 79204f67 73737364     ....  .sgO ydsss
+   171d4:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   171e4:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   171f4:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   17204:	64737373 674f2079 20202e73 732e2020     sssdy Ogs.    .s
+   17214:	79204f67 73737367 73737373 73737373     gO ygsssssssssss
+   17224:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   17234:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   17244:	73737373 73737373 67737373 674f2079     sssssssssssgy Og
+   17254:	20202e73 732e2020 79204f67 73737364     s.    .sgO ydsss
+   17264:	67737373 674f2079 20202e73 20202020     sssgy Ogs.      
+   17274:	30255820 72727272 72727272 20582530      X%0rrrrrrrr0%X 
+   17284:	20202020 402b2020 74773b3b 4e4e4e4e           +@;;wtNNNN
+   17294:	724e4e4e 3b3b7774 58586f40 20202020     NNNrtw;;@oXX    
+   172a4:	20202020 58585858 58582058 20202020         XXXXX XX    
+   172b4:	20202020 2e202020 4f4f262b 2e2e4f26            .+&OO&O..
+   172c4:	4f4f2e2e 2e2b2b4f 20202020 20582020     ..OOO++.      X 
+   172d4:	2b4f2b20 2020202b 2e2e2e20 202e2e2e      +O++    ...... 
+   172e4:	20202e20 00000000 79202020 4f207967      .  ....   ygy O
+   172f4:	67646479 67676767 67676767 67676767     yddggggggggggggg
+   17304:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   17314:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   17324:	67676767 79646767 6479204f 20202079     ggggggdyO ydy   
+   17334:	79202020 4f207967 67676479 67676767        ygy Oydgggggg
+   17344:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   17354:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   17364:	67676767 67676767 67676767 79646767     ggggggggggggggdy
+   17374:	6479204f 20202079 79202020 4f207967     O ydy      ygy O
+   17384:	67676479 79646767 6779204f 20202079     ydggggdyO ygy   
+   17394:	20202020 256f2020 65656530 30656572           o%0eeeree0
+   173a4:	20206f25 20202020 40582020 776e3b40     %o        X@@;nw
+   173b4:	74747274 7472744e 403b6e77 20202040     trttNtrtwn;@@   
+   173c4:	20202020 20202020 20202020 20202020                     
+   173d4:	20202020 20202020 20202020 20202020                     
+   173e4:	20202020 20202020 20202020 20202020                     
+   173f4:	20202020 20202020 20202020 20202020                     
+   17404:	20202020 20202020 00000000 4f202020             ....   O
+   17414:	204f7364 4f4f4f20 4f4f4f4f 4f4f4f4f     dsO  OOOOOOOOOOO
+   17424:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   17434:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   17444:	4f4f4f4f 4f4f4f4f 204f4f4f 64732e20     OOOOOOOOOOO  .sd
+   17454:	2020204f 4f202020 202e7364 4f4f4f20     O      Ods.  OOO
+   17464:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   17474:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   17484:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   17494:	204f4f4f 64732e20 2020204f 4f202020     OOO  .sdO      O
+   174a4:	202e7364 4f4f4f20 204f4f4f 64732e20     ds.  OOOOOO  .sd
+   174b4:	2020204f 20202020 6f202020 30303225     O          o%200
+   174c4:	25323030 2020206f 20202020 2b582020     002%o         X+
+   174d4:	6e3b3b40 74747774 35747474 403b3b3b     @;;ntwttttt5;;;@
+   174e4:	20205858 20202020 20202020 20202020     XX              
+   174f4:	20202020 20202020 20202020 20202020                     
+   17504:	20202020 20202020 20202020 20202020                     
+   17514:	20202020 20202020 20202020 20202020                     
+   17524:	20202020 20202020 20202020 00000000                 ....
+   17534:	20202020 79736426 4f4f4f4f 4f4f4f4f         &dsyOOOOOOOO
+   17544:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   17554:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   17564:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   17574:	79677379 20202020 20202020 79736479     ysgy        ydsy
+   17584:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   17594:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   175a4:	4f4f4f4f 4f4f4f4f 4f4f4f4f 4f4f4f4f     OOOOOOOOOOOOOOOO
+   175b4:	4f4f4f4f 4f4f4f4f 79677379 20202020     OOOOOOOOysgy    
+   175c4:	20202020 79736479 4f4f4f4f 4f4f4f4f         ydsyOOOOOOOO
+   175d4:	79677379 20202020 20202020 20202020     ysgy            
+   175e4:	25236f20 206f2325 20202020 20202020      o#%%#o         
+   175f4:	58202020 3b3b4040 6e773b3b 3b3b3b77        X@@;;;;wnw;;;
+   17604:	40403b3b 20202020 20202020 20202020     ;;@@            
+   17614:	20202020 20202020 20202020 20202020                     
+   17624:	20202020 20202020 20202020 20202020                     
+   17634:	20202020 20202020 20202020 20202020                     
+   17644:	20202020 20202020 20202020 20202020                     
+   17654:	00000000 20202020 6767794f 67676767     ....    Oygggggg
+   17664:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   17674:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   17684:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   17694:	67676767 4f796467 20202020 20202020     gggggdyO        
+   176a4:	6764794f 67676767 67676767 67676767     Oydggggggggggggg
+   176b4:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   176c4:	67676767 67676767 67676767 67676767     gggggggggggggggg
+   176d4:	67676767 67676767 67676767 4f796467     gggggggggggggdyO
+   176e4:	20202020 20202020 6764794f 67676767             Oydggggg
+   176f4:	67676767 4f796464 20202020 20202020     ggggddyO        
+   17704:	20202020 20202020 20202020 20202020                     
+   17714:	20202020 58202020 40406f58 6e3b3b3b            XXo@@;;;n
+   17724:	3b3b3b3b 582b4040 20202020 20202020     ;;;;@@+X        
+   17734:	20202020 20202020 20202020 20202020                     
+   17744:	20202020 20202020 20202020 20202020                     
+   17754:	20202020 20202020 20202020 20202020                     
+   17764:	20202020 20202020 20202020 20202020                     
+   17774:	20202020 00000000 20202020 794f2020         ....      Oy
+   17784:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   17794:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   177a4:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   177b4:	73737373 73737373 20204f79 20202020     ssssssssyO      
+   177c4:	20202020 794f2020 73737373 73737373           Oyssssssss
+   177d4:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   177e4:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   177f4:	73737373 73737373 73737373 73737373     ssssssssssssssss
+   17804:	20204f79 20202020 20202020 794f2020     yO            Oy
+   17814:	73737373 73737373 20204f79 20202020     ssssssssyO      
+   17824:	20202020 20202020 20202020 20202020                     
+   17834:	20202020 20202020 20202020 40585858                 XXX@
+   17844:	3b404040 40404040 20585840 20202020     @@@;@@@@@XX     
+   17854:	20202020 20202020 20202020 20202020                     
+   17864:	20202020 20202020 20202020 20202020                     
+   17874:	20202020 20202020 20202020 20202020                     
+   17884:	20202020 20202020 20202020 20202020                     
+   17894:	20202020 20202020 00000000 20202020             ....    
+   178a4:	20202020 2e2e2e2e 2e2e2e2e 2e2e2e2e         ............
+   178b4:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   178c4:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   178d4:	2e2e2e2e 2e2e2e2e 2e2e2e2e 20202020     ............    
+   178e4:	20202020 20202020 2e202020 2e2e2e2e                .....
+   178f4:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   17904:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   17914:	2e2e2e2e 2e2e2e2e 2e2e2e2e 2e2e2e2e     ................
+   17924:	2e2e2e2e 20202020 20202020 20202020     ....            
+   17934:	2e202020 2e2e2e2e 2e2e2e2e 20202020        .........    
+   17944:	20202020 20202020 20202020 20202020                     
+   17954:	20202020 20202020 20202020 20202020                     
+   17964:	58582020 40584040 58404040 20205858       XX@@X@@@@XXX  
+   17974:	20202020 20202020 20202020 20202020                     
+   17984:	20202020 20202020 20202020 20202020                     
+   17994:	20202020 20202020 20202020 20202020                     
+   179a4:	20202020 20202020 20202020 20202020                     
+   179b4:	20202020 20202020 20202020 00000000                 ....
+   179c4:	20202020 20202020 20202020 20202020                     
+   179d4:	20202020 20202020 20202020 20202020                     
+   179e4:	20202020 20202020 20202020 20202020                     
+   179f4:	20202020 20202020 20202020 20202020                     
+   17a04:	20202020 20202020 20202020 20202020                     
+   17a14:	20202020 20202020 20202020 20202020                     
+   17a24:	20202020 20202020 20202020 20202020                     
+   17a34:	20202020 20202020 20202020 20202020                     
+   17a44:	20202020 20202020 20202020 20202020                     
+   17a54:	20202020 20202020 20202020 20202020                     
+   17a64:	20202020 20202020 20202020 20202020                     
+   17a74:	20202020 20202020 20202020 20202020                     
+   17a84:	20202020 20202020 58585820 20205858              XXXXX  
+   17a94:	20202020 20202020 20202020 20202020                     
+   17aa4:	20202020 20202020 20202020 20202020                     
+   17ab4:	20202020 20202020 20202020 20202020                     
+   17ac4:	20202020 20202020 20202020 20202020                     
+   17ad4:	20202020 20202020 20202020 20202020                     
+   17ae4:	00000000 20202020 20202020 20202020     ....            
+   17af4:	20202020 20202020 20202020 20202020                     
+   17b04:	20202020 20202020 20202020 20202020                     
+   17b14:	20202020 20202020 20202020 20202020                     
+   17b24:	20202020 20202020 20202020 20202020                     
+   17b34:	20202020 20202020 20202020 20202020                     
+   17b44:	20202020 20202020 20202020 20202020                     
+   17b54:	20202020 20202020 20202020 20202020                     
+   17b64:	20202020 20202020 20202020 20202020                     
+   17b74:	20202020 20202020 20202020 20202020                     
+   17b84:	20202020 20202020 20202020 20202020                     
+   17b94:	20202020 20202020 20202020 20202020                     
+   17ba4:	20202020 20202020 20202020 58582020                   XX
+   17bb4:	20202020 20202020 20202020 20202020                     
+   17bc4:	20202020 20202020 20202020 20202020                     
+   17bd4:	20202020 20202020 20202020 20202020                     
+   17be4:	20202020 20202020 20202020 20202020                     
+   17bf4:	20202020 20202020 20202020 20202020                     
+   17c04:	20202020 00000000 00000043                  ....C...

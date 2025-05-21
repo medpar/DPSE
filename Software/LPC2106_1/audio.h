@@ -109,6 +109,7 @@ enum notes {
 extern volatile int CH1_ON,CH2_ON,CH3_ON,CH4_ON;
 extern volatile int iPP, rPP;
 extern unsigned char PARTITURE[131][4];
+extern unsigned char PARTITURE_galaga_intro_txt[][4] ;
 
 
 

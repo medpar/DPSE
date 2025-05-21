@@ -706,6 +706,8 @@ static void checkCollisions(void)
 /* =================================================================== */
 /*                                MAIN                                 */
 /* =================================================================== */
+
+
 #define PACMANIA_TEMPO 150
 void start_pacmania_music(void) {
     // El array PARTITURE se define en "pacmania.mod.txt.c"
@@ -715,8 +717,15 @@ void start_pacmania_music(void) {
 
     // Llamamos a la función principal para iniciar la partitura
     PARTITURE_On(PARTITURE, numero_de_eventos, 90);
+   
+    //PARTITURE_On(PARTITURE_galaga_intro_txt, 64, 90);
+   
+   
+   
 }
 
+
+extern unsigned int NOTE[] ;
 int main(void)
 {
     /* -------- NO TOCAR CONFIGURACIï¿½N DE PINES ---------------------- */
@@ -729,8 +738,20 @@ int main(void)
 
     _printf("Desarrollo Practico de Sistemas Electronicos\r\n"
             "Ingenieria de Sistemas Electronicos\r\n");
-
+   int i=0;
     AMPLIF_ON;
+   /*
+
+   while(1)
+   {
+     _printf("%3d %6d\n",i, NOTE[i]); 
+     Nota( NOTE[i] );  
+     i++; if(i==12*5) i =0;
+   }
+   */
+   
+   
+   
    
        start_pacmania_music();
    
@@ -747,7 +768,7 @@ int main(void)
     xpm_sx = TILE; xpm_sy = TILE;
     XPM_SetxNyN(SCALE, SCALE);
 
-    int i;
+
     for (i = 0; i < GHOST_COUNT; i++) {
             int px    = X_OFFSET + ghosts[i].x * TW;
             int py    = Y_OFFSET + ghosts[i].y * TW;

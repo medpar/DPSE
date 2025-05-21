@@ -116,6 +116,8 @@ const short TABLA_SQUARE_WAVE[]={
 
    volatile unsigned short nota1, nota2, nota3, nota4;
 
+volatile unsigned char Amplitud1;
+
 	volatile unsigned char *Part;
 
 	volatile unsigned int Next;
@@ -173,10 +175,21 @@ void PWM0_ISR(void)
    
 
  // Attenuate
+  
    d1=(d1>>2); //Divido entre 3
    d2=(d2>>2);
    d3=(d3>>2);
    d4=(d4>>2);
+   
+   
+   if(!nota1)   d1=0;
+   if(!nota2)   d2=0;
+   if(!nota3)   d3=0;
+   if(!nota4)   d4=0;   
+   
+   
+   
+   
    
  // Increment phases
     Fase1+=Delta_Fase1;
@@ -184,45 +197,13 @@ void PWM0_ISR(void)
     Fase3+=Delta_Fase3;
     Fase4+=Delta_Fase4;
  
- // Special effects
-   if (expl && exCount < duration){
-		if (effectType == GUN_EFFECT) {
-			defecto = TABLA_SINUS_WAVE[fase >> 8];  // Usar tabla de ondas sinusoidales
-			defecto=(defecto>>4); // Atenuo el efecto
-		}
-		else if (effectType == EXPLOSION_EFFECT) {
-			if (exCount % 100 == 0) {
-				defecto = ((int)(rnd(defecto) & 0x3FF) - 512) >> 4;
-			}
-		}
-		
-		//_printf("\r\n defecto %d",defecto);
 
-        // Limitar la amplitud para evitar saturación
-        if (defecto > 511) defecto = 511;
-        if (defecto < -511) defecto = -511;
-
-        // Incrementar la fase
-        delta_fase = (unsigned short)((256L * freq) / 225);
-        fase += delta_fase;
-
-        // Disminuir la frecuencia para simular el decaimiento de la explosión
-        if (exCount % 100 == 0) {
-            freq -= 10;
-        }
-
-		exCount++;
-     }
-     else{
-		defecto = 0;
-		expl=0;
-     }
  // Add components (cuadraphonic sound)
-    dtotalIzq=d1+d2+defecto;
+    dtotalIzq=d1+d2;
     if(dtotalIzq> 511) dtotalIzq = 511; //Saturación
     if(dtotalIzq<-511) dtotalIzq = -511;
       //Canal Derecho
-    dtotalDch=d3+d4+defecto;
+    dtotalDch=d3+d4;
     if(dtotalDch> 511) dtotalDch = 511; //Saturación
     if(dtotalDch<-511) dtotalDch = -511;
 
@@ -262,19 +243,19 @@ void TIMER0_ISR(void)
  T0IR = 0xFFFF;	   	   // Clear all interrupt notifications	
  // Next note, if any, update delta phases
    nota1=((Part[cont*4+0]) & 0b00111111);
-   Delta_Fase1= (unsigned int)((256L*NOTE[nota1])/22500); //coger solo los bits del 5:0
-   
+   Delta_Fase1= (unsigned int)((114L*NOTE[nota1])/10000); //coger solo los bits del 5:0
+  
    
    nota2=((Part[cont*4+1]) & 0b00111111);
-   Delta_Fase2= (unsigned int)((256L*NOTE[nota2])/22500);
+   Delta_Fase2= (unsigned int)((114L*NOTE[nota2])/10000);
    
    
    nota3=((Part[cont*4+2]) & 0b00111111);
-   Delta_Fase3= (unsigned int)((256L*NOTE[nota3])/22500);
+   Delta_Fase3= (unsigned int)((114L*NOTE[nota3])/10000);
    
    
    nota4=((Part[cont*4+3]) & 0b00111111);
-   Delta_Fase4= (unsigned int)((256L*NOTE[nota4])/22500);
+   Delta_Fase4= (unsigned int)((114L*NOTE[nota4])/10000);
    
    
    cont++;
@@ -327,7 +308,7 @@ void AUDIO_Timer_On()
 void PARTITURE_On(unsigned char *P, unsigned int N, unsigned int tempo)
 {
 Part=P;
-Next=N;
+Next=N; cont=0;
  int ms_negra = 60000/tempo;
  int ms_semicorchea = ms_negra/4; 
  #define PCTIM0 (1)
@@ -371,4 +352,17 @@ void AUDIO_Effect(int type)
    exCount=0;
    fase = 0;
    freq = duration / 100 * 10 + 10;
+}
+
+
+void Nota(unsigned int f)
+{
+  AUDIO_Timer_On();
+  asm volatile ("mrs r0,cpsr\n bic r0,r0,#0x80\n msr cpsr,r0");	
+  nota1 = 1;
+  Delta_Fase1= (unsigned int)((114L*f)/10000);
+  _printf(" %8d\n", Delta_Fase1); 
+  _delay_ms(500); 
+   nota1 = 0;
+
 }

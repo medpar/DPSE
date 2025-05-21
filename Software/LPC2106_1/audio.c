@@ -243,9 +243,6 @@ void PWM0_ISR(void)
    PWMMR2 = dtotalDch + 512;//Centrado
 
  
- PWMLER = (1<<4) | (1 << 2);
-
-
  VICVectAddr=-1;  	   // EOI for interrupt controller
 }
 // ------------------------------------------------------------------------
@@ -262,19 +259,19 @@ void TIMER0_ISR(void)
  T0IR = 0xFFFF;	   	   // Clear all interrupt notifications	
  // Next note, if any, update delta phases
    nota1=((Part[cont*4+0]) & 0b00111111);
-   Delta_Fase1= (unsigned int)((256L*NOTE[nota1])/22500); //coger solo los bits del 5:0
+   Delta_Fase1= (unsigned int)((NOTE[nota1] * 65536L) / 5760000L); //coger solo los bits del 5:0
    
    
    nota2=((Part[cont*4+1]) & 0b00111111);
-   Delta_Fase2= (unsigned int)((256L*NOTE[nota2])/22500);
+   Delta_Fase2= (unsigned int)((NOTE[nota2] * 65536L) / 5760000L);
    
    
    nota3=((Part[cont*4+2]) & 0b00111111);
-   Delta_Fase3= (unsigned int)((256L*NOTE[nota3])/22500);
+   Delta_Fase3= (unsigned int)((NOTE[nota3] * 65536L) / 5760000L);
    
    
    nota4=((Part[cont*4+3]) & 0b00111111);
-   Delta_Fase4= (unsigned int)((256L*NOTE[nota4])/22500);
+   Delta_Fase4= (unsigned int)((NOTE[nota4] * 65536L) / 5760000L);
    
    
    cont++;
@@ -304,12 +301,9 @@ void AUDIO_Timer_On()
 	//PWM2 single edge and output enabled
 
  PWMMR0 = 1024-1;			// Interrupt frequency 57600 Hz. Exact 10-bit PWM
- PWMMR4 = PWMMR0;
- PWMMR2 = PWMMR0;
- //PWMLER = (1<< 4) | (1<< 2); 			// Copy to duty reg from shadow PWM4
-// PWM2 configuration mising
-
-
+ PWMMR4 = 512;
+ PWMMR2 = 512;
+ PWMLER = (1<< 4) | (1<< 2); 			// Copy to duty reg from shadow PWM4 & PWM2
 
  PWMTCR = 0b00001001;       // Counter enable and PWM mode enabled
 
@@ -320,8 +314,7 @@ void AUDIO_Timer_On()
  VICVectAddr0=(unsigned int)PWM0_ISR;               // Vector for slot 0
  VICVectCntl0=(1<<5)|PWM0_INT;                      // Slot 0 for PWM0 and enabled
  // Enable both IRQ interrupts
- asm volatile ("mrs r0,cpsr\n bic r0,r0,#0x80\n msr cpsr,r0");
- asm volatile ("mrs r0,cpsr\n orr r0,r0,#0x80\n msr cpsr,r0");
+ asm volatile ("mrs r0,cpsr\n bic r0,r0,#0x80\n msr cpsr_c,r0"); // Enable IRQs
 }
 // ------------------------------------------------------------------------
 void PARTITURE_On(unsigned char *P, unsigned int N, unsigned int tempo)
@@ -355,7 +348,7 @@ Next=N;
  AUDIO_Timer_On();
 
  // Enable both IRQ interrupts
- asm volatile ("mrs r0,cpsr\n bic r0,r0,#0x80\n msr cpsr,r0");	
+ asm volatile ("mrs r0,cpsr\n bic r0,r0,#0x80\n msr cpsr_c,r0"); // Enable IRQs
 }
 // ------------------------------------------------------------------------
 void PARTITURE_Off()

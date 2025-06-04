@@ -207,14 +207,7 @@ void PWM0_ISR(void)
     if(dtotalDch> 511) dtotalDch = 511; //Saturación
     if(dtotalDch<-511) dtotalDch = -511;
 
- // Silence?
-   /*
-   if(silence||(CH1_ON+CH2_ON==0))
-	  dtotalIzq=511;
-   if(silence||(CH3_ON+CH4_ON==0))
-	 dtotalDch=511;
-   */
-    
+
    
    
  // PMW output

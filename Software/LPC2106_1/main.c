@@ -1,7 +1,7 @@
 // =======================================================================
 // Proyecto VIDEOCONSOLA Curso 2022-2023
 // Autor : Jes�s Manuel Hern�ndez Mangas
-// File  : main.c � PAC-MAN suave, r�pido y sin parpadeos
+// File  : main.c PAC-MAN
 // =======================================================================
 #include "system.h"
 #include "xpm.h"
@@ -740,18 +740,6 @@ int main(void)
             "Ingenieria de Sistemas Electronicos\r\n");
    int i=0;
     AMPLIF_ON;
-   /*
-
-   while(1)
-   {
-     _printf("%3d %6d\n",i, NOTE[i]); 
-     Nota( NOTE[i] );  
-     i++; if(i==12*5) i =0;
-   }
-   */
-   
-   
-   
    
        start_pacmania_music();
    

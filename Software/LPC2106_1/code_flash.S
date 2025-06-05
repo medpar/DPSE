@@ -27280,8 +27280,8 @@ void PWM0_ISR(void)
     88b8:	b580102c 	strlt	r1, [r0, #44]	; 0x2c
     88bc:	a2822c02 	addge	r2, r2, #512	; 0x200
     88c0:	b3a02001 	movlt	r2, #1
-   */
-    
+
+
    
    
  // PMW output
@@ -29008,10 +29008,6 @@ int main(void)
     AMPLIF_ON;
     9ca0:	e3a03901 	mov	r3, #16384	; 0x4000
     9ca4:	e5063fe7 	str	r3, [r6, #-4071]	; 0xfe7
-   */
-   
-   
-   
    
        start_pacmania_music();
     9ca8:	ebffdd5d 	bl	1224 <start_pacmania_music>

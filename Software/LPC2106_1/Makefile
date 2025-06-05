@@ -8,9 +8,9 @@ SHELL = cmd.exe
 SRC = crt.S main.c \
 	NT35510.c \
 	calibrate.c xpt2046.c  \
-	bloques.c xpm.c \
+	 xpm.c \
 	vibrador.c big_font.c small_font.c audio.c \
-	galaga.c pacmanXPM.c xpmschulos.c pacmania.mod.txt.c
+	galaga.c xpmPacman.c pacmania.mod.txt.c
 	
 INC = nt35510.h calibrate.h xpt2046.h system.h audio.h 
 

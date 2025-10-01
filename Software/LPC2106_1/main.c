@@ -355,6 +355,7 @@ static void initGame(void)
 /* =================================================================== */
 /*                         DIBUJO MAPA & HUD                           */
 /* =================================================================== */
+//con esto lo que hacemos es pintar bloques de pÃ­xeles uno a uno con la textura que queramos.
 static void drawTile(int r, int c)
 {
     int px = X_OFFSET + c * TW;
@@ -393,6 +394,7 @@ static void drawTile(int r, int c)
     }
 }
 
+//esta funcion pinta el mapa entero con todas las curvas y todas las esquinas
 static void dibuja_mapa(const char m[][MAP_COLS + 1])
 {
     XPM_Extract(pacman);
@@ -711,11 +713,11 @@ static void checkCollisions(void)
 #define PACMANIA_TEMPO 150
 void start_pacmania_music(void) {
     // El array PARTITURE se define en "pacmania.mod.txt.c"
-    // Calculamos N, el número de eventos (cada evento son 4 bytes)
+    // Calculamos N, el nï¿½mero de eventos (cada evento son 4 bytes)
    
     int numero_de_eventos = 131;
 
-    // Llamamos a la función principal para iniciar la partitura
+    // Llamamos a la funciï¿½n principal para iniciar la partitura
     PARTITURE_On(PARTITURE, numero_de_eventos, 90);
    
     //PARTITURE_On(PARTITURE_galaga_intro_txt, 64, 90);
